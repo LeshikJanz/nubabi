@@ -1,0 +1,7 @@
+export const PUSH_ROUTE = 'PUSH_ROUTE';
+export const POP_ROUTE = 'POP_ROUTE';
+export const CHANGE_TAB = 'CHANGE_TAB';
+export const SET_SKILL_AREA = 'SET_SKILL_AREA';
+export const NEXT_SKILL_AREA = 'NEXT_SKILL_AREA';
+export const PREVIOUS_SKILL_AREA = 'PREVIOUS_SKILL_AREA';
+export const TOGGLE_CHOOSE_BABY_MODAL = 'TOGGLE_CHOOSE_BABY_MODAL';
