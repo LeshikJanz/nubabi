@@ -6,19 +6,86 @@ import {
   Text,
   Dimensions,
   ScrollView,
+  Animated,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
+import Svg, {
+ Path,
+} from 'react-native-svg';
 
 import { POP_ROUTE } from '../constants/actionTypes';
 import { NUBABI_RED } from '../constants/colours';
 
 const window = Dimensions.get('window');
 
+function forInitial(props) {
+  const {
+    navigationState,
+    scene,
+  } = props;
+
+  const focused = navigationState.index === scene.index;
+  const opacity = focused ? 1 : 0;
+  const translate = focused ? 0 : 1000000;
+  return {
+    opacity,
+    transform: [
+      { translateX: translate },
+      { translateY: translate },
+    ],
+  };
+}
+
 class ChooseBaby extends Component {
   constructor(props) {
     super(props);
     this._handleBack = this._handleBack.bind(this);
+  }
+
+  getAnimatedStyle() {
+    const {
+      layout,
+      position,
+      scene,
+    } = this.props;
+
+    if (!layout.isMeasured) {
+      return forInitial(this.props);
+    }
+
+    const index = scene.index;
+    const inputRange = [index - 1, index, index + 1];
+    const height = layout.initHeight;
+    const width = layout.initWidth;
+
+    const opacity = position.interpolate({
+      inputRange,
+      outputRange: ([1, 1, 0.3]),
+    });
+
+    const scale = position.interpolate({
+      inputRange,
+      outputRange: ([1, 1, 0.95]),
+    });
+
+    const translateX = position.interpolate({
+      inputRange,
+      outputRange: ([-width, 0, 200]),
+    });
+    const translateY = position.interpolate({
+      inputRange,
+      outputRange: ([-height, 0, -10]),
+    });
+
+    return {
+      opacity,
+      transform: [
+        { scale },
+        { translateX },
+        { translateY },
+      ],
+    };
   }
 
   _handleBack() {
@@ -27,8 +94,18 @@ class ChooseBaby extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.chooseContainer} />
+      <Animated.View style={[styles.container, this.getAnimatedStyle()]}>
+        <Svg
+          style={styles.headerShape}
+        >
+          <Path
+            d="M242.028455,326.522878 C242.828957,347.908578 260.418521,365 282,365 C303.756979,365 321.456854,347.629474 321.987736,326.00031 C410.423065,317.73135 491.521973,284.207863 558,232.714294 L558,0 L0,0 L0,232.714294 C67.9827067,285.373381 151.25565,319.239702 242.028455,326.522878 Z"
+            id="Combined-Shape"
+            stroke="none"
+            fill="#FFFFFF"
+            fill-rule="evenodd"
+          />
+        </Svg>
         <View style={styles.babyContainer}>
           <ScrollView
             style={{
@@ -51,11 +128,11 @@ class ChooseBaby extends Component {
         </View>
         <Icon
           name="ios-add-circle"
-          size={40}
+          size={45}
           color={NUBABI_RED}
-          style={{ marginTop: -60, width: 40 }}
+          style={styles.addButton}
         />
-      </View>
+      </Animated.View>
     );
   }
 }
@@ -83,14 +160,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-  },
-  chooseContainer: {
-    top: 0,
-    backgroundColor: '#fff',
-    height: 900,
-    width: 900,
-    borderRadius: 900 / 2,
-    marginTop: -750,
+    backgroundColor: 'transparent',
   },
   babyContainer: {
     left: 0,
@@ -121,6 +191,18 @@ const styles = StyleSheet.create({
   babyName: {
     fontSize: 10,
     color: NUBABI_RED,
+    backgroundColor: '#fff',
+  },
+  addButton: {
+    marginTop: -50,
+    backgroundColor: 'transparent',
+    marginLeft: -1,
+  },
+  headerShape: {
+    height: 365,
+    width: 558,
+    marginTop: -200,
+    marginLeft: -7,
   },
 });
 

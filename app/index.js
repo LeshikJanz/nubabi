@@ -26,7 +26,6 @@ const {
 } = NavigationExperimental;
 
 class NuBabiMobile extends Component {
-
   constructor(props) {
     super(props);
     this._renderScene = this._renderScene.bind(this);
@@ -47,7 +46,6 @@ class NuBabiMobile extends Component {
   }
 
   _handleToggleChooseBaby() {
-    // this.props.dispatch({ type: TOGGLE_CHOOSE_BABY_MODAL });
     return this._handleAction({
       type: PUSH_ROUTE, route: { key: 'chooseBaby' } });
   }
@@ -143,7 +141,9 @@ class NuBabiMobile extends Component {
   _renderScene(sceneProps) {
     switch (sceneProps.scene.route.key) {
       case 'chooseBaby': return (
-        <ChooseBaby />
+        <ChooseBaby
+          {...sceneProps}
+        />
       );
       case 'settings': return (
         <Settings />
@@ -177,14 +177,13 @@ class NuBabiMobile extends Component {
   }
 
   render() {
-    const cardStyle = this._determineCardStyle(this.props.navigation);
     return (
       <NavigationCardStack
         renderScene={this._renderScene}
         renderHeader={this._renderHeader}
         navigationState={this.props.navigation}
         onNavigate={this.props.onNavigate}
-        cardStyle={cardStyle}
+        cardStyle={styles.cardStyle}
       />
     );
   }
@@ -220,7 +219,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   cardStyle: {
-    backgroundColor: 'rgba(116,130,148,0.7)',
+    backgroundColor: 'transparent',
     shadowOpacity: 0,
   },
   headerIcon: {
