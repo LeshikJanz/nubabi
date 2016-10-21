@@ -23,14 +23,18 @@ class EditBaby extends Component {
   }
 
   render() {
+    const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i);
+    const weekOptions = range(32, 43).map((val) => {
+      return <Picker.Item label={val.toString()} value={val} key={val.toString()} />;
+    });
     return (
       <KeyboardAwareScrollView
         style={styles.container}
         contentContainerStyle={this.scrollContainer}
       >
         <View style={styles.headerContainer}>
-          <CoverImage coverImage={this.props.baby.coverImage} />
-          <IconHeader avatar={this.props.baby.avatar} />
+          <CoverImage coverImage={this.props.baby.avatar_thumb} />
+          <IconHeader avatar={this.props.baby.avatar_thumb} />
           <View style={styles.changeAvatarContainer}>
             <View style={styles.changeAvatarView}>
               <View style={styles.changeAvatarInnerView}>
@@ -67,29 +71,26 @@ class EditBaby extends Component {
           <Text style={styles.inputLabel}>BORN ON</Text>
           <TextInput
             style={styles.textInput}
-            value={this.state.birthDate}
-            onChangeText={text => this.setState({ birthDate: text })}
+            value={this.state.birth_date}
+            onChangeText={text => this.setState({ birth_date: text })}
           />
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>RELATIONSHIP TO ME</Text>
           <TextInput
             style={styles.textInput}
-            value={this.state.relationshipToMe}
-            onChangeText={text => this.setState({ relationshipToMe: text })}
+            value={this.state.relationship}
+            onChangeText={text => this.setState({ relationship: text })}
           />
         </View>
         <View style={[styles.inputContainer, { height: 180 }]}>
           <Text style={styles.inputLabel}>WEEK BABY BORN</Text>
           <Picker
-            selectedValue={this.state.weekBorn}
-            onValueChange={week => this.setState({ weekBorn: week })}
+            selectedValue={this.state.week_born}
+            onValueChange={week => this.setState({ week_born: week })}
             style={styles.pickerInput}
           >
-            <Picker.Item label="31" value={31} key="31" />
-            <Picker.Item label="32" value={32} key="32" />
-            <Picker.Item label="33" value={33} key="33" />
-            <Picker.Item label="34" value={34} key="34" />
+            {weekOptions}
           </Picker>
         </View>
         <View style={styles.submitButtonContainer}>
@@ -116,7 +117,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     navigation: state.navigationReducer,
-    baby: state.babyReducer,
+    baby: state.babyReducer.babies[state.babyReducer.index],
   };
 };
 

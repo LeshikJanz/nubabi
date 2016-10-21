@@ -8,7 +8,15 @@ import Svg, {
  Path,
 } from 'react-native-svg';
 
+const babyIcon = require('../../../images/face_icon.jpg');
+
 const IconHeader = ({ avatar }) => {
+  let imageSource;
+  if (avatar === '') {
+    imageSource = babyIcon;
+  } else {
+    imageSource = { uri: avatar };
+  }
   return (
     <View style={styles.iconHeaderContainer}>
       <Svg
@@ -22,13 +30,13 @@ const IconHeader = ({ avatar }) => {
           fill-rule="evenodd"
         />
       </Svg>
-      <Image source={avatar} style={styles.babyIcon} />
+      <Image source={imageSource} style={styles.babyIcon} />
     </View>
   );
 };
 
 IconHeader.propTypes = {
-  avatar: React.PropTypes.number.isRequired,
+  avatar: React.PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

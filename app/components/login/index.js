@@ -23,7 +23,10 @@ const window = Dimensions.get('window');
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = props.user;
+    this.state = {
+      email: 'markmil@gmail.com',
+      password: 'seapoint8005',
+    };
   }
 
   login = () => {

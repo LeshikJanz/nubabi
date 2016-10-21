@@ -28,8 +28,8 @@ const Header = ({ coverImage, avatar, babyName, birthDate, onEditBaby }) => {
 };
 
 Header.propTypes = {
-  coverImage: React.PropTypes.number.isRequired,
-  avatar: React.PropTypes.number.isRequired,
+  coverImage: React.PropTypes.string.isRequired,
+  avatar: React.PropTypes.string.isRequired,
   babyName: React.PropTypes.string.isRequired,
   birthDate: React.PropTypes.string.isRequired,
   onEditBaby: React.PropTypes.func.isRequired,

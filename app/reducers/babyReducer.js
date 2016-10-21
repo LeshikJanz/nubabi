@@ -1,3 +1,5 @@
+import * as types from '../actions/actionTypes';
+
 const headerBackground = require('../images/profileBackground.jpg');
 const babyIcon = require('../images/face_icon.jpg');
 const memory1 = require('../images/memory1.png');
@@ -38,9 +40,23 @@ const babyInfo = {
   ],
 };
 
-export default function babyReducer(state = babyInfo, action) {
-  switch (action.type) {
+const babies = {
+  babies: [],
+};
 
+export default function babyReducer(state = babies, action) {
+  switch (action.type) {
+    case types.GET_BABIES.REQUEST:
+      return Object.assign({}, state, {
+        isFetching: true,
+      });
+    case types.GET_BABIES.SUCCESS:
+      return Object.assign({}, state, {
+        isFetching: false,
+        failure: false,
+        babies: action.babies,
+        index: 0,
+      });
     default:
       return state;
   }

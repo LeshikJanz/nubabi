@@ -11,13 +11,16 @@ import { FONT_COLOR, NUBABI_RED } from '../../constants/colours';
 import Memory from './memory';
 
 const RecentMemories = ({ memories }) => {
-  const memoriesList = (
-    memories.map((memory, idx) => {
-      return (
-        <Memory memory={memory} key={idx} />
-      );
-    })
-  );
+  let memoriesList = [];
+  if (memories !== undefined) {
+    memoriesList = (
+      memories.map((memory, idx) => {
+        return (
+          <Memory memory={memory} key={idx} />
+        );
+      })
+    );
+  }
 
   return (
     <View style={styles.memoriesView}>
@@ -44,7 +47,7 @@ const RecentMemories = ({ memories }) => {
 };
 
 RecentMemories.propTypes = {
-  memories: React.PropTypes.array.isRequired,
+  memories: React.PropTypes.array,
 };
 
 const styles = StyleSheet.create({

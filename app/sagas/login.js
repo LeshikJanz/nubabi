@@ -1,6 +1,13 @@
 import { take, put, call, fork } from 'redux-saga/effects';
 import * as types from '../actions/actionTypes';
-import { loginSuccess, loginFailure, logout } from '../actions/loginActions';
+import {
+  loginSuccess,
+  loginFailure,
+  logout,
+} from '../actions/loginActions';
+import {
+  getBabiesSuccess,
+} from '../actions/babyActions';
 import api from '../services/mlb';
 
 function loginCall({ email, password }) {
@@ -9,6 +16,10 @@ function loginCall({ email, password }) {
 
 function logoutCall(token) {
   return api.logout(token);
+}
+
+function getBabies() {
+  return api.getBabies();
 }
 
 function* watchLoginRequest() {
@@ -20,9 +31,10 @@ function* watchLoginRequest() {
         email,
         password,
       };
-      const response = yield call(loginCall, payload);
-
-      yield put(loginSuccess(response));
+      const loginResponse = yield call(loginCall, payload);
+      const babiesResponse = yield call(getBabies);
+      yield put(getBabiesSuccess(babiesResponse));
+      yield put(loginSuccess(loginResponse));
     } catch (err) {
       yield put(loginFailure(err));
     }

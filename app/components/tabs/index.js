@@ -16,6 +16,8 @@ import Memories from '../../components/memories';
 import NubabiIcon from '../../icons/nubabi';
 import { LIGHT_GREY } from '../../constants/colours';
 
+const babyIcon = require('../../images/face_icon.jpg');
+
 class Tabs extends Component {
   _handleAction(action) {
     this.props.onNavigate(action);
@@ -51,16 +53,23 @@ class Tabs extends Component {
   }
 
   render() {
+    const baby = this.props.babies.babies[this.props.babies.index];
     const tabBar = this.props.navigation.routes.map((tab, i) => {
       const size = (tab.key === 'profile') ? 40 : 18;
       const tabStyle = (tab.key === 'profile' ? styles.middleTabButton : '');
       let icon;
+      let avatarSource;
+      if (baby.avatar_thumb === '') {
+        avatarSource = babyIcon;
+      } else {
+        avatarSource = { uri: baby.avatar_thumb };
+      }
       if (tab.key === 'profile') {
         icon = (
           <View style={styles.tabIconOuterView}>
             <View style={styles.tabIconInnerView}>
               <View style={styles.tabIconInnerImageHolder}>
-                <Image source={this.props.baby.avatar} style={styles.tabIconImage} />
+                <Image source={avatarSource} style={styles.tabIconImage} />
               </View>
             </View>
             <View style={styles.tabSquare} />
@@ -81,7 +90,7 @@ class Tabs extends Component {
           <View style={styles.tabIconOuterView}>
             <View style={[styles.tabIconInnerView, { backgroundColor: 'rgba(234,49,84,0.6)' }]}>
               <View style={styles.tabIconInnerImageHolder}>
-                <Image source={this.props.baby.avatar} style={styles.tabIconImage} />
+                <Image source={avatarSource} style={styles.tabIconImage} />
               </View>
             </View>
             <View style={styles.tabSquare} />
@@ -126,7 +135,7 @@ class Tabs extends Component {
 Tabs.propTypes = {
   navigation: React.PropTypes.object.isRequired,
   onNavigate: React.PropTypes.func.isRequired,
-  baby: React.PropTypes.object.isRequired,
+  babies: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -139,7 +148,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     navigation: state.tabReducer,
-    baby: state.babyReducer,
+    babies: state.babyReducer,
   };
 };
 

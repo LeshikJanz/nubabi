@@ -56,6 +56,7 @@ class NuBabiMobile extends Component {
   }
 
   _renderHeader(sceneProps) {
+    const baby = this.props.babies.babies[this.props.babies.index];
     switch (sceneProps.scene.route.key) {
       case 'chooseBaby':
       case 'tabs': return (
@@ -67,7 +68,7 @@ class NuBabiMobile extends Component {
               <NavigationHeader.Title
                 textStyle={styles.navHeaderTitle}
               >
-                {this.props.baby.name}
+                {baby.name}
               </NavigationHeader.Title>
             :
               <View />
@@ -192,7 +193,7 @@ class NuBabiMobile extends Component {
 NuBabiMobile.propTypes = {
   navigation: React.PropTypes.object.isRequired,
   onNavigate: React.PropTypes.func.isRequired,
-  baby: React.PropTypes.object.isRequired,
+  babies: React.PropTypes.object.isRequired,
   user: React.PropTypes.object.isRequired,
 };
 
@@ -205,7 +206,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    baby: state.babyReducer,
+    babies: state.babyReducer,
     navigation: state.navigationReducer,
     user: state.user,
   };

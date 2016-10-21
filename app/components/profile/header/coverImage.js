@@ -8,17 +8,25 @@ import {
 
 const window = Dimensions.get('window');
 
+const headerBackground = require('../../../images/profileBackground.jpg');
+
 const CoverImage = ({ coverImage }) => {
+  let imageSource;
+  if (coverImage === '') {
+    imageSource = headerBackground;
+  } else {
+    imageSource = { uri: coverImage };
+  }
   return (
     <View>
-      <Image source={coverImage} style={styles.profileImage} />
+      <Image source={imageSource} style={styles.profileImage} />
       <View style={styles.imageOverlay} />
     </View>
   );
 };
 
 CoverImage.propTypes = {
-  coverImage: React.PropTypes.number.isRequired,
+  coverImage: React.PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

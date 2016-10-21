@@ -19,6 +19,8 @@ import { NUBABI_RED } from '../../../constants/colours';
 
 const window = Dimensions.get('window');
 
+const babyIcon = require('../../../images/face_icon.jpg');
+
 function forInitial(props) {
   const {
     navigationState,
@@ -93,6 +95,27 @@ class ChooseBaby extends Component {
   }
 
   render() {
+    let babiesList = [];
+    if (this.props.babies.babies !== undefined) {
+      babiesList = (
+        this.props.babies.babies.map((baby, idx) => {
+          let avatarSource;
+          if (baby.avatar_thumb === '') {
+            avatarSource = babyIcon;
+          } else {
+            avatarSource = { uri: baby.avatar_thumb };
+          }
+          return (
+            <View style={styles.babyIconContainerView} key={idx}>
+              <View style={styles.babyIconView}>
+                <Image source={avatarSource} style={styles.babyIcon} />
+              </View>
+              <Text style={styles.babyName}>{baby.name}</Text>
+            </View>
+          );
+        })
+      );
+    }
     return (
       <Animated.View style={[styles.container, this.getAnimatedStyle()]}>
         <Svg
@@ -118,12 +141,7 @@ class ChooseBaby extends Component {
             showsHorizontalScrollIndicator={false}
             horizontal
           >
-            <View style={styles.babyIconContainerView}>
-              <View style={styles.babyIconView}>
-                <Image source={this.props.baby.avatar} style={styles.babyIcon} />
-              </View>
-              <Text style={styles.babyName}>{this.props.baby.name}</Text>
-            </View>
+            {babiesList}
           </ScrollView>
         </View>
         <Icon
@@ -139,7 +157,7 @@ class ChooseBaby extends Component {
 
 ChooseBaby.propTypes = {
   onNavigate: React.PropTypes.func.isRequired,
-  baby: React.PropTypes.object.isRequired,
+  babies: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -152,7 +170,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     navigation: state.tabReducer,
-    baby: state.babyReducer,
+    babies: state.babyReducer,
   };
 };
 

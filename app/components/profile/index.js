@@ -27,28 +27,29 @@ class Profile extends Component {
   }
 
   render() {
+    const baby = this.props.babies.babies[this.props.babies.index];
     return (
       <View style={styles.container}>
         <ScrollView
           style={styles.scrollContainer}
         >
           <Header
-            coverImage={this.props.baby.coverImage}
-            avatar={this.props.baby.avatar}
-            babyName={this.props.baby.name}
-            birthDate={this.props.baby.birthDate}
+            coverImage={baby.avatar_thumb}
+            avatar={baby.avatar_thumb}
+            babyName={baby.name}
+            birthDate={baby.birth_date}
             onEditBaby={this._handleEditBaby}
           />
           <View style={styles.measurementsRow}>
             <Measurement
-              amount={this.props.baby.weight}
+              amount={10}
               header="Weight"
               unit="kg"
               iconName="weight"
               onUpdate={() => (null)}
             />
             <Measurement
-              amount={this.props.baby.height}
+              amount={10}
               header="Height"
               unit="cm"
               iconName="height"
@@ -56,7 +57,7 @@ class Profile extends Component {
             />
           </View>
           <Achievements />
-          <RecentMemories memories={this.props.baby.memories} />
+          <RecentMemories memories={baby.memories} />
         </ScrollView>
       </View>
     );
@@ -65,7 +66,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
   onNavigate: React.PropTypes.func.isRequired,
-  baby: React.PropTypes.object.isRequired,
+  babies: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -78,7 +79,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     navigation: state.navigationReducer,
-    baby: state.babyReducer,
+    babies: state.babyReducer,
   };
 };
 
