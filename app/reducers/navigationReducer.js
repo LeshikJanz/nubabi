@@ -1,5 +1,5 @@
 import { NavigationExperimental } from 'react-native';
-import { POP_ROUTE, PUSH_ROUTE, TOGGLE_CHOOSE_BABY_MODAL } from '../constants/actionTypes';
+import { POP_ROUTE, PUSH_ROUTE, TOGGLE_CHOOSE_BABY_MODAL, RESET_ROUTES } from '../actions/actionTypes';
 
 const {
   StateUtils: NavigationStateUtils,

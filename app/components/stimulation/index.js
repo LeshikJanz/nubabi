@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { PUSH_ROUTE } from '../../constants/actionTypes';
+import { PUSH_ROUTE } from '../../actions/actionTypes';
 
 class Stimulation extends Component {
   constructor(props) {

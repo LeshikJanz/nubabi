@@ -1,8 +1,8 @@
-const headerBackground = require('./images/profileBackground.jpg');
-const babyIcon = require('./images/face_icon.jpg');
-const memory1 = require('./images/memory1.png');
-const memory2 = require('./images/memory2.png');
-const memory3 = require('./images/memory3.png');
+const headerBackground = require('../images/profileBackground.jpg');
+const babyIcon = require('../images/face_icon.jpg');
+const memory1 = require('../images/memory1.png');
+const memory2 = require('../images/memory2.png');
+const memory3 = require('../images/memory3.png');
 
 const babyInfo = {
   name: 'Sebastian',

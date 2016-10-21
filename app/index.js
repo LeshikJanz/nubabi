@@ -9,16 +9,17 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import Tabs from './components/tabs';
-import { POP_ROUTE, PUSH_ROUTE } from './constants/actionTypes';
+import { POP_ROUTE, PUSH_ROUTE } from './actions/actionTypes';
 import NubabiIcon from './icons/nubabi';
 import { HEADER_FONT_COLOR } from './constants/colours';
-import ChooseBaby from './components/chooseBaby';
+import ChooseBaby from './components/profile/chooseBaby';
 import Settings from './components/settings';
 import EditBaby from './components/profile/editBaby';
 import ThisWeeksActivities from './components/stimulation/thisWeeksActivities';
 import NextWeeksEquipment from './components/stimulation/nextWeeksEquipment';
 import BrowseActivities from './components/stimulation/browseActivities';
 import ViewThisWeeksActivity from './components/stimulation/viewThisWeeksActivity';
+import Login from './components/login';
 
 const {
   Header: NavigationHeader,
@@ -34,7 +35,6 @@ class NuBabiMobile extends Component {
     this._handleAction = this._handleAction.bind(this);
     this._handleBackAction = this._handleBackAction.bind(this);
     this._handleOpenSettings = this._handleOpenSettings.bind(this);
-    this._determineCardStyle = this._determineCardStyle.bind(this);
   }
 
   _handleAction(action) {
@@ -171,12 +171,12 @@ class NuBabiMobile extends Component {
     }
   }
 
-  _determineCardStyle(sceneProps) {
-    const key = sceneProps.routes[sceneProps.index].key;
-    return key === 'chooseBaby' ? styles.cardStyle : '';
-  }
-
   render() {
+    const { isAuthenticated } = this.props.user;
+
+    if (!isAuthenticated) {
+      return <Login />;
+    }
     return (
       <NavigationCardStack
         renderScene={this._renderScene}
@@ -193,6 +193,7 @@ NuBabiMobile.propTypes = {
   navigation: React.PropTypes.object.isRequired,
   onNavigate: React.PropTypes.func.isRequired,
   baby: React.PropTypes.object.isRequired,
+  user: React.PropTypes.object.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -206,6 +207,7 @@ const mapStateToProps = (state) => {
   return {
     baby: state.babyReducer,
     navigation: state.navigationReducer,
+    user: state.user,
   };
 };
 

@@ -14,8 +14,8 @@ import Svg, {
  Path,
 } from 'react-native-svg';
 
-import { POP_ROUTE } from '../constants/actionTypes';
-import { NUBABI_RED } from '../constants/colours';
+import { POP_ROUTE } from '../../../actions/actionTypes';
+import { NUBABI_RED } from '../../../constants/colours';
 
 const window = Dimensions.get('window');
 

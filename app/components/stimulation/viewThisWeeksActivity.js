@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { NEXT_SKILL_AREA, PREVIOUS_SKILL_AREA } from '../../constants/actionTypes';
+import { NEXT_SKILL_AREA, PREVIOUS_SKILL_AREA } from '../../actions/actionTypes';
 
 class ViewThisWeeksActivity extends Component {
   _handleNextSkill() {
@@ -68,6 +68,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
 });
 

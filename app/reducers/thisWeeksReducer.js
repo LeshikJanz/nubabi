@@ -2,7 +2,7 @@ import {
   NEXT_SKILL_AREA,
   PREVIOUS_SKILL_AREA,
   SET_SKILL_AREA,
-} from '../constants/actionTypes';
+} from '../actions/actionTypes';
 
 
 const thisWeek = {

@@ -7,7 +7,7 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import { connect } from 'react-redux';
 
-import { CHANGE_TAB } from '../../constants/actionTypes';
+import { CHANGE_TAB } from '../../actions/actionTypes';
 import Stimulation from '../../components/stimulation';
 import Growth from '../../components/growth';
 import Profile from '../../components/profile';

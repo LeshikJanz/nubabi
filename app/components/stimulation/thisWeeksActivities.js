@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { SET_SKILL_AREA, PUSH_ROUTE } from '../../constants/actionTypes';
+import { SET_SKILL_AREA, PUSH_ROUTE } from '../../actions/actionTypes';
 
 class ThisWeeksActivities extends Component {
   _handleAction(action) {
@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#fff',
   },
 });
 

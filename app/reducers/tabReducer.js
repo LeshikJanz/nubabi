@@ -1,5 +1,5 @@
 import { NavigationExperimental } from 'react-native';
-import { CHANGE_TAB } from '../constants/actionTypes';
+import { CHANGE_TAB } from '../actions/actionTypes';
 
 const {
   StateUtils: NavigationStateUtils,

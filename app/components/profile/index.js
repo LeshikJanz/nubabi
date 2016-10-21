@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { PUSH_ROUTE } from '../../constants/actionTypes';
+import { PUSH_ROUTE } from '../../actions/actionTypes';
 import Measurement from './measurement';
 import Header from './header';
 import Achievements from './achievements';
