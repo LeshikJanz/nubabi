@@ -11,11 +11,15 @@ const api = {
         .send(request)
         .end((err, res) => {
           if (err !== null) {
-            let { error } = res.body;
-            if (res.status === 401) {
-              error = 'The email or password you have entered is invalid';
+            if (res === undefined) {
+              reject({ code: 500, errorMessage: 'The was a problem communicating with the server' });
+            } else {
+              let { error } = res.body;
+              if (res.status === 401) {
+                error = 'The email or password you have entered is invalid';
+              }
+              reject({ code: res.status, errorMessage: error });
             }
-            reject({ code: res.status, errorMessage: error });
           } else {
             const { user } = res.body;
             resolve({ user, token: user.authentication_token });
