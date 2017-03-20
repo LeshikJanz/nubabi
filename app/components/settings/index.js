@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   Text,
+  TouchableHighlight,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -22,11 +23,16 @@ class Settings extends Component {
     return (
       <View style={styles.container}>
         <Text style={styles.inputLabel}>{user.email}</Text>
-        <View style={styles.submitButtonContainer}>
-          <View style={styles.submitButton}>
-            <Text style={styles.submitText} onPress={this.logout}>LOG OUT</Text>
+        <TouchableHighlight
+          underlayColor='rgba(0,0,0,0)'
+          style={styles.oneButton}
+          onPress={this.logout}>
+          <View style={styles.submitButtonContainer}>
+            <View style={styles.submitButton}>
+              <Text style={styles.submitText}>LOG OUT</Text>
+            </View>
           </View>
-        </View>
+        </TouchableHighlight>
       </View>
     );
   }

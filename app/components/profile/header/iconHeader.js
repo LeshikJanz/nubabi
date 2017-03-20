@@ -3,12 +3,16 @@ import {
   View,
   Image,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import Svg, {
  Path,
+ Circle,
 } from 'react-native-svg';
 
 const babyIcon = require('../../../images/face_icon.jpg');
+
+const width = Dimensions.get('window').width;
 
 const IconHeader = ({ avatar }) => {
   let imageSource;
@@ -17,18 +21,16 @@ const IconHeader = ({ avatar }) => {
   } else {
     imageSource = { uri: avatar };
   }
+  const curve = `M0 0 C ${(width / 2) - 20} 60, ${(width / 2) + 20} 60, ${width} 0`;
+  const circleSize = 40;
+  const circleStart = (width / 2);
   return (
     <View style={styles.iconHeaderContainer}>
       <Svg
         style={styles.headerShape}
       >
-        <Path
-          d="M242.028455,326.522878 C242.828957,347.908578 260.418521,365 282,365 C303.756979,365 321.456854,347.629474 321.987736,326.00031 C410.423065,317.73135 491.521973,284.207863 558,232.714294 L558,0 L0,0 L0,232.714294 C67.9827067,285.373381 151.25565,319.239702 242.028455,326.522878 Z"
-          id="Combined-Shape"
-          stroke="none"
-          fill="#FFFFFF"
-          fill-rule="evenodd"
-        />
+        <Path d={curve} stroke="#FFFFFF" fill="#FFFFFF" />
+        <Circle cx={circleStart} cy="30" r={circleSize} fill="#FFFFFF" />
       </Svg>
       <Image source={imageSource} style={styles.babyIcon} />
     </View>
@@ -53,13 +55,13 @@ const styles = StyleSheet.create({
     height: 60,
     borderRadius: 60 / 2,
     resizeMode: 'stretch',
-    marginTop: -68,
+    marginTop: -100,
   },
   headerShape: {
-    height: 365,
-    width: 558,
-    marginTop: -286,
-    marginLeft: -7,
+    height: 100,
+    width,
+    marginTop: 0,
+    marginLeft: 0,
   },
 });
 

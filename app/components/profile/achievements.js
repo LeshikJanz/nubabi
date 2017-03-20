@@ -3,10 +3,15 @@ import {
   View,
   Text,
   StyleSheet,
+  Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { FONT_COLOR, VDARK_GREY, NUBABI_RED } from '../../constants/colours';
+
+const medal1 = require('../../images/medal1.png');
+const medal2 = require('../../images/medal2.png');
+const medal3 = require('../../images/medal3.png');
 
 const Achievements = () => {
   return (
@@ -23,17 +28,17 @@ const Achievements = () => {
         />
       </View>
       <View style={styles.achievementsValue}>
-        <Icon
-          name="ios-trophy-outline"
-          size={37}
-          color={VDARK_GREY}
-          style={{ marginRight: 10 }}
+        <Image
+          source={medal1}
+          style={styles.medalIcon}
         />
-        <Icon
-          name="ios-trophy-outline"
-          size={37}
-          color={VDARK_GREY}
-          style={{ marginRight: 10 }}
+        <Image
+          source={medal2}
+          style={styles.medalIcon}
+        />
+        <Image
+          source={medal3}
+          style={styles.medalIcon}
         />
       </View>
     </View>
@@ -70,6 +75,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
   },
+  medalIcon: {
+    width: 40,
+    height: 40,
+    marginTop: -2,
+    marginRight: 10,
+  }
 });
 
 export default Achievements;

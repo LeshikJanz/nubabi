@@ -54,6 +54,19 @@ const api = {
         });
     });
   },
+  getThisWeeksActivities(babyId) {
+    return new Promise((resolve, reject) => {
+      agent.get(`${host}api/babies/${babyId}/activities`)
+        .set('Content-Type', 'application/json')
+        .set('X-Auth-Token', 'uu7qWqoxB1ZMbePyhiu5')
+        .end((err, res) => {
+          if (res.error) {
+            reject();
+          }
+          resolve(res.body.skill_areas);
+        });
+    });
+  },
 };
 
 export default api;

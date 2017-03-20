@@ -20,3 +20,24 @@ export function getBabiesFailure(err) {
     err,
   };
 }
+
+export function getThisWeeksActivitiesRequest(token) {
+  return {
+    type: types.GET_THIS_WEEKS_ACTIVITIES.REQUEST,
+    token,
+  };
+}
+
+export function getThisWeeksActivitiesSuccess(babies) {
+  return {
+    type: types.GET_THIS_WEEKS_ACTIVITIES.SUCCESS,
+    babies,
+  };
+}
+
+export function getThisWeeksActivitiesFailure(err) {
+  return {
+    type: types.GET_THIS_WEEKS_ACTIVITIES.FAILURE,
+    err,
+  };
+}

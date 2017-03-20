@@ -6,3 +6,5 @@ export const DARK_GREY = '#748294';
 export const LIGHT_GREY = '#9EABBC';
 export const HEADER_FONT_COLOR = '#3D414B';
 export const FONT_COLOR = VDARK_GREY;
+export const PANEL_BACKGROUND = '#f8f9fc';
+export const PANEL_BUTTON_TEXT = '#454D56';

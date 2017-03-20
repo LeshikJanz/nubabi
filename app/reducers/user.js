@@ -16,12 +16,13 @@ export default function user(state = initialState, action) {
         isAuthenticated: false,
       });
     case types.LOGIN.SUCCESS:
+      console.log(action);
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
         token: action.token,
         failure: false,
-        user: action.user,
+        user: action,
       });
     case types.LOGIN.FAILURE:
       return Object.assign({}, state, {

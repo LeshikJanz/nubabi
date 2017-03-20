@@ -32,19 +32,19 @@ class Tabs extends Component {
       case 'stimulation':
         return (
           <Stimulation />
-      );
+        );
       case 'growth':
         return (
           <Growth />
-      );
+        );
       case 'library':
         return (
           <Library />
-      );
+        );
       case 'memories':
         return (
           <Memories />
-      );
+        );
       default:
         return (
           <Profile />
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#e6e9f0',
     height: 80,
-    bottom: -30,
+    bottom: -31,
     borderRadius: 80 / 2,
     padding: 13,
     margin: 0,

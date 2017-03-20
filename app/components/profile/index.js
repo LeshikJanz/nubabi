@@ -7,6 +7,7 @@ import {
 import { connect } from 'react-redux';
 
 import { PUSH_ROUTE } from '../../actions/actionTypes';
+import { PANEL_BACKGROUND } from '../../constants/colours';
 import Measurement from './measurement';
 import Header from './header';
 import Achievements from './achievements';
@@ -42,14 +43,14 @@ class Profile extends Component {
           />
           <View style={styles.measurementsRow}>
             <Measurement
-              amount={10}
+              amount={baby.weight}
               header="Weight"
               unit="kg"
               iconName="weight"
               onUpdate={() => (null)}
             />
             <Measurement
-              amount={10}
+              amount={baby.height}
               header="Height"
               unit="cm"
               iconName="height"
@@ -87,7 +88,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: '#f8f9fd',
+    backgroundColor: PANEL_BACKGROUND,
   },
   scrollContainer: {
     flex: 1,

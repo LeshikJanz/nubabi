@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Image,
   Dimensions,
+  TouchableHighlight,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
@@ -15,7 +16,6 @@ import { NUBABI_RED } from '../../constants/colours';
 import * as loginActions from '../../actions/loginActions';
 
 const background = require('../../images/loginBackground.png');
-
 const logo = require('../../images/loginLogo.png');
 
 const window = Dimensions.get('window');
@@ -24,8 +24,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'markmil@gmail.com',
-      password: 'seapoint8005',
+      email: '',
+      password: '',
     };
   }
 
@@ -35,6 +35,7 @@ class Login extends Component {
   };
 
   render() {
+    const buttonText = this.props.isFetching ? 'Logging in...' : 'LOG IN';
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} />
@@ -53,8 +54,15 @@ class Login extends Component {
               <TextInput
                 style={styles.textInput}
                 value={this.state.email}
+                placeholder="name@example.com"
                 keyBoardType="email-address"
+                autoFocus
+                autoCapitalize="none"
+                autoCorrect={false}
+                returnKeyType="next"
+                blurOnSubmit={false}
                 onChangeText={email => this.setState({ email })}
+                onSubmitEditing={() => this.passwordInput.focus()}
               />
             </View>
             <View style={styles.inputContainer}>
@@ -62,15 +70,27 @@ class Login extends Component {
               <TextInput
                 style={styles.textInput}
                 value={this.state.password}
+                ref={input => this.passwordInput = input}
                 secureTextEntry
+                autoCapitalize="none"
+                palceholder="password"
+                autoCorrect={false}
+                focus={this.state.focusPassword}
                 onChangeText={password => this.setState({ password })}
+                returnKeyType="go"
               />
             </View>
-            <View style={styles.submitButtonContainer}>
-              <View style={styles.submitButton}>
-                <Text style={styles.submitText} onPress={this.login}>LOG IN</Text>
+            <TouchableHighlight
+              underlayColor="rgba(0,0,0,0)"
+              style={styles.oneButton}
+              onPress={this.login}
+            >
+              <View style={styles.submitButtonContainer}>
+                <View style={styles.submitButton}>
+                  <Text style={styles.submitText}>{buttonText}</Text>
+                </View>
               </View>
-            </View>
+            </TouchableHighlight>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -81,6 +101,7 @@ class Login extends Component {
 Login.propTypes = {
   user: React.PropTypes.object.isRequired,
   actions: React.PropTypes.object.isRequired,
+  isFetching: React.PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -91,6 +112,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
+    isFetching: state.user.isFetching,
     user: state.user,
   };
 };

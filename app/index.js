@@ -234,7 +234,7 @@ const styles = StyleSheet.create({
   navHeader: {
     backgroundColor: '#fff',
     borderBottomColor: '#fff',
-    height: 50,
+    height: 60,
   },
   navHeaderTitle: {
     fontSize: 17,

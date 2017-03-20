@@ -4,11 +4,14 @@ import {
   Text,
   ScrollView,
   StyleSheet,
+  Dimensions,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { FONT_COLOR, NUBABI_RED } from '../../constants/colours';
 import Memory from './memory';
+
+const window = Dimensions.get('window');
 
 const RecentMemories = ({ memories }) => {
   let memoriesList = [];
@@ -19,6 +22,13 @@ const RecentMemories = ({ memories }) => {
           <Memory memory={memory} key={idx} />
         );
       })
+    );
+  } else {
+    memoriesList = (
+      <View style={styles.missingMemoriesView}>
+        <Text style={styles.missingMemories}>Click here to add some memories</Text>
+        <Icon name="ios-arrow-round-up" style={styles.missingArrow} />
+      </View>
     );
   }
 
@@ -65,12 +75,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 5,
   },
+  missingArrow: {
+    color: NUBABI_RED,
+    fontSize: 30,
+    marginLeft: 5,
+    marginTop: -10,
+    marginRight: 10,
+  },
   memoriesHeaderText: {
     color: FONT_COLOR,
     fontSize: 18,
   },
   memoriesListView: {
     height: 125,
+  },
+  missingMemoriesView: {
+    flexDirection: 'row',
+    width: window.width - 40,
+    marginTop: 5,
+  },
+  missingMemories: {
+    textAlign: 'right',
+    flex: 1,
+    color: NUBABI_RED,
+    fontFamily: 'Bradley Hand',
   },
 });
 

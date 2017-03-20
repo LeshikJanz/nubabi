@@ -1,18 +1,19 @@
 import * as types from './actionTypes';
 
-export function loginRequest(email, password) {
+export function loginRequest(email, password, uid) {
   return {
     type: types.LOGIN.REQUEST,
     email,
     password,
+    uid,
   };
 }
 
-export function loginSuccess({ token, user }) {
+export function loginSuccess({ email, uid }) {
   return {
     type: types.LOGIN.SUCCESS,
-    token,
-    user,
+    token: uid,
+    email,
   };
 }
 

@@ -9,13 +9,14 @@ import {
   getBabiesSuccess,
 } from '../actions/babyActions';
 import api from '../services/mlb';
+import firebase from '../services/firebase';
 
 function loginCall({ email, password }) {
-  return api.login(email, password);
+  return firebase.login(email, password);
 }
 
-function logoutCall(token) {
-  return api.logout(token);
+function logoutCall() {
+  return firebase.logout();
 }
 
 function getBabies() {
@@ -46,7 +47,7 @@ function* watchLogoutRequest() {
     const { token } = yield take(types.LOGOUT);
 
     try {
-      yield call(logoutCall, token);
+      yield call(logoutCall);
       yield put(logout());
     } catch (err) {
       yield put(loginFailure(err.status));

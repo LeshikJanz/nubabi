@@ -21,3 +21,4 @@ export const LOGIN = createRequestTypes('LOGIN');
 export const LOGOUT = 'LOGOUT';
 
 export const GET_BABIES = createRequestTypes('GET_BABIES');
+export const GET_THIS_WEEKS_ACTIVITIES = createRequestTypes('GET_THIS_WEEKS_ACTIVITIES');

@@ -24,7 +24,7 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }) => {
       <View style={styles.valueRow}>
         <Text style={styles.valueText}>{amount}{unit}</Text>
       </View>
-      <View style={styles.udpateRow}>
+      <View style={styles.updateRow}>
         <TouchableHighlight>
           <Text style={styles.updateText} onPress={onUpdate}>Update</Text>
         </TouchableHighlight>
@@ -35,7 +35,7 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }) => {
 
 Measurement.propTypes = {
   header: React.PropTypes.string.isRequired,
-  amount: React.PropTypes.number.isRequired,
+  amount: React.PropTypes.string.isRequired,
   unit: React.PropTypes.string.isRequired,
   iconName: React.PropTypes.string.isRequired,
   onUpdate: React.PropTypes.func.isRequired,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     color: FONT_COLOR,
     fontSize: 28,
   },
-  udpateRow: {
+  updateRow: {
     alignItems: 'center',
     marginTop: 8,
   },
