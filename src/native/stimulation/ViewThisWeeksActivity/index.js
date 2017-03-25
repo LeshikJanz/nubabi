@@ -9,27 +9,47 @@ import {
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { NEXT_SKILL_AREA, PREVIOUS_SKILL_AREA } from '../../../common/actionTypes';
+import {
+  NEXT_SKILL_AREA,
+  PREVIOUS_SKILL_AREA,
+} from '../../../common/actionTypes';
 import { PANEL_BACKGROUND } from '../../../common/themes/defaultTheme';
 import ExpertInfo from './ExpertInfo';
 import Header from './Header';
 
 class ViewThisWeeksActivity extends Component {
-  _handleNextSkill() {
+  static navigationOptions = {
+    title: ({ state }) => state.params.title,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.skillArea !== this.props.skillArea) {
+      this.props.navigation.setParams({
+        title: this.findActivity(nextProps).name,
+      });
+    }
+  }
+
+  handleNextSkill() {
     return this.props.dispatch({
       type: NEXT_SKILL_AREA,
     });
   }
 
-  _handlePreviousSkill() {
+  handlePreviousSkill() {
     return this.props.dispatch({
       type: PREVIOUS_SKILL_AREA,
     });
   }
 
+  findActivity(props = this.props) {
+    const { skillArea: skillAreaId } = props;
+    return _.find(props.activities, { skillAreaId });
+  }
+
   render() {
     const skill = this.props.skillAreas[this.props.skillArea];
-    const activity = _.find(this.props.activities, { skillAreaId: this.props.skillArea });
+    const activity = this.findActivity();
     const expert = _.find(this.props.experts, { id: activity.expertId });
     return (
       <View style={styles.container}>
@@ -40,14 +60,14 @@ class ViewThisWeeksActivity extends Component {
           <ExpertInfo expert={expert} activity={activity} />
           <View style={styles.nextButtonsContainer}>
             <TouchableHighlight
-              onPress={() => this._handlePreviousSkill()}
+              onPress={() => this.handlePreviousSkill()}
               underlayColor="rgba(0,0,0,0)"
               style={styles.previousButton}
             >
               <Text style={styles.previousButtonText}>Previous</Text>
             </TouchableHighlight>
             <TouchableHighlight
-              onPress={() => this._handleNextSkill()}
+              onPress={() => this.handleNextSkill()}
               underlayColor="rgba(0,0,0,0)"
               style={styles.nextButton}
             >
@@ -71,7 +91,6 @@ ViewThisWeeksActivity.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    onNavigate: action => dispatch(action),
   };
 };
 
@@ -81,7 +100,6 @@ const mapStateToProps = (state) => {
     skillAreas: state.thisWeek.skillAreas,
     activities: state.thisWeek.activities,
     experts: state.thisWeek.experts,
-    navigation: state.navigation,
   };
 };
 
@@ -115,4 +133,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ViewThisWeeksActivity);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ViewThisWeeksActivity);

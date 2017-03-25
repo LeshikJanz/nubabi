@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   View,
@@ -6,38 +7,50 @@ import {
   Text,
 } from 'react-native';
 import { connect } from 'react-redux';
-
-import { PUSH_ROUTE } from '../../common/actionTypes';
+import type { State, Baby } from '../../common/types';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import Measurement from './Measurement';
 import Header from './Header';
 import Achievements from './Achievements';
 import RecentMemories from './RecentMemories';
+import ProfileIcon from '../navigation/ProfileIcon';
+import { getBabyTitle, getTabHeaders } from '../navigation/shared';
+
+type Props = {
+  navigation: any,
+  babies: {
+    index: number,
+    items: Array<Baby>,
+  },
+};
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-    this._handleEditBaby = this._handleEditBaby.bind(this);
-  }
+  props: Props;
 
-  _handleAction(action) {
-    this.props.onNavigate(action);
-  }
+  static navigationOptions = {
+    ...getBabyTitle(),
+    tabBar: (state, defaultTabBarOptions) => ({
+      ...defaultTabBarOptions,
+      label: () => null, // showLabel doesn't work on this context, probably a bug
+      icon: ({ tintColor, focused }) => (
+        <ProfileIcon active={focused} tintColor={tintColor} />
+      ),
+    }),
+  };
 
-  _handleEditBaby() {
-    return this._handleAction({ type: PUSH_ROUTE, route: { key: 'editBaby', title: 'Edit Baby' } });
-  }
+  handleEditBaby = () => this.props.navigation.navigate('editBaby');
 
   render() {
     const baby = this.props.babies.items[this.props.babies.index];
     // TODO: empty state
     if (!baby) {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={styles.emptyState}>
           <Text>No baby</Text>
         </View>
       );
     }
+
     return (
       <View style={styles.container}>
         <ScrollView
@@ -48,7 +61,7 @@ class Profile extends Component {
             avatar={baby.avatar_thumb}
             babyName={baby.name}
             birthDate={baby.birth_date}
-            onEditBaby={this._handleEditBaby}
+            onEditBaby={this.handleEditBaby}
           />
           <View style={styles.measurementsRow}>
             <Measurement
@@ -74,25 +87,6 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
-  onNavigate: React.PropTypes.func.isRequired,
-  babies: React.PropTypes.object.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch,
-    onNavigate: action => dispatch(action),
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    navigation: state.navigation,
-    babies: state.babies,
-  };
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -111,6 +105,11 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginBottom: 20,
   },
+  emptyState: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
+export default connect(({ babies }: State) => ({ babies }))(Profile);

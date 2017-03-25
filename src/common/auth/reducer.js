@@ -1,8 +1,6 @@
 // @flow
 import type { Action, AuthState } from '../types';
 
-import * as types from '../actionTypes';
-
 const initialState = {
   isAuthenticated: false,
   isFetching: false,

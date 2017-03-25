@@ -2,7 +2,7 @@ import type { ViewerState, Action } from '../types';
 
 const initialState = null;
 
-const reducer = (state: ViewerState = initialState, action: Action) : ViewerState => {
+const reducer = (state: ViewerState = initialState, action: Action): ViewerState => {
   switch (action.type) {
     case 'ON_AUTH': {
       return action.payload.user || null;

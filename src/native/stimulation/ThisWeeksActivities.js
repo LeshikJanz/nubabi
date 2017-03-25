@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   View,
@@ -9,31 +10,39 @@ import {
   ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
+import type { Dispatch } from 'redux';
 import _ from 'lodash';
-
-import { SET_SKILL_AREA, PUSH_ROUTE } from '../../common/actionTypes';
+import type { NavigationProp } from 'react-navigation';
+import type { Activity, SkillArea } from '../../common/types';
+import { SET_SKILL_AREA } from '../../common/actionTypes';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
-
 const width = Dimensions.get('window').width;
 
-class ThisWeeksActivities extends Component {
-  _handleAction(action) {
-    this.props.onNavigate(action);
-  }
+type Props = {
+  dispatch: Dispatch<*, *>,
+  skillAreas: Array<SkillArea>,
+  activities: Array<Activity>,
+  navigation: NavigationProp<*, *>,
+};
 
-  _handleThisWeeksActivity(skillAreaId) {
+class ThisWeeksActivities extends Component {
+  props: Props;
+
+  static navigationOptions = {
+    title: "This Week's Activities",
+    header: {
+      backTitle: 'Activities',
+    },
+  };
+
+  handleThisWeeksActivity = (skillAreaId: number, title: string) => {
     this.props.dispatch({
       type: SET_SKILL_AREA,
       skillArea: skillAreaId,
     });
-    return this._handleAction({
-      type: PUSH_ROUTE,
-      route: {
-        key: 'viewThisWeeksActivity',
-        title: 'Activities',
-      },
-    });
-  }
+
+    this.props.navigation.navigate('viewThisWeeksActivity', { title });
+  };
 
   render() {
     const skills = this.props.skillAreas.map((skillArea) => {
@@ -41,7 +50,7 @@ class ThisWeeksActivities extends Component {
       return (
         <TouchableHighlight
           underlayColor="rgba(0,0,0,0)"
-          onPress={() => this._handleThisWeeksActivity(skillArea.id)}
+          onPress={() => this.handleThisWeeksActivity(skillArea.id, activity.name)}
           key={skillArea.id}
         >
           <View style={styles.activityRow}>
@@ -67,17 +76,9 @@ class ThisWeeksActivities extends Component {
   }
 }
 
-ThisWeeksActivities.propTypes = {
-  onNavigate: React.PropTypes.func.isRequired,
-  dispatch: React.PropTypes.func.isRequired,
-  skillAreas: React.PropTypes.array.isRequired,
-  activities: React.PropTypes.array.isRequired,
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    onNavigate: action => dispatch(action),
   };
 };
 
@@ -85,7 +86,6 @@ const mapStateToProps = (state) => {
   return {
     skillAreas: state.thisWeek.skillAreas,
     activities: state.thisWeek.activities,
-    navigation: state.navigation,
   };
 };
 

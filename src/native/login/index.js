@@ -21,6 +21,12 @@ const logo = require('../../common/images/loginLogo.png');
 const window = Dimensions.get('window');
 
 class Login extends Component {
+  static navigationOptions = {
+    header: {
+      visible: false,
+    },
+  };
+
   constructor(props) {
     super(props);
     this.state = {

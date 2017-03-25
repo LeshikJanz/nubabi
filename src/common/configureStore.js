@@ -39,6 +39,7 @@ const configureStore = (options: Options) => {
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   /* eslint-enable */
 
+  // $FlowFixMe
   const store = createStore(
     reducer,
     initialState,

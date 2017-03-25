@@ -53,7 +53,7 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Nubabi.ttf</string>
+		<string>nubabi.ttf</string>
 		<string>Entypo.ttf</string>
 		<string>EvilIcons.ttf</string>
 		<string>FontAwesome.ttf</string>

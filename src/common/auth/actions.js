@@ -1,5 +1,4 @@
 import type { Action } from '../types';
-import * as types from '../actionTypes';
 
 export function loginRequest(email, password, uid): Action {
   return {
@@ -24,7 +23,7 @@ export function loginSuccess({ email, uid }): Action {
   };
 }
 
-export function loginFailure(err) : Action {
+export function loginFailure(err): Action {
   return {
     type: 'LOGIN_FAILURE',
     payload: err,
@@ -32,7 +31,7 @@ export function loginFailure(err) : Action {
   };
 }
 
-export function logout() : Action {
+export function logout(): Action {
   return {
     type: 'LOGOUT',
   };

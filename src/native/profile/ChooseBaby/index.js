@@ -7,92 +7,113 @@ import {
   Dimensions,
   ScrollView,
   Animated,
+  Easing,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Svg, {
- Path,
-} from 'react-native-svg';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import Svg, { Path } from 'react-native-svg';
 
-import { POP_ROUTE } from '../../../common/actionTypes';
-import { NUBABI_RED } from '../../../common/themes/defaultTheme';
+import {
+  HEADER_FONT_COLOR,
+  NUBABI_RED,
+} from '../../../common/themes/defaultTheme';
 
 const window = Dimensions.get('window');
 
+const Icon = Animated.createAnimatedComponent(IonIcon);
 const babyIcon = require('../../../common/images/face_icon.jpg');
 
-function forInitial(props) {
-  const {
-    navigationState,
-    scene,
-  } = props;
-
-  const focused = navigationState.index === scene.index;
-  const opacity = focused ? 1 : 0;
-  const translate = focused ? 0 : 1000000;
-  return {
-    opacity,
-    transform: [
-      { translateX: translate },
-      { translateY: translate },
-    ],
-  };
-}
-
 class ChooseBaby extends Component {
+  static navigationOptions = {
+    cardStack: {
+      gesturesEnabled: false,
+    },
+  };
+
+  static contextTypes = {
+    setActiveTransition: React.PropTypes.func,
+  };
+
   constructor(props) {
     super(props);
-    this._handleBack = this._handleBack.bind(this);
+
+    this.elementsAnimation = new Animated.Value(0);
+    this.buttonAnimation = new Animated.Value(0);
+    this.listAnimation = new Animated.Value(0);
   }
 
-  getAnimatedStyle() {
-    const {
-      layout,
-      position,
-      scene,
-    } = this.props;
+  componentDidMount() {
+    Animated.stagger(400, [
+      Animated.spring(this.elementsAnimation, {
+        toValue: 2,
+        velocity: 3,
+        tension: -10,
+        friction: 1.5,
+      }),
+      Animated.spring(this.listAnimation, {
+        toValue: 2,
+        easing: Easing.linear,
+      }),
+      Animated.spring(this.buttonAnimation, {
+        toValue: 2,
+        easing: Easing.inOut(Easing.quad),
+      }),
+    ]).start();
+  }
 
-    if (!layout.isMeasured) {
-      return forInitial(this.props);
-    }
+  getContainerAnimatedStyle() {
+    const value = this.elementsAnimation;
 
-    const index = scene.index;
-    const inputRange = [index - 1, index, index + 1];
-    const height = layout.initHeight;
-    const width = layout.initWidth;
+    const inputRange = [0, 1, 2];
 
-    const opacity = position.interpolate({
+    const translateY = value.interpolate({
       inputRange,
-      outputRange: ([1, 1, 0.3]),
+      outputRange: [-100, -75, 0],
     });
 
-    const scale = position.interpolate({
+    const scale = value.interpolate({
       inputRange,
-      outputRange: ([1, 1, 0.95]),
-    });
-
-    const translateX = position.interpolate({
-      inputRange,
-      outputRange: ([-width, 0, 200]),
-    });
-    const translateY = position.interpolate({
-      inputRange,
-      outputRange: ([-height, 0, -10]),
+      outputRange: [0, 0.5, 1],
     });
 
     return {
-      opacity,
       transform: [
-        { scale },
-        { translateX },
         { translateY },
+        { scale },
       ],
     };
   }
 
-  _handleBack() {
-    this.props.onNavigate({ type: POP_ROUTE });
+  getListAnimatedStyle() {
+    const value = this.listAnimation;
+
+    const opacity = value.interpolate({
+      inputRange: [0, 1, 2],
+      outputRange: [0, 0.3, 1],
+    });
+
+    return {
+      opacity,
+    };
   }
+
+  getButtonAnimatedStyle() {
+    const value = this.buttonAnimation;
+
+    const scale = value.interpolate({
+      inputRange: [0, 1, 2],
+      outputRange: [0, 1.5, 1],
+    });
+
+    return {
+      transform: [{ scale }],
+    };
+  }
+
+  goBack = () => {
+    this.props.navigation.goBack();
+    this.context.setActiveTransition('cardStack');
+  };
 
   render() {
     let babiesList = [];
@@ -115,73 +136,91 @@ class ChooseBaby extends Component {
           );
         })
       );
+    } else {
+      babiesList = (
+        <Animated.View
+          style={[
+            {
+              alignSelf: 'center',
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }, this.getListAnimatedStyle()]}
+        >
+          <Text>Add a baby to get started...</Text>
+        </Animated.View>
+      );
     }
     return (
-      <Animated.View style={[styles.container, this.getAnimatedStyle()]}>
-        <Svg
-          style={styles.headerShape}
+      <Animated.View style={styles.overlay}>
+        <Animated.View
+          style={[styles.container, this.getContainerAnimatedStyle()]}
         >
-          <Path
-            d="M242.028455,326.522878 C242.828957,347.908578 260.418521,365 282,365 C303.756979,365 321.456854,347.629474 321.987736,326.00031 C410.423065,317.73135 491.521973,284.207863 558,232.714294 L558,0 L0,0 L0,232.714294 C67.9827067,285.373381 151.25565,319.239702 242.028455,326.522878 Z"
-            id="Combined-Shape"
-            stroke="none"
-            fill="#FFFFFF"
-            fill-rule="evenodd"
-          />
-        </Svg>
-        <View style={styles.babyContainer}>
-          <ScrollView
-            style={{
-              height: 80,
-              width: window.width,
-              paddingLeft: 10,
-              paddingRight: 10,
-              marginTop: 5,
-            }}
-            showsHorizontalScrollIndicator={false}
-            horizontal
+          <Svg
+            style={styles.headerShape}
           >
-            {babiesList}
-          </ScrollView>
-        </View>
-        <Icon
-          name="ios-add-circle"
-          size={45}
-          color={NUBABI_RED}
-          style={styles.addButton}
-        />
+            <Path
+              d="M242.028455,326.522878 C242.828957,347.908578 260.418521,365 282,365 C303.756979,365 321.456854,347.629474 321.987736,326.00031 C410.423065,317.73135 491.521973,284.207863 558,232.714294 L558,0 L0,0 L0,232.714294 C67.9827067,285.373381 151.25565,319.239702 242.028455,326.522878 Z"
+              id="Combined-Shape"
+              stroke="none"
+              fill="#FFFFFF"
+              fill-rule="evenodd"
+            />
+          </Svg>
+
+          <View style={styles.babyContainer}>
+            <View style={styles.closeButton}>
+              <Icon
+                name="ios-close-outline"
+                style={styles.closeIcon}
+                onPress={this.goBack}
+              />
+            </View>
+            <ScrollView
+              contentContainerStyle={{
+                height: 80,
+                width: window.width,
+                paddingLeft: 10,
+                paddingRight: 10,
+                marginTop: 10,
+              }}
+              showsHorizontalScrollIndicator={false}
+              horizontal
+            >
+              {babiesList}
+            </ScrollView>
+          </View>
+          <Icon
+            name="ios-add-circle"
+            size={45}
+            color={NUBABI_RED}
+            style={[styles.addButton, this.getButtonAnimatedStyle()]}
+          />
+        </Animated.View>
       </Animated.View>
     );
   }
 }
 
 ChooseBaby.propTypes = {
-  onNavigate: React.PropTypes.func.isRequired,
+  navigation: React.PropTypes.object.isRequired,
   babies: React.PropTypes.object.isRequired,
-  layout: React.PropTypes.object.isRequired,
-  position: React.PropTypes.object.isRequired,
-  scene: React.PropTypes.object.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch,
-    onNavigate: action => dispatch(action),
-  };
 };
 
 const mapStateToProps = (state) => {
   return {
-    navigation: state.tabs,
     babies: state.babies,
   };
 };
 
 const styles = StyleSheet.create({
-  container: {
+  overlay: {
+    backgroundColor: 'rgba(0,0,0, .6)',
     flex: 1,
+  },
+  container: {
     alignItems: 'center',
-    backgroundColor: 'transparent',
+    //backgroundColor: 'transparent',
   },
   babyContainer: {
     left: 0,
@@ -189,7 +228,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: window.width,
     alignItems: 'center',
-    height: 150,
+    //height: 150,
   },
   babyIconContainerView: {
     flex: 1,
@@ -225,6 +264,18 @@ const styles = StyleSheet.create({
     marginTop: -200,
     marginLeft: -7,
   },
+  closeButton: {
+    marginTop: 15,
+    height: 25,
+  },
+  closeIcon: {
+    padding: 10,
+    backgroundColor: 'transparent',
+    color: HEADER_FONT_COLOR,
+    fontSize: 25,
+    marginTop: -6,
+    marginRight: -4,
+  },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChooseBaby);
+export default connect(mapStateToProps)(ChooseBaby);
