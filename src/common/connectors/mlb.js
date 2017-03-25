@@ -2,6 +2,7 @@ import agent from 'superagent';
 
 // TODO: make dynamic
 const host = 'http://localhost:3000/';
+const auth_token = 'dHY49Iz4O9UByM7ZKBqmJ7GdnX83';
 
 const api = {
   login(email, password) {
@@ -46,7 +47,7 @@ const api = {
     return new Promise((resolve, reject) => {
       agent.get(`${host}api/babies`)
         .set('Content-Type', 'application/json')
-        .set('X-Auth-Token', 'uu7qWqoxB1ZMbePyhiu5')
+        .set('X-Auth-Token', auth_token)
         .end((err, res) => {
           if (!res) {
             return reject(new Error('No response'));
@@ -63,7 +64,7 @@ const api = {
     return new Promise((resolve, reject) => {
       agent.get(`${host}api/babies/${babyId}/activities`)
         .set('Content-Type', 'application/json')
-        .set('X-Auth-Token', 'uu7qWqoxB1ZMbePyhiu5')
+        .set('X-Auth-Token', auth_token)
         .end((err, res) => {
           if (res.error) {
             reject();

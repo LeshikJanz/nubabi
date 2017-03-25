@@ -1097,6 +1097,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MyLearningBaby.Nubabi;
 				PRODUCT_NAME = NuBabiMobile;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1115,6 +1116,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.MyLearningBaby.Nubabi;
 				PRODUCT_NAME = NuBabiMobile;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
