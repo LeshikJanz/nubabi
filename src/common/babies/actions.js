@@ -1,5 +1,4 @@
 import { Action } from '../types';
-import * as types from '../actionTypes';
 
 export function getBabiesRequest(token): Action {
   return {
@@ -10,14 +9,14 @@ export function getBabiesRequest(token): Action {
   };
 }
 
-export function getBabiesSuccess(babies) : Action {
+export function getBabiesSuccess(babies): Action {
   return {
     type: 'GET_BABIES_SUCCESS',
     payload: babies,
   };
 }
 
-export function getBabiesFailure(err) : Action {
+export function getBabiesFailure(err): Action {
   return {
     type: 'GET_BABIES_FAILURE',
     payload: err,
@@ -25,7 +24,7 @@ export function getBabiesFailure(err) : Action {
   };
 }
 
-export function getThisWeeksActivitiesRequest(token) : Action {
+export function getThisWeeksActivitiesRequest(token): Action {
   return {
     type: 'GET_THIS_WEEKS_ACTIVITIES_REQUEST',
     meta: {
@@ -34,14 +33,14 @@ export function getThisWeeksActivitiesRequest(token) : Action {
   };
 }
 
-export function getThisWeeksActivitiesSuccess(babies) : Action {
+export function getThisWeeksActivitiesSuccess(babies): Action {
   return {
     type: 'GET_THIS_WEEKS_ACTIVITIES_SUCCESS',
     payload: babies,
   };
 }
 
-export function getThisWeeksActivitiesFailure(err) : Action {
+export function getThisWeeksActivitiesFailure(err): Action {
   return {
     type: 'GET_THIS_WEEKS_ACTIVITIES_FAILURE',
     payload: err,

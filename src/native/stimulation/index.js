@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   View,
@@ -5,43 +6,45 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native';
-import { connect } from 'react-redux';
-
+import type { NavigationProp } from 'react-navigation';
+import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
 import BrowseAllActivitiesButton from './BrowseAllActivitiesButton';
 import CalendarButton from './CalendarButton';
 import FavouritesButton from './FavouritesButton';
 import DidYouKnow from './DidYouKnow';
-import { PUSH_ROUTE } from '../../common/actionTypes';
-import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
+import { getBabyTitle } from '../navigation/shared';
+
+type Props = {
+  navigation: NavigationProp<*, *>,
+};
 
 class Stimulation extends Component {
+  props: Props;
+
+  static navigationOptions = {
+    ...getBabyTitle(),
+  };
+
   constructor(props) {
     super(props);
-    this._handleThisWeeksActivities = this._handleThisWeeksActivities.bind(this);
-    this._handleNextWeeksEquipment = this._handleNextWeeksEquipment.bind(this);
-    this._handleBrowseActivities = this._handleBrowseActivities.bind(this);
+    this.handleThisWeeksActivities = this.handleThisWeeksActivities.bind(this);
+    this.handleNextWeeksEquipment = this.handleNextWeeksEquipment.bind(this);
+    this.handleBrowseActivities = this.handleBrowseActivities.bind(this);
   }
 
-  _handleAction(action) {
-    this.props.onNavigate(action);
-  }
+  handleThisWeeksActivities = () => {
+    this.props.navigation.navigate('thisWeekActivities');
+  };
 
-  _handleThisWeeksActivities() {
-    return this._handleAction({
-      type: PUSH_ROUTE, route: { key: 'thisWeeksActivities', title: 'This Weeks Activities' } });
-  }
+  handleNextWeeksEquipment = () => {
+    this.props.navigation.navigate('nextWeeksEquipment');
+  };
 
-  _handleNextWeeksEquipment() {
-    return this._handleAction({
-      type: PUSH_ROUTE, route: { key: 'nextWeeksEquipment', title: 'Next Weeks Equipment' } });
-  }
-
-  _handleBrowseActivities() {
-    return this._handleAction({
-      type: PUSH_ROUTE, route: { key: 'browseActivities', title: 'Browse All Activities' } });
-  }
+  handleBrowseActivities = () => {
+    this.props.navigation.navigate('browseActivities');
+  };
 
   render() {
     return (
@@ -55,7 +58,7 @@ class Stimulation extends Component {
         >
           <TouchableHighlight
             underlayColor="rgba(0,0,0,0)"
-            onPress={this._handleThisWeeksActivities}
+            onPress={this.handleThisWeeksActivities}
             style={styles.oneButton}
           >
             <ThisWeeksActivitiesButton />
@@ -63,13 +66,13 @@ class Stimulation extends Component {
           <View style={styles.twoButtons}>
             <TouchableHighlight
               underlayColor="rgba(0,0,0,0)"
-              onPress={this._handleNextWeeksEquipment}
+              onPress={this.handleNextWeeksEquipment}
             >
               <NextWeeksEquipmentButton />
             </TouchableHighlight>
             <TouchableHighlight
               underlayColor="rgba(0,0,0,0)"
-              onPress={this._handleBrowseActivities}
+              onPress={this.handleBrowseActivities}
             >
               <BrowseAllActivitiesButton />
             </TouchableHighlight>
@@ -83,22 +86,7 @@ class Stimulation extends Component {
   }
 }
 
-Stimulation.propTypes = {
-  onNavigate: React.PropTypes.func.isRequired,
-};
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch,
-    onNavigate: action => dispatch(action),
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    navigation: state.navigation,
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -157,4 +145,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Stimulation);
+export default Stimulation;

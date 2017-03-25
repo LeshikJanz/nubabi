@@ -19,7 +19,7 @@ import GenderSelection from './GenderSelection';
 class EditBaby extends Component {
   constructor(props) {
     super(props);
-    this.state = props.baby;
+    this.state = props.baby; // FIXME
   }
 
   render() {
@@ -110,13 +110,11 @@ EditBaby.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    onNavigate: action => dispatch(action),
   };
 };
 
 const mapStateToProps = (state) => {
   return {
-    navigation: state.navigation,
     baby: state.babies.items[state.babies.index],
   };
 };

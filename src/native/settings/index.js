@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -5,17 +6,28 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
+import type { NavigationProp } from 'react-navigation';
+import type { Viewer } from '../../common/types';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-
+import { logout } from '../../common/auth/actions';
 import { NUBABI_RED } from '../../common/themes/defaultTheme';
-import * as loginActions from '../../common/auth/actions';
-import * as navigationActions from '../../common/navigation/actions';
+
+type Props = {
+  navigation: NavigationProp<*, *>,
+  user: Viewer,
+  logout: typeof logout,
+};
 
 class Settings extends Component {
+  props: Props;
+
+  static navigationOptions = {
+    title: 'Settings',
+  };
+
   logout = () => {
-    this.props.loginActions.logout();
-    this.props.navigationActions.pop();
+    this.props.logout();
+    this.props.navigation.goBack();
   };
 
   render() {
@@ -39,25 +51,6 @@ class Settings extends Component {
     );
   }
 }
-
-Settings.propTypes = {
-  user: React.PropTypes.object.isRequired,
-  loginActions: React.PropTypes.object.isRequired,
-  navigationActions: React.PropTypes.object.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loginActions: bindActionCreators(loginActions, dispatch),
-    navigationActions: bindActionCreators(navigationActions, dispatch),
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.viewer,
-  };
-};
 
 const styles = StyleSheet.create({
   container: {
@@ -94,4 +87,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Settings);
+export default connect(
+  ({ viewer }) => ({ user: viewer }),
+  { logout },
+)(Settings);

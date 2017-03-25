@@ -17,7 +17,10 @@
 .*/node_modules/react-native/local-cli/server/util/inspectorProxy.js
 .*/node_modules/react-static-container/.*
 
+; These don't make flow happy
 .*/node_modules/react-native-keyboard-aware-scroll-view/.*
+.*/node_modules/react-native-tab-view/.*
+.*/node_modules/react-navigation/.*/__tests__/.*
 
 [include]
 

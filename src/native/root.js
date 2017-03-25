@@ -5,13 +5,17 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Ionicons';
 
+import { connect } from 'react-redux';
+import { addNavigationHelpers, TabNavigator } from 'react-navigation';
+import AppNavigator from './navigation/AppNavigator';
+import Icon from 'react-native-vector-icons/Ionicons';
+import RightHeader from './navigation/RightHeader';
+import LeftHeader from './navigation/LeftHeader';
 import Tabs from './tabs';
 import { POP_ROUTE, PUSH_ROUTE } from '../common/actionTypes';
-import NubabiIcon from '../common/icons/nubabi';
 import { HEADER_FONT_COLOR } from '../common/themes/defaultTheme';
+import Login from './login';
 import ChooseBaby from './profile/ChooseBaby';
 import Settings from './settings';
 import EditBaby from './profile/EditBaby';
@@ -19,7 +23,6 @@ import ThisWeeksActivities from './stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from './stimulation/NextWeeksEquipment';
 import BrowseActivities from './stimulation/BrowseActivities';
 import ViewThisWeeksActivity from './stimulation/ViewThisWeeksActivity';
-import Login from './login';
 
 const {
   Header: NavigationHeader,
@@ -47,43 +50,37 @@ class NuBabiMobile extends Component {
 
   _handleToggleChooseBaby() {
     return this._handleAction({
-      type: PUSH_ROUTE, route: { key: 'chooseBaby' } });
+      type: PUSH_ROUTE, route: { key: 'chooseBaby' },
+    });
   }
 
   _handleOpenSettings() {
     return this._handleAction({
-      type: PUSH_ROUTE, route: { key: 'settings', title: 'Settings' } });
+      type: PUSH_ROUTE, route: { key: 'settings', title: 'Settings' },
+    });
   }
 
   _renderHeader(sceneProps) {
     const baby = this.props.babies.items[this.props.babies.index];
     switch (sceneProps.scene.route.key) {
       case 'chooseBaby':
-      case 'tabs': return (
-        <NavigationHeader
-          {...sceneProps}
-          style={styles.navHeader}
-          renderTitleComponent={() => (
-            (sceneProps.scene.route.key === 'tabs') ?
-              <NavigationHeader.Title
+      case 'tabs':
+        return (
+          <NavigationHeader
+            {...sceneProps}
+            style={styles.navHeader}
+            renderTitleComponent={() => (
+              (sceneProps.scene.route.key === 'tabs') ? <NavigationHeader.Title
                 textStyle={styles.navHeaderTitle}
               >
                 {baby ? baby.name : 'Nubabi'}
               </NavigationHeader.Title>
-            :
-              <View />
-          )}
-          renderLeftComponent={() => (
-            (sceneProps.scene.route.key === 'tabs') ?
-              <View>
-                <NubabiIcon
-                  name="changeBabyIcon"
-                  style={styles.headerIcon}
-                  onPress={this._handleToggleChooseBaby}
-                />
-              </View>
-            :
-              <View
+                : <View />
+            )}
+            renderLeftComponent={() => (
+              (sceneProps.scene.route.key === 'tabs') ?
+                <LeftHeader onPress={this._handleToggleChooseBaby} />
+                : <View
                 style={styles.headerBackView}
               >
                 <Icon
@@ -92,83 +89,81 @@ class NuBabiMobile extends Component {
                   onPress={this._handleBackAction}
                 />
               </View>
-          )}
-          renderRightComponent={() => (
-            (sceneProps.scene.route.key === 'tabs') ?
-              <View style={{ flexDirection: 'row' }}>
-                <NubabiIcon
-                  name="alerts"
-                  style={styles.headerIcon}
-                />
-                <NubabiIcon
-                  name="settings"
-                  style={[styles.headerIcon, { fontSize: 16 }]}
-                  onPress={this._handleOpenSettings}
-                />
-              </View>
-            :
-              <View />
-          )}
-        />
-      );
-      default: return (
-        <NavigationHeader
-          {...sceneProps}
-          style={styles.navHeader}
-          renderTitleComponent={() => (
-            <NavigationHeader.Title>{sceneProps.scene.route.title}</NavigationHeader.Title>)}
-          renderLeftComponent={() => (
-            <View
-              style={styles.headerBackView}
-            >
-              <Icon
-                name="ios-arrow-back-outline"
-                style={styles.headerBackIcon}
-                onPress={this._handleBackAction}
-              />
-              <Text
-                style={styles.headerBackText}
-                onPress={this._handleBackAction}
+            )}
+            renderRightComponent={() => (
+              (sceneProps.scene.route.key === 'tabs') ?
+                <RightHeader onPress={this._handleOpenSettings} />
+                : <View />
+            )}
+          />
+        );
+      default:
+        return (
+          <NavigationHeader
+            {...sceneProps}
+            style={styles.navHeader}
+            renderTitleComponent={() => (
+              <NavigationHeader.Title>{sceneProps.scene.route.title}</NavigationHeader.Title>)}
+            renderLeftComponent={() => (
+              <View
+                style={styles.headerBackView}
               >
-                Back
-              </Text>
-            </View>
-          )}
-        />
-      );
+                <Icon
+                  name="ios-arrow-back-outline"
+                  style={styles.headerBackIcon}
+                  onPress={this._handleBackAction}
+                />
+                <Text
+                  style={styles.headerBackText}
+                  onPress={this._handleBackAction}
+                >
+                  Back
+                </Text>
+              </View>
+            )}
+          />
+        );
     }
   }
 
   _renderScene(sceneProps) {
     switch (sceneProps.scene.route.key) {
-      case 'chooseBaby': return (
-        <ChooseBaby
-          {...sceneProps}
-        />
-      );
-      case 'settings': return (
-        <Settings />
-      );
-      case 'editBaby': return (
-        <EditBaby />
-      );
-      case 'thisWeeksActivities': return (
-        <ThisWeeksActivities />
-      );
-      case 'nextWeeksEquipment': return (
-        <NextWeeksEquipment />
-      );
-      case 'browseActivities': return (
-        <BrowseActivities />
-      );
-      case 'viewThisWeeksActivity': return (
-        <ViewThisWeeksActivity />
-      );
-      default: return (
-        <View style={{ flex: 1 }}>
-          <Tabs index={sceneProps.scene.route.index} />
-        </View>
-      );
+      case 'chooseBaby':
+        return (
+          <ChooseBaby
+            {...sceneProps}
+          />
+        );
+      case 'settings':
+        return (
+          <Settings />
+        );
+      case 'editBaby':
+        return (
+          <EditBaby />
+        );
+      case 'thisWeeksActivities':
+        return (
+          <ThisWeeksActivities />
+        );
+      case 'nextWeeksEquipment':
+        return (
+          <NextWeeksEquipment />
+        );
+      case 'browseActivities':
+        return (
+          <BrowseActivities />
+        );
+      case 'viewThisWeeksActivity':
+        return (
+          <ViewThisWeeksActivity />
+        );
+      default:
+        return (
+          <View style={{ flex: 1 }}>
+            <Tabs index={sceneProps.scene.route.index} />
+          </View>
+        );
     }
   }
 
@@ -214,14 +209,14 @@ NuBabiMobile.propTypes = {
 const mapDispatchToProps = (dispatch) => {
   return {
     dispatch,
-    onNavigate: action => dispatch(action),
+    //onNavigate: action => dispatch(action),
   };
 };
 
 const mapStateToProps = (state) => {
   return {
-    babies: state.babies,
     navigation: state.navigation,
+    babies: state.babies,
     isAuthenticated: state.auth.isAuthenticated,
     appStarted: state.app.started,
     appOnline: state.app.online,
@@ -281,4 +276,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(NuBabiMobile);
+const TabsNavigator = TabNavigator({
+  Home: { screen: () => <Text>hi</Text> },
+});
+
+const Root = ({ dispatch, navigation }) => {
+  const nav = addNavigationHelpers({
+    dispatch,
+    state: navigation,
+  });
+
+  return (
+    <AppNavigator navigation={nav} />
+  );
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

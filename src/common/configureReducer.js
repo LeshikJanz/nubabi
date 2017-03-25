@@ -34,6 +34,7 @@ const resetStateOnSignOutReducer = (reducer, initialState) => {
 /* eslint-disable no-unused-vars */
 const configureReducer = (platformReducers: Object, initialState: Object) => {
   /* eslint-enable no-unused-vars */
+  // $FlowFixMe
   let reducer = combineReducers({
     app,
     auth,

@@ -8,15 +8,28 @@ export type Deps = {
 
 // Models
 export type Baby = {
+  // TODO: we should probably move this to a GraphQL schema and use tooling to
+  // get flowtypes. Also, camelcase
+  id: string,
+  name: string,
+  avatar_thumb: string,
+  birth_date: Date,
+  weight: number,
+  height: number,
+  memories: Array<Memory>;
+};
+
+export type Memory = {
   // TODO
-}
+};
 
 export type User = {
   // TODO
 };
 
 export type FirebaseUser = {
-  uid: string
+  uid: string,
+  email: string
 }
 
 export type Activity = {
@@ -85,6 +98,8 @@ export type AuthState = {
 export type ViewerState = {
   viewer: ?User,
 };
+
+export type Viewer = FirebaseUser; // For the time being
 
 export type TabNavigationState = {
   index: number,

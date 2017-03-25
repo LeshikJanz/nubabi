@@ -1,6 +1,5 @@
 // @flow
 import type { Action, BabyState } from '../types';
-import * as types from '../actionTypes';
 
 const initialState = {
   items: [],

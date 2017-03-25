@@ -7,8 +7,7 @@ import configureStore from '../common/configureStore';
 import NuBabiMobile from './root';
 import configureStorage from '../common/configureStorage';
 import { Action } from '../common/types';
-import navigation from './navigation/navigationReducer';
-import tabs from './navigation/tabReducer';
+import navigation from './navigation/reducer';
 import device from './device/reducer';
 
 const config = {
@@ -24,7 +23,6 @@ const store = configureStore({
   platformDeps: { firebase },
   platformReducers: {
     navigation,
-    tabs,
     device,
   },
 });
@@ -43,7 +41,7 @@ persistStore(
 firebase.initializeApp(config);
 
 firebase.auth().onAuthStateChanged((user) => {
-  store.dispatch(({ type: 'ON_AUTH', payload: { user } } : Action));
+  store.dispatch(({ type: 'ON_AUTH', payload: { user } }: Action));
 });
 
 const Main = () => (

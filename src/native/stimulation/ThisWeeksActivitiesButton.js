@@ -29,7 +29,7 @@ class ThisWeeksActivitiesButton extends Component {
         <View style={styles.overlay} />
 
         <View style={styles.textContainer}>
-          <Text style={styles.title}>${title}</Text>
+          <Text style={styles.title}>{title}</Text>
         </View>
       </View>
     );
