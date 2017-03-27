@@ -1,14 +1,14 @@
 import agent from 'superagent';
-
+import config from '../../common/config';
+const apiUrl = config.apiUrl;
 // TODO: make dynamic
-const host = 'http://localhost:3000/';
-const auth_token = 'dHY49Iz4O9UByM7ZKBqmJ7GdnX83';
+const authToken = 'dHY49Iz4O9UByM7ZKBqmJ7GdnX83';
 
 const api = {
   login(email, password) {
     const request = { user: { email, password } };
     return new Promise((resolve, reject) => {
-      agent.post(`${host}auth/signin.json`)
+      agent.post(`${apiUrl}/auth/signin.json`)
         .set('Content-Type', 'application/json')
         .send(request)
         .end((err, res) => {
@@ -32,7 +32,7 @@ const api = {
   logout(token) {
     const request = { authentication_token: token };
     return new Promise((resolve, reject) => {
-      agent.delete(`${host}auth/signout.json`)
+      agent.delete(`${apiUrl}/auth/signout.json`)
         .set('Content-Type', 'application/json')
         .send(request)
         .end((err, res) => {
@@ -45,9 +45,9 @@ const api = {
   },
   getBabies() {
     return new Promise((resolve, reject) => {
-      agent.get(`${host}api/babies`)
+      agent.get(`${apiUrl}api/babies`)
         .set('Content-Type', 'application/json')
-        .set('X-Auth-Token', auth_token)
+        .set('X-Auth-Token', authToken)
         .end((err, res) => {
           if (!res) {
             return reject(new Error('No response'));
@@ -62,9 +62,9 @@ const api = {
   },
   getThisWeeksActivities(babyId) {
     return new Promise((resolve, reject) => {
-      agent.get(`${host}api/babies/${babyId}/activities`)
+      agent.get(`${apiUrl}api/babies/${babyId}/activities`)
         .set('Content-Type', 'application/json')
-        .set('X-Auth-Token', auth_token)
+        .set('X-Auth-Token', authToken)
         .end((err, res) => {
           if (res.error) {
             reject();
