@@ -49,6 +49,7 @@ class Login extends Component {
         <KeyboardAwareScrollView
           style={styles.container}
           contentContainerStyle={this.scrollContainer}
+          keyboardShouldPersistTaps="handled"
         >
           <Image source={logo} style={styles.logo} />
           <View style={styles.errorContainer}>
