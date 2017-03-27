@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { StyleSheet, View, Image, LayoutAnimation } from 'react-native';
+import { sample } from 'lodash';
 import { NavigationActions } from 'react-navigation';
 import type { State } from '../../common/types';
 import theme from '../../common/themes/defaultTheme';
+import loadingMessages from './loadingMessages';
 
-const loadingImage = require('../../common/images/loading7.png');
+const loadingImage = { uri: 'LaunchImage' };
 
 type Props = {
   appOnline: boolean,
@@ -43,10 +45,22 @@ class SplashScreen extends Component {
     this.props.navigation.dispatch(resetAction);
   };
 
+  renderLoadingMessage() {
+    return (
+      <View style={styles.loadingMessageContainer}>
+        <Text style={styles.loadingMessage}>
+          {sample(loadingMessages.splash)}
+        </Text>
+      </View>
+    );
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Image source={loadingImage} />
+        <Image source={loadingImage} style={styles.textContainer}>
+          {this.renderLoadingMessage()}
+        </Image>
       </View>
     );
   }
@@ -56,6 +70,25 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: theme.colors.primary,
     flex: 1,
+  },
+  textContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingMessageContainer: {
+    marginTop: 100,
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadingMessage: {
+    width: 274, // TODO: I don't like this
+    margin: 20,
+    color: theme.colors.open.gray0,
+    textAlign: 'center',
+    fontSize: 14,
+    lineHeight: 26,
   },
 });
 
