@@ -14,14 +14,11 @@ import Header from './Header';
 import Achievements from './Achievements';
 import RecentMemories from './RecentMemories';
 import ProfileIcon from '../navigation/ProfileIcon';
-import { getBabyTitle, getTabHeaders } from '../navigation/shared';
+import { getBabyTitle } from '../navigation/shared';
 
 type Props = {
   navigation: any,
-  babies: {
-    index: number,
-    items: Array<Baby>,
-  },
+  baby: ?Baby,
 };
 
 class Profile extends Component {
@@ -38,10 +35,20 @@ class Profile extends Component {
     }),
   };
 
+  componentWillReceiveProps(nextProps) {
+    // Workaround that react-navigation has only static suport
+    if (!this.babyName && nextProps.baby && nextProps.baby.name) {
+      this.babyName = nextProps.baby.name;
+
+      this.props.navigation.setParams({ babyName: this.babyName });
+    }
+  }
+
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
 
   render() {
-    const baby = this.props.babies.items[this.props.babies.index];
+    const { baby } = this.props;
+
     // TODO: empty state
     if (!baby) {
       return (
@@ -112,4 +119,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(({ babies }: State) => ({ babies }))(Profile);
+export default connect(({ babies }: State) => ({
+  baby: babies.items[babies.index],
+}))(Profile);
