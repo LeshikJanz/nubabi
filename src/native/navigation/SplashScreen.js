@@ -26,7 +26,10 @@ class SplashScreen extends Component {
 
   componentDidUpdate() {
     if (this.props.appOnline) {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+      LayoutAnimation.configureNext({
+        ...LayoutAnimation.Presets.spring,
+        duration: 400,
+      });
 
       if (this.props.isAuthenticated) {
         this.navigateTo('home');
