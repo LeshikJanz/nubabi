@@ -6,6 +6,7 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import type { NavigationProp } from 'react-navigation';
 import type { Viewer } from '../../common/types';
 import { connect } from 'react-redux';
@@ -27,11 +28,21 @@ class Settings extends Component {
 
   logout = () => {
     this.props.logout();
-    this.props.navigation.goBack();
+
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [NavigationActions.navigate({ routeName: 'login' })],
+    });
+
+    this.props.navigation.dispatch(resetAction);
   };
 
   render() {
     const { user } = this.props;
+
+    if (!user) {
+      return null;
+    }
 
     return (
       <View style={styles.container}>
@@ -88,6 +99,6 @@ const styles = StyleSheet.create({
 });
 
 export default connect(
-  ({ viewer }) => ({ user: viewer }),
+  ({ viewer, navigation: { index } }) => ({ user: viewer, routeIndex: index }),
   { logout },
 )(Settings);

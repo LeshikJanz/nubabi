@@ -24,20 +24,29 @@ class SplashScreen extends Component {
     },
   };
 
-  componentDidUpdate() {
-    if (this.props.appOnline) {
-      LayoutAnimation.configureNext({
-        ...LayoutAnimation.Presets.spring,
-        duration: 400,
-      });
+  componentDidMount() {
+    // Required since react-navigation pushes this route after logout for some reason
+    this.handleNextScreen();
+  }
 
+  componentDidUpdate() {
+    LayoutAnimation.configureNext({
+      ...LayoutAnimation.Presets.spring,
+      duration: 400,
+    });
+
+    this.handleNextScreen();
+  }
+
+  handleNextScreen = () => {
+    if (this.props.appOnline) {
       if (this.props.isAuthenticated) {
         this.navigateTo('home');
       } else {
         this.navigateTo('login');
       }
     }
-  }
+  };
 
   navigateTo = (routeName) => {
     const resetAction = NavigationActions.reset({
