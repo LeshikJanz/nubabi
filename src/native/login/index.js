@@ -85,6 +85,7 @@ class Login extends Component {
                 focus={this.state.focusPassword}
                 onChangeText={password => this.setState({ password })}
                 returnKeyType="go"
+                onSubmitEditing={this.login}
               />
             </View>
             <TouchableHighlight
