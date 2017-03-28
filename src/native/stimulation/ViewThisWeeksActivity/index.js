@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   View,
@@ -8,7 +9,9 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
+import type { SkillArea, Expert, Activity } from '../../../common/types';
+import type { NavigationProp } from 'react-navigation';
+import type { Dispatch } from 'redux';
 import {
   NEXT_SKILL_AREA,
   PREVIOUS_SKILL_AREA,
@@ -17,7 +20,18 @@ import { PANEL_BACKGROUND } from '../../../common/themes/defaultTheme';
 import ExpertInfo from './ExpertInfo';
 import Header from './Header';
 
+type Props = {
+  navigation: NavigationProp<*, *>,
+  dispatch: Dispatch<*>,
+  skillArea: number,
+  skillAreas: Array<SkillArea>,
+  activities: Array<Activity>, // eslint-disable-line react/no-unused-prop-types
+  experts: Array<Expert>,
+}
+
 class ViewThisWeeksActivity extends Component {
+  props: Props;
+
   static navigationOptions = {
     title: ({ state }) => state.params.title,
   };
@@ -42,10 +56,10 @@ class ViewThisWeeksActivity extends Component {
     });
   }
 
-  findActivity(props = this.props) {
+  findActivity = (props = this.props) => {
     const { skillArea: skillAreaId } = props;
     return _.find(props.activities, { skillAreaId });
-  }
+  };
 
   render() {
     const skill = this.props.skillAreas[this.props.skillArea];
@@ -80,28 +94,20 @@ class ViewThisWeeksActivity extends Component {
   }
 }
 
-ViewThisWeeksActivity.propTypes = {
-  dispatch: React.PropTypes.func.isRequired,
-  skillArea: React.PropTypes.number.isRequired,
-  skillAreas: React.PropTypes.array.isRequired,
-  activities: React.PropTypes.array.isRequired,
-  experts: React.PropTypes.array.isRequired,
-};
-
-const mapDispatchToProps = (dispatch) => {
+function mapDispatchToProps(dispatch) {
   return {
     dispatch,
   };
-};
+}
 
-const mapStateToProps = (state) => {
+function mapStateToProps(state) {
   return {
     skillArea: state.thisWeek.skillArea,
     skillAreas: state.thisWeek.skillAreas,
     activities: state.thisWeek.activities,
     experts: state.thisWeek.experts,
   };
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -133,5 +139,6 @@ const styles = StyleSheet.create({
   },
 });
 
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(
   ViewThisWeeksActivity);

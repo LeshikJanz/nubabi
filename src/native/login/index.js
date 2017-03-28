@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { NUBABI_RED } from '../../common/themes/defaultTheme';
 import * as loginActions from '../../common/auth/actions';
-import { resetNavigation } from '../navigation/actions';
 
 const background = require('../../common/images/loginBackground.png');
 const logo = require('../../common/images/loginLogo.png');
@@ -38,7 +37,6 @@ class Login extends Component {
   login = () => {
     const { email, password } = this.state;
     this.props.actions.loginRequest(email, password);
-    this.props.navigation.dispatch(resetNavigation('home'));
   };
 
   render() {
@@ -121,7 +119,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.auth.isFetching,
+    isFetching: state.auth.isFetching || state.babies.isFetching,
     auth: state.auth,
   };
 };

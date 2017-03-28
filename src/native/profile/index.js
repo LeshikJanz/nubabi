@@ -50,6 +50,7 @@ class Profile extends Component {
     }
   }
 
+  babyName = null;
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
 
   render() {

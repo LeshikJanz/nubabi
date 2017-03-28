@@ -6,15 +6,12 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import type { NavigationProp } from 'react-navigation';
 import type { Viewer } from '../../common/types';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
 import { NUBABI_RED } from '../../common/themes/defaultTheme';
 
 type Props = {
-  navigation: NavigationProp<*, *>,
   user: Viewer,
   logout: typeof logout,
 };
@@ -24,17 +21,6 @@ class Settings extends Component {
 
   static navigationOptions = {
     title: 'Settings',
-  };
-
-  logout = () => {
-    this.props.logout();
-
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [NavigationActions.navigate({ routeName: 'login' })],
-    });
-
-    this.props.navigation.dispatch(resetAction);
   };
 
   render() {
@@ -50,7 +36,7 @@ class Settings extends Component {
         <TouchableHighlight
           underlayColor="rgba(0,0,0,0)"
           style={styles.oneButton}
-          onPress={this.logout}
+          onPress={this.props.logout}
         >
           <View style={styles.submitButtonContainer}>
             <View style={styles.submitButton}>

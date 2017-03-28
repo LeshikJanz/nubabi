@@ -1,6 +1,7 @@
 import agent from 'superagent';
 import config from '../../common/config';
-const apiUrl = config.apiUrl;
+
+const { apiUrl } = config;
 // TODO: make dynamic
 const authToken = 'dHY49Iz4O9UByM7ZKBqmJ7GdnX83';
 

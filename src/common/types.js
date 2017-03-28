@@ -56,6 +56,8 @@ export type SkillArea = {
   name: string,
 }
 
+export type Viewer = FirebaseUser; // For the time being
+
 // State
 
 export type AppState = {
@@ -98,8 +100,6 @@ export type AuthState = {
 export type ViewerState = {
   viewer: ?User,
 };
-
-export type Viewer = FirebaseUser; // For the time being
 
 export type TabNavigationState = {
   index: number,

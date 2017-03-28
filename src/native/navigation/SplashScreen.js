@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { sample } from 'lodash';
@@ -15,7 +15,7 @@ type Props = {
   isAuthenticated: boolean,
 };
 
-class SplashScreen extends Component {
+class SplashScreen extends PureComponent {
   props: Props;
 
   static navigationOptions = {
@@ -24,9 +24,8 @@ class SplashScreen extends Component {
     },
   };
 
-  componentDidMount() {
-    // Required since react-navigation pushes this route after logout for some reason
-    this.handleNextScreen();
+  shouldComponentUpdate(nextProps) {
+    return this.props.appOnline !== nextProps.appOnline;
   }
 
   componentDidUpdate() {
@@ -52,6 +51,9 @@ class SplashScreen extends Component {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName })],
+      meta: {
+        splash: true,
+      },
     });
 
     this.props.navigation.dispatch(resetAction);
@@ -104,7 +106,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect((state: State) => ({
-  appOnline: state.app.online,
-  isAuthenticated: state.auth.isAuthenticated,
-}))(SplashScreen);
+export default connect((state: State) => {
+  return ({
+    appOnline: state.app.online,
+    isAuthenticated: state.auth.isAuthenticated,
+  });
+})(SplashScreen);

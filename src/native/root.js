@@ -23,7 +23,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
   return {
     navigation: state.navigation,
-    babies: state.babies,
     isAuthenticated: state.auth.isAuthenticated,
     appStarted: state.app.started,
     appOnline: state.app.online,

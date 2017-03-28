@@ -3,11 +3,18 @@ import * as types from '../actionTypes';
 import {
   loginSuccess,
   loginFailure,
-  logout,
 } from '../auth/actions';
 import { getBabiesSuccess, getBabiesRequest } from '../babies/actions';
-import api from '../connectors/mlb';
 import firebase from '../connectors/firebase';
+
+/*
+  FIXME: this is NOT cross-platform, the only reason is here is to be able
+  to switch navigation without having the components do it themselves, or
+  introduce flicker-ness.
+  I haven't been able to pass context-like options to redux-saga, like
+  we can with redux-observable's combineEnics.
+ */
+import { resetNavigation } from '../../native/navigation/actions';
 
 function loginCall({ email, password }) {
   return firebase.login(email, password);
@@ -15,10 +22,6 @@ function loginCall({ email, password }) {
 
 function logoutCall() {
   return firebase.logout();
-}
-
-function getBabies() {
-  return api.getBabies();
 }
 
 function* watchLoginRequest() {
@@ -34,10 +37,10 @@ function* watchLoginRequest() {
       };
 
       const loginResponse = yield call(loginCall, payload);
-
-      const babiesResponse = yield call(getBabies);
-      yield put(getBabiesSuccess(babiesResponse));
+      yield put(getBabiesRequest(loginResponse.uid));
+      yield take(getBabiesSuccess);
       yield put(loginSuccess(loginResponse));
+      yield put(resetNavigation('home'));
     } catch (err) {
       yield put(loginFailure(err));
     }
@@ -47,11 +50,11 @@ function* watchLoginRequest() {
 function* watchLogoutRequest() {
   while (true) { // eslint-disable-line no-constant-condition
     //  We will use token eventually
-    yield take(types.LOGOUT);
+    yield take('LOGOUT');
 
     try {
       yield call(logoutCall);
-      yield put(logout());
+      yield put(resetNavigation('login'));
     } catch (err) {
       yield put(loginFailure(err.status));
     }
@@ -65,19 +68,20 @@ function* watchFirebaseAuthStatus() {
 
     if (appState.started) {
       if (!appState.online) {
+        if (action.payload.user) {
+          yield put(getBabiesRequest(action.payload.user.uid));
+          yield take(getBabiesSuccess);
+        }
+
+        // We're using app online to determine when firebase got loaded
+        // we probably need to change this and Root, and instead
+        // track connectivity/presence with this, so we currently kind of
+        // mock that
+
+        // If this is the first time this runs we mark the app as online
+        // ensure we loaded our store
         yield put({ type: 'APP_ONLINE', payload: { online: true } });
       }
-    }
-
-    if (action.payload.user) {
-      // We're using app online to determine when firebase got loaded
-      // we probably need to change this and Root, and instead
-      // track connectivity/presence with this, so we currently kind of
-      // mock that
-
-      // If this is the first time this runs we mark the app as online
-      // ensure we loaded our store
-      yield put(getBabiesRequest(action.payload.user.uid));
     }
   }
 }
