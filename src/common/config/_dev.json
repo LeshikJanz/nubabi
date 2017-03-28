@@ -1,0 +1,11 @@
+{
+  "appName": "Nubabi",
+  "apiUrl": "http://localhost:3000",
+  "firebase": {
+    "apiKey": "AIzaSyD7KJ48lVi0o489Hr0zuoGkNyhZUL9SsSw",
+    "authDomain": "nubabitest1.firebaseapp.com",
+    "databaseURL": "https://nubabitest1.firebaseio.com",
+    "storageBucket": "nubabitest1.appspot.com",
+    "messagingSenderId": "397278907687"
+  }
+}
