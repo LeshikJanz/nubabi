@@ -143,6 +143,8 @@ const AppNavigator = createCustomNavigator({
   navigationOptions: {
     header: (navigation, childRouter) => {
       const options = {
+        tintColor: theme.colors.black,
+        backTitle: 'Back',
         style: {
           backgroundColor: theme.colors.white,
         },
