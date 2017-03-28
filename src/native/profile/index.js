@@ -26,6 +26,12 @@ class Profile extends Component {
 
   static navigationOptions = {
     ...getBabyTitle(),
+    header: (_, defaultHeader) => ({
+      ...defaultHeader,
+      style: {
+        shadowOpacity: 0,
+      },
+    }),
     tabBar: (state, defaultTabBarOptions) => ({
       ...defaultTabBarOptions,
       label: () => null, // showLabel doesn't work on this context, probably a bug
