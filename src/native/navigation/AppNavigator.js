@@ -8,6 +8,7 @@ import {
 } from 'react-navigation';
 
 import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
+import { merge } from 'lodash';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
 import crossFade from './transitioners/CrossFadeTransitioner';
 import android from './transitioners/AndroidDefaultTransitioner';
@@ -23,6 +24,7 @@ import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivities from '../stimulation/BrowseActivities';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeeksActivity';
 import Login from '../login';
+import theme from '../../common/themes/defaultTheme';
 
 export type TransitionName =
   | 'cardStack'
@@ -121,10 +123,7 @@ const createCustomNavigator = (
   )), containerOptions);
 };
 
-const AppNavigator = createCustomNavigator({
-  splash: { screen: SplashScreen },
-  login: { screen: Login },
-  home: { screen: TabsNavigator },
+const routes = {
   chooseBaby: { screen: ChooseBaby, mode: 'modal' },
   editBaby: { screen: EditBaby },
   thisWeekActivities: { screen: ThisWeeksActivities },
@@ -132,11 +131,27 @@ const AppNavigator = createCustomNavigator({
   browseActivities: { screen: BrowseActivities },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
   settings: { screen: Settings },
+};
+
+const AppNavigator = createCustomNavigator({
+  splash: { screen: SplashScreen },
+  login: { screen: Login },
+  home: { screen: TabsNavigator },
+  ...routes,
 }, {
-  headerMode: 'screen',
-  header: {
-    visible: false,
+  headerMode: 'float',
+  navigationOptions: {
+    header: (navigation, childRouter) => {
+      const options = {
+        style: {
+          backgroundColor: theme.colors.white,
+        },
+      };
+
+      return childRouter ? merge({}, options, childRouter) : options;
+    },
   },
+
 });
 
 export default AppNavigator;

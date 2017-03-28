@@ -19,7 +19,7 @@
     "react-native-tab-navigator": "^0.3.3",
     "react-native-tab-view": "https://github.com/react-native-community/react-native-tab-view#4e1140ef5d15c9d1f146ca138fdc52841d71c3ce",
     "react-native-vector-icons": "^4.0.0",
-    "react-navigation": "^1.0.0-beta.7",
+    "react-navigation": "https://github.com/blackxored/react-navigation#feat/allow-hiding-floating-headers",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.2",

@@ -30,9 +30,10 @@ class ThisWeeksActivities extends Component {
 
   static navigationOptions = {
     title: "This Week's Activities",
-    header: {
+    header: (_, defaultHeader) => ({
+      ...defaultHeader,
       backTitle: 'Activities',
-    },
+    }),
   };
 
   handleThisWeeksActivity = (skillAreaId: number, title: string) => {
