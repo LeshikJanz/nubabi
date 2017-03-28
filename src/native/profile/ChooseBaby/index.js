@@ -178,13 +178,13 @@ class ChooseBaby extends Component {
           </Svg>
 
           <View style={styles.babyContainer}>
-            <View style={styles.closeButton}>
+            <Animated.View style={[styles.closeButton, this.getListAnimatedStyle()]}>
               <Icon
                 name="ios-close-outline"
                 style={styles.closeIcon}
                 onPress={this.goBack}
               />
-            </View>
+            </Animated.View>
             <ScrollView
               contentContainerStyle={{
                 height: 80,
@@ -224,7 +224,6 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    //backgroundColor: 'transparent',
   },
   babyContainer: {
     left: 0,
@@ -232,7 +231,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: window.width,
     alignItems: 'center',
-    //height: 150,
   },
   babyIconContainerView: {
     flex: 1,
@@ -271,6 +269,7 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: 15,
     height: 25,
+    alignSelf: 'flex-start',
   },
   closeIcon: {
     padding: 10,
