@@ -19,4 +19,4 @@ else
   export NUBABI_FIREBASE_MESSAGING_SENDER_ID=$NUBABI_STAGING_FIREBASE_MESSAGING_SENDER_ID
 fi
 
-echo $(env) # TODO: remove
+echo '{}' > $BUDDYBUILD_WORKSPACE/src/common/config/_dev.json # make eager require happy
