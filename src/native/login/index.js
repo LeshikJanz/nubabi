@@ -7,6 +7,7 @@ import {
   Image,
   Dimensions,
   TouchableHighlight,
+  Platform,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
@@ -67,6 +68,7 @@ class Login extends Component {
                 autoCorrect={false}
                 returnKeyType="next"
                 blurOnSubmit={false}
+                underlineColorAndroid="#eff1f7"
                 onChangeText={email => this.setState({ email })}
                 onSubmitEditing={() => this.passwordInput.focus()}
               />
@@ -172,16 +174,21 @@ const styles = StyleSheet.create({
   },
   inputOuterContainer: {
     marginTop: 30,
+    flex: 1,
   },
   inputContainer: {
     flex: 1,
     flexDirection: 'column',
-    height: 40,
-    marginHorizontal: 30,
     marginBottom: 15,
-    borderBottomWidth: 1,
     paddingBottom: 5,
+    marginHorizontal: 30,
     borderColor: '#eff1f7',
+    ...Platform.select({
+      ios: {
+        borderBottomWidth: 1,
+        height: 40,
+      },
+    }),
   },
   inputLabel: {
     fontSize: 8,
