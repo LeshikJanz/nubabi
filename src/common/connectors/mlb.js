@@ -1,6 +1,7 @@
 import agent from 'superagent';
 import config from '../../common/config';
-const apiUrl = config.apiUrl;
+
+const { apiUrl } = config;
 // TODO: make dynamic
 const authToken = 'dHY49Iz4O9UByM7ZKBqmJ7GdnX83';
 
@@ -45,7 +46,7 @@ const api = {
   },
   getBabies() {
     return new Promise((resolve, reject) => {
-      agent.get(`${apiUrl}api/babies`)
+      agent.get(`${apiUrl}/api/babies`)
         .set('Content-Type', 'application/json')
         .set('X-Auth-Token', authToken)
         .end((err, res) => {
@@ -62,7 +63,7 @@ const api = {
   },
   getThisWeeksActivities(babyId) {
     return new Promise((resolve, reject) => {
-      agent.get(`${apiUrl}api/babies/${babyId}/activities`)
+      agent.get(`${apiUrl}/api/babies/${babyId}/activities`)
         .set('Content-Type', 'application/json')
         .set('X-Auth-Token', authToken)
         .end((err, res) => {

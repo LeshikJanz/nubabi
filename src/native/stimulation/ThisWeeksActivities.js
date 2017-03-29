@@ -11,15 +11,16 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
-import _ from 'lodash';
+import { find } from 'lodash';
 import type { NavigationProp } from 'react-navigation';
 import type { Activity, SkillArea } from '../../common/types';
 import { SET_SKILL_AREA } from '../../common/actionTypes';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
+
 const width = Dimensions.get('window').width;
 
 type Props = {
-  dispatch: Dispatch<*, *>,
+  dispatch: Dispatch<*>,
   skillAreas: Array<SkillArea>,
   activities: Array<Activity>,
   navigation: NavigationProp<*, *>,
@@ -30,9 +31,10 @@ class ThisWeeksActivities extends Component {
 
   static navigationOptions = {
     title: "This Week's Activities",
-    header: {
+    header: (_, defaultHeader) => ({
+      ...defaultHeader,
       backTitle: 'Activities',
-    },
+    }),
   };
 
   handleThisWeeksActivity = (skillAreaId: number, title: string) => {
@@ -46,7 +48,7 @@ class ThisWeeksActivities extends Component {
 
   render() {
     const skills = this.props.skillAreas.map((skillArea) => {
-      const activity = _.find(this.props.activities, { skillAreaId: skillArea.id });
+      const activity = find(this.props.activities, { skillAreaId: skillArea.id });
       return (
         <TouchableHighlight
           underlayColor="rgba(0,0,0,0)"
@@ -142,4 +144,5 @@ const styles = StyleSheet.create({
   },
 });
 
+// $FlowFixMe
 export default connect(mapStateToProps, mapDispatchToProps)(ThisWeeksActivities);

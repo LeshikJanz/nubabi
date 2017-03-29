@@ -11,7 +11,6 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-
 import { NUBABI_RED } from '../../common/themes/defaultTheme';
 import * as loginActions from '../../common/auth/actions';
 
@@ -49,6 +48,7 @@ class Login extends Component {
         <KeyboardAwareScrollView
           style={styles.container}
           contentContainerStyle={this.scrollContainer}
+          keyboardShouldPersistTaps="handled"
         >
           <Image source={logo} style={styles.logo} />
           <View style={styles.errorContainer}>
@@ -84,6 +84,7 @@ class Login extends Component {
                 focus={this.state.focusPassword}
                 onChangeText={password => this.setState({ password })}
                 returnKeyType="go"
+                onSubmitEditing={this.login}
               />
             </View>
             <TouchableHighlight
@@ -118,7 +119,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    isFetching: state.auth.isFetching,
+    isFetching: state.auth.isFetching || state.babies.isFetching,
     auth: state.auth,
   };
 };

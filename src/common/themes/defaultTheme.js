@@ -22,6 +22,7 @@ const colors = {
   black0: '#454D56',
   black1: '#3D414B',
 };
+
 const theme = {
   typography: null, // TODO
   colors: {

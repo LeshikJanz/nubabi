@@ -21,6 +21,8 @@
 .*/node_modules/react-native-keyboard-aware-scroll-view/.*
 .*/node_modules/react-native-tab-view/.*
 .*/node_modules/react-navigation/.*/__tests__/.*
+.*/node_modules/react-navigation/examples/.*
+.*/node_modules/react-navigation/website/.*
 
 [include]
 

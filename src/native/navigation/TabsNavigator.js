@@ -44,8 +44,14 @@ const TabsNavigator = TabNavigator({
       ),
       label: upperFirst(state.routeName),
     }),
-    headerMode: 'float',
-    header: ({ navigate }) => getTabHeaders(navigate),
+    headerMode: 'screen',
+    header: ({ navigate }) => ({
+      ...getTabHeaders(navigate),
+      style: {
+        backgroundColor: theme.colors.white,
+      },
+      visible: true,
+    }),
   },
 });
 

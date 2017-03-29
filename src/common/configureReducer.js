@@ -22,9 +22,11 @@ const resetStateOnSignOutReducer = (reducer, initialState) => {
       return reducer(state, action);
     }
     // Note how we can purge sensitive data without hard reload easily.
+
     const stateWithoutSensitiveData = {
       app: state.app,
       device: state.device,
+      navigation: state.navigation,
     };
 
     return reducer(stateWithoutSensitiveData, action);

@@ -27,7 +27,7 @@ class Stimulation extends Component {
     ...getBabyTitle(),
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
     this.handleThisWeeksActivities = this.handleThisWeeksActivities.bind(this);
     this.handleNextWeeksEquipment = this.handleNextWeeksEquipment.bind(this);
@@ -85,8 +85,6 @@ class Stimulation extends Component {
     );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {

@@ -12,7 +12,8 @@ import {
 import { connect } from 'react-redux';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Svg, { Path } from 'react-native-svg';
-
+import { NavigationProp } from 'react-navigation';
+import type { Baby } from '../../common/types';
 import {
   HEADER_FONT_COLOR,
   NUBABI_RED,
@@ -23,7 +24,14 @@ const window = Dimensions.get('window');
 const Icon = Animated.createAnimatedComponent(IonIcon);
 const babyIcon = require('../../../common/images/face_icon.jpg');
 
+type Props = {
+  navigation: NavigationProp<*, *>,
+  babies: Array<Baby>,
+}
+
 class ChooseBaby extends Component {
+  props: Props;
+
   static navigationOptions = {
     cardStack: {
       gesturesEnabled: false,
@@ -117,9 +125,10 @@ class ChooseBaby extends Component {
 
   render() {
     let babiesList = [];
-    if (this.props.babies.babies !== undefined) {
+    if (this.props.babies.length) {
       babiesList = (
-        this.props.babies.babies.map((baby) => {
+        // TODO: we definitely need a selector, and an inner component for this
+        this.props.babies.map((baby) => {
           let avatarSource;
           if (baby.avatar_thumb === '') {
             avatarSource = babyIcon;
@@ -169,13 +178,13 @@ class ChooseBaby extends Component {
           </Svg>
 
           <View style={styles.babyContainer}>
-            <View style={styles.closeButton}>
+            <Animated.View style={[styles.closeButton, this.getListAnimatedStyle()]}>
               <Icon
                 name="ios-close-outline"
                 style={styles.closeIcon}
                 onPress={this.goBack}
               />
-            </View>
+            </Animated.View>
             <ScrollView
               contentContainerStyle={{
                 height: 80,
@@ -202,14 +211,9 @@ class ChooseBaby extends Component {
   }
 }
 
-ChooseBaby.propTypes = {
-  navigation: React.PropTypes.object.isRequired,
-  babies: React.PropTypes.object.isRequired,
-};
-
 const mapStateToProps = (state) => {
   return {
-    babies: state.babies,
+    babies: state.babies.items,
   };
 };
 
@@ -220,7 +224,6 @@ const styles = StyleSheet.create({
   },
   container: {
     alignItems: 'center',
-    //backgroundColor: 'transparent',
   },
   babyContainer: {
     left: 0,
@@ -228,7 +231,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: window.width,
     alignItems: 'center',
-    //height: 150,
   },
   babyIconContainerView: {
     flex: 1,
@@ -267,6 +269,7 @@ const styles = StyleSheet.create({
   closeButton: {
     marginTop: 15,
     height: 25,
+    alignSelf: 'flex-start',
   },
   closeIcon: {
     padding: 10,
