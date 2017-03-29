@@ -18,6 +18,8 @@
 {
   NSURL *jsCodeLocation;
 
+  [BuddyBuildSDK setup];
+
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation

@@ -12,6 +12,7 @@ const config = {
     storageBucket: process.env.NUBABI_FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.NUBABI_FIREBASE_MESSAGING_SENDER_ID,
   },
+  sentryUrl: process.env.NUBABI_SENTRY_URL,
 };
 
 export default config;

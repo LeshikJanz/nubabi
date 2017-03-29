@@ -6,6 +6,7 @@ import { NavigationActions } from 'react-navigation';
 import type { State } from '../../common/types';
 import theme from '../../common/themes/defaultTheme';
 import loadingMessages from './loadingMessages';
+import Alert from '../components/Alert';
 
 const loadingImage = { uri: 'LaunchImage' };
 
@@ -75,6 +76,7 @@ class SplashScreen extends PureComponent {
         <Image source={loadingImage} style={styles.textContainer}>
           {this.renderLoadingMessage()}
         </Image>
+        <Alert />
       </View>
     );
   }

@@ -54,3 +54,4 @@ fastlane/screenshots
 
 src/common/config/_dev.json
 .envrc
+.tmp
