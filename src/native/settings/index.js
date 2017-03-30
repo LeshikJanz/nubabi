@@ -10,6 +10,7 @@ import type { Viewer } from '../../common/types';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
 import { NUBABI_RED } from '../../common/themes/defaultTheme';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   user: Viewer,
@@ -24,26 +25,35 @@ class Settings extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, appName, appVersion } = this.props;
 
     if (!user) {
       return null;
     }
 
+    const copyright = appName
+      && appVersion
+      && `© ${new Date().getFullYear()} MyLearningBaby Ltd. ${appName} ${appVersion}`;
+
     return (
       <View style={styles.container}>
         <Text style={styles.inputLabel}>{user.email}</Text>
-        <TouchableHighlight
-          underlayColor="rgba(0,0,0,0)"
-          style={styles.oneButton}
-          onPress={this.props.logout}
-        >
-          <View style={styles.submitButtonContainer}>
+        <View style={styles.submitButtonContainer}>
+          <TouchableHighlight
+            underlayColor="rgba(0,0,0,0)"
+            style={styles.oneButton}
+            onPress={this.props.logout}
+          >
+
             <View style={styles.submitButton}>
               <Text style={styles.submitText}>LOG OUT</Text>
             </View>
-          </View>
-        </TouchableHighlight>
+          </TouchableHighlight>
+        </View>
+
+        <View style={styles.copyrightContainer}>
+          <Text style={styles.copyrightText}>{copyright}</Text>
+        </View>
       </View>
     );
   }
@@ -82,9 +92,25 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     marginTop: 50,
   },
+  copyrightContainer: {
+    alignSelf: 'stretch',
+    paddingVertical: 10,
+    backgroundColor: theme.colors.open.white1,
+    alignItems: 'center',
+  },
+  copyrightText: {
+    fontSize: 10,
+    color: theme.colors.open.gray3,
+    textAlign: 'center',
+  },
 });
 
 export default connect(
-  ({ viewer, navigation: { index } }) => ({ user: viewer, routeIndex: index }),
+  ({ viewer, navigation: { index }, config: { appName, appVersion } }) => ({
+    user: viewer,
+    routeIndex: index,
+    appName,
+    appVersion,
+  }),
   { logout },
 )(Settings);

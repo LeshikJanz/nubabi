@@ -2,6 +2,7 @@
 import { combineReducers } from 'redux';
 import type { Action, State } from './types';
 import app from '../../src/common/app/reducer';
+import config from '../../src/common/config/reducer';
 import auth from '../../src/common/auth/reducer';
 import device from '../../src/common/device/reducer';
 import viewer from './viewer/reducer';
@@ -27,6 +28,7 @@ const resetStateOnSignOutReducer = (reducer, initialState) => {
       app: state.app,
       device: state.device,
       navigation: state.navigation,
+      config: initialState.config,
     };
 
     return reducer(stateWithoutSensitiveData, action);
@@ -40,6 +42,7 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
   let reducer = combineReducers({
     app,
     auth,
+    config,
     babies,
     thisWeek,
     device,

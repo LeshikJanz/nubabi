@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
-export CI=true
+export GIT_REVISION_SHA=$(git rev-parse HEAD)
+export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
+
+BUNDLE_BASE_VERSION=$(/usr/libexec/PListBuddy -c "Print :CFBundleShortVersionString" $BUDDYBUILD_WORKSPACE/ios/NubabiMobile/Info.plist)
 
 if [[ "$BUDDYBUILD_BRANCH" =~ "release" ]]; then
   export NUBABI_APP_NAME=$NUBABI_APP_NAME
+  export NUBABI_APP_VERSION="${BUNDLE_BASE_VERSION}+${BUDDYBUILD_BUILD_NUMBER}"
   export NUBABI_API_URL=$NUBABI_PRODUCTION_API_URL
   export NUBABI_FIREBASE_API_KEY=$NUBABI_PRODUCTION_FIREBASE_API_KEY
   export NUBABI_FIREBASE_DATABASE_URL=$NUBABI_PRODUCTION_FIREBASE_DATABASE_URL
@@ -11,6 +15,7 @@ if [[ "$BUDDYBUILD_BRANCH" =~ "release" ]]; then
   export NUBABI_FIREBASE_MESSAGING_SENDER_ID=$NUBABI_PRODUCTION_FIREBASE_MESSAGING_SENDER_ID
 else
   export NUBABI_APP_NAME=$NUBABI_APP_NAME
+  export NUBABI_APP_VERSION="${BUNDLE_BASE_VERSION}-dev+${BUDDYBUILD_BUILD_NUMBER}.sha.${GIT_REVISION_SHORT_SHA}"
   export NUBABI_API_URL=$NUBABI_STAGING_API_URL
   export NUBABI_FIREBASE_API_KEY=$NUBABI_STAGING_FIREBASE_API_KEY
   export NUBABI_FIREBASE_DATABASE_URL=$NUBABI_STAGING_FIREBASE_DATABASE_URL
@@ -19,4 +24,25 @@ else
   export NUBABI_FIREBASE_MESSAGING_SENDER_ID=$NUBABI_STAGING_FIREBASE_MESSAGING_SENDER_ID
 fi
 
-echo '{}' > $BUDDYBUILD_WORKSPACE/src/common/config/_dev.json # make eager require happy
+# I've tried everything else, BuddyBuild is just weird when it comes to
+# environment variables, they don't get preserved between custom script
+# stages, so I had to resort to just nuking and replacing the file.
+tee $BUDDYBUILD_WORKSPACE/src/common/config/index.js > /dev/null <<EOF
+const config = {
+  appName: "$NUBABI_APP_NAME",
+  appVersion: "$NUBABI_APP_VERSION",
+  apiUrl: "$NUBABI_API_URL",
+  firebase: {
+    "apiKey": "$NUBABI_FIREBASE_API_KEY",
+    "authDomain": "$NUBABI_FIREBASE_AUTH_DOMAIN",
+    "databaseURL": "$NUBABI_FIREBASE_DATABASE_URL",
+    "storageBucket": "$NUBABI_FIREBASE_STORAGE_BUCKET",
+    "messagingSenderId": "$NUBABI_FIREBASE_MESSAGING_SENDER_ID",
+  }
+};
+
+export default config;
+EOF
+
+export BABEL_ENV="production"
+cat $BUDDYBUILD_WORKSPACE/src/common/config/index.js
