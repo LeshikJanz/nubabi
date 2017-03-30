@@ -12,6 +12,9 @@ import navigation from './navigation/reducer';
 import device from './device/reducer';
 
 const store = configureStore({
+  initialState: {
+    config,
+  },
   platformDeps: { firebase },
   platformReducers: {
     navigation,
