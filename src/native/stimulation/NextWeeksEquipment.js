@@ -5,12 +5,14 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const NextWeeksEquipment = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Next Weeks Equipment</Text>
-    </View>
-  );
+const NextWeeksEquipment = () => (
+  <View style={styles.container}>
+    <Text style={styles.title}>Next Weeks Equipment</Text>
+  </View>
+);
+
+NextWeeksEquipment.navigationOptions = {
+  title: 'Next Week\'s Equipment',
 };
 
 const styles = StyleSheet.create({

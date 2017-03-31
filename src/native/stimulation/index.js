@@ -105,11 +105,12 @@ const styles = StyleSheet.create({
   oneButton: {
     flex: 1,
     height: 210,
-    shadowColor: 'rgba(0,0,0,0.15)',
+    shadowColor: '#000',
+    shadowOpacity: 0.15,
     shadowRadius: 3,
     shadowOffset: {
       height: 1,
-      width: 1,
+      width: 0,
     },
   },
   twoButtons: {

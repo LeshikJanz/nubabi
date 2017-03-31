@@ -5,13 +5,15 @@ import {
   StyleSheet,
 } from 'react-native';
 
-const BrowseActivities = () => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Browse Activities</Text>
-    </View>
-  );
-};
+const BrowseActivities = () => (
+  <View style={styles.container}>
+    <Text style={styles.title}>Browse Activities</Text>
+  </View>
+);
+
+BrowseActivities.navigationOptions = {
+  title: 'All Activities',
+}
 
 const styles = StyleSheet.create({
   container: {
