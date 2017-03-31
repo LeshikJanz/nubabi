@@ -34,6 +34,7 @@ const TabsNavigator = TabNavigator({
       borderTopWidth: 1,
     },
     activeTintColor: theme.colors.primary,
+    inactiveTintColor: theme.colors.gray,
   },
 
   navigationOptions: {
