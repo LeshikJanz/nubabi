@@ -7,7 +7,7 @@
     "flow": "flow"
   },
   "dependencies": {
-    "babel-plugin-transform-define": "^1.2.0",
+    "babel-plugin-transform-define": "https://github.com/blackxored/babel-plugin-transform-define#react-native-packager-fix",
     "color": "^1.0.3",
     "firebase": "3.7.4",
     "lodash": "^4.17.4",
