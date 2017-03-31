@@ -2,8 +2,7 @@ import agent from 'superagent';
 import config from '../../common/config';
 
 const { apiUrl } = config;
-// TODO: make dynamic
-const authToken = 'dHY49Iz4O9UByM7ZKBqmJ7GdnX83';
+
 
 const api = {
   login(email, password) {
@@ -44,14 +43,14 @@ const api = {
         });
     });
   },
-  getBabies() {
+  getBabies(token) {
     return new Promise((resolve, reject) => {
       agent.get(`${apiUrl}/api/babies`)
         .set('Content-Type', 'application/json')
-        .set('X-Auth-Token', authToken)
+        .set('X-Auth-Token', token)
         .end((err, res) => {
           if (!res) {
-            return reject(new Error('No response'));
+            return reject(new Error('No response from API server'));
           }
 
           if (res.error) {
@@ -61,11 +60,11 @@ const api = {
         });
     });
   },
-  getThisWeeksActivities(babyId) {
+  getThisWeeksActivities(babyId, token) {
     return new Promise((resolve, reject) => {
       agent.get(`${apiUrl}/api/babies/${babyId}/activities`)
         .set('Content-Type', 'application/json')
-        .set('X-Auth-Token', authToken)
+        .set('X-Auth-Token', token)
         .end((err, res) => {
           if (res.error) {
             reject();

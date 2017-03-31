@@ -6,16 +6,20 @@ import {
   Text,
   TouchableHighlight,
 } from 'react-native';
-import type { Viewer } from '../../common/types';
+import type { State, Viewer } from '../../common/types';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
-import { NUBABI_RED } from '../../common/themes/defaultTheme';
-import theme from '../../common/themes/defaultTheme';
+import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 
 type Props = {
   user: Viewer,
   logout: typeof logout,
+  appName: string,
+  appVersion: string,
 };
+
+const copyrightHolder = 'MyLearningBaby Ltd';
+const copyrightYear = new Date().getFullYear();
 
 class Settings extends Component {
   props: Props;
@@ -24,16 +28,38 @@ class Settings extends Component {
     title: 'Settings',
   };
 
+  getAppVersionString() {
+    const { appName, appVersion } = this.props;
+
+    if (appName && appVersion) {
+      return [appName, appVersion].join(' ');
+    }
+
+    return null;
+  }
+
+  renderCopyright() {
+    const copyright = `© ${copyrightYear} ${copyrightHolder}.`;
+    let copyrightText = `${copyright}`;
+    const version = this.getAppVersionString();
+
+    if (version) {
+      copyrightText = `${copyrightText} ${version}`;
+    }
+
+    return (
+      <View style={styles.copyrightContainer}>
+        <Text style={styles.copyrightText}>{copyrightText}</Text>
+      </View>
+    );
+  }
+
   render() {
-    const { user, appName, appVersion } = this.props;
+    const { user } = this.props;
 
     if (!user) {
       return null;
     }
-
-    const copyright = appName
-      && appVersion
-      && `© ${new Date().getFullYear()} MyLearningBaby Ltd. ${appName} ${appVersion}`;
 
     return (
       <View style={styles.container}>
@@ -51,9 +77,9 @@ class Settings extends Component {
           </TouchableHighlight>
         </View>
 
-        <View style={styles.copyrightContainer}>
-          <Text style={styles.copyrightText}>{copyright}</Text>
-        </View>
+        {this.renderCopyright()}
+
+
       </View>
     );
   }
@@ -105,12 +131,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(
-  ({ viewer, navigation: { index }, config: { appName, appVersion } }) => ({
-    user: viewer,
-    routeIndex: index,
-    appName,
-    appVersion,
-  }),
-  { logout },
+export default connect((state: State) => ({
+  user: state.viewer,
+  routeIndex: state.navigation.index,
+  appName: state.config.appName,
+  appVersion: state.config.appVersion,
+}),
+{ logout },
 )(Settings);

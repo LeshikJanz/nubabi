@@ -4,7 +4,6 @@ import { autoRehydrate } from 'redux-persist';
 import isReactNative from './app/isReactNative';
 import configureMiddleware from './configureMiddleware';
 import configureReducer from './configureReducer';
-import runSagaMiddleware from './configureAsyncActions';
 
 type Options = {
   initialState: Object,
@@ -49,8 +48,6 @@ const configureStore = (options: Options) => {
       ...platformStoreEnhancers,
     ),
   );
-
-  runSagaMiddleware();
 
   // Enable hot reloading for reducers.
   /* eslint-disable */
