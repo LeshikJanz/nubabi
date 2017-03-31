@@ -1,9 +1,11 @@
 // @flow
 
 export type Deps = {
-  firebase: any,
   getState: () => Object,
   now: () => number,
+  firebase: any,
+  firebaseAuth: Function,
+  firebaseDatabase: any,
 };
 
 // Models
@@ -66,6 +68,14 @@ export type AppState = {
   started: boolean,
 };
 
+export type ConfigState = {
+  appName: string,
+  appVersion: string,
+  apiUrl: string,
+  firebase: ?Object,
+  sentryUrl: string,
+};
+
 export type GenericDeviceState = {
   host: string,
 };
@@ -122,6 +132,7 @@ export type ThisWeekState = {
 export type State = {
   app: AppState,
   auth: AuthState,
+  config: ConfigState,
   babies: BabyState,
   device: DeviceState,
   navigation: MobileNavigationState,
@@ -135,12 +146,13 @@ export type State = {
 export type Action =
   | { type: 'APP_STARTED' }
   | { type: 'APP_ONLINE', payload: { online: boolean } }
+  | { type: 'APP_ERROR', payload: Error | Object }
   | { type: 'ON_AUTH', payload: { user: ?FirebaseUser } }
   | { type: 'LOGIN_REQUEST', payload: { email: string, password: string }, meta: { uid: string }}
   | { type: 'LOGIN_SUCCESS', payload: { email: string }, meta: { token: string } }
   | { type: 'LOGIN_FAILURE', payload: Error, error: true }
   | { type: 'LOGOUT' }
-  | { type: 'GET_BABIES_REQUEST', meta: { token: string } }
+  | { type: 'GET_BABIES_REQUEST' }
   | { type: 'GET_BABIES_SUCCESS', payload: Array<Baby> }
   | { type: 'GET_BABIES_FAILURE', payload: Error, error: true }
   | { type: 'GET_THIS_WEEKS_ACTIVITIES_REQUEST', meta: { token: string }}

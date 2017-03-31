@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Svg, { Path } from 'react-native-svg';
 import { NavigationProp } from 'react-navigation';
-import type { Baby } from '../../common/types';
+import type { Baby } from '../../../common/types';
 import {
   HEADER_FONT_COLOR,
   NUBABI_RED,

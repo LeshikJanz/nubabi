@@ -2,3 +2,5 @@
 ios/**
 flow-typed/**
 /node_modules/eslint-config-airbnb/rules/react-a11y.js
+# used by transform on development
+src/common/config/getConfig.js 

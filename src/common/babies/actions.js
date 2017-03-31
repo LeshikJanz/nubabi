@@ -1,11 +1,10 @@
-import { Action } from '../types';
+import { Observable } from 'rxjs/Observable';
+import { Action, Deps } from '../types';
+import api from '../connectors/mlb';
 
-export function getBabiesRequest(token): Action {
+export function getBabiesRequest(): Action {
   return {
     type: 'GET_BABIES_REQUEST',
-    meta: {
-      token,
-    },
   };
 }
 
@@ -24,15 +23,6 @@ export function getBabiesFailure(err): Action {
   };
 }
 
-export function getThisWeeksActivitiesRequest(token): Action {
-  return {
-    type: 'GET_THIS_WEEKS_ACTIVITIES_REQUEST',
-    meta: {
-      token,
-    },
-  };
-}
-
 export function getThisWeeksActivitiesSuccess(babies): Action {
   return {
     type: 'GET_THIS_WEEKS_ACTIVITIES_SUCCESS',
@@ -47,3 +37,27 @@ export function getThisWeeksActivitiesFailure(err): Action {
     error: true,
   };
 }
+
+const fetchBabiesEpic = (action$: any, { getState }: Deps) => (
+  action$
+    .filter((action: Action) => action.type === 'GET_BABIES_REQUEST')
+    .mergeMap(() => {
+      return Observable.fromPromise(api.getBabies(getState().auth.token))
+        .map(response => getBabiesSuccess(response))
+        .catch((err) => Observable.of(getBabiesFailure(err)));
+    })
+);
+
+const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) => (
+  action$
+    .filter((action: Action) => action.type === 'GET_THIS_WEEKS_ACTIVITIES_REQUEST')
+    .mergeMap(() => (
+      Observable
+        .fromPromise(api.getThisWeeksActivities(api.getBabies(getState().auth.token)))
+        .map(response => getThisWeeksActivitiesSuccess(response))
+        .catch(err => Observable.of(getThisWeeksActivitiesFailure(err)))
+    ),
+  )
+);
+
+export const epics = [fetchBabiesEpic, fetchThisWeekActivitiesEpic];
