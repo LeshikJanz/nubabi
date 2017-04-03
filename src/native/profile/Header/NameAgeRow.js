@@ -11,13 +11,10 @@ import NubabiIcon from '../../../common/icons/nubabi';
 import { NUBABI_RED } from '../../../common/themes/defaultTheme';
 
 class NameAgeRow extends Component {
-
   _returnAge(dateString) {
-    const today = new Date();
-    const birthDate = new Date(dateString);
-    const a = moment(today);
-    const b = moment([birthDate.getFullYear(), birthDate.getMonth(), birthDate.getDay()]);
-    return a.diff(b, 'months');
+    const birthDate = moment(dateString, 'dd/MM/YYYY');
+
+    return moment().diff(birthDate, 'months');
   }
 
   render() {
