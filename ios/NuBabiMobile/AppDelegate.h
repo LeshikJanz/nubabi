@@ -8,6 +8,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <BuddyBuildSDK/BuddyBuildSDK.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

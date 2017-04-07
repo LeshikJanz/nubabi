@@ -10,9 +10,9 @@ const captureException = (error, Raven) => {
     /* eslint-disable no-console */
     console.warn(
       'Uncaught error. Fix it, or it will be reported on production.',
+      error,
     );
     // github.com/redux-observable/redux-observable/issues/10#issuecomment-235431202
-    console.error(error.stack);
     /* eslint-enable no-console */
   }
 };
@@ -30,7 +30,10 @@ const setRavenUserContext = (user, Raven) => {
 
 const contextWithoutPrivateData = (state, actions) => ({
   actions: actions.map(action => action.type),
-  device: state.device,
+  device: {
+    ...state.device,
+    appVersion: state.config.appVersion,
+  },
 });
 
 const createReportingMiddleware = (Raven) => {
@@ -114,8 +117,12 @@ const configureReporting = (options: any) => {
     // TODO: Add list of common ignore rules from
     // docs.getsentry.com/hosted/clients/javascript/tips/#decluttering-sentry
   };
-  Raven.config(sentryUrl, args).install();
-  register(unhandledRejection);
+
+  if (!__DEV__) {
+    Raven.config(sentryUrl, args).install();
+    register(unhandledRejection);
+  }
+
   return createReportingMiddleware(Raven);
 };
 
