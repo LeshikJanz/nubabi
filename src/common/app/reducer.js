@@ -1,7 +1,7 @@
 // @flow
 import type { Action, AppState } from '../types';
 
-const initialState = {
+export const initialState: AppState = {
   error: null,
   online: false,
   started: false,
@@ -22,7 +22,7 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
       return { ...state, error: action.payload };
 
     case 'APP_ONLINE':
-      return { ...state, online: action.payload.online };
+      return { ...state, error: null, online: action.payload.online };
 
     case 'APP_STARTED':
       return { ...state, started: true };

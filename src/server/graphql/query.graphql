@@ -1,0 +1,79 @@
+query getAll {
+  viewer {
+    babies {
+      edges {
+        node {
+          id
+          name
+          avatar {
+            thumb {
+              url
+            }
+          }
+          dob
+          weight
+          height
+          gender
+          activities {
+            edges {
+              node {
+                id
+                name
+                introduction
+                steps
+                equipment
+                expert {
+                  name
+                  avatar {
+                    thumb {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          recentMemories: memories(filter: RECENT) {
+            edges {
+              node {
+                id
+                description
+                image(width: 60, height: 60) {
+                  url
+                  width
+                  height
+                }
+              }
+            }
+          }
+          memories(first: 10) {
+            edges {
+              node {
+                id
+                description
+                image {
+                  url
+
+                }
+              }
+            }
+          }
+          achievements(first: 3) {
+            edges {
+              node {
+                id
+                badges(upcoming: true) {
+                  image(width: 60, height: 60) {
+                    url
+                    width
+                    height
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

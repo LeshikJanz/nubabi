@@ -1,7 +1,6 @@
 import type { Action, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { resetNavigation } from '../../native/navigation/actions';
-import { getBabiesRequest } from '../babies/actions';
 
 export function loginRequest(email, password, uid): Action {
   return {
@@ -52,25 +51,23 @@ const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
 
   return action$
     .filter((action: Action) => action.type === 'LOGIN_REQUEST')
-    .mergeMap((action) => {
+    .mergeMap(action => {
       return Observable.merge(
         signInWithEmailAndPassword(action.payload),
-        action$.ofType('LOGIN_SUCCESS')
-          .take(1)
-          .mapTo(getBabiesRequest()),
-        action$.ofType('GET_BABIES_SUCCESS')
-          .withLatestFrom(action$.ofType('LOGIN_SUCCESS'))
+        action$
+          .ofType('APP_ONLINE')
+          .withLatestFrom(action$.ofType('GET_BABIES_SUCCESS'))
           .take(1)
           .mapTo(resetNavigation('home')),
       );
     });
 };
 
-const logoutEpic = (action$: any, { firebaseAuth }: Deps) =>
-  action$
-    .filter((action: Action) => action.type === 'LOGOUT').mergeMap(() => {
-      firebaseAuth().signOut();
-      return Observable.of(resetNavigation('login'));
-    });
+const logoutEpic = (action$: any, { firebaseAuth, apollo }: Deps) =>
+  action$.filter((action: Action) => action.type === 'LOGOUT').mergeMap(() => {
+    firebaseAuth().signOut();
+    apollo.resetStore();
+    return Observable.of(resetNavigation('login'));
+  });
 
 export const epics = [loginEpic, logoutEpic];

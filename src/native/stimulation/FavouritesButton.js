@@ -5,6 +5,7 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
+import theme from '../../common/themes/defaultTheme';
 
 const icon = require('../../common/images/star.png');
 
@@ -23,8 +24,8 @@ class FavouritesButton extends Component {
         <Image source={icon} style={styles.icon} />
 
         <View style={styles.textContainer}>
-          <Text style={styles.date}>View</Text>
-          <Text style={styles.month}>Favourites</Text>
+          <Text style={theme.typography.subHeaderText}>View</Text>
+          <Text style={theme.typography.subHeaderText}>Favourites</Text>
         </View>
       </View>
     );

@@ -46,9 +46,9 @@ const config = {
 
 export default config;
 EOF
-
 export BABEL_ENV="production"
 echo "Exported config for environment $NUBABI_ENV to src/common/config/index.js"
+cat $BUDDYBUILD_WORKSPACE/src/common/config/index.js
 # Workaround the fact that buddybuild doesn't seem to handle env vars correctly
 tee $BUDDYBUILD_WORKSPACE/.env > /dev/null <<EOF
   export NUBABI_APP_VERSION=$NUBABI_APP_VERSION

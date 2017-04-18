@@ -1,0 +1,8 @@
+{
+  "database": {
+    "rules": "src/server/firebase/rules.bolt"
+  },
+  "functions": {
+    "source": "src/server/firebase/functions"
+  }
+}

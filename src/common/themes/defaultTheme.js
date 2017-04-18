@@ -9,7 +9,7 @@ export const FONT_COLOR = VDARK_GREY;
 export const PANEL_BACKGROUND = '#f8f9fc';
 export const PANEL_BUTTON_TEXT = '#454D56';
 
-const colors = {
+const open = {
   white0: '#FFFFFF',
   white1: '#F8F9FC',
   gray0: '#E0E4E7',
@@ -23,19 +23,31 @@ const colors = {
   black1: '#3D414B',
 };
 
-const theme = {
-  typography: null, // TODO
-  colors: {
-    primary: colors.red0,
-    success: colors.blue1,
-    warning: '', // TODO
-    danger: colors.red0,
-    black: colors.black0,
-    white: colors.white0,
-    gray: colors.gray3,
-    open: colors, // consider an OpenColor instance here
-    secondary: colors.gray2,
+const colors = {
+  open, // TODO: consider an OpenColor instance here.
+  primary: open.red0,
+  success: open.blue1,
+  warning: '', // TODO
+  danger: open.red0,
+  black: open.black0,
+  white: open.white0,
+  gray: open.gray3,
+  secondary: open.gray2,
+};
+
+const typography = {
+  subHeaderText: {
+    fontSize: 14,
+    color: colors.gray,
+    letterSpacing: 0.88,
+    lineHeight: 16,
+    fontWeight: '500',
   },
+};
+
+const theme = {
+  colors,
+  typography,
 };
 
 export default theme;

@@ -1,6 +1,14 @@
 import { Observable } from 'rxjs/Observable';
-import { Action, Deps } from '../types';
+import { Action, Deps, MutationResultAction } from '../types';
 import api from '../connectors/mlb';
+import { resetNavigation } from '../../native/navigation/actions';
+
+export function selectBaby(id): Action {
+  return {
+    type: 'SELECT_BABY',
+    payload: id,
+  };
+}
 
 export function getBabiesRequest(): Action {
   return {
@@ -38,26 +46,46 @@ export function getThisWeeksActivitiesFailure(err): Action {
   };
 }
 
-const fetchBabiesEpic = (action$: any, { getState }: Deps) => (
+const createBabyEpic = (action$: any) => {
+  return action$
+    .filter((action: MutationResultAction) => {
+      return action.type === 'APOLLO_MUTATION_RESULT' &&
+        action.operationName === 'CreateBaby';
+    })
+    .mergeMap(({ result: { data } }) => {
+      if (data.createBaby) {
+        const id = data.createBaby.createdBaby.id;
+        //
+        return [selectBaby(id), resetNavigation('home')];
+      }
+
+      return Observable.of(null);
+    });
+};
+
+const fetchBabiesEpic = (action$: any, { getState }: Deps) =>
   action$
     .filter((action: Action) => action.type === 'GET_BABIES_REQUEST')
     .mergeMap(() => {
       return Observable.fromPromise(api.getBabies(getState().auth.token))
         .map(response => getBabiesSuccess(response))
-        .catch((err) => Observable.of(getBabiesFailure(err)));
-    })
-);
+        .catch(err => Observable.of(getBabiesFailure(err)));
+    });
 
-const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) => (
+const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) =>
   action$
-    .filter((action: Action) => action.type === 'GET_THIS_WEEKS_ACTIVITIES_REQUEST')
-    .mergeMap(() => (
-      Observable
-        .fromPromise(api.getThisWeeksActivities(api.getBabies(getState().auth.token)))
+    .filter(
+      (action: Action) => action.type === 'GET_THIS_WEEKS_ACTIVITIES_REQUEST',
+    )
+    .mergeMap(() =>
+      Observable.fromPromise(
+        api.getThisWeeksActivities(api.getBabies(getState().auth.token)),
+      )
         .map(response => getThisWeeksActivitiesSuccess(response))
-        .catch(err => Observable.of(getThisWeeksActivitiesFailure(err)))
-    ),
-  )
-);
+        .catch(err => Observable.of(getThisWeeksActivitiesFailure(err))));
 
-export const epics = [fetchBabiesEpic, fetchThisWeekActivitiesEpic];
+export const epics = [
+  fetchBabiesEpic,
+  fetchThisWeekActivitiesEpic,
+  createBabyEpic,
+];

@@ -1,9 +1,3 @@
-import {
-  NEXT_SKILL_AREA,
-  PREVIOUS_SKILL_AREA,
-  SET_SKILL_AREA,
-} from '../actionTypes';
-
 // TODO: this doesn't belong here, quiet eslint for the time being
 /* eslint-disable */
 const fine_motor = require('../../common/images/fine_motor.png');
@@ -29,19 +23,65 @@ const lindi_thumbnail = require('../../common/images/lindi.jpg');
 const thisWeek = {
   skillArea: 0,
   skillAreas: [
-    { id: 0, name: 'Gross Motor', icon: gross_motor_icon, image_thumbnail: gross_motor, image_large: gross_motor_large },
-    { id: 1, name: 'Fine Motor', icon: fine_motor_icon, image_thumbnail: fine_motor, image_large: gross_motor_large },
-    { id: 2, name: 'Sensory', icon: sensory_icon, image_thumbnail: sensory, image_large: gross_motor_large },
-    { id: 3, name: 'Speech & Language', icon: speech_icon, image_thumbnail: speech_language, image_large: gross_motor_large },
+    {
+      id: 0,
+      name: 'Gross Motor',
+      icon: gross_motor_icon,
+      image_thumbnail: gross_motor,
+      image_large: gross_motor_large,
+    },
+    {
+      id: 1,
+      name: 'Fine Motor',
+      icon: fine_motor_icon,
+      image_thumbnail: fine_motor,
+      image_large: gross_motor_large,
+    },
+    {
+      id: 2,
+      name: 'Sensory',
+      icon: sensory_icon,
+      image_thumbnail: sensory,
+      image_large: gross_motor_large,
+    },
+    {
+      id: 3,
+      name: 'Speech & Language',
+      icon: speech_icon,
+      image_thumbnail: speech_language,
+      image_large: gross_motor_large,
+    },
   ],
   experts: [
-    { id: 0, name: 'Jenny Lange', profession: 'Physiotherapist', image_thumbnail: jenny_thumbnail, biography: 'Physiotherapist Jenny Lange has 12 years’ experience working with children with a variety of physical and mental challenges. She is passionate about the foundational role that gross motor development plays for other aspects of a child’s development. After graduating in 2000 with a BSc in Physiotherapy from the University of Cape Town, Jenny joined a private physio practice in Cape Town as a locum where she gained experience working with children. Her interest in paediatrics grew while she worked with spinal cord and traumatic head injury cases. She later joined the Bel Porto School for children with intellectual and physical impairments. After eight years, she moved on to Vista Nova School in Cape Town. Jenny advocates a healthy, active lifestyle with plenty of physical play. “You don’t need expensive toys and a lot of equipment, use what you have at home,” she says. She is very active herself, having completed several Comrades and Two Oceans ultra-marathons, as well as the 80-kilometer ‘Puffer’ trail challenge. Jenny holds advanced qualifications in infant neurodevelopment, and served as the chairperson of the SA Neurodevelopmental Therapy Association for nine years before stepping away this year to focus on her growing family. She welcomed her first baby, Oliver, in August 2013.' },
-    { id: 1, name: 'Carly Tzanos', profession: 'Occupational Therapist', image_thumbnail: carly_thumbnail },
-    { id: 2, name: 'Lourdes Bruwer', profession: 'Occupational Therapist', image_thumbnail: lourdes_thumbnail },
-    { id: 3, name: 'Lindi Bester', profession: 'Speech Therapist', image_thumbnail: lindi_thumbnail },
+    {
+      id: 0,
+      name: 'Jenny Lange',
+      profession: 'Physiotherapist',
+      image_thumbnail: jenny_thumbnail,
+      biography: 'Physiotherapist Jenny Lange has 12 years’ experience working with children with a variety of physical and mental challenges. She is passionate about the foundational role that gross motor development plays for other aspects of a child’s development. After graduating in 2000 with a BSc in Physiotherapy from the University of Cape Town, Jenny joined a private physio practice in Cape Town as a locum where she gained experience working with children. Her interest in paediatrics grew while she worked with spinal cord and traumatic head injury cases. She later joined the Bel Porto School for children with intellectual and physical impairments. After eight years, she moved on to Vista Nova School in Cape Town. Jenny advocates a healthy, active lifestyle with plenty of physical play. “You don’t need expensive toys and a lot of equipment, use what you have at home,” she says. She is very active herself, having completed several Comrades and Two Oceans ultra-marathons, as well as the 80-kilometer ‘Puffer’ trail challenge. Jenny holds advanced qualifications in infant neurodevelopment, and served as the chairperson of the SA Neurodevelopmental Therapy Association for nine years before stepping away this year to focus on her growing family. She welcomed her first baby, Oliver, in August 2013.',
+    },
+    {
+      id: 1,
+      name: 'Carly Tzanos',
+      profession: 'Occupational Therapist',
+      image_thumbnail: carly_thumbnail,
+    },
+    {
+      id: 2,
+      name: 'Lourdes Bruwer',
+      profession: 'Occupational Therapist',
+      image_thumbnail: lourdes_thumbnail,
+    },
+    {
+      id: 3,
+      name: 'Lindi Bester',
+      profession: 'Speech Therapist',
+      image_thumbnail: lindi_thumbnail,
+    },
   ],
   activities: [
-    { id: 232,
+    {
+      id: 232,
       skillAreaId: 0,
       expertId: 0,
       name: 'Ladder Ladder',
@@ -59,7 +99,7 @@ const thisWeek = {
       skillAreaId: 2,
       expertId: 2,
       name: 'Squishy-squeezy flour art',
-      description: 'Flour and water makes a runny sticky mixture, add some food colouring or paint and some glitter and you have a recipe for some successful sensory fun. This messy play starts off clean and can entice even the most sensitive toddler to touch and explore his creation! Remember getting messy is important for your little one\'s touch sense to mature and this will help his fine motor develop and refine. So let\'s get messy!',
+      description: "Flour and water makes a runny sticky mixture, add some food colouring or paint and some glitter and you have a recipe for some successful sensory fun. This messy play starts off clean and can entice even the most sensitive toddler to touch and explore his creation! Remember getting messy is important for your little one's touch sense to mature and this will help his fine motor develop and refine. So let's get messy!",
     },
     {
       id: 22,
@@ -70,11 +110,12 @@ const thisWeek = {
     },
   ],
 };
-
 export default function thisWeeksReducer(state = thisWeek, action) {
   switch (action.type) {
-    case NEXT_SKILL_AREA: {
-      const skillIds = state.skillAreas.map((skill) => { return skill.id; });
+    case 'NEXT_SKILL_AREA': {
+      const skillIds = state.skillAreas.map(skill => {
+        return skill.id;
+      });
       let index = skillIds.indexOf(state.skillArea);
       index += 1;
       if (index > skillIds.length - 1) {
@@ -84,9 +125,10 @@ export default function thisWeeksReducer(state = thisWeek, action) {
         skillArea: skillIds[index],
       });
     }
-
-    case PREVIOUS_SKILL_AREA: {
-      const skillIds = state.skillAreas.map((skill) => { return skill.id; });
+    case 'PREVIOUS_SKILL_AREA': {
+      const skillIds = state.skillAreas.map(skill => {
+        return skill.id;
+      });
       let index = skillIds.indexOf(state.skillArea);
       index -= 1;
       if (index < 0) {
@@ -96,13 +138,11 @@ export default function thisWeeksReducer(state = thisWeek, action) {
         skillArea: skillIds[index],
       });
     }
-
-    case SET_SKILL_AREA: {
+    case 'SET_SKILL_AREA': {
       return Object.assign({}, state, {
         skillArea: action.skillArea,
       });
     }
-
     default:
       return state;
   }

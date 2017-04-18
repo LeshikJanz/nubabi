@@ -37,6 +37,10 @@
 	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
+  <key>NSPhotoLibraryUsageDescription</key>
+  <string>Select avatars, cover images, and profile pictures</string>
+  <key>NSCameraUsageDescription</key>
+  <string>Take a photo directly to choose as avatar, cover image and profile pictures</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>nubabi.ttf</string>

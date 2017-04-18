@@ -13,7 +13,7 @@ const BrowseActivities = () => (
 
 BrowseActivities.navigationOptions = {
   title: 'All Activities',
-}
+};
 
 const styles = StyleSheet.create({
   container: {

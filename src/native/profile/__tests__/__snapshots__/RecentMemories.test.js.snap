@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "height": 75,
+      "marginBottom": 100,
+      "marginLeft": 10,
+      "marginRight": -10,
+      "marginTop": 10,
+      "padding": 7,
+      "paddingRight": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+        "justifyContent": "space-between",
+        "marginBottom": 5,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#4e555f",
+          "fontSize": 18,
+        }
+      }
+    >
+      Recent Memories
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#ED3154",
+            "fontSize": 24,
+          },
+          Object {
+            "marginRight": 28,
+            "marginTop": -2,
+          },
+          Object {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+  </View>
+  <RCTScrollView
+    horizontal={true}
+    showsHorizontalScrollIndicator={false}
+    style={
+      Object {
+        "height": 125,
+      }
+    }
+  >
+    <View />
+  </RCTScrollView>
+</View>
+`;

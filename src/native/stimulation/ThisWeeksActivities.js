@@ -1,4 +1,5 @@
 // @flow
+import type { State, Activity } from '../../common/types';
 import React, { Component } from 'react';
 import {
   View,
@@ -10,24 +11,44 @@ import {
   ScrollView,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { compose, path } from 'ramda';
+import { graphql, gql } from 'react-apollo';
 import type { Dispatch } from 'redux';
-import { find } from 'lodash';
 import type { NavigationProp } from 'react-navigation';
-import type { Activity, SkillArea } from '../../common/types';
-import { SET_SKILL_AREA } from '../../common/actionTypes';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
+import displayLoadingState from '../components/displayLoadingState';
+import iconMappings from './iconMappings';
 
 const width = Dimensions.get('window').width;
 
 type Props = {
   dispatch: Dispatch<*>,
-  skillAreas: Array<SkillArea>,
   activities: Array<Activity>,
   navigation: NavigationProp<*, *>,
 };
 
 class ThisWeeksActivities extends Component {
   props: Props;
+
+  static fragments = {
+    activities: gql`
+      fragment ThisWeekActivities on Activity {
+        id
+        name
+        skillArea {
+          id
+          name
+          image {
+            thumb {
+              url
+            }
+          }
+          icon
+          completedIcon
+        }
+      }
+    `,
+  };
 
   static navigationOptions = {
     title: "This Week's Activities",
@@ -37,60 +58,63 @@ class ThisWeeksActivities extends Component {
     }),
   };
 
-  handleThisWeeksActivity = (skillAreaId: number, title: string) => {
+  handleThisWeeksActivity = (
+    id: string,
+    title: string,
+    skillAreaId: string,
+  ) => {
     this.props.dispatch({
-      type: SET_SKILL_AREA,
+      type: 'SET_SKILL_AREA',
       skillArea: skillAreaId,
     });
 
-    this.props.navigation.navigate('viewThisWeeksActivity', { title });
+    this.props.navigation.navigate('viewThisWeeksActivity', { id, title });
   };
 
   render() {
-    const skills = this.props.skillAreas.map((skillArea) => {
-      const activity = find(this.props.activities, { skillAreaId: skillArea.id });
+    // TODO: we probably need a ListView component here
+    const activities = this.props.activities.map((activity: Activity) => {
+      const { skillArea } = activity;
+
       return (
         <TouchableHighlight
-          underlayColor="rgba(0,0,0,0)"
-          onPress={() => this.handleThisWeeksActivity(skillArea.id, activity.name)}
           key={skillArea.id}
+          underlayColor="rgba(0,0,0,0)"
+          onPress={() => {
+            this.handleThisWeeksActivity(
+              activity.id,
+              activity.name,
+              skillArea.id,
+            );
+          }}
         >
           <View style={styles.activityRow}>
-            <Image style={styles.skillImage} source={skillArea.image_thumbnail} />
+            <Image
+              style={styles.skillImage}
+              source={{ uri: path(['image', 'thumb', 'url'], skillArea) }}
+            />
             <View style={styles.textContainer}>
               <Text style={styles.skillName}>{skillArea.name}</Text>
               <Text style={styles.activityName}>{activity.name}</Text>
             </View>
-            <Image style={styles.skillIcon} source={skillArea.icon} />
+            <Image
+              style={styles.skillIcon}
+              source={iconMappings(skillArea.icon)}
+            />
           </View>
         </TouchableHighlight>
       );
     });
+
     return (
       <View style={styles.container}>
-        <ScrollView
-          style={styles.scrollContainer}
-        >
-          {skills}
+        <ScrollView style={styles.scrollContainer}>
+          {activities}
         </ScrollView>
       </View>
     );
   }
 }
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    dispatch,
-  };
-};
-
-const mapStateToProps = (state) => {
-  return {
-    skillAreas: state.thisWeek.skillAreas,
-    activities: state.thisWeek.activities,
-  };
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -144,5 +168,42 @@ const styles = StyleSheet.create({
   },
 });
 
-// $FlowFixMe
-export default connect(mapStateToProps, mapDispatchToProps)(ThisWeeksActivities);
+export default compose(
+  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  graphql(
+    gql`
+      query ThisWeeksActivitiesList($babyId: ID!) {
+        viewer {
+          baby(id: $babyId) {
+            id
+            activities {
+              edges {
+                node {
+                  ...ThisWeekActivities
+                }
+              }
+            }
+          }
+        }
+      }
+      ${ThisWeeksActivities.fragments.activities}
+    `,
+    {
+      options: ({ currentBabyId }) => ({
+        variables: { babyId: currentBabyId },
+      }),
+      props: ({ data }) => {
+        const activities = path(
+          ['viewer', 'baby', 'activities', 'edges'],
+          data,
+        );
+
+        return {
+          data,
+          activities: activities ? activities.map(edge => edge.node) : [],
+        };
+      },
+    },
+  ),
+  displayLoadingState,
+)(ThisWeeksActivities);

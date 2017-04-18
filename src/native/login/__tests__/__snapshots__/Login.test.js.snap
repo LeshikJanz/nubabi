@@ -1,0 +1,820 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "flex": 1,
+        "height": 1334,
+        "position": "absolute",
+        "resizeMode": "stretch",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(116,130,148,0.55)",
+        "flex": 1,
+        "height": 1334,
+        "position": "absolute",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <RCTScrollView
+    contentContainerStyle={undefined}
+    contentInset={
+      Object {
+        "bottom": 0,
+      }
+    }
+    enableAutoAutomaticScroll={true}
+    enableResetScrollToCoords={true}
+    extraHeight={75}
+    extraScrollHeight={0}
+    keyboardDismissMode="interactive"
+    keyboardShouldPersistTaps="handled"
+    onScroll={[Function]}
+    scrollEventThrottle={0}
+    showsVerticalScrollIndicator={true}
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <Image
+        source={1}
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 73.2,
+            "marginLeft": 264,
+            "marginTop": 100,
+            "position": "absolute",
+            "resizeMode": "stretch",
+            "width": 222,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 200,
+            "padding": 20,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#ED3154",
+              "textAlign": "center",
+            }
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginTop": 30,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eff1f7",
+              "flex": 1,
+              "flexDirection": "column",
+              "height": 40,
+              "marginBottom": 15,
+              "marginHorizontal": 30,
+              "paddingBottom": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#fff",
+                "fontSize": 8,
+                "marginBottom": 4,
+              }
+            }
+          >
+            EMAIL
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoFocus={true}
+            blurOnSubmit={false}
+            keyBoardType="email-address"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            placeholder="name@example.com"
+            returnKeyType="next"
+            style={
+              Object {
+                "color": "#fff",
+                "flex": 1,
+                "fontSize": 16,
+              }
+            }
+            underlineColorAndroid="#eff1f7"
+            value=""
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eff1f7",
+              "flex": 1,
+              "flexDirection": "column",
+              "height": 40,
+              "marginBottom": 15,
+              "marginHorizontal": 30,
+              "paddingBottom": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#fff",
+                "fontSize": 8,
+                "marginBottom": 4,
+              }
+            }
+          >
+            PASSWORD
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            focus={undefined}
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            palceholder="password"
+            returnKeyType="go"
+            secureTextEntry={true}
+            style={
+              Object {
+                "color": "#fff",
+                "flex": 1,
+                "fontSize": 16,
+              }
+            }
+            value=""
+          />
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              undefined,
+            ]
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "marginBottom": 50,
+                "marginTop": 20,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ED3154",
+                  "borderRadius": 15,
+                  "height": 30,
+                  "justifyContent": "center",
+                  "width": 100,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#fff",
+                    "fontSize": 12,
+                    "fontWeight": "700",
+                  }
+                }
+              >
+                LOG IN
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`show progress when logging in 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "flex": 1,
+        "height": 1334,
+        "position": "absolute",
+        "resizeMode": "stretch",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(116,130,148,0.55)",
+        "flex": 1,
+        "height": 1334,
+        "position": "absolute",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <RCTScrollView
+    contentContainerStyle={undefined}
+    contentInset={
+      Object {
+        "bottom": 0,
+      }
+    }
+    enableAutoAutomaticScroll={true}
+    enableResetScrollToCoords={true}
+    extraHeight={75}
+    extraScrollHeight={0}
+    keyboardDismissMode="interactive"
+    keyboardShouldPersistTaps="handled"
+    onScroll={[Function]}
+    scrollEventThrottle={0}
+    showsVerticalScrollIndicator={true}
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <Image
+        source={1}
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 73.2,
+            "marginLeft": 264,
+            "marginTop": 100,
+            "position": "absolute",
+            "resizeMode": "stretch",
+            "width": 222,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 200,
+            "padding": 20,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#ED3154",
+              "textAlign": "center",
+            }
+          }
+        >
+          
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginTop": 30,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eff1f7",
+              "flex": 1,
+              "flexDirection": "column",
+              "height": 40,
+              "marginBottom": 15,
+              "marginHorizontal": 30,
+              "paddingBottom": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#fff",
+                "fontSize": 8,
+                "marginBottom": 4,
+              }
+            }
+          >
+            EMAIL
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoFocus={true}
+            blurOnSubmit={false}
+            keyBoardType="email-address"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            placeholder="name@example.com"
+            returnKeyType="next"
+            style={
+              Object {
+                "color": "#fff",
+                "flex": 1,
+                "fontSize": 16,
+              }
+            }
+            underlineColorAndroid="#eff1f7"
+            value=""
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eff1f7",
+              "flex": 1,
+              "flexDirection": "column",
+              "height": 40,
+              "marginBottom": 15,
+              "marginHorizontal": 30,
+              "paddingBottom": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#fff",
+                "fontSize": 8,
+                "marginBottom": 4,
+              }
+            }
+          >
+            PASSWORD
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            focus={undefined}
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            palceholder="password"
+            returnKeyType="go"
+            secureTextEntry={true}
+            style={
+              Object {
+                "color": "#fff",
+                "flex": 1,
+                "fontSize": 16,
+              }
+            }
+            value=""
+          />
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              undefined,
+            ]
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "marginBottom": 50,
+                "marginTop": 20,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ED3154",
+                  "borderRadius": 15,
+                  "height": 30,
+                  "justifyContent": "center",
+                  "width": 100,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#fff",
+                    "fontSize": 12,
+                    "fontWeight": "700",
+                  }
+                }
+              >
+                Logging in...
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
+
+exports[`shows error if one occurs 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "transparent",
+      "flex": 1,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "flex": 1,
+        "height": 1334,
+        "position": "absolute",
+        "resizeMode": "stretch",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "rgba(116,130,148,0.55)",
+        "flex": 1,
+        "height": 1334,
+        "position": "absolute",
+        "top": 0,
+        "width": 750,
+      }
+    }
+  />
+  <RCTScrollView
+    contentContainerStyle={undefined}
+    contentInset={
+      Object {
+        "bottom": 0,
+      }
+    }
+    enableAutoAutomaticScroll={true}
+    enableResetScrollToCoords={true}
+    extraHeight={75}
+    extraScrollHeight={0}
+    keyboardDismissMode="interactive"
+    keyboardShouldPersistTaps="handled"
+    onScroll={[Function]}
+    scrollEventThrottle={0}
+    showsVerticalScrollIndicator={true}
+    style={
+      Object {
+        "backgroundColor": "transparent",
+        "flex": 1,
+      }
+    }
+  >
+    <View>
+      <Image
+        source={1}
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 73.2,
+            "marginLeft": 264,
+            "marginTop": 100,
+            "position": "absolute",
+            "resizeMode": "stretch",
+            "width": 222,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "height": 50,
+            "justifyContent": "center",
+            "marginTop": 200,
+            "padding": 20,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#ED3154",
+              "textAlign": "center",
+            }
+          }
+        >
+          Invalid email/password
+        </Text>
+      </View>
+      <View
+        style={
+          Object {
+            "flex": 1,
+            "marginTop": 30,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eff1f7",
+              "flex": 1,
+              "flexDirection": "column",
+              "height": 40,
+              "marginBottom": 15,
+              "marginHorizontal": 30,
+              "paddingBottom": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#fff",
+                "fontSize": 8,
+                "marginBottom": 4,
+              }
+            }
+          >
+            EMAIL
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            autoFocus={true}
+            blurOnSubmit={false}
+            keyBoardType="email-address"
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            placeholder="name@example.com"
+            returnKeyType="next"
+            style={
+              Object {
+                "color": "#fff",
+                "flex": 1,
+                "fontSize": 16,
+              }
+            }
+            underlineColorAndroid="#eff1f7"
+            value=""
+          />
+        </View>
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 1,
+              "borderColor": "#eff1f7",
+              "flex": 1,
+              "flexDirection": "column",
+              "height": 40,
+              "marginBottom": 15,
+              "marginHorizontal": 30,
+              "paddingBottom": 5,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#fff",
+                "fontSize": 8,
+                "marginBottom": 4,
+              }
+            }
+          >
+            PASSWORD
+          </Text>
+          <TextInput
+            autoCapitalize="none"
+            autoCorrect={false}
+            focus={undefined}
+            onChangeText={[Function]}
+            onSubmitEditing={[Function]}
+            palceholder="password"
+            returnKeyType="go"
+            secureTextEntry={true}
+            style={
+              Object {
+                "color": "#fff",
+                "flex": 1,
+                "fontSize": 16,
+              }
+            }
+            value=""
+          />
+        </View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              undefined,
+            ]
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "marginBottom": 50,
+                "marginTop": 20,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#ED3154",
+                  "borderRadius": 15,
+                  "height": 30,
+                  "justifyContent": "center",
+                  "width": 100,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "backgroundColor": "transparent",
+                    "color": "#fff",
+                    "fontSize": 12,
+                    "fontWeight": "700",
+                  }
+                }
+              >
+                LOG IN
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTScrollView>
+</View>
+`;
