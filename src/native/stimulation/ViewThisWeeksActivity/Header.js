@@ -1,14 +1,9 @@
+// @flow
+import type { Image as ImageType } from '../../../common/types';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  Dimensions,
-  Text,
-} from 'react-native';
-import Svg, {
- Path,
-} from 'react-native-svg';
+import { View, StyleSheet, Image, Dimensions, Text } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
+import { gql } from 'react-apollo';
 
 const width = Dimensions.get('window').width;
 
@@ -18,42 +13,66 @@ const cameraPath = 'M21.875,3.125 L18.75,3.125 L16.66666699999999,0 L8.333333000
 
 const shareIconPath = 'M21.593001000000015,6.5345379999999995 L15.681968999999981,0.20750664000000008 C15.285169999999994,-0.2174527799999999 14.555570999999986,0.05390684999999973 14.555570999999986,0.62670607 L14.555570999999986,2.85518304 C14.555570999999986,3.06126276 14.39429100000001,3.2308625299999996 14.181810999999982,3.2539024999999997 C7.676860000000005,3.9655815299999997 2.1114279999999894,8.2881357 0.06534999999999513,14.418687299999998 C-0.33656899999999723,15.623165700000001 1.209668999999991,16.5377245 2.1299879999999973,15.6366057 L2.17094800000001,15.5962857 C5.330623000000003,12.5038099 9.639096999999992,10.7636523 14.134451000000013,10.7636523 C14.366771000000028,10.7636523 14.555570999999986,10.946052 14.555570999999986,11.1706917 L14.555570999999986,13.280768900000002 C14.555570999999986,13.8535681 15.285169999999994,14.1249277 15.681968999999981,13.699968300000002 L21.593001000000015,7.372936900000001 C21.815720999999996,7.134857200000001 21.815720999999996,6.7726177 21.593001000000015,6.5345379999999995';
 
-const Header = ({ skill, activity }) => {
-  const curve = `M0 0 C ${(width / 2) - 50} 75, ${(width / 2) + 50} 75, ${width} 0`;
+type Props = {
+  activityName: string,
+  skillImage: ImageType,
+  skillName: string,
+};
+
+const Header = ({ activityName, skillName, skillImage }: Props) => {
+  const curve = `M0 0 C ${width / 2 - 50} 75, ${width / 2 + 50} 75, ${width} 0`;
   const box = `M0 0 H ${width} V 58 H 0 L 0 0`;
+
   return (
     <View style={styles.header}>
-      <Image source={skill.image_large} style={styles.headerImage} />
+      <Image source={{ uri: skillImage.url }} style={styles.headerImage} />
       <View style={styles.overlay} />
       <View style={styles.headerTextContainer}>
-        <Text style={styles.activityName}>{activity.name}</Text>
-        <Text style={styles.skillName}>{skill.name}</Text>
+        <Text style={styles.activityName}>{activityName}</Text>
+        <Text style={styles.skillName}>{skillName}</Text>
       </View>
-      <Svg
-        style={styles.headerShape}
-      >
+      <Svg style={styles.headerShape}>
         <Path d={curve + box} stroke="transparent" fill="#FFFFFF" />
       </Svg>
       <View style={styles.headerButtons}>
-        <View style={[styles.headerButton, { borderRightColor: '#C5CDD7', borderRightWidth: 1 }]}>
-          <Svg
-            style={styles.favouriteButton}
-          >
-            <Path d={favouritePath} stroke="none" fill="#EA3154" fill-rule="evenodd" />
+        <View
+          style={[
+            styles.headerButton,
+            { borderRightColor: '#C5CDD7', borderRightWidth: 1 },
+          ]}
+        >
+          <Svg style={styles.favouriteButton}>
+            <Path
+              d={favouritePath}
+              stroke="none"
+              fill="#EA3154"
+              fill-rule="evenodd"
+            />
           </Svg>
         </View>
         <View style={styles.headerButton}>
-          <Svg
-            style={styles.cameraButton}
-          >
-            <Path d={cameraPath} stroke="none" fill="#9EABBC" fill-rule="evenodd" />
+          <Svg style={styles.cameraButton}>
+            <Path
+              d={cameraPath}
+              stroke="none"
+              fill="#9EABBC"
+              fill-rule="evenodd"
+            />
           </Svg>
         </View>
-        <View style={[styles.headerButton, { borderLeftColor: '#C5CDD7', borderLeftWidth: 1 }]}>
-          <Svg
-            style={styles.shareButton}
-          >
-            <Path d={shareIconPath} stroke="none" fill="#9EABBC" fill-rule="evenodd" />
+        <View
+          style={[
+            styles.headerButton,
+            { borderLeftColor: '#C5CDD7', borderLeftWidth: 1 },
+          ]}
+        >
+          <Svg style={styles.shareButton}>
+            <Path
+              d={shareIconPath}
+              stroke="none"
+              fill="#9EABBC"
+              fill-rule="evenodd"
+            />
           </Svg>
         </View>
       </View>
@@ -61,9 +80,22 @@ const Header = ({ skill, activity }) => {
   );
 };
 
-Header.propTypes = {
-  skill: React.PropTypes.object.isRequired,
-  activity: React.PropTypes.object.isRequired,
+Header.fragments = {
+  skillArea: gql`
+    fragment HeaderSkill on SkillArea {
+      name
+      image {
+        large {
+          url
+        }
+      }
+    }
+  `,
+  activity: gql`
+    fragment HeaderActivity on Activity {
+      name
+    },
+  `,
 };
 
 const styles = StyleSheet.create({

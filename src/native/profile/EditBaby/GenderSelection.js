@@ -1,31 +1,43 @@
+// @flow
+import type { Gender } from '../../../common/types';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-} from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
 import GenderButton from './GenderButton';
+import theme from '../../../common/themes/defaultTheme';
 
-const GenderSelection = ({ selectedGender, onChangeGender }) => {
-  return (
-    <View style={styles.genderContainer}>
-      <GenderButton
-        buttonText={'GIRL'}
-        selected={selectedGender === 'f'}
-        onChangeGender={() => onChangeGender('f')}
-      />
-      <GenderButton
-        buttonText={'BOY'}
-        selected={selectedGender === 'm'}
-        onChangeGender={() => onChangeGender('m')}
-      />
-    </View>
-  );
+type Props = {
+  selectedGender: Gender,
+  onChangeGender: (gender: Gender) => void,
+  hasError: Boolean,
 };
 
-GenderSelection.propTypes = {
-  selectedGender: React.PropTypes.string.isRequired,
-  onChangeGender: React.PropTypes.func.isRequired,
+const GenderError = () => (
+  <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+    <Text style={styles.errorLabel}>YOU MUST SELECT A GENDER</Text>
+  </View>
+);
+
+const GenderSelection = (
+  { selectedGender, onChangeGender, hasError }: Props,
+) => {
+  return (
+    <View style={{ flex: 1, marginBottom: 20 }}>
+      <View style={styles.genderContainer}>
+        <GenderButton
+          buttonText={'GIRL'}
+          selected={selectedGender === 'FEMALE'}
+          onChangeGender={() => onChangeGender('FEMALE')}
+        />
+        <GenderButton
+          buttonText={'BOY'}
+          selected={selectedGender === 'MALE'}
+          onChangeGender={() => onChangeGender('MALE')}
+        />
+      </View>
+      {hasError ? <GenderError /> : null}
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
@@ -34,7 +46,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     height: 40,
-    marginBottom: 20,
+  },
+  errorLabel: {
+    fontSize: 8,
+    color: theme.colors.danger,
+    marginBottom: 4,
   },
 });
 

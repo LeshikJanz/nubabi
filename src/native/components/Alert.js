@@ -8,7 +8,7 @@ import theme from '../../common/themes/defaultTheme';
 
 type AlertProps = {
   duration: number,
-  error?: typeof Error,
+  error?: Error,
   hideTimeout: number,
 };
 
@@ -119,7 +119,9 @@ class Alert extends React.Component {
             }}
             onLayout={(e) => this.onAlertLayout(e)}
           >
-            <Text style={{paddingHorizontal: 1, color: 'white', padding: 0.5}}>
+            <Text
+              style={{ paddingHorizontal: 1, color: 'white', padding: 0.5 }}
+            >
               {errorMessage}
             </Text>
           </View>

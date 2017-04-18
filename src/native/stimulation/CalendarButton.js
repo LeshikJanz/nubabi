@@ -5,12 +5,42 @@ import {
   StyleSheet,
   Image,
 } from 'react-native';
+import moment from 'moment';
+import theme from '../../common/themes/defaultTheme';
 
 const icon = require('../../common/images/calendar.png');
 
 class CalendarButton extends Component {
   setNativeProps(nativeProps) {
     this._root.setNativeProps(nativeProps);
+  }
+
+  renderWeekdays() {
+    // TODO: locales maybe?
+    const startOfWeekDate = moment().startOf('isoweek');
+    const endOfWeekDate = moment().endOf('isoweek');
+
+    // We include the abbreviation of the previous month if the week
+    // started last month
+    const startOfWeek = startOfWeekDate.format(
+      startOfWeekDate.month() < endOfWeekDate.month()
+        ? 'MMM D'
+        : 'D',
+    );
+
+    const endOfWeek = endOfWeekDate.format('D');
+    const endMonth = endOfWeekDate.format('MMMM YYYY');
+
+    return (
+      <View style={styles.textContainer}>
+        <Text style={theme.typography.subHeaderText}>
+          {startOfWeek} - {endOfWeek}
+        </Text>
+        <Text style={theme.typography.subHeaderText}>
+          {endMonth}
+        </Text>
+      </View>
+    );
   }
 
   render() {
@@ -20,14 +50,9 @@ class CalendarButton extends Component {
         ref={(component) => { this._root = component; }}
         {...this.props}
       >
-        <Image
-          source={icon}
-          style={styles.icon}
-        />
-        <View style={styles.textContainer}>
-          <Text style={styles.date}>6 - 12</Text>
-          <Text style={styles.month}>November 2016</Text>
-        </View>
+        <Image source={icon} style={styles.icon} />
+
+        {this.renderWeekdays()}
       </View>
     );
   }
@@ -43,16 +68,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  date: {
-    fontSize: 14,
-    color: '#748294',
-    backgroundColor: 'transparent',
-  },
-  month: {
-    fontSize: 14,
-    color: '#748294',
-    backgroundColor: 'transparent',
   },
   textContainer: {
     backgroundColor: 'transparent',

@@ -1,6 +1,7 @@
 // @flow
 import { combineReducers } from 'redux';
 import type { Action, State } from './types';
+import { reducer as form } from 'redux-form';
 import app from '../../src/common/app/reducer';
 import config from '../../src/common/config/reducer';
 import auth from '../../src/common/auth/reducer';
@@ -8,6 +9,7 @@ import device from '../../src/common/device/reducer';
 import viewer from './viewer/reducer';
 import babies from './babies/reducer';
 import thisWeek from '../../src/common/activities/reducer';
+import { configureApollo } from './configureApollo';
 
 // stackoverflow.com/q/35622588/233902
 /* eslint-disable no-unused-vars */
@@ -38,14 +40,19 @@ const resetStateOnSignOutReducer = (reducer, initialState) => {
 /* eslint-disable no-unused-vars */
 const configureReducer = (platformReducers: Object, initialState: Object) => {
   /* eslint-enable no-unused-vars */
+
+  const apollo = configureApollo().reducer();
+
   // $FlowFixMe
   let reducer = combineReducers({
     app,
+    apollo,
     auth,
     config,
     babies,
-    thisWeek,
     device,
+    form,
+    thisWeek,
     viewer,
     ...platformReducers,
   });

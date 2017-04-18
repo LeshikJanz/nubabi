@@ -1,15 +1,23 @@
+// @flow
 import React from 'react';
-import {
-  View,
-  Text,
-  TouchableHighlight,
-  StyleSheet,
-} from 'react-native';
-
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { gql } from 'react-apollo';
 import NubabiIcon from '../../common/icons/nubabi';
-import { LIGHT_GREY, FONT_COLOR, NUBABI_RED } from '../../common/themes/defaultTheme';
+import theme, {
+  LIGHT_GREY,
+  FONT_COLOR,
+  NUBABI_RED,
+} from '../../common/themes/defaultTheme';
 
-const Measurement = ({ header, amount, unit, iconName, onUpdate }) => {
+type Props = {
+  header: string,
+  amount: ?number,
+  unit: 'kg' | 'cm',
+  iconName: string,
+  onUpdate: () => void,
+};
+
+const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
@@ -22,7 +30,9 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }) => {
         />
       </View>
       <View style={styles.valueRow}>
-        <Text style={styles.valueText}>{amount}{unit}</Text>
+        {amount
+          ? <Text style={styles.valueText}>{amount}{unit}</Text>
+          : <Text style={styles.noDataText}>No Data Yet</Text>}
       </View>
       <View style={styles.updateRow}>
         <TouchableHighlight>
@@ -33,12 +43,13 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }) => {
   );
 };
 
-Measurement.propTypes = {
-  header: React.PropTypes.string.isRequired,
-  amount: React.PropTypes.string.isRequired,
-  unit: React.PropTypes.string.isRequired,
-  iconName: React.PropTypes.string.isRequired,
-  onUpdate: React.PropTypes.func.isRequired,
+Measurement.fragments = {
+  weight: gql`
+    fragment Measurement on Baby {
+      weight
+      height
+    }
+  `,
 };
 
 const styles = StyleSheet.create({
@@ -74,6 +85,11 @@ const styles = StyleSheet.create({
   valueText: {
     color: FONT_COLOR,
     fontSize: 28,
+  },
+  noDataText: {
+    marginVertical: 10,
+    fontSize: 10,
+    color: theme.colors.secondary,
   },
   updateRow: {
     alignItems: 'center',

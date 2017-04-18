@@ -5,6 +5,7 @@ import configureDeps from './configureDeps';
 import configureEpics from './configureEpics';
 import { createEpicMiddleware } from 'redux-observable';
 import isReactNative from './app/isReactNative';
+import { configureApollo } from './configureApollo';
 
 // Like redux-thunk, but with just one argument for dependencies.
 const injectMiddleware = deps =>
@@ -25,10 +26,12 @@ const configureMiddleware = (
   const deps = configureDeps(initialState, platformDeps);
   const rootEpic = configureEpics(deps);
   const epicMiddleware = createEpicMiddleware(rootEpic);
+  const apolloMiddleware = configureApollo().middleware();
 
   const middleware = [
     injectMiddleware(deps),
     epicMiddleware,
+    apolloMiddleware,
     ...platformMiddleware,
   ];
 

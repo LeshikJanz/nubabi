@@ -4,3 +4,10 @@ flow-typed/**
 /node_modules/eslint-config-airbnb/rules/react-a11y.js
 # used by transform on development
 src/common/config/getConfig.js 
+src/server/firebase/functions
+
+# a local server I use to test the non-firebase (and Firebase Admin SDK-backed in the future)
+src/server/graphql/server.js
+src/server/graphql/helpers/printSchema.js
+
+__mocks__/**/*.js

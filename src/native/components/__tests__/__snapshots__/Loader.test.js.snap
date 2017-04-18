@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it can customize the size and color 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <RNSpinkit
+    color="blue"
+    size={20}
+    style={
+      Array [
+        Object {
+          "height": 20,
+          "width": 20,
+        },
+        undefined,
+      ]
+    }
+    type="Bounce"
+  />
+</View>
+`;
+
+exports[`it renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <RNSpinkit
+    color="#EA3154"
+    size={37}
+    style={
+      Array [
+        Object {
+          "height": 37,
+          "width": 37,
+        },
+        undefined,
+      ]
+    }
+    type="Bounce"
+  />
+</View>
+`;

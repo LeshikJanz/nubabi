@@ -1,3 +1,4 @@
+// prettier-ignore
 // Used from transform-define
 const { execSync } = require('child_process');
 
@@ -19,7 +20,7 @@ var configMap = {};
 });
 
 if (!configMap['NUBABI_APP_VERSION']) {
-  configMap['process.env.NUBABI_APP_VERSION'] = '1.0.0-HEAD'
+  configMap['process.env.NUBABI_APP_VERSION'] = '1.0.0-HEAD';
 }
 
 module.exports = configMap;

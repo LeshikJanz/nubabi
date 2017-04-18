@@ -1,55 +1,83 @@
+// @flow
+import type { Expert } from '../../../common/types';
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  Dimensions,
-} from 'react-native';
-import _ from 'lodash';
-import Icon from 'react-native-vector-icons/Ionicons';
-
+import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import { gql } from 'react-apollo';
+import { path, head } from 'ramda';
 import FlipCard from '../../shared/FlipView';
-import { LIGHT_GREY } from '../../../common/themes/defaultTheme';
 
 const width = Dimensions.get('window').width;
 const infoIcon = require('../../../common/images/info_icon.png');
 
-class ExpertInfo extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isFlipped: false };
-  }
+type Props = {
+  expert: Expert,
+  activityDescription: string,
+};
 
-  _renderFront = () => {
-    const firstName = _.first(this.props.expert.name.split(' '));
+class ExpertInfo extends Component {
+  props: Props;
+
+  state = {
+    isFlipped: false,
+  };
+
+  static fragments = {
+    expert: gql`
+      fragment ExpertInfo on Expert {
+        id
+        name
+        discipline
+        avatar {
+          url
+        }
+        biography
+      }
+    `,
+    activity: gql`
+      fragment ExpertInfoActivity on Activity {
+        introduction
+      }
+    `,
+  };
+
+  renderFront = () => {
+    const firstName = head(this.props.expert.name.split(' '));
+    const avatar = { uri: path(['avatar', 'url'], this.props.expert) };
+
     return (
       <View style={styles.descriptionContainer}>
-        <Text style={styles.descriptionHeader}>Our expert {firstName} says:</Text>
-        <Image source={this.props.expert.image_thumbnail} style={styles.avatar} />
-        <Text style={styles.descriptionText}>{this.props.activity.description}</Text>
+        <Text style={styles.descriptionHeader}>
+          Our expert {firstName} says:
+        </Text>
+        <Image source={avatar} style={styles.avatar} />
+        <Text style={styles.descriptionText}>
+          {this.props.activityDescription}
+        </Text>
         <View style={styles.expertDescriptionButton}>
-          <Text style={styles.expertDescriptionName}>{this.props.expert.name}</Text>
-          <Text style={styles.expertDescriptionProfession}>{this.props.expert.profession}</Text>
+          <Text style={styles.expertDescriptionName}>
+            {this.props.expert.name}
+          </Text>
+          <Text style={styles.expertDescriptionProfession}>
+            {this.props.expert.discipline}
+          </Text>
           <Image style={styles.infoIcon} source={infoIcon} />
         </View>
       </View>
     );
   };
 
-  _renderBack = () => {
+  renderBack = () => {
     return (
       <View style={styles.biographyContainer}>
-        <Image source={this.props.expert.image_thumbnail} style={styles.biographyAvatar} />
-        <Text style={styles.expertBiographyName}>{this.props.expert.name}</Text>
-        <Text style={styles.expertDescriptionProfession}>{this.props.expert.profession}</Text>
-        <Text style={styles.biographyText}>{this.props.expert.biography}</Text>
-        <Icon
-          name="ios-close"
-          size={30}
-          color={LIGHT_GREY}
-          style={styles.closeBiographyButton}
+        <Image
+          source={{ uri: this.props.expert.avatar.url }}
+          style={styles.biographyAvatar}
         />
+        <Text style={styles.expertBiographyName}>{this.props.expert.name}</Text>
+        <Text style={styles.expertDescriptionProfession}>
+          {this.props.expert.discipline}
+        </Text>
+        <Text style={styles.biographyText}>{this.props.expert.biography}</Text>
       </View>
     );
   };
@@ -61,17 +89,12 @@ class ExpertInfo extends Component {
         velocity={4}
         tension={7}
         friction={5}
-        renderFront={this._renderFront()}
-        renderBack={this._renderBack()}
+        renderFront={this.renderFront()}
+        renderBack={this.renderBack()}
       />
     );
   }
 }
-
-ExpertInfo.propTypes = {
-  expert: React.PropTypes.object.isRequired,
-  activity: React.PropTypes.object.isRequired,
-};
 
 const styles = StyleSheet.create({
   flipViewStyle: {
@@ -91,7 +114,6 @@ const styles = StyleSheet.create({
       height: 2,
       width: 1,
     },
-
   },
   biographyContainer: {
     marginLeft: 20,

@@ -6,54 +6,51 @@ import { upperFirst } from 'lodash';
 import theme from '../../common/themes/defaultTheme';
 import NubabiIcon from '../../common/icons/nubabi';
 import Stimulation from '../stimulation';
-import Growth from '../growth';
-import Profile from '../profile';
-import Library from '../library';
-import Memories from '../memories';
+import Growth from '../growth/Growth';
+import Profile from '../profile/Profile';
+import Library from '../library/Library';
+import Memories from '../memories/Memories';
 import { getTabHeaders } from './shared';
 
-const TabsNavigator = TabNavigator({
-  stimulation: { screen: Stimulation },
-  growth: { screen: Growth },
-  library: { screen: Library },
-  memories: { screen: Memories },
-  profile: { screen: Profile },
-}, {
-  initialRouteName: 'profile',
-  order: [
-    'stimulation',
-    'growth',
-    'profile',
-    'library',
-    'memories',
-  ],
-  tabBarOptions: {
-    style: {
-      backgroundColor: '#fff',
-      borderTopColor: '#e6e9f0',
-      borderTopWidth: 1,
-    },
-    activeTintColor: theme.colors.primary,
-    inactiveTintColor: theme.colors.gray,
+const TabsNavigator = TabNavigator(
+  {
+    stimulation: { screen: Stimulation },
+    growth: { screen: Growth },
+    library: { screen: Library },
+    memories: { screen: Memories },
+    profile: { screen: Profile },
   },
-
-  navigationOptions: {
-    title: navigation => upperFirst(navigation.state.key),
-    tabBar: ({ state }) => ({
-      icon: ({ tintColor }: TabBarConfig) => (
-        <NubabiIcon name={state.key} size={18} color={tintColor} />
-      ),
-      label: upperFirst(state.routeName),
-    }),
-    headerMode: 'screen',
-    header: ({ navigate }) => ({
-      ...getTabHeaders(navigate),
+  {
+    initialRouteName: 'profile',
+    order: ['stimulation', 'growth', 'profile', 'library', 'memories'],
+    tabBarOptions: {
       style: {
-        backgroundColor: theme.colors.white,
+        backgroundColor: '#fff',
+        borderTopColor: '#e6e9f0',
+        borderTopWidth: 1,
       },
-      visible: true,
-    }),
+      activeTintColor: theme.colors.primary,
+      inactiveTintColor: theme.colors.gray,
+    },
+
+    navigationOptions: {
+      title: navigation => upperFirst(navigation.state.key),
+      tabBar: ({ state }) => ({
+        icon: ({ tintColor }: TabBarConfig) => (
+          <NubabiIcon name={state.key} size={18} color={tintColor} />
+        ),
+        label: upperFirst(state.routeName),
+      }),
+      headerMode: 'screen',
+      header: ({ navigate }) => ({
+        ...getTabHeaders(navigate),
+        style: {
+          backgroundColor: theme.colors.white,
+        },
+        visible: true,
+      }),
+    },
   },
-});
+);
 
 export default TabsNavigator;

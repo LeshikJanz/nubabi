@@ -2,6 +2,9 @@
 import React from 'react';
 import { View, Image, StyleSheet } from 'react-native';
 import type { ImageSource } from 'react-native';
+import { compose, path } from 'ramda';
+import { connect } from 'react-redux';
+import { gql, graphql } from 'react-apollo';
 import color from 'color';
 
 const babyIcon = require('../../common/images/face_icon.jpg');
@@ -15,16 +18,20 @@ type Props = {
 const ProfileIcon = ({ avatarSource = babyIcon, active, tintColor }: Props) => {
   const activeStyle = active
     ? {
-      borderColor: color(tintColor).alpha(0.6).string(),
-      borderWidth: 2,
-    }
+        borderColor: color(tintColor).alpha(0.6).string(),
+        borderWidth: 2,
+      }
     : {};
 
   return (
     <View style={styles.tabIconOuterView}>
       <View style={[styles.tabIconInnerView]}>
         <View style={[styles.tabIconInnerImageHolder, activeStyle]}>
-          <Image source={avatarSource} style={[styles.tabIconImage]} />
+          <Image
+            source={avatarSource}
+            style={[styles.tabIconImage]}
+            resizeMode="cover"
+          />
         </View>
       </View>
       <View style={styles.tabSquare} />
@@ -82,4 +89,32 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProfileIcon;
+export default compose(
+  connect(({ babies: { currentBabyId } }) => ({ currentBabyId })),
+  graphql(
+    gql`
+   query getBabyAvatar($id: ID!) {
+     viewer {
+       baby(id: $id) {
+         id
+         avatar {
+           url
+         }
+       }
+     }
+   } 
+  `,
+    {
+      options: ({ currentBabyId }) => ({
+        variables: { id: currentBabyId },
+      }),
+      props: ({ data }) => {
+        const avatar = path(['viewer', 'baby', 'avatar'], data);
+
+        return {
+          avatarSource: avatar ? { uri: avatar.url } : null,
+        };
+      },
+    },
+  ),
+)(ProfileIcon);

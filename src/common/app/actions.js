@@ -1,40 +1,79 @@
 // @flow
-import type { Action, Deps, FirebaseUser } from '../types';
 import { Observable } from 'rxjs/Observable';
-import api from '../connectors/mlb';
 import { getBabiesSuccess } from '../babies/actions';
+import { gql } from 'react-apollo';
+import { query as chooseBabyQuery } from '../../native/profile/ChooseBaby';
+import type {
+  Action,
+  AppOnlineAction,
+  AppErrorAction,
+  OnAuthAction,
+  Deps,
+  FirebaseUser,
+} from '../types';
 
-export const appError = (error: Object): Action => ({
+export const appError = (error: Object): AppErrorAction => ({
   type: 'APP_ERROR',
   payload: error,
   error: true,
 });
 
-export const appOnline = (online: boolean): Action => ({
+export const appOnline = (online: boolean): AppOnlineAction => ({
   type: 'APP_ONLINE',
   payload: { online },
 });
 
-export const onAuth = (user: ?FirebaseUser): Action => ({
+export const onAuth = (user: ?FirebaseUser, token?: string): OnAuthAction => ({
   type: 'ON_AUTH',
-  payload: { user },
+  payload: { user, token },
 });
 
 // We will get rid of this once we standarize data fetching
 const appOnlineEpic = (action$: any, deps: Deps) => {
-  return action$.ofType('ON_AUTH')
-    .switchMap(() => {
-      const { getState } = deps;
-      const state = getState();
+  return action$.ofType('ON_AUTH').switchMap(() => {
+    const { getState, apollo } = deps;
+    const state = getState();
 
-      if (!state.app.online && state.auth.isAuthenticated) {
-        return Observable.fromPromise(api.getBabies(state.auth.token))
-          .mergeMap(response => [getBabiesSuccess(response), appOnline(true)])
-          .catch((err) => Observable.of(appError(err)));
-      }
+    if (state.auth.isAuthenticated) {
+      // TODO: remove from here, this should be a client concern
+      // so we should handle on SplashScreen and Profile (initial tab)
+      const { currentBabyId } = state.babies;
+      const fetchBabiesQuery = gql`
+          query getBabies {
+            viewer {
+              user {
+                id
+              }
+              babies {
+                edges {
+                  node {
+                    id
+                    name
+                  }
+                }
+              }
+            }
+          }
+        `;
 
-      return Observable.of(appOnline(true));
-    });
+      // $FlowFixMe
+      return Observable.zip(
+        Observable.fromPromise(apollo.query({ query: fetchBabiesQuery })),
+        currentBabyId
+          ? Observable.fromPromise(apollo.query({ query: chooseBabyQuery }))
+          : Observable.of(null),
+      )
+        .mergeMap(([fetchBabiesResult]) => [
+          getBabiesSuccess(
+            fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),
+          ),
+          appOnline(true),
+        ])
+        .catch(err => Observable.of(appError(err)));
+    }
+
+    return Observable.of(appOnline(true));
+  });
 };
 
 const appStartedEpic = (action$: any, deps: Deps) => {
@@ -42,7 +81,13 @@ const appStartedEpic = (action$: any, deps: Deps) => {
 
   const onAuth$ = Observable.create(observer => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
-      observer.next(onAuth(firebaseUser));
+      if (firebaseUser) {
+        firebaseAuth().currentUser.getToken().then(token => {
+          observer.next(onAuth(firebaseUser, token));
+        });
+      } else {
+        observer.next(onAuth(firebaseUser));
+      }
     });
     return unsubscribe;
   });

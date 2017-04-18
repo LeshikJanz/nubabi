@@ -4,6 +4,7 @@ import { autoRehydrate } from 'redux-persist';
 import isReactNative from './app/isReactNative';
 import configureMiddleware from './configureMiddleware';
 import configureReducer from './configureReducer';
+import { configureApolloAuth } from './configureApollo';
 
 type Options = {
   initialState: Object,
@@ -48,6 +49,8 @@ const configureStore = (options: Options) => {
       ...platformStoreEnhancers,
     ),
   );
+
+  configureApolloAuth(store);
 
   // Enable hot reloading for reducers.
   /* eslint-disable */

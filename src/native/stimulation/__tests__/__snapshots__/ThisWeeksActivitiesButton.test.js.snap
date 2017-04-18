@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#fff",
+      "borderRadius": 4,
+      "flex": 2,
+      "height": 97,
+      "margin": 10,
+      "marginTop": 10,
+      "overflow": "hidden",
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 100,
+        "width": 200,
+      },
+      "shadowOpacity": 1,
+      "shadowRadius": 1,
+    }
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": 140,
+        "resizeMode": "cover",
+        "width": 355,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "backgroundColor": "#748294",
+        "height": 140,
+        "opacity": 0.3,
+        "position": "absolute",
+        "top": 0,
+        "width": 355,
+      }
+    }
+  />
+  <View
+    style={
+      Object {
+        "justifyContent": "center",
+        "paddingLeft": 10,
+        "paddingTop": 15,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#454D56",
+          "fontSize": 16,
+          "justifyContent": "center",
+        }
+      }
+    >
+      This Week's Activities
+    </Text>
+  </View>
+</View>
+`;

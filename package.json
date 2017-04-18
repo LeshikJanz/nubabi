@@ -4,19 +4,52 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "flow": "flow"
+    "flow": "flow",
+    "test": "jest",
+    "precommit": "lint-staged",
+    "firebase:install": "cd src/server/firebase/functions && npm install",
+    "firebase:deploy": "firebase deploy",
+    "firebase:deploy:functions": "firebase deploy --only functions",
+    "firebase:deploy:rules": "firebase deploy --only database"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80",
+      "git add",
+      "jest --bail --findRelatedTests"
+    ]
+  },
+  "jest": {
+    "preset": "react-native"
   },
   "dependencies": {
+    "apollo-client": "^1.0.1",
+    "apollo-test-utils": "^0.3.0",
+    "axios": "^0.16.0",
+    "axios-debug-log": "^0.3.0",
+    "babel-plugin-inline-import": "^2.0.4",
     "babel-plugin-transform-define": "https://github.com/blackxored/babel-plugin-transform-define#react-native-packager-fix",
+    "base-64": "^0.1.0",
     "color": "^1.0.3",
+    "faker": "^4.1.0",
     "firebase": "3.7.4",
+    "graphql": "^0.9.2",
+    "graphql-anywhere": "^3.0.1",
+    "graphql-iso-date": "^3.1.0",
+    "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
+    "graphql-tag": "^2.0.0",
+    "graphql-tools": "^0.11.0",
+    "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
     "ramda": "^0.23.0",
     "raven-js": "^3.14.0",
     "react": "~15.4.1",
+    "react-apollo": "^1.0.0",
     "react-native": "0.42.3",
+    "react-native-image-picker": "^0.26.3",
     "react-native-keyboard-aware-scroll-view": "^0.2.7",
+    "react-native-spinkit": "^1.0.2",
     "react-native-svg": "^5.1.5",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-tab-view": "https://github.com/react-native-community/react-native-tab-view#4e1140ef5d15c9d1f146ca138fdc52841d71c3ce",
@@ -24,10 +57,12 @@
     "react-navigation": "https://github.com/blackxored/react-navigation#feat/allow-hiding-floating-headers",
     "react-redux": "^5.0.2",
     "redux": "^3.6.0",
+    "redux-form": "^6.6.2",
     "redux-logger": "^2.8.2",
     "redux-observable": "^0.14.1",
     "redux-persist": "^4.4.2",
     "redux-saga": "^0.14.3",
+    "require-text": "^0.0.1",
     "rxjs": "^5.2.0",
     "superagent": "^3.4.3"
   },
@@ -42,6 +77,11 @@
     "eslint-plugin-react": "^6.7.1",
     "eslint-plugin-react-native": "^2.3.1",
     "flow-bin": "^0.38.0",
-    "redux-devtools": "^3.3.2"
+    "husky": "^0.13.3",
+    "jest": "^19.0.2",
+    "lint-staged": "^3.4.0",
+    "react-test-renderer": "^15.5.4",
+    "redux-devtools": "^3.3.2",
+    "redux-mock-store": "^1.2.3"
   }
 }

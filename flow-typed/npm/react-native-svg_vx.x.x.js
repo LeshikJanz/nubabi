@@ -1,4 +1,4 @@
-// flow-typed signature: 4ebff59f6730f4cc7f6e16a124715f97
+// flow-typed signature: a02a23fcbd95f537832f6898b5f81cba
 // flow-typed version: <<STUB>>/react-native-svg_v^5.1.5/flow_v0.38.0
 
 /**
@@ -131,6 +131,10 @@ declare module 'react-native-svg/lib/extract/extractGradient' {
 }
 
 declare module 'react-native-svg/lib/extract/extractOpacity' {
+  declare module.exports: any;
+}
+
+declare module 'react-native-svg/lib/extract/extractPolyPoints' {
   declare module.exports: any;
 }
 
@@ -272,6 +276,9 @@ declare module 'react-native-svg/lib/extract/extractGradient.js' {
 }
 declare module 'react-native-svg/lib/extract/extractOpacity.js' {
   declare module.exports: $Exports<'react-native-svg/lib/extract/extractOpacity'>;
+}
+declare module 'react-native-svg/lib/extract/extractPolyPoints.js' {
+  declare module.exports: $Exports<'react-native-svg/lib/extract/extractPolyPoints'>;
 }
 declare module 'react-native-svg/lib/extract/extractProps.js' {
   declare module.exports: $Exports<'react-native-svg/lib/extract/extractProps'>;

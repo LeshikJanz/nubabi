@@ -1,0 +1,148 @@
+scalar Date
+scalar DateTime
+scalar Time
+scalar Secret
+
+interface Node {
+  # A globally-unique ID
+  id: ID!
+}
+
+interface Timestampable {
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+interface ResizableImage {
+  url: String
+  width: Int
+  height: Int
+}
+
+type Image implements ResizableImage {
+  url: String
+  width: Int
+  height: Int
+  large: Image
+  thumb: Image
+}
+
+type Avatar implements ResizableImage {
+  url: String
+  width: Int
+  height: Int
+}
+
+type Avatar {
+  url: String,
+  large: Image,
+  thumb: Image,
+}
+
+input ImageInput {
+  # A Base64-encoded data URI representing the image contents
+  url: String
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+}
+
+# An edge in a connection.
+type UserEdge {
+  # The item at the end of the edge.
+  node: User!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type User implements Node, Timestampable {
+  # A globally-unique ID
+  id: ID!
+  username: String!
+  email: String
+  name: String
+  website: String
+  # Date of Birth
+  dob: DateTime
+  avatar: Avatar
+  phone: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Viewer {
+  allUsers(before: String, after: String, first: Int, last: Int): UserConnection!
+  user: User
+  getUser(id: ID!): User
+}
+
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  # count: Int!
+}
+
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
+input CreateUserInput {
+  username: String!
+  password: Secret,
+  clientMutationId: ID,
+}
+
+type CreateUserPayload {
+  # The user's authentication token
+  token: String
+
+  # The mutated User.
+  changedUser: User
+
+  # An edge containing the mutated User. Use this to update your client side cache.
+  changedEdge: UserEdge
+
+  # A view port into your application.
+  viewer: Viewer
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+type Mutation {
+  ping: String
+}

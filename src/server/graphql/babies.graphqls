@@ -1,0 +1,227 @@
+extend type Viewer {
+  babies: BabyConnection
+  baby(id: ID!): Baby
+  allSkillAreas(before: String, after: String, first: Int, last: Int): SkillAreaConnection
+}
+
+extend type Mutation {
+  createBaby(input: CreateBabyInput!): CreateBabyPayload
+  updateBaby(input: UpdateBabyInput!): UpdateBabyPayload
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+type Baby implements Node, Timestampable {
+  id: ID!
+  name: String!
+  avatar: Avatar
+  coverImage: Image
+  # Date of birth
+  dob: Date!
+  # The current weight for this Baby
+  weight: Float
+  # The current height for this Baby
+  height: Float
+  gender: Gender!
+  weekBorn: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  # Relationship to Viewer
+  relationship: String
+  activities(before: String, after: String, first: Int, last: Int): ActivityConnection
+  activity(id: ID!): Activity
+  achievements(before: String, after: String, first: Int, last: Int): AchievementConnection
+  memories(filter: MemoryFilter, first: Int, last: Int): MemoryConnection
+}
+
+input CreateBabyInput {
+  name: String!
+  # Date of birth
+  dob: Date!
+  avatar: ImageInput
+  coverImage: ImageInput
+  weight: Float
+  height: Float
+  gender: Gender!
+  weekBorn: Int!
+  relationship: String
+}
+
+type CreateBabyPayload {
+  createdBaby: Baby
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+input UpdateBabyInput {
+  id: ID!
+  name: String
+  dob: Date
+  avatar: ImageInput
+  coverImage: ImageInput
+  weight: Float
+  height: Float
+  gender: Gender
+  weekBorn: Int
+  relationship: String
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+type UpdateBabyPayload {
+  changedBaby: Baby
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+# A connection to a list of items.
+type BabyConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [BabyEdge]
+}
+
+type BabyEdge {
+  # The item at the end of the edge.
+  node: Baby!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type SkillArea implements Node {
+  id: ID!
+  name: String!
+  icon: String!
+  image: SkillAreaImage!
+  completedIcon: String
+}
+
+type SkillAreaImage implements ResizableImage {
+  url: String!
+  large: Image!
+  thumb: Image!
+  width: Int
+  height: Int
+}
+
+# A connection to a list of items.
+type SkillAreaConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [SkillAreaEdge]
+}
+
+type SkillAreaEdge {
+  # The item at the end of the edge.
+  node: SkillArea!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type Activity implements Node {
+  id: ID!
+  name: String!
+  introduction: String
+  steps: [String]!
+  equipment: String
+  expert: Expert!
+  skillArea: SkillArea!
+  isFavorite: Boolean
+}
+
+# A connection to a list of items.
+type ActivityConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ActivityEdge]
+}
+
+type ActivityEdge {
+  # The item at the end of the edge.
+  node: Activity
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type Achievement implements Node {
+  id: ID!
+  badges(
+    upcoming: Boolean
+  ): [Badge]
+}
+
+type Badge {
+  image(
+    # Width of the image that should be returned
+    width: Int,
+    # Height of the image that should be returned
+    height: Int
+  ): Image
+}
+
+# A connection to a list of items.
+type AchievementConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AchievementEdge]
+
+  # Count of result set without considering pagination arguments
+  count: Int!
+}
+
+type AchievementEdge {
+  # The item at the end of the edge.
+  node: Achievement!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum MemoryFilter {
+  # Returns all memories
+  ALL
+  # Returns recent memories (TODO: consider removal)
+  RECENT
+  # Returns special memories
+  SPECIAL
+}
+
+type Memory implements Node {
+  id: ID!
+  description: String
+  image(width: Int, height: Int): Image
+}
+
+# A connection to a list of items.
+type MemoryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [MemoryEdge]
+}
+
+type MemoryEdge {
+  # The item at the end of the edge.
+  node: Memory!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}

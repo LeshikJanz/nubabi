@@ -7,7 +7,9 @@ import {
   CardStack,
 } from 'react-navigation';
 
-import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
+import type {
+  NavigationRouteConfigMap,
+} from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import { merge } from 'lodash';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
 import crossFade from './transitioners/CrossFadeTransitioner';
@@ -17,13 +19,15 @@ import chooseBaby from './transitioners/ChooseBabyTransitioner';
 import SplashScreen from './SplashScreen';
 import TabsNavigator from './TabsNavigator';
 import ChooseBaby from '../profile/ChooseBaby';
-import Settings from '../settings';
-import EditBaby from '../profile/EditBaby';
+import Settings from '../settings/Settings';
+import AddBaby from '../profile/EditBaby/AddBaby';
+import EditBaby from '../profile/EditBaby/EditBaby';
 import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivities from '../stimulation/BrowseActivities';
-import ViewThisWeeksActivity from '../stimulation/ViewThisWeeksActivity';
-import Login from '../login';
+import ViewThisWeeksActivity
+  from '../stimulation/ViewThisWeeksActivity/ViewThisWeekActivity';
+import Login from '../login/Login';
 import theme from '../../common/themes/defaultTheme';
 
 export type TransitionName =
@@ -86,7 +90,9 @@ class TransitionerSwitcher extends PureComponent {
 }
 
 const createCustomNavigator = (
-  routeConfigMap: NavigationRouteConfigMap, config) => {
+  routeConfigMap: NavigationRouteConfigMap,
+  config,
+) => {
   const {
     containerOptions,
     initialRouteName,
@@ -110,21 +116,25 @@ const createCustomNavigator = (
 
   const router = StackRouter(routeConfigMap, routerConfig);
 
-  return createNavigationContainer(createNavigator(router)(props => (
-    <TransitionerSwitcher
-      {...props}
-      headerComponent={headerComponent}
-      headerMode={headerMode}
-      mode={mode}
-      cardStyle={cardStyle}
-      onTransitionStart={onTransitionStart}
-      onTransitionEnd={onTransitionEnd}
-    />
-  )), containerOptions);
+  return createNavigationContainer(
+    createNavigator(router)(props => (
+      <TransitionerSwitcher
+        {...props}
+        headerComponent={headerComponent}
+        headerMode={headerMode}
+        mode={mode}
+        cardStyle={cardStyle}
+        onTransitionStart={onTransitionStart}
+        onTransitionEnd={onTransitionEnd}
+      />
+    )),
+    containerOptions,
+  );
 };
 
 const routes = {
   chooseBaby: { screen: ChooseBaby, mode: 'modal' },
+  addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   thisWeekActivities: { screen: ThisWeeksActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
@@ -133,27 +143,29 @@ const routes = {
   settings: { screen: Settings },
 };
 
-const AppNavigator = createCustomNavigator({
-  splash: { screen: SplashScreen },
-  login: { screen: Login },
-  home: { screen: TabsNavigator },
-  ...routes,
-}, {
-  headerMode: 'float',
-  navigationOptions: {
-    header: (navigation, childRouter) => {
-      const options = {
-        tintColor: theme.colors.black,
-        backTitle: 'Back',
-        style: {
-          backgroundColor: theme.colors.white,
-        },
-      };
+const AppNavigator = createCustomNavigator(
+  {
+    splash: { screen: SplashScreen },
+    login: { screen: Login },
+    home: { screen: TabsNavigator },
+    ...routes,
+  },
+  {
+    headerMode: 'float',
+    navigationOptions: {
+      header: (navigation, childRouter) => {
+        const options = {
+          tintColor: theme.colors.black,
+          backTitle: 'Back',
+          style: {
+            backgroundColor: theme.colors.white,
+          },
+        };
 
-      return childRouter ? merge({}, options, childRouter) : options;
+        return childRouter ? merge({}, options, childRouter) : options;
+      },
     },
   },
-
-});
+);
 
 export default AppNavigator;

@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly when not selected 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "borderColor": "#f5f6fa",
+          "borderRadius": 15,
+          "borderWidth": 1,
+          "height": 30,
+          "justifyContent": "center",
+          "width": 90,
+        },
+        Object {
+          "marginRight": 20,
+        },
+        "",
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#a5b0c0",
+            "fontSize": 12,
+            "fontWeight": "700",
+          },
+          "",
+        ]
+      }
+    >
+      BOY
+    </Text>
+  </View>
+</View>
+`;
+
+exports[`it renders correctly when selected 1`] = `
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "opacity": 1,
+    }
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "borderColor": "#f5f6fa",
+          "borderRadius": 15,
+          "borderWidth": 1,
+          "height": 30,
+          "justifyContent": "center",
+          "width": 90,
+        },
+        Object {
+          "marginRight": 20,
+        },
+        Object {
+          "backgroundColor": "#e9ecf5",
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "backgroundColor": "transparent",
+            "color": "#a5b0c0",
+            "fontSize": 12,
+            "fontWeight": "700",
+          },
+          Object {
+            "color": "#5c646e",
+          },
+        ]
+      }
+    >
+      GIRL
+    </Text>
+  </View>
+</View>
+`;

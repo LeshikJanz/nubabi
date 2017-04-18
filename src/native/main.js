@@ -1,13 +1,14 @@
 import React from 'react';
-import { Provider } from 'react-redux';
+import { ApolloProvider } from 'react-apollo';
 import { AsyncStorage } from 'react-native';
 import { persistStore } from 'redux-persist';
 import Raven from 'raven-js';
 import configureStore from '../common/configureStore';
 import configureStorage from '../common/configureStorage';
 import configureReporting from '../common/configureReporting';
+import { configureApollo } from '../common/configureApollo';
 import config from '../common/config';
-import NuBabiMobile from './root';
+import Root from './root';
 
 import { Action } from '../common/types';
 import navigation from './navigation/reducer';
@@ -32,6 +33,7 @@ const store = configureStore({
   platformMiddleware: [reportingMiddleware],
 });
 
+
 persistStore(
   store,
   {
@@ -43,10 +45,12 @@ persistStore(
   },
 );
 
+const apollo = configureApollo();
+
 const Main = () => (
-  <Provider store={store}>
-    <NuBabiMobile />
-  </Provider>
+  <ApolloProvider client={apollo} store={store}>
+    <Root />
+  </ApolloProvider>
 );
 
 export default Main;

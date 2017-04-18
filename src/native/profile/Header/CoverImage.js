@@ -1,21 +1,22 @@
+// @flow
+import type { Image as ImageType } from '../../../common/types';
 import React from 'react';
-import {
-  View,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
 
 const window = Dimensions.get('window');
 
 const headerBackground = require('../../../common/images/profileBackground.jpg');
 
-const CoverImage = ({ coverImage }) => {
+type Props = {
+  coverImage: ImageType,
+};
+
+const CoverImage = ({ coverImage }: Props) => {
   let imageSource;
-  if (coverImage === '') {
-    imageSource = headerBackground;
+  if (coverImage) {
+    imageSource = { uri: coverImage.url };
   } else {
-    imageSource = { uri: coverImage };
+    imageSource = headerBackground;
   }
   return (
     <View>
@@ -23,10 +24,6 @@ const CoverImage = ({ coverImage }) => {
       <View style={styles.imageOverlay} />
     </View>
   );
-};
-
-CoverImage.propTypes = {
-  coverImage: React.PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

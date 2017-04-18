@@ -1,11 +1,13 @@
+// @flow
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 
-const Statistics = ({ achievements, favourites }) => {
+type Props = {
+  achievements: number,
+  favourites: number,
+};
+
+const Statistics = ({ achievements, favourites }: Props) => {
   return (
     <View style={styles.stats}>
       <View style={styles.achievements}>
@@ -26,11 +28,6 @@ const Statistics = ({ achievements, favourites }) => {
       </View>
     </View>
   );
-};
-
-Statistics.propTypes = {
-  achievements: React.PropTypes.number.isRequired,
-  favourites: React.PropTypes.number.isRequired,
 };
 
 const styles = StyleSheet.create({

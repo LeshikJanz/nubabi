@@ -11,10 +11,9 @@ import NubabiIcon from '../../../common/icons/nubabi';
 import { NUBABI_RED } from '../../../common/themes/defaultTheme';
 
 class NameAgeRow extends Component {
-  _returnAge(dateString) {
-    const birthDate = moment(dateString, 'dd/MM/YYYY');
-
-    return moment().diff(birthDate, 'months');
+  _returnAge(birthDate) {
+    const diff = moment().diff(moment(birthDate), 'months');
+    return diff === 1 ? `${diff} month old` : `${diff} months old`;
   }
 
   render() {
@@ -36,7 +35,7 @@ class NameAgeRow extends Component {
               <Text
                 style={styles.babyAge}
               >
-                {this._returnAge(this.props.birthDate)} months old
+                {this._returnAge(this.props.birthDate)}
               </Text>
             </View>
           </View>

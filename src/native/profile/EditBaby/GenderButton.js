@@ -1,41 +1,30 @@
+// @flow
+import type { Gender } from '../../../common/types';
 import React from 'react';
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 
-const GenderButton = ({ buttonText, selected, onChangeGender }) => {
+type Props = {
+  buttonText: string,
+  selected: boolean,
+  onChangeGender: (gender: Gender) => void,
+};
+
+const GenderButton = ({ buttonText, selected, onChangeGender }: Props) => {
   return (
-    <TouchableOpacity
-      onPress={onChangeGender}
-    >
+    <TouchableOpacity onPress={onChangeGender}>
       <View
         style={[
           styles.genderButton,
           { marginRight: 20 },
-          (selected ? styles.selectedButton : ''),
+          selected ? styles.selectedButton : '',
         ]}
-
       >
-        <Text
-          style={[
-            styles.genderText,
-            (selected ? styles.selectedText : ''),
-          ]}
-        >
+        <Text style={[styles.genderText, selected ? styles.selectedText : '']}>
           {buttonText}
         </Text>
       </View>
     </TouchableOpacity>
   );
-};
-
-GenderButton.propTypes = {
-  buttonText: React.PropTypes.string.isRequired,
-  selected: React.PropTypes.bool.isRequired,
-  onChangeGender: React.PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

@@ -1,44 +1,36 @@
+// @flow
+import type { Avatar } from '../../../common/types';
 import React from 'react';
-import {
-  View,
-  Image,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
-import Svg, {
- Path,
- Circle,
-} from 'react-native-svg';
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import Svg, { Path, Circle } from 'react-native-svg';
 
 const babyIcon = require('../../../common/images/face_icon.jpg');
 
 const width = Dimensions.get('window').width;
 
-const IconHeader = ({ avatar }) => {
+type Props = {
+  avatar: ?Avatar,
+};
+
+const IconHeader = ({ avatar }: Props) => {
   let imageSource;
-  if (avatar === '') {
-    imageSource = babyIcon;
+  if (avatar) {
+    imageSource = { uri: avatar.url };
   } else {
-    imageSource = { uri: avatar };
+    imageSource = babyIcon;
   }
-  const curve = `M0 0 C ${(width / 2) - 20} 60, ${(width / 2) + 20} 60, ${width} 0`;
+  const curve = `M0 0 C ${width / 2 - 20} 60, ${width / 2 + 20} 60, ${width} 0`;
   const circleSize = 40;
-  const circleStart = (width / 2);
+  const circleStart = width / 2;
   return (
     <View style={styles.iconHeaderContainer}>
-      <Svg
-        style={styles.headerShape}
-      >
+      <Svg style={styles.headerShape}>
         <Path d={curve} stroke="#FFFFFF" fill="#FFFFFF" />
         <Circle cx={circleStart} cy="30" r={circleSize} fill="#FFFFFF" />
       </Svg>
-      <Image source={imageSource} style={styles.babyIcon} />
+      <Image source={imageSource} style={styles.babyIcon} resizeMode="cover" />
     </View>
   );
-};
-
-IconHeader.propTypes = {
-  avatar: React.PropTypes.string.isRequired,
 };
 
 const styles = StyleSheet.create({

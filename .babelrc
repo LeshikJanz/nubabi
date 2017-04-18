@@ -2,7 +2,9 @@
   "presets": [
     "react-native" // this is required for debugging with react-native/packager/transformer
   ],
-  "plugins": [],
+  "plugins": [
+    ["inline-import", { "extensions": [".graphql", ".graphqls"] }] 
+  ],
 
   "env": {
     "development": {
