@@ -63,15 +63,6 @@ const createBabyEpic = (action$: any) => {
     });
 };
 
-const fetchBabiesEpic = (action$: any, { getState }: Deps) =>
-  action$
-    .filter((action: Action) => action.type === 'GET_BABIES_REQUEST')
-    .mergeMap(() => {
-      return Observable.fromPromise(api.getBabies(getState().auth.token))
-        .map(response => getBabiesSuccess(response))
-        .catch(err => Observable.of(getBabiesFailure(err)));
-    });
-
 const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) =>
   action$
     .filter(
@@ -84,8 +75,4 @@ const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) =>
         .map(response => getThisWeeksActivitiesSuccess(response))
         .catch(err => Observable.of(getThisWeeksActivitiesFailure(err))));
 
-export const epics = [
-  fetchBabiesEpic,
-  fetchThisWeekActivitiesEpic,
-  createBabyEpic,
-];
+export const epics = [fetchThisWeekActivitiesEpic, createBabyEpic];

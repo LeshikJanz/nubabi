@@ -1,5 +1,11 @@
 // @flow
-import type { State, Baby, Viewer, GraphQLDataProp } from '../../common/types';
+import type {
+  State,
+  Baby,
+  Viewer,
+  GraphQLDataProp,
+  NavigationOptions,
+} from '../../common/types';
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StyleSheet, Text } from 'react-native';
 import { compose, path } from 'ramda';
@@ -8,12 +14,13 @@ import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import theme from '../../common/themes/defaultTheme';
 import displayLoadingState from '../components/displayLoadingState';
+import { Screen } from '../components';
 import Measurement from './Measurement';
 import Header from './Header/Header';
 import Achievements from './Achievements';
 import RecentMemories from './RecentMemories';
 import ProfileIcon from '../navigation/ProfileIcon';
-import { getBabyTitle } from '../navigation/shared';
+import BabyNameTitle from './BabyNameTitle';
 
 type Props = {
   navigation: any,
@@ -36,37 +43,16 @@ class Profile extends PureComponent {
     `,
   };
 
-  static navigationOptions = {
-    ...getBabyTitle(),
-    header: (_, defaultHeader) => ({
-      ...defaultHeader,
-      style: {
-        shadowOpacity: 0,
-      },
-    }),
-    tabBar: (state, defaultTabBarOptions) => ({
-      ...defaultTabBarOptions,
-      label: () => null, // showLabel doesn't work on this context, probably a bug
-      icon: ({ tintColor, focused }) => (
-        <ProfileIcon active={focused} tintColor={tintColor} />
-      ),
-    }),
+  static navigationOptions: NavigationOptions = {
+    title: <BabyNameTitle />,
+    headerStyle: {
+      shadowOpacity: 0,
+    },
+    tabBarLabel: () => null,
+    tabBarIcon: ({ tintColor, focused }) => (
+      <ProfileIcon active={focused} tintColor={tintColor} />
+    ),
   };
-
-  componentWillUpdate(nextProps) {
-    const babyName = path(['baby', 'name']);
-
-    const currentBabyName = babyName(nextProps);
-
-    if (!this.props.navigation.state.params) {
-      this.props.navigation.setParams({ babyName: currentBabyName });
-      return;
-    }
-
-    if (this.props.navigation.state.params.babyName !== currentBabyName) {
-      this.props.navigation.setParams({ babyName: currentBabyName });
-    }
-  }
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
 
@@ -83,32 +69,34 @@ class Profile extends PureComponent {
     }
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scrollContainer}>
-          <Header
-            {...filter(Header.fragments.header, baby)}
-            onEditBaby={this.handleEditBaby}
-          />
-          <View style={styles.measurementsRow}>
-            <Measurement
-              amount={baby.weight}
-              header="Weight"
-              unit="kg"
-              iconName="weight"
-              onUpdate={() => {}}
+      <Screen>
+        <View style={styles.container}>
+          <ScrollView style={styles.scrollContainer}>
+            <Header
+              {...filter(Header.fragments.header, baby)}
+              onEditBaby={this.handleEditBaby}
             />
-            <Measurement
-              amount={baby.height}
-              header="Height"
-              unit="cm"
-              iconName="height"
-              onUpdate={() => {}}
-            />
-          </View>
-          <Achievements />
-          <RecentMemories memories={baby.memories} />
-        </ScrollView>
-      </View>
+            <View style={styles.measurementsRow}>
+              <Measurement
+                amount={baby.weight}
+                header="Weight"
+                unit="kg"
+                iconName="weight"
+                onUpdate={() => {}}
+              />
+              <Measurement
+                amount={baby.height}
+                header="Height"
+                unit="cm"
+                iconName="height"
+                onUpdate={() => {}}
+              />
+            </View>
+            <Achievements />
+            <RecentMemories memories={baby.memories} />
+          </ScrollView>
+        </View>
+      </Screen>
     );
   }
 }

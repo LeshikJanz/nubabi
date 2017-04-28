@@ -1,27 +1,97 @@
-import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
+// @flow
+import type { ActivityEdge, NavigationOptions } from '../../common/types';
+import type { NavigationProp } from 'react-navigation';
+import React, { PureComponent } from 'react';
+import { compose, path } from 'ramda';
+import { gql, graphql } from 'react-apollo';
+import displayLoadingState from '../components/displayLoadingState';
+import { Screen } from '../components';
+import ActivityList from './ActivityList';
 
-const BrowseActivities = () => (
-  <View style={styles.container}>
-    <Text style={styles.title}>Browse Activities</Text>
-  </View>
-);
-
-BrowseActivities.navigationOptions = {
-  title: 'All Activities',
+type Props = {
+  navigation: NavigationProp<*>,
+  activities: Array<ActivityEdge>,
+  loadMoreEntries: () => void,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
-});
+export class BrowseActivities extends PureComponent {
+  props: Props;
 
-export default BrowseActivities;
+  static navigationOptions: NavigationOptions = {
+    title: 'All Activities',
+  };
+
+  handleNavigate = (id: string, title: string) => {
+    this.props.navigation.navigate('viewActivity', { id, title });
+  };
+
+  render() {
+    return (
+      <Screen>
+        <ActivityList
+          activities={this.props.activities}
+          onActivityItemPress={this.handleNavigate}
+          onLoadMore={this.props.loadMoreEntries}
+        />
+      </Screen>
+    );
+  }
+}
+
+const query = gql`
+  query BrowseActivities($cursor: String) {
+    viewer {
+      allActivities(first: 15, after: $cursor) {
+        edges {
+          node {
+            ...ActivityList
+          }
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+    }
+  }
+  ${ActivityList.fragments.activities}
+`;
+
+export default compose(
+  graphql(query, {
+    props: ({ data }) => {
+      const { fetchMore } = data;
+      const activities = path(['viewer', 'allActivities', 'edges'], data);
+
+      return {
+        data,
+        activities: activities || [],
+        loadMoreEntries: () => {
+          return fetchMore({
+            query,
+            variables: {
+              cursor: data.viewer.allActivities.pageInfo.endCursor,
+            },
+            updateQuery: (previousResult, { fetchMoreResult }) => {
+              const newEdges = fetchMoreResult.viewer.allActivities.edges;
+              const pageInfo = fetchMoreResult.viewer.allActivities.pageInfo;
+
+              return {
+                viewer: {
+                  allActivities: {
+                    edges: [
+                      ...previousResult.viewer.allActivities.edges,
+                      ...newEdges,
+                    ],
+                    pageInfo,
+                  },
+                },
+              };
+            },
+          });
+        },
+      };
+    },
+  }),
+  displayLoadingState,
+)(BrowseActivities);

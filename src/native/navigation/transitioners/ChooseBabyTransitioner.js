@@ -1,19 +1,18 @@
 // @flow
 import React from 'react';
-import { CardStack } from 'react-navigation';
+import CardStackTransitioner
+  from 'react-navigation/src/views/CardStackTransitioner';
 import type {
   NavigationSceneRendererProps,
-  NavigationRoute,
   NavigationProp,
-  NavigationAction,
   NavigationRouter,
 } from 'react-navigation/src/TypeDefinition';
 
 type Props = {
-  navigation: NavigationProp<NavigationRoute, NavigationAction>,
-  router: NavigationRouter,
-}
-const ChooseBabyTransitioner = ({ navigation, router }: Props) => {
+  navigation: NavigationProp<*, *>,
+  router: NavigationRouter<*, *, *>,
+};
+const ChooseBabyTransitioner = (props: Props) => {
   const transitionConfig = () => ({
     screenInterpolator: (sceneProps: NavigationSceneRendererProps) => {
       const { position, scene } = sceneProps;
@@ -23,7 +22,7 @@ const ChooseBabyTransitioner = ({ navigation, router }: Props) => {
 
       const opacity = position.interpolate({
         inputRange,
-        outputRange: ([0.5, 0.9, 1]),
+        outputRange: [0.5, 0.9, 1],
       });
 
       return {
@@ -33,12 +32,11 @@ const ChooseBabyTransitioner = ({ navigation, router }: Props) => {
   });
 
   return (
-    <CardStack
+    <CardStackTransitioner
+      {...props}
       mode="card"
-      navigation={navigation}
-      router={router}
-      transitionConfig={transitionConfig}
       headerMode="none"
+      transitionConfig={transitionConfig}
     />
   );
 };

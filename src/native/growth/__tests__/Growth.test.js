@@ -3,6 +3,8 @@ import React from 'react';
 import Growth from '../Growth';
 import renderer from 'react-test-renderer';
 
+jest.mock('../../components/Alert');
+
 test('it renders correctly', () => {
   const tree = renderer.create(<Growth />).toJSON();
 

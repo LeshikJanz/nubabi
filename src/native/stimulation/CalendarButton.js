@@ -1,20 +1,11 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import moment from 'moment';
 import theme from '../../common/themes/defaultTheme';
 
 const icon = require('../../common/images/calendar.png');
 
 class CalendarButton extends Component {
-  setNativeProps(nativeProps) {
-    this._root.setNativeProps(nativeProps);
-  }
-
   renderWeekdays() {
     // TODO: locales maybe?
     const startOfWeekDate = moment().startOf('isoweek');
@@ -23,9 +14,7 @@ class CalendarButton extends Component {
     // We include the abbreviation of the previous month if the week
     // started last month
     const startOfWeek = startOfWeekDate.format(
-      startOfWeekDate.month() < endOfWeekDate.month()
-        ? 'MMM D'
-        : 'D',
+      startOfWeekDate.month() < endOfWeekDate.month() ? 'MMM D' : 'D',
     );
 
     const endOfWeek = endOfWeekDate.format('D');
@@ -33,10 +22,10 @@ class CalendarButton extends Component {
 
     return (
       <View style={styles.textContainer}>
-        <Text style={theme.typography.subHeaderText}>
+        <Text style={theme.subheader}>
           {startOfWeek} - {endOfWeek}
         </Text>
-        <Text style={theme.typography.subHeaderText}>
+        <Text style={theme.subheader}>
           {endMonth}
         </Text>
       </View>
@@ -45,11 +34,7 @@ class CalendarButton extends Component {
 
   render() {
     return (
-      <View
-        style={styles.container}
-        ref={(component) => { this._root = component; }}
-        {...this.props}
-      >
+      <View style={styles.container} {...this.props}>
         <Image source={icon} style={styles.icon} />
 
         {this.renderWeekdays()}
@@ -82,4 +67,3 @@ const styles = StyleSheet.create({
 });
 
 export default CalendarButton;
-

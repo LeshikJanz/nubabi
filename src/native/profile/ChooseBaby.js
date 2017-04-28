@@ -1,4 +1,11 @@
 // @flow
+import type {
+  Baby,
+  GraphQLDataProp,
+  State,
+  NavigationOptions,
+} from '../../common/types/index';
+import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
 import {
   View,
@@ -17,8 +24,6 @@ import { compose, path } from 'ramda';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Svg, { Path } from 'react-native-svg';
 import { NavigationActions } from 'react-navigation';
-import type { NavigationProp } from 'react-navigation';
-import type { Baby, GraphQLDataProp, State } from '../../common/types/index';
 import theme, {
   HEADER_FONT_COLOR,
   NUBABI_RED,
@@ -56,10 +61,8 @@ class ChooseBaby extends Component {
     `,
   };
 
-  static navigationOptions = {
-    cardStack: {
-      gesturesEnabled: false,
-    },
+  static navigationOptions: NavigationOptions = {
+    gesturesEnabled: false,
   };
 
   static contextTypes = {

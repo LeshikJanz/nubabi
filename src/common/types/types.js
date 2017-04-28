@@ -1,9 +1,13 @@
 // @flow
+import type { NavigationScreenProp } from 'react-navigation/src/TypeDefinition';
+import type { Element } from 'react';
 
 // Models
 import type {
   Baby,
   Activity,
+  ActivityConnection,
+  ActivityEdge,
   Memory,
   User,
   Achievement,
@@ -12,11 +16,19 @@ import type {
   GenderEnum as Gender,
   Image,
   Avatar,
+  CreateBabyInput,
+  UpdateBabyInput,
+  SwoopActivityInput,
+  ActivityLevelOperationEnum as ActivityLevelOperation,
+  AdjustActivityLevelInput,
+  ToggleFavoriteInput,
 } from './modelTypes';
 
 export type {
   Baby,
   Activity,
+  ActivityConnection,
+  ActivityEdge,
   Memory,
   User,
   Achievement,
@@ -25,6 +37,12 @@ export type {
   Gender,
   Image,
   Avatar,
+  CreateBabyInput,
+  UpdateBabyInput,
+  SwoopActivityInput,
+  ActivityLevelOperation,
+  AdjustActivityLevelInput,
+  ToggleFavoriteInput,
 };
 
 export type FirebaseUser = {
@@ -52,6 +70,54 @@ export type {
   MutationResultAction,
   InjectedGraphQLDataProps as GraphQLDataProp,
 } from './apolloTypes';
+
+// React Navigation
+export type Style =
+  | { [key: string]: any }
+  | number
+  | false
+  | null
+  | void
+  | Array<Style>;
+
+type NavigationScreenOptions = {|
+  // CardStackOptions
+  headerMode?: 'float' | 'screen' | 'none',
+  // NavigationScreenOptions
+  title?: string | Element<*>,
+  // NavigationStackScreenOptions
+  headerTitle?: string | Element<*>,
+  headerTitleStyle?: Style,
+  headerTintColor?: string,
+  headerLeft?: Element<*>,
+  headerBackTitle?: string,
+  headerTruncatedBackTitle?: string,
+  headerPressColorAndroid?: string,
+  headerRight?: Element<*>,
+  headerStyle?: Style,
+  headerVisible?: boolean,
+  gesturesEnabled?: boolean,
+  // NavigationTabScreenOptions
+  tabBarIcon?:
+    | Element<*>
+    | ((options: { tintColor: ?string, focused: boolean }) => ?Element<*>),
+  tabBarLabel?:
+    | string
+    | Element<*>
+    | ((options: { tintColor: ?string, focused: boolean }) => ?Element<*>),
+  tabBarVisible?: boolean,
+|};
+
+type NavigationConfigProp = {
+  navigation: NavigationScreenProp<*, *>,
+};
+
+// We separate the types to get more descriptive error messages
+export type NavigationOptionsGetter = (
+  NavigationConfigProp,
+) => NavigationScreenOptions;
+
+export type NavigationOptions = NavigationScreenOptions;
 
 // State
 

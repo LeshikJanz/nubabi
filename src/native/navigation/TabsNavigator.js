@@ -1,4 +1,5 @@
 // @flow
+import type { NavigationOptions } from '../../common/types';
 import React from 'react';
 import { TabNavigator } from 'react-navigation';
 import type { TabBarConfig } from 'react-navigation';
@@ -11,6 +12,25 @@ import Profile from '../profile/Profile';
 import Library from '../library/Library';
 import Memories from '../memories/Memories';
 import { getTabHeaders } from './shared';
+
+const navigationOptions: NavigationOptions = (
+  { navigation, navigationOptions: childOptions },
+) => ({
+  title: upperFirst(navigation.state.key),
+  headerMode: 'screen',
+  headerVisible: true,
+  headerStyle: {
+    backgroundColor: theme.colors.white,
+    shadowOpacity: 0.1,
+    ...childOptions.headerStyle,
+  },
+  headerLeft: getTabHeaders(navigation.navigate).left,
+  headerRight: getTabHeaders(navigation.navigate).right,
+  tabBarIcon: ({ tintColor }: *) => (
+    <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />
+  ),
+  tabBarLabel: upperFirst(navigation.state.routeName),
+});
 
 const TabsNavigator = TabNavigator(
   {
@@ -32,24 +52,7 @@ const TabsNavigator = TabNavigator(
       activeTintColor: theme.colors.primary,
       inactiveTintColor: theme.colors.gray,
     },
-
-    navigationOptions: {
-      title: navigation => upperFirst(navigation.state.key),
-      tabBar: ({ state }) => ({
-        icon: ({ tintColor }: TabBarConfig) => (
-          <NubabiIcon name={state.key} size={18} color={tintColor} />
-        ),
-        label: upperFirst(state.routeName),
-      }),
-      headerMode: 'screen',
-      header: ({ navigate }) => ({
-        ...getTabHeaders(navigate),
-        style: {
-          backgroundColor: theme.colors.white,
-        },
-        visible: true,
-      }),
-    },
+    navigationOptions,
   },
 );
 

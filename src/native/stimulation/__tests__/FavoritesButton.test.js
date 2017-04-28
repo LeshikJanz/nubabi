@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import FavouritesButton from '../FavouritesButton';
+import FavouritesButton from '../FavoritesButton';
 import renderer from 'react-test-renderer';
 
 test('it renders correctly', () => {

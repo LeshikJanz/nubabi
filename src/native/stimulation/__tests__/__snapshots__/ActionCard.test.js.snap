@@ -1,0 +1,164 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#FFFFFF",
+      "borderBottomLeftRadius": 4,
+      "borderBottomRightRadius": 4,
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopLeftRadius": 4,
+      "borderTopRightRadius": 4,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "justifyContent": "center",
+      "marginBottom": 32,
+      "marginLeft": 0,
+      "marginRight": 0,
+      "marginTop": 32,
+      "paddingBottom": 16,
+      "paddingLeft": 16,
+      "paddingRight": 16,
+      "paddingTop": 16,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 2,
+        "width": 1,
+      },
+      "shadowOpacity": 0.1,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    accessibilityComponentType="button"
+    accessibilityLabel={undefined}
+    accessibilityTraits={
+      Array [
+        "button",
+      ]
+    }
+    accessible={true}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "borderBottomLeftRadius": 15,
+        "borderBottomRightRadius": 15,
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopLeftRadius": 15,
+        "borderTopRightRadius": 15,
+        "borderTopWidth": 0,
+        "flex": 1,
+        "flexDirection": "column",
+        "justifyContent": "center",
+        "marginBottom": 4.8,
+        "marginTop": 4.8,
+        "opacity": 1,
+        "paddingBottom": 3.2,
+        "paddingTop": 3.2,
+      }
+    }
+    testID={undefined}
+    tvParallaxProperties={undefined}
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={false}
+      ellipsizeMode="tail"
+      id={undefined}
+      style={
+        Array [
+          Object {
+            "color": undefined,
+            "fontSize": 30,
+          },
+          Array [
+            Object {
+              "textAlign": "center",
+            },
+            Object {
+              "alignSelf": "center",
+              "borderColor": "#CFD6DF",
+              "borderRadius": 22.5,
+              "borderWidth": 1,
+              "color": "#EA3154",
+              "height": 45,
+              "marginBottom": 10,
+              "paddingVertical": 9,
+              "width": 45,
+            },
+          ],
+          Object {
+            "fontFamily": "Ionicons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+        ]
+      }
+    >
+      
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      spacing={-0.31}
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#454D56",
+          "fontFamily": "System",
+          "fontSize": 13,
+          "fontWeight": "600",
+          "letterSpacing": -0.88,
+          "lineHeight": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      NOT READY
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#9EABBC",
+          "fontFamily": "System",
+          "fontSize": 13,
+          "lineHeight": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      Not quite ready for this
+    </Text>
+  </View>
+</View>
+`;

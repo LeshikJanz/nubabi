@@ -1,7 +1,14 @@
 // @flow
-import type { Image as ImageType } from '../../../common/types';
+import type { Image as ImageType } from '../../common/types/index';
 import React from 'react';
-import { View, StyleSheet, Image, Dimensions, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Image,
+  Dimensions,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { gql } from 'react-apollo';
 
@@ -17,9 +24,19 @@ type Props = {
   activityName: string,
   skillImage: ImageType,
   skillName: string,
+  onToggleFavorite: () => void,
+  isFavoriteActivity: boolean,
 };
 
-const Header = ({ activityName, skillName, skillImage }: Props) => {
+const Header = (
+  {
+    activityName,
+    skillName,
+    skillImage,
+    onToggleFavorite,
+    isFavoriteActivity,
+  }: Props,
+) => {
   const curve = `M0 0 C ${width / 2 - 50} 75, ${width / 2 + 50} 75, ${width} 0`;
   const box = `M0 0 H ${width} V 58 H 0 L 0 0`;
 
@@ -41,14 +58,16 @@ const Header = ({ activityName, skillName, skillImage }: Props) => {
             { borderRightColor: '#C5CDD7', borderRightWidth: 1 },
           ]}
         >
-          <Svg style={styles.favouriteButton}>
-            <Path
-              d={favouritePath}
-              stroke="none"
-              fill="#EA3154"
-              fill-rule="evenodd"
-            />
-          </Svg>
+          <TouchableOpacity onPress={onToggleFavorite}>
+            <Svg style={styles.favouriteButton}>
+              <Path
+                d={favouritePath}
+                stroke="none"
+                fill={isFavoriteActivity ? '#EA3154' : '#9EABBC'}
+                fill-rule="evenodd"
+              />
+            </Svg>
+          </TouchableOpacity>
         </View>
         <View style={styles.headerButton}>
           <Svg style={styles.cameraButton}>

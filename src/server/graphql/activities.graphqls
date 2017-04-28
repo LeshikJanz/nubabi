@@ -1,0 +1,124 @@
+extend type Viewer {
+  allActivities(before: String, after: String, first: Int, last: Int): ActivityConnection!
+  activity(id: ID!): Activity
+}
+
+extend type Baby {
+  favoriteActivities(
+    before: String, after: String, first: Int, last: Int
+  ): ActivityConnection!
+}
+
+extend type Mutation {
+  swoopActivity(input: SwoopActivityInput!): ChangeActivityPayload
+  changeActivity(input: AdjustActivityLevelInput!): ChangeActivityPayload
+  toggleActivityFavorite(input: ToggleFavoriteInput!): ToggleFavoritePayload
+}
+
+type Activity implements Node {
+  id: ID!
+  name: String!
+  introduction: String
+  steps: [String]!
+  equipment: String
+  expert: Expert!
+  skillArea: SkillArea!
+  isFavorite: Boolean
+}
+
+input SwoopActivityInput {
+  # The ID of the current Activity
+  id: ID!
+  # The ID of the baby the Activity belongs to
+  babyId: ID! # TODO: this is because we don't have /babies/:id/activities/:id
+}
+
+enum ActivityLevelOperation {
+  INCREASE
+  DECREASE
+}
+
+input AdjustActivityLevelInput {
+  # The ID of the current Activity
+  id: ID!
+  # The ID of the baby the Activity belongs to
+  babyId: ID! # TODO: this is because we don't have /babies/:id/activities/:id
+  level: ActivityLevelOperation!
+}
+
+type ChangeActivityPayload {
+  newActivity: Activity
+
+  # The ID for the Activity that got replaced
+  oldActivityId: ID
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+input ToggleFavoriteInput {
+  id: ID!
+  babyId: ID!
+  favorite: Boolean!
+}
+
+type ToggleFavoritePayload {
+  activity: Activity
+  wasFavorited: Boolean
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+# A connection to a list of items.
+type ActivityConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ActivityEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int!
+}
+
+type ActivityEdge {
+  # The item at the end of the edge.
+  node: Activity
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type SkillArea implements Node {
+  id: ID!
+  name: String!
+  icon: String!
+  image: SkillAreaImage!
+  completedIcon: String
+}
+
+type SkillAreaImage implements ResizableImage {
+  url: String!
+  large: Image!
+  thumb: Image!
+  width: Int
+  height: Int
+}
+
+# A connection to a list of items.
+type SkillAreaConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [SkillAreaEdge]
+}
+
+type SkillAreaEdge {
+  # The item at the end of the edge.
+  node: SkillArea!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}

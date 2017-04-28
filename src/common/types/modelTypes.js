@@ -39,6 +39,10 @@ export type Viewer = {
   /**  */
   allSkillAreas?: SkillAreaConnection,
   /**  */
+  allActivities: ActivityConnection,
+  /**  */
+  activity?: Activity,
+  /**  */
   allExperts: ExpertConnection,
   /**  */
   expert?: Expert,
@@ -105,14 +109,7 @@ export type User = {
   updatedAt: any,
 };
 
-export type Node =
-  | User
-  | Baby
-  | Activity
-  | Expert
-  | SkillArea
-  | Achievement
-  | Memory;
+export type Node = User | Baby | Activity | Expert | SkillArea;
 
 export type Timestampable = User | Baby;
 
@@ -195,6 +192,8 @@ export type Baby = {
   achievements?: AchievementConnection,
   /**  */
   memories?: MemoryConnection,
+  /**  */
+  favoriteActivities: ActivityConnection,
 };
 
 export type GenderEnum = 'MALE' | 'FEMALE';
@@ -208,6 +207,8 @@ export type ActivityConnection = {
   pageInfo: PageInfo,
   /** A list of edges. */
   edges?: Array<ActivityEdge>,
+  /** Count of filtered result set without considering pagination arguments */
+  count: number,
 };
 
 export type ActivityEdge = {
@@ -303,7 +304,7 @@ export type AchievementEdge = {
 
 export type Achievement = {
   __typename: string,
-  /** The ID of an object */
+  /**  */
   id: string,
   /**  */
   badges?: Array<Badge>,
@@ -392,6 +393,12 @@ export type Mutation = {
   createBaby?: CreateBabyPayload,
   /**  */
   updateBaby?: UpdateBabyPayload,
+  /**  */
+  swoopActivity?: ChangeActivityPayload,
+  /**  */
+  changeActivity?: ChangeActivityPayload,
+  /**  */
+  toggleActivityFavorite?: ToggleFavoritePayload,
 };
 
 export type CreateBabyInput = {
@@ -457,6 +464,53 @@ export type UpdateBabyPayload = {
   __typename: string,
   /**  */
   changedBaby?: Baby,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId?: string,
+};
+
+export type SwoopActivityInput = {
+  /** The ID of the current Activity */
+  id: string,
+  /** The ID of the baby the Activity belongs to */
+  babyId: string,
+};
+
+export type ChangeActivityPayload = {
+  __typename: string,
+  /**  */
+  newActivity?: Activity,
+  /** The ID for the Activity that got replaced */
+  oldActivityId?: string,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId?: string,
+};
+
+export type AdjustActivityLevelInput = {
+  /** The ID of the current Activity */
+  id: string,
+  /** The ID of the baby the Activity belongs to */
+  babyId: string,
+  /**  */
+  level: ActivityLevelOperationEnum,
+};
+
+export type ActivityLevelOperationEnum = 'INCREASE' | 'DECREASE';
+
+export type ToggleFavoriteInput = {
+  /**  */
+  id: string,
+  /**  */
+  babyId: string,
+  /**  */
+  favorite: boolean,
+};
+
+export type ToggleFavoritePayload = {
+  __typename: string,
+  /**  */
+  activity?: Activity,
+  /**  */
+  wasFavorited?: boolean,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId?: string,
 };

@@ -20,9 +20,7 @@ class SplashScreen extends PureComponent {
   props: Props;
 
   static navigationOptions = {
-    header: {
-      visible: false,
-    },
+    headerVisible: false,
   };
 
   shouldComponentUpdate(nextProps) {
@@ -48,7 +46,7 @@ class SplashScreen extends PureComponent {
     }
   };
 
-  navigateTo = (routeName) => {
+  navigateTo = routeName => {
     const resetAction = NavigationActions.reset({
       index: 0,
       actions: [NavigationActions.navigate({ routeName })],
@@ -109,8 +107,8 @@ const styles = StyleSheet.create({
 });
 
 export default connect((state: State) => {
-  return ({
+  return {
     appOnline: state.app.online,
     isAuthenticated: state.auth.isAuthenticated,
-  });
+  };
 })(SplashScreen);
