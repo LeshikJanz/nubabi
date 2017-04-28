@@ -1,6 +1,9 @@
+// @flow
+import type { NavigationOptions } from '../../../common/types';
 import React, { Component } from 'react';
 import { compose, path, assocPath, prepend } from 'ramda';
 import { graphql, gql } from 'react-apollo';
+import { Screen } from '../../components';
 import BabyForm from './BabyForm';
 
 type Props = {
@@ -10,15 +13,11 @@ type Props = {
 class AddBaby extends Component {
   props: Props;
 
-  static navigationOptions = {
-    header: (_, defaultHeader) => ({
-      ...defaultHeader,
-      title: 'Add Baby',
-      style: {
-        ...defaultHeader.style,
-        shadowOpacity: 0,
-      },
-    }),
+  static navigationOptions: NavigationOptions = {
+    headerTitle: 'Add Baby',
+    headerStyle: {
+      shadowOpacity: 0,
+    },
   };
 
   state = {
@@ -44,11 +43,13 @@ class AddBaby extends Component {
 
   render() {
     return (
-      <BabyForm
-        mode="add"
-        onSubmit={this.handleSubmit}
-        loading={this.state.submitting}
-      />
+      <Screen>
+        <BabyForm
+          mode="add"
+          onSubmit={this.handleSubmit}
+          loading={this.state.submitting}
+        />
+      </Screen>
     );
   }
 }

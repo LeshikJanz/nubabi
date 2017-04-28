@@ -1,13 +1,13 @@
 // @flow
-import type { Expert } from '../../../common/types';
+import type { Expert } from '../../common/types/index';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { gql } from 'react-apollo';
 import { path, head } from 'ramda';
-import FlipCard from '../../shared/FlipView';
+import FlipCard from '../shared/FlipView';
 
 const width = Dimensions.get('window').width;
-const infoIcon = require('../../../common/images/info_icon.png');
+const infoIcon = require('../../common/images/info_icon.png');
 
 type Props = {
   expert: Expert,

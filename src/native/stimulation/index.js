@@ -1,20 +1,15 @@
 // @flow
-import React, { Component } from 'react';
-import {
-  View,
-  ScrollView,
-  TouchableHighlight,
-  StyleSheet,
-} from 'react-native';
+import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
+import React, { Component } from 'react';
+import { View, ScrollView, TouchableHighlight, StyleSheet } from 'react-native';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
 import BrowseAllActivitiesButton from './BrowseAllActivitiesButton';
 import CalendarButton from './CalendarButton';
-import FavouritesButton from './FavouritesButton';
+import FavoritesButton from './FavoritesButton';
 import DidYouKnow from './DidYouKnow';
-import { getBabyTitle } from '../navigation/shared';
 
 type Props = {
   navigation: NavigationProp<*, *>,
@@ -23,8 +18,8 @@ type Props = {
 class Stimulation extends Component {
   props: Props;
 
-  static navigationOptions = {
-    ...getBabyTitle(),
+  static navigationOptions: NavigationOptions = {
+    title: 'Stimulation',
   };
 
   constructor(props: Props) {
@@ -46,16 +41,18 @@ class Stimulation extends Component {
     this.props.navigation.navigate('browseActivities');
   };
 
+  handleFavorites = () => {
+    this.props.navigation.navigate('favoriteActivities');
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.actionButtons}>
           <CalendarButton />
-          <FavouritesButton />
+          <FavoritesButton onPress={this.handleFavorites} />
         </View>
-        <ScrollView
-          style={styles.scrollContainer}
-        >
+        <ScrollView style={styles.scrollContainer}>
           <TouchableHighlight
             underlayColor="rgba(0,0,0,0)"
             onPress={this.handleThisWeeksActivities}

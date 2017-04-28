@@ -4,8 +4,9 @@ import {
   createNavigationContainer,
   createNavigator,
   StackRouter,
-  CardStack,
 } from 'react-navigation';
+import CardStackTransitioner
+  from 'react-navigation/src/views/CardStackTransitioner';
 
 import type {
   NavigationRouteConfigMap,
@@ -25,10 +26,13 @@ import EditBaby from '../profile/EditBaby/EditBaby';
 import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivities from '../stimulation/BrowseActivities';
-import ViewThisWeeksActivity
-  from '../stimulation/ViewThisWeeksActivity/ViewThisWeekActivity';
+import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
 import Login from '../login/Login';
+
 import theme from '../../common/themes/defaultTheme';
+import FavoriteActivities from '../stimulation/Favorites';
+import ViewActivity from '../stimulation/ViewActivity';
+import NavigatorTypes from 'react-navigation/src/navigators/NavigatorTypes';
 
 export type TransitionName =
   | 'cardStack'
@@ -76,7 +80,7 @@ class TransitionerSwitcher extends PureComponent {
 
   render() {
     const transitionMap = {
-      cardStack: CardStack,
+      cardStack: CardStackTransitioner,
       materialSharedElement: sharedElements,
       crossFade,
       androidDefault: android,
@@ -115,11 +119,11 @@ const createCustomNavigator = (
   };
 
   const router = StackRouter(routeConfigMap, routerConfig);
-
-  return createNavigationContainer(
-    createNavigator(router)(props => (
+  const view = props => {
+    return (
       <TransitionerSwitcher
         {...props}
+        router={router}
         headerComponent={headerComponent}
         headerMode={headerMode}
         mode={mode}
@@ -127,9 +131,19 @@ const createCustomNavigator = (
         onTransitionStart={onTransitionStart}
         onTransitionEnd={onTransitionEnd}
       />
-    )),
-    containerOptions,
-  );
+    );
+  };
+
+  view.displayName = 'AppNavigator';
+
+  const navigator = createNavigator(
+    router,
+    routeConfigMap,
+    config,
+    NavigatorTypes.STACK,
+  )(view);
+
+  return createNavigationContainer(navigator, containerOptions);
 };
 
 const routes = {
@@ -137,8 +151,10 @@ const routes = {
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   thisWeekActivities: { screen: ThisWeeksActivities },
+  favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
   browseActivities: { screen: BrowseActivities },
+  viewActivity: { screen: ViewActivity },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
   settings: { screen: Settings },
 };
@@ -152,18 +168,17 @@ const AppNavigator = createCustomNavigator(
   },
   {
     headerMode: 'float',
-    navigationOptions: {
-      header: (navigation, childRouter) => {
-        const options = {
-          tintColor: theme.colors.black,
-          backTitle: 'Back',
-          style: {
-            backgroundColor: theme.colors.white,
-          },
-        };
-
-        return childRouter ? merge({}, options, childRouter) : options;
-      },
+    // TODO: ensure child options get preserved
+    navigationOptions: ({ navigationOptions }) => {
+      // console.log('APP NAVIGATOR', args);
+      return {
+        headerBackTitle: 'Back',
+        headerTintColor: theme.colors.black,
+        headerStyle: {
+          backgroundColor: theme.colors.white,
+          ...navigationOptions.headerStyle,
+        },
+      };
     },
   },
 );

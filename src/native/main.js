@@ -1,16 +1,20 @@
+// @flow
+import type { Action } from '../common/types';
 import React from 'react';
-import { ApolloProvider } from 'react-apollo';
 import { AsyncStorage } from 'react-native';
+import { ApolloProvider } from 'react-apollo';
 import { persistStore } from 'redux-persist';
 import Raven from 'raven-js';
+import { createRenderer } from 'fela-native';
 import configureStore from '../common/configureStore';
 import configureStorage from '../common/configureStorage';
 import configureReporting from '../common/configureReporting';
 import { configureApollo } from '../common/configureApollo';
+import configureFela from '../common/configureFela';
+import NativeFelaProvider from './components/FelaProvider';
+import theme from '../common/themes/defaultTheme';
 import config from '../common/config';
 import Root from './root';
-
-import { Action } from '../common/types';
 import navigation from './navigation/reducer';
 import device from './device/reducer';
 
@@ -33,7 +37,6 @@ const store = configureStore({
   platformMiddleware: [reportingMiddleware],
 });
 
-
 persistStore(
   store,
   {
@@ -47,9 +50,14 @@ persistStore(
 
 const apollo = configureApollo();
 
+const { renderer } = configureFela(createRenderer);
+const FelaProvider = NativeFelaProvider(renderer, theme);
+
 const Main = () => (
   <ApolloProvider client={apollo} store={store}>
-    <Root />
+    <FelaProvider>
+      <Root />
+    </FelaProvider>
   </ApolloProvider>
 );
 

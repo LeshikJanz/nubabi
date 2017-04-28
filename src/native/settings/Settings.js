@@ -5,6 +5,7 @@ import type { State, Viewer } from '../../common/types';
 import { connect } from 'react-redux';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
+import { Screen } from '../components';
 
 type Props = {
   user: Viewer,
@@ -52,24 +53,26 @@ export class Settings extends Component {
       return null;
     }
     return (
-      <View style={styles.container}>
-        <Text style={styles.inputLabel}>{user.email}</Text>
-        <View style={styles.submitButtonContainer}>
-          <TouchableHighlight
-            underlayColor="rgba(0,0,0,0)"
-            style={styles.oneButton}
-            onPress={this.props.logout}
-          >
+      <Screen>
+        <View style={styles.container}>
+          <Text style={styles.inputLabel}>{user.email}</Text>
+          <View style={styles.submitButtonContainer}>
+            <TouchableHighlight
+              underlayColor="rgba(0,0,0,0)"
+              style={styles.oneButton}
+              onPress={this.props.logout}
+            >
 
-            <View style={styles.submitButton}>
-              <Text style={styles.submitText}>LOG OUT</Text>
-            </View>
-          </TouchableHighlight>
+              <View style={styles.submitButton}>
+                <Text style={styles.submitText}>LOG OUT</Text>
+              </View>
+            </TouchableHighlight>
+          </View>
+
+          {this.renderCopyright()}
+
         </View>
-
-        {this.renderCopyright()}
-
-      </View>
+      </Screen>
     );
   }
 }

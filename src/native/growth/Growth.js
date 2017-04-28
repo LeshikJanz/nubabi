@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { Screen } from '../components';
 
 const Growth = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Growth</Text>
-      <TouchableHighlight>
-        <Text>Go to Stimulation</Text>
-      </TouchableHighlight>
-    </View>
+    <Screen>
+      <View style={styles.container}>
+        <Text style={styles.title}>Growth</Text>
+        <TouchableHighlight>
+          <Text>Go to Stimulation</Text>
+        </TouchableHighlight>
+      </View>
+    </Screen>
   );
 };
 

@@ -1,5 +1,10 @@
 // @flow
-import type { Image, Avatar, Achievement } from '../../../common/types';
+import type {
+  Image,
+  Avatar,
+  Achievement,
+  ActivityConnection,
+} from '../../../common/types';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { pathOr } from 'ramda';
@@ -15,11 +20,20 @@ type Props = {
   name: String,
   dob: Date,
   achievements: Achievement[],
+  favoriteActivities: ActivityConnection,
   onEditBaby: () => void,
 };
 
 const Header = (
-  { coverImage, avatar, name, dob, achievements, onEditBaby }: Props,
+  {
+    coverImage,
+    avatar,
+    name,
+    dob,
+    achievements,
+    onEditBaby,
+    favoriteActivities,
+  }: Props,
 ) => {
   return (
     <View style={styles.container}>
@@ -28,7 +42,7 @@ const Header = (
       <NameAgeRow babyName={name} birthDate={dob} onEditBaby={onEditBaby} />
       <Statistics
         achievements={pathOr(0, ['count'], achievements)}
-        favourites={3}
+        favourites={pathOr(0, ['count'], favoriteActivities)}
       />
     </View>
   );
@@ -46,6 +60,9 @@ Header.fragments = {
       }
       dob
       achievements {
+        count
+      }
+      favoriteActivities {
         count
       }
     }

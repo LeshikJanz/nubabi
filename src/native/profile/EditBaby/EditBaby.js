@@ -1,12 +1,14 @@
 // @flow
-import type { Baby, State } from '../../../common/types';
+import type { Baby, State, NavigationOptions } from '../../../common/types';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose, path, omit } from 'ramda';
 import displayLoadingState from '../../components/displayLoadingState';
+import { Screen } from '../../components/';
+import BabyNameTitle from '../BabyNameTitle';
 import BabyForm from './BabyForm';
-import { getBabyTitle } from '../../navigation/shared';
+import theme from '../../../common/themes/defaultTheme';
 
 class EditBaby extends Component {
   props: {
@@ -14,15 +16,12 @@ class EditBaby extends Component {
     mutate: () => Promise<*>,
   };
 
-  static navigationOptions = {
-    ...getBabyTitle(),
-    header: (_, defaultHeader) => ({
-      ...defaultHeader,
-      style: {
-        ...defaultHeader.style,
-        shadowOpacity: 0,
-      },
-    }),
+  static navigationOptions: NavigationOptions = {
+    title: <BabyNameTitle />,
+    headerStyle: {
+      backgroundColor: theme.colors.white,
+      shadowOpacity: 0,
+    },
   };
 
   state = {
@@ -50,12 +49,14 @@ class EditBaby extends Component {
 
   render() {
     return (
-      <BabyForm
-        mode="edit"
-        initialValues={omit(['id', '__typename'], this.props.baby)}
-        onSubmit={this.handleSubmit}
-        loading={this.state.submitting}
-      />
+      <Screen>
+        <BabyForm
+          mode="edit"
+          initialValues={omit(['id', '__typename'], this.props.baby)}
+          onSubmit={this.handleSubmit}
+          loading={this.state.submitting}
+        />
+      </Screen>
     );
   }
 }

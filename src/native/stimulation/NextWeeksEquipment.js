@@ -1,19 +1,22 @@
+// @flow
+import type { NavigationOptions } from '../../common/types';
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { Screen } from '../components';
 
 const NextWeeksEquipment = () => (
-  <View style={styles.container}>
-    <Text style={styles.title}>Next Weeks Equipment</Text>
-  </View>
+  <Screen>
+    <View style={styles.container}>
+      <Text style={styles.title}>Next Weeks Equipment</Text>
+    </View>
+  </Screen>
 );
 
-NextWeeksEquipment.navigationOptions = {
-  title: 'Next Week\'s Equipment',
+const navigationOptions: NavigationOptions = {
+  title: "Next Week's Equipment",
 };
+
+NextWeeksEquipment.navigationOptions = navigationOptions;
 
 const styles = StyleSheet.create({
   container: {

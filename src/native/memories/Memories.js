@@ -1,14 +1,17 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { Screen } from '../components';
 
 const Memories = () => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Memories</Text>
-      <TouchableHighlight>
-        <Text>Go To Next Scene</Text>
-      </TouchableHighlight>
-    </View>
+    <Screen>
+      <View style={styles.container}>
+        <Text style={styles.title}>Memories</Text>
+        <TouchableHighlight>
+          <Text>Go To Next Scene</Text>
+        </TouchableHighlight>
+      </View>
+    </Screen>
   );
 };
 

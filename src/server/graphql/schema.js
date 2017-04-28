@@ -1,5 +1,6 @@
 import { Core } from './core.graphqls';
 import { Babies } from './babies.graphqls';
+import { Activities } from './activities.graphqls';
 import { Experts } from './experts.graphqls';
 
 const {
@@ -10,7 +11,7 @@ const {
 const resolvers = require('./resolvers');
 const mocking = require('./mocks');
 
-const typeDefs = [Core, Babies, Experts];
+const typeDefs = [Core, Babies, Activities, Experts];
 
 const schema = makeExecutableSchema({
   typeDefs,
@@ -27,6 +28,5 @@ if (enableMocks) {
     preserveResolvers: true,
   });
 }
-
 
 module.exports = { schema };

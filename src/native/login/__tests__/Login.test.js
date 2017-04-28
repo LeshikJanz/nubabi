@@ -3,34 +3,18 @@ import React from 'react';
 import { Login } from '../Login';
 import renderer from 'react-test-renderer';
 
+jest.mock('../../components/Alert');
+
 test('renders correctly', () => {
   const tree = renderer
-    .create(
-      <Login isFetching={false} auth={{ errorMessage: '' }} actions={{}} />,
-    )
+    .create(<Login isFetching={false} actions={{}} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();
 });
 
 test('show progress when logging in', () => {
-  const tree = renderer
-    .create(<Login isFetching auth={{ errorMessage: '' }} actions={{}} />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
-});
-
-test('shows error if one occurs', () => {
-  const tree = renderer
-    .create(
-      <Login
-        isFetching={false}
-        auth={{ errorMessage: 'Invalid email/password' }}
-        actions={{}}
-      />,
-    )
-    .toJSON();
+  const tree = renderer.create(<Login isFetching actions={{}} />).toJSON();
 
   expect(tree).toMatchSnapshot();
 });

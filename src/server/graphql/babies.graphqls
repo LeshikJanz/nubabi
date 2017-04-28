@@ -97,68 +97,7 @@ type BabyEdge {
   cursor: String!
 }
 
-type SkillArea implements Node {
-  id: ID!
-  name: String!
-  icon: String!
-  image: SkillAreaImage!
-  completedIcon: String
-}
-
-type SkillAreaImage implements ResizableImage {
-  url: String!
-  large: Image!
-  thumb: Image!
-  width: Int
-  height: Int
-}
-
-# A connection to a list of items.
-type SkillAreaConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [SkillAreaEdge]
-}
-
-type SkillAreaEdge {
-  # The item at the end of the edge.
-  node: SkillArea!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-type Activity implements Node {
-  id: ID!
-  name: String!
-  introduction: String
-  steps: [String]!
-  equipment: String
-  expert: Expert!
-  skillArea: SkillArea!
-  isFavorite: Boolean
-}
-
-# A connection to a list of items.
-type ActivityConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [ActivityEdge]
-}
-
-type ActivityEdge {
-  # The item at the end of the edge.
-  node: Activity
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-type Achievement implements Node {
+type Achievement {
   id: ID!
   badges(
     upcoming: Boolean
@@ -203,7 +142,7 @@ enum MemoryFilter {
   SPECIAL
 }
 
-type Memory implements Node {
+type Memory {
   id: ID!
   description: String
   image(width: Int, height: Int): Image

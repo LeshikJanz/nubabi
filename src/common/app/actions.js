@@ -1,6 +1,6 @@
 // @flow
 import { Observable } from 'rxjs/Observable';
-import { getBabiesSuccess } from '../babies/actions';
+import { getBabiesRequest, getBabiesSuccess } from '../babies/actions';
 import { gql } from 'react-apollo';
 import { query as chooseBabyQuery } from '../../native/profile/ChooseBaby';
 import type {
@@ -56,20 +56,23 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
           }
         `;
 
-      // $FlowFixMe
-      return Observable.zip(
-        Observable.fromPromise(apollo.query({ query: fetchBabiesQuery })),
-        currentBabyId
-          ? Observable.fromPromise(apollo.query({ query: chooseBabyQuery }))
-          : Observable.of(null),
-      )
-        .mergeMap(([fetchBabiesResult]) => [
-          getBabiesSuccess(
-            fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),
-          ),
-          appOnline(true),
-        ])
-        .catch(err => Observable.of(appError(err)));
+      return Observable.merge(
+        Observable.of(getBabiesRequest()),
+        // $FlowFixMe
+        Observable.zip(
+          Observable.fromPromise(apollo.query({ query: fetchBabiesQuery })),
+          currentBabyId
+            ? Observable.fromPromise(apollo.query({ query: chooseBabyQuery }))
+            : Observable.of(null),
+        )
+          .mergeMap(([fetchBabiesResult]) => [
+            getBabiesSuccess(
+              fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),
+            ),
+            appOnline(true),
+          ])
+          .catch(err => Observable.of(appError(err))),
+      );
     }
 
     return Observable.of(appOnline(true));

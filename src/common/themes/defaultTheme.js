@@ -1,3 +1,7 @@
+// @flow
+import type { Theme } from './types';
+import typography from './typography';
+
 export const NUBABI_RED = '#ED3154';
 export const NUBABI_BLUE = '#00ADEE';
 export const NUBABI_YELLOW = '#FBD026';
@@ -31,23 +35,53 @@ const colors = {
   danger: open.red0,
   black: open.black0,
   white: open.white0,
-  gray: open.gray3,
+  gray: open.gray2,
   secondary: open.gray2,
 };
 
-const typography = {
-  subHeaderText: {
-    fontSize: 14,
-    color: colors.gray,
-    letterSpacing: 0.88,
+const theme: Theme = {
+  typography: typography({
+    fontSize: 13,
+    fontSizeScale: 'step1',
     lineHeight: 16,
-    fontWeight: '500',
-  },
-};
-
-const theme = {
+  }),
   colors,
-  typography,
+  states: {
+    active: {
+      darken: 0.2,
+      opacity: 0.7,
+    },
+    disabled: {
+      opacity: 0.5,
+    },
+  },
+  text: {
+    bold: 600,
+    fontFamily: 'System',
+  },
+  block: {
+    marginBottom: 1,
+    maxWidth: 21,
+  },
+  button: {
+    borderRadius: 15,
+  },
+  heading: {
+    fontFamily: 'System',
+    marginBottom: 1,
+    letterSpacing: -0.88,
+  },
+  subheader: {
+    /* legacy */
+    fontSize: 14,
+    color: colors.open.gray3,
+    letterSpacing: 0.88,
+    fontWeight: '500',
+    lineHeight: 16,
+  },
+  paragraph: {
+    marginBottom: 1,
+  },
 };
 
 export default theme;

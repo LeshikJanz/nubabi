@@ -1,12 +1,8 @@
 import { GraphQLString } from 'graphql';
 import { GraphQLDate, GraphQLTime, GraphQLDateTime } from 'graphql-iso-date';
-import {
-  nodeFieldResolver,
-  globalIdField,
-  prop,
-} from './common';
+import { nodeFieldResolver, globalIdField, prop } from './common';
 
-const resolvers = ({
+const resolvers = {
   DateTime: GraphQLDateTime,
   Date: GraphQLDate,
   Time: GraphQLTime,
@@ -21,8 +17,8 @@ const resolvers = ({
     },
   },
   User: {
-    id: globalIdField('User', (obj) => obj.uid),
-    avatar: (obj) => ({
+    id: globalIdField('User', obj => obj.uid),
+    avatar: obj => ({
       url: obj.avatar,
       thumb: obj.avatar_thumb ? { url: obj.avatar_thumb } : null,
       large: null,
@@ -35,8 +31,12 @@ const resolvers = ({
         return 'User';
       }
 
-      if (obj.weight) {
+      if (obj.weekBorn) {
         return 'Baby';
+      }
+
+      if (obj.introduction) {
+        return 'Activity';
       }
 
       // TODO: extra models
@@ -46,8 +46,7 @@ const resolvers = ({
     id: globalIdField(),
   },
 
-  Mutation: {
-  },
-});
+  Mutation: {},
+};
 
 export default resolvers;
