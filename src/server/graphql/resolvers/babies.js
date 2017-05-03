@@ -34,6 +34,7 @@ const resolvers = {
       return connector.getActivity(token, fromGlobalId(id).id);
     },
   },
+
   Mutation: {
     createBaby: mutationWithClientMutationId((input, {
       connectors: { firebase },
@@ -78,6 +79,7 @@ const resolvers = {
         .then(() => ({ wasFavorited: favorite }));
     }),
   },
+
   Baby: {
     id: globalIdField(),
     dob: transform('dob', date => new Date(date)),
@@ -98,6 +100,33 @@ const resolvers = {
         args,
       ),
 
+    growth: async (baby, args, { token, connectors: { firebase } }, info) => {
+      const connection = await connectionFromPromisedArray(
+        connector.getGrowthContent(token, baby),
+        args,
+      );
+
+      const viewer = await firebase.getViewer();
+
+      if (
+        typeof info.variableValues.hasSeenGlobalIntro !== 'undefined' &&
+        info.variableValues.hasSeenGlobalIntro === false
+      ) {
+        const introduction = await connector.getIntroductionFor(
+          token,
+          baby,
+          viewer.displayName || viewer.email,
+        );
+
+        return {
+          ...connection,
+          introduction,
+        };
+      }
+
+      return connection;
+    },
+
     relationship: ({ id }, _, { connectors: { firebase } }) =>
       firebase.getRelationship(id),
   },
@@ -109,10 +138,33 @@ const resolvers = {
     expert: (obj, args, { token }) =>
       connector.getExpert(token, obj['expert_id']), // eslint-disable-line dot-notation
   },
+
   SkillArea: {
     id: globalIdField(),
     completedIcon: prop('completed_icon'),
     image: connector.getSkillAreaImage,
+  },
+
+  Growth: {
+    id: globalIdField(),
+    minimumAge: prop('age_min'),
+    maximumAge: prop('age_max'),
+    ageDuration: transform('age_duration', duration => duration.toUpperCase()),
+    // TODO: extract method
+    content: async (obj, _, { connectors: { firebase } }) => {
+      return connector.makeStringFromTemplate(
+        prop('growth_development')(obj),
+        await connector.getTemplateVariables(firebase, obj.baby),
+      );
+
+      return result;
+    },
+    introduction: async (obj, _, { connectors: { firebase } }) => {
+      return connector.makeStringFromTemplate(
+        obj.introduction,
+        await connector.getTemplateVariables(firebase, obj.baby),
+      );
+    },
   },
 };
 

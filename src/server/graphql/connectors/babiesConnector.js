@@ -1,7 +1,7 @@
 // @flow
 require('axios-debug-log');
 
-import type { ActivityLevelOperation } from '../../../common/types';
+import type { ActivityLevelOperation, Baby } from '../../../common/types';
 import { path, find, prop, propEq } from 'ramda';
 import axios from 'axios';
 import config from '../../../common/config/index';
@@ -139,6 +139,56 @@ export const toggleActivityFavorite = (
   }
 
   return instance.delete(url, withToken(token)).then(path(['data']));
+};
+
+export const makeStringFromTemplate = (template: string, variables: *) => {
+  return Object.keys(variables).reduce(
+    (output, variable) => {
+      return output.replace(
+        new RegExp(`{${variable}}`, 'g'),
+        variables[variable],
+      );
+    },
+    template,
+  );
+};
+
+export const getTemplateVariables = async (firebase, baby) => {
+  const viewer = await firebase.getViewer();
+  const viewerName = viewer.displayName || viewer.email;
+
+  console.log(baby.gender);
+  return {
+    baby: baby.name,
+    name: viewerName,
+    baby_possessive: baby.gender === 'f' ? 'her' : 'his',
+  };
+};
+
+export const getGrowthContent = (token: string, baby: Baby) => {
+  // FIXME: filter
+  return instance
+    .get('/content/growth', withToken(token))
+    .then(path(['data']))
+    .then(data => {
+      return data.map(content => {
+        // HACK
+        content.baby = baby; // eslint-disable-line: no-param-reassign
+        return content;
+      });
+    });
+};
+
+export const getIntroductionFor = (
+  token: string,
+  baby: Baby,
+  viewerName: string,
+) => {
+  return instance
+    .get('/content/growth/introduction', withToken(token))
+    .then(path(['data', 'text']))
+    .then(text =>
+      makeStringFromTemplate(text, { name: viewerName, baby: baby.name }));
 };
 
 export const getExperts = (token: string) =>

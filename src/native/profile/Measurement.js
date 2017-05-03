@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
   noDataText: {
     marginVertical: 10,
     fontSize: 10,
-    color: theme.colors.secondary,
+    color: theme.colors.gray,
   },
   updateRow: {
     alignItems: 'center',

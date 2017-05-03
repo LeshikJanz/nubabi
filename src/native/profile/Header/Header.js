@@ -19,7 +19,7 @@ type Props = {
   avatar: Avatar,
   name: String,
   dob: Date,
-  achievements: Achievement[],
+  achievements?: Achievement[],
   favoriteActivities: ActivityConnection,
   onEditBaby: () => void,
 };

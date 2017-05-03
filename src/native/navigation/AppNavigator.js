@@ -33,6 +33,8 @@ import theme from '../../common/themes/defaultTheme';
 import FavoriteActivities from '../stimulation/Favorites';
 import ViewActivity from '../stimulation/ViewActivity';
 import NavigatorTypes from 'react-navigation/src/navigators/NavigatorTypes';
+import { WhatYouNeedToKnowScreen } from '../growth/WhatYouNeedToKnowScreen';
+import DevelopmentRoadmapScreen from '../growth/DevelopmentRoadmapScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -156,6 +158,8 @@ const routes = {
   browseActivities: { screen: BrowseActivities },
   viewActivity: { screen: ViewActivity },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
+  whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
+  developmentRoadmap: { screen: DevelopmentRoadmapScreen },
   settings: { screen: Settings },
 };
 

@@ -2,13 +2,14 @@
 import { combineReducers } from 'redux';
 import type { Action, State } from './types';
 import { reducer as form } from 'redux-form';
-import app from '../../src/common/app/reducer';
-import config from '../../src/common/config/reducer';
-import auth from '../../src/common/auth/reducer';
+import app from './app/reducer';
+import config from './config/reducer';
+import auth from './auth/reducer';
 import device from '../../src/common/device/reducer';
 import viewer from './viewer/reducer';
 import babies from './babies/reducer';
-import thisWeek from '../../src/common/activities/reducer';
+import growth from './growth/reducer';
+import thisWeek from './activities/reducer';
 import { configureApollo } from './configureApollo';
 
 // stackoverflow.com/q/35622588/233902
@@ -50,6 +51,7 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
     auth,
     config,
     babies,
+    growth,
     device,
     form,
     thisWeek,

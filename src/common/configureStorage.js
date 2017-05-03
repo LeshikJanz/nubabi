@@ -2,10 +2,10 @@
 import { createTransform } from 'redux-persist';
 import { pick } from 'ramda';
 
-// TODO: pick what to serialize
 const paths = [
   ['auth', ['token']],
   ['babies', ['currentBabyId']],
+  ['growth', ['hasSeenGlobalIntro']],
   ['viewer'],
 ];
 

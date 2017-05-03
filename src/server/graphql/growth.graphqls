@@ -1,0 +1,41 @@
+extend type Baby {
+  growth: GrowthConnection!
+}
+
+enum AgeDuration {
+  WEEK
+  MONTH
+  YEAR
+}
+
+type Growth implements Node {
+  id: ID!
+  title: String!
+  introduction: String!
+  content: String!
+  # Minimum baby age in ageDuration units
+  minimumAge: Int
+  # Maximum baby age in ageDuration units
+  maximumAge: Int
+  # Age duration
+  ageDuration: AgeDuration
+}
+
+type GrowthConnection {
+  # Global introduction to the Growth section
+  introduction: String!
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  edges: [GrowthEdge]
+}
+
+type GrowthEdge {
+  # The item at the end of the edge.
+  node: Growth!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+

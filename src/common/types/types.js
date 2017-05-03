@@ -157,6 +157,10 @@ export type BabyState = {
   +currentBabyId: ?string,
 };
 
+export type GrowthState = {
+  +hasSeenGlobalIntro: boolean,
+};
+
 export type AuthState = {
   +isAuthenticated: boolean,
   +isFetching: boolean,
@@ -193,6 +197,7 @@ export type State = {
   +config: ConfigState,
   +babies: BabyState,
   +device: DeviceState,
+  +growth: GrowthState,
   +navigation: MobileNavigationState,
   +tabs: TabNavigationState,
   +thisWeek: ThisWeekState,
@@ -248,6 +253,11 @@ export type GetBabiesFailureAction = {
   error: true,
 };
 
+export type SeenGrowthGlobalIntroAction = {
+  type: 'GROWTH_SEEN_GLOBAL_INTRO',
+  payload: boolean,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -259,4 +269,5 @@ export type Action =
   | LogoutAction
   | GetBabiesRequestAction
   | GetBabiesSuccessAction
-  | GetBabiesFailureAction;
+  | GetBabiesFailureAction
+  | SeenGrowthGlobalIntroAction;

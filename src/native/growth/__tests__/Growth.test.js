@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import Growth from '../Growth';
+import Growth from '../GrowthScreen';
 import renderer from 'react-test-renderer';
 
 jest.mock('../../components/Alert');
