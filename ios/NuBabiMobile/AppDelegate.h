@@ -9,9 +9,12 @@
 
 #import <UIKit/UIKit.h>
 #import <BuddyBuildSDK/BuddyBuildSDK.h>
+#import <React/RCTRootView.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (nonatomic, strong) UIWindow *window;
-
+@property (nonatomic, strong) RCTRootView *rootView;
+@property (nonatomic, strong) UIColor *defaultBackground;
+@property (nonatomic, strong) UIColor *launchImageBackground;
 @end

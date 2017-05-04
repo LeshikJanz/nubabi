@@ -24,9 +24,13 @@
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"NuBabiMobile"
-                                               initialProperties:nil
+                                                      initialProperties:nil
                                                    launchOptions:launchOptions];
-  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+
+  self.rootView = rootView;
+
+  self.defaultBackground = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+  rootView.backgroundColor = self.defaultBackground;
   
   NSArray *allPngImageNames = [[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:nil];
   for (NSString *imgName in allPngImageNames){
@@ -35,10 +39,21 @@
       
       if (img.scale == [UIScreen mainScreen].scale
           && CGSizeEqualToSize(img.size, [UIScreen mainScreen].bounds.size)) {
-        rootView.backgroundColor = [UIColor colorWithPatternImage:img];
+        self.launchImageBackground = [UIColor colorWithPatternImage:img];
+        rootView.backgroundColor = self.launchImageBackground;
       }
     }
   }
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(javascriptLoadEvent:) 
+        name:@"RCTContentDidAppearNotification"
+        object:nil];
+
+  [[NSNotificationCenter defaultCenter] addObserver:self
+        selector:@selector(javascriptLoadEvent:) 
+        name:@"RCTJavaScriptWillStartLoadingNotification"
+        object:nil];
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
@@ -48,4 +63,18 @@
   return YES;
 }
 
+- (void) javascriptLoadEvent:(NSNotification *) notification
+{
+  if ([[notification name] isEqualToString:@"RCTContentDidAppearNotification"]) {
+    self.rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+    return;
+  }
+
+  if ([[notification name] isEqualToString:@"RCTJavaScriptWillStartLoadingNotification"] &&
+      self.launchImageBackground
+    ) {
+    self.rootView.backgroundColor = self.launchImageBackground;
+    return;
+  }
+}
 @end
