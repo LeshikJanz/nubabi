@@ -239,6 +239,7 @@ exports[`it renders collapsed 1`] = `
       :
     </Text>
     <View
+      onLayout={[Function]}
       style={
         Object {
           "alignItems": "center",
@@ -256,10 +257,10 @@ exports[`it renders collapsed 1`] = `
           "flex": 1,
           "flexDirection": "row",
           "justifyContent": "flex-start",
-          "marginBottom": 32,
+          "marginBottom": 16,
           "marginLeft": 16,
           "marginRight": 16,
-          "marginTop": 32,
+          "marginTop": 16,
           "paddingBottom": 8,
           "paddingLeft": 8,
           "paddingRight": 8,
@@ -374,7 +375,7 @@ exports[`it renders collapsed 1`] = `
                 "borderLeftWidth": 0,
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
-                "color": "#9EABBC",
+                "color": "#748294",
                 "fontFamily": "System",
                 "fontSize": 13,
                 "lineHeight": 16,
@@ -727,6 +728,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
       }
     >
       <View
+        onLayout={[Function]}
         style={
           Object {
             "alignItems": "stretch",
@@ -742,7 +744,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             "borderTopWidth": 0,
             "flex": 1,
             "justifyContent": "center",
-            "marginBottom": 32,
+            "marginBottom": 16,
             "marginLeft": 0,
             "marginRight": 0,
             "marginTop": 32,
@@ -874,7 +876,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 "borderLeftWidth": 0,
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
-                "color": "#9EABBC",
+                "color": "#748294",
                 "fontFamily": "System",
                 "fontSize": 13,
                 "lineHeight": 16,
@@ -887,6 +889,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
         </View>
       </View>
       <View
+        onLayout={[Function]}
         style={
           Object {
             "alignItems": "stretch",
@@ -902,7 +905,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             "borderTopWidth": 0,
             "flex": 1,
             "justifyContent": "center",
-            "marginBottom": 32,
+            "marginBottom": 16,
             "marginLeft": 8,
             "marginRight": 8,
             "marginTop": 32,
@@ -1034,7 +1037,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 "borderLeftWidth": 0,
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
-                "color": "#9EABBC",
+                "color": "#748294",
                 "fontFamily": "System",
                 "fontSize": 13,
                 "lineHeight": 16,
@@ -1047,6 +1050,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
         </View>
       </View>
       <View
+        onLayout={[Function]}
         style={
           Object {
             "alignItems": "stretch",
@@ -1062,7 +1066,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             "borderTopWidth": 0,
             "flex": 1,
             "justifyContent": "center",
-            "marginBottom": 32,
+            "marginBottom": 16,
             "marginLeft": 0,
             "marginRight": 0,
             "marginTop": 32,
@@ -1194,7 +1198,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 "borderLeftWidth": 0,
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
-                "color": "#9EABBC",
+                "color": "#748294",
                 "fontFamily": "System",
                 "fontSize": 13,
                 "lineHeight": 16,

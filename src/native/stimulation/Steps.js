@@ -143,7 +143,7 @@ class Steps extends PureComponent {
 
   render() {
     return (
-      <Card marginHorizontal={1.2} padding={0}>
+      <Card marginHorizontal={1.2} marginVertical={1} padding={0}>
         <Box padding={1} margin={0}>
           {this.renderStep()}
         </Box>

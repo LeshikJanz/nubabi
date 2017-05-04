@@ -157,7 +157,6 @@ export const getTemplateVariables = async (firebase, baby) => {
   const viewer = await firebase.getViewer();
   const viewerName = viewer.displayName || viewer.email;
 
-  console.log(baby.gender);
   return {
     baby: baby.name,
     name: viewerName,

@@ -49,7 +49,7 @@ class ActivityActions extends Component {
     return (
       <Card
         padding={0.5}
-        marginHorizontal={1}
+        margin={1}
         flex={1}
         flexDirection="row"
         alignSelf="stretch"

@@ -119,6 +119,12 @@ export type NavigationOptionsGetter = (
 
 export type NavigationOptions = NavigationScreenOptions;
 
+// Layout
+export type LayoutProps = {
+  width: ?number,
+  height: ?number,
+};
+
 // State
 
 export type AppState = {

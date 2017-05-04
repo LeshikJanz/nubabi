@@ -63,3 +63,5 @@ graphql.config.json
 src/server/graphql/server.js
 src/server/graphql/schema.json
 src/server/grahpql/printSchema.js
+
+coverage/
