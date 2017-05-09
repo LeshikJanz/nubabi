@@ -6,7 +6,6 @@ exports[`it renders correctly 1`] = `
     source={1}
     style={
       Object {
-        "flex": 1,
         "height": 210,
         "position": "absolute",
         "width": 750,
@@ -15,16 +14,21 @@ exports[`it renders correctly 1`] = `
   />
   <View
     style={
-      Object {
-        "backgroundColor": "#748294",
-        "flex": 1,
-        "height": 210,
-        "left": 0,
-        "opacity": 0.7,
-        "position": "absolute",
-        "right": 0,
-        "top": 0,
-      }
+      Array [
+        Object {
+          "backgroundColor": "#748294",
+          "flex": 1,
+          "height": 210,
+          "left": 0,
+          "opacity": 0.7,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "width": 750,
+        },
+      ]
     }
   />
 </View>

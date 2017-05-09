@@ -121,8 +121,10 @@ export type NavigationOptions = NavigationScreenOptions;
 
 // Layout
 export type LayoutProps = {
-  width: ?number,
-  height: ?number,
+  viewportWidth: number,
+  viewportHeight: number,
+  parentWidth: ?number,
+  parentHeight: ?number,
 };
 
 // State

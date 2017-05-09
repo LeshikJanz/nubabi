@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import { PANEL_BUTTON_TEXT } from '../../common/themes/defaultTheme';
 
 const icon = require('../../common/images/didYouKnowIcon.png');
@@ -15,8 +10,10 @@ const DidYouKnow = () => {
       <Image style={styles.icon} source={icon} />
       <View style={styles.textContainer}>
         <Text style={styles.title}>Did you know</Text>
-        <Text style={styles.body}>At this time your baby will begin to babble
-          routinely, often amusing herself for long persion of time!</Text>
+        <Text style={styles.body}>
+          At this time your baby will begin to babble
+          routinely, often amusing herself for long persion of time!
+        </Text>
       </View>
     </View>
   );
@@ -31,15 +28,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     overflow: 'hidden',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   textContainer: {
     flexDirection: 'column',
-    width: 250,
+    flex: 1,
+    marginRight: 5,
+    //width: 250,
   },
   title: {
     color: PANEL_BUTTON_TEXT,
     fontSize: 14,
+    marginBottom: 5,
   },
   body: {
     fontSize: 12,

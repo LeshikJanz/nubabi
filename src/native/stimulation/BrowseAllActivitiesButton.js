@@ -1,36 +1,44 @@
-import React, { Component } from 'react';
+// @flow
+import type { LayoutProps } from '../../common/types/types';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
+  TouchableHighlight,
 } from 'react-native';
+import withLayout from '../components/withLayout';
+
+type Props = {
+  onPress: () => void,
+  layout: LayoutProps,
+};
 
 const background = require('../../common/images/browseAllActivitiesButton.png');
 
-class BrowseAllActivitiesButton extends Component {
-  setNativeProps(nativeProps) {
-    this._root.setNativeProps(nativeProps);
-  }
-
-  render() {
-    return (
-      <View
-        style={styles.container}
-        ref={(component) => { this._root = component; }}
-        {...this.props}
+export const BrowseAllActivitiesButton = ({ onPress, layout }: Props) => {
+  const width = { width: layout.parentWidth };
+  return (
+    <TouchableHighlight
+      style={styles.container}
+      underlayColor="rgba(0,0,0,0)"
+      onPress={onPress}
+    >
+      <Image
+        source={background}
+        style={[styles.background, width]}
+        resizeMode="contain"
       >
-        <Image source={background} style={styles.background}>
-          <View style={styles.textContainer}>
-            <View style={styles.overlay} />
-            <Text style={styles.title}>Browse All</Text>
-            <Text style={styles.title}>Activities</Text>
-          </View>
-        </Image>
-      </View>
-    );
-  }
-}
+        <View style={styles.textContainer}>
+          <View style={[styles.overlay, width]} />
+          <Text style={styles.title}>Browse All</Text>
+          <Text style={styles.title}>Activities</Text>
+        </View>
+      </Image>
+    </TouchableHighlight>
+  );
+};
 
 const HEIGHT = 130;
 
@@ -78,10 +86,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    resizeMode: 'contain',
     width: 175,
   },
 });
 
-export default BrowseAllActivitiesButton;
-
+export default withLayout(BrowseAllActivitiesButton);

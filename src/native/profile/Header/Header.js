@@ -6,13 +6,14 @@ import type {
   ActivityConnection,
 } from '../../../common/types';
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import { pathOr } from 'ramda';
 import { gql } from 'react-apollo';
 import CoverImage from './CoverImage';
 import IconHeader from './IconHeader';
 import NameAgeRow from './NameAgeRow';
 import Statistics from './Statistics';
+import withLayout from '../../components/withLayout';
 
 type Props = {
   coverImage: Image,
@@ -33,10 +34,13 @@ const Header = (
     achievements,
     onEditBaby,
     favoriteActivities,
+    layout,
   }: Props,
 ) => {
+  const width = layout.viewportWidth;
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { width }]}>
       <CoverImage coverImage={coverImage} />
       <IconHeader avatar={avatar} />
       <NameAgeRow babyName={name} birthDate={dob} onEditBaby={onEditBaby} />
@@ -78,4 +82,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default withLayout(Header);

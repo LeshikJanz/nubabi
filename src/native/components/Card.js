@@ -1,10 +1,15 @@
 // @flow
-import type { Event } from 'react-native';
 import type { BoxProps } from './Box';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Dimensions, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Box from './Box';
+import {
+  getChildContext,
+  childContextTypes,
+  getLayoutInitialState,
+  handleLayout,
+} from './withLayout';
 
 type Props = BoxProps & {
   children: any,
@@ -17,48 +22,15 @@ class Card extends PureComponent {
     theme: PropTypes.object,
   };
 
-  static childContextTypes = {
-    layout: PropTypes.shape({
-      viewportWidth: PropTypes.number,
-      viewportHeight: PropTypes.number,
-      parentWidth: PropTypes.number,
-      parentHeight: PropTypes.number,
-    }),
-  };
+  static childContextTypes = childContextTypes;
 
   state = {
-    viewportWidth: Dimensions.get('window').width,
-    viewportHeight: Dimensions.get('window').height,
-    parentWidth: null,
-    parentHeight: null,
+    ...getLayoutInitialState(),
   };
 
-  getChildContext() {
-    return {
-      layout: {
-        viewportWidth: this.state.viewportWidth,
-        viewportHeight: this.state.viewportHeight,
-        parentWidth: this.state.parentWidth,
-        height: this.state.parentHeight,
-      },
-    };
-  }
+  getChildContext = getChildContext.bind(this);
 
-  handleLayout = (event: Event) => {
-    const { width, height } = event.nativeEvent.layout;
-    if (width !== this.state.width && height !== this.state.height) {
-      this.setState({
-        viewportWidth: Dimensions.get('window').width,
-        viewportHeight: Dimensions.get('window').height,
-        parentWidth: width,
-        parentHeight: height,
-      });
-    }
-  };
-
-  componentDidUpdate() {
-    console.log('updated');
-  }
+  handleLayout = handleLayout.bind(this);
 
   render() {
     const { props } = this;

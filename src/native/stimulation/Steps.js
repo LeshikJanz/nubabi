@@ -9,13 +9,14 @@ import {
 import { gql } from 'react-apollo';
 import { range } from 'ramda';
 import { Card, Text, Box, Image, Button } from '../components';
+import Step from './Step';
 import theme from '../../common/themes/defaultTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-type Step = string;
+type StepType = string;
 
 type Props = {
-  steps: Array<Step>,
+  steps: Array<StepType>,
   activityName: string,
 };
 
@@ -41,44 +42,16 @@ class Steps extends PureComponent {
     this.setState({ currentStep: index < 0 ? 0 : index });
   };
 
-  renderTitle(step: Step, index: number) {
-    const { activityName } = this.props;
-    let actionCall;
-
-    if (index === 0) {
-      actionCall = 'begin';
-    } else if (index === this.props.steps.length - 1) {
-      actionCall = 'finish';
-    } else {
-      actionCall = 'continue';
-    }
-
-    const title = `Let's ${actionCall} ${activityName}`;
-
-    return (
-      <Box marginBottom={1}>
-        <Text color="black" spacing={-0.43} size={3}>{title}</Text>
-      </Box>
-    );
-  }
-
   renderStep() {
     const step = this.props.steps[this.state.currentStep];
 
-    if (!step) {
-      return null;
-    }
-
     return (
-      <Box>
-        {this.renderTitle(step, this.state.currentStep)}
-        <Text marginBottom={1}>{step}</Text>
-        <Image
-          src={require('../../common/images/centered-paragraph.png')}
-          size={{ width: 290, height: 200 }}
-          opacity={0.2}
-        />
-      </Box>
+      <Step
+        step={step}
+        activityName={this.props.activityName}
+        currentStepIndex={this.state.currentStep}
+        length={this.props.steps.length}
+      />
     );
   }
 

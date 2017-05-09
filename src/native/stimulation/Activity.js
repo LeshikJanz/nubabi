@@ -12,6 +12,12 @@ import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActivityActions from './ActivityActions';
 import theme, { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
+import {
+  childContextTypes,
+  handleLayout,
+  getLayoutInitialState,
+  getChildContext,
+} from '../components/withLayout';
 import iconMappings from './iconMappings';
 import Header from './Header';
 import Steps from './Steps';
@@ -43,6 +49,10 @@ type Props = ActivityProps & ActivityNavigationProps & ActivityActionProps;
 
 export class Activity extends PureComponent {
   props: Props;
+
+  state = {
+    ...getLayoutInitialState(),
+  };
 
   static defaultProps = {
     enableNavigation: false,
@@ -100,6 +110,12 @@ export class Activity extends PureComponent {
   };
 
   scrollView = null;
+
+  static childContextTypes = childContextTypes;
+
+  getChildContext = getChildContext.bind(this);
+
+  handleLayout = handleLayout.bind(this);
 
   scrollToTop = () => {
     if (this.scrollView) {
@@ -191,9 +207,13 @@ export class Activity extends PureComponent {
     const { expert } = activity;
 
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={this.handleLayout}>
         <ScrollView
           style={styles.scrollContainer}
+          contentContainerStyle={{
+            alignItems: 'stretch',
+            justifyContent: 'flex-start',
+          }}
           keyboardShouldPersistTaps="handled"
           pagingEnabled={false}
           ref={ref => {
@@ -223,12 +243,12 @@ export class Activity extends PureComponent {
               onIncrease={this.handleLevelIncrease}
               onDecrease={this.handleLevelDecrease}
             />}
+          {enableNavigation &&
+            <View style={styles.nextButtonsContainer}>
+              {this.renderPreviousButton()}
+              {this.renderNextButton()}
+            </View>}
         </ScrollView>
-        {enableNavigation &&
-          <View style={styles.nextButtonsContainer}>
-            {this.renderPreviousButton()}
-            {this.renderNextButton()}
-          </View>}
       </View>
     );
   }

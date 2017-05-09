@@ -18,6 +18,7 @@ import {
   Easing,
   TouchableOpacity,
 } from 'react-native';
+import SVGPath from 'art/modes/svg/path';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
@@ -29,6 +30,7 @@ import theme, {
   NUBABI_RED,
 } from '../../common/themes/defaultTheme';
 import { selectBaby } from '../../common/babies/actions';
+import withLayout from '../components/withLayout';
 
 const window = Dimensions.get('window');
 
@@ -59,10 +61,6 @@ class ChooseBaby extends Component {
         }
       }
     `,
-  };
-
-  static navigationOptions: NavigationOptions = {
-    gesturesEnabled: false,
   };
 
   static contextTypes = {
@@ -164,6 +162,7 @@ class ChooseBaby extends Component {
   render() {
     const { babies } = this.props;
 
+    const width = this.props.layout.viewportWidth;
     let babiesList = [];
 
     // TODO: this is more complicated than it should because we want an
@@ -228,14 +227,39 @@ class ChooseBaby extends Component {
       );
     }
 
+    console.log(this.props);
+
+    const headerShapeWidth = Math.round(
+      this.props.layout.viewportWidth / 0.672,
+    );
+
+    console.log(this.props.layout.viewportHeight);
+    console.log(headerShapeWidth);
+    const shape = new SVGPath()
+      .moveTo(242.0284455, 326.522878)
+      .curveTo(242.828957, 347.908578, 260.418521, 365, 282, 365)
+      .curveTo(303.756979, 365, 321.456854, 347.629474, 321.987736, 326.00031)
+      .curveTo(410.423065, 317.73135, 491.521973, 284.207863, 558, 232.714294)
+      .lineTo(558, 0)
+      .lineTo(0, 0)
+      .lineTo(0, 232.714294)
+      .curveTo(
+        67.9827067,
+        285.373381,
+        151.25565,
+        319.239702,
+        242.028455,
+        326.522878,
+      )
+      .close();
     return (
       <Animated.View style={styles.overlay}>
         <Animated.View
           style={[styles.container, this.getContainerAnimatedStyle()]}
         >
-          <Svg style={styles.headerShape}>
+          <Svg style={[styles.headerShape, { width: headerShapeWidth }]}>
             <Path
-              d="M242.028455,326.522878 C242.828957,347.908578 260.418521,365 282,365 C303.756979,365 321.456854,347.629474 321.987736,326.00031 C410.423065,317.73135 491.521973,284.207863 558,232.714294 L558,0 L0,0 L0,232.714294 C67.9827067,285.373381 151.25565,319.239702 242.028455,326.522878 Z"
+              d={shape.toString()}
               id="Combined-Shape"
               stroke="none"
               fill="#FFFFFF"
@@ -243,7 +267,7 @@ class ChooseBaby extends Component {
             />
           </Svg>
 
-          <View style={styles.babyContainer}>
+          <View style={[styles.babyContainer, { width }]}>
             <Animated.View
               style={[styles.closeButton, this.getListAnimatedStyle()]}
             >
@@ -255,8 +279,8 @@ class ChooseBaby extends Component {
             </Animated.View>
             <ScrollView
               contentContainerStyle={{
+                width,
                 height: 80,
-                width: window.width,
                 paddingLeft: 10,
                 paddingRight: 10,
               }}
@@ -290,7 +314,6 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     position: 'absolute',
-    width: window.width,
     alignItems: 'center',
   },
   babyIconContainerView: {
@@ -379,4 +402,5 @@ export default compose(
       };
     },
   }),
+  withLayout,
 )(ChooseBaby);

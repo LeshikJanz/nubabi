@@ -1,38 +1,42 @@
 // @flow
-import type { Image as ImageType } from '../../../common/types';
+import type { LayoutProps, Image as ImageType } from '../../../common/types';
 import React from 'react';
 import { View, Image, StyleSheet, Dimensions } from 'react-native';
-
-const window = Dimensions.get('window');
+import withLayout from '../../components/withLayout';
 
 const headerBackground = require('../../../common/images/profileBackground.jpg');
 
 type Props = {
   coverImage: ImageType,
+  layout: LayoutProps,
 };
 
-const CoverImage = ({ coverImage }: Props) => {
+const CoverImage = ({ coverImage, layout }: Props) => {
   let imageSource;
   if (coverImage) {
     imageSource = { uri: coverImage.url };
   } else {
     imageSource = headerBackground;
   }
+
+  const width = layout ? layout.viewportWidth : Dimensions.get('window').width;
+
   return (
     <View>
-      <Image source={imageSource} style={styles.profileImage} />
-      <View style={styles.imageOverlay} />
+      <Image
+        source={imageSource}
+        style={{
+          width,
+          position: 'absolute',
+          height: 210,
+        }}
+      />
+      <View style={[styles.imageOverlay, { width }]} />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  profileImage: {
-    flex: 1,
-    height: 210,
-    width: window.width,
-    position: 'absolute',
-  },
   imageOverlay: {
     height: 210,
     top: 0,
@@ -45,4 +49,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CoverImage;
+export default withLayout(CoverImage);

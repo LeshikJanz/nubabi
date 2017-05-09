@@ -5,13 +5,15 @@ import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import { gql } from 'react-apollo';
 import { path, head } from 'ramda';
 import FlipCard from '../shared/FlipView';
+import withLayout from '../components/withLayout';
+import theme from '../../common/themes/defaultTheme';
 
-const width = Dimensions.get('window').width;
 const infoIcon = require('../../common/images/info_icon.png');
 
 type Props = {
   expert: Expert,
   activityDescription: string,
+  layout: LayoutProps,
 };
 
 class ExpertInfo extends Component {
@@ -83,15 +85,27 @@ class ExpertInfo extends Component {
   };
 
   render() {
+    const width = this.props.layout.viewportWidth ||
+      Dimensions.get('window').width;
+
     return (
-      <FlipCard
-        style={{ flex: 1 }}
-        velocity={4}
-        tension={7}
-        friction={5}
-        renderFront={this.renderFront()}
-        renderBack={this.renderBack()}
-      />
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.open.white1,
+          paddingTop: 20,
+          marginTop: 0,
+        }}
+      >
+        <FlipCard
+          style={{ flex: 1 }}
+          velocity={4}
+          tension={7}
+          friction={5}
+          renderFront={this.renderFront()}
+          renderBack={this.renderBack()}
+        />
+      </View>
     );
   }
 }
@@ -105,7 +119,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     padding: 20,
     backgroundColor: '#fff',
-    marginTop: 20,
     borderRadius: 4,
     shadowColor: '#000',
     shadowOpacity: 0.1,
@@ -118,7 +131,6 @@ const styles = StyleSheet.create({
   biographyContainer: {
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 20,
     padding: 20,
     backgroundColor: '#fff',
     borderRadius: 4,
@@ -194,13 +206,6 @@ const styles = StyleSheet.create({
     right: 10,
     top: 20,
   },
-  nextButtonsContainer: {
-    marginTop: 10,
-    backgroundColor: '#fff',
-    width,
-    height: 60,
-    flexDirection: 'row',
-  },
   closeBiographyButton: {
     position: 'absolute',
     bottom: 20,
@@ -209,4 +214,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExpertInfo;
+export default withLayout(ExpertInfo);

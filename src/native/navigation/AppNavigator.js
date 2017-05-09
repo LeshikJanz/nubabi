@@ -19,7 +19,7 @@ import chooseBaby from './transitioners/ChooseBabyTransitioner';
 
 import SplashScreen from './SplashScreen';
 import TabsNavigator from './TabsNavigator';
-import ChooseBaby from '../profile/ChooseBaby';
+import ChooseBabyScreen from '../profile/ChooseBabyScreen';
 import Settings from '../settings/Settings';
 import AddBaby from '../profile/EditBaby/AddBaby';
 import EditBaby from '../profile/EditBaby/EditBaby';
@@ -27,7 +27,7 @@ import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivities from '../stimulation/BrowseActivities';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
-import Login from '../login/Login';
+import LoginScreen from '../login/LoginScreen';
 
 import theme from '../../common/themes/defaultTheme';
 import FavoriteActivities from '../stimulation/Favorites';
@@ -149,7 +149,7 @@ const createCustomNavigator = (
 };
 
 const routes = {
-  chooseBaby: { screen: ChooseBaby, mode: 'modal' },
+  chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   thisWeekActivities: { screen: ThisWeeksActivities },
@@ -166,7 +166,7 @@ const routes = {
 const AppNavigator = createCustomNavigator(
   {
     splash: { screen: SplashScreen },
-    login: { screen: Login },
+    login: { screen: LoginScreen },
     home: { screen: TabsNavigator },
     ...routes,
   },

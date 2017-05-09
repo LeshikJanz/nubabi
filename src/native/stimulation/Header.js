@@ -1,5 +1,5 @@
 // @flow
-import type { Image as ImageType } from '../../common/types/index';
+import type { LayoutProps, Image as ImageType } from '../../common/types';
 import React from 'react';
 import {
   View,
@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { gql } from 'react-apollo';
+import withLayout from '../components/withLayout';
 
 const width = Dimensions.get('window').width;
 
@@ -26,6 +27,7 @@ type Props = {
   skillName: string,
   onToggleFavorite: () => void,
   isFavoriteActivity: boolean,
+  layout: LayoutProps,
 };
 
 const Header = (
@@ -35,23 +37,66 @@ const Header = (
     skillImage,
     onToggleFavorite,
     isFavoriteActivity,
+    layout,
   }: Props,
 ) => {
-  const curve = `M0 0 C ${width / 2 - 50} 75, ${width / 2 + 50} 75, ${width} 0`;
-  const box = `M0 0 H ${width} V 58 H 0 L 0 0`;
+  const width = layout.viewportWidth || Dimensions.get('window').width;
+
+  const headerMargin = Math.round(width / 7.5); // 50 portrait 7p
+  const headerTopMargin = Math.round(width / 9.3); // 40 portrait 7p
+  const headerPath = Math.round(width / 5); // 75 portrait 7p
+  const boxPath = Math.round(width / 6.46); // 58 portrait 7p
+  const curve = `M0 0 C ${width / 2 - headerMargin} ${headerPath}, ${width / 2 + headerMargin} ${headerPath}, ${width} 0`;
+  const box = `M0 0 H ${width} V ${boxPath} H 0 L 0 0`;
+
+  const headerShapeStyle = {
+    width,
+    height: Math.round(width / 5.76),
+    marginTop: headerTopMargin,
+  };
+
+  const headerImageStyle = {
+    width,
+    height: headerShapeStyle.width - headerPath, // 300 portrait 7p
+    marginTop: -headerMargin,
+  };
+
+  const overlayStyle = {
+    width,
+    height: headerShapeStyle.width - headerPath, // 300 portrait 7p
+    top: -headerMargin, // -50 portrait 7p
+  };
+
+  const headerTextStyle = {
+    marginTop: -Math.round(width / 2.2),
+  };
+
+  const headerContainerStyle = {
+    //paddingBottom: Math.round(width / 18.75 ), // 20 portrait 7p
+    flex: 1,
+  };
+
+  const headerButtonsStyle = {
+    width,
+    marginTop: -Math.round(width / 46.8), // -8 portrait 7p
+  };
 
   return (
-    <View style={styles.header}>
-      <Image source={{ uri: skillImage.url }} style={styles.headerImage} />
-      <View style={styles.overlay} />
-      <View style={styles.headerTextContainer}>
+    <View style={[styles.header, headerContainerStyle]}>
+      <Image
+        source={{ uri: skillImage.url }}
+        style={[styles.headerImage, headerImageStyle]}
+        resizeMode="cover"
+      />
+      <View style={[styles.overlay, overlayStyle]} />
+      <View style={[styles.headerTextContainer, headerTextStyle]}>
         <Text style={styles.activityName}>{activityName}</Text>
         <Text style={styles.skillName}>{skillName}</Text>
       </View>
-      <Svg style={styles.headerShape}>
+      <Svg style={[styles.headerShape, headerShapeStyle]}>
         <Path d={curve + box} stroke="transparent" fill="#FFFFFF" />
       </Svg>
-      <View style={styles.headerButtons}>
+      <View style={[styles.headerButtons, headerButtonsStyle]}>
         <View
           style={[
             styles.headerButton,
@@ -122,28 +167,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   headerShape: {
-    height: 65,
-    width,
-    marginTop: 40,
     marginLeft: 0,
-  },
-  headerImage: {
-    width,
-    height: 300,
-    marginTop: -50,
   },
   overlay: {
     backgroundColor: '#748294',
     opacity: 0.4,
-    width,
-    height: 300,
     position: 'absolute',
-    top: -50,
   },
   headerTextContainer: {
     backgroundColor: 'transparent',
     alignItems: 'center',
-    marginTop: -150,
   },
   activityName: {
     color: '#fff',
@@ -174,7 +207,6 @@ const styles = StyleSheet.create({
   headerButtons: {
     marginTop: -8,
     backgroundColor: '#fff',
-    width,
     borderColor: '#E9ECF4',
     borderBottomWidth: 1,
     flex: 1,
@@ -204,4 +236,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Header;
+export default withLayout(Header);

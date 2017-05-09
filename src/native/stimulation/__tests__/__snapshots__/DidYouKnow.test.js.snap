@@ -10,7 +10,7 @@ exports[`it renders correctly 1`] = `
       "flex": 2,
       "flexDirection": "row",
       "height": 96,
-      "justifyContent": "center",
+      "justifyContent": "flex-start",
       "overflow": "hidden",
     }
   }
@@ -28,8 +28,9 @@ exports[`it renders correctly 1`] = `
   <View
     style={
       Object {
+        "flex": 1,
         "flexDirection": "column",
-        "width": 250,
+        "marginRight": 5,
       }
     }
   >
@@ -41,6 +42,7 @@ exports[`it renders correctly 1`] = `
         Object {
           "color": "#454D56",
           "fontSize": 14,
+          "marginBottom": 5,
         }
       }
     >

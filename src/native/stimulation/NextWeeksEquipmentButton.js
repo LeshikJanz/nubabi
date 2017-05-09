@@ -1,26 +1,39 @@
-import React, { Component } from 'react';
+// @flow
+import type { LayoutProps } from '../../common/types/types';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
+  TouchableHighlight,
 } from 'react-native';
+import withLayout from '../components/withLayout';
 
 const background = require('../../common/images/nextWeeksEquipmentButton.png');
 
-class NextWeeksEquipmentButton extends Component {
-  setNativeProps(nativeProps) {
-    this._root.setNativeProps(nativeProps);
-  }
+type Props = {
+  onPress: () => void,
+  layout: LayoutProps,
+};
 
-  render() {
-    return (
-      <View
-        style={styles.container}
-        ref={(component) => { this._root = component; }}
-        {...this.props}
-      >
-        <Image source={background} style={styles.background}>
+export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
+  const width = {
+    width: layout.parentWidth,
+  };
+
+  return (
+    <TouchableHighlight
+      style={styles.container}
+      underlayColor="rgba(0,0,0,0)"
+      onPress={onPress}
+    >
+      <View>
+        <Image
+          source={background}
+          style={[styles.background, width]}
+          resizeMode="contain"
+        >
           <View style={styles.textContainer}>
             <View style={styles.overlay} />
             <Text style={styles.title}>Equipment For</Text>
@@ -28,9 +41,9 @@ class NextWeeksEquipmentButton extends Component {
           </View>
         </Image>
       </View>
-    );
-  }
-}
+    </TouchableHighlight>
+  );
+};
 
 const HEIGHT = 130;
 
@@ -79,9 +92,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   background: {
-    resizeMode: 'contain',
     width: 175,
   },
 });
 
-export default NextWeeksEquipmentButton;
+export default withLayout(NextWeeksEquipmentButton);
