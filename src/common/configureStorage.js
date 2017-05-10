@@ -4,6 +4,7 @@ import { pick } from 'ramda';
 
 const paths = [
   ['auth', ['token']],
+  ['apollo', ['data']],
   ['babies', ['currentBabyId']],
   ['growth', ['hasSeenGlobalIntro']],
   ['viewer'],
