@@ -393,6 +393,9 @@ export default compose(
     },
   ),
   graphql(query, {
+    options: {
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
+    },
     props: ({ data }) => {
       const babies = path(['viewer', 'babies', 'edges'], data);
 

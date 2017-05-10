@@ -1,18 +1,21 @@
 // @flow
-import type { State, Growth } from '../../common/types';
+import type { State, Growth, GraphQLDataProp } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ScrollView, LayoutAnimation } from 'react-native';
+import { LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
-import { filter } from 'graphql-anywhere';
-import { compose, path, partial } from 'ramda';
-import { skipIntroduction } from '../../common/growth/reducer';
+import { compose, path } from 'ramda';
+import {
+  getClosestContentForPeriod,
+  skipIntroduction,
+} from '../../common/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
 import displayLoadingState from '../components/displayLoadingState';
 
 type Props = {
   growth: ?Array<Growth>,
+  data: GraphQLDataProp<*>,
 };
 
 type ComponentState = {
@@ -27,6 +30,9 @@ export class WhatYouNeedToKnow extends PureComponent {
     period: gql`
       fragment GrowthPeriod on Growth {
         title
+        minimumAge
+        maximumAge
+        ageDuration
       }
     `,
     current: gql`
@@ -43,11 +49,9 @@ export class WhatYouNeedToKnow extends PureComponent {
 
   getPeriodOptions() {
     return this.props.growth.map(node => ({
+      ...node,
       label: node.title,
       key: node.id,
-      content: node.content,
-      expert: node.expert,
-      introduction: node.introduction,
     }));
   }
 
@@ -57,7 +61,12 @@ export class WhatYouNeedToKnow extends PureComponent {
       return options.find(period => period.key === this.state.selectedPeriod);
     }
 
-    return options[0];
+    const current = getClosestContentForPeriod(
+      options,
+      path(['viewer', 'baby', 'dob'], this.props.data),
+    );
+
+    return current;
   }
 
   handlePeriodSelect = (periodId: string) => {
@@ -103,6 +112,7 @@ export default compose(
         viewer {
           baby(id: $babyId) {
             id
+            dob
             growth {
               edges {
                 node {
@@ -125,6 +135,7 @@ export default compose(
     `,
     {
       options: ownProps => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: ownProps.currentBabyId },
       }),
       props: ({ data }) => {

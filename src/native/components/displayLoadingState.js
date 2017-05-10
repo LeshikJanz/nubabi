@@ -9,7 +9,9 @@ type Props = {
 };
 
 const displayLoadingState = Component =>
-  (props: Props) =>
-    props.data.loading ? <Loader {...props} /> : <Component {...props} />;
+  (props: Props) => {
+    const isLoading = props.data.loading && !props.data.viewer;
+    return isLoading ? <Loader {...props} /> : <Component {...props} />;
+  };
 
 export default hoistStatics(displayLoadingState);

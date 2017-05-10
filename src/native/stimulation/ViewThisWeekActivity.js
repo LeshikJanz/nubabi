@@ -222,6 +222,7 @@ export default compose(
     `,
     {
       options: ownProps => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: {
           babyId: ownProps.currentBabyId,
           activityId: ownProps.navigation.state.params.id,

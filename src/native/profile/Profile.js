@@ -144,6 +144,7 @@ export default compose(
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
       variables: { id: currentBabyId },
     }),
     props: ({ data }: GraphQLDataProp<Viewer>) => ({

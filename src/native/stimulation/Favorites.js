@@ -116,6 +116,7 @@ export default compose(
     `,
     {
       options: ({ currentBabyId }) => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: currentBabyId },
       }),
       props: ({ data }) => {
