@@ -66,7 +66,9 @@ export class WhatYouNeedToKnow extends PureComponent {
       path(['viewer', 'baby', 'dob'], this.props.data),
     );
 
-    return current;
+    // Default to latest content if there's no content
+    // for the baby's age.
+    return current || options[options.length - 1];
   }
 
   handlePeriodSelect = (periodId: string) => {

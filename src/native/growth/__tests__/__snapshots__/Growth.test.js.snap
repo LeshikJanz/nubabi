@@ -77,7 +77,7 @@ exports[`it renders correctly 1`] = `
       >
         TestBaby
          is 
-        0 months old
+        0 weeks old
       </Text>
     </View>
     <View

@@ -5,9 +5,9 @@ import type {
   SeenGrowthGlobalIntroAction,
   SkipGrowthIntroductionAction,
 } from '../types';
-
+import moment from 'moment';
 import { createSelector } from 'reselect';
-import { identity } from 'ramda';
+
 type Action = SeenGrowthGlobalIntroAction | SkipGrowthIntroductionAction;
 
 export const initialState = {
@@ -51,6 +51,42 @@ export const makeShouldShowIntroductionSelector = () => {
       return !skipped.includes(current);
     },
   );
+};
+
+export const getClosestContentForPeriod = (
+  content: Array<Growth>,
+  dobString: string,
+) => {
+  const dob = moment(dobString);
+  const ageInWeeks = moment().diff(dob, 'weeks');
+
+  let result;
+
+  result = findContent('WEEK', ageInWeeks, content);
+
+  if (result) {
+    return result;
+  }
+
+  const ageInMonths = moment().diff(dob, 'months');
+  result = findContent('MONTH', ageInMonths, content);
+
+  if (result) {
+    return result;
+  }
+
+  const ageInYears = moment().diff(dob, 'years');
+  result = findContent('YEAR', ageInYears, content);
+
+  return result;
+};
+
+const findContent = (ageDuration, currentAge, collection) => {
+  return collection.find(element => {
+    return element.ageDuration === ageDuration &&
+      element.minimumAge >= currentAge &&
+      element.maximumAge <= currentAge;
+  });
 };
 
 export const skipIntroduction = (id: string): SkipGrowthIntroductionAction => {
