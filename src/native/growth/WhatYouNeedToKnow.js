@@ -49,6 +49,7 @@ export class WhatYouNeedToKnow extends PureComponent {
       key: node.id,
       content: node.content,
       expert: node.expert,
+      introduction: node.introduction,
     }));
   }
 
@@ -81,7 +82,7 @@ export class WhatYouNeedToKnow extends PureComponent {
           onPeriodSelect={this.handlePeriodSelect}
         />
         <Box zIndex={-1}>
-          <Box>
+          <Box paddingHorizontal={1}>
             <Introduction text={current.introduction} />
           </Box>
           <Box backgroundColor="white" flex={1}>
