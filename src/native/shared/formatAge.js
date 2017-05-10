@@ -1,11 +1,12 @@
+// @flow
 import moment from 'moment';
 import pluralize from 'pluralize';
 
-const pluralizeAge = (count, unit) => {
+const pluralizeAge = (count: number, unit: string) => {
   return [count, pluralize(unit, count), 'old'].join(' ');
 };
 
-export const formatAge = dobString => {
+export const formatAge = (dobString: string) => {
   const now = moment();
   const dob = moment(dobString);
 
