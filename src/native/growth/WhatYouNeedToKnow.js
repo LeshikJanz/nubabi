@@ -9,6 +9,8 @@ import { Box, Card, Markdown } from '../components';
 import PeriodFilter from './PeriodFilter';
 import displayLoadingState from '../components/displayLoadingState';
 import Introduction from './Introduction';
+import HealthcareNotice from './HealthcareNotice';
+
 type Props = {
   growth: ?Array<Growth>,
 };
@@ -55,8 +57,7 @@ export class WhatYouNeedToKnow extends PureComponent {
           currentPeriod={current}
           onPeriodSelect={this.handlePeriodSelect}
         />
-
-        <Box padding={1}>
+        <Box zIndex={-1}>
           <Box>
             <Introduction text={current.introduction} />
           </Box>
@@ -64,7 +65,7 @@ export class WhatYouNeedToKnow extends PureComponent {
             <Markdown text={current.content} />
           </Box>
           <Box>
-            <Card margin={1} />
+            <HealthcareNotice />
           </Box>
         </Box>
       </ScrollView>
