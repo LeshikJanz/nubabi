@@ -111,9 +111,6 @@ export class Growth extends Component {
               </Text>
             </Box>
           </Card>
-          <DevelopmentRoadmapButton
-            onPress={this.props.onNavigateToDevelopmentRoadmap}
-          />
         </Box>
       </ScrollView>
     );
