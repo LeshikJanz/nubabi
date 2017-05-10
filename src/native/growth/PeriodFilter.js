@@ -1,6 +1,12 @@
+// @flow
 import React, { Component } from 'react';
-import ModalPicker from 'react-native-modal-picker';
-import { View } from 'react-native';
+import Menu, {
+  MenuContext,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger,
+} from 'react-native-menu';
+import { View, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Box, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
@@ -25,47 +31,69 @@ class PeriodFilter extends Component {
     });
   };
 
+  renderOptions() {
+    return this.props.options.map(option => (
+      <MenuOption key={option.key} value={option.key}>
+        <Text>{option.label}</Text>
+      </MenuOption>
+    ));
+  }
+
   render() {
-    console.log(this.props);
     return (
-      <Box
-        flex={1}
-        style={theme => ({ backgroundColor: theme.colors.open.white1 })}
-      >
-        <ModalPicker
-          data={this.props.options}
-          initValue={this.props.currentPeriod.label}
-          cancelText="Cancel"
-          overlayStyle={{ backgroundColor: 'rgba(0,0,0,.9)' }}
-        >
-          <Box
-            backgroundColor="white"
-            alignItems="center"
-            padding={0.8}
-            margin={1}
-            borderRadius={4}
-            borderWidth={1}
-            style={() => ({ borderColor: '#E9ECF4' })}
-            flexDirection="row"
-          >
-            <Text
-              key={this.props.currentPeriod.key}
-              color="black"
-              size={2}
-              flex={1}
+      <MenuContext style={{ flex: 1 }}>
+        <Menu onSelect={this.handleSelect} style={styles.dropdown}>
+          <MenuTrigger>
+            <Box
+              backgroundColor="white"
+              alignItems="center"
+              padding={0.8}
+              margin={1}
+              borderRadius={4}
+              borderWidth={1}
+              style={() => ({ borderColor: '#E9ECF4' })}
+              flexDirection="row"
             >
-              {this.props.currentPeriod.label}
-            </Text>
-            <Icon
-              name="md-arrow-dropdown"
-              size={20}
-              color={theme.colors.secondary}
-            />
-          </Box>
-        </ModalPicker>
-      </Box>
+              <Text
+                key={this.props.currentPeriod.key}
+                color="black"
+                size={2}
+                flex={1}
+              >
+                {this.props.currentPeriod.label}
+              </Text>
+              <Icon
+                name="md-arrow-dropdown"
+                size={20}
+                color={theme.colors.secondary}
+              />
+            </Box>
+          </MenuTrigger>
+          <MenuOptions optionsContainerStyle={styles.dropdownOptions}>
+            {this.renderOptions()}
+          </MenuOptions>
+        </Menu>
+      </MenuContext>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  dropdownOptions: {
+    left: 17,
+    flex: 1,
+    marginTop: 63,
+    width: 341,
+    zIndex: 2,
+    alignSelf: 'center',
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    shadowRadius: 4,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+  },
+});
 
 export default PeriodFilter;
