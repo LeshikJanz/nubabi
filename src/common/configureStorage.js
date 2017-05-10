@@ -6,7 +6,7 @@ const paths = [
   ['auth', ['token']],
   ['apollo', ['data']],
   ['babies', ['currentBabyId']],
-  ['growth', ['hasSeenGlobalIntro']],
+  ['growth', ['hasSeenGlobalIntro', 'skippedIntroductions']],
   ['viewer'],
 ];
 

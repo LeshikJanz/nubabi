@@ -167,6 +167,7 @@ export type BabyState = {
 
 export type GrowthState = {
   +hasSeenGlobalIntro: boolean,
+  +skippedIntroductions: Array<string>,
 };
 
 export type AuthState = {
@@ -266,6 +267,11 @@ export type SeenGrowthGlobalIntroAction = {
   payload: boolean,
 };
 
+export type SkipGrowthIntroductionAction = {
+  type: 'GROWTH_SKIP_INTRODUCTION',
+  payload: string,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -278,4 +284,5 @@ export type Action =
   | GetBabiesRequestAction
   | GetBabiesSuccessAction
   | GetBabiesFailureAction
-  | SeenGrowthGlobalIntroAction;
+  | SeenGrowthGlobalIntroAction
+  | SkipGrowthIntroductionAction;

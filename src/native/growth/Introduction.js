@@ -32,7 +32,6 @@ export const Introduction = ({ text, onSkip }: Props) => {
           </TouchableOpacity>
         </Box>
       </Box>
-
     </Card>
   );
 };

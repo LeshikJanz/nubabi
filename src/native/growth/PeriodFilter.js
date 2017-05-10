@@ -1,4 +1,5 @@
 // @flow
+import type { Expert } from '../../common/types';
 import React, { PureComponent } from 'react';
 import Menu, {
   MenuContext,
@@ -14,6 +15,9 @@ import theme from '../../common/themes/defaultTheme';
 export type GrowthPeriodOption = {
   label: string,
   key: string,
+  introduction: string,
+  content: string,
+  expert: Expert,
 };
 
 type Props = {
