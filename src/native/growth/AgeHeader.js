@@ -5,16 +5,11 @@ import moment from 'moment';
 import theme from '../../common/themes/defaultTheme';
 import { Box, Text } from '../components';
 import NubabiIcon from '../../common/icons/nubabi';
+import { formatAge } from '../shared/formatAge';
 
 type Props = {
   name: string,
   dob: string,
-};
-
-// TODO: this duplicates NameAgeRow
-const formatAge = birthDate => {
-  const diff = moment().diff(moment(birthDate), 'months');
-  return diff === 1 ? `${diff} month old` : `${diff} months old`;
 };
 
 export const AgeHeader = ({ name, dob }: Props) => {

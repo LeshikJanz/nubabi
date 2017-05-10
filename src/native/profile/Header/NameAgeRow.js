@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
-import {
-  View,
-  TouchableHighlight,
-  Text,
-  StyleSheet,
-} from 'react-native';
-import moment from 'moment';
-
+import { View, TouchableHighlight, Text, StyleSheet } from 'react-native';
 import NubabiIcon from '../../../common/icons/nubabi';
 import { NUBABI_RED } from '../../../common/themes/defaultTheme';
+import { formatAge } from '../../shared/formatAge';
 
 class NameAgeRow extends Component {
-  _returnAge(birthDate) {
-    const diff = moment().diff(moment(birthDate), 'months');
-    return diff === 1 ? `${diff} month old` : `${diff} months old`;
-  }
-
   render() {
     return (
       <View style={styles.profileBackground}>
@@ -30,12 +19,12 @@ class NameAgeRow extends Component {
           <View style={styles.backdropView}>
             <Text style={styles.babyName}>{this.props.babyName}</Text>
           </View>
-          <View style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}>
+          <View
+            style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}
+          >
             <View style={styles.babyAgeBackground}>
-              <Text
-                style={styles.babyAge}
-              >
-                {this._returnAge(this.props.birthDate)}
+              <Text style={styles.babyAge}>
+                {formatAge(this.props.birthDate)}
               </Text>
             </View>
           </View>
@@ -44,9 +33,10 @@ class NameAgeRow extends Component {
           <View style={styles.profileHeaderButton}>
             <NubabiIcon
               onPress={this.props.onEditBaby}
-              style={
-                [styles.profileHeaderButtonText, { marginLeft: 7, fontSize: 16, marginTop: -1 }]
-              }
+              style={[
+                styles.profileHeaderButtonText,
+                { marginLeft: 7, fontSize: 16, marginTop: -1 },
+              ]}
               name="editProfile"
             />
           </View>
