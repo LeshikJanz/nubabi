@@ -156,14 +156,15 @@ const resolvers = {
         prop('growth_development')(obj),
         await connector.getTemplateVariables(firebase, obj.baby),
       );
-
-      return result;
     },
     introduction: async (obj, _, { connectors: { firebase } }) => {
       return connector.makeStringFromTemplate(
         obj.introduction,
         await connector.getTemplateVariables(firebase, obj.baby),
       );
+    },
+    expert: (obj, _, { token }) => {
+      return connector.getExpert(token, prop('expert_id')(obj));
     },
   },
 };

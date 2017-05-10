@@ -4,12 +4,14 @@ import React, { PureComponent } from 'react';
 import { ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
+import { filter } from 'graphql-anywhere';
 import { compose, path } from 'ramda';
-import { Box, Card, Markdown } from '../components';
+import { Box, Markdown } from '../components';
 import PeriodFilter from './PeriodFilter';
 import displayLoadingState from '../components/displayLoadingState';
 import Introduction from './Introduction';
 import HealthcareNotice from './HealthcareNotice';
+import ExpertAdvice from './ExpertAdvice';
 
 type Props = {
   growth: ?Array<Growth>,
@@ -19,7 +21,6 @@ export class WhatYouNeedToKnow extends PureComponent {
   static fragments = {
     period: gql`
       fragment GrowthPeriod on Growth {
-        id
         title
       }
     `,
@@ -36,6 +37,7 @@ export class WhatYouNeedToKnow extends PureComponent {
       label: node.title,
       key: node.id,
       content: node.content,
+      expert: node.expert,
     }));
   }
 
@@ -49,6 +51,7 @@ export class WhatYouNeedToKnow extends PureComponent {
   render() {
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
+    console.log(current);
 
     return (
       <ScrollView style={{ flex: 1 }}>
@@ -61,8 +64,13 @@ export class WhatYouNeedToKnow extends PureComponent {
           <Box>
             <Introduction text={current.introduction} />
           </Box>
-          <Box backgroundColor="white" flex={1} padding={1}>
-            <Markdown text={current.content} />
+          <Box backgroundColor="white" flex={1}>
+            <ExpertAdvice
+              {...filter(ExpertAdvice.fragments.expert, current.expert)}
+            />
+            <Box padding={1}>
+              <Markdown text={current.content} />
+            </Box>
           </Box>
           <Box>
             <HealthcareNotice />
@@ -82,11 +90,17 @@ export default compose(
     query WhatYouNeedToKnow($babyId: ID!) {
       viewer {
         baby(id: $babyId) {
+          id
           growth {
             edges {
               node {
+                id
                 ...GrowthPeriod
                 ...CurrentGrowth
+                expert {
+                  id
+                  ...ExpertAdvice
+                }
               }
             }
           }
@@ -95,6 +109,7 @@ export default compose(
     }
     ${WhatYouNeedToKnow.fragments.period}
     ${WhatYouNeedToKnow.fragments.current} 
+    ${ExpertAdvice.fragments.expert}
   `,
     {
       options: ownProps => ({
@@ -104,7 +119,7 @@ export default compose(
         let growth;
         const edges = path(['viewer', 'baby', 'growth', 'edges'], data);
 
-        if (edges.length) {
+        if (edges && edges.length) {
           growth = edges.map(edge => edge.node);
         }
 
