@@ -1,12 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Menu, {
   MenuContext,
   MenuOptions,
   MenuOption,
   MenuTrigger,
 } from 'react-native-menu';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Box, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
@@ -17,19 +17,13 @@ export type GrowthPeriodOption = {
 };
 
 type Props = {
-  onPeriodSelect: () => void,
-  currentPeriod: GrowthPeriodOption,
+  onPeriodSelect: (periodId: string) => void,
+  selectedPeriod: GrowthPeriodOption,
   options: Array<GrowthPeriodOption>,
 };
 
-class PeriodFilter extends Component {
+class PeriodFilter extends PureComponent {
   props: Props;
-
-  handleSelect = option => {
-    this.setState({
-      selectedPeriod: option,
-    });
-  };
 
   renderOptions() {
     return this.props.options.map(option => (
@@ -42,7 +36,7 @@ class PeriodFilter extends Component {
   render() {
     return (
       <MenuContext style={{ flex: 1 }}>
-        <Menu onSelect={this.handleSelect} style={styles.dropdown}>
+        <Menu onSelect={this.props.onPeriodSelect} style={styles.dropdown}>
           <MenuTrigger>
             <Box
               backgroundColor="white"
@@ -55,12 +49,12 @@ class PeriodFilter extends Component {
               flexDirection="row"
             >
               <Text
-                key={this.props.currentPeriod.key}
+                key={this.props.selectedPeriod.key}
                 color="black"
                 size={2}
                 flex={1}
               >
-                {this.props.currentPeriod.label}
+                {this.props.selectedPeriod.label}
               </Text>
               <Icon
                 name="md-arrow-dropdown"

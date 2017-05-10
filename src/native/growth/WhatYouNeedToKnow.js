@@ -1,7 +1,7 @@
 // @flow
 import type { State, Growth } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
@@ -17,7 +17,14 @@ type Props = {
   growth: ?Array<Growth>,
 };
 
+type ComponentState = {
+  selectedPeriod: ?string,
+};
+
 export class WhatYouNeedToKnow extends PureComponent {
+  props: Props;
+  state: ComponentState;
+
   static fragments = {
     period: gql`
       fragment GrowthPeriod on Growth {
@@ -32,6 +39,10 @@ export class WhatYouNeedToKnow extends PureComponent {
     `,
   };
 
+  state = {
+    selectedPeriod: null,
+  };
+
   getPeriodOptions() {
     return this.props.growth.map(node => ({
       label: node.title,
@@ -43,21 +54,30 @@ export class WhatYouNeedToKnow extends PureComponent {
 
   getGrowthForCurrentPeriod(options) {
     // FIXME
+    if (this.state.selectedPeriod) {
+      return options.find(period => period.key === this.state.selectedPeriod);
+    }
+
     return options[0];
   }
 
-  handlePeriodSelect = () => {};
+  handlePeriodSelect = (periodId: string) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
+
+    this.setState({
+      selectedPeriod: periodId,
+    });
+  };
 
   render() {
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
-    console.log(current);
 
     return (
       <ScrollView style={{ flex: 1 }}>
         <PeriodFilter
           options={this.getPeriodOptions()}
-          currentPeriod={current}
+          selectedPeriod={current}
           onPeriodSelect={this.handlePeriodSelect}
         />
         <Box zIndex={-1}>
