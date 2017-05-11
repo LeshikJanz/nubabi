@@ -24,7 +24,7 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
   const textStyle = {
     paragraph: {
       fontSize: 16,
-      lineHeight: 20,
+      lineHeight: 26,
     },
   };
 

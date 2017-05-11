@@ -1,16 +1,16 @@
 // @flow
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { merge } from 'lodash';
 import SimpleMarkdown from 'react-native-simple-markdown';
 import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   text: string,
-  styles?: Object,
+  style?: Object,
 };
 
-export const Markdown = ({ styles: stylesProp, text }: Props) => {
-  const style = StyleSheet.flatten(styles, stylesProp);
+export const Markdown = ({ style: stylesProp, text }: Props) => {
+  const style = merge({}, styles, stylesProp);
 
   return (
     <SimpleMarkdown styles={style}>
