@@ -56,7 +56,6 @@ export class WhatYouNeedToKnow extends PureComponent {
   }
 
   getGrowthForCurrentPeriod(options) {
-    // FIXME
     if (this.state.selectedPeriod) {
       return options.find(period => period.key === this.state.selectedPeriod);
     }
@@ -79,11 +78,6 @@ export class WhatYouNeedToKnow extends PureComponent {
     });
   };
 
-  handleSkipIntroduction = (id: string) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.props.skipIntroduction(id);
-  };
-
   render() {
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
@@ -92,7 +86,6 @@ export class WhatYouNeedToKnow extends PureComponent {
       <WhatYouNeedToKnowForPeriod
         current={current}
         onPeriodSelect={this.handlePeriodSelect}
-        onSkipIntroduction={this.handleSkipIntroduction}
         periods={options}
       />
     );
@@ -100,14 +93,9 @@ export class WhatYouNeedToKnow extends PureComponent {
 }
 
 export default compose(
-  connect(
-    (state: State) => ({
-      currentBabyId: state.babies.currentBabyId,
-    }),
-    {
-      skipIntroduction,
-    },
-  ),
+  connect((state: State) => ({
+    currentBabyId: state.babies.currentBabyId,
+  })),
   graphql(
     gql`
       query WhatYouNeedToKnow($babyId: ID!) {

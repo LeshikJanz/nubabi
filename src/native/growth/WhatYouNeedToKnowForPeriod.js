@@ -2,24 +2,15 @@
 import type { GrowthPeriodOption } from './PeriodFilter';
 import React from 'react';
 import { ScrollView } from 'react-native';
-import { compose } from 'ramda';
-import { connect } from 'react-redux';
-import {
-  makeShouldShowIntroductionSelector,
-  shouldShowIntroduction,
-} from '../../common/growth/reducer';
 import { filter } from 'graphql-anywhere';
-import { Box, Markdown } from '../components';
+import { Box, Markdown, Text } from '../components';
 import PeriodFilter from './PeriodFilter';
-import Introduction from './Introduction';
 import HealthcareNotice from './HealthcareNotice';
 import ExpertAdvice from './ExpertAdvice';
 
 type Props = {
   current: GrowthPeriodOption,
   periods: Array<GrowthPeriodOption>,
-  shouldShowIntroduction: boolean,
-  onSkipIntroduction: () => void,
   onPeriodSelect: () => void,
 };
 
@@ -27,10 +18,15 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
   const {
     current,
     periods,
-    shouldShowIntroduction,
-    onSkipIntroduction,
     onPeriodSelect,
   } = props;
+
+  const textStyle = {
+    paragraph: {
+      fontSize: 16,
+      lineHeight: 20,
+    },
+  };
 
   // TODO: bound func in render (onSkip)
   return (
@@ -41,19 +37,17 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
         onPeriodSelect={onPeriodSelect}
       />
       <Box zIndex={-1}>
-        {shouldShowIntroduction &&
-          <Box paddingHorizontal={1}>
-            <Introduction
-              text={current.introduction}
-              onSkip={() => onSkipIntroduction(current.key)}
-            />
-          </Box>}
-        <Box backgroundColor="white" flex={1}>
+        <Box backgroundColor="white" paddingBottom={1} flex={1}>
           <ExpertAdvice
             {...filter(ExpertAdvice.fragments.expert, current.expert)}
           />
-          <Box padding={1}>
-            <Markdown text={current.content} />
+          <Box paddingHorizontal={1}>
+            <Text marginVertical={1} size={3} bold>What you need to know</Text>
+            <Markdown text={current.introduction} style={textStyle} />
+          </Box>
+          <Box paddingHorizontal={1}>
+            <Text marginVertical={1} size={3} bold>Growth & Development</Text>
+            <Markdown text={current.content} style={textStyle} />
           </Box>
         </Box>
         <Box>
@@ -64,14 +58,4 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
   );
 };
 
-export default compose(
-  connect((state, props) => ({
-    shouldShowIntroduction: shouldShowIntroduction(state, props),
-  })),
-  // connect((() => {
-  //   const shouldShowIntroduction = makeShouldShowIntroductionSelector();
-  //   return (state, props) => ({
-  //     shouldShouldIntroduction: shouldShowIntroduction(state, props),
-  //   });
-  // })()),
-)(WhatYouNeedToKnowForPeriod);
+export default WhatYouNeedToKnowForPeriod;
