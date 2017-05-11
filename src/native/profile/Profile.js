@@ -55,6 +55,8 @@ class Profile extends PureComponent {
   };
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
+  handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
+  handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
 
   render() {
     const { baby } = this.props;
@@ -82,14 +84,14 @@ class Profile extends PureComponent {
                 header="Weight"
                 unit="kg"
                 iconName="weight"
-                onUpdate={() => {}}
+                onUpdate={this.handleUpdateWeight}
               />
               <Measurement
                 amount={baby.height}
                 header="Height"
                 unit="cm"
                 iconName="height"
-                onUpdate={() => {}}
+                onUpdate={this.handleUpdateHeight}
               />
             </View>
             <Achievements />

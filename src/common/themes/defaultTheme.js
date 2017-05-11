@@ -57,6 +57,7 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
+    medium: 500,
     fontFamily: 'System',
   },
   block: {

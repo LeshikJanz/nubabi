@@ -119,6 +119,8 @@ export type NavigationOptionsGetter = (
 
 export type NavigationOptions = NavigationScreenOptions;
 
+export type NavigationProp = NavigationScreenProp<*, *>;
+
 // Layout
 export type LayoutProps = {
   viewportWidth: number,

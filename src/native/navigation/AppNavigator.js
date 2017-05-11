@@ -1,3 +1,4 @@
+// @flow
 import React, { PureComponent } from 'react';
 // $FlowFixMe
 import {
@@ -28,6 +29,8 @@ import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivities from '../stimulation/BrowseActivities';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
 import LoginScreen from '../login/LoginScreen';
+import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
+import UpdateHeightScreen from '../profile/EditBaby/UpdateHeightScreen';
 
 import theme from '../../common/themes/defaultTheme';
 import FavoriteActivities from '../stimulation/Favorites';
@@ -152,6 +155,8 @@ const routes = {
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
+  updateHeight: { screen: UpdateHeightScreen },
+  updateWeight: { screen: UpdateWeightScreen },
   thisWeekActivities: { screen: ThisWeeksActivities },
   favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
