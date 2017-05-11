@@ -22,7 +22,9 @@ export class UpdateMeasurement extends PureComponent {
   props: Props;
   state: State;
 
-  state = {};
+  state = {
+    value: 56,
+  };
 
   handleUnitSwitch = (unit: ?MeasurementUnit) => {
     this.setState({
@@ -34,6 +36,20 @@ export class UpdateMeasurement extends PureComponent {
     this.setState({
       currentUnit: this.props.type === 'weight' ? 'kg' : 'cm',
     });
+  }
+
+  valueInCurrentUnit() {
+    if (this.props.type === 'weight' && this.state.currentUnit !== 'kg') {
+      const valueInPounds = this.state.value * 2.20462;
+      return valueInPounds.toFixed(1);
+    }
+
+    if (this.props.type === 'height' && this.state.currentUnit !== 'cm') {
+      const valueInInches = this.state.value * 0.393701;
+      return valueInInches.toFixed(1);
+    }
+
+    return this.state.value;
   }
 
   render() {
@@ -76,7 +92,7 @@ export class UpdateMeasurement extends PureComponent {
                 fontWeight: '200',
               })}
             >
-              56 {this.state.currentUnit}
+              {this.valueInCurrentUnit()} {this.state.currentUnit}
             </Text>
           </Box>
           <Box alignItems="center" justifyContent="flex-end">
