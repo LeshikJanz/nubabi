@@ -1,0 +1,26 @@
+extend type Viewer {
+  allTips(before: String, after: String, first: Int, last: Int): TipConnection
+}
+
+# A Tip used in the Did You Know section
+type Tip {
+  id: ID!
+  text: String!
+}
+
+# A connection to a list of items.
+type TipConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [TipEdge]
+}
+
+type TipEdge {
+  # The item at the end of the edge.
+  node: Tip!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}

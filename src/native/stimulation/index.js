@@ -3,6 +3,9 @@ import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
+import { graphql, gql } from 'react-apollo';
+import { compose, path } from 'ramda';
+import { sample } from 'lodash';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
@@ -19,6 +22,7 @@ import {
 
 type Props = {
   navigation: NavigationProp<*, *>,
+  didYouKnow: ?string,
 };
 
 class Stimulation extends Component {
@@ -54,6 +58,8 @@ class Stimulation extends Component {
   };
 
   render() {
+    const { didYouKnow } = this.props;
+
     return (
       <View style={styles.container} onLayout={this.handleLayout}>
         <View style={styles.actionButtons}>
@@ -72,7 +78,7 @@ class Stimulation extends Component {
           </View>
 
           <View style={styles.didYouKnow}>
-            <DidYouKnow />
+            <DidYouKnow text={didYouKnow} />
           </View>
         </ScrollView>
       </View>
@@ -84,6 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: PANEL_BACKGROUND,
+    paddingBottom: 1,
   },
   actionButtons: {
     justifyContent: 'center',
@@ -126,7 +133,6 @@ const styles = StyleSheet.create({
   },
   didYouKnow: {
     marginTop: 5,
-    height: 96,
     marginLeft: 10,
     marginRight: 10,
     shadowColor: '#000',
@@ -139,4 +145,39 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stimulation;
+export default compose(
+  graphql(
+    gql`
+    query Stimulation {
+      viewer {
+        allTips {
+          edges {
+            node {
+              ...DidYouKnow
+            }
+          }
+        }
+      }
+    }
+    ${DidYouKnow.fragments.tips}
+    `,
+    {
+      options: { fetchPolicy: 'cache-and-network' },
+      props: ({ data }) => {
+        let didYouKnow;
+
+        const edges = path(['viewer', 'allTips', 'edges'], data);
+        console.log(data);
+        if (edges) {
+          didYouKnow = sample(edges.map(edge => edge.node.text));
+        }
+        console.log(didYouKnow);
+
+        return {
+          data,
+          didYouKnow,
+        };
+      },
+    },
+  ),
+)(Stimulation);

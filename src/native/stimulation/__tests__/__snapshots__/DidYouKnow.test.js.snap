@@ -9,9 +9,8 @@ exports[`it renders correctly 1`] = `
       "borderRadius": 4,
       "flex": 2,
       "flexDirection": "row",
-      "height": 96,
       "justifyContent": "flex-start",
-      "overflow": "hidden",
+      "padding": 5,
     }
   }
 >
@@ -56,6 +55,7 @@ exports[`it renders correctly 1`] = `
         Object {
           "color": "#748294",
           "fontSize": 12,
+          "lineHeight": 16,
         }
       }
     >

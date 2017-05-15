@@ -195,3 +195,9 @@ export const getExperts = (token: string) =>
 
 export const getExpert = (token: string, id: string) =>
   instance.get(`/experts/${id}`, withToken(token)).then(path(['data']));
+
+export const getTips = (token: String) =>
+  instance.get('/content/tips', withToken(token)).then(path(['data']));
+
+export const getQuotes = (token: String) =>
+  instance.get('/content/quotes', withToken(token)).then(path(['data']));
