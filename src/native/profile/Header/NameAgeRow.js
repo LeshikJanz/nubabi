@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, TouchableHighlight, Text, StyleSheet } from 'react-native';
 import NubabiIcon from '../../../common/icons/nubabi';
 import { NUBABI_RED } from '../../../common/themes/defaultTheme';
-import { formatAge } from '../../shared/formatAge';
+import { formatAge } from '../../../common/helpers/formatAge';
 
 class NameAgeRow extends Component {
   render() {

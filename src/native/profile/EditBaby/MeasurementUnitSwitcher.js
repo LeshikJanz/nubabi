@@ -3,6 +3,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Box, Text } from '../../components';
 
+// TODO: remove these types, use from modelTypes
 export type WeightMeasurementUnit = 'kg' | 'lbs';
 export type HeightMeasurementUnit = 'cm' | 'in';
 export type MeasurementUnit = WeightMeasurementUnit | HeightMeasurementUnit;

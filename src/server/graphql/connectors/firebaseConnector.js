@@ -1,5 +1,10 @@
+// @flow
 import { omit, evolve } from 'ramda';
 import { decode } from 'base-64';
+import {
+  toCentimeters,
+  toKilograms,
+} from '../../../common/helpers/measurement';
 
 const returnVal = snapshot => snapshot.val();
 const returnValWithKeyAsId = snapshot => {
@@ -146,10 +151,62 @@ const createOrUpdateBaby = (firebase, values, id) => {
 };
 
 const getViewer = firebase => firebase.auth().currentUser;
+
 const get = (firebase, path) =>
   firebase.database().ref(path).once('value').then(returnVal);
+
 const set = (firebase, path, values) =>
   firebase.database().ref(path).set(values);
+
+const getBaby = (firebase, id) => {
+  return firebase
+    .database()
+    .ref()
+    .child(`/babies/${id}`)
+    .once('value')
+    .then(returnValWithKeyAsId);
+};
+
+const recordMeasurement = async (firebase, babyId, type, unit, value) => {
+  // TODO: this is currently stored in Firebase, which isn't particularly
+  // good for historical data. We might consider a separate datastore for
+  // this, probably BigQuery if we wish to stay in the Google ecosystem
+
+  const suffix = type === 'weight' ? 'weights' : 'heights';
+  const measurementPrefix = `/measurements/${babyId}/${suffix}`;
+  const measurementKey = firebase.database().ref(measurementPrefix).push().key;
+  const measurementPath = [measurementPrefix, measurementKey].join('/');
+
+  let rawValue = value;
+
+  if (type === 'weight' && unit !== 'kg') {
+    rawValue = toKilograms(value);
+  } else if (type === 'height' && unit !== 'cm') {
+    rawValue = toCentimeters(value);
+  }
+
+  const updates = {};
+  updates[`/babies/${babyId}/${type}`] = rawValue;
+
+  updates[measurementPath] = {
+    value: rawValue,
+    recordedAt: firebase.database.ServerValue,
+  };
+
+  await firebase.database().ref().update(updates);
+  const baby = await getBaby(firebase, babyId);
+
+  const measurement = await get(firebase, measurementPath);
+
+  return {
+    baby,
+    recordedMeasurement: {
+      value: measurement.value,
+      unit: type === 'weight' ? 'kg' : 'cm',
+      recordedAt: new Date(measurement.recordedAt.TIMESTAMP),
+    },
+  };
+};
 
 const firebaseConnector = firebase => {
   return {
@@ -179,13 +236,8 @@ const firebaseConnector = firebase => {
           ))
         .then(([...babies]) => babies);
     },
-    getBaby: id => {
-      return firebase
-        .database()
-        .ref()
-        .child(`/babies/${id}`)
-        .once('value')
-        .then(returnValWithKeyAsId);
+    getBaby: (id: string) => {
+      return getBaby(firebase, id);
     },
     getRelationship: id => {
       return firebase
@@ -199,6 +251,14 @@ const firebaseConnector = firebase => {
     },
     updateBaby: (id, values) => {
       return createOrUpdateBaby(firebase, values, id);
+    },
+    recordMeasurement: (
+      id: string,
+      type: MeasurementType,
+      unit: MeasurementUnit,
+      value: number,
+    ) => {
+      return recordMeasurement(firebase, id, type, unit, value);
     },
   };
 };

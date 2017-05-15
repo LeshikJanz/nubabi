@@ -20,7 +20,6 @@ type Props = {
   baby: Baby,
   skipGrowthGlobalIntro: () => void,
   onNavigateToWhatYouNeedToKnow: () => void,
-  onNavigateToDevelopmentRoadmap: () => void,
 };
 
 const formatName = (name: string) => {

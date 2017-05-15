@@ -5,7 +5,7 @@ import moment from 'moment';
 import theme from '../../common/themes/defaultTheme';
 import { Box, Text } from '../components';
 import NubabiIcon from '../../common/icons/nubabi';
-import { formatAge } from '../shared/formatAge';
+import { formatAge } from '../../common/helpers/formatAge';
 
 type Props = {
   name: string,

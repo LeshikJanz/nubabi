@@ -7,6 +7,7 @@ extend type Viewer {
 extend type Mutation {
   createBaby(input: CreateBabyInput!): CreateBabyPayload
   updateBaby(input: UpdateBabyInput!): UpdateBabyPayload
+  recordBabyMeasurement(input: RecordMeasurementInput!): RecordMeasurementPayload
 }
 
 enum Gender {
@@ -80,6 +81,8 @@ type UpdateBabyPayload {
   clientMutationId: String
 }
 
+
+
 # A connection to a list of items.
 type BabyConnection {
   # Information to aid in pagination.
@@ -95,6 +98,40 @@ type BabyEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+enum MeasurementUnit {
+  kg
+  cm
+  in
+  lbs
+}
+
+enum MeasurementType {
+  height
+  weight
+}
+
+type Measurement {
+  value: Float!
+  unit: MeasurementUnit!
+  recordedAt: DateTime!
+}
+
+input RecordMeasurementInput {
+  babyId: ID!
+  value: Float!
+  type: MeasurementType!
+  unit: MeasurementUnit!
+}
+
+type RecordMeasurementPayload {
+  changedMeasurement: Measurement
+
+  baby: Baby!
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
 }
 
 type Achievement {

@@ -55,7 +55,7 @@ type Baby {
   coverImage: Image | Null
   dob: Date
 
-  // Weight and height are updated separetely to track historical data
+  // Weight and height are updated separately to track historical data
   weight: Number | Null
   height: Number | Null
 
@@ -67,10 +67,12 @@ type Baby {
 
 // Paths
 // FIXME: we shouldn't need this
+/*
 path / {
   read() { isSignedIn() }
   write() { isSignedIn() }
 }
+*/
 
 path /users/{uid} {
   read() { isViewer(uid) }
@@ -84,10 +86,26 @@ path /users/{uid}/babies/{id} {
 
 path /babies {
   read() { true }
-  create() { isSignedIn() }
-  update() { isSignedIn() } // TODO
 
   /{id} is Baby {
+    create() { isSignedIn() }
+    update() { isSignedIn() }
+  }
+}
+
+path /measurements/{babyId} {
+  validate() {
+    root.babies[babyId] !== null
+  }
+
+  path /weights {
+    read() { isSignedIn() }
+    write() { isSignedIn() } // TODO
+  }
+
+  path /heights {
+    read() { isSignedIn() }
+    write() { isSignedIn() } // TODO
   }
 }
 

@@ -78,6 +78,20 @@ const resolvers = {
         )
         .then(() => ({ wasFavorited: favorite }));
     }),
+
+    recordBabyMeasurement: mutationWithClientMutationId(({
+      babyId,
+      type,
+      unit,
+      value,
+    }, { connectors: { firebase } }) => {
+      return firebase.recordMeasurement(
+        fromGlobalId(babyId).id,
+        type,
+        unit,
+        value,
+      );
+    }),
   },
 
   Baby: {

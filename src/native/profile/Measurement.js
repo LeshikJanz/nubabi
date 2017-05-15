@@ -8,6 +8,7 @@ import theme, {
   FONT_COLOR,
   NUBABI_RED,
 } from '../../common/themes/defaultTheme';
+import { formatMeasurement } from '../../common/helpers/measurement';
 
 type Props = {
   header: string,
@@ -31,7 +32,9 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
       </View>
       <View style={styles.valueRow}>
         {amount
-          ? <Text style={styles.valueText}>{amount}{unit}</Text>
+          ? <Text style={styles.valueText}>
+              {formatMeasurement(amount)}{unit}
+            </Text>
           : <Text style={styles.noDataText}>No Data Yet</Text>}
       </View>
       <View style={styles.updateRow}>

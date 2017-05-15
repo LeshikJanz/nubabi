@@ -22,6 +22,7 @@ import type {
   ActivityLevelOperationEnum as ActivityLevelOperation,
   AdjustActivityLevelInput,
   ToggleFavoriteInput,
+  RecordMeasurementInput,
 } from './modelTypes';
 
 export type {
@@ -43,6 +44,7 @@ export type {
   ActivityLevelOperation,
   AdjustActivityLevelInput,
   ToggleFavoriteInput,
+  RecordMeasurementInput,
 };
 
 export type FirebaseUser = {
