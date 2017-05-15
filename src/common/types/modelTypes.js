@@ -39,9 +39,17 @@ export type Viewer = {
   /**  */
   allSkillAreas?: SkillAreaConnection,
   /**  */
+  allActivities: ActivityConnection,
+  /**  */
+  activity?: Activity,
+  /**  */
   allExperts: ExpertConnection,
   /**  */
   expert?: Expert,
+  /**  */
+  allTips?: TipConnection,
+  /**  */
+  allQuotes?: QuoteConnection,
 };
 
 /**
@@ -105,14 +113,7 @@ export type User = {
   updatedAt: any,
 };
 
-export type Node =
-  | User
-  | Baby
-  | Activity
-  | Expert
-  | SkillArea
-  | Achievement
-  | Memory;
+export type Node = User | Baby | Activity | Expert | SkillArea | Growth;
 
 export type Timestampable = User | Baby;
 
@@ -195,6 +196,10 @@ export type Baby = {
   achievements?: AchievementConnection,
   /**  */
   memories?: MemoryConnection,
+  /**  */
+  favoriteActivities: ActivityConnection,
+  /**  */
+  growth: GrowthConnection,
 };
 
 export type GenderEnum = 'MALE' | 'FEMALE';
@@ -208,6 +213,8 @@ export type ActivityConnection = {
   pageInfo: PageInfo,
   /** A list of edges. */
   edges?: Array<ActivityEdge>,
+  /** Count of filtered result set without considering pagination arguments */
+  count: number,
 };
 
 export type ActivityEdge = {
@@ -303,7 +310,7 @@ export type AchievementEdge = {
 
 export type Achievement = {
   __typename: string,
-  /** The ID of an object */
+  /**  */
   id: string,
   /**  */
   badges?: Array<Badge>,
@@ -346,6 +353,46 @@ export type Memory = {
   image?: Image,
 };
 
+export type GrowthConnection = {
+  __typename: string,
+  /** Global introduction to the Growth section */
+  introduction: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /**  */
+  edges?: Array<GrowthEdge>,
+};
+
+export type GrowthEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Growth,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Growth = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  title: string,
+  /**  */
+  introduction: string,
+  /**  */
+  content: string,
+  /** Minimum baby age in ageDuration units */
+  minimumAge?: number,
+  /** Maximum baby age in ageDuration units */
+  maximumAge?: number,
+  /** Age duration */
+  ageDuration?: AgeDurationEnum,
+  /** Expert who gave this content's advice */
+  expert?: Expert,
+};
+
+export type AgeDurationEnum = 'WEEK' | 'MONTH' | 'YEAR';
+
 /**
   description: A connection to a list of items.
 */
@@ -384,6 +431,67 @@ export type ExpertEdge = {
   cursor: string,
 };
 
+/**
+  description: A connection to a list of items.
+*/
+export type TipConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<TipEdge>,
+};
+
+export type TipEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Tip,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+/**
+  description: A Tip used in the Did You Know section
+*/
+export type Tip = {
+  __typename: string,
+  /**  */
+  id: string,
+  /**  */
+  text: string,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type QuoteConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<QuoteEdge>,
+};
+
+export type QuoteEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Quote,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Quote = {
+  __typename: string,
+  /**  */
+  id: string,
+  /**  */
+  author?: string,
+  /**  */
+  text?: string,
+  /**  */
+  title?: string,
+};
+
 export type Mutation = {
   __typename: string,
   /**  */
@@ -392,6 +500,14 @@ export type Mutation = {
   createBaby?: CreateBabyPayload,
   /**  */
   updateBaby?: UpdateBabyPayload,
+  /**  */
+  recordBabyMeasurement?: RecordMeasurementPayload,
+  /**  */
+  swoopActivity?: ChangeActivityPayload,
+  /**  */
+  changeActivity?: ChangeActivityPayload,
+  /**  */
+  toggleActivityFavorite?: ToggleFavoritePayload,
 };
 
 export type CreateBabyInput = {
@@ -457,6 +573,88 @@ export type UpdateBabyPayload = {
   __typename: string,
   /**  */
   changedBaby?: Baby,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId?: string,
+};
+
+export type RecordMeasurementInput = {
+  /**  */
+  babyId: string,
+  /**  */
+  value: number,
+  /**  */
+  type: MeasurementTypeEnum,
+  /**  */
+  unit: MeasurementUnitEnum,
+};
+
+export type MeasurementTypeEnum = 'height' | 'weight';
+
+export type MeasurementUnitEnum = 'kg' | 'cm' | 'in' | 'lbs';
+
+export type RecordMeasurementPayload = {
+  __typename: string,
+  /**  */
+  changedMeasurement?: Measurement,
+  /**  */
+  baby: Baby,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId?: string,
+};
+
+export type Measurement = {
+  __typename: string,
+  /**  */
+  value: number,
+  /**  */
+  unit: MeasurementUnitEnum,
+  /**  */
+  recordedAt: any,
+};
+
+export type SwoopActivityInput = {
+  /** The ID of the current Activity */
+  id: string,
+  /** The ID of the baby the Activity belongs to */
+  babyId: string,
+};
+
+export type ChangeActivityPayload = {
+  __typename: string,
+  /**  */
+  newActivity?: Activity,
+  /** The ID for the Activity that got replaced */
+  oldActivityId?: string,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId?: string,
+};
+
+export type AdjustActivityLevelInput = {
+  /** The ID of the current Activity */
+  id: string,
+  /** The ID of the baby the Activity belongs to */
+  babyId: string,
+  /**  */
+  level: ActivityLevelOperationEnum,
+};
+
+export type ActivityLevelOperationEnum = 'INCREASE' | 'DECREASE';
+
+export type ToggleFavoriteInput = {
+  /**  */
+  id: string,
+  /**  */
+  babyId: string,
+  /**  */
+  favorite: boolean,
+};
+
+export type ToggleFavoritePayload = {
+  __typename: string,
+  /**  */
+  activity?: Activity,
+  /**  */
+  wasFavorited?: boolean,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId?: string,
 };

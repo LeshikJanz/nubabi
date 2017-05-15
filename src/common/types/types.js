@@ -1,5 +1,4 @@
 // @flow
-import type { NavigationScreenProp } from 'react-navigation/src/TypeDefinition';
 import type { Element } from 'react';
 
 // Models
