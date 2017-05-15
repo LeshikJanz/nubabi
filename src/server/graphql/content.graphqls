@@ -1,5 +1,6 @@
 extend type Viewer {
   allTips(before: String, after: String, first: Int, last: Int): TipConnection
+  allQuotes(before: String, after: String, first: Int, last: Int): QuoteConnection
 }
 
 # A Tip used in the Did You Know section
@@ -20,6 +21,30 @@ type TipConnection {
 type TipEdge {
   # The item at the end of the edge.
   node: Tip!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type Quote {
+  id: ID!
+  author: String
+  text: String
+  title: String
+}
+
+# A connection to a list of items.
+type QuoteConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [QuoteEdge]
+}
+
+type QuoteEdge {
+  # The item at the end of the edge.
+  node: Quote!
 
   # A cursor for use in pagination.
   cursor: String!

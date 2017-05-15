@@ -64,15 +64,13 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
           currentBabyId
             ? Observable.fromPromise(apollo.query({ query: chooseBabyQuery }))
             : Observable.of(null),
-        )
-          .mergeMap(([fetchBabiesResult]) => [
-            getBabiesSuccess(
-              fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),
-            ),
-            appOnline(true),
-          ])
-          .catch(err => Observable.of(appError(err))),
-      );
+        ).mergeMap(([fetchBabiesResult]) => [
+          getBabiesSuccess(
+            fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),
+          ),
+          appOnline(true),
+        ]),
+      ).catch(err => Observable.of(appError(err)));
     }
 
     return Observable.of(appOnline(true));

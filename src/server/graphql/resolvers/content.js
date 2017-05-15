@@ -6,6 +6,13 @@ export const resolvers = {
     allTips: (_, args, { token }) => {
       return connectionFromPromisedArray(babiesConnector.getTips(token), args);
     },
+
+    allQuotes: (_, args, { token }) => {
+      return connectionFromPromisedArray(
+        babiesConnector.getQuotes(token),
+        args,
+      );
+    },
   },
 };
 
