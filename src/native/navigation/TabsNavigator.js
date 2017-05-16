@@ -52,7 +52,6 @@ const TabsNavigator = TabNavigator(
       activeTintColor: theme.colors.primary,
       inactiveTintColor: theme.colors.gray,
     },
-    lazy: true,
     navigationOptions,
   },
 );
