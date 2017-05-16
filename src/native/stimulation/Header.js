@@ -72,7 +72,7 @@ const Header = (
   };
 
   const headerContainerStyle = {
-    //paddingBottom: Math.round(width / 18.75 ), // 20 portrait 7p
+    // paddingBottom: Math.round(width / 18.75 ), // 20 portrait 7p
     flex: 1,
   };
 

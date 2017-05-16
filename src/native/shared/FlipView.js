@@ -1,9 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import {
-  View,
-  Animated,
-} from 'react-native';
+import { View, Animated } from 'react-native';
 
 const styles = {
   animatedContainer: {
@@ -39,10 +36,10 @@ export class FlipCard extends Component {
 
   _flippedCard() {
     Animated.spring(this.state.animatedValue, {
-      toValue: 0,   // Returns to the start
-      velocity: this.props.velocity,  // Velocity makes it move
+      toValue: 0, // Returns to the start
+      velocity: this.props.velocity, // Velocity makes it move
       tension: this.props.tension, // Slow
-      friction: this.props.friction,  // Oscillate a lot
+      friction: this.props.friction, // Oscillate a lot
     }).start();
   }
 
@@ -62,11 +59,15 @@ export class FlipCard extends Component {
     return (
       <View style={styles.animatedContainer}>
         <Animated.View
-          style={[styles.animatedContainer, { transform: [{ rotateY }, { perspective }]}]}
+          style={[
+            styles.animatedContainer,
+            { transform: [{ rotateY }, { perspective }] },
+          ]}
         >
           {this.flippedCardView(this.state.isFlipped)}
         </Animated.View>
-      </View>);
+      </View>
+    );
   }
 }
 

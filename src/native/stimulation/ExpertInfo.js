@@ -48,7 +48,7 @@ class ExpertInfo extends Component {
     `,
   };
 
-  renderFront = (onFlip) => {
+  renderFront = onFlip => {
     const firstName = head(this.props.expert.name.split(' '));
     const avatar = { uri: path(['avatar', 'url'], this.props.expert) };
 
@@ -69,15 +69,18 @@ class ExpertInfo extends Component {
             {this.props.expert.discipline}
           </Text>
           <TouchableOpacity style={styles.infoIcon} onPress={onFlip}>
-            <Icon name="md-information-circle" size={24}
-                  color={theme.colors.primary} />
+            <Icon
+              name="md-information-circle"
+              size={24}
+              color={theme.colors.primary}
+            />
           </TouchableOpacity>
         </View>
       </View>
     );
   };
 
-  renderBack = (onFlip) => {
+  renderBack = onFlip => {
     return (
       <View style={styles.biographyContainer}>
         <TouchableOpacity
@@ -117,8 +120,8 @@ class ExpertInfo extends Component {
           velocity={4}
           tension={7}
           friction={5}
-          renderFront={(onFlip) => this.renderFront(onFlip)}
-          renderBack={(onFlip) => this.renderBack(onFlip)}
+          renderFront={onFlip => this.renderFront(onFlip)}
+          renderBack={onFlip => this.renderBack(onFlip)}
         />
       </View>
     );
