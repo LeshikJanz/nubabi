@@ -2,96 +2,124 @@
 
 exports[`it renders correctly 1`] = `
 <View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "red",
-      "borderRadius": 4,
-      "flex": 2,
-      "height": 130,
-      "justifyContent": "center",
-      "marginRight": 5,
-      "overflow": "hidden",
-      "shadowColor": "#000",
-      "shadowOffset": Object {
-        "height": 5,
-        "width": 0,
-      },
-      "shadowOpacity": 1,
-      "shadowRadius": 1,
-    }
-  }
->
-  <Image
-    source={1}
-    style={
+    Array [
       Object {
-        "resizeMode": "contain",
-        "width": 175,
-      }
-    }
-  >
-    <View
+        "backgroundColor": "transparent",
+      },
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "red",
+        "borderRadius": 4,
+        "flex": 2,
+        "height": 130,
+        "justifyContent": "center",
+        "marginRight": 5,
+        "overflow": "hidden",
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 5,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View>
+    <Image
+      resizeMode="contain"
+      source={1}
       style={
-        Object {
-          "alignItems": "center",
-          "backgroundColor": "transparent",
-          "flex": 1,
-          "justifyContent": "center",
-        }
+        Array [
+          Object {
+            "width": 175,
+          },
+          Object {
+            "width": undefined,
+          },
+        ]
       }
     >
       <View
         style={
           Object {
             "alignItems": "center",
-            "backgroundColor": "#748294",
+            "backgroundColor": "transparent",
             "flex": 1,
-            "height": 130,
-            "justifyContent": "center",
-            "marginTop": 65,
-            "opacity": 0.4,
-            "position": "absolute",
-            "top": 0,
-            "width": 200,
-          }
-        }
-      />
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "transparent",
-            "color": "#fff",
-            "fontSize": 16,
-            "fontWeight": "500",
             "justifyContent": "center",
           }
         }
       >
-        Equipment For
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "transparent",
-            "color": "#fff",
-            "fontSize": 16,
-            "fontWeight": "500",
-            "justifyContent": "center",
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#748294",
+              "flex": 1,
+              "height": 130,
+              "justifyContent": "center",
+              "marginTop": 65,
+              "opacity": 0.4,
+              "position": "absolute",
+              "top": 0,
+              "width": 200,
+            }
           }
-        }
-      >
-        Next Week
-      </Text>
-    </View>
-  </Image>
+        />
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "color": "#fff",
+              "fontSize": 16,
+              "fontWeight": "500",
+              "justifyContent": "center",
+            }
+          }
+        >
+          Equipment For
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "transparent",
+              "color": "#fff",
+              "fontSize": 16,
+              "fontWeight": "500",
+              "justifyContent": "center",
+            }
+          }
+        >
+          Next Week
+        </Text>
+      </View>
+    </Image>
+  </View>
 </View>
 `;

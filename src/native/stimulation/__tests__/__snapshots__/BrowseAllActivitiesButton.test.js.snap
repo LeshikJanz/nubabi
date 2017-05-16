@@ -2,32 +2,58 @@
 
 exports[`it renders correctly 1`] = `
 <View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
-    Object {
-      "alignItems": "center",
-      "backgroundColor": "red",
-      "borderRadius": 4,
-      "flex": 2,
-      "height": 130,
-      "justifyContent": "center",
-      "overflow": "hidden",
-      "shadowColor": "#ccc",
-      "shadowOffset": Object {
-        "height": 5,
-        "width": 0,
+    Array [
+      Object {
+        "backgroundColor": "transparent",
       },
-      "shadowOpacity": 1,
-      "shadowRadius": 1,
-    }
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "red",
+        "borderRadius": 4,
+        "flex": 2,
+        "height": 130,
+        "justifyContent": "center",
+        "overflow": "hidden",
+        "shadowColor": "#ccc",
+        "shadowOffset": Object {
+          "height": 5,
+          "width": 0,
+        },
+        "shadowOpacity": 1,
+        "shadowRadius": 1,
+      },
+    ]
   }
+  testID={undefined}
+  tvParallaxProperties={undefined}
 >
   <Image
+    resizeMode="contain"
     source={1}
     style={
-      Object {
-        "resizeMode": "contain",
-        "width": 175,
-      }
+      Array [
+        Object {
+          "width": 175,
+        },
+        Object {
+          "width": undefined,
+        },
+      ]
     }
   >
     <View
@@ -42,18 +68,23 @@ exports[`it renders correctly 1`] = `
     >
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "backgroundColor": "#748294",
-            "flex": 1,
-            "height": 130,
-            "justifyContent": "center",
-            "marginTop": 65,
-            "opacity": 0.4,
-            "position": "absolute",
-            "top": 0,
-            "width": 200,
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#748294",
+              "flex": 1,
+              "height": 130,
+              "justifyContent": "center",
+              "marginTop": 65,
+              "opacity": 0.4,
+              "position": "absolute",
+              "top": 0,
+              "width": 200,
+            },
+            Object {
+              "width": undefined,
+            },
+          ]
         }
       />
       <Text

@@ -3,13 +3,11 @@
 exports[`handles GROWTH_SEEN_GLOBAL_INTRO when not seen 1`] = `
 Object {
   "hasSeenGlobalIntro": false,
-  "skippedIntroductions": Array [],
 }
 `;
 
 exports[`handles GROWTH_SEEN_GLOBAL_INTRO when seen 1`] = `
 Object {
   "hasSeenGlobalIntro": true,
-  "skippedIntroductions": Array [],
 }
 `;
