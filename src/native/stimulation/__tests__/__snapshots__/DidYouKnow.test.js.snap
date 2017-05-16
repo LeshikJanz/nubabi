@@ -10,7 +10,7 @@ exports[`it renders correctly 1`] = `
       "flex": 2,
       "flexDirection": "row",
       "justifyContent": "flex-start",
-      "padding": 5,
+      "padding": 10,
     }
   }
 >
@@ -39,9 +39,15 @@ exports[`it renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
           "color": "#454D56",
-          "fontSize": 14,
-          "marginBottom": 5,
+          "fontFamily": "System",
+          "fontSize": 16.828997530864196,
+          "lineHeight": 32,
         }
       }
     >
@@ -53,9 +59,15 @@ exports[`it renders correctly 1`] = `
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#748294",
-          "fontSize": 12,
-          "lineHeight": 16,
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#454D56",
+          "fontFamily": "System",
+          "fontSize": 14.791111111111112,
+          "lineHeight": 20,
         }
       }
     >

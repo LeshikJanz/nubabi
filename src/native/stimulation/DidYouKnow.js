@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
+import { Text } from '../components';
 import { gql } from 'react-apollo';
 import { PANEL_BUTTON_TEXT } from '../../common/themes/defaultTheme';
 
@@ -9,17 +10,16 @@ const icon = require('../../common/images/didYouKnowIcon.png');
 const defaultText = 'At this time your baby will begin to babble routinely, often amusing herself for long persion of time!';
 
 type Props = {
-  text: string,
+  text?: string,
 };
 
-const DidYouKnow = ({ text }: Props) => {
-  console.log('DidYouKnow', text);
+const DidYouKnow = ({ text = defaultText }: Props) => {
   return (
     <View style={styles.container}>
       <Image style={styles.icon} source={icon} />
       <View style={styles.textContainer}>
-        <Text style={styles.title}>Did you know</Text>
-        <Text style={styles.body}>
+        <Text color="black" size={4}>Did you know</Text>
+        <Text size={2} lineHeight={20}>
           {text}
         </Text>
       </View>
@@ -36,10 +36,6 @@ DidYouKnow.fragments = {
   `,
 };
 
-DidYouKnow.defaultProps = {
-  text: defaultText,
-};
-
 const styles = StyleSheet.create({
   container: {
     flex: 2,
@@ -48,7 +44,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    padding: 5,
+    padding: 10,
   },
   textContainer: {
     flexDirection: 'column',
