@@ -18,6 +18,7 @@ type Props = {
   navigation: any,
   isAuthenticated: boolean,
   loadingMessage: ?string,
+  author: ?string,
 };
 
 class SplashScreen extends PureComponent {
@@ -82,6 +83,25 @@ class SplashScreen extends PureComponent {
         <Text style={styles.loadingMessage}>
           {loadingMessage}
         </Text>
+        {this.props.author &&
+          <View
+            style={{
+              marginVertical: 5,
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 14,
+                color: theme.colors.open.gray0,
+                fontStyle: 'italic',
+              }}
+            >
+              {this.props.author}
+            </Text>
+          </View>}
       </View>
     );
   }
@@ -139,6 +159,8 @@ export default compose(
         allQuotes {
           edges {
             node {
+              id
+              author
               text
             }
           }
@@ -154,14 +176,18 @@ export default compose(
       props: ({ data }) => {
         const edges = path(['viewer', 'allQuotes', 'edges'], data);
         let loadingMessage;
+        let author;
 
         if (edges) {
-          loadingMessage = sample(edges.map(edge => edge.node.text));
+          const quote = sample(edges.map(edge => edge.node));
+          loadingMessage = quote.text;
+          author = quote.author;
         }
 
         return {
           data,
           loadingMessage,
+          author,
         };
       },
     },
