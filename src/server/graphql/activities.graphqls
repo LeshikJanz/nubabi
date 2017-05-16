@@ -1,6 +1,5 @@
 extend type Viewer {
   allActivities(before: String, after: String, first: Int, last: Int): ActivityConnection!
-  activity(id: ID!): Activity
 }
 
 extend type Baby {
@@ -15,7 +14,7 @@ extend type Mutation {
   toggleActivityFavorite(input: ToggleFavoriteInput!): ToggleFavoritePayload
 }
 
-type Activity implements Node {
+type Activity {
   id: ID!
   name: String!
   introduction: String

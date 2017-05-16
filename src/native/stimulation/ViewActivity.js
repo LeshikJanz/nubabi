@@ -64,12 +64,13 @@ export default compose(
     gql`
       query ViewActivity($babyId: ID!, $activityId: ID!) {
         viewer {
-          activity(id: $activityId) {
-            ...Activity
-          }
           baby(id: $babyId) {
             id
             name
+            
+            activity(id: $activityId) {
+              ...Activity
+            }
 
             favoriteActivities {
               edges {
@@ -100,16 +101,16 @@ export default compose(
         let isFavorite = false;
 
         if (favoriteActivities) {
-          // this should be simplified once activities include favorite info
+          // TODO: this could be simplified if activities include favorite info
           const favorites = pluck('node', favoriteActivities.edges);
-          const activityId = path(['viewer', 'activity', 'id'], data);
+          const activityId = path(['viewer', 'baby', 'activity', 'id'], data);
 
           isFavorite = !!find(propEq('id', activityId), favorites);
         }
 
         return {
           data,
-          activity: path(['viewer', 'activity'], data),
+          activity: path(['viewer', 'baby', 'activity'], data),
           babyName: path(['viewer', 'baby', 'name'], data),
           isFavorite,
         };

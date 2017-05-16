@@ -41,8 +41,6 @@ export type Viewer = {
   /**  */
   allActivities: ActivityConnection,
   /**  */
-  activity?: Activity,
-  /**  */
   allExperts: ExpertConnection,
   /**  */
   expert?: Expert,
@@ -113,7 +111,7 @@ export type User = {
   updatedAt: any,
 };
 
-export type Node = User | Baby | Activity | Expert | SkillArea | Growth;
+export type Node = User | Baby | Expert | SkillArea | Growth;
 
 export type Timestampable = User | Baby;
 

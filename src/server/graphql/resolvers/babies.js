@@ -30,9 +30,6 @@ const resolvers = {
         args,
       );
     },
-    activity: (_, { id }, { token }) => {
-      return connector.getActivity(token, fromGlobalId(id).id);
-    },
   },
 
   Mutation: {
