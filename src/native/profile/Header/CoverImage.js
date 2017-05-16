@@ -7,7 +7,7 @@ import withLayout from '../../components/withLayout';
 const headerBackground = require('../../../common/images/profileBackground.jpg');
 
 type Props = {
-  coverImage: ImageType,
+  coverImage: ?ImageType,
   layout: LayoutProps,
 };
 
