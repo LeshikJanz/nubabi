@@ -1,7 +1,7 @@
 extend type Viewer {
-  babies: BabyConnection
+  babies: BabyConnection!
   baby(id: ID!): Baby
-  allSkillAreas(before: String, after: String, first: Int, last: Int): SkillAreaConnection
+  allSkillAreas(before: String, after: String, first: Int, last: Int): SkillAreaConnection!
 }
 
 extend type Mutation {

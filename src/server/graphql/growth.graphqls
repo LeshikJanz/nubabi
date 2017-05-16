@@ -15,16 +15,16 @@ type Growth implements Node {
   content: String!
 
   # Minimum baby age in ageDuration units
-  minimumAge: Int
+  minimumAge: Int!
 
   # Maximum baby age in ageDuration units
-  maximumAge: Int
+  maximumAge: Int!
 
   # Age duration
-  ageDuration: AgeDuration
+  ageDuration: AgeDuration!
 
   # Expert who gave this content's advice
-  expert: Expert
+  expert: Expert!
 }
 
 type GrowthConnection {

@@ -1,6 +1,6 @@
 extend type Viewer {
-  allTips(before: String, after: String, first: Int, last: Int): TipConnection
-  allQuotes(before: String, after: String, first: Int, last: Int): QuoteConnection
+  allTips(before: String, after: String, first: Int, last: Int): TipConnection!
+  allQuotes(before: String, after: String, first: Int, last: Int): QuoteConnection!
 }
 
 # A Tip used in the Did You Know section
