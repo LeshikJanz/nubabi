@@ -12,7 +12,7 @@ type StepTitleProps = {
 
 type StepProps = {
   activityName: string,
-  step: string,
+  step: ?string,
   currentStepIndex: number,
   length: number,
   layout: LayoutProps,
@@ -34,20 +34,29 @@ const StepTitle = (props: StepTitleProps) => {
 
   return (
     <Box marginBottom={1}>
-      <Text color="black" spacing={-0.43} size={3}>{title}</Text>
+      <Text color="black" spacing={-0.43} size={4} lineHeight={21}>
+        {title}
+      </Text>
     </Box>
   );
 };
 
 export const Step = (props: StepProps) => {
   const { currentStepIndex, activityName, layout, length, step } = props;
-
-  if (!step) {
-    return null;
-  }
-
   const width = Math.round(layout.viewportWidth * 0.80);
   const height = Math.round(layout.viewportWidth * 0.35);
+
+  if (!step) {
+    return (
+      <Box>
+        <Image
+          src={require('../../common/images/centered-paragraph.png')}
+          size={{ width, height }}
+          opacity={0.2}
+        />
+      </Box>
+    );
+  }
 
   return (
     <Box>
@@ -57,12 +66,12 @@ export const Step = (props: StepProps) => {
         step={step}
         length={length}
       />
-      <Text marginBottom={1}>{step}</Text>
-      <Image
-        src={require('../../common/images/centered-paragraph.png')}
-        size={{ width, height }}
-        opacity={0.2}
-      />
+      <Text
+        marginBottom={1}
+        size={4}
+        lineHeight={26}
+        style={() => ({ color: '#6A7683' })}
+      >{step}</Text>
     </Box>
   );
 };

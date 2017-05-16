@@ -105,8 +105,9 @@ const resolvers = {
     activities: ({ id }, args, { token }) =>
       connectionFromPromisedArray(connector.getActivities(token, id), args),
 
-    activity: ({ id: babyId }, { id: activityId }, { token }) =>
-      connector.getActivity(token, fromGlobalId(activityId).id),
+    activity: ({ id: babyId }, { id: activityId }, { token }) => {
+      return connector.getActivity(token, fromGlobalId(activityId).id, babyId);
+    },
 
     favoriteActivities: ({ id: babyId }, args, { token }) =>
       connectionFromPromisedArrayWithCount(
@@ -151,6 +152,9 @@ const resolvers = {
       connector.getSkillArea(token, obj['skill_area_id']), // eslint-disable-line dot-notation
     expert: (obj, args, { token }) =>
       connector.getExpert(token, obj['expert_id']), // eslint-disable-line dot-notation
+    steps: ({ babyId, steps }, args, { connectors: { firebase } }) => {
+      return connector.getSteps(firebase, babyId, steps);
+    },
   },
 
   SkillArea: {

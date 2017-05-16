@@ -13,7 +13,7 @@ const instance = axios.create({
   responseType: 'json',
 });
 
-const withToken = token => ({
+const withToken = (token: string) => ({
   headers: {
     Authorization: `Bearer ${token}`,
   },
@@ -62,10 +62,21 @@ export const getFavoriteActivities = (token: string, babyId: string) =>
     .get(`/babies/${babyId}/activities/favourites`, withToken(token))
     .then(path(['data']));
 
-export const getActivity = (token: string, id: string) => {
+export const getActivity = (token: string, id: string, babyId: string) => {
   return instance
     .get(`/activities/${id}`, withToken(token))
-    .then(path(['data']));
+    .then(response => ({ babyId, ...path(['data'], response) }));
+};
+
+export const getSteps = async (
+  firebase,
+  babyId: string,
+  steps: Array<string>,
+) => {
+  const baby = await firebase.getBaby(babyId);
+  const variables = await getTemplateVariables(firebase, baby);
+
+  return steps.map(step => makeStringFromTemplate(step, variables));
 };
 
 export const getAllActivities = (token: string) => {
@@ -196,8 +207,8 @@ export const getExperts = (token: string) =>
 export const getExpert = (token: string, id: string) =>
   instance.get(`/experts/${id}`, withToken(token)).then(path(['data']));
 
-export const getTips = (token: String) =>
+export const getTips = (token: string) =>
   instance.get('/content/tips', withToken(token)).then(path(['data']));
 
-export const getQuotes = (token: String) =>
+export const getQuotes = (token: string) =>
   instance.get('/content/quotes', withToken(token)).then(path(['data']));
