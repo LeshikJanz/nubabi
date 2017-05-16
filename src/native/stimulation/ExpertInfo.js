@@ -1,14 +1,20 @@
 // @flow
-import type { Expert } from '../../common/types/index';
+import type { Expert, LayoutProps } from '../../common/types/index';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { path, head } from 'ramda';
 import FlipCard from '../shared/FlipView';
 import withLayout from '../components/withLayout';
 import theme from '../../common/themes/defaultTheme';
-
-const infoIcon = require('../../common/images/info_icon.png');
 
 type Props = {
   expert: Expert,
@@ -42,7 +48,7 @@ class ExpertInfo extends Component {
     `,
   };
 
-  renderFront = () => {
+  renderFront = (onFlip) => {
     const firstName = head(this.props.expert.name.split(' '));
     const avatar = { uri: path(['avatar', 'url'], this.props.expert) };
 
@@ -62,15 +68,24 @@ class ExpertInfo extends Component {
           <Text style={styles.expertDescriptionProfession}>
             {this.props.expert.discipline}
           </Text>
-          <Image style={styles.infoIcon} source={infoIcon} />
+          <TouchableOpacity style={styles.infoIcon} onPress={onFlip}>
+            <Icon name="md-information-circle" size={24}
+                  color={theme.colors.primary} />
+          </TouchableOpacity>
         </View>
       </View>
     );
   };
 
-  renderBack = () => {
+  renderBack = (onFlip) => {
     return (
       <View style={styles.biographyContainer}>
+        <TouchableOpacity
+          onPress={onFlip}
+          style={{ alignSelf: 'flex-end', flex: 1 }}
+        >
+          <Icon name="ios-close-circle" color={theme.colors.gray} size={24} />
+        </TouchableOpacity>
         <Image
           source={{ uri: this.props.expert.avatar.url }}
           style={styles.biographyAvatar}
@@ -102,8 +117,8 @@ class ExpertInfo extends Component {
           velocity={4}
           tension={7}
           friction={5}
-          renderFront={this.renderFront()}
-          renderBack={this.renderBack()}
+          renderFront={(onFlip) => this.renderFront(onFlip)}
+          renderBack={(onFlip) => this.renderBack(onFlip)}
         />
       </View>
     );
@@ -201,10 +216,11 @@ const styles = StyleSheet.create({
   infoIcon: {
     width: 20,
     height: 20,
-    resizeMode: 'contain',
     position: 'absolute',
     right: 10,
     top: 20,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   closeBiographyButton: {
     position: 'absolute',
