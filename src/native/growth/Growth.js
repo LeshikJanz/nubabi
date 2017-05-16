@@ -62,7 +62,10 @@ export class Growth extends Component {
     const introduction = baby.growth.introduction;
 
     return (
-      <ScrollView style={{ flex: 1 }}>
+      <ScrollView
+        style={{ flex: 1 }}
+        hitSlop={{ top: 0, left: 0, bottom: 0, right: 0 }}
+      >
         <AgeHeader {...filter(AgeHeader.fragments.baby, baby)} />
         <Box padding={1}>
           <Introduction

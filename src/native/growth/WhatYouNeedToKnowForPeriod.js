@@ -41,8 +41,7 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
           <ExpertAdvice
             {...filter(ExpertAdvice.fragments.expert, current.expert)}
           />
-          <Box paddingHorizontal={1}>
-            <Text marginVertical={1} size={3} bold>What you need to know</Text>
+          <Box paddingHorizontal={1} paddingTop={3}>
             <Markdown text={current.introduction} style={textStyle} />
           </Box>
           <Box paddingHorizontal={1}>
