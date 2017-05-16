@@ -12,7 +12,7 @@ type Props = {
 };
 
 export const UpdateMeasurementHeader = ({ onViewGraph }: Props) => {
-  const date = moment().format('d MMM YYYY');
+  const date = moment().format('D MMM YYYY');
 
   return (
     <Box
