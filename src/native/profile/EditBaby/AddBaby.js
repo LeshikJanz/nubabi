@@ -5,6 +5,7 @@ import { compose, path, assocPath, prepend } from 'ramda';
 import { graphql, gql } from 'react-apollo';
 import { Screen } from '../../components';
 import BabyForm from './BabyForm';
+import theme from '../../../common/themes/defaultTheme';
 
 type Props = {
   mutate: (options: Object) => Promise<*>,
@@ -16,6 +17,7 @@ class AddBaby extends Component {
   static navigationOptions: NavigationOptions = {
     headerTitle: 'Add Baby',
     headerStyle: {
+      backgroundColor: theme.colors.white,
       shadowOpacity: 0,
     },
   };
@@ -57,16 +59,16 @@ class AddBaby extends Component {
 export default compose(
   graphql(
     gql`
-    mutation CreateBaby($input: CreateBabyInput!) {
-      createBaby(input: $input) {
-        createdBaby {
-          ...BabyForm
+      mutation CreateBaby($input: CreateBabyInput!) {
+        createBaby(input: $input) {
+          createdBaby {
+            ...BabyForm
+          }
         }
       }
-    }
 
-    ${BabyForm.fragments.form}
-  `,
+      ${BabyForm.fragments.form}
+    `,
     {
       options: {
         updateQueries: {
