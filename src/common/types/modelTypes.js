@@ -33,11 +33,11 @@ export type Viewer = {
   /**  */
   getUser?: User,
   /**  */
-  babies?: BabyConnection,
+  babies: BabyConnection,
   /**  */
   baby?: Baby,
   /**  */
-  allSkillAreas?: SkillAreaConnection,
+  allSkillAreas: SkillAreaConnection,
   /**  */
   allActivities: ActivityConnection,
   /**  */
@@ -47,9 +47,9 @@ export type Viewer = {
   /**  */
   expert?: Expert,
   /**  */
-  allTips?: TipConnection,
+  allTips: TipConnection,
   /**  */
-  allQuotes?: QuoteConnection,
+  allQuotes: QuoteConnection,
 };
 
 /**
@@ -382,13 +382,13 @@ export type Growth = {
   /**  */
   content: string,
   /** Minimum baby age in ageDuration units */
-  minimumAge?: number,
+  minimumAge: number,
   /** Maximum baby age in ageDuration units */
-  maximumAge?: number,
+  maximumAge: number,
   /** Age duration */
-  ageDuration?: AgeDurationEnum,
+  ageDuration: AgeDurationEnum,
   /** Expert who gave this content's advice */
-  expert?: Expert,
+  expert: Expert,
 };
 
 export type AgeDurationEnum = 'WEEK' | 'MONTH' | 'YEAR';

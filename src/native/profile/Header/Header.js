@@ -1,5 +1,6 @@
 // @flow
 import type {
+  LayoutProps,
   Image,
   Avatar,
   Achievement,
@@ -23,6 +24,7 @@ type Props = {
   achievements?: Achievement[],
   favoriteActivities: ActivityConnection,
   onEditBaby: () => void,
+  layout: LayoutProps,
 };
 
 const Header = (

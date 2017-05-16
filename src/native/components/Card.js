@@ -13,6 +13,7 @@ import {
 
 type Props = BoxProps & {
   children: any,
+  onPress?: () => void,
 };
 
 class Card extends PureComponent {

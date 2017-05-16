@@ -5,8 +5,17 @@ import { getContext } from 'recompose';
 import PropTypes from 'prop-types';
 import hoistStatics from './hoistStatics';
 
+type LayoutState = {
+  layout: {
+    viewportWidth: number,
+    viewportHeight: number,
+    parentWidth: ?number,
+    parentHeight: ?number,
+  },
+};
+
 export function getLayoutInitialState() {
-  return {
+  const state: LayoutState = {
     layout: {
       viewportWidth: Dimensions.get('window').width,
       viewportHeight: Dimensions.get('window').height,
@@ -14,6 +23,8 @@ export function getLayoutInitialState() {
       parentHeight: null,
     },
   };
+
+  return state;
 }
 
 export function getChildContext() {
@@ -44,8 +55,6 @@ export function handleLayout(event: Event) {
 
   const parentChanged = state.parentWidth !== parentWidth ||
     state.parentHeight !== parentHeight;
-  const viewportChanged = state.viewportWidth !== viewportWidth ||
-    state.viewportHeight !== viewportHeight;
 
   if (parentChanged) {
     this.setState({

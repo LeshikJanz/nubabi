@@ -4,6 +4,7 @@ import type {
   GraphQLDataProp,
   State,
   NavigationOptions,
+  LayoutProps,
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
@@ -32,13 +33,12 @@ import theme, {
 import { selectBaby } from '../../common/babies/actions';
 import withLayout from '../components/withLayout';
 
-const window = Dimensions.get('window');
-
 const Icon = Animated.createAnimatedComponent(IonIcon);
 const babyIcon = require('../../common/images/face_icon.jpg');
 
 type Props = {
   navigation: NavigationProp<*, *>,
+  layout: LayoutProps,
   currentBabyId: ?string,
   babies: ?(Baby[]),
   data: GraphQLDataProp<*>,

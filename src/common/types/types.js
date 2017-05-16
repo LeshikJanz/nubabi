@@ -3,6 +3,7 @@ import type { Element } from 'react';
 
 // Models
 import type {
+  Query,
   Baby,
   Activity,
   ActivityConnection,
@@ -12,7 +13,12 @@ import type {
   Achievement,
   Expert,
   SkillArea,
+  Growth,
+  AgeDurationEnum as AgeDuration,
   GenderEnum as Gender,
+  MeasurementTypeEnum as MeasurementType,
+  MeasurementUnitEnum as MeasurementUnit,
+  Tip,
   Image,
   Avatar,
   CreateBabyInput,
@@ -25,6 +31,7 @@ import type {
 } from './modelTypes';
 
 export type {
+  Query,
   Baby,
   Activity,
   ActivityConnection,
@@ -34,9 +41,14 @@ export type {
   Achievement,
   Expert,
   SkillArea,
+  Growth,
+  AgeDuration,
+  MeasurementType,
+  MeasurementUnit,
   Gender,
   Image,
   Avatar,
+  Tip,
   CreateBabyInput,
   UpdateBabyInput,
   SwoopActivityInput,
@@ -170,7 +182,6 @@ export type BabyState = {
 
 export type GrowthState = {
   +hasSeenGlobalIntro: boolean,
-  +skippedIntroductions: Array<string>,
 };
 
 export type AuthState = {

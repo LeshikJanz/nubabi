@@ -24,7 +24,7 @@ function dimensionRelativeToIphone(dimension, actualRefVal = window.width) {
 
 const whatYouNeedToKnowImage = require('../../common/images/growth-what-you-need-to-know.png');
 
-export const WhatYouNeedToKnowButton = ({ onPress }: Props, context) => {
+export const WhatYouNeedToKnowButton = ({ onPress }: Props) => {
   const width = dimensionRelativeToIphone(345);
   const height = dimensionRelativeToIphone(150);
 

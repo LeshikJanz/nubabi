@@ -1,4 +1,5 @@
 // @flow
+import type { MeasurementType, MeasurementUnit } from '../../../common/types';
 import { omit, evolve } from 'ramda';
 import { decode } from 'base-64';
 import {
@@ -62,9 +63,7 @@ const uploadFile = (firebase, refPath, dataUrl) => {
     );
 
     const metadata = { contentType };
-
     const ref = firebase.storage().ref().child(refPath);
-
     const uploadTask = ref.put(content);
 
     uploadTask.on(
@@ -72,7 +71,10 @@ const uploadFile = (firebase, refPath, dataUrl) => {
       () => {
         /* progress */
       },
-      error => reject(error),
+      error => {
+        console.log(error);
+        reject(error);
+      },
       () => {
         ref
           .updateMetadata(metadata)
@@ -152,10 +154,10 @@ const createOrUpdateBaby = (firebase, values, id) => {
 
 const getViewer = firebase => firebase.auth().currentUser;
 
-const get = (firebase, path) =>
+const get = (firebase, path: string) =>
   firebase.database().ref(path).once('value').then(returnVal);
 
-const set = (firebase, path, values) =>
+const set = (firebase, path: string, values: mixed) =>
   firebase.database().ref(path).set(values);
 
 const getBaby = (firebase, id) => {
@@ -211,8 +213,8 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
 const firebaseConnector = firebase => {
   return {
     firebase: () => firebase,
-    get: path => get(firebase, path),
-    set: (path, values) => set(firebase, path, values),
+    get: (path: string) => get(firebase, path),
+    set: (path: string, values: mixed) => set(firebase, path, values),
     getViewer: () => getViewer(firebase),
     getBabies: () => {
       const currentUserId = getViewer(firebase).uid;
@@ -234,22 +236,26 @@ const firebaseConnector = firebase => {
                 .then(returnValWithKeyAsId);
             }),
           ))
-        .then(([...babies]) => babies);
+        .then(([...babies]) => babies)
+        .catch(err => {
+          console.warn(err);
+          return [];
+        });
     },
     getBaby: (id: string) => {
       return getBaby(firebase, id);
     },
-    getRelationship: id => {
+    getRelationship: (id: string) => {
       return firebase
         .database()
         .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
         .once('value')
         .then(returnVal);
     },
-    createBaby: values => {
+    createBaby: (values: mixed) => {
       return createOrUpdateBaby(firebase, values);
     },
-    updateBaby: (id, values) => {
+    updateBaby: (id: string, values: mixed) => {
       return createOrUpdateBaby(firebase, values, id);
     },
     recordMeasurement: (

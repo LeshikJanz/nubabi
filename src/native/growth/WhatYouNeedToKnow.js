@@ -5,10 +5,7 @@ import { LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose, path } from 'ramda';
-import {
-  getClosestContentForPeriod,
-  skipIntroduction,
-} from '../../common/growth/reducer';
+import { getClosestContentForPeriod } from '../../common/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
 import displayLoadingState from '../components/displayLoadingState';
@@ -44,7 +41,7 @@ export class WhatYouNeedToKnow extends PureComponent {
   };
 
   state = {
-    selectedPeriod: null,
+    selectedPeriod: undefined,
   };
 
   getPeriodOptions() {

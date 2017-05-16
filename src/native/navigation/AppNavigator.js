@@ -1,6 +1,5 @@
 // @flow
 import React, { PureComponent } from 'react';
-// $FlowFixMe
 import {
   createNavigationContainer,
   createNavigator,
