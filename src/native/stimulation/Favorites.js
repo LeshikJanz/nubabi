@@ -17,9 +17,6 @@ import { Screen } from '../components';
 import ActivityList from './ActivityList';
 import theme from '../../common/themes/defaultTheme';
 
-const ACTIVITIES_INDEX = 0;
-const RECIPES_INDEX = 1;
-
 type Props = {
   activities: Array<ActivityEdge>,
   navigation: NavigationProp<*>,
@@ -32,10 +29,6 @@ class FavoriteActivities extends PureComponent {
     title: 'Favorites',
   };
 
-  state = {
-    selectedIndex: ACTIVITIES_INDEX,
-  };
-
   handleNavigate = (id: string, title: string) => {
     this.props.navigation.navigate('viewActivity', {
       id,
@@ -43,52 +36,14 @@ class FavoriteActivities extends PureComponent {
     });
   };
 
-  handleSectionChange = (event: Event) => {
-    this.setState({
-      selectedIndex: event.nativeEvent.selectedSegmentIndex,
-    });
-  };
-
-  renderContent() {
-    if (this.state.selectedIndex === RECIPES_INDEX) {
-      return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: theme.colors.open.white1,
-          }}
-        >
-          <Text>No recipes yet</Text>
-        </View>
-      );
-    }
-
-    return (
-      <ActivityList
-        activities={this.props.activities}
-        emptyMessage="No activities have been favorited yet."
-        onActivityItemPress={this.handleNavigate}
-      />
-    );
-  }
-
   render() {
     return (
       <Screen>
-        <View
-          style={{ padding: 10, backgroundColor: theme.colors.open.white1 }}
-        >
-          <SegmentedControlIOS
-            values={['Activities', 'Recipes']}
-            selectedIndex={this.state.selectedIndex}
-            tintColor={theme.colors.primary}
-            onChange={this.handleSectionChange}
-          />
-        </View>
-
-        {this.renderContent()}
+        <ActivityList
+          activities={this.props.activities}
+          emptyMessage="No activities have been favorited yet."
+          onActivityItemPress={this.handleNavigate}
+        />
       </Screen>
     );
   }
