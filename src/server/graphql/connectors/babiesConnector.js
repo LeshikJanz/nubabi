@@ -2,7 +2,7 @@
 require('axios-debug-log');
 
 import type { ActivityLevelOperation, Baby } from '../../../common/types';
-import { path, find, prop, propEq } from 'ramda';
+import { path, prop } from 'ramda';
 import axios from 'axios';
 import config from '../../../common/config/index';
 
@@ -205,12 +205,10 @@ export const getIntroductionFor = (
 };
 
 export const getExperts = (token: string) =>
-  instance.get('/experts', withToken(token)).then(path(['data', 'experts']));
+  instance.get('/experts', withToken(token)).then(path(['data']));
 
 export const getExpert = (token: string, id: string) =>
-  instance
-    .get(`/experts/${id}`, withToken(token))
-    .then(path(['data', 'expert']));
+  instance.get(`/experts/${id}`, withToken(token)).then(path(['data']));
 
 export const getTips = (token: string) =>
   instance.get('/content/tips', withToken(token)).then(path(['data']));
@@ -219,14 +217,10 @@ export const getQuotes = (token: string) =>
   instance.get('/content/quotes', withToken(token)).then(path(['data']));
 
 export const getCategories = (token: string) =>
-  instance
-    .get('/categories', withToken(token))
-    .then(path(['data', 'categories']));
+  instance.get('/categories', withToken(token)).then(path(['data']));
 
 export const getCategory = (token: string, id: string) =>
-  instance
-    .get(`/categories/${id}`, withToken(token))
-    .then(path(['data', 'category']));
+  instance.get(`/categories/${id}`, withToken(token)).then(path(['data']));
 
 export const getCategoriesFor = (token: string, categoryIds: Array<string>) => {
   return Promise.all(categoryIds.map(id => getCategory(token, id))).then(
