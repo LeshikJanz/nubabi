@@ -1,4 +1,5 @@
 // @flow
+import type { ActivityMediaType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import {
   View,
@@ -6,21 +7,24 @@ import {
   LayoutAnimation,
   StyleSheet,
 } from 'react-native';
+import Image from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { range } from 'ramda';
-import { Card, Text, Box, Image, Button } from '../components';
+import { Card, Text, Box } from '../components';
 import Step from './Step';
 import theme from '../../common/themes/defaultTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import withLayout from '../components/withLayout';
 
 type StepType = string;
 
 type Props = {
   steps: Array<StepType>,
   activityName: string,
+  activityMedia: ?string,
+  activityMediaType: ?ActivityMediaType,
+  activityMediaThumbnail: ?string,
 };
-
-const actionCalls = ['begin', 'continue', 'finish'];
 
 class Steps extends PureComponent {
   props: Props;
@@ -33,6 +37,15 @@ class Steps extends PureComponent {
       fragment Steps on Activity {
         name
         steps
+        media(first: 1) {
+          edges {
+            node {
+              type
+              thumb
+              url
+            }
+          }
+        }
       }
     `,
   };
@@ -114,9 +127,33 @@ class Steps extends PureComponent {
     );
   }
 
+  renderMedia() {
+    const { activityMedia, activityMediaType, layout } = this.props;
+    let media;
+
+    if (!activityMedia) {
+      return null;
+    }
+
+    const width = layout.viewportWidth * 0.8;
+
+    if (activityMediaType === 'IMAGE') {
+      media = (
+        <Image style={{ width, height: 200 }} source={{ uri: activityMedia }} />
+      );
+    }
+
+    return (
+      <Box padding={1}>
+        {media}
+      </Box>
+    );
+  }
+
   render() {
     return (
       <Card marginHorizontal={1.2} marginVertical={1} padding={0}>
+        {this.renderMedia()}
         <Box padding={1} margin={0}>
           {this.renderStep()}
         </Box>
@@ -126,4 +163,4 @@ class Steps extends PureComponent {
   }
 }
 
-export default Steps;
+export default withLayout(Steps);

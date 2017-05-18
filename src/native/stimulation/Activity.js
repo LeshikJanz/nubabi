@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActivityActions from './ActivityActions';
@@ -206,6 +207,21 @@ export class Activity extends PureComponent {
     const skill = activity.skillArea;
     const { expert } = activity;
 
+    const activityMedia = path(
+      ['media', 'edges', '0', 'node', 'url'],
+      activity,
+    );
+
+    const activityThumb = path(
+      ['media', 'edges', '0', 'node', 'thumb'],
+      activity,
+    );
+
+    const activityMediaType = path(
+      ['media', 'edges', '0', 'node', 'type'],
+      activity,
+    );
+
     return (
       <View style={styles.container} onLayout={this.handleLayout}>
         <ScrollView
@@ -232,7 +248,13 @@ export class Activity extends PureComponent {
             activityDescription={activity.introduction}
           />
 
-          <Steps steps={activity.steps} activityName={activity.name} />
+          <Steps
+            steps={activity.steps}
+            activityName={activity.name}
+            activityMedia={activityMedia}
+            activityMediaThumbnail={activityThumb}
+            activityMediaType={activityMediaType}
+          />
 
           {enableActions &&
             <ActivityActions
