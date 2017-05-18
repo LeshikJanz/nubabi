@@ -24,7 +24,9 @@ type Activity {
   skillArea: SkillArea!
   isFavorite: Boolean
   categories: CategoryConnection!
-  media: ActivityMediaConnection!
+  media(
+    before: String, after: String, first: Int, last: Int
+  ): ActivityMediaConnection!
 }
 
 input SwoopActivityInput {
