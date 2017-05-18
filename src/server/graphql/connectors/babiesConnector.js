@@ -20,14 +20,12 @@ const withToken = (token: string) => ({
 });
 
 export const getSkillAreas = (token: string) =>
-  instance
-    .get('/skill_areas', withToken(token))
-    .then(path(['data', 'skill_areas']));
+  instance.get('/skill_areas', withToken(token)).then(path(['data']));
 
 export const getSkillArea = (token: string, id: string) => {
   return instance
     .get(`/skill_areas/${id}`, withToken(token))
-    .then(path(['data', 'skill_area']));
+    .then(path(['data']));
 };
 
 export const getSkillAreaImage = (obj: mixed) => {
