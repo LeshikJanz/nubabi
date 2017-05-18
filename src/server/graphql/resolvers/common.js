@@ -10,6 +10,23 @@ import {
 } from 'graphql-relay';
 import * as babies from '../connectors/babiesConnector';
 
+export type GraphQLContext = {
+  token: string,
+  connectors: {
+    firebase: Object,
+  },
+};
+
+export type { ConnectionArguments } from 'graphql-relay';
+
+export type RawSkillArea = {};
+
+export type RawActivity = {
+  skill_area_id: number,
+};
+
+export type RawActivityMedia = {};
+
 export const mutationWithClientMutationId = mutateAndGetPayload => {
   return (_, { input }, ctx, info) => {
     return Promise.resolve(
@@ -21,10 +38,9 @@ export const mutationWithClientMutationId = mutateAndGetPayload => {
   };
 };
 
-const { nodeField } = nodeDefinitions((globalId, {
-  token,
-  connectors: { firebase },
-}) => {
+const {
+  nodeField,
+} = nodeDefinitions((globalId, { token, connectors: { firebase } }) => {
   const { type, id } = fromGlobalId(globalId);
   switch (type) {
     case 'Baby': {
@@ -46,12 +62,11 @@ export const prop = propName =>
     return R.propOr(null, propName, obj);
   });
 
-export const transform = (propName, transformFn) =>
-  obj => {
-    const value = prop(propName)(obj);
+export const transform = (propName, transformFn) => obj => {
+  const value = prop(propName)(obj);
 
-    return value ? transformFn(value) : null;
-  };
+  return value ? transformFn(value) : null;
+};
 
 export const connectionFromPromisedArrayWithCount = (promise, args) => {
   return promise.then(data => {

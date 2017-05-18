@@ -20,12 +20,14 @@ const withToken = (token: string) => ({
 });
 
 export const getSkillAreas = (token: string) =>
-  instance.get('/skill_areas', withToken(token)).then(path(['data']));
+  instance
+    .get('/skill_areas', withToken(token))
+    .then(path(['data', 'skill_areas']));
 
 export const getSkillArea = (token: string, id: string) => {
   return instance
     .get(`/skill_areas/${id}`, withToken(token))
-    .then(path(['data']));
+    .then(path(['data', 'skill_area']));
 };
 
 export const getSkillAreaImage = (obj: mixed) => {
@@ -55,7 +57,7 @@ export const getSkillAreaImage = (obj: mixed) => {
 export const getActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(path(['data']));
+    .then(path(['data', 'data']));
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
   instance
@@ -65,22 +67,27 @@ export const getFavoriteActivities = (token: string, babyId: string) =>
 export const getActivity = (token: string, id: string, babyId: string) => {
   return instance
     .get(`/activities/${id}`, withToken(token))
-    .then(response => ({ babyId, ...path(['data'], response) }));
+    .then(response => ({ babyId, ...path(['data', 'activity'], response) }));
 };
 
 export const getSteps = async (
   firebase,
   babyId: string,
+  activityId: string,
   steps: Array<string>,
 ) => {
   const baby = await firebase.getBaby(babyId);
   const variables = await getTemplateVariables(firebase, baby);
 
-  return steps.map(step => makeStringFromTemplate(step, variables));
+  return steps.map((step, index) => {
+    return makeStringFromTemplate(step, variables);
+  });
 };
 
 export const getAllActivities = (token: string) => {
-  return instance.get('/activities', withToken(token)).then(path(['data']));
+  return instance
+    .get('/activities', withToken(token))
+    .then(path(['data', 'data']));
 };
 
 export const swoopActivity = (
@@ -153,15 +160,12 @@ export const toggleActivityFavorite = (
 };
 
 export const makeStringFromTemplate = (template: string, variables: *) => {
-  return Object.keys(variables).reduce(
-    (output, variable) => {
-      return output.replace(
-        new RegExp(`{${variable}}`, 'g'),
-        variables[variable],
-      );
-    },
-    template,
-  );
+  return Object.keys(variables).reduce((output, variable) => {
+    return output.replace(
+      new RegExp(`{${variable}}`, 'g'),
+      variables[variable],
+    );
+  }, template);
 };
 
 export const getTemplateVariables = async (firebase, baby) => {
@@ -198,17 +202,36 @@ export const getIntroductionFor = (
     .get('/content/growth/introduction', withToken(token))
     .then(path(['data', 'text']))
     .then(text =>
-      makeStringFromTemplate(text, { name: viewerName, baby: baby.name }));
+      makeStringFromTemplate(text, { name: viewerName, baby: baby.name }),
+    );
 };
 
 export const getExperts = (token: string) =>
-  instance.get('/experts', withToken(token)).then(path(['data']));
+  instance.get('/experts', withToken(token)).then(path(['data', 'experts']));
 
 export const getExpert = (token: string, id: string) =>
-  instance.get(`/experts/${id}`, withToken(token)).then(path(['data']));
+  instance
+    .get(`/experts/${id}`, withToken(token))
+    .then(path(['data', 'expert']));
 
 export const getTips = (token: string) =>
   instance.get('/content/tips', withToken(token)).then(path(['data']));
 
 export const getQuotes = (token: string) =>
   instance.get('/content/quotes', withToken(token)).then(path(['data']));
+
+export const getCategories = (token: string) =>
+  instance
+    .get('/categories', withToken(token))
+    .then(path(['data', 'categories']));
+
+export const getCategory = (token: string, id: string) =>
+  instance
+    .get(`/categories/${id}`, withToken(token))
+    .then(path(['data', 'category']));
+
+export const getCategoriesFor = (token: string, categoryIds: Array<string>) => {
+  return Promise.all(categoryIds.map(id => getCategory(token, id))).then(
+    ([...categories]) => categories,
+  );
+};

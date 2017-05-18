@@ -23,6 +23,8 @@ type Activity {
   expert: Expert!
   skillArea: SkillArea!
   isFavorite: Boolean
+  categories: CategoryConnection!
+  media: ActivityMediaConnection!
 }
 
 input SwoopActivityInput {
@@ -117,6 +119,56 @@ type SkillAreaConnection {
 type SkillAreaEdge {
   # The item at the end of the edge.
   node: SkillArea!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type Category implements Node {
+  id: ID!
+  name: String!
+}
+
+# A connection to a list of items.
+type CategoryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [CategoryEdge]
+}
+
+type CategoryEdge {
+  # The item at the end of the edge.
+  node: Category!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+enum ActivityMediaType {
+  IMAGE
+  VIDEO
+}
+
+type ActivityMedia {
+  type: ActivityMediaType!
+  url: String
+  thumb: String
+}
+
+# A connection to a list of items.
+type ActivityMediaConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ActivityMediaEdge]
+}
+
+type ActivityMediaEdge {
+  # The item at the end of the edge.
+  node: ActivityMedia!
 
   # A cursor for use in pagination.
   cursor: String!

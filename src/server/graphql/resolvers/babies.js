@@ -3,6 +3,7 @@ import * as connector from '../connectors/babiesConnector';
 import {
   prop,
   transform,
+  connectionFromArray,
   connectionFromPromisedArray,
   connectionFromPromisedArrayWithCount,
   globalIdField,
@@ -17,84 +18,37 @@ const resolvers = {
 
     baby: (_, { id }, { connectors: { firebase } }) =>
       firebase.getBaby(fromGlobalId(id).id),
-
-    allSkillAreas: (_, args, { token }) =>
-      connectionFromPromisedArray(connector.getSkillAreas(token), args),
-
-    allExperts: (_, args, { token }) =>
-      connectionFromPromisedArray(connector.getExperts(token), args),
-
-    allActivities: (_, args, { token }) => {
-      return connectionFromPromisedArrayWithCount(
-        connector.getAllActivities(token),
-        args,
-      );
-    },
   },
 
   Mutation: {
-    createBaby: mutationWithClientMutationId((input, {
-      connectors: { firebase },
-    }) => firebase.createBaby(input).then(createdBaby => ({ createdBaby }))),
+    createBaby: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) =>
+        firebase.createBaby(input).then(createdBaby => ({ createdBaby })),
+    ),
 
-    updateBaby: mutationWithClientMutationId((input, {
-      connectors: { firebase },
-    }) =>
-      firebase
-        .updateBaby(fromGlobalId(input.id).id, input)
-        .then(baby => ({ changedBaby: baby }))),
+    updateBaby: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) =>
+        firebase
+          .updateBaby(fromGlobalId(input.id).id, input)
+          .then(baby => ({ changedBaby: baby })),
+    ),
 
-    swoopActivity: mutationWithClientMutationId(({ id, babyId }, { token }) =>
-      connector
-        .swoopActivity(token, fromGlobalId(babyId).id, fromGlobalId(id).id)
-        .then(newActivity => ({ newActivity, oldActivityId: id }))),
-
-    changeActivity: mutationWithClientMutationId(({ id, babyId, level }, {
-      token,
-    }) =>
-      connector
-        .changeActivityLevel(
-          token,
+    recordBabyMeasurement: mutationWithClientMutationId(
+      ({ babyId, type, unit, value }, { connectors: { firebase } }) => {
+        return firebase.recordMeasurement(
           fromGlobalId(babyId).id,
-          fromGlobalId(id).id,
-          level,
-        )
-        .then(newActivity => ({ newActivity, oldActivityId: id }))),
-
-    toggleActivityFavorite: mutationWithClientMutationId(({
-      id,
-      babyId,
-      favorite,
-    }, { token }) => {
-      return connector
-        .toggleActivityFavorite(
-          token,
-          fromGlobalId(babyId).id,
-          fromGlobalId(id).id,
-          favorite,
-        )
-        .then(() => ({ wasFavorited: favorite }));
-    }),
-
-    recordBabyMeasurement: mutationWithClientMutationId(({
-      babyId,
-      type,
-      unit,
-      value,
-    }, { connectors: { firebase } }) => {
-      return firebase.recordMeasurement(
-        fromGlobalId(babyId).id,
-        type,
-        unit,
-        value,
-      );
-    }),
+          type,
+          unit,
+          value,
+        );
+      },
+    ),
   },
 
   Baby: {
     id: globalIdField(),
     dob: transform('dob', date => new Date(date)),
-    gender: transform('gender', g => g === 'm' ? 'MALE' : 'FEMALE'),
+    gender: transform('gender', g => (g === 'm' ? 'MALE' : 'FEMALE')),
 
     avatar: obj =>
       obj.avatar ? pick(['url', 'thumb', 'large'], obj.avatar) : null,
@@ -143,23 +97,6 @@ const resolvers = {
       firebase.getRelationship(id),
   },
 
-  Activity: {
-    id: globalIdField(),
-    skillArea: (obj, args, { token }) =>
-      connector.getSkillArea(token, obj['skill_area_id']), // eslint-disable-line dot-notation
-    expert: (obj, args, { token }) =>
-      connector.getExpert(token, obj['expert_id']), // eslint-disable-line dot-notation
-    steps: ({ babyId, steps }, args, { connectors: { firebase } }) => {
-      return connector.getSteps(firebase, babyId, steps);
-    },
-  },
-
-  SkillArea: {
-    id: globalIdField(),
-    completedIcon: prop('completed_icon'),
-    image: connector.getSkillAreaImage,
-  },
-
   Growth: {
     id: globalIdField(),
     minimumAge: prop('age_min'),
@@ -167,14 +104,18 @@ const resolvers = {
     ageDuration: transform('age_duration', duration => duration.toUpperCase()),
     // TODO: extract method
     content: async (obj, _, { connectors: { firebase } }) => {
+      const template = prop('growth_development')(obj);
+
       return connector.makeStringFromTemplate(
-        prop('growth_development')(obj),
+        template,
         await connector.getTemplateVariables(firebase, obj.baby),
       );
     },
     introduction: async (obj, _, { connectors: { firebase } }) => {
+      const template = obj.introduction;
+
       return connector.makeStringFromTemplate(
-        obj.introduction,
+        template,
         await connector.getTemplateVariables(firebase, obj.baby),
       );
     },
