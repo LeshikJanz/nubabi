@@ -57,7 +57,7 @@ export const getSkillAreaImage = (obj: mixed) => {
 export const getActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(path(['data', 'data']));
+    .then(path(['data']));
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
   instance
