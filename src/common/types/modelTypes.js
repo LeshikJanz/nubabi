@@ -6,9 +6,9 @@ export type GraphQLResponseRoot = {
 };
 
 export type GraphQLResponseError = {
-  [propName: string]: any, // 7.2.2 says 'GraphQL servers may provide additional entries to error'
   message: string, // Required for all errors
   locations?: Array<GraphQLResponseErrorLocation>,
+  [propName: string]: any, // 7.2.2 says 'GraphQL servers may provide additional entries to error'
 };
 
 export type GraphQLResponseErrorLocation = {
@@ -111,7 +111,7 @@ export type User = {
   updatedAt: any,
 };
 
-export type Node = User | Baby | Expert | SkillArea | Growth;
+export type Node = User | Baby | Expert | SkillArea | Category | Growth;
 
 export type Timestampable = User | Baby;
 
@@ -241,6 +241,10 @@ export type Activity = {
   skillArea: SkillArea,
   /**  */
   isFavorite?: boolean,
+  /**  */
+  categories: CategoryConnection,
+  /**  */
+  media: ActivityMediaConnection,
 };
 
 export type Expert = {
@@ -284,6 +288,64 @@ export type SkillAreaImage = {
   /**  */
   height?: number,
 };
+
+/**
+  description: A connection to a list of items.
+*/
+export type CategoryConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<CategoryEdge>,
+};
+
+export type CategoryEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Category,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Category = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  name: string,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type ActivityMediaConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<ActivityMediaEdge>,
+};
+
+export type ActivityMediaEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: ActivityMedia,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type ActivityMedia = {
+  __typename: string,
+  /**  */
+  type: ActivityMediaTypeEnum,
+  /**  */
+  url?: string,
+  /**  */
+  thumb?: string,
+};
+
+export type ActivityMediaTypeEnum = 'IMAGE' | 'VIDEO';
 
 /**
   description: A connection to a list of items.
@@ -453,7 +515,7 @@ export type TipEdge = {
 */
 export type Tip = {
   __typename: string,
-  /**  */
+  /** The ID of an object */
   id: string,
   /**  */
   text: string,
@@ -480,7 +542,7 @@ export type QuoteEdge = {
 
 export type Quote = {
   __typename: string,
-  /**  */
+  /** The ID of an object */
   id: string,
   /**  */
   author?: string,

@@ -8,6 +8,7 @@ import type {
   Activity,
   ActivityConnection,
   ActivityEdge,
+  ActivityMediaTypeEnum as ActivityMediaType,
   Memory,
   User,
   Achievement,
@@ -56,6 +57,7 @@ export type {
   AdjustActivityLevelInput,
   ToggleFavoriteInput,
   RecordMeasurementInput,
+  ActivityMediaType,
 };
 
 export type FirebaseUser = {
@@ -126,9 +128,7 @@ type NavigationConfigProp = {
 };
 
 // We separate the types to get more descriptive error messages
-export type NavigationOptionsGetter = (
-  NavigationConfigProp,
-) => NavigationScreenOptions;
+export type NavigationOptionsGetter = NavigationConfigProp => NavigationScreenOptions;
 
 export type NavigationOptions = NavigationScreenOptions;
 
