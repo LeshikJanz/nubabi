@@ -4,12 +4,7 @@ import React, { Component } from 'react';
 import { ART, Dimensions, StyleSheet, View } from 'react-native';
 import * as graphUtils from '../../common/components/graphUtils';
 
-const {
-  Group,
-  Shape,
-  Surface,
-  Path,
-} = ART;
+const { Group, Shape, Surface, Path } = ART;
 
 const dimensionWindow = Dimensions.get('window');
 const PADDING_SIZE = 20;
@@ -43,18 +38,11 @@ export class LineGraph extends Component {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    console.log('received props', nextProps);
     this.computeNextState(nextProps);
   }
 
   computeNextState(nextProps: Props) {
-    const {
-      data,
-      width,
-      height,
-      xAccessor,
-      yAccessor,
-    } = nextProps;
+    const { data, width, height, xAccessor, yAccessor } = nextProps;
 
     const graphWidth = width;
     const graphHeight = height;
@@ -104,16 +92,9 @@ export class LineGraph extends Component {
   }
 
   render() {
-    const {
-      graphWidth,
-      graphHeight,
-      lineGraph,
-    } = this.state;
+    const { graphWidth, graphHeight, lineGraph } = this.state;
 
-    const {
-      strokeColor,
-      fillColor,
-    } = this.props;
+    const { strokeColor, fillColor } = this.props;
 
     return (
       <View style={styles.container}>

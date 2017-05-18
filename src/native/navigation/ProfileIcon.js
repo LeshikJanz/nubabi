@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Image from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';

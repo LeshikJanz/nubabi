@@ -167,11 +167,10 @@ export default compose(
         let didYouKnow;
 
         const edges = path(['viewer', 'allTips', 'edges'], data);
-        console.log(data);
+
         if (edges) {
           didYouKnow = sample(edges.map(edge => edge.node.text));
         }
-        console.log(didYouKnow);
 
         return {
           data,

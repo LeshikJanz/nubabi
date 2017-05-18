@@ -1,12 +1,13 @@
 // @flow
+import type { State, Baby } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
+import { ImageCacheProvider } from 'react-native-cached-image';
 import { graphql, gql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import { sample } from 'lodash';
 import { NavigationActions } from 'react-navigation';
-import type { State } from '../../common/types';
 import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
@@ -19,6 +20,7 @@ type Props = {
   isAuthenticated: boolean,
   loadingMessage: ?string,
   author: ?string,
+  baby: ?Baby,
 };
 
 class SplashScreen extends PureComponent {
@@ -49,12 +51,24 @@ class SplashScreen extends PureComponent {
   }
 
   handleNextScreen = () => {
-    if (this.props.appOnline) {
-      if (this.props.isAuthenticated) {
-        this.navigateTo('home');
-      } else {
-        this.navigateTo('login');
-      }
+    const { appOnline, isAuthenticated, baby } = this.props;
+    if (!appOnline) {
+      return;
+    }
+
+    if (!isAuthenticated) {
+      this.navigateTo('login');
+    }
+
+    if (baby) {
+      const avatar = path(['avatar', 'url'], baby);
+      const coverImage = path(['coverImage', 'url'], baby);
+
+      ImageCacheProvider.cacheMultipleImages([avatar, coverImage]).then(() =>
+        this.navigateTo('home'),
+      );
+    } else {
+      this.navigateTo('home');
     }
   };
 
@@ -75,8 +89,8 @@ class SplashScreen extends PureComponent {
       return null;
     }
 
-    const loadingMessage = this.props.loadingMessage ||
-      sample(loadingMessages.splash);
+    const loadingMessage =
+      this.props.loadingMessage || sample(loadingMessages.splash);
 
     return (
       <View style={styles.loadingMessageContainer}>
@@ -150,31 +164,46 @@ export default compose(
       appOnline: state.app.online,
       appStarted: state.app.started,
       isAuthenticated: state.auth.isAuthenticated,
+      currentBabyId: state.babies.currentBabyId,
     };
   }),
   graphql(
     gql`
-    query SplashScreen {
-      viewer {
-        allQuotes {
-          edges {
-            node {
-              id
-              author
-              text
+      query SplashScreen($currentBabyId: ID!, $hasCurrentBaby: Boolean!) {
+        viewer {
+          baby(id: $currentBabyId) @include(if: $hasCurrentBaby) {
+            avatar {
+              url
+            }
+            coverImage {
+              url
+            }
+          },
+          allQuotes {
+            edges {
+              node {
+                id
+                author
+                text
+              }
             }
           }
         }
       }
-    }
-  `,
+    `,
     {
       options: ownProps => ({
         fetchPolicy: 'cache-and-network',
         skip: !ownProps.isAuthenticated,
+        variables: {
+          currentBabyId: ownProps.currentBabyId,
+          hasCurrentBaby: !!ownProps.currentBabyId,
+        },
       }),
       props: ({ data }) => {
         const edges = path(['viewer', 'allQuotes', 'edges'], data);
+        const baby = path(['viewer', 'baby'], data);
+
         let loadingMessage;
         let author;
 
@@ -186,6 +215,7 @@ export default compose(
 
         return {
           data,
+          baby,
           loadingMessage,
           author,
         };
