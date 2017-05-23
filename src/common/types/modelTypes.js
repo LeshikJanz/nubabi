@@ -48,6 +48,8 @@ export type Viewer = {
   allTips: TipConnection,
   /**  */
   allQuotes: QuoteConnection,
+  /**  */
+  growthArticle?: GrowthArticle,
 };
 
 /**
@@ -449,9 +451,44 @@ export type Growth = {
   ageDuration: AgeDurationEnum,
   /** Expert who gave this content's advice */
   expert: Expert,
+  /** Parenting tips content link */
+  parentingLinks: GrowthArticleConnection,
+  /** FAQ links */
+  faqLinks: GrowthArticleConnection,
 };
 
 export type AgeDurationEnum = 'WEEK' | 'MONTH' | 'YEAR';
+
+/**
+  description: A connection to a list of items.
+*/
+export type GrowthArticleConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<GrowthArticleEdge>,
+};
+
+export type GrowthArticleEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: GrowthArticle,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type GrowthArticle = {
+  __typename: string,
+  /**  */
+  id: string,
+  /**  */
+  title: string,
+  /**  */
+  text: string,
+};
+
+export type Content = GrowthArticle | Tip | Quote;
 
 /**
   description: A connection to a list of items.
@@ -547,7 +584,7 @@ export type Quote = {
   /**  */
   author?: string,
   /**  */
-  text?: string,
+  text: string,
   /**  */
   title?: string,
 };

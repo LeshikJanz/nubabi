@@ -96,33 +96,6 @@ const resolvers = {
     relationship: ({ id }, _, { connectors: { firebase } }) =>
       firebase.getRelationship(id),
   },
-
-  Growth: {
-    id: globalIdField(),
-    minimumAge: prop('age_min'),
-    maximumAge: prop('age_max'),
-    ageDuration: transform('age_duration', duration => duration.toUpperCase()),
-    // TODO: extract method
-    content: async (obj, _, { connectors: { firebase } }) => {
-      const template = prop('growth_development')(obj);
-
-      return connector.makeStringFromTemplate(
-        template,
-        await connector.getTemplateVariables(firebase, obj.baby),
-      );
-    },
-    introduction: async (obj, _, { connectors: { firebase } }) => {
-      const template = obj.introduction;
-
-      return connector.makeStringFromTemplate(
-        template,
-        await connector.getTemplateVariables(firebase, obj.baby),
-      );
-    },
-    expert: (obj, _, { token }) => {
-      return connector.getExpert(token, prop('expert_id')(obj));
-    },
-  },
 };
 
 export default resolvers;

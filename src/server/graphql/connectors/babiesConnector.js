@@ -191,6 +191,34 @@ export const getGrowthContent = (token: string, baby: Baby) => {
     });
 };
 
+export const getGrowthContentById = async (
+  token: string,
+  id: string,
+  baby: Baby,
+  firebase,
+) => {
+  const variables = await getTemplateVariables(firebase, baby);
+  return instance
+    .get(`/content/growth/${id}`, withToken(token))
+    .then(path(['data']))
+    .then(data => {
+      const contentId = path(['sys', 'id'], data);
+      const locale = path(['sys', 'locale'], data);
+      const title = path(['fields', locale, 'title'], data);
+      const text = makeStringFromTemplate(
+        path(['fields', locale, 'content'], data),
+        variables,
+      );
+
+      return {
+        id: contentId,
+        baby,
+        title,
+        text,
+      };
+    });
+};
+
 export const getIntroductionFor = (
   token: string,
   baby: Baby,

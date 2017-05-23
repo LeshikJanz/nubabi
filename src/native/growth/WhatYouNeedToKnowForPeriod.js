@@ -2,11 +2,13 @@
 import type { GrowthPeriodOption } from './PeriodFilter';
 import React from 'react';
 import { ScrollView } from 'react-native';
+import { path } from 'ramda';
 import { filter } from 'graphql-anywhere';
 import { Box, Markdown, Text } from '../components';
 import PeriodFilter from './PeriodFilter';
 import HealthcareNotice from './HealthcareNotice';
 import ExpertAdvice from './ExpertAdvice';
+import SectionLinks from './SectionLinks';
 
 type Props = {
   current: GrowthPeriodOption,
@@ -15,11 +17,7 @@ type Props = {
 };
 
 export const WhatYouNeedToKnowForPeriod = (props: Props) => {
-  const {
-    current,
-    periods,
-    onPeriodSelect,
-  } = props;
+  const { current, periods, onPeriodSelect } = props;
 
   const textStyle = {
     paragraph: {
@@ -27,6 +25,9 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
       lineHeight: 26,
     },
   };
+
+  const parentingLinks = path(['parentingLinks', 'edges'], current);
+  const faqLinks = path(['faqLinks', 'edges'], current);
 
   // TODO: bound func in render (onSkip)
   return (
@@ -43,10 +44,12 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
           />
           <Box paddingHorizontal={1} paddingTop={3}>
             <Markdown text={current.introduction} style={textStyle} />
+            <SectionLinks links={parentingLinks} />
           </Box>
           <Box paddingHorizontal={1}>
             <Text marginVertical={1} size={3} bold>Growth & Development</Text>
             <Markdown text={current.content} style={textStyle} />
+            <SectionLinks links={faqLinks} />
           </Box>
         </Box>
         <Box>

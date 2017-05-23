@@ -36,6 +36,24 @@ export class WhatYouNeedToKnow extends PureComponent {
       fragment CurrentGrowth on Growth {
         introduction
         content
+        parentingLinks {
+          edges {
+            node {
+              id
+              title
+              text # for preloading
+            }
+          }
+        }
+        faqLinks {
+          edges {
+            node {
+              id
+              title
+              text # for preloading
+            }
+          }
+        }
       }
     `,
   };

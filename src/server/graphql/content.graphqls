@@ -1,10 +1,16 @@
 extend type Viewer {
   allTips(before: String, after: String, first: Int, last: Int): TipConnection!
   allQuotes(before: String, after: String, first: Int, last: Int): QuoteConnection!
+  growthArticle(id: ID!, babyId: ID!): GrowthArticle
+}
+
+interface Content {
+  id: ID!
+  text: String!
 }
 
 # A Tip used in the Did You Know section
-type Tip {
+type Tip implements Content {
   id: ID!
   text: String!
 }
@@ -26,10 +32,10 @@ type TipEdge {
   cursor: String!
 }
 
-type Quote {
+type Quote implements Content {
   id: ID!
   author: String
-  text: String
+  text: String!
   title: String
 }
 

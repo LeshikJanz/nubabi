@@ -81,8 +81,6 @@ type UpdateBabyPayload {
   clientMutationId: String
 }
 
-
-
 # A connection to a list of items.
 type BabyConnection {
   # Information to aid in pagination.

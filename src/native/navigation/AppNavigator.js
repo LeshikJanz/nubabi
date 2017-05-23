@@ -1,6 +1,8 @@
 // @flow
 import React, { PureComponent } from 'react';
+import { Platform, Linking } from 'react-native';
 import {
+  NavigationActions,
   createNavigationContainer,
   createNavigator,
   StackRouter,
@@ -37,6 +39,8 @@ import ViewActivity from '../stimulation/ViewActivity';
 import NavigatorTypes from 'react-navigation/src/navigators/NavigatorTypes';
 import { WhatYouNeedToKnowScreen } from '../growth/WhatYouNeedToKnowScreen';
 import DevelopmentRoadmapScreen from '../growth/DevelopmentRoadmapScreen';
+import ViewGrowthContentScreen from '../growth/ViewGrowthArticleScreen';
+import { BackAndroid } from 'react-navigation/src/PlatformHelpers';
 
 export type TransitionName =
   | 'cardStack'
@@ -49,6 +53,9 @@ type State = {
   transition: TransitionName,
   duration: number,
 };
+
+// on Android, the URI prefix typically contains a host in addition to scheme
+const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 class TransitionerSwitcher extends PureComponent {
   state: State;
@@ -147,7 +154,9 @@ const createCustomNavigator = (
     NavigatorTypes.STACK,
   )(view);
 
-  return createNavigationContainer(navigator, containerOptions);
+  const container = createNavigationContainer(navigator, containerOptions);
+  container.router = router;
+  return container;
 };
 
 const routes = {
@@ -164,6 +173,10 @@ const routes = {
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
   whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
   developmentRoadmap: { screen: DevelopmentRoadmapScreen },
+  viewGrowthContent: {
+    screen: ViewGrowthContentScreen,
+    path: 'content/growth/:id',
+  },
   settings: { screen: Settings },
 };
 
@@ -191,4 +204,53 @@ const AppNavigator = createCustomNavigator(
   },
 );
 
-export default AppNavigator;
+// So that we can handle deep linking
+// See: https://github.com/react-community/react-navigation/issues/1189
+class AppNavigatorWithLinking extends AppNavigator {
+  componentDidMount() {
+    this.subs = BackAndroid.addEventListener('backPress', () =>
+      this.dispatch(NavigationActions.back()),
+    );
+
+    Linking.addEventListener('url', ({ url }: { url: string }) => {
+      this._handleOpenURL(url);
+    });
+
+    Linking.getInitialURL().then(
+      (url: string) => url && this._handleOpenURL(url),
+    );
+  }
+
+  _urlToPathAndParams(url: string) {
+    const params = {};
+    const delimiter = uriPrefix || '://';
+    let path = url.split(delimiter)[1];
+    if (!path) {
+      path = url;
+    }
+    return {
+      path,
+      params,
+    };
+  }
+
+  _handleOpenURL = (url: string) => {
+    const parsedUrl = this._urlToPathAndParams(url);
+    if (parsedUrl) {
+      const { path, params } = parsedUrl;
+      // Use router static set above
+      const action = AppNavigator.router.getActionForPathAndParams(
+        path,
+        params,
+      );
+      const state = AppNavigator.router.getStateForAction(action);
+      // TODO: handle case when opened URI is the current URI
+      if (action) {
+        // Use navigation from props
+        this.props.navigation.dispatch(action);
+      }
+    }
+  };
+}
+
+export default AppNavigatorWithLinking;

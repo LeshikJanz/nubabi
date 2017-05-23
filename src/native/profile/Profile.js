@@ -7,7 +7,14 @@ import type {
   NavigationOptions,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { View, ScrollView, StyleSheet, Text, Image } from 'react-native';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
@@ -94,7 +101,14 @@ class Profile extends PureComponent {
                 onUpdate={this.handleUpdateHeight}
               />
             </View>
-            <Achievements />
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL(
+                  'nubabi://content/growth/4IUT9xUt9eUAa6Q6sWC06e',
+                )}
+            >
+              <Achievements />
+            </TouchableOpacity>
             <RecentMemories memories={baby.memories} />
           </ScrollView>
         </View>
