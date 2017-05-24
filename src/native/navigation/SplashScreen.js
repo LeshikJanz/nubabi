@@ -172,6 +172,7 @@ export default compose(
       query SplashScreen($currentBabyId: ID!, $hasCurrentBaby: Boolean!) {
         viewer {
           baby(id: $currentBabyId) @include(if: $hasCurrentBaby) {
+            id
             avatar {
               url
             }
