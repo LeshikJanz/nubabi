@@ -57,7 +57,7 @@ class SplashScreen extends PureComponent {
     }
 
     if (!isAuthenticated) {
-      this.navigateTo('login');
+      return this.navigateTo('login');
     }
 
     if (baby) {
