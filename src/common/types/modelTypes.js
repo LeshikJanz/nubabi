@@ -49,6 +49,10 @@ export type Viewer = {
   /**  */
   allQuotes: QuoteConnection,
   /**  */
+  allArticles: ArticleConnection,
+  /**  */
+  article?: Article,
+  /**  */
   growthArticle?: GrowthArticle,
 };
 
@@ -113,7 +117,14 @@ export type User = {
   updatedAt: any,
 };
 
-export type Node = User | Baby | Expert | SkillArea | Category | Growth;
+export type Node =
+  | User
+  | Baby
+  | Expert
+  | SkillArea
+  | Category
+  | Growth
+  | Article;
 
 export type Timestampable = User | Baby;
 
@@ -486,9 +497,21 @@ export type GrowthArticle = {
   title: string,
   /**  */
   text: string,
+  /**  */
+  readingTime: ReadingTime,
 };
 
-export type Content = GrowthArticle | Tip | Quote;
+export type Content = GrowthArticle | Tip | Quote | Article;
+
+export type ReadingTime = {
+  __typename: string,
+  /**  */
+  text: string,
+  /**  */
+  time: number,
+  /**  */
+  words: number,
+};
 
 /**
   description: A connection to a list of items.
@@ -587,6 +610,68 @@ export type Quote = {
   text: string,
   /**  */
   title?: string,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type ArticleConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<ArticleEdge>,
+};
+
+export type ArticleEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Article,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+/**
+  description: A blog post
+*/
+export type Article = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  title: string,
+  /**  */
+  text: string,
+  /**  */
+  summary: string,
+  /**  */
+  publishedAt: any,
+  /**  */
+  author: Author,
+  /**  */
+  tags?: Array<Tag>,
+  /**  */
+  image: Image,
+};
+
+export type Author = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  name: string,
+  /**  */
+  biography?: string,
+  /**  */
+  avatar?: Avatar,
+};
+
+export type Tag = {
+  __typename: string,
+  /**  */
+  id: string,
+  /**  */
+  name: string,
 };
 
 export type Mutation = {

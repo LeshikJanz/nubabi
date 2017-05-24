@@ -255,3 +255,15 @@ export const getCategoriesFor = (token: string, categoryIds: Array<string>) => {
     ([...categories]) => categories,
   );
 };
+
+export const getArticles = (token: string) => {
+  return instance
+    .get('/content/articles', withToken(token))
+    .then(path(['data']));
+};
+
+export const getArticle = (token: string, id: string) => {
+  return instance
+    .get(`/content/articles/${id}`, withToken(token))
+    .then(path(['data']));
+};

@@ -16,6 +16,7 @@ import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
 import ActivityList from './ActivityList';
 import theme from '../../common/themes/defaultTheme';
+import mapEdgesToProp from '../shared/mapEdgesToProp';
 
 type Props = {
   activities: Array<ActivityEdge>,
@@ -74,14 +75,7 @@ export default compose(
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: currentBabyId },
       }),
-      props: ({ data }) => {
-        const activities = path(['viewer', 'baby', 'favoriteActivities'], data);
-
-        return {
-          data,
-          activities: activities ? activities.edges : [],
-        };
-      },
+      props: mapEdgesToProp('viewer.baby.favoriteActivities', 'activities'),
     },
   ),
   displayLoadingState,

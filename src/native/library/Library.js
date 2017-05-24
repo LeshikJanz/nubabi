@@ -1,16 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import { Screen } from '../components';
+import { Screen, Box } from '../components';
+import ArticleList from './ArticleList';
 
 const Library = () => {
   return (
     <Screen>
-      <View style={styles.container}>
-        <Text style={styles.title}>Library</Text>
-        <TouchableHighlight>
-          <Text>Go To Next Scene</Text>
-        </TouchableHighlight>
-      </View>
+      <Box flex={1}>
+        <ArticleList />
+        <Box flex={1} />
+        <Box flex={1} />
+      </Box>
     </Screen>
   );
 };

@@ -9,6 +9,7 @@ import { getClosestContentForPeriod } from '../../common/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
 import displayLoadingState from '../components/displayLoadingState';
+import mapEdgesToProp from '../shared/mapEdgesToProp';
 
 type Props = {
   growth: ?Array<Growth>,
@@ -94,6 +95,7 @@ export class WhatYouNeedToKnow extends PureComponent {
   };
 
   render() {
+    console.log(this.props);
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
 
@@ -143,19 +145,7 @@ export default compose(
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: ownProps.currentBabyId },
       }),
-      props: ({ data }) => {
-        let growth;
-        const edges = path(['viewer', 'baby', 'growth', 'edges'], data);
-
-        if (edges && edges.length) {
-          growth = edges.map(edge => edge.node);
-        }
-
-        return {
-          data,
-          growth,
-        };
-      },
+      props: mapEdgesToProp('viewer.baby.growth.edges', 'growth'),
     },
   ),
   displayLoadingState,

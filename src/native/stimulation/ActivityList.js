@@ -1,5 +1,5 @@
 // @flow
-import type { ActivityEdge } from '../../common/types';
+import type { Activity } from '../../common/types';
 import type { DataSource } from 'react-native';
 import React, { PureComponent } from 'react';
 import { View, Text, StyleSheet, ListView } from 'react-native';
@@ -8,7 +8,7 @@ import ActivityListItem from './ActivityListItem';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 
 type Props = {
-  activities: Array<ActivityEdge>,
+  activities: Array<?Activity>,
   onActivityItemPress: (id: string, title: string, cursor: string) => void,
   emptyMessage?: string,
   onLoadMore?: () => void,
@@ -80,14 +80,12 @@ class ActivityList extends PureComponent {
 
   listView = null;
 
-  renderRow = (edge: ActivityEdge) => {
-    const activity = edge.node;
-
+  renderRow = (activity: Activity) => {
     if (!activity) {
       return null;
     }
 
-    const cursor = edge.cursor;
+    const cursor = activity.cursor;
     const { skillArea } = activity;
 
     return (

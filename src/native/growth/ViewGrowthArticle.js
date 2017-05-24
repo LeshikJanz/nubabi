@@ -1,18 +1,24 @@
 // @flow
-import type { State, GrowthArticle, LayoutProps } from '../../common/types';
+import type {
+  State,
+  GrowthArticle as GrowthArticleType,
+  LayoutProps,
+} from '../../common/types';
 import React from 'react';
-import { ScrollView, View, Dimensions } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { graphql, gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import {
   Box,
+  FAB,
+  Text,
   withLayout,
   displayLoadingState,
   showNoContentViewIf,
 } from '../components';
-import Article from '../library/Article';
+import GrowthArticle from '../library/GrowthArticle';
 import HeaderContainer from '../stimulation/HeaderContainer';
 import HeaderImage from '../stimulation/HeaderImage';
 import HeaderOverlay from '../stimulation/HeaderOverlay';
@@ -22,13 +28,12 @@ import HeaderTextSection from '../stimulation/HeaderTextSection';
 import HeaderShape from '../stimulation/HeaderShape';
 
 type Props = {
-  article: GrowthArticle,
+  article: GrowthArticleType,
   layout: LayoutProps,
 };
 
 export const ViewGrowthArticle = ({ article, layout }: Props) => {
   const { title } = article;
-  console.log(layout);
   const width = layout.viewportWidth;
 
   const {
@@ -52,11 +57,12 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
         </HeaderTextSection>
 
         <HeaderShape width={width} />
+
         <View style={{ flex: 1, marginTop: -8 }} />
       </HeaderContainer>
 
       <Box padding={1} backgroundColor="white">
-        <Article {...filter(Article.fragments.growth, article)} />
+        <GrowthArticle {...filter(GrowthArticle.fragments.growth, article)} />
       </Box>
     </Box>
   );
@@ -76,7 +82,7 @@ export default compose(
         }
       }
     }
-    ${Article.fragments.growth}
+    ${GrowthArticle.fragments.growth}
   `,
     {
       options: ownProps => ({

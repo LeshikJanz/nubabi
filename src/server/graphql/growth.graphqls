@@ -37,6 +37,7 @@ type GrowthArticle implements Content {
   id: ID!
   title: String!
   text: String!
+  readingTime: ReadingTime!
 }
 
 type GrowthConnection {
@@ -72,4 +73,10 @@ type GrowthArticleEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+type ReadingTime {
+  text: String!
+  time: Int!
+  words: Int!
 }

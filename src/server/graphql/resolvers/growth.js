@@ -6,6 +6,7 @@ import {
   fromGlobalId,
 } from './common';
 import * as connector from '../connectors/babiesConnector';
+import readingTime from 'reading-time';
 
 export const resolvers = {
   Viewer: {
@@ -79,6 +80,11 @@ export const resolvers = {
         : [];
 
       return connectionFromArray(content, args);
+    },
+  },
+  GrowthArticle: {
+    readingTime: obj => {
+      return readingTime(obj.text);
     },
   },
 };

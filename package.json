@@ -75,6 +75,7 @@
     "react-native-vector-icons": "^4.1.1",
     "react-navigation": "https://github.com/blackxored/react-navigation#feat/allow-hiding-floating-headers",
     "react-redux": "^5.0.2",
+    "reading-time": "^1.1.0",
     "recompose": "^0.23.1",
     "redux": "^3.6.0",
     "redux-form": "^6.6.2",

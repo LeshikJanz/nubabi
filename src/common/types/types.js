@@ -31,6 +31,7 @@ import type {
   AdjustActivityLevelInput,
   ToggleFavoriteInput,
   RecordMeasurementInput,
+  Article,
 } from './modelTypes';
 
 export type {
@@ -62,6 +63,7 @@ export type {
   ToggleFavoriteInput,
   RecordMeasurementInput,
   ActivityMediaType,
+  Article,
 };
 
 export type FirebaseUser = {

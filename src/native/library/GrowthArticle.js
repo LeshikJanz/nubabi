@@ -28,6 +28,9 @@ Article.fragments = {
       id
       title
       text
+      readingTime {
+        text
+      }
     }
   `,
 };

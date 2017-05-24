@@ -6,27 +6,25 @@ import renderer from 'react-test-renderer';
 jest.mock('../../components/Alert');
 
 test.only('it renders correctly', () => {
-  const activityEdges = [
+  const activities = [
     {
-      node: {
+      id: 1,
+      name: 'Test Activity',
+      skillArea: {
         id: 1,
-        name: 'Test Activity',
-        skillArea: {
-          id: 1,
-          name: 'Test Skill Area',
-          image: {
-            thumb: {
-              url: 'http://example.com/test.png',
-            },
+        name: 'Test Skill Area',
+        image: {
+          thumb: {
+            url: 'http://example.com/test.png',
           },
-          icon: 'icon-gross',
         },
+        icon: 'icon-gross',
       },
     },
   ];
 
   const tree = renderer
-    .create(<BrowseActivities activities={activityEdges} />)
+    .create(<BrowseActivities activities={activities} />)
     .toJSON();
 
   expect(tree).toMatchSnapshot();

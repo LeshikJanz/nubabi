@@ -8,6 +8,7 @@ import Markdown from './Markdown';
 import Link from './Link';
 import NoContentView from './NoContentView';
 import Pill from './Pill';
+import FAB from './FAB';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
@@ -23,6 +24,7 @@ export {
   Link,
   NoContentView,
   Pill,
+  FAB,
   withLayout,
   displayLoadingState,
   showNoContentViewIf,
