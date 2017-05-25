@@ -257,9 +257,9 @@ class ChooseBaby extends Component {
         <Animated.View
           style={[styles.container, this.getContainerAnimatedStyle()]}
         >
-          <Svg style={[styles.headerShape, { width: headerShapeWidth }]}>
+          <Svg style={styles.headerShape}>
             <Path
-              d={shape.toString()}
+              d="M242.028455,326.522878 C242.828957,347.908578 260.418521,365 282,365 C303.756979,365 321.456854,347.629474 321.987736,326.00031 C410.423065,317.73135 491.521973,284.207863 558,232.714294 L558,0 L0,0 L0,232.714294 C67.9827067,285.373381 151.25565,319.239702 242.028455,326.522878 Z"
               id="Combined-Shape"
               stroke="none"
               fill="#FFFFFF"
@@ -267,7 +267,7 @@ class ChooseBaby extends Component {
             />
           </Svg>
 
-          <View style={[styles.babyContainer, { width }]}>
+          <View style={styles.babyContainer}>
             <Animated.View
               style={[styles.closeButton, this.getListAnimatedStyle()]}
             >
