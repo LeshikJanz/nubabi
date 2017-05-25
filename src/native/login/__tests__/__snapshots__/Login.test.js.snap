@@ -16,7 +16,7 @@ exports[`renders correctly 1`] = `
         "flex": 1,
         "height": 1334,
         "position": "absolute",
-        "resizeMode": "stretch",
+        "resizeMode": "cover",
         "top": 0,
         "width": 750,
       }
@@ -274,7 +274,7 @@ exports[`show progress when logging in 1`] = `
         "flex": 1,
         "height": 1334,
         "position": "absolute",
-        "resizeMode": "stretch",
+        "resizeMode": "cover",
         "top": 0,
         "width": 750,
       }

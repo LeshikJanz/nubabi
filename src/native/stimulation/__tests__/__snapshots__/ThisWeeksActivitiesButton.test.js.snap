@@ -61,24 +61,31 @@ exports[`it renders correctly 1`] = `
           },
         ]
       }
-    />
-    <View
-      style={
-        Array [
+    >
+      <View
+        style={
           Object {
-            "backgroundColor": "#748294",
-            "height": 140,
-            "opacity": 0.3,
-            "position": "absolute",
-            "top": 0,
-            "width": 355,
-          },
-          Object {
-            "width": 750,
-          },
-        ]
-      }
-    />
+            "flex": 1,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgba(116, 130, 148, .4)",
+              "bottom": 0,
+              "flex": 1,
+              "justifyContent": "center",
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        />
+      </View>
+    </Image>
     <View
       style={
         Object {

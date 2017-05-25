@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, TouchableHighlight, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  TouchableHighlight,
+  TouchableOpacity,
+  Text,
+  StyleSheet,
+} from 'react-native';
 import NubabiIcon from '../../../common/icons/nubabi';
 import { NUBABI_RED } from '../../../common/themes/defaultTheme';
 import { formatAge } from '../../../common/helpers/formatAge';
@@ -30,16 +36,18 @@ class NameAgeRow extends Component {
           </View>
         </View>
         <View style={styles.profileHeaderButtonView}>
-          <View style={styles.profileHeaderButton}>
+          <TouchableOpacity
+            onPress={this.props.onEditBaby}
+            style={styles.profileHeaderButton}
+          >
             <NubabiIcon
-              onPress={this.props.onEditBaby}
               style={[
                 styles.profileHeaderButtonText,
                 { marginLeft: 7, fontSize: 16, marginTop: -1 },
               ]}
               name="editProfile"
             />
-          </View>
+          </TouchableOpacity>
         </View>
       </View>
     );

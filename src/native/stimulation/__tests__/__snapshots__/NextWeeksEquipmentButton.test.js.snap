@@ -25,7 +25,7 @@ exports[`it renders correctly 1`] = `
         "alignItems": "center",
         "backgroundColor": "red",
         "borderRadius": 4,
-        "flex": 2,
+        "flex": 1,
         "height": 130,
         "justifyContent": "center",
         "marginRight": 5,
@@ -43,47 +43,55 @@ exports[`it renders correctly 1`] = `
   testID={undefined}
   tvParallaxProperties={undefined}
 >
-  <View>
-    <Image
-      resizeMode="contain"
-      source={1}
+  <Image
+    resizeMode="contain"
+    source={1}
+    style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        Object {
+          "height": undefined,
+          "width": undefined,
+        },
+      ]
+    }
+  >
+    <View
       style={
-        Array [
-          Object {
-            "width": 175,
-          },
-          Object {
-            "width": undefined,
-          },
-        ]
+        Object {
+          "flex": 1,
+        }
       }
     >
       <View
         style={
           Object {
             "alignItems": "center",
+            "backgroundColor": "rgba(116, 130, 148, .4)",
+            "bottom": 0,
+            "flex": 1,
+            "justifyContent": "center",
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "alignSelf": "stretch",
             "backgroundColor": "transparent",
             "flex": 1,
+            "flexDirection": "column",
             "justifyContent": "center",
           }
         }
       >
-        <View
-          style={
-            Object {
-              "alignItems": "center",
-              "backgroundColor": "#748294",
-              "flex": 1,
-              "height": 130,
-              "justifyContent": "center",
-              "marginTop": 65,
-              "opacity": 0.4,
-              "position": "absolute",
-              "top": 0,
-              "width": 200,
-            }
-          }
-        />
         <Text
           accessible={true}
           allowFontScaling={true}
@@ -119,7 +127,7 @@ exports[`it renders correctly 1`] = `
           Next Week
         </Text>
       </View>
-    </Image>
-  </View>
+    </View>
+  </Image>
 </View>
 `;
