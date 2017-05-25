@@ -9,7 +9,6 @@ import device from '../../src/common/device/reducer';
 import viewer from './viewer/reducer';
 import babies from './babies/reducer';
 import growth from './growth/reducer';
-import thisWeek from './activities/reducer';
 import { configureApollo } from './configureApollo';
 
 // stackoverflow.com/q/35622588/233902
@@ -18,9 +17,8 @@ const resetStateOnSignOutReducer = (reducer, initialState) => {
   /* eslint-enable no-unused-vars */
   return (state: State, action: Action) => {
     // TODO: this is too attached to Firebase
-    const userWasSignedOut = action.type === 'ON_AUTH' &&
-      state.viewer &&
-      !action.payload.user;
+    const userWasSignedOut =
+      action.type === 'ON_AUTH' && state.viewer && !action.payload.user;
 
     if (!userWasSignedOut) {
       return reducer(state, action);
@@ -54,7 +52,6 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
     growth,
     device,
     form,
-    thisWeek,
     viewer,
     ...platformReducers,
   });
