@@ -9,9 +9,9 @@ import {
 } from 'react-native';
 
 import { PANEL_BUTTON_TEXT } from '../../common/themes/defaultTheme';
-import withLayout from '../components/withLayout';
+import { Overlay, withLayout } from '../components';
 
-const background = require('../../common/images/thisWeeksActivitiesButton.png');
+const background = require('../../common/images/gross_motor_large.jpg');
 
 type Props = {
   onPress: () => void,
@@ -19,9 +19,11 @@ type Props = {
   layout: LayoutProps,
 };
 
-export const ThisWeeksActivitiesButton = (
-  { onPress, style, layout }: Props,
-) => {
+export const ThisWeeksActivitiesButton = ({
+  onPress,
+  style,
+  layout,
+}: Props) => {
   const title = "This Week's Activities";
   const width = {
     width: layout.viewportWidth,
@@ -38,9 +40,9 @@ export const ThisWeeksActivitiesButton = (
           source={background}
           style={[styles.background, width]}
           resizeMode="cover"
-        />
-
-        <View style={[styles.overlay, width]} />
+        >
+          <Overlay />
+        </Image>
 
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>

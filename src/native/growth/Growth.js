@@ -13,7 +13,6 @@ import displayLoadingState from '../components/displayLoadingState';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import WhatYouNeedToKnowButton from './WhatYouNeedToKnowButton';
-import DevelopmentRoadmapButton from './DevelopmentRoadmapButton';
 import Chart from './Chart';
 
 type Props = {

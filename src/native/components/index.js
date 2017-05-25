@@ -9,6 +9,7 @@ import Link from './Link';
 import NoContentView from './NoContentView';
 import Pill from './Pill';
 import FAB from './FAB';
+import Overlay from './Overlay';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
@@ -25,6 +26,7 @@ export {
   NoContentView,
   Pill,
   FAB,
+  Overlay,
   withLayout,
   displayLoadingState,
   showNoContentViewIf,

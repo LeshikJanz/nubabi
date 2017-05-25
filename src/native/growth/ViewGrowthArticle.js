@@ -43,7 +43,7 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
   } = getHeaderStyles(width);
 
   // FIXME: hardcoded, where do I get images from?
-  const image = require('../../common/images/gross_motor_large.png');
+  const image = require('../../common/images/gross_motor_large.jpg');
   // TODO: where to get tags
   return (
     <Box flex={1} as={ScrollView} backgroundColor="white">

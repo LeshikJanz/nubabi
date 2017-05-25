@@ -18,7 +18,7 @@ import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import * as loginActions from '../../common/auth/actions';
 import Loader from '../components/Loader';
 
-const background = require('../../common/images/loginBackground.png');
+const background = require('../../common/images/loginBackground.jpg');
 const logo = require('../../common/images/loginLogo.png');
 
 const window = Dimensions.get('window');
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: window.width,
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     height: window.height,
   },
   backgroundFilter: {

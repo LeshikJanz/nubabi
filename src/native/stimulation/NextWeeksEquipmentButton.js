@@ -8,9 +8,9 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import withLayout from '../components/withLayout';
+import { Overlay, withLayout } from '../components';
 
-const background = require('../../common/images/nextWeeksEquipmentButton.png');
+const background = require('../../common/images/nextWeeksEquipmentButton.jpg');
 
 type Props = {
   onPress: () => void,
@@ -18,9 +18,7 @@ type Props = {
 };
 
 export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
-  const width = {
-    width: layout.parentWidth,
-  };
+  const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
 
   return (
     <TouchableHighlight
@@ -28,19 +26,16 @@ export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
       underlayColor="rgba(0,0,0,0)"
       onPress={onPress}
     >
-      <View>
-        <Image
-          source={background}
-          style={[styles.background, width]}
-          resizeMode="contain"
-        >
-          <View style={styles.textContainer}>
-            <View style={styles.overlay} />
-            <Text style={styles.title}>Equipment For</Text>
-            <Text style={styles.title}>Next Week</Text>
-          </View>
-        </Image>
-      </View>
+      <Image
+        source={background}
+        style={[{ flex: 1 }, dimensions]}
+        resizeMode="contain"
+      >
+        <Overlay>
+          <Text style={styles.title}>Equipment For</Text>
+          <Text style={styles.title}>Next Week</Text>
+        </Overlay>
+      </Image>
     </TouchableHighlight>
   );
 };
@@ -49,7 +44,7 @@ const HEIGHT = 130;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     borderRadius: 4,
     height: HEIGHT,
     backgroundColor: 'red',

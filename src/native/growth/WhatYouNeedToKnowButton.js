@@ -1,32 +1,21 @@
 // @flow
+import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { Image, Dimensions } from 'react-native';
-import { Box, Card, Text } from '../components';
+import { Box, Card, Text, Overlay } from '../components';
+import withLayout from '../components/withLayout';
 
 type Props = {
   onPress: () => void,
+  layout: LayoutProps,
 };
 
-const window = Dimensions.get('window');
+const whatYouNeedToKnowImage = require('../../common/images/growth-what-you-need-to-know.jpg');
 
-export function getSizeRelativeToReference(
-  dimension,
-  originalRefVal,
-  actualRefVal,
-) {
-  return dimension / originalRefVal * actualRefVal;
-}
-
-function dimensionRelativeToIphone(dimension, actualRefVal = window.width) {
-  // 375 is iPhone width
-  return getSizeRelativeToReference(dimension, 375, actualRefVal);
-}
-
-const whatYouNeedToKnowImage = require('../../common/images/growth-what-you-need-to-know.png');
-
-export const WhatYouNeedToKnowButton = ({ onPress }: Props) => {
-  const width = dimensionRelativeToIphone(345);
-  const height = dimensionRelativeToIphone(150);
+export const WhatYouNeedToKnowButton = ({ onPress, layout }: Props) => {
+  console.log(layout.viewportWidth);
+  const width = Math.round(layout.viewportWidth * 0.915);
+  const height = Math.round(layout.viewportHeight * 0.2);
 
   return (
     <Card padding={0} onPress={onPress}>
@@ -34,7 +23,9 @@ export const WhatYouNeedToKnowButton = ({ onPress }: Props) => {
         flex={1}
         style={() => ({ borderTopLeftRadius: 4, borderTopRightRadius: 4 })}
       >
-        <Image source={whatYouNeedToKnowImage} style={{ width, height }} />
+        <Image source={whatYouNeedToKnowImage} style={{ width, height }}>
+          <Overlay />
+        </Image>
         <Box justifyContent="center" padding={1}>
           <Text size={2}>What you need to know</Text>
         </Box>
@@ -43,4 +34,4 @@ export const WhatYouNeedToKnowButton = ({ onPress }: Props) => {
   );
 };
 
-export default WhatYouNeedToKnowButton;
+export default withLayout(WhatYouNeedToKnowButton);

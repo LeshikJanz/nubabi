@@ -8,17 +8,17 @@ import {
   Image,
   TouchableHighlight,
 } from 'react-native';
-import withLayout from '../components/withLayout';
+import { Overlay, withLayout } from '../components';
 
 type Props = {
   onPress: () => void,
   layout: LayoutProps,
 };
 
-const background = require('../../common/images/browseAllActivitiesButton.png');
+const background = require('../../common/images/browseAllActivitiesButton.jpg');
 
 export const BrowseAllActivitiesButton = ({ onPress, layout }: Props) => {
-  const width = { width: layout.parentWidth };
+  const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
   return (
     <TouchableHighlight
       style={styles.container}
@@ -27,14 +27,13 @@ export const BrowseAllActivitiesButton = ({ onPress, layout }: Props) => {
     >
       <Image
         source={background}
-        style={[styles.background, width]}
-        resizeMode="contain"
+        style={[styles.background, { flex: 1 }, dimensions]}
+        resizeMode="cover"
       >
-        <View style={styles.textContainer}>
-          <View style={[styles.overlay, width]} />
+        <Overlay>
           <Text style={styles.title}>Browse All</Text>
           <Text style={styles.title}>Activities</Text>
-        </View>
+        </Overlay>
       </Image>
     </TouchableHighlight>
   );
@@ -44,7 +43,7 @@ const HEIGHT = 130;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     borderRadius: 4,
     height: HEIGHT,
     backgroundColor: 'red',
@@ -67,9 +66,6 @@ const styles = StyleSheet.create({
     opacity: 0.4,
     position: 'absolute',
     top: 0,
-    marginTop: 65,
-    height: HEIGHT,
-    width: 200,
   },
   title: {
     fontSize: 16,
@@ -84,9 +80,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     flex: 1,
-  },
-  background: {
-    width: 175,
   },
 });
 
