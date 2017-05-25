@@ -37,7 +37,6 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
     if (state.auth.isAuthenticated) {
       // TODO: remove from here, this should be a client concern
       // so we should handle on SplashScreen and Profile (initial tab)
-      const { currentBabyId } = state.babies;
       const fetchBabiesQuery = gql`
           query getBabies {
             viewer {
@@ -61,9 +60,6 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
         // $FlowFixMe
         Observable.zip(
           Observable.fromPromise(apollo.query({ query: fetchBabiesQuery })),
-          currentBabyId
-            ? Observable.fromPromise(apollo.query({ query: chooseBabyQuery }))
-            : Observable.of(null),
         ).mergeMap(([fetchBabiesResult]) => [
           getBabiesSuccess(
             fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),

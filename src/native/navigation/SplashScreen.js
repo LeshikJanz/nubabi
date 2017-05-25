@@ -1,5 +1,5 @@
 // @flow
-import type { State, Baby } from '../../common/types';
+import type { State, Baby, BabyEdge } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
 import { ImageCacheProvider } from 'react-native-cached-image';
@@ -11,6 +11,7 @@ import { NavigationActions } from 'react-navigation';
 import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
+import ChooseBaby from '../profile/ChooseBaby';
 
 const loadingImage = { uri: 'LaunchImage' };
 
@@ -21,6 +22,7 @@ type Props = {
   loadingMessage: ?string,
   author: ?string,
   baby: ?Baby,
+  babies: ?Array<BabyEdge>,
 };
 
 class SplashScreen extends PureComponent {
@@ -51,7 +53,7 @@ class SplashScreen extends PureComponent {
   }
 
   handleNextScreen = () => {
-    const { appOnline, isAuthenticated, baby } = this.props;
+    const { appOnline, isAuthenticated, baby, babies } = this.props;
     if (!appOnline) {
       return;
     }
@@ -64,7 +66,18 @@ class SplashScreen extends PureComponent {
       const avatar = path(['avatar', 'url'], baby);
       const coverImage = path(['coverImage', 'url'], baby);
 
-      ImageCacheProvider.cacheMultipleImages([avatar, coverImage]).then(() =>
+      const images = [avatar, coverImage];
+
+      if (babies && babies.length) {
+        babies.forEach(babyEdge => {
+          const image = path(['node', 'avatar', 'url'], babyEdge);
+          if (image) {
+            images.push(image);
+          }
+        });
+      }
+
+      ImageCacheProvider.cacheMultipleImages(images).then(() =>
         this.navigateTo('home'),
       );
     } else {
@@ -171,6 +184,7 @@ export default compose(
     gql`
       query SplashScreen($currentBabyId: ID!, $hasCurrentBaby: Boolean!) {
         viewer {
+          # Prefetch current baby avatar and coverImage
           baby(id: $currentBabyId) @include(if: $hasCurrentBaby) {
             id
             avatar {
@@ -180,6 +194,16 @@ export default compose(
               url
             }
           },
+          # Choose Baby
+          babies {
+            edges {
+              node {
+                id
+                ...ChooseBaby
+              }
+            }
+          }
+          # Get quotes for splash screen
           allQuotes {
             edges {
               node {
@@ -191,6 +215,7 @@ export default compose(
           }
         }
       }
+      ${ChooseBaby.fragments.list}
     `,
     {
       options: ownProps => ({
@@ -204,6 +229,7 @@ export default compose(
       props: ({ data }) => {
         const edges = path(['viewer', 'allQuotes', 'edges'], data);
         const baby = path(['viewer', 'baby'], data);
+        const babies = path(['viewer', 'babies', 'edges'], data);
 
         let loadingMessage;
         let author;
@@ -217,6 +243,7 @@ export default compose(
         return {
           data,
           baby,
+          babies,
           loadingMessage,
           author,
         };

@@ -1,13 +1,8 @@
 // @flow
 import type { SkillArea, Activity } from '../../common/types';
 import React from 'react';
-import {
-  Dimensions,
-  View,
-  Image,
-  TouchableHighlight,
-  Text,
-} from 'react-native';
+import { Dimensions, View, TouchableHighlight, Text } from 'react-native';
+import Image from 'react-native-cached-image';
 import { path } from 'ramda';
 import iconMappings from './iconMappings';
 
@@ -20,11 +15,7 @@ type Props = {
 };
 
 export const ActivityListItem = (props: Props) => {
-  const {
-    skillArea,
-    activity,
-    onPress,
-  } = props;
+  const { skillArea, activity, onPress } = props;
 
   return (
     <TouchableHighlight

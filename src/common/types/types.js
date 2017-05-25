@@ -5,6 +5,7 @@ import type { Element } from 'react';
 import type {
   Query,
   Baby,
+  BabyEdge,
   Activity,
   ActivityConnection,
   ActivityEdge,
@@ -37,6 +38,7 @@ import type {
 export type {
   Query,
   Baby,
+  BabyEdge,
   Activity,
   ActivityConnection,
   ActivityEdge,

@@ -11,7 +11,6 @@ import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  Image,
   Text,
   Dimensions,
   ScrollView,
@@ -19,6 +18,7 @@ import {
   Easing,
   TouchableOpacity,
 } from 'react-native';
+import Image from 'react-native-cached-image';
 import SVGPath from 'art/modes/svg/path';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -54,9 +54,6 @@ class ChooseBaby extends Component {
         id
         name
         avatar {
-          url
-        }
-        coverImage {
           url
         }
       }
@@ -394,7 +391,7 @@ export default compose(
   ),
   graphql(query, {
     options: {
-      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
+      fetchPolicy: 'cache-first', // TODO: remove when there's a way to set a default
     },
     props: ({ data }) => {
       const babies = path(['viewer', 'babies', 'edges'], data);

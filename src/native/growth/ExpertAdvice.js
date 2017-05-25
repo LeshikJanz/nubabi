@@ -1,7 +1,7 @@
 // @flow
 import type { Avatar } from '../../common/types';
 import React from 'react';
-import { Image } from 'react-native';
+import Image from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { Box, Text } from '../components';
 
