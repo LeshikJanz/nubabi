@@ -1,5 +1,5 @@
 // @flow
-import type { Activity, NavigationOptions } from '../../common/types';
+import type { ActivityEdge, NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { compose, path } from 'ramda';
@@ -7,11 +7,10 @@ import { gql, graphql } from 'react-apollo';
 import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
 import ActivityList from './ActivityList';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
 
 type Props = {
   navigation: NavigationProp<*>,
-  activities: Array<Activity>,
+  activities: Array<ActivityEdge>,
   loadMoreEntries: () => void,
 };
 
@@ -65,9 +64,11 @@ export default compose(
     },
     props: ({ data }) => {
       const { fetchMore } = data;
+      const activities = path(['viewer', 'allActivities', 'edges'], data);
 
       return {
-        ...mapEdgesToProp('viewer.allActivities.edges', 'activities', data),
+        data,
+        activities: activities || [],
         loadMoreEntries: () => {
           return fetchMore({
             query,

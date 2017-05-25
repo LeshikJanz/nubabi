@@ -12,7 +12,6 @@ import { graphql, gql } from 'react-apollo';
 import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
 import ActivityList from './ActivityList';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
 
 type Props = {
   activities: Array<ActivityEdge>,
@@ -73,7 +72,17 @@ export default compose(
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: currentBabyId },
       }),
-      props: mapEdgesToProp('viewer.baby.activities', 'activities'),
+      props: ({ data }) => {
+        const activities = path(
+          ['viewer', 'baby', 'activities', 'edges'],
+          data,
+        );
+
+        return {
+          data,
+          activities: activities || [],
+        };
+      },
     },
   ),
   displayLoadingState,
