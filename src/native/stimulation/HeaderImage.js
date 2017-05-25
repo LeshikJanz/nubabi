@@ -1,7 +1,8 @@
 // @flow
 import React from 'react';
 import merge from 'lodash';
-import { Image, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import Image from 'react-native-cached-image';
 
 type Props = {
   style?: Object | number,

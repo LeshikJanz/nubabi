@@ -5,10 +5,10 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { path, head } from 'ramda';
@@ -103,8 +103,8 @@ class ExpertInfo extends Component {
   };
 
   render() {
-    const width = this.props.layout.viewportWidth ||
-      Dimensions.get('window').width;
+    const width =
+      this.props.layout.viewportWidth || Dimensions.get('window').width;
 
     return (
       <View
