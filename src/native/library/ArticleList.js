@@ -2,8 +2,8 @@
 import type { DataSource } from 'react-native';
 import type { Article } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ListView } from 'react-native';
-import { compose, pluck } from 'ramda';
+import { ListView, TouchableOpacity } from 'react-native';
+import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import {
@@ -14,10 +14,12 @@ import {
   showNoContentViewIf,
 } from '../components';
 import mapEdgesToProp from '../shared/mapEdgesToProp';
-import ArticleListItem from './ArticleListItem';
+import ArticleCardItem from './ArticleCardItem';
 
 type Props = {
   articles: Array<Article>,
+  onBrowseAll: () => void,
+  onViewArticle: (id: string) => void,
 };
 
 type State = {
@@ -47,33 +49,44 @@ export class ArticleList extends PureComponent {
     }
   }
 
-  renderRow(article: Article) {
+  renderRow = (article: Article) => {
     if (!article) {
       return null;
     }
 
+    const onViewArticle = () => {
+      this.props.onViewArticle(article.id);
+    };
+
     return (
-      <Card padding={0} margin={0} justifyContent="flex-start">
-        <ArticleListItem
+      <Card
+        padding={0}
+        margin={0}
+        justifyContent="flex-start"
+        onPress={onViewArticle}
+      >
+        <ArticleCardItem
           key={article.id}
-          {...filter(ArticleListItem.fragments.item, article)}
+          {...filter(ArticleCardItem.fragments.item, article)}
         />
       </Card>
     );
-  }
+  };
 
   renderSeparator() {
     return <Box flex={1} marginHorizontal={0.5} />;
   }
 
-  renderHeader() {
+  renderHeader = () => {
     return (
       <Box flexDirection="row" justifyContent="space-between" padding={1}>
         <Text size={2}>Articles</Text>
-        <Text medium color="primary">SEE ALL</Text>
+        <TouchableOpacity onPress={this.props.onBrowseAll}>
+          <Text medium color="primary">SEE ALL</Text>
+        </TouchableOpacity>
       </Box>
     );
-  }
+  };
 
   render() {
     return (
@@ -109,7 +122,7 @@ export default compose(
         }
       }
     }
-    ${ArticleListItem.fragments.item}
+    ${ArticleCardItem.fragments.item}
   `,
     {
       options: {

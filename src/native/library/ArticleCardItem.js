@@ -2,7 +2,6 @@
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import Image from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { compose } from 'ramda';
@@ -16,27 +15,28 @@ type Props = {
 
 export const ArticleListItem = ({ title, image, layout }: Props) => {
   return (
-    <Box flex={1} flexDirection="row">
+    <Box flex={1}>
       <Image source={{ uri: image.url }} style={{ flex: 1 }} resizeMode="cover">
         <Overlay />
       </Image>
 
       <Box
-        flex={2}
-        padding={1}
-        alignItems="flex-start"
         justifyContent="center"
-        style={() => ({ flex: 2 })}
+        style={() => ({
+          shadowRadius: StyleSheet.hairlineWidth,
+          shadowColor: '#000',
+          shadowOpacity: 0.1,
+          shadowOffset: {
+            width: 0,
+            height: -1,
+          },
+        })}
       >
         <Box justiyContent="center" alignItems="center" padding={0.5}>
-          <Text size={2} numberOfLines={4}>
+          <Text style={() => ({ width: 100 })} numberOfLines={2} align="center">
             {title}
           </Text>
         </Box>
-      </Box>
-
-      <Box alignItems="center" justifyContent="center" padding={1}>
-        <Icon name="ios-arrow-forward" size={20} color="#C5CDD7" />
       </Box>
     </Box>
   );

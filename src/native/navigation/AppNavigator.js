@@ -14,33 +14,34 @@ import type {
   NavigationRouteConfigMap,
 } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import { merge } from 'lodash';
+import { BackAndroid } from 'react-navigation/src/PlatformHelpers';
+import theme from '../../common/themes/defaultTheme';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
 import crossFade from './transitioners/CrossFadeTransitioner';
 import android from './transitioners/AndroidDefaultTransitioner';
 import chooseBaby from './transitioners/ChooseBabyTransitioner';
+import TabsNavigator from './TabsNavigator';
 
 import SplashScreen from './SplashScreen';
-import TabsNavigator from './TabsNavigator';
-import ChooseBabyScreen from '../profile/ChooseBabyScreen';
+import LoginScreen from '../login/LoginScreen';
 import Settings from '../settings/Settings';
+import ChooseBabyScreen from '../profile/ChooseBabyScreen';
 import AddBaby from '../profile/EditBaby/AddBaby';
 import EditBaby from '../profile/EditBaby/EditBaby';
 import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivities from '../stimulation/BrowseActivities';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
-import LoginScreen from '../login/LoginScreen';
+import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
 import UpdateHeightScreen from '../profile/EditBaby/UpdateHeightScreen';
 
-import theme from '../../common/themes/defaultTheme';
 import FavoriteActivities from '../stimulation/Favorites';
 import ViewActivity from '../stimulation/ViewActivity';
 import NavigatorTypes from 'react-navigation/src/navigators/NavigatorTypes';
 import { WhatYouNeedToKnowScreen } from '../growth/WhatYouNeedToKnowScreen';
 import DevelopmentRoadmapScreen from '../growth/DevelopmentRoadmapScreen';
 import ViewGrowthContentScreen from '../growth/ViewGrowthArticleScreen';
-import { BackAndroid } from 'react-navigation/src/PlatformHelpers';
 
 export type TransitionName =
   | 'cardStack'
@@ -160,6 +161,7 @@ const createCustomNavigator = (
 };
 
 const routes = {
+  settings: { screen: Settings },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
@@ -177,7 +179,7 @@ const routes = {
     screen: ViewGrowthContentScreen,
     path: 'content/growth/:id',
   },
-  settings: { screen: Settings },
+  browseArticles: { screen: BrowseArticlesScreen },
 };
 
 const AppNavigator = createCustomNavigator(

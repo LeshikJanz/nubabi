@@ -1,30 +1,41 @@
-import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+// @flow
+import type { NavigationOptions } from '../../common/types';
+import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
+import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
 import ArticleList from './ArticleList';
 
-const Library = () => {
-  return (
-    <Screen>
-      <Box flex={1}>
-        <ArticleList />
-        <Box flex={1} />
-        <Box flex={1} />
-      </Box>
-    </Screen>
-  );
+type Props = {
+  navigation: NavigationProp<*, *>,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 40,
-    textAlign: 'center',
-  },
-});
+class Library extends PureComponent {
+  props: Props;
+
+  static navigationOptions: NavigationOptions = {
+    title: 'Library',
+  };
+
+  handleBrowseArticles = () => {
+    this.props.navigation.navigate('browseArticles');
+  };
+
+  handleViewArticle = (id: string) => {};
+
+  render() {
+    return (
+      <Screen>
+        <Box flex={1}>
+          <ArticleList
+            onBrowseAll={this.handleBrowseArticles}
+            onViewArticle={this.handleViewArticle}
+          />
+          <Box flex={1} />
+          <Box flex={1} />
+        </Box>
+      </Screen>
+    );
+  }
+}
 
 export default Library;

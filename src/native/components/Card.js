@@ -35,14 +35,14 @@ class Card extends PureComponent {
 
   render() {
     const { props } = this;
-    const children = props.onPress
-      ? <TouchableOpacity onPress={props.onPress}>
-          {props.children}
-        </TouchableOpacity>
-      : props.children;
+    const { children } = props;
+    const componentProps = props.onPress
+      ? { as: TouchableOpacity, onPress: props.onPress }
+      : {};
 
     return (
       <Box
+        {...componentProps}
         onLayout={this.handleLayout}
         flex={1}
         justifyContent="center"
