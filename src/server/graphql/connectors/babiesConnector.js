@@ -65,7 +65,7 @@ export const getFavoriteActivities = (token: string, babyId: string) =>
 export const getActivity = (token: string, id: string, babyId: string) => {
   return instance
     .get(`/activities/${id}`, withToken(token))
-    .then(response => ({ babyId, ...path(['data', 'activity'], response) }));
+    .then(response => ({ babyId, ...path(['data'], response) }));
 };
 
 export const getSteps = async (
