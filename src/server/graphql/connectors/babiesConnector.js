@@ -202,13 +202,9 @@ export const getGrowthContentById = async (
     .get(`/content/growth/${id}`, withToken(token))
     .then(path(['data']))
     .then(data => {
-      const contentId = path(['sys', 'id'], data);
-      const locale = path(['sys', 'locale'], data);
-      const title = path(['fields', locale, 'title'], data);
-      const text = makeStringFromTemplate(
-        path(['fields', locale, 'content'], data),
-        variables,
-      );
+      const contentId = path(['id'], data);
+      const title = path(['title'], data);
+      const text = makeStringFromTemplate(path(['content'], data), variables);
 
       return {
         id: contentId,
