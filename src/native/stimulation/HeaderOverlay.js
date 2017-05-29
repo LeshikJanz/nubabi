@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 type Props = {
-  style?: Object | number,
+  overlayStyle?: Object | number,
 };
 
 export const HeaderOverlay = ({ overlayStyle: styleProp }: Props) => {
