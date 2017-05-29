@@ -17,6 +17,7 @@ export const HeaderTitle = ({ text, style: styleProp }: Props) => {
 
 const styles = {
   text: {
+    textAlign: 'center',
     color: '#fff',
     fontWeight: '500',
     fontSize: 22,

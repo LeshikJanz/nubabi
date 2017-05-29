@@ -42,6 +42,7 @@ import NavigatorTypes from 'react-navigation/src/navigators/NavigatorTypes';
 import { WhatYouNeedToKnowScreen } from '../growth/WhatYouNeedToKnowScreen';
 import DevelopmentRoadmapScreen from '../growth/DevelopmentRoadmapScreen';
 import ViewGrowthContentScreen from '../growth/ViewGrowthArticleScreen';
+import ViewArticleScreen from '../library/ViewArticleScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -180,6 +181,10 @@ const routes = {
     path: 'content/growth/:id',
   },
   browseArticles: { screen: BrowseArticlesScreen },
+  viewArticle: {
+    screen: ViewArticleScreen,
+    path: 'articles/:id',
+  },
 };
 
 const AppNavigator = createCustomNavigator(

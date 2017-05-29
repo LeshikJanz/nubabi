@@ -4,11 +4,25 @@ import { StyleSheet, Text } from 'react-native';
 
 type Props = {
   children: any,
+  style?: Object | number,
+  backgroundColor?: string,
+  color?: string,
+  borderColor?: string,
 };
 
-export const Pill = ({ children }: Props) => {
+export const Pill = (props: Props) => {
+  const { children } = props;
+
+  const style = {};
+  const styleProps = ['backgroundColor', 'color', 'borderColor'];
+  styleProps.forEach(prop => {
+    if (prop) {
+      style[prop] = props[prop];
+    }
+  });
+
   return (
-    <Text style={styles.pill}>
+    <Text style={[styles.pill, style]}>
       {children}
     </Text>
   );

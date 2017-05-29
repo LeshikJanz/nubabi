@@ -23,6 +23,7 @@ import mapEdgesToProp from '../shared/mapEdgesToProp';
 type Props = {
   articles: Array<ArticleType>,
   data: GraphQLDataProp<*>,
+  onViewArticle: (id: string) => void,
 };
 
 const Separator = () => <Box padding={0.5} />;
@@ -34,7 +35,19 @@ export class BrowseArticles extends PureComponent {
     refreshing: false,
   };
 
+  handleRefresh = () => {
+    this.setState({ refreshing: true }, () => {
+      this.props.data.refetch().then(() => {
+        this.setState({ refreshing: false });
+      });
+    });
+  };
+
   renderItem = ({ item: article }: { item: ArticleType }) => {
+    const viewArticle = () => {
+      this.props.onViewArticle(article.id);
+    };
+
     return (
       <Card
         marginVertical={0.1}
@@ -42,19 +55,14 @@ export class BrowseArticles extends PureComponent {
         padding={0}
         justifyContent="flex-start"
         alignItems="stretch"
-        onPress={() => {}}
+        onPress={viewArticle}
       >
-        <ArticleListItem {...filter(ArticleListItem.fragments.item, article)} />
+        <ArticleListItem
+          {...filter(ArticleListItem.fragments.item, article)}
+          onViewArticle
+        />
       </Card>
     );
-  };
-
-  handleRefresh = () => {
-    this.setState({ refreshing: true }, () => {
-      this.props.data.refetch().then(() => {
-        this.setState({ refreshing: false });
-      });
-    });
   };
 
   render() {

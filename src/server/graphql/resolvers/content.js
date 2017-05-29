@@ -1,7 +1,8 @@
 // @flow
 import type { Context, ConnectionArguments, GraphQLContext } from './common';
-import { path } from 'ramda';
+import { path, curry } from 'ramda';
 import moment from 'moment';
+import readTime from 'reading-time';
 import {
   prop,
   transform,
@@ -11,12 +12,15 @@ import {
 } from './common';
 import * as connector from '../connectors/babiesConnector';
 
+const readingTime = curry((propName, obj) => {
+  return readTime(prop(propName)(obj));
+});
+
 export const resolvers = {
   Viewer: {
     allTips: (_: mixed, args: ConnectionArguments, { token }: Context) => {
       return connectionFromPromisedArray(connector.getTips(token), args);
     },
-
     allQuotes: (_: mixed, args: ConnectionArguments, { token }: Context) => {
       return connectionFromPromisedArray(connector.getQuotes(token), args);
     },
@@ -28,10 +32,7 @@ export const resolvers = {
       return connectionFromPromisedArray(connector.getArticles(token), args);
     },
     article: (_, { id }: { id: string }, { token }: GraphQLContext) => {
-      return connector.getArticle(token, fromGlobalId(id).id).then(obj => {
-        console.log(obj);
-        return obj;
-      });
+      return connector.getArticle(token, fromGlobalId(id).id);
     },
   },
   Quote: {
@@ -57,6 +58,7 @@ export const resolvers = {
         height: path(['file', 'details', 'image', 'height'], image),
       };
     },
+    readingTime: readingTime('body'),
   },
   Author: {
     id: globalIdField(),

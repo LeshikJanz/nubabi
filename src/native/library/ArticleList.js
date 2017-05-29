@@ -55,7 +55,7 @@ export class ArticleList extends PureComponent {
     }
 
     const onViewArticle = () => {
-      this.props.onViewArticle(article.id);
+      this.props.onViewArticle(article.id, article.title);
     };
 
     return (

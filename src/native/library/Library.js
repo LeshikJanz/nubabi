@@ -20,7 +20,9 @@ class Library extends PureComponent {
     this.props.navigation.navigate('browseArticles');
   };
 
-  handleViewArticle = (id: string) => {};
+  handleViewArticle = (id: string) => {
+    this.props.navigation.navigate('viewArticle', { id });
+  };
 
   render() {
     return (

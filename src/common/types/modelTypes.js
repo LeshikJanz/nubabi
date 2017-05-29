@@ -652,6 +652,8 @@ export type Article = {
   tags?: Array<Tag>,
   /**  */
   image: Image,
+  /**  */
+  readingTime: ReadingTime,
 };
 
 export type Author = {

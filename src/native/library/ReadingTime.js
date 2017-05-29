@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Box, FAB, Text } from '../components';
+import { Box, FAB, Text } from '../components/index';
 
 type Props = {
   minutes: number,
@@ -12,7 +12,7 @@ export const ReadingTime = ({ minutes, suffix = 'min read' }: Props) => {
     <FAB
       style={{
         position: 'absolute',
-        bottom: 0,
+        bottom: 45,
         right: 15,
       }}
     >

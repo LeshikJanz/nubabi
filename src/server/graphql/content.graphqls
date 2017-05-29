@@ -68,6 +68,7 @@ type Article implements Node, Content {
   author: Author!
   tags: [Tag]
   image: Image!
+  readingTime: ReadingTime!
 }
 
 # A connection to a list of items.
@@ -97,4 +98,10 @@ type Author {
 type Tag {
   id: ID!
   name: String!
+}
+
+type ReadingTime {
+  text: String!
+  time: Int!
+  words: Int!
 }

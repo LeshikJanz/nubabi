@@ -14,7 +14,7 @@ const textStyle = {
   },
 };
 
-export const Article = ({ text }: Props) => {
+export const GrowthArticle = ({ text }: Props) => {
   return (
     <Box flex={1}>
       <Markdown text={text} style={textStyle} />
@@ -22,7 +22,7 @@ export const Article = ({ text }: Props) => {
   );
 };
 
-Article.fragments = {
+GrowthArticle.fragments = {
   growth: gql`
     fragment GrowthArticle on GrowthArticle {
       id
@@ -35,4 +35,4 @@ Article.fragments = {
   `,
 };
 
-export default Article;
+export default GrowthArticle;

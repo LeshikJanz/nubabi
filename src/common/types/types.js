@@ -33,6 +33,7 @@ import type {
   ToggleFavoriteInput,
   RecordMeasurementInput,
   Article,
+  Tag,
 } from './modelTypes';
 
 export type {
@@ -66,6 +67,7 @@ export type {
   RecordMeasurementInput,
   ActivityMediaType,
   Article,
+  Tag,
 };
 
 export type FirebaseUser = {

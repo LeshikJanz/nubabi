@@ -75,8 +75,4 @@ type GrowthArticleEdge {
   cursor: String!
 }
 
-type ReadingTime {
-  text: String!
-  time: Int!
-  words: Int!
-}
+
