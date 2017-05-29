@@ -16,7 +16,7 @@ export const Pill = (props: Props) => {
   const style = {};
   const styleProps = ['backgroundColor', 'color', 'borderColor'];
   styleProps.forEach(prop => {
-    if (prop) {
+    if (props[prop]) {
       style[prop] = props[prop];
     }
   });
