@@ -84,10 +84,7 @@ const routes = {
     screen: ViewArticleScreen,
     path: 'articles/:id',
   },
-  viewActivityMedia: {
-    screen: ActivityMediaScreen,
-    mode: 'modal',
-  },
+  viewActivityMedia: { screen: ActivityMediaScreen },
 };
 
 class TransitionerSwitcher extends PureComponent {

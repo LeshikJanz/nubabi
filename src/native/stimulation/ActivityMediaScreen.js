@@ -1,7 +1,6 @@
 // @flow
 import type { ActivityMediaConnection } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { StatusBar } from 'react-native';
 import PhotoBrowser from 'react-native-photo-browser';
 
 type Props = {
@@ -10,6 +9,9 @@ type Props = {
 
 class ActivityMediaScreen extends PureComponent {
   props: Props;
+  state = {
+    media: [],
+  };
 
   static navigationOptions = {
     mode: 'modal',
@@ -18,6 +20,10 @@ class ActivityMediaScreen extends PureComponent {
     },
     headerTintColor: 'white',
   };
+
+  componentDidMount() {
+    this.setState({ media: this.getMediaList() });
+  }
 
   getMediaList() {
     return this.props.navigation.state.params.media.edges
@@ -35,7 +41,7 @@ class ActivityMediaScreen extends PureComponent {
   render() {
     return (
       <PhotoBrowser
-        mediaList={this.getMediaList()}
+        mediaList={this.state.media}
         displayNavArrows
         enableGrid
         useCircleProgress
