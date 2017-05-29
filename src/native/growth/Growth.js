@@ -12,7 +12,7 @@ import { Box, Card, Text } from '../components';
 import displayLoadingState from '../components/displayLoadingState';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
-import WhatYouNeedToKnowButton from './WhatYouNeedToKnowButton';
+import ThisWeekGrowthButton from './ThisWeekGrowthButton';
 import Chart from './Chart';
 
 type Props = {
@@ -71,7 +71,7 @@ export class Growth extends Component {
             text={introduction}
             onSkip={this.handleIntroductionSkip}
           />
-          <WhatYouNeedToKnowButton
+          <ThisWeekGrowthButton
             onPress={this.props.onNavigateToWhatYouNeedToKnow}
           />
           <Card padding={0}>

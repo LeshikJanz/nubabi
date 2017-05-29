@@ -13,21 +13,21 @@ type Props = {
 const whatYouNeedToKnowImage = require('../../common/images/growth-what-you-need-to-know.jpg');
 
 export const WhatYouNeedToKnowButton = ({ onPress, layout }: Props) => {
-  console.log(layout.viewportWidth);
   const width = Math.round(layout.viewportWidth * 0.915);
   const height = Math.round(layout.viewportHeight * 0.2);
 
   return (
     <Card padding={0} onPress={onPress}>
-      <Box
-        flex={1}
-        style={() => ({ borderTopLeftRadius: 4, borderTopRightRadius: 4 })}
-      >
-        <Image source={whatYouNeedToKnowImage} style={{ width, height }}>
+      <Box flex={1} borderRadius={4} style={() => ({ overflow: 'hidden' })}>
+        <Image
+          source={whatYouNeedToKnowImage}
+          style={{ width, height }}
+          resizeMode="cover"
+        >
           <Overlay />
         </Image>
         <Box justifyContent="center" padding={1}>
-          <Text size={2}>What you need to know</Text>
+          <Text size={2}>This Week's Growth</Text>
         </Box>
       </Box>
     </Card>
