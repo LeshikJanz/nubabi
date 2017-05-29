@@ -25,7 +25,11 @@ export const ActivityListItem = (props: Props) => {
       onPress={onPress}
     >
       <View style={styles.activityRow}>
-        <Box overflow="hidden" borderRadius={4}>
+        <Box
+          overflow="hidden"
+          borderTopLeftRadius={4}
+          borderBottomLeftRadius={4}
+        >
           <Image
             style={styles.skillImage}
             source={{ uri: path(['image', 'thumb', 'url'], skillArea) }}

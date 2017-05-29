@@ -16,7 +16,13 @@ type Props = {
 
 export const ArticleListItem = ({ title, image, layout }: Props) => {
   return (
-    <Box flexDirection="row" flex={1} borderRadius={4} overflow="hidden">
+    <Box
+      flexDirection="row"
+      flex={1}
+      borderTopLeftRadius={4}
+      borderBottomLeftRadius={4}
+      overflow="hidden"
+    >
       <Image source={{ uri: image.url }} style={{ flex: 1 }} resizeMode="cover">
         <Overlay />
       </Image>
