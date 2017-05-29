@@ -4291,6 +4291,18 @@ react-native-menu@^0.20.2:
   dependencies:
     react-timer-mixin "^0.13.3"
 
+react-native-photo-browser@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/react-native-photo-browser/-/react-native-photo-browser-0.3.1.tgz#4adfebf3ec090d10ca36ae497b1633f6d437bb35"
+  dependencies:
+    react-native-progress "^3.2.0"
+
+react-native-progress@^3.2.0:
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.2.1.tgz#9f2353045c49f06803ae04d86a2cd5baa83cd465"
+  dependencies:
+    prop-types "^15.5.8"
+
 react-native-simple-markdown@^1.0.60-rc.3:
   version "1.0.60-rc.3"
   resolved "https://registry.yarnpkg.com/react-native-simple-markdown/-/react-native-simple-markdown-1.0.60-rc.3.tgz#80c772b22eb32fb43b9f23620f6c876aef06d721"

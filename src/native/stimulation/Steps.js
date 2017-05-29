@@ -24,6 +24,7 @@ type Props = {
   activityMedia: ?string,
   activityMediaType: ?ActivityMediaType,
   activityMediaThumbnail: ?string,
+  onActivityMediaPress: () => void,
 };
 
 class Steps extends PureComponent {
@@ -37,7 +38,7 @@ class Steps extends PureComponent {
       fragment Steps on Activity {
         name
         steps
-        media(first: 1) {
+        media {
           edges {
             node {
               type
@@ -144,7 +145,11 @@ class Steps extends PureComponent {
     }
 
     return (
-      <Box padding={1}>
+      <Box
+        as={TouchableOpacity}
+        onPress={this.props.onActivityMediaPress}
+        padding={1}
+      >
         {media}
       </Box>
     );

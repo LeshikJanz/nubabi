@@ -43,6 +43,7 @@ import { WhatYouNeedToKnowScreen } from '../growth/WhatYouNeedToKnowScreen';
 import DevelopmentRoadmapScreen from '../growth/DevelopmentRoadmapScreen';
 import ViewGrowthContentScreen from '../growth/ViewGrowthArticleScreen';
 import ViewArticleScreen from '../library/ViewArticleScreen';
+import ActivityMediaScreen from '../stimulation/ActivityMediaScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -58,6 +59,36 @@ type State = {
 
 // on Android, the URI prefix typically contains a host in addition to scheme
 const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
+
+const routes = {
+  settings: { screen: Settings },
+  chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
+  addBaby: { screen: AddBaby },
+  editBaby: { screen: EditBaby },
+  updateHeight: { screen: UpdateHeightScreen },
+  updateWeight: { screen: UpdateWeightScreen },
+  thisWeekActivities: { screen: ThisWeeksActivities },
+  favoriteActivities: { screen: FavoriteActivities },
+  nextWeeksEquipment: { screen: NextWeeksEquipment },
+  browseActivities: { screen: BrowseActivities },
+  viewActivity: { screen: ViewActivity },
+  viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
+  whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
+  developmentRoadmap: { screen: DevelopmentRoadmapScreen },
+  viewGrowthContent: {
+    screen: ViewGrowthContentScreen,
+    path: 'content/growth/:id',
+  },
+  browseArticles: { screen: BrowseArticlesScreen },
+  viewArticle: {
+    screen: ViewArticleScreen,
+    path: 'articles/:id',
+  },
+  viewActivityMedia: {
+    screen: ActivityMediaScreen,
+    mode: 'modal',
+  },
+};
 
 class TransitionerSwitcher extends PureComponent {
   state: State;
@@ -159,32 +190,6 @@ const createCustomNavigator = (
   const container = createNavigationContainer(navigator, containerOptions);
   container.router = router;
   return container;
-};
-
-const routes = {
-  settings: { screen: Settings },
-  chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
-  addBaby: { screen: AddBaby },
-  editBaby: { screen: EditBaby },
-  updateHeight: { screen: UpdateHeightScreen },
-  updateWeight: { screen: UpdateWeightScreen },
-  thisWeekActivities: { screen: ThisWeeksActivities },
-  favoriteActivities: { screen: FavoriteActivities },
-  nextWeeksEquipment: { screen: NextWeeksEquipment },
-  browseActivities: { screen: BrowseActivities },
-  viewActivity: { screen: ViewActivity },
-  viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
-  whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
-  developmentRoadmap: { screen: DevelopmentRoadmapScreen },
-  viewGrowthContent: {
-    screen: ViewGrowthContentScreen,
-    path: 'content/growth/:id',
-  },
-  browseArticles: { screen: BrowseArticlesScreen },
-  viewArticle: {
-    screen: ViewArticleScreen,
-    path: 'articles/:id',
-  },
 };
 
 const AppNavigator = createCustomNavigator(

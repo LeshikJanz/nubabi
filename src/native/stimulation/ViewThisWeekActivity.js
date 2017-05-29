@@ -35,15 +35,15 @@ type Props = {
   babyName: string,
   currentBabyId: string,
   navigation: NavigationProp<*>,
-  swoopActivity: (
-    options: { variables: { input: SwoopActivityInput } },
-  ) => Promise<*>, // TODO
-  changeActivityLevel: (
-    options: { variables: { input: AdjustActivityLevelInput } },
-  ) => Promise<*>,
-  toggleFavorite: (
-    options: { variables: { input: ToggleFavoriteInput } },
-  ) => Promise<*>,
+  swoopActivity: (options: {
+    variables: { input: SwoopActivityInput },
+  }) => Promise<*>, // TODO
+  changeActivityLevel: (options: {
+    variables: { input: AdjustActivityLevelInput },
+  }) => Promise<*>,
+  toggleFavorite: (options: {
+    variables: { input: ToggleFavoriteInput },
+  }) => Promise<*>,
   isFavorite: boolean,
 };
 
@@ -125,6 +125,12 @@ class ViewThisWeeksActivity extends Component {
     this.handleNavigateToActivity(this.props.previousActivity);
   };
 
+  handleActivityMediaPress = () => {
+    this.props.navigation.navigate('viewActivityMedia', {
+      media: this.props.activity.media,
+    });
+  };
+
   render() {
     const {
       activity,
@@ -153,6 +159,7 @@ class ViewThisWeeksActivity extends Component {
           onToggleFavorite={this.handleToggleFavorite}
           onLevelIncrease={this.handleLevelIncrease}
           onLevelDecrease={this.handleLevelDecrease}
+          onActivityMediaPress={this.handleActivityMediaPress}
         />
       </Screen>
     );

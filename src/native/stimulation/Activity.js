@@ -31,6 +31,7 @@ type ActivityProps = {
   onToggleFavorite: () => void,
   enableActions: boolean,
   enableNavigation: boolean,
+  onActivityMediaPress?: () => void,
 };
 
 type ActivityActionProps = {
@@ -40,6 +41,7 @@ type ActivityActionProps = {
 };
 
 type ActivityNavigationProps = {
+  onActivityMediaPress: () => void,
   onPreviousActivity?: () => void,
   onNextActivity?: () => void,
   previousSkillAreaName?: string,
@@ -254,6 +256,7 @@ export class Activity extends PureComponent {
             activityMedia={activityMedia}
             activityMediaThumbnail={activityThumb}
             activityMediaType={activityMediaType}
+            onActivityMediaPress={this.props.onActivityMediaPress}
           />
 
           {enableActions &&

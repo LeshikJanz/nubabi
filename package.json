@@ -67,6 +67,7 @@
     "react-native-image-picker": "^0.26.3",
     "react-native-keyboard-aware-scroll-view": "^0.2.7",
     "react-native-menu": "^0.20.2",
+    "react-native-photo-browser": "^0.3.1",
     "react-native-simple-markdown": "^1.0.60-rc.3",
     "react-native-snap-carousel": "^2.1.2",
     "react-native-spinkit": "^1.0.2",

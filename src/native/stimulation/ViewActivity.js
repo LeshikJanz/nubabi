@@ -38,12 +38,14 @@ export class ViewActivity extends PureComponent {
     this.props.toggleFavorite({ variables: { input } });
   };
 
+  handleActivityMediaPress = () => {
+    this.props.navigation.navigate('viewActivityMedia', {
+      media: this.props.activity.media,
+    });
+  };
+
   render() {
-    const {
-      activity,
-      babyName,
-      isFavorite,
-    } = this.props;
+    const { activity, babyName, isFavorite } = this.props;
 
     return (
       <Screen>
@@ -52,6 +54,7 @@ export class ViewActivity extends PureComponent {
           babyName={babyName}
           isFavorite={isFavorite}
           onToggleFavorite={this.handleToggleFavorite}
+          onActivityMediaPress={this.handleActivityMediaPress}
         />
       </Screen>
     );
