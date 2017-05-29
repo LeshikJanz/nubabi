@@ -13,9 +13,9 @@ type Props = {
   layout: LayoutProps,
 };
 
-export const ArticleListItem = ({ title, image, layout }: Props) => {
+export const ArticleCardItem = ({ title, image, layout }: Props) => {
   return (
-    <Box flex={1}>
+    <Box flex={1} borderRadius={4} overflow="hidden">
       <Image source={{ uri: image.url }} style={{ flex: 1 }} resizeMode="cover">
         <Overlay />
       </Image>
@@ -42,7 +42,7 @@ export const ArticleListItem = ({ title, image, layout }: Props) => {
   );
 };
 
-ArticleListItem.fragments = {
+ArticleCardItem.fragments = {
   item: gql`
     fragment ArticleListItem on Article {
       id
@@ -54,4 +54,4 @@ ArticleListItem.fragments = {
   `,
 };
 
-export default compose(withLayout)(ArticleListItem);
+export default compose(withLayout)(ArticleCardItem);
