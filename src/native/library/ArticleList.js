@@ -93,7 +93,7 @@ export class ArticleList extends PureComponent {
       <Box flex={1}>
         {this.renderHeader()}
         <ListView
-          contentContainerStyle={{ paddingHorizontal: 16 }}
+          contentContainerStyle={{ paddingHorizontal: 10 }}
           dataSource={this.state.ds}
           renderRow={this.renderRow}
           renderSeparator={this.renderSeparator}

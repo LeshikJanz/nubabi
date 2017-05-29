@@ -8,8 +8,7 @@ import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
 import { skipGrowthGlobalIntro } from '../../common/growth/reducer';
-import { Box, Card, Text } from '../components';
-import displayLoadingState from '../components/displayLoadingState';
+import { Box, Card, Text, displayLoadingState } from '../components';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import ThisWeekGrowthButton from './ThisWeekGrowthButton';
@@ -66,7 +65,7 @@ export class Growth extends Component {
         hitSlop={{ top: 0, left: 0, bottom: 0, right: 0 }}
       >
         <AgeHeader {...filter(AgeHeader.fragments.baby, baby)} />
-        <Box padding={1}>
+        <Box contentSpacing>
           <Introduction
             text={introduction}
             onSkip={this.handleIntroductionSkip}

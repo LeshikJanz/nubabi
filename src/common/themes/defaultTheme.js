@@ -47,6 +47,9 @@ const theme: Theme = {
     lineHeight: 16,
   }),
   colors,
+  contentSpacing: {
+    padding: 0.625,
+  },
   states: {
     active: {
       darken: 0.2,

@@ -19,14 +19,15 @@ import {
 } from '../components';
 import ArticleListItem from './ArticleListItem';
 import mapEdgesToProp from '../shared/mapEdgesToProp';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   articles: Array<ArticleType>,
   data: GraphQLDataProp<*>,
-  onViewArticle: (id: string) => void,
+  onViewArticle: id => void,
 };
 
-const Separator = () => <Box padding={0.5} />;
+const Separator = () => <Box contentSpacing />;
 const keyExtractor = item => item.id;
 
 export class BrowseArticles extends PureComponent {
@@ -50,11 +51,9 @@ export class BrowseArticles extends PureComponent {
 
     return (
       <Card
-        marginVertical={0.1}
-        marginHorizontal={1}
+        margin={theme.contentSpacing.padding}
         padding={0}
-        justifyContent="flex-start"
-        alignItems="stretch"
+        marginBottom={0}
         onPress={viewArticle}
       >
         <ArticleListItem
@@ -72,7 +71,6 @@ export class BrowseArticles extends PureComponent {
         data={articles}
         keyExtractor={keyExtractor}
         renderItem={this.renderItem}
-        ListHeaderComponent={Separator}
         ListFooterComponent={Separator}
         refreshing={this.state.refreshing}
         onRefresh={this.handleRefresh}
