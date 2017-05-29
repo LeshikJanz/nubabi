@@ -9,6 +9,7 @@ import {
   handleLayout,
   getLayoutInitialState,
 } from './withLayout';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   children: any,
@@ -30,7 +31,10 @@ export class Screen extends PureComponent {
     const { style, children } = this.props;
 
     return (
-      <View style={[{ flex: 1 }, style]} onLayout={this.handleLayout}>
+      <View
+        style={[{ flex: 1, backgroundColor: theme.colors.background }, style]}
+        onLayout={this.handleLayout}
+      >
         {children}
         <Alert />
       </View>

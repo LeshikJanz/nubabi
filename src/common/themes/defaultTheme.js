@@ -37,6 +37,7 @@ const colors = {
   white: open.white0,
   gray: open.gray2,
   secondary: open.gray3,
+  background: open.white1,
 };
 
 const theme: Theme = {
