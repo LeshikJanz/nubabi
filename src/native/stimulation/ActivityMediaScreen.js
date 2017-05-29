@@ -1,6 +1,7 @@
 // @flow
 import type { ActivityMediaConnection } from '../../common/types';
 import React, { PureComponent } from 'react';
+import { StatusBar } from 'react-native';
 import PhotoBrowser from 'react-native-photo-browser';
 
 type Props = {
@@ -11,7 +12,11 @@ class ActivityMediaScreen extends PureComponent {
   props: Props;
 
   static navigationOptions = {
-    headerVisible: false,
+    mode: 'modal',
+    headerStyle: {
+      backgroundColor: 'black',
+    },
+    headerTintColor: 'white',
   };
 
   getMediaList() {
@@ -28,11 +33,8 @@ class ActivityMediaScreen extends PureComponent {
   };
 
   render() {
-    console.log(this.getMediaList());
     return (
       <PhotoBrowser
-        onBack={this.handleBack}
-        displayTopBar
         mediaList={this.getMediaList()}
         displayNavArrows
         enableGrid
