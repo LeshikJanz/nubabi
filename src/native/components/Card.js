@@ -54,11 +54,11 @@ class Card extends PureComponent {
         {...props}
         style={theme => ({
           shadowColor: '#000',
-          shadowOpacity: 0.1,
+          shadowOpacity: 0.15,
           shadowRadius: 3,
           shadowOffset: {
-            height: 2,
-            width: 1,
+            height: 1,
+            width: 0,
           },
           ...(typeof props.style === 'function'
             ? props.style(theme)
