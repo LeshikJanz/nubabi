@@ -2,7 +2,7 @@
 require('axios-debug-log');
 
 import type { ActivityLevelOperation, Baby } from '../../../common/types';
-import { path, prop } from 'ramda';
+import { path, prop, sortBy } from 'ramda';
 import axios from 'axios';
 import config from '../../../common/config/index';
 
@@ -18,6 +18,8 @@ const withToken = (token: string) => ({
     Authorization: `Bearer ${token}`,
   },
 });
+
+const sortBySkillArea = sortBy(prop('skill_area_id'));
 
 export const getSkillAreas = (token: string) =>
   instance.get('/skill_areas', withToken(token)).then(path(['data']));
@@ -55,12 +57,14 @@ export const getSkillAreaImage = (obj: mixed) => {
 export const getActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(path(['data']));
+    .then(path(['data']))
+    .then(sortBySkillArea);
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities/favourites`, withToken(token))
-    .then(path(['data']));
+    .then(path(['data']))
+    .then(sortBySkillArea);
 
 export const getActivity = (token: string, id: string, babyId: string) => {
   return instance
