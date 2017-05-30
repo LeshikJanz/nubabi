@@ -1,6 +1,6 @@
 // @flow
 import React, { createElement } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { merge, map } from 'lodash';
@@ -12,7 +12,7 @@ type Props = {
   style?: Object,
 };
 
-export const ListItemNumber = ({ number }) => (
+export const ListItemNumber = ({ number }: { number: number }) => (
   <View style={styles.listItemRounded}>
     <Text style={styles.listItemRoundedNumber}>{number}</Text>
   </View>
@@ -41,18 +41,15 @@ export const ruleOverrides = {
         ? `https:${node.target}`
         : node.target;
 
+      const width = Dimensions.get('window').width - 30;
+
       return (
-        <View
+        <Image
           key={state.key}
-          margin={10}
-          padding={10}
-          style={{ width: 320, height: 340 }}
-        >
-          <Image
-            source={{ uri }}
-            style={{ width: 320, height: 320, alignSelf: 'center' }}
-          />
-        </View>
+          source={{ uri }}
+          style={{ alignSelf: 'center', width, height: 320 }}
+          resizeMode="contain"
+        />
       );
     },
   },
