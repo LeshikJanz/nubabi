@@ -40,7 +40,14 @@ export const resolvers = {
     swoopActivity: mutationWithClientMutationId(({ id, babyId }, { token }) =>
       connector
         .swoopActivity(token, fromGlobalId(babyId).id, fromGlobalId(id).id)
-        .then(newActivity => ({ newActivity, oldActivityId: id })),
+        .then(newActivity => {
+          // We need to return babyId to join steps
+          // TODO: in the future we need to have better firebase/API joining
+          return {
+            newActivity: { ...newActivity, babyId: fromGlobalId(babyId).id },
+            oldActivityId: id,
+          };
+        }),
     ),
 
     changeActivity: mutationWithClientMutationId(
@@ -52,7 +59,13 @@ export const resolvers = {
             fromGlobalId(id).id,
             level,
           )
-          .then(newActivity => ({ newActivity, oldActivityId: id })),
+          .then(newActivity => {
+            // See comment in swoopActivity
+            return {
+              newActivity: { ...newActivity, babyId: fromGlobalId(babyId).id },
+              oldActivityId: id,
+            };
+          }),
     ),
 
     toggleActivityFavorite: mutationWithClientMutationId(
@@ -80,6 +93,7 @@ export const resolvers = {
       { id, babyId, steps }: RawActivity,
       _: mixed,
       { connectors: { firebase } }: Context,
+      info,
     ) => {
       return connector.getSteps(firebase, babyId, id, steps);
     },
