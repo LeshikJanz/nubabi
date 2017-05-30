@@ -4,6 +4,7 @@ const iconMappings = {
   'icon-fine': require('../../common/images/fine_motor_icon.png'),
   'icon-sensory': require('../../common/images/sensory_icon.png'),
   'icon-speech': require('../../common/images/speech_icon.png'),
+  'icon-social': require('../../common/images/social_emotional_icon.png'),
 };
 
 export default iconName => {
