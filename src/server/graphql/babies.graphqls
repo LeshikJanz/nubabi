@@ -1,6 +1,6 @@
 extend type Viewer {
   babies: BabyConnection!
-  baby(id: ID!): Baby
+  baby(id: ID): Baby
   allSkillAreas(before: String, after: String, first: Int, last: Int): SkillAreaConnection!
 }
 

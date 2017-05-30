@@ -182,7 +182,7 @@ export default compose(
   }),
   graphql(
     gql`
-      query SplashScreen($currentBabyId: ID!, $hasCurrentBaby: Boolean!) {
+      query SplashScreen($currentBabyId: ID, $hasCurrentBaby: Boolean!) {
         viewer {
           # Prefetch current baby avatar and coverImage
           baby(id: $currentBabyId) @include(if: $hasCurrentBaby) {

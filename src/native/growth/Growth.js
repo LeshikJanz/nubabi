@@ -8,7 +8,13 @@ import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
 import { skipGrowthGlobalIntro } from '../../common/growth/reducer';
-import { Box, Card, Text, displayLoadingState } from '../components';
+import {
+  Box,
+  Card,
+  Text,
+  displayLoadingState,
+  showNoContentViewIf,
+} from '../components';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import ThisWeekGrowthButton from './ThisWeekGrowthButton';
@@ -163,6 +169,7 @@ export default compose(
           babyId: ownProps.currentBabyId,
           hasSeenGlobalIntro: ownProps.hasSeenGlobalIntro,
         },
+        skip: !ownProps.currentBabyId,
       }),
       props: ({ data }) => ({
         data,
@@ -170,5 +177,6 @@ export default compose(
       }),
     },
   ),
+  showNoContentViewIf(props => !props.baby),
   displayLoadingState,
 )(Growth);

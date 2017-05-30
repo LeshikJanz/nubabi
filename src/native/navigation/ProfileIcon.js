@@ -94,7 +94,7 @@ export default compose(
   connect(({ babies: { currentBabyId } }) => ({ currentBabyId })),
   graphql(
     gql`
-   query getBabyAvatar($id: ID!) {
+   query getBabyAvatar($id: ID) {
      viewer {
        baby(id: $id) {
          id
@@ -109,6 +109,7 @@ export default compose(
       options: ({ currentBabyId }) => ({
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { id: currentBabyId },
+        skip: !currentBabyId,
       }),
       props: ({ data }) => {
         const avatar = path(['viewer', 'baby', 'avatar'], data);

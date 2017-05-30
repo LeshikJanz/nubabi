@@ -15,7 +15,7 @@ type Props = {
 export const AgeHeader = ({ name, dob }: Props) => {
   return (
     <Box
-      padding={1}
+      padding={1.55}
       alignItems="center"
       justifyContent="center"
       flexDirection="row"
