@@ -18,19 +18,7 @@ export const ListItemNumber = ({ number }: { number: number }) => (
   </View>
 );
 
-export const ListItemBullet = () => (
-  <View
-    style={{
-      alignItems: 'center',
-      justifyContent: 'flex-start',
-      marginTop: 8,
-      marginLeft: -10,
-      marginRight: 5,
-    }}
-  >
-    <Icon name="ios-disc" color={theme.colors.secondary} />
-  </View>
-);
+export const ListItemBullet = () => <View style={styles.listItemBullet} />;
 
 // Needed to customize because content returns URLs with no protocol
 // Also cache and style
@@ -152,6 +140,15 @@ const styles = {
   listItemRoundedNumber: {
     fontSize: 14,
     color: theme.colors.secondary,
+  },
+  listItemBullet: {
+    backgroundColor: '#E9ECF4',
+    height: 14,
+    width: 14,
+    borderRadius: 14 / 2,
+    marginLeft: -10,
+    marginRight: 10,
+    marginTop: 7,
   },
 };
 
