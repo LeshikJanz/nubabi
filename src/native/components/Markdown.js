@@ -135,7 +135,6 @@ const styles = {
   listItem: {
     margin: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   listItemText: {
     fontSize: 16,
