@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { View } from 'react-native';
 import Image from 'react-native-cached-image';
 import { merge } from 'lodash';
 import SimpleMarkdown from 'react-native-simple-markdown';
@@ -21,17 +22,17 @@ export const imageRule = {
         : node.target;
 
       return (
-        <Box
+        <View
           key={state.key}
-          margin={1}
-          padding={1}
-          style={() => ({ width: 320, height: 340 })}
+          margin={10}
+          padding={10}
+          style={{ width: 320, height: 340 }}
         >
           <Image
             source={{ uri }}
             style={{ width: 320, height: 320, alignSelf: 'center' }}
           />
-        </Box>
+        </View>
       );
     },
   },
