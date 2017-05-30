@@ -16,7 +16,6 @@ export const articleMarkdownStyle = {
   },
   heading: {
     marginVertical: 10,
-    textAlign: 'center',
     color: theme.colors.secondary,
   },
 };
