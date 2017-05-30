@@ -22,7 +22,7 @@ const reducer = (
         isFetching: false,
         failure: false,
         currentBabyId: state.currentBabyId ||
-          path('payload', '0', 'id', action),
+          path(['payload', '0', 'id'], action),
       });
     case 'GET_BABIES_FAILURE': {
       return Object.assign({}, state, {
