@@ -29,7 +29,7 @@ export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
       <Image
         source={background}
         style={[{ flex: 1 }, dimensions]}
-        resizeMode="contain"
+        resizeMode="cover"
       >
         <Overlay>
           <Text style={styles.title}>Equipment For</Text>
@@ -85,9 +85,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     flex: 1,
-  },
-  background: {
-    width: 175,
   },
 });
 
