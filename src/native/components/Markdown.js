@@ -72,7 +72,7 @@ export const ruleOverrides = {
 
 export const Markdown = ({ style: stylesProp, text }: Props) => {
   const style = merge({}, styles, stylesProp);
-  const markdown = S(text.replace(/&nbsp;/, '')).stripTags().unescapeHTML();
+  const markdown = S(text.replace(/&nbsp;/g, ' ')).stripTags().unescapeHTML();
 
   return (
     <SimpleMarkdown styles={style} rules={ruleOverrides}>

@@ -162,13 +162,17 @@ export const toggleActivityFavorite = (
   return instance.delete(url, withToken(token)).then(path(['data']));
 };
 
+const getActivityIntroduction = (firebase, introduction, babyId) => {};
+
 export const makeStringFromTemplate = (template: string, variables: *) => {
-  return Object.keys(variables).reduce((output, variable) => {
-    return output.replace(
-      new RegExp(`{${variable}}`, 'g'),
-      variables[variable],
-    );
-  }, S(template.replace(/&nbsp;/g, '')).stripTags().unescapeHTML());
+  const output = Object.keys(variables).reduce((acc, variable) => {
+    return acc.replace(new RegExp(`{${variable}}`, 'g'), variables[variable]);
+  }, template);
+
+  return S(output.replace(/&nbsp;/g, ' '))
+    .stripTags()
+    .unescapeHTML()
+    .toString();
 };
 
 export const getTemplateVariables = async (firebase, baby) => {
