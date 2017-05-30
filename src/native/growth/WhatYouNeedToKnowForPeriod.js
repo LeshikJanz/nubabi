@@ -42,7 +42,7 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
           <ExpertAdvice
             {...filter(ExpertAdvice.fragments.expert, current.expert)}
           />
-          <Box paddingHorizontal={1} paddingTop={3}>
+          <Box paddingHorizontal={1} paddingTop={1}>
             <Markdown text={current.introduction} style={textStyle} />
             <SectionLinks links={parentingLinks} />
           </Box>
