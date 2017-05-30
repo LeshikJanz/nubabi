@@ -59,7 +59,11 @@ class ViewThisWeeksActivity extends Component {
   }
 
   refreshActivity = ({ data }) => {
-    const newActivity = path(['changeActivity', 'newActivity'], data);
+    const newActivity = pathOr(
+      path(['swoopActivity', 'newActivity'], data),
+      ['changeActivity', 'newActivity'],
+      data,
+    );
 
     if (newActivity) {
       this.props.navigation.setParams({
