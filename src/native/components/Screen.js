@@ -32,7 +32,7 @@ export class Screen extends PureComponent {
 
     return (
       <View
-        style={[{ flex: 1, backgroundColor: theme.colors.background }, style]}
+        style={[{ flex: 1, backgroundColor: theme.colors.panel }, style]}
         onLayout={this.handleLayout}
       >
         {children}

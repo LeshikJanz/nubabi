@@ -15,21 +15,25 @@ type Props = {
 export const AgeHeader = ({ name, dob }: Props) => {
   return (
     <Box
+      backgroundColor="white"
       padding={1.55}
       alignItems="center"
       justifyContent="center"
       flexDirection="row"
       style={() => ({
-        shadowOpacity: 0.1,
-        shadowOffset: {
-          width: 0,
-          height: 1,
-        },
-        shadowRadius: 0.5,
+        borderColor: 'rgba(0,0,0,.1)',
+        borderTopWidth: 1,
+        borderBottomWidth: 1,
       })}
     >
       <NubabiIcon name="growth" color={theme.colors.primary} />
-      <Text color="secondary" size={1} spacing={-0.88} marginHorizontal={1}>
+      <Text
+        color="secondary"
+        medium
+        size={1}
+        spacing={-0.88}
+        marginHorizontal={1}
+      >
         {name} is {formatAge(dob)}
       </Text>
     </Box>
