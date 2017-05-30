@@ -4,6 +4,7 @@ require('axios-debug-log');
 import type { ActivityLevelOperation, Baby } from '../../../common/types';
 import { path, prop, sortBy } from 'ramda';
 import axios from 'axios';
+import S from 'string';
 import config from '../../../common/config/index';
 
 type SwapActivityAction = 'swop' | 'increase' | 'decrease';
@@ -167,7 +168,7 @@ export const makeStringFromTemplate = (template: string, variables: *) => {
       new RegExp(`{${variable}}`, 'g'),
       variables[variable],
     );
-  }, template);
+  }, S(template.replace(/&nbsp;/g, '')).stripTags().unescapeHTML());
 };
 
 export const getTemplateVariables = async (firebase, baby) => {

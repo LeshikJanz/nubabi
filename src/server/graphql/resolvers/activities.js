@@ -1,4 +1,5 @@
 // @flow
+import S from 'string';
 import type {
   Context,
   ConnectionArguments,
@@ -102,6 +103,9 @@ export const resolvers = {
         connector.getCategoriesFor(token, prop('category_ids')(obj)),
         args,
       );
+    },
+    introduction: ({ introduction }) => {
+      return S(introduction.replace(/&nbsp;/g, '')).stripTags().unescapeHTML();
     },
     media: (obj: RawActivity, args: ConnectionArguments) => {
       return connectionFromArray(obj.media, args);

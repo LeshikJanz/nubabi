@@ -2,7 +2,7 @@
 import React, { createElement } from 'react';
 import { View, Text, Dimensions } from 'react-native';
 import Image from 'react-native-cached-image';
-import Icon from 'react-native-vector-icons/Ionicons';
+import S from 'string';
 import { merge, map } from 'lodash';
 import SimpleMarkdown from 'react-native-simple-markdown';
 import theme from '../../common/themes/defaultTheme';
@@ -72,10 +72,11 @@ export const ruleOverrides = {
 
 export const Markdown = ({ style: stylesProp, text }: Props) => {
   const style = merge({}, styles, stylesProp);
+  const markdown = S(text.replace(/&nbsp;/, '')).stripTags().unescapeHTML();
 
   return (
     <SimpleMarkdown styles={style} rules={ruleOverrides}>
-      {text}
+      {markdown}
     </SimpleMarkdown>
   );
 };
@@ -115,7 +116,7 @@ const styles = {
   },
   /* Article */
   list: {
-    marginRight: 10,
+    marginRight: 15,
   },
   listItem: {
     margin: 10,
@@ -125,6 +126,7 @@ const styles = {
     fontSize: 16,
     lineHeight: 26,
     color: theme.colors.secondary,
+    marginRight: 10,
   },
   // custom
   listItemRounded: {
