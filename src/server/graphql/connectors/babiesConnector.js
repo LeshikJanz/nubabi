@@ -173,7 +173,9 @@ export const getTemplateVariables = async (firebase, baby) => {
   return {
     baby: baby.name,
     name: viewerName,
-    baby_possessive: baby.gender === 'f' ? 'her' : 'his',
+    baby_possessive: baby.name.endsWith('s')
+      ? `${baby.name}`
+      : `${baby.name}'s`,
   };
 };
 
