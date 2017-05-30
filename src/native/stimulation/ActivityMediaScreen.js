@@ -9,8 +9,8 @@ type Props = {
 
 class ActivityMediaScreen extends PureComponent {
   props: Props;
-  state = {
-    media: [],
+  state: {
+    media: Array<*>,
   };
 
   static navigationOptions = {
@@ -21,8 +21,11 @@ class ActivityMediaScreen extends PureComponent {
     headerTintColor: 'white',
   };
 
-  componentDidMount() {
-    this.setState({ media: this.getMediaList() });
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      media: this.getMediaList(),
+    };
   }
 
   getMediaList() {
