@@ -211,19 +211,20 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         borderBottomWidth: 1,
-        height: 40,
+        height: 50,
       },
     }),
   },
   inputLabel: {
-    fontSize: 8,
+    fontSize: 12,
     color: '#fff',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   textInput: {
     flex: 1,
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
+    lineHeight: 26,
   },
   submitButtonContainer: {
     marginTop: 20,
@@ -241,7 +242,7 @@ const styles = StyleSheet.create({
   },
   submitText: {
     backgroundColor: 'transparent',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '700',
     color: '#fff',
   },
