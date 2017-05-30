@@ -7,21 +7,27 @@ import withLayout from '../components/withLayout';
 
 type Props = {
   onPress: () => void,
-  layout: LayoutProps,
 };
 
 const whatYouNeedToKnowImage = require('../../common/images/growth-what-you-need-to-know.jpg');
 
-export const WhatYouNeedToKnowButton = ({ onPress, layout }: Props) => {
-  const width = Math.round(layout.viewportWidth * 0.915);
-  const height = Math.round(layout.viewportHeight * 0.2);
-
-  return (
-    <Card padding={0} onPress={onPress}>
-      <Box flex={1} borderRadius={4} style={() => ({ overflow: 'hidden' })}>
+export const ThisWeekGrowth = withLayout(
+  ({ layout }: { layout: LayoutProps }) => {
+    const dimensions = {
+      width: Math.round(layout.viewportWidth / 1.03),
+      height: Math.round(layout.viewportWidth / 2.5),
+    };
+    return (
+      <Box
+        flex={1}
+        borderRadius={4}
+        style={() => ({
+          overflow: 'hidden',
+        })}
+      >
         <Image
           source={whatYouNeedToKnowImage}
-          style={{ width, height }}
+          style={[{ flex: 1 }, dimensions]}
           resizeMode="cover"
         >
           <Overlay />
@@ -30,8 +36,16 @@ export const WhatYouNeedToKnowButton = ({ onPress, layout }: Props) => {
           <Text size={2}>This Week's Growth</Text>
         </Box>
       </Box>
+    );
+  },
+);
+
+export const WhatYouNeedToKnowButton = ({ onPress }: Props) => {
+  return (
+    <Card padding={0} onPress={onPress}>
+      <ThisWeekGrowth />
     </Card>
   );
 };
 
-export default withLayout(WhatYouNeedToKnowButton);
+export default WhatYouNeedToKnowButton;
