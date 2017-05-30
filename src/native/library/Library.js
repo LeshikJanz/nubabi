@@ -4,6 +4,8 @@ import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
 import ArticleList from './ArticleList';
+import HealthHelpButton from './HealthHelpButton';
+import ParentingTipsButton from './ParentingTipsButton';
 
 type Props = {
   navigation: NavigationProp<*, *>,
@@ -24,6 +26,9 @@ class Library extends PureComponent {
     this.props.navigation.navigate('viewArticle', { id });
   };
 
+  handleHealthHelp = () => {};
+  handleParentingTips = () => {};
+
   render() {
     return (
       <Screen>
@@ -32,8 +37,12 @@ class Library extends PureComponent {
             onBrowseAll={this.handleBrowseArticles}
             onViewArticle={this.handleViewArticle}
           />
-          <Box flex={1} />
-          <Box flex={1} />
+          <Box flex={1} contentSpacing>
+            <ParentingTipsButton onPress={this.handleParentingTips} />
+          </Box>
+          <Box flex={1} contentSpacing>
+            <HealthHelpButton onPress={this.handleHealthHelp} />
+          </Box>
         </Box>
       </Screen>
     );
