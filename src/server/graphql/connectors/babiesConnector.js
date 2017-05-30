@@ -162,7 +162,16 @@ export const toggleActivityFavorite = (
   return instance.delete(url, withToken(token)).then(path(['data']));
 };
 
-const getActivityIntroduction = (firebase, introduction, babyId) => {};
+export const getActivityIntroduction = async (
+  firebase,
+  babyId,
+  introduction,
+) => {
+  return makeStringFromTemplate(
+    introduction,
+    await getTemplateVariables(firebase, await firebase.getBaby(babyId)),
+  );
+};
 
 export const makeStringFromTemplate = (template: string, variables: *) => {
   const output = Object.keys(variables).reduce((acc, variable) => {

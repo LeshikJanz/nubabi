@@ -104,8 +104,12 @@ export const resolvers = {
         args,
       );
     },
-    introduction: ({ introduction }) => {
-      return S(introduction.replace(/&nbsp;/g, '')).stripTags().unescapeHTML();
+    introduction: (
+      { introduction, babyId },
+      _,
+      { connectors: { firebase } },
+    ) => {
+      return connector.getActivityIntroduction(firebase, babyId, introduction);
     },
     media: (obj: RawActivity, args: ConnectionArguments) => {
       return connectionFromArray(obj.media, args);
