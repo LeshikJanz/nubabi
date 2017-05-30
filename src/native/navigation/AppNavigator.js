@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Platform, Linking } from 'react-native';
+import { Platform, Linking, BackHandler } from 'react-native';
 import {
   NavigationActions,
   createNavigationContainer,
@@ -14,7 +14,6 @@ import type {
   NavigationRouteConfigMap,
 } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import { merge } from 'lodash';
-import { BackAndroid } from 'react-navigation/src/PlatformHelpers';
 import theme from '../../common/themes/defaultTheme';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
 import crossFade from './transitioners/CrossFadeTransitioner';
@@ -217,7 +216,7 @@ const AppNavigator = createCustomNavigator(
 // See: https://github.com/react-community/react-navigation/issues/1189
 class AppNavigatorWithLinking extends AppNavigator {
   componentDidMount() {
-    this.subs = BackAndroid.addEventListener('backPress', () =>
+    this.subs = BackHandler.addEventListener('hardwareBackPress', () =>
       this.dispatch(NavigationActions.back()),
     );
 
