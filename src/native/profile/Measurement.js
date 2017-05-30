@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { gql } from 'react-apollo';
 import NubabiIcon from '../../common/icons/nubabi';
 import theme, {
@@ -20,7 +20,7 @@ type Props = {
 
 const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onUpdate}>
       <View style={styles.headerRow}>
         <Text style={styles.header}>{header}</Text>
         <NubabiIcon
@@ -38,11 +38,9 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
           : <Text style={styles.noDataText}>No Data Yet</Text>}
       </View>
       <View style={styles.updateRow}>
-        <TouchableHighlight>
-          <Text style={styles.updateText} onPress={onUpdate}>Update</Text>
-        </TouchableHighlight>
+        <Text style={styles.updateText} onPress={onUpdate}>Update</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

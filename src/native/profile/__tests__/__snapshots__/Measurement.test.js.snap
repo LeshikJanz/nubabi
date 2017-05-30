@@ -2,6 +2,19 @@
 
 exports[`renders height 1`] = `
 <View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "backgroundColor": "#fff",
@@ -10,6 +23,7 @@ exports[`renders height 1`] = `
       "height": 97,
       "margin": 10,
       "marginTop": 0,
+      "opacity": 1,
       "shadowColor": "#ccc",
       "shadowOffset": Object {
         "height": 1,
@@ -19,6 +33,8 @@ exports[`renders height 1`] = `
       "shadowRadius": 1,
     }
   }
+  testID={undefined}
+  tvParallaxProperties={undefined}
 >
   <View
     style={
@@ -99,54 +115,40 @@ exports[`renders height 1`] = `
       }
     }
   >
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
+    <Text
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={undefined}
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-          },
-          undefined,
-        ]
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        onPress={undefined}
-        style={
-          Object {
-            "color": "#ED3154",
-            "fontSize": 10,
-            "fontWeight": "700",
-          }
+        Object {
+          "color": "#ED3154",
+          "fontSize": 10,
+          "fontWeight": "700",
         }
-      >
-        Update
-      </Text>
-    </View>
+      }
+    >
+      Update
+    </Text>
   </View>
 </View>
 `;
 
 exports[`renders weight 1`] = `
 <View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
   style={
     Object {
       "backgroundColor": "#fff",
@@ -155,6 +157,7 @@ exports[`renders weight 1`] = `
       "height": 97,
       "margin": 10,
       "marginTop": 0,
+      "opacity": 1,
       "shadowColor": "#ccc",
       "shadowOffset": Object {
         "height": 1,
@@ -164,6 +167,8 @@ exports[`renders weight 1`] = `
       "shadowRadius": 1,
     }
   }
+  testID={undefined}
+  tvParallaxProperties={undefined}
 >
   <View
     style={
@@ -244,48 +249,21 @@ exports[`renders weight 1`] = `
       }
     }
   >
-    <View
-      accessibilityComponentType={undefined}
-      accessibilityLabel={undefined}
-      accessibilityTraits={undefined}
+    <Text
       accessible={true}
-      hasTVPreferredFocus={undefined}
-      hitSlop={undefined}
-      isTVSelectable={true}
-      onLayout={undefined}
-      onResponderGrant={[Function]}
-      onResponderMove={[Function]}
-      onResponderRelease={[Function]}
-      onResponderTerminate={[Function]}
-      onResponderTerminationRequest={[Function]}
-      onStartShouldSetResponder={[Function]}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      onPress={undefined}
       style={
-        Array [
-          Object {
-            "backgroundColor": "transparent",
-          },
-          undefined,
-        ]
-      }
-      testID={undefined}
-      tvParallaxProperties={undefined}
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
-        onPress={undefined}
-        style={
-          Object {
-            "color": "#ED3154",
-            "fontSize": 10,
-            "fontWeight": "700",
-          }
+        Object {
+          "color": "#ED3154",
+          "fontSize": 10,
+          "fontWeight": "700",
         }
-      >
-        Update
-      </Text>
-    </View>
+      }
+    >
+      Update
+    </Text>
   </View>
 </View>
 `;
