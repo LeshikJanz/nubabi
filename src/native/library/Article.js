@@ -3,22 +3,28 @@
 import React from 'react';
 import { gql } from 'react-apollo';
 import { Box, Markdown } from '../components';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   text: string,
 };
 
-const textStyle = {
+export const articleMarkdownStyle = {
   paragraph: {
     fontSize: 16,
     lineHeight: 26,
+  },
+  heading: {
+    marginVertical: 10,
+    textAlign: 'center',
+    color: theme.colors.secondary,
   },
 };
 
 export const Article = ({ text }: Props) => {
   return (
     <Box flex={1}>
-      <Markdown text={text} style={textStyle} />
+      <Markdown text={text} style={articleMarkdownStyle} />
     </Box>
   );
 };
