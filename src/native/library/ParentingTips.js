@@ -17,7 +17,7 @@ type Props = {
   articles: Array<GrowthArticleType>,
 };
 
-export const HealthHelp = ({
+export const ParentingTips = ({
   articles,
   onViewArticle,
   data: { refetch },
@@ -34,9 +34,9 @@ export const HealthHelp = ({
 export default compose(
   graphql(
     gql`
-      query HealthHelp {
+      query ParentingTips {
         viewer {
-          allLibraryArticles(filter: { section: "health"}) {
+          allLibraryArticles(filter: { section: "parenting"}) {
             edges {
               node {
                 ...GrowthArticleListItem
@@ -56,4 +56,4 @@ export default compose(
   ),
   showNoContentViewIf(props => !props.articles),
   displayLoadingState,
-)(HealthHelp);
+)(ParentingTips);

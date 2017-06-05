@@ -3,6 +3,7 @@ require('axios-debug-log');
 
 import type { ActivityLevelOperation, Baby } from '../../../common/types';
 import { path, prop, sortBy } from 'ramda';
+import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
 import config from '../../../common/config/index';
@@ -281,5 +282,17 @@ export const getArticles = (token: string) => {
 export const getArticle = (token: string, id: string) => {
   return instance
     .get(`/content/articles/${id}`, withToken(token))
+    .then(path(['data']));
+};
+
+export const getLibraryArticles = (token: string, args: mixed) => {
+  let filter = '';
+  const sectionFilter = path(['filter', 'section'], args);
+
+  if (sectionFilter) {
+    filter = `?${qs.stringify({ section: sectionFilter })}`;
+  }
+  return instance
+    .get(`/content/library${filter}`, withToken(token))
     .then(path(['data']));
 };

@@ -34,6 +34,16 @@ export const resolvers = {
     article: (_, { id }: { id: string }, { token }: GraphQLContext) => {
       return connector.getArticle(token, fromGlobalId(id).id);
     },
+    allLibraryArticles: (
+      obj: mixed,
+      args: ConnectionArguments,
+      { token }: Context,
+    ) => {
+      return connectionFromPromisedArray(
+        connector.getLibraryArticles(token, args),
+        args,
+      );
+    },
   },
   Quote: {
     id: globalIdField(),

@@ -1,83 +1,32 @@
 // @flow
-// TODO: maybe we can get rid of this component and pass
-// mode="cards" and mode="list" to ArticleList instead
-// if the differences aren't too many
-import type {
-  Article as ArticleType,
-  GraphQLDataProp,
-} from '../../common/types';
-import React, { PureComponent } from 'react';
-import { FlatList } from 'react-native';
+import type { GraphQLDataProp, Article } from '../../common/types';
+import React from 'react';
 import { compose } from 'ramda';
-import { gql, graphql } from 'react-apollo';
-import { filter } from 'graphql-anywhere';
-import {
-  Box,
-  Card,
-  displayLoadingState,
-  showNoContentViewIf,
-} from '../components';
+import { graphql, gql } from 'react-apollo';
+import { showNoContentViewIf, displayLoadingState } from '../components';
+import ArticleList from './ArticleList';
 import ArticleListItem from './ArticleListItem';
 import mapEdgesToProp from '../shared/mapEdgesToProp';
-import theme from '../../common/themes/defaultTheme';
 
 type Props = {
-  articles: Array<ArticleType>,
+  onViewArticle: () => void,
   data: GraphQLDataProp<*>,
-  onViewArticle: id => void,
+  articles: Array<Article>,
 };
 
-const Separator = () => <Box contentSpacing />;
-const keyExtractor = item => item.id;
-
-export class BrowseArticles extends PureComponent {
-  props: Props;
-  state = {
-    refreshing: false,
-  };
-
-  handleRefresh = () => {
-    this.setState({ refreshing: true }, () => {
-      this.props.data.refetch().then(() => {
-        this.setState({ refreshing: false });
-      });
-    });
-  };
-
-  renderItem = ({ item: article }: { item: ArticleType }) => {
-    const viewArticle = () => {
-      this.props.onViewArticle(article.id);
-    };
-
-    return (
-      <Card
-        margin={theme.contentSpacing.padding}
-        padding={0}
-        marginBottom={0}
-        onPress={viewArticle}
-      >
-        <ArticleListItem
-          {...filter(ArticleListItem.fragments.item, article)}
-          onViewArticle
-        />
-      </Card>
-    );
-  };
-
-  render() {
-    const { articles } = this.props;
-    return (
-      <FlatList
-        data={articles}
-        keyExtractor={keyExtractor}
-        renderItem={this.renderItem}
-        ListFooterComponent={Separator}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleRefresh}
-      />
-    );
-  }
-}
+export const BrowseArticles = ({
+  articles,
+  onViewArticle,
+  data: { refetch },
+}: Props) => {
+  return (
+    <ArticleList
+      articles={articles}
+      onViewArticle={onViewArticle}
+      onRefresh={refetch}
+    />
+  );
+};
 
 export default compose(
   graphql(

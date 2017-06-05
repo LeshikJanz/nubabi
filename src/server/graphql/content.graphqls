@@ -4,6 +4,15 @@ extend type Viewer {
   allArticles(before: String, after: String, first: Int, last: Int): ArticleConnection!
   article(id: ID!): Article
   growthArticle(id: ID!, babyId: ID!): GrowthArticle
+
+  # Content articles for library (not blog links)
+  allLibraryArticles(
+    before: String,
+    after: String,
+    first: Int,
+    last: Int,
+    filter: LibraryArticlesFilterInput
+  ): GrowthArticleConnection!
 }
 
 interface Content {
@@ -104,4 +113,8 @@ type ReadingTime {
   text: String!
   time: Int!
   words: Int!
+}
+
+input LibraryArticlesFilterInput {
+  section: String
 }

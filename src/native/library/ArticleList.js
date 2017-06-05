@@ -1,136 +1,76 @@
 // @flow
-import type { DataSource } from 'react-native';
-import type { Article } from '../../common/types';
+// TODO: maybe we can get rid of this component and pass
+// mode="cards" and mode="list" to ArticleList instead
+// if the differences aren't too many
+import type {
+  Article as ArticleType,
+  GraphQLDataProp,
+} from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ListView, TouchableOpacity } from 'react-native';
+import { FlatList } from 'react-native';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import {
-  Box,
-  Card,
-  Text,
-  displayLoadingState,
-  showNoContentViewIf,
-} from '../components';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
-import ArticleCardItem from './ArticleCardItem';
+import { Box, Card } from '../components';
+import ArticleListItem from './ArticleListItem';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
-  articles: Array<Article>,
-  onBrowseAll: () => void,
+  articles: Array<ArticleType>,
+  onRefresh: () => Promise<*>,
   onViewArticle: (id: string) => void,
 };
 
-type State = {
-  ds: DataSource,
-};
+const Separator = () => <Box contentSpacing />;
+const keyExtractor = item => item.id;
+
 export class ArticleList extends PureComponent {
   props: Props;
-  state: State;
+  state = {
+    refreshing: false,
+  };
 
-  constructor(props: Props) {
-    super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
-    });
-
-    this.state = {
-      ds: ds.cloneWithRows(props.articles),
-      shouldScrollToBottom: false,
-    };
-  }
-
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.articles !== this.props.articles) {
-      this.setState({
-        ds: this.state.ds.cloneWithRows(nextProps.articles),
+  handleRefresh = () => {
+    this.setState({ refreshing: true }, () => {
+      this.props.onRefresh().then(() => {
+        this.setState({ refreshing: false });
       });
-    }
-  }
+    });
+  };
 
-  renderRow = (article: Article) => {
-    if (!article) {
-      return null;
-    }
-
-    const onViewArticle = () => {
-      this.props.onViewArticle(article.id, article.title);
+  renderItem = ({ item: article }: { item: ArticleType }) => {
+    const viewArticle = () => {
+      this.props.onViewArticle(article.id);
     };
 
     return (
       <Card
+        margin={theme.contentSpacing.padding}
         padding={0}
-        margin={0}
-        justifyContent="flex-start"
-        onPress={onViewArticle}
+        marginBottom={0}
+        onPress={viewArticle}
       >
-        <ArticleCardItem
-          key={article.id}
-          {...filter(ArticleCardItem.fragments.item, article)}
+        <ArticleListItem
+          {...filter(ArticleListItem.fragments.item, article)}
+          onViewArticle
         />
       </Card>
     );
   };
 
-  renderSeparator() {
-    return <Box flex={1} marginHorizontal={0.5} />;
-  }
-
-  renderHeader = () => {
-    return (
-      <Box flexDirection="row" justifyContent="space-between" padding={1}>
-        <Text size={2}>Articles</Text>
-        <TouchableOpacity onPress={this.props.onBrowseAll}>
-          <Text medium color="primary">SEE ALL</Text>
-        </TouchableOpacity>
-      </Box>
-    );
-  };
-
   render() {
+    const { articles } = this.props;
     return (
-      <Box flex={1}>
-        {this.renderHeader()}
-        <ListView
-          contentContainerStyle={{ paddingHorizontal: 10 }}
-          dataSource={this.state.ds}
-          renderRow={this.renderRow}
-          renderSeparator={this.renderSeparator}
-          horizontal
-          initialListSize={5}
-          showsVerticalScrollIndicator={false}
-          showsHorizontalScrollIndicator={false}
-          removeClippedSubviews={false}
-        />
-      </Box>
+      <FlatList
+        data={articles}
+        keyExtractor={keyExtractor}
+        renderItem={this.renderItem}
+        ListFooterComponent={Separator}
+        refreshing={this.state.refreshing}
+        onRefresh={this.handleRefresh}
+      />
     );
   }
 }
 
-export default compose(
-  graphql(
-    gql`
-    query ArticleList {
-      viewer {
-        allArticles(first: 5) {
-          edges {
-            node {
-              ...ArticleListItem,
-            }
-          }
-        }
-      }
-    }
-    ${ArticleCardItem.fragments.item}
-  `,
-    {
-      options: {
-        fetchPolicy: 'cache-and-network',
-      },
-      props: mapEdgesToProp('viewer.allArticles.edges', 'articles'),
-    },
-  ),
-  showNoContentViewIf(props => !props.articles),
-  displayLoadingState,
-)(ArticleList);
+export default ArticleList;

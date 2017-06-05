@@ -5,16 +5,17 @@ import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Image from 'react-native-cached-image';
 import { gql } from 'react-apollo';
-import { compose } from 'ramda';
+import { compose, path } from 'ramda';
 import { Box, Text, Overlay, withLayout } from '../components';
 
 type Props = {
   title: string,
-  image: { url: string },
+  image?: { url: string },
   layout: LayoutProps,
 };
 
 export const ArticleListItem = ({ title, image, layout }: Props) => {
+  const imageSource = path(['url'], image);
   return (
     <Box
       flexDirection="row"
@@ -23,9 +24,14 @@ export const ArticleListItem = ({ title, image, layout }: Props) => {
       borderBottomLeftRadius={4}
       overflow="hidden"
     >
-      <Image source={{ uri: image.url }} style={{ flex: 1 }} resizeMode="cover">
-        <Overlay />
-      </Image>
+      {imageSource &&
+        <Image
+          source={{ uri: image.url }}
+          style={{ flex: 1 }}
+          resizeMode="cover"
+        >
+          <Overlay />
+        </Image>}
 
       <Box
         flex={2}

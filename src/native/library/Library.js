@@ -3,7 +3,7 @@ import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
-import ArticleList from './ArticleList';
+import ArticleList from './ArticleCardList';
 import HealthHelpButton from './HealthHelpButton';
 import ParentingTipsButton from './ParentingTipsButton';
 
@@ -26,8 +26,13 @@ class Library extends PureComponent {
     this.props.navigation.navigate('viewArticle', { id });
   };
 
-  handleHealthHelp = () => {};
-  handleParentingTips = () => {};
+  handleHealthHelp = () => {
+    this.props.navigation.navigate('healthHelp');
+  };
+
+  handleParentingTips = () => {
+    this.props.navigation.navigate('parentingTips');
+  };
 
   render() {
     return (

@@ -54,6 +54,8 @@ export type Viewer = {
   article?: Article,
   /**  */
   growthArticle?: GrowthArticle,
+  /** Content articles for library (not blog links) */
+  allLibraryArticles: GrowthArticleConnection,
 };
 
 /**
@@ -678,6 +680,11 @@ export type Quote = {
   text: string,
   /**  */
   title?: string,
+};
+
+export type LibraryArticlesFilterInput = {
+  /**  */
+  section?: string,
 };
 
 export type Mutation = {

@@ -14,6 +14,10 @@ const textStyle = {
   },
 };
 
+export function viewGrowthArticle(id) {
+  this.props.navigation.navigate('viewGrowthContent', { id });
+}
+
 export const GrowthArticle = ({ text }: Props) => {
   return (
     <Box flex={1}>
@@ -31,6 +35,12 @@ GrowthArticle.fragments = {
       readingTime {
         text
       }
+    }
+  `,
+  item: gql`
+    fragment GrowthArticleListItem on GrowthArticle {
+      id
+      title
     }
   `,
 };
