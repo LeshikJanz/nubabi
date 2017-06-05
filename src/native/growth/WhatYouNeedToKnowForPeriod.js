@@ -26,10 +26,15 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
     },
   };
 
-  const parentingLinks = path(['parentingLinks', 'edges'], current);
-  const faqLinks = path(['faqLinks', 'edges'], current);
+  const introductionContentLinks = path(
+    ['introductionContentLinks', 'edges'],
+    current,
+  );
+  const growthDevelopmentContentLinks = path(
+    ['growthDevelopmentContentLinks', 'edges'],
+    current,
+  );
 
-  // TODO: bound func in render (onSkip)
   return (
     <ScrollView style={{ flex: 1 }}>
       <PeriodFilter
@@ -44,12 +49,12 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
           />
           <Box paddingHorizontal={1} paddingTop={1}>
             <Markdown text={current.introduction} style={textStyle} />
-            <SectionLinks links={parentingLinks} />
+            <SectionLinks links={introductionContentLinks} />
           </Box>
           <Box paddingHorizontal={1}>
             <Text marginVertical={1} size={3} bold>Growth & Development</Text>
             <Markdown text={current.content} style={textStyle} />
-            <SectionLinks links={faqLinks} />
+            <SectionLinks links={growthDevelopmentContentLinks} />
           </Box>
         </Box>
         <Box>

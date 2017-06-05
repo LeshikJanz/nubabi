@@ -37,7 +37,7 @@ export class WhatYouNeedToKnow extends PureComponent {
       fragment CurrentGrowth on Growth {
         introduction
         content
-        parentingLinks {
+        introductionContentLinks {
           edges {
             node {
               id
@@ -46,7 +46,7 @@ export class WhatYouNeedToKnow extends PureComponent {
             }
           }
         }
-        faqLinks {
+        growthDevelopmentContentLinks {
           edges {
             node {
               id

@@ -219,7 +219,7 @@ export const getGrowthContentById = async (
 ) => {
   const variables = await getTemplateVariables(firebase, baby);
   return instance
-    .get(`/content/growth/${id}`, withToken(token))
+    .get(`/content/library/${id}`, withToken(token))
     .then(path(['data']))
     .then(data => {
       const contentId = path(['id'], data);

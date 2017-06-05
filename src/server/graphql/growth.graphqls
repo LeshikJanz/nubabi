@@ -26,11 +26,17 @@ type Growth implements Node {
   # Expert who gave this content's advice
   expert: Expert!
 
-  # Parenting tips content link
-  parentingLinks: GrowthArticleConnection!
+  # Links to articles (blog posts)
+  growthDevelopmentArticleLinks: ArticleConnection!
 
-  # FAQ links
-  faqLinks: GrowthArticleConnection!
+  # Links to library content (Growth & Development)
+  growthDevelopmentContentLinks: GrowthArticleConnection!
+
+  # Links to articles (blog posts)
+  introductionArticleLinks: ArticleConnection!
+
+  # Links to library content (introductory section)
+  introductionContentLinks: GrowthArticleConnection!
 }
 
 type GrowthArticle implements Content {

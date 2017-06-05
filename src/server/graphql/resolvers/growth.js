@@ -8,6 +8,18 @@ import {
 import * as connector from '../connectors/babiesConnector';
 import readingTime from 'reading-time';
 
+const getContentLinks = async (links, baby, token, firebase, args) => {
+  const content = links
+    ? await Promise.all(
+        links.map(link => {
+          return connector.getGrowthContentById(token, link.id, baby, firebase);
+        }),
+      ).then(([...responses]) => responses)
+    : [];
+
+  return connectionFromArray(content, args);
+};
+
 export const resolvers = {
   Viewer: {
     growthArticle: async (
@@ -44,42 +56,31 @@ export const resolvers = {
     expert: (obj, _, { token }) => {
       return connector.getExpert(token, prop('expert_id')(obj));
     },
-    parentingLinks: async (obj, args, { token, connectors: { firebase } }) => {
-      const parentingLinks = prop('parenting_links')(obj);
-
-      const content = parentingLinks
-        ? await Promise.all(
-            parentingLinks.map(tip => {
-              return connector.getGrowthContentById(
-                token,
-                tip.id,
-                obj.baby,
-                firebase,
-              );
-            }),
-          ).then(([...responses]) => responses)
-        : [];
-
-      return connectionFromArray(content, args);
+    growthDevelopmentContentLinks: async (
+      obj,
+      args,
+      { token, connectors: { firebase } },
+    ) => {
+      return await getContentLinks(
+        prop('growth_development_content_links')(obj),
+        obj.baby,
+        token,
+        firebase,
+        args,
+      );
     },
-    faqLinks: async (obj, args, { token, connectors: { firebase } }) => {
-      // TODO: remove duplication with parentingLinks
-      const faqLinks = prop('faq_links')(obj);
-
-      const content = faqLinks
-        ? await Promise.all(
-            faqLinks.map(tip => {
-              return connector.getGrowthContentById(
-                token,
-                tip.id,
-                obj.baby,
-                firebase,
-              );
-            }),
-          ).then(([...responses]) => responses)
-        : [];
-
-      return connectionFromArray(content, args);
+    introductionContentLinks: async (
+      obj,
+      args,
+      { token, connectors: { firebase } },
+    ) => {
+      return await getContentLinks(
+        prop('introduction_content_links')(obj),
+        obj.baby,
+        token,
+        firebase,
+        args,
+      );
     },
   },
   GrowthArticle: {
