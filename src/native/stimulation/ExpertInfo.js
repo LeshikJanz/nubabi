@@ -22,7 +22,7 @@ type Props = {
   layout: LayoutProps,
 };
 
-class ExpertInfo extends Component {
+export class ExpertInfo extends Component {
   props: Props;
 
   state = {

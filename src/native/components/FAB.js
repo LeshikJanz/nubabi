@@ -40,16 +40,5 @@ export const FAB = ({ onPress, children, size = 70, style = {} }: Props) => {
     </Box>
   );
 };
-/*
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    fontSize: 21,
-    color: '#EA3154',
-    letterSpacing: 0,
-    lineHeight: 14,
-    //boxShadow: 0 1px 3px rgba(0,0,0,.15),
-  },
-});
-*/
+
 export default FAB;

@@ -21,23 +21,18 @@ exports[`it renders correctly 1`] = `
       style={
         Object {
           "alignItems": "center",
-          "borderBottomWidth": 0,
-          "borderColor": "#9EABBC",
+          "backgroundColor": "#FFFFFF",
+          "borderBottomWidth": 1,
+          "borderColor": "rgba(0,0,0,.1)",
           "borderLeftWidth": 0,
           "borderRightWidth": 0,
-          "borderTopWidth": 0,
+          "borderTopWidth": 1,
           "flexDirection": "row",
           "justifyContent": "center",
-          "paddingBottom": 16,
-          "paddingLeft": 16,
-          "paddingRight": 16,
-          "paddingTop": 16,
-          "shadowOffset": Object {
-            "height": 1,
-            "width": 0,
-          },
-          "shadowOpacity": 0.1,
-          "shadowRadius": 0.5,
+          "paddingBottom": 24.8,
+          "paddingLeft": 24.8,
+          "paddingRight": 24.8,
+          "paddingTop": 24.8,
         }
       }
     >
@@ -77,6 +72,7 @@ exports[`it renders correctly 1`] = `
             "color": "#748294",
             "fontFamily": "System",
             "fontSize": 13.866666666666667,
+            "fontWeight": "500",
             "lineHeight": 16,
             "marginLeft": 16,
             "marginRight": 16,
@@ -89,6 +85,7 @@ exports[`it renders correctly 1`] = `
       </Text>
     </View>
     <View
+      contentSpacing={true}
       style={
         Object {
           "borderBottomWidth": 0,
@@ -96,10 +93,10 @@ exports[`it renders correctly 1`] = `
           "borderLeftWidth": 0,
           "borderRightWidth": 0,
           "borderTopWidth": 0,
-          "paddingBottom": 16,
-          "paddingLeft": 16,
-          "paddingRight": 16,
-          "paddingTop": 16,
+          "paddingBottom": 10,
+          "paddingLeft": 10,
+          "paddingRight": 10,
+          "paddingTop": 10,
         }
       }
     >
@@ -127,10 +124,10 @@ exports[`it renders correctly 1`] = `
             "paddingTop": 0,
             "shadowColor": "#000",
             "shadowOffset": Object {
-              "height": 2,
-              "width": 1,
+              "height": 1,
+              "width": 0,
             },
-            "shadowOpacity": 0.1,
+            "shadowOpacity": 0.15,
             "shadowRadius": 3,
           }
         }
@@ -223,7 +220,7 @@ exports[`it renders correctly 1`] = `
                       "color": "#748294",
                       "fontSize": 12,
                       "lineHeight": 17,
-                      "marginBottom": 5,
+                      "marginBottom": 10,
                     }
                   }
                 >
@@ -356,10 +353,10 @@ exports[`it renders correctly 1`] = `
             "paddingTop": 0,
             "shadowColor": "#000",
             "shadowOffset": Object {
-              "height": 2,
-              "width": 1,
+              "height": 1,
+              "width": 0,
             },
-            "shadowOpacity": 0.1,
+            "shadowOpacity": 0.15,
             "shadowRadius": 3,
           }
         }
@@ -367,6 +364,8 @@ exports[`it renders correctly 1`] = `
         <View
           style={
             Object {
+              "borderBottomLeftRadius": 4,
+              "borderBottomRightRadius": 4,
               "borderBottomWidth": 0,
               "borderColor": "#9EABBC",
               "borderLeftWidth": 0,
@@ -375,18 +374,50 @@ exports[`it renders correctly 1`] = `
               "borderTopRightRadius": 4,
               "borderTopWidth": 0,
               "flex": 1,
+              "overflow": "hidden",
             }
           }
         >
           <Image
+            resizeMode="cover"
             source={1}
             style={
-              Object {
-                "height": 300,
-                "width": 690,
-              }
+              Array [
+                Object {
+                  "flex": 1,
+                },
+                Object {
+                  "height": 300,
+                  "width": 728,
+                },
+              ]
             }
-          />
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(116, 130, 148)",
+                    "bottom": 0,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "left": 0,
+                    "opacity": 0.4,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  }
+                }
+              />
+            </View>
+          </Image>
           <View
             style={
               Object {
@@ -421,7 +452,7 @@ exports[`it renders correctly 1`] = `
                 }
               }
             >
-              What you need to know
+              This Week's Growth
             </Text>
           </View>
         </View>
@@ -450,10 +481,10 @@ exports[`it renders correctly 1`] = `
             "paddingTop": 0,
             "shadowColor": "#000",
             "shadowOffset": Object {
-              "height": 2,
-              "width": 1,
+              "height": 1,
+              "width": 0,
             },
-            "shadowOpacity": 0.1,
+            "shadowOpacity": 0.15,
             "shadowRadius": 3,
           }
         }

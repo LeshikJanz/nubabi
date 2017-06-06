@@ -26,6 +26,9 @@
       "!**/node_modules/**",
       "!**/vendor/**",
       "!**/flow-typed/**"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/src/native/shared/felaSnapshotSerializer"
     ]
   },
   "dependencies": {
@@ -106,7 +109,7 @@
     "flow-bin": "^0.46.0",
     "graphql-server-express": "^0.7.2",
     "husky": "^0.13.3",
-    "jest": "^19.0.2",
+    "jest": "^20.0.4",
     "lint-staged": "^3.4.0",
     "react-test-renderer": "16.0.0-alpha.6",
     "redux-devtools": "^3.3.2",

@@ -1,8 +1,7 @@
 // @flow
 import type { GrowthContentEdge } from '../../common/types';
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Box, Markdown, Link } from '../components';
+import { Box, Link } from '../components';
 import { pluck, reject, compose, isNil } from 'ramda';
 
 type Props = {

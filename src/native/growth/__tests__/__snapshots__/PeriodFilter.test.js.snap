@@ -1,0 +1,167 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "marginBottom": 16,
+    "marginLeft": 16,
+    "marginRight": 16,
+    "marginTop": 16,
+    "paddingBottom": 11.8,
+    "paddingLeft": 11.8,
+    "paddingRight": 11.8,
+    "paddingTop": 11.8,
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "flexDirection": "row",
+    "flex": 1,
+    "fontSize": 14.791111111111112,
+    "lineHeight": 16,
+    "color": "#454D56",
+    "fontFamily": "System"
+}
+
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      collapsable={false}
+      style={undefined}
+    >
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={undefined}
+        testID={undefined}
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#FFFFFF",
+              "borderBottomLeftRadius": 4,
+              "borderBottomRightRadius": 4,
+              "borderBottomWidth": 1,
+              "borderColor": "#E9ECF4",
+              "borderLeftWidth": 1,
+              "borderRightWidth": 1,
+              "borderTopLeftRadius": 4,
+              "borderTopRightRadius": 4,
+              "borderTopWidth": 1,
+              "flexDirection": "row",
+              "marginBottom": 16,
+              "marginLeft": 16,
+              "marginRight": 16,
+              "marginTop": 16,
+              "paddingBottom": 11.8,
+              "paddingLeft": 11.8,
+              "paddingRight": 11.8,
+              "paddingTop": 11.8,
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "color": "#454D56",
+                "flex": 1,
+                "fontFamily": "System",
+                "fontSize": 14.791111111111112,
+                "lineHeight": 16,
+              }
+            }
+          >
+            Week 1
+          </Text>
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#748294",
+                  "fontSize": 20,
+                },
+                undefined,
+                Object {
+                  "fontFamily": "Ionicons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
+    accessible={true}
+    hitSlop={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Array [
+        Object {
+          "bottom": -1334,
+          "left": 0,
+          "opacity": 0,
+          "position": "absolute",
+          "top": 1334,
+        },
+        null,
+      ]
+    }
+    testID={undefined}
+  />
+</View>
+`;

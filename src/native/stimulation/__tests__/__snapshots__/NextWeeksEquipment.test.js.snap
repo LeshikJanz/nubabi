@@ -6,6 +6,7 @@ exports[`it renders correctly 1`] = `
   style={
     Array [
       Object {
+        "backgroundColor": "#F8F9FC",
         "flex": 1,
       },
       undefined,

@@ -1,12 +1,11 @@
 import 'react-native';
 import React from 'react';
-import Library from '../Library';
-import renderer from 'react-test-renderer';
+import { Library } from '../Library';
+import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
+jest.mock('../ArticleCardList');
 
 test('it renders correctly', () => {
-  const tree = renderer.create(<Library />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<Library />);
 });

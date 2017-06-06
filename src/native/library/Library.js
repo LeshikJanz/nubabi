@@ -11,7 +11,7 @@ type Props = {
   navigation: NavigationProp<*, *>,
 };
 
-class Library extends PureComponent {
+export class Library extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {

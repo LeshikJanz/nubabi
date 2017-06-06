@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "overflow": "hidden",
+    "justifyContent": "center",
+    "shadowRadius": 0.5,
+    "shadowColor": "#000",
+    "shadowOpacity": 0.1,
+    "shadowOffset": {
+        "width": 0,
+        "height": -1
+    },
+    "paddingBottom": 8,
+    "paddingLeft": 8,
+    "paddingRight": 8,
+    "paddingTop": 8,
+    "alignItems": "center",
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#454D56",
+    "fontFamily": "System",
+    "textAlign": "center",
+    "width": 100
+}
+
+<View
+  style={
+    Object {
+      "borderBottomLeftRadius": 4,
+      "borderBottomRightRadius": 4,
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopLeftRadius": 4,
+      "borderTopRightRadius": 4,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "overflow": "hidden",
+    }
+  }
+>
+  <Image
+    resizeMode="cover"
+    source={
+      Object {
+        "uri": "http://example.com",
+      }
+    }
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "rgb(116, 130, 148)",
+            "bottom": 0,
+            "flex": 1,
+            "justifyContent": "center",
+            "left": 0,
+            "opacity": 0.4,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      />
+    </View>
+  </Image>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "justifyContent": "center",
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": -1,
+          "width": 0,
+        },
+        "shadowOpacity": 0.1,
+        "shadowRadius": 0.5,
+      }
+    }
+  >
+    <View
+      justiyContent="center"
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "paddingBottom": 8,
+          "paddingLeft": 8,
+          "paddingRight": 8,
+          "paddingTop": 8,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        numberOfLines={2}
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "color": "#454D56",
+            "fontFamily": "System",
+            "fontSize": 13,
+            "lineHeight": 16,
+            "textAlign": "center",
+            "width": 100,
+          }
+        }
+      >
+        Some Article
+      </Text>
+    </View>
+  </View>
+</View>
+`;

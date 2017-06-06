@@ -1,0 +1,266 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "marginBottom": 16,
+    "paddingBottom": 0,
+    "paddingLeft": 0,
+    "paddingRight": 0,
+    "paddingTop": 0,
+    "flex": 1,
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "stretch",
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "justifyContent": "space-around",
+    "shadowColor": "#000",
+    "shadowOpacity": 0.15,
+    "shadowRadius": 3,
+    "shadowOffset": {
+        "height": 1,
+        "width": 0
+    },
+    "flexDirection": "row",
+    "marginLeft": 16,
+    "marginRight": 16,
+    "marginTop": 16,
+    "height": 48,
+    "width": 48
+}
+
+<View
+  onLayout={[Function]}
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#FFFFFF",
+      "borderBottomLeftRadius": 4,
+      "borderBottomRightRadius": 4,
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopLeftRadius": 4,
+      "borderTopRightRadius": 4,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "justifyContent": "flex-start",
+      "marginBottom": 16,
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "flexDirection": "row",
+          "justifyContent": "space-around",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "marginBottom": 16,
+            "marginLeft": 16,
+            "marginRight": 16,
+            "marginTop": 16,
+          }
+        }
+      >
+        <Image
+          source={1}
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "height": 48,
+              "width": 48,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "flex": 1,
+            "marginBottom": 16,
+            "marginRight": 16,
+            "marginTop": 16,
+          }
+        }
+      >
+        <View
+          style={
+            Array [
+              Object {},
+              Object {
+                "flex": 1,
+              },
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "color": "#748294",
+                "fontSize": 12,
+                "lineHeight": 17,
+                "marginBottom": 10,
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {},
+                  undefined,
+                ]
+              }
+            >
+              This 
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {},
+                  undefined,
+                ]
+              }
+            >
+              is 
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {},
+                  undefined,
+                ]
+              }
+            >
+              the 
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {},
+                  undefined,
+                ]
+              }
+            >
+              introduction
+            </Text>
+          </Text>
+        </View>
+      </View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={undefined}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "margin": 10,
+            "opacity": 1,
+            "padding": 5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={false}
+          ellipsizeMode="tail"
+          style={
+            Array [
+              Object {
+                "color": undefined,
+                "fontSize": 20,
+              },
+              undefined,
+              Object {
+                "fontFamily": "Ionicons",
+                "fontStyle": "normal",
+                "fontWeight": "normal",
+              },
+            ]
+          }
+        >
+          
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;

@@ -1,11 +1,11 @@
 import 'react-native';
 import React from 'react';
 import { BrowseActivities } from '../BrowseActivities';
-import renderer from 'react-test-renderer';
+import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
 
-test.only('it renders correctly', () => {
+test('it renders correctly', () => {
   const activityEdges = [
     {
       node: {
@@ -25,9 +25,5 @@ test.only('it renders correctly', () => {
     },
   ];
 
-  const tree = renderer
-    .create(<BrowseActivities activities={activityEdges} />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<BrowseActivities activities={activityEdges} />);
 });

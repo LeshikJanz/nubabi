@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "marginBottom": 16,
+    "fontSize": 16.828997530864196,
+    "lineHeight": 26,
+    "color": "#6A7683",
+    "fontFamily": "System"
+}
+
+<View
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "marginBottom": 16,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      spacing={-0.43}
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#454D56",
+          "fontFamily": "System",
+          "fontSize": 16.828997530864196,
+          "lineHeight": 21,
+        }
+      }
+    >
+      Let's continue Some Activity
+    </Text>
+  </View>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#6A7683",
+        "fontFamily": "System",
+        "fontSize": 16.828997530864196,
+        "lineHeight": 26,
+        "marginBottom": 16,
+      }
+    }
+  >
+    Do something
+  </Text>
+</View>
+`;

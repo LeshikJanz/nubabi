@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it can be given colors props 1`] = `
+style = Object {}
+
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#33B7EB",
+        "borderColor": "#33B7EB",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "color": "#fff",
+        "fontSize": 12,
+        "marginTop": 5,
+        "overflow": "hidden",
+        "paddingBottom": 3,
+        "paddingLeft": 10,
+        "paddingRight": 10,
+        "paddingTop": 3,
+      },
+      Object {
+        "backgroundColor": "blue",
+        "borderColor": "gray",
+        "color": "white",
+      },
+    ]
+  }
+/>
+`;
+
+exports[`it renders correctly 1`] = `
+style = Object {}
+
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#33B7EB",
+        "borderColor": "#33B7EB",
+        "borderRadius": 10,
+        "borderWidth": 1,
+        "color": "#fff",
+        "fontSize": 12,
+        "marginTop": 5,
+        "overflow": "hidden",
+        "paddingBottom": 3,
+        "paddingLeft": 10,
+        "paddingRight": 10,
+        "paddingTop": 3,
+      },
+      Object {},
+    ]
+  }
+/>
+`;

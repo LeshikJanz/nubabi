@@ -28,10 +28,10 @@ exports[`it renders correctly 1`] = `
       "paddingTop": 16,
       "shadowColor": "#000",
       "shadowOffset": Object {
-        "height": 2,
-        "width": 1,
+        "height": 1,
+        "width": 0,
       },
-      "shadowOpacity": 0.1,
+      "shadowOpacity": 0.15,
       "shadowRadius": 3,
     }
   }
