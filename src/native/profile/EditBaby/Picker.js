@@ -11,6 +11,16 @@ import {
 import { range } from 'ramda';
 import theme from '../../../common/themes/defaultTheme';
 
+export const weekOptions = range(20, 44).map(val => {
+  return (
+    <PickerComponent.Item
+      label={val.toString()}
+      value={val}
+      key={val.toString()}
+    />
+  );
+});
+
 class Picker extends Component {
   props: {
     field: Object,
@@ -33,16 +43,6 @@ class Picker extends Component {
 
   renderPicker() {
     const { field } = this.props;
-
-    const weekOptions = range(20, 44).map(val => {
-      return (
-        <PickerComponent.Item
-          label={val.toString()}
-          value={val}
-          key={val.toString()}
-        />
-      );
-    });
 
     return (
       <PickerComponent
