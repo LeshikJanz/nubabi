@@ -187,7 +187,7 @@ export const makeStringFromTemplate = (template: string, variables: *) => {
 
 export const getTemplateVariables = async (firebase, baby) => {
   const viewer = await firebase.getViewer();
-  const viewerName = viewer.displayName || viewer.email;
+  const viewerName = viewer.firstName || viewer.email;
 
   return {
     baby: baby.name,
