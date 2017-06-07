@@ -1,10 +1,8 @@
 import 'react-native';
 import React from 'react';
 import CoverImage from '../CoverImage';
-import renderer from 'react-test-renderer';
+import { expectRender } from '../../../shared/testUtils';
 
-test.skip('it renders correctly', () => {
-  const tree = renderer.create(<CoverImage />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+test('it renders correctly', () => {
+  expectRender(<CoverImage />);
 });
