@@ -22,6 +22,7 @@ import theme, {
 } from '../../../common/themes/defaultTheme';
 import imagePicker from '../../components/imagePicker';
 import Picker from './Picker';
+import RelationshipDropdown from './RelationshipDropdown';
 import CoverImage from '../Header/CoverImage';
 import IconHeader from '../Header/IconHeader';
 import GenderSelection from './GenderSelection';
@@ -70,10 +71,9 @@ class Form extends Component {
 
   scroll = null;
 
-  updateImageField = name =>
-    ({ data }) => {
-      this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
-    };
+  updateImageField = name => ({ data }) => {
+    this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
+  };
 
   handleCoverImage = () => {
     imagePicker({ title: 'Select Cover Photo' }).then(
@@ -147,6 +147,10 @@ class Form extends Component {
     return <Picker field={field} onPickerOpen={this.scrollToPicker} />;
   };
 
+  renderRelationshipDropdown = field => {
+    return <RelationshipDropdown field={field} />;
+  };
+
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
@@ -156,6 +160,7 @@ class Form extends Component {
       renderTextInput,
       renderCoverImage,
       renderAvatar,
+      renderRelationshipDropdown,
     } = this;
 
     let submitText;
@@ -229,8 +234,8 @@ class Form extends Component {
 
         <Field
           name="relationship"
-          label="RELATIONSHIP TO ME"
-          component={renderTextInput}
+          label="RELATIONSHIP TO BABY"
+          component={renderRelationshipDropdown}
           validate={[required]}
         />
 
@@ -340,7 +345,6 @@ const styles = StyleSheet.create({
     color: FONT_COLOR,
     fontSize: 16,
   },
-
   inputLabel: {
     fontSize: 8,
     color: '#a8b3c2',

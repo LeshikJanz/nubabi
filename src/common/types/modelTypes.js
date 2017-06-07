@@ -200,7 +200,7 @@ export type Baby = {
   /**  */
   updatedAt?: any,
   /** Relationship to Viewer */
-  relationship?: string,
+  relationship?: BabyRelationshipEnum,
   /**  */
   activities?: ActivityConnection,
   /**  */
@@ -216,6 +216,15 @@ export type Baby = {
 };
 
 export type GenderEnum = 'MALE' | 'FEMALE';
+
+export type BabyRelationshipEnum =
+  | 'Parent'
+  | 'Grandparent'
+  | 'Guardian'
+  | 'Relative'
+  | 'Nanny'
+  | 'AuPair'
+  | 'Other';
 
 /**
   description: A connection to a list of items.

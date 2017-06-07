@@ -10,11 +10,6 @@ extend type Mutation {
   recordBabyMeasurement(input: RecordMeasurementInput!): RecordMeasurementPayload
 }
 
-enum Gender {
-  MALE
-  FEMALE
-}
-
 type Baby implements Node, Timestampable {
   id: ID!
   name: String!
@@ -31,11 +26,26 @@ type Baby implements Node, Timestampable {
   createdAt: DateTime!
   updatedAt: DateTime
   # Relationship to Viewer
-  relationship: String
+  relationship: BabyRelationship
   activities(before: String, after: String, first: Int, last: Int): ActivityConnection
   activity(id: ID!): Activity
   achievements(before: String, after: String, first: Int, last: Int): AchievementConnection
   memories(filter: MemoryFilter, first: Int, last: Int): MemoryConnection
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum BabyRelationship {
+  Parent
+  Grandparent
+  Guardian
+  Relative
+  Nanny
+  AuPair
+  Other
 }
 
 input CreateBabyInput {

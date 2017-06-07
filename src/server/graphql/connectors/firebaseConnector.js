@@ -235,7 +235,8 @@ const firebaseConnector = firebase => {
                 .once('value')
                 .then(returnValWithKeyAsId);
             }),
-          ))
+          ),
+        )
         .then(([...babies]) => babies)
         .catch(err => {
           console.warn(err);
@@ -250,7 +251,25 @@ const firebaseConnector = firebase => {
         .database()
         .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
         .once('value')
-        .then(returnVal);
+        .then(returnVal)
+        .then(val => {
+          // To ease migration, will be removed
+          const validRelationships = [
+            'Parent',
+            'Grandparent',
+            'Guardian',
+            'Relative',
+            'Nanny',
+            'AuPair',
+            'Other',
+          ];
+
+          if (!validRelationships.includes(val)) {
+            return 'Other';
+          }
+
+          return val;
+        });
     },
     createBaby: (values: mixed) => {
       return createOrUpdateBaby(firebase, values);
