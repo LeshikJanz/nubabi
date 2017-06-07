@@ -34,7 +34,7 @@ class Picker extends Component {
   renderPicker() {
     const { field } = this.props;
 
-    const weekOptions = range(32, 43).map(val => {
+    const weekOptions = range(20, 44).map(val => {
       return (
         <PickerComponent.Item
           label={val.toString()}

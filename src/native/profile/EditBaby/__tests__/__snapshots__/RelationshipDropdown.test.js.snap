@@ -11,12 +11,14 @@ style = Object {
     "lineHeight": 16,
     "color": "#454D56",
     "fontFamily": "System",
-    "marginBottom": 0,
+    "marginBottom": 4,
     "marginLeft": 0,
     "marginRight": 0,
     "marginTop": 0,
-    "paddingBottom": 11.8,
-    "paddingTop": 12.8,
+    "paddingBottom": 0,
+    "paddingLeft": 0,
+    "paddingRight": 0,
+    "paddingTop": 0,
     "flex": 1,
     "backgroundColor": "#FFFFFF",
     "alignItems": "center",
@@ -120,8 +122,10 @@ style = Object {
                 "marginLeft": 0,
                 "marginRight": 0,
                 "marginTop": 0,
-                "paddingBottom": 11.8,
-                "paddingTop": 12.8,
+                "paddingBottom": 0,
+                "paddingLeft": 0,
+                "paddingRight": 0,
+                "paddingTop": 0,
               }
             }
           >
@@ -141,6 +145,7 @@ style = Object {
                   "fontFamily": "System",
                   "fontSize": 14.791111111111112,
                   "lineHeight": 16,
+                  "marginBottom": 4,
                 }
               }
             >
