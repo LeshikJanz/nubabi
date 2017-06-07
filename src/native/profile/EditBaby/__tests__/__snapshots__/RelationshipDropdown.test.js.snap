@@ -70,6 +70,7 @@ style = Object {
             "fontFamily": "System",
             "fontSize": 8,
             "lineHeight": 16,
+            "marginBottom": 4,
           }
         }
       />

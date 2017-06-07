@@ -10,6 +10,7 @@ import NoContentView from './NoContentView';
 import Pill from './Pill';
 import FAB from './FAB';
 import Overlay from './Overlay';
+import DatePicker from './DatePicker';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
@@ -27,6 +28,7 @@ export {
   Pill,
   FAB,
   Overlay,
+  DatePicker,
   withLayout,
   displayLoadingState,
   showNoContentViewIf,

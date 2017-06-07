@@ -44,7 +44,7 @@ class RelationshipDropdown extends Component {
   }
 
   componentWillUpdate() {
-    LayoutAnimation.configureNext(LayoutAnimation.presets.easeInEaseOut);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
   }
 
   renderOptions() {
@@ -65,6 +65,7 @@ class RelationshipDropdown extends Component {
         style={() => ({
           fontSize: 8,
           color: '#a8b3c2',
+          marginBottom: 4,
         })}
       >
         {this.props.field.label}

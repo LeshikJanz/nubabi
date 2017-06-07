@@ -13,6 +13,7 @@ import {
 } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { reduxForm, Field } from 'redux-form';
+import { DatePicker } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NubabiIcon from '../../../common/icons/nubabi';
@@ -151,6 +152,21 @@ class Form extends Component {
     return <RelationshipDropdown field={field} />;
   };
 
+  renderDatePicker = field => {
+    const { label } = field;
+    return (
+      <View style={styles.inputContainer}>
+        <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
+
+        <DatePicker
+          onChange={field.input.onChange}
+          date={field.input.value}
+          format="YYYY-MM-DD"
+        />
+      </View>
+    );
+  };
+
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
@@ -161,6 +177,7 @@ class Form extends Component {
       renderCoverImage,
       renderAvatar,
       renderRelationshipDropdown,
+      renderDatePicker,
     } = this;
 
     let submitText;
@@ -228,7 +245,7 @@ class Form extends Component {
         <Field
           name="dob"
           label="BORN ON"
-          component={renderTextInput}
+          component={renderDatePicker}
           validate={[required, formattedDate('YYYY-MM-DD')]}
         />
 
