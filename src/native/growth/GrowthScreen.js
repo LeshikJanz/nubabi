@@ -15,7 +15,7 @@ export class GrowthScreen extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {
-    title: <BabyNameTitle />,
+    title: 'Growth',
   };
 
   handleWhatYouNeedToKnow = () => {
