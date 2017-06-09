@@ -10,7 +10,7 @@ import * as connector from '../connectors/babiesConnector';
 import {
   connectionFromArray,
   connectionFromPromisedArray,
-  connectionFromPromisedArrayWithCount,
+  connectionFromBackendMetadata,
   mutationWithClientMutationId,
   fromGlobalId,
   globalIdField,
@@ -24,8 +24,8 @@ export const resolvers = {
       args: ConnectionArguments,
       { token }: Context,
     ) => {
-      return connectionFromPromisedArrayWithCount(
-        connector.getAllActivities(token),
+      return connectionFromBackendMetadata(
+        connector.getAllActivities(token, args),
         args,
       );
     },

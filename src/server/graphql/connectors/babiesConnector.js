@@ -1,8 +1,10 @@
 // @flow
+import { getPaginationArguments } from '../resolvers/common';
+
 require('axios-debug-log');
 
 import type { ActivityLevelOperation, Baby } from '../../../common/types';
-import { path, prop, sortBy } from 'ramda';
+import { path, prop, sortBy, mergeAll } from 'ramda';
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
@@ -20,6 +22,14 @@ const withToken = (token: string) => ({
     Authorization: `Bearer ${token}`,
   },
 });
+
+const withPagination = (args: ConnectionArguments) => ({
+  params: getPaginationArguments(args),
+});
+
+const withConfigs = (...configs) => {
+  return mergeAll(configs);
+};
 
 const sortBySkillArea = sortBy(prop('skill_area_id'));
 
@@ -88,10 +98,10 @@ export const getSteps = async (
   });
 };
 
-export const getAllActivities = (token: string) => {
+export const getAllActivities = (token: string, args?: ConnectionArguments) => {
   return instance
-    .get('/activities', withToken(token))
-    .then(path(['data', 'data']));
+    .get('/activities', withConfigs(withToken(token), withPagination(args)))
+    .then(path(['data']));
 };
 
 export const swoopActivity = (
