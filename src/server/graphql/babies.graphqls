@@ -31,6 +31,7 @@ type Baby implements Node, Timestampable {
   activity(id: ID!): Activity
   achievements(before: String, after: String, first: Int, last: Int): AchievementConnection
   memories(filter: MemoryFilter, first: Int, last: Int): MemoryConnection
+  measurements: Measurements
 }
 
 enum Gender {
@@ -123,11 +124,7 @@ enum MeasurementType {
   weight
 }
 
-type Measurement {
-  value: Float!
-  unit: MeasurementUnit!
-  recordedAt: DateTime!
-}
+
 
 input RecordMeasurementInput {
   babyId: ID!
@@ -208,6 +205,34 @@ type MemoryConnection {
 type MemoryEdge {
   # The item at the end of the edge.
   node: Memory!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type Measurements {
+  heights: MeasurementConnection!
+  weights: MeasurementConnection!
+}
+
+type Measurement {
+  value: Float!
+  unit: MeasurementUnit!
+  recordedAt: DateTime!
+}
+
+# A connection to a list of items.
+type MeasurementConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [MeasurementEdge]
+}
+
+type MeasurementEdge {
+  # The item at the end of the edge.
+  node: Measurement!
 
   # A cursor for use in pagination.
   cursor: String!

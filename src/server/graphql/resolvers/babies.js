@@ -95,6 +95,25 @@ const resolvers = {
 
     relationship: ({ id }, _, { connectors: { firebase } }) =>
       firebase.getRelationship(id),
+
+    measurements: ({ id }) => ({
+      babyId: id,
+    }),
+  },
+
+  Measurements: {
+    heights: ({ babyId }, args, { connectors: { firebase } }) => {
+      return connectionFromPromisedArrayWithCount(
+        firebase.getBabyHeights(babyId),
+        args,
+      );
+    },
+    weights: ({ babyId }, args, { connectors: { firebase } }) => {
+      return connectionFromPromisedArrayWithCount(
+        firebase.getBabyWeights(babyId),
+        args,
+      );
+    },
   },
 };
 

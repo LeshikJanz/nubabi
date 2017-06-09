@@ -1,6 +1,6 @@
 // @flow
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
-import { omit, evolve } from 'ramda';
+import R, { omit, evolve, map, compose } from 'ramda';
 import { decode } from 'base-64';
 import {
   toCentimeters,
@@ -183,6 +183,49 @@ const getBaby = (firebase, id) => {
     .then(returnValWithKeyAsId);
 };
 
+const assignIdsToCollection = R.mapObjIndexed((value, key) => {
+  return R.assoc('id', key, value);
+});
+
+const timestampToDate = val => new Date(val.TIMESTAMP);
+
+const evolveBabyMeasurement = type => {
+  return R.compose(
+    R.assoc('unit', type === 'weights' ? 'kg' : 'cm'),
+    R.evolve({
+      recordedAt: timestampToDate,
+    }),
+  );
+};
+
+const getBabyMeasurements = (
+  firebase,
+  id: string,
+  type: 'weights' | 'heights',
+) => {
+  return firebase
+    .database()
+    .ref()
+    .child(`/measurements/${id}/${type}`)
+    .once('value')
+    .then(
+      compose(
+        map(evolveBabyMeasurement(type)),
+        R.values,
+        assignIdsToCollection,
+        returnVal,
+      ),
+    );
+};
+
+const getBabyWeights = (firebase, id: string) => {
+  return getBabyMeasurements(firebase, id, 'weights');
+};
+
+const getBabyHeights = (firebase, id: string) => {
+  return getBabyMeasurements(firebase, id, 'heights');
+};
+
 const recordMeasurement = async (firebase, babyId, type, unit, value) => {
   // TODO: this is currently stored in Firebase, which isn't particularly
   // good for historical data. We might consider a separate datastore for
@@ -286,6 +329,8 @@ const firebaseConnector = firebase => {
           return val;
         });
     },
+    getBabyWeights: (id: string) => getBabyWeights(firebase, id),
+    getBabyHeights: (id: string) => getBabyHeights(firebase, id),
     createBaby: (values: mixed) => {
       return createOrUpdateBaby(firebase, values);
     },

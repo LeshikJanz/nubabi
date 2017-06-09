@@ -206,6 +206,8 @@ export type Baby = {
   /**  */
   memories?: MemoryConnection,
   /**  */
+  measurements?: Measurements,
+  /**  */
   favoriteActivities: ActivityConnection,
   /**  */
   growth: GrowthConnection,
@@ -434,6 +436,45 @@ export type Memory = {
   /**  */
   image?: Image,
 };
+
+export type Measurements = {
+  __typename: string,
+  /**  */
+  heights: MeasurementConnection,
+  /**  */
+  weights: MeasurementConnection,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type MeasurementConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<MeasurementEdge>,
+};
+
+export type MeasurementEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Measurement,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Measurement = {
+  __typename: string,
+  /**  */
+  value: number,
+  /**  */
+  unit: MeasurementUnitEnum,
+  /**  */
+  recordedAt: any,
+};
+
+export type MeasurementUnitEnum = 'kg' | 'cm' | 'in' | 'lbs';
 
 export type GrowthConnection = {
   __typename: string,
@@ -792,8 +833,6 @@ export type RecordMeasurementInput = {
 
 export type MeasurementTypeEnum = 'height' | 'weight';
 
-export type MeasurementUnitEnum = 'kg' | 'cm' | 'in' | 'lbs';
-
 export type RecordMeasurementPayload = {
   __typename: string,
   /**  */
@@ -802,16 +841,6 @@ export type RecordMeasurementPayload = {
   baby: Baby,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId?: string,
-};
-
-export type Measurement = {
-  __typename: string,
-  /**  */
-  value: number,
-  /**  */
-  unit: MeasurementUnitEnum,
-  /**  */
-  recordedAt: any,
 };
 
 export type SwoopActivityInput = {

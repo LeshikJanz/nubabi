@@ -25,6 +25,8 @@ export const Chart = ({ data, layout }: Props) => {
   const { parentWidth, viewportHeight } = layout;
   const graphHeight = viewportHeight * 0.2;
 
+  console.log(data);
+
   return (
     <LineGraph
       data={data}

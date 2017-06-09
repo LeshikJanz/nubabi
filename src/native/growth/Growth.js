@@ -7,6 +7,7 @@ import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { skipGrowthGlobalIntro } from '../../common/growth/reducer';
 import {
   Box,
@@ -30,7 +31,9 @@ const formatName = (name: string) => {
   return name.endsWith('s') ? `${name}'` : `${name}'s`;
 };
 
-const data = [
+const DAY_MS = 86400000;
+
+const defaultData = [
   { timestamp: new Date(2007, 1, 1).getTime(), value: 83.24 },
   { timestamp: new Date(2007, 1, 2).getTime(), value: 85.35 },
   { timestamp: new Date(2007, 1, 3).getTime(), value: 98.84 },
@@ -60,6 +63,36 @@ export class Growth extends Component {
 
     this.props.skipGrowthGlobalIntro();
   };
+
+  getChartData() {
+    if (
+      !path(['measurements', 'heights', 'edges', '0', 'node'], this.props.baby)
+    ) {
+      return defaultData; // TODO: how to handle this?
+    }
+
+    const measurements = path(
+      ['measurements', 'heights', 'edges'],
+      this.props.baby,
+    ).map(edge => {
+      return {
+        timestamp: new Date(edge.node.recordedAt).getTime(),
+        value: edge.node.value,
+      };
+    });
+
+    return [
+      // HACK: so it kinda curves so the graph doesn't cut
+      /*
+      {
+        timestamp: moment(this.props.baby.dob).toDate().getTime() - DAY_MS,
+        value: measurements[0].value - 5,
+        point: false,
+      },
+      */
+      ...measurements,
+    ];
+  }
 
   render() {
     const { baby } = this.props;
@@ -109,7 +142,7 @@ export class Growth extends Component {
                   <Text color="secondary" size={2}>cm</Text>
                 </Text>
               </Box>
-              <Chart data={data} height={120} />
+              <Chart data={this.getChartData()} height={120} />
             </Box>
             <Box justifyContent="center" padding={1}>
               <Text size={2}>
@@ -141,6 +174,16 @@ export default compose(
             id
             weight
             height
+            measurements {
+              heights {
+                edges {
+                  node {
+                    value
+                    recordedAt
+                  }
+                }
+              }
+            }
             growth {
               ...GrowthIntroduction
               edges {
