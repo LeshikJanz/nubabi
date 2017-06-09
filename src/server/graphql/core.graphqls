@@ -77,19 +77,19 @@ type UserEdge {
   cursor: String!
 }
 
-type User implements Node, Timestampable {
+type User implements Node {
   # A globally-unique ID
   id: ID!
-  username: String!
   email: String
-  name: String
-  website: String
+  firstName: String
+  lastName: String
+
   # Date of Birth
   dob: DateTime
   avatar: Avatar
-  phone: String
-  createdAt: DateTime!
-  updatedAt: DateTime!
+
+  totalAchievements: Int
+  totalMemories: Int
 }
 
 type Viewer {

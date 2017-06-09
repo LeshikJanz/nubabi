@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import type { State, Viewer } from '../../common/types';
 import { connect } from 'react-redux';
+import { compose, path } from 'ramda';
+import { graphql, gql } from 'react-apollo';
+import { filter } from 'graphql-anywhere';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
-import { Screen } from '../components';
+import UserProfile from './UserProfile';
 
 type Props = {
   user: Viewer,
@@ -47,32 +50,36 @@ export class Settings extends Component {
       </View>
     );
   }
+
   render() {
-    const { user } = this.props;
-    if (!user) {
+    const { user: viewer } = this.props;
+
+    if (!viewer) {
       return null;
     }
+
+    const userProp = filter(UserProfile.fragments.profile, viewer.user);
+    const viewerProp = filter(UserProfile.fragments.viewer, viewer);
+
     return (
-      <Screen>
-        <View style={styles.container}>
-          <Text style={styles.inputLabel}>{user.email}</Text>
-          <View style={styles.submitButtonContainer}>
-            <TouchableHighlight
-              underlayColor="rgba(0,0,0,0)"
-              style={styles.oneButton}
-              onPress={this.props.logout}
-            >
+      <View style={styles.container}>
+        <UserProfile user={userProp} viewer={viewerProp} />
+        <View style={styles.submitButtonContainer}>
+          <TouchableHighlight
+            underlayColor="rgba(0,0,0,0)"
+            style={styles.oneButton}
+            onPress={this.props.logout}
+          >
 
-              <View style={styles.submitButton}>
-                <Text style={styles.submitText}>LOG OUT</Text>
-              </View>
-            </TouchableHighlight>
-          </View>
-
-          {this.renderCopyright()}
-
+            <View style={styles.submitButton}>
+              <Text style={styles.submitText}>LOG OUT</Text>
+            </View>
+          </TouchableHighlight>
         </View>
-      </Screen>
+
+        {this.renderCopyright()}
+
+      </View>
     );
   }
 }
@@ -84,10 +91,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   submitButtonContainer: {
-    marginTop: 20,
-    flex: 1,
     alignItems: 'center',
-    marginBottom: 50,
+    justifyContent: 'flex-end',
+    marginVertical: 20,
   },
   submitButton: {
     backgroundColor: NUBABI_RED,
@@ -121,12 +127,33 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
-export default connect(
-  (state: State) => ({
-    user: state.viewer,
-    routeIndex: state.navigation.index,
-    appName: state.config.appName,
-    appVersion: state.config.appVersion,
-  }),
-  { logout },
+
+export default compose(
+  connect(
+    (state: State) => ({
+      appName: state.config.appName,
+      appVersion: state.config.appVersion,
+    }),
+    { logout },
+  ),
+  graphql(
+    gql`
+      query UserProfile {
+        viewer {
+          ...UserProfileViewer
+          user {
+            ...UserProfile
+          }
+        }
+      }
+      ${UserProfile.fragments.viewer}
+      ${UserProfile.fragments.profile}
+    `,
+    {
+      options: { fetchPolicy: 'cache-and-network' },
+      props: ({ data }) => ({
+        user: path(['viewer'], data),
+      }),
+    },
+  ),
 )(Settings);

@@ -84,7 +84,7 @@ const uploadFile = (firebase, refPath, dataUrl) => {
   });
 };
 
-const createOrUpdateBaby = (firebase, values, id) => {
+const createOrUpdateBaby = async (firebase, values, id) => {
   const creating = !id;
 
   const currentUserPath = `/users/${getViewer(firebase).uid}`;
@@ -153,6 +153,20 @@ const createOrUpdateBaby = (firebase, values, id) => {
 };
 
 const getViewer = firebase => firebase.auth().currentUser;
+const getViewerWithProfile = async firebase => {
+  const user = getViewer(firebase);
+  const profile = await firebase
+    .database()
+    .ref(`/users/${user.uid}`)
+    .once('value')
+    .then(returnVal);
+
+  return {
+    ...profile,
+    email: user.email,
+    uid: user.uid,
+  };
+};
 
 const get = (firebase, path: string) =>
   firebase.database().ref(path).once('value').then(returnVal);
@@ -216,6 +230,7 @@ const firebaseConnector = firebase => {
     get: (path: string) => get(firebase, path),
     set: (path: string, values: mixed) => set(firebase, path, values),
     getViewer: () => getViewer(firebase),
+    getViewerWithProfile: () => getViewerWithProfile(firebase),
     getBabies: () => {
       const currentUserId = getViewer(firebase).uid;
 

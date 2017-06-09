@@ -14,7 +14,7 @@ import {
 const resolvers = {
   Viewer: {
     babies: (_, args, { connectors: { firebase } }) =>
-      connectionFromPromisedArray(firebase.getBabies(), args),
+      connectionFromPromisedArrayWithCount(firebase.getBabies(), args),
 
     baby: (_, { id }, { connectors: { firebase } }) =>
       firebase.getBaby(fromGlobalId(id).id),

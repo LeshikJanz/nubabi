@@ -98,6 +98,9 @@ type BabyConnection {
 
   # A list of edges.
   edges: [BabyEdge]
+
+  # Count of result set without considering pagination arguments
+  count: Int!
 }
 
 type BabyEdge {

@@ -75,6 +75,9 @@ export type {
 export type FirebaseUser = {
   uid: String,
   email: String,
+  firstName?: String,
+  lastName?: String,
+  avatar?: Avatar,
 };
 
 // Deps

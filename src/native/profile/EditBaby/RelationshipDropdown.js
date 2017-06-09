@@ -91,6 +91,7 @@ class RelationshipDropdown extends Component {
           <MenuTrigger style={styles.trigger} renderTouchable={renderTouchable}>
             <Box
               flex={1}
+              flexDirection="row"
               backgroundColor="white"
               alignItems="center"
               margin={0}
@@ -98,7 +99,6 @@ class RelationshipDropdown extends Component {
               borderRadius={4}
               borderBottomWidth={1}
               style={() => ({ borderColor: '#E9ECF4' })}
-              flexDirection="row"
             >
               <Text
                 key={current.key}
@@ -128,7 +128,6 @@ class RelationshipDropdown extends Component {
 
 const styles = StyleSheet.create({
   dropdown: {
-    //backgroundColor: 'blue',
     flex: 1,
     paddingHorizontal: 30,
     marginBottom: 15,

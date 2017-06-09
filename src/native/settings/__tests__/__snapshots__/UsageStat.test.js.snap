@@ -1,0 +1,191 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "marginBottom": 8,
+    "marginLeft": 0,
+    "marginRight": 0,
+    "marginTop": 8,
+    "paddingBottom": 0,
+    "paddingLeft": 0,
+    "paddingRight": 0,
+    "paddingTop": 0,
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "flexDirection": "column",
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#748294",
+    "fontFamily": "System",
+    "textAlign": "center",
+    "fontWeight": "600"
+}
+
+<View
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "flexDirection": "column",
+      "marginBottom": 0,
+      "marginLeft": 0,
+      "marginRight": 0,
+      "marginTop": 0,
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#454D56",
+        "fontFamily": "System",
+        "fontSize": 14.791111111111112,
+        "fontWeight": "600",
+        "lineHeight": 16,
+        "marginBottom": 8,
+        "marginTop": 8,
+        "textAlign": "center",
+      }
+    }
+  >
+    1
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    spacing={-0.41}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#748294",
+        "fontFamily": "System",
+        "fontSize": 13,
+        "lineHeight": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    BABY
+  </Text>
+</View>
+`;
+
+exports[`it renders correctly 2`] = `
+style = Object {
+    "marginBottom": 8,
+    "marginLeft": 0,
+    "marginRight": 0,
+    "marginTop": 8,
+    "paddingBottom": 0,
+    "paddingLeft": 0,
+    "paddingRight": 0,
+    "paddingTop": 0,
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "flexDirection": "column",
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#748294",
+    "fontFamily": "System",
+    "textAlign": "center",
+    "fontWeight": "600"
+}
+
+<View
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "flexDirection": "column",
+      "marginBottom": 0,
+      "marginLeft": 0,
+      "marginRight": 0,
+      "marginTop": 0,
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#454D56",
+        "fontFamily": "System",
+        "fontSize": 14.791111111111112,
+        "fontWeight": "600",
+        "lineHeight": 16,
+        "marginBottom": 8,
+        "marginTop": 8,
+        "textAlign": "center",
+      }
+    }
+  >
+    0
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    spacing={-0.41}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#748294",
+        "fontFamily": "System",
+        "fontSize": 13,
+        "lineHeight": 16,
+        "textAlign": "center",
+      }
+    }
+  >
+    MEMORIES
+  </Text>
+</View>
+`;

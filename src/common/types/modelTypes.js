@@ -100,23 +100,19 @@ export type User = {
   /** The ID of an object */
   id: string,
   /**  */
-  username: string,
-  /**  */
   email?: string,
   /**  */
-  name?: string,
+  firstName?: string,
   /**  */
-  website?: string,
+  lastName?: string,
   /** Date of Birth */
   dob?: any,
   /**  */
   avatar?: Avatar,
   /**  */
-  phone?: string,
+  totalAchievements?: number,
   /**  */
-  createdAt: any,
-  /**  */
-  updatedAt: any,
+  totalMemories?: number,
 };
 
 export type Node =
@@ -127,8 +123,6 @@ export type Node =
   | Category
   | Growth
   | Article;
-
-export type Timestampable = User | Baby;
 
 export type Avatar = {
   __typename: string,
@@ -165,6 +159,8 @@ export type BabyConnection = {
   pageInfo: PageInfo,
   /** A list of edges. */
   edges?: Array<BabyEdge>,
+  /** Count of result set without considering pagination arguments */
+  count: number,
 };
 
 export type BabyEdge = {
@@ -214,6 +210,8 @@ export type Baby = {
   /**  */
   growth: GrowthConnection,
 };
+
+export type Timestampable = Baby;
 
 export type GenderEnum = 'MALE' | 'FEMALE';
 

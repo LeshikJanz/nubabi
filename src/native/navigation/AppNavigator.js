@@ -23,7 +23,7 @@ import TabsNavigator from './TabsNavigator';
 
 import SplashScreen from './SplashScreen';
 import LoginScreen from '../login/LoginScreen';
-import Settings from '../settings/Settings';
+import SettingsScreen from '../settings/SettingsScreen';
 import ChooseBabyScreen from '../profile/ChooseBabyScreen';
 import AddBaby from '../profile/EditBaby/AddBaby';
 import EditBaby from '../profile/EditBaby/EditBaby';
@@ -62,7 +62,7 @@ type State = {
 const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 const routes = {
-  settings: { screen: Settings },
+  settings: { screen: SettingsScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
