@@ -1,7 +1,8 @@
 // @flow
 import type { Image as ImageType, LayoutProps } from '../../common/types/types';
 import React from 'react';
-import { Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { Text, StyleSheet, TouchableHighlight } from 'react-native';
+import Image from 'react-native-cached-image';
 import { Overlay, withLayout } from '../components';
 
 type Props = {
