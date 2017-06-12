@@ -650,6 +650,13 @@ export type SkillAreaEdge = {
   cursor: string,
 };
 
+export type ActivityFilterInput = {
+  /**  */
+  skillAreas?: Array<string>,
+  /**  */
+  categories?: Array<string>,
+};
+
 /**
   description: A connection to a list of items.
 */

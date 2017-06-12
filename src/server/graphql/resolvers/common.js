@@ -116,7 +116,7 @@ export const getPaginationArguments = (args: ConnectionArguments) => {
 
 export const connectionFromBackendMetadataArray = data => {
   const { data: payload, meta } = data;
-  console.log(payload);
+
   const edges = payload.map(node => ({
     node: R.omit('cursor', node),
     cursor: node.cursor,
@@ -136,7 +136,7 @@ export const connectionFromBackendMetadataArray = data => {
       hasPrevPage: meta.hasPrevPage,
     },
   };
-  console.log(connection);
+
   return connection;
 };
 

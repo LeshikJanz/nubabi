@@ -29,7 +29,9 @@ import AddBaby from '../profile/EditBaby/AddBaby';
 import EditBaby from '../profile/EditBaby/EditBaby';
 import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
-import BrowseActivities from '../stimulation/BrowseActivities';
+import BrowseActivitiesScreen from '../stimulation/BrowseActivitiesScreen';
+import BrowseActivitiesListScreen
+  from '../stimulation/BrowseActivitiesListScreen';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
 import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
@@ -71,7 +73,8 @@ const routes = {
   thisWeekActivities: { screen: ThisWeeksActivities },
   favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
-  browseActivities: { screen: BrowseActivities },
+  browseActivities: { screen: BrowseActivitiesScreen },
+  browseActivitiesList: { screen: BrowseActivitiesListScreen },
   viewActivity: { screen: ViewActivity },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
   whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },

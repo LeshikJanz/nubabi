@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import { BrowseActivities } from '../BrowseActivities';
+import { BrowseActivities } from '../BrowseActivitiesListScreen';
 import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');

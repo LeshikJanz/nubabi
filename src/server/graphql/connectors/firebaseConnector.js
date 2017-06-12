@@ -155,6 +155,10 @@ const createOrUpdateBaby = async (firebase, values, id) => {
 const getViewer = firebase => firebase.auth().currentUser;
 const getViewerWithProfile = async firebase => {
   const user = getViewer(firebase);
+  if (!user) {
+    return null;
+  }
+
   const profile = await firebase
     .database()
     .ref(`/users/${user.uid}`)

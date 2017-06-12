@@ -1,5 +1,11 @@
 extend type Viewer {
-  allActivities(before: String, after: String, first: Int, last: Int): ActivityConnection!
+  allActivities(
+    before: String,
+    after: String,
+    first: Int,
+    last: Int,
+    filter: ActivityFilterInput
+  ): ActivityConnection!
 }
 
 extend type Baby {
@@ -27,6 +33,11 @@ type Activity {
   media(
     before: String, after: String, first: Int, last: Int
   ): ActivityMediaConnection!
+}
+
+input ActivityFilterInput {
+  skillAreas: [ID!]
+  categories: [ID!]
 }
 
 input SwoopActivityInput {

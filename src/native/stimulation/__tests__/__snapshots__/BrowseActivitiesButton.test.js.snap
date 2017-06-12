@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly 1`] = `
+style = Object {}
+
 <View
   accessibilityComponentType={undefined}
   accessibilityLabel={undefined}
@@ -21,22 +23,25 @@ exports[`it renders correctly 1`] = `
       Object {
         "backgroundColor": "transparent",
       },
-      Object {
-        "alignItems": "center",
-        "backgroundColor": "red",
-        "borderRadius": 4,
-        "flex": 1,
-        "height": 130,
-        "justifyContent": "center",
-        "overflow": "hidden",
-        "shadowColor": "#ccc",
-        "shadowOffset": Object {
-          "height": 5,
-          "width": 0,
+      Array [
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "red",
+          "borderRadius": 4,
+          "flex": 1,
+          "height": 130,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "shadowColor": "#ccc",
+          "shadowOffset": Object {
+            "height": 5,
+            "width": 0,
+          },
+          "shadowOpacity": 1,
+          "shadowRadius": 1,
         },
-        "shadowOpacity": 1,
-        "shadowRadius": 1,
-      },
+        undefined,
+      ],
     ]
   }
   testID={undefined}
@@ -108,7 +113,7 @@ exports[`it renders correctly 1`] = `
             }
           }
         >
-          Browse All
+          Browse
         </Text>
         <Text
           accessible={true}

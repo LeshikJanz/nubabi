@@ -1,27 +1,38 @@
 // @flow
-import type { LayoutProps } from '../../common/types/types';
+import type { Image as ImageType, LayoutProps } from '../../common/types/types';
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableHighlight,
-} from 'react-native';
+import { Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { Overlay, withLayout } from '../components';
 
 type Props = {
   onPress: () => void,
   layout: LayoutProps,
+  image?: ImageType,
+  text?: String,
+  style?: Object | number,
 };
 
-const background = require('../../common/images/browseAllActivitiesButton.jpg');
+const defaultBackground = require('../../common/images/browseAllActivitiesButton.jpg');
 
-export const BrowseAllActivitiesButton = ({ onPress, layout }: Props) => {
+export const BrowseActivitiesButton = ({
+  onPress,
+  layout,
+  style,
+  image,
+  text,
+}: Props) => {
   const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
+  const background = image ? { uri: image.url } : defaultBackground;
+  const caption = text
+    ? <Text style={styles.title}>{text}</Text>
+    : [
+        <Text key="all" style={styles.title}>Browse</Text>,
+        <Text key="activities" style={styles.title}>Activities</Text>,
+      ];
+
   return (
     <TouchableHighlight
-      style={styles.container}
+      style={[styles.container, style]}
       underlayColor="rgba(0,0,0,0)"
       onPress={onPress}
     >
@@ -31,8 +42,7 @@ export const BrowseAllActivitiesButton = ({ onPress, layout }: Props) => {
         resizeMode="cover"
       >
         <Overlay>
-          <Text style={styles.title}>Browse All</Text>
-          <Text style={styles.title}>Activities</Text>
+          {caption}
         </Overlay>
       </Image>
     </TouchableHighlight>
@@ -83,4 +93,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withLayout(BrowseAllActivitiesButton);
+export default withLayout(BrowseActivitiesButton);

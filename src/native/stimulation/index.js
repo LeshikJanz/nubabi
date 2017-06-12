@@ -9,7 +9,7 @@ import { sample } from 'lodash';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
-import BrowseAllActivitiesButton from './BrowseAllActivitiesButton';
+import BrowseAllActivitiesButton from './BrowseActivitiesButton';
 import CalendarButton from './CalendarButton';
 import FavoritesButton from './FavoritesButton';
 import DidYouKnow from './DidYouKnow';

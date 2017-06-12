@@ -2,9 +2,25 @@
 import { getPaginationArguments } from '../resolvers/common';
 
 require('axios-debug-log');
-
-import type { ActivityLevelOperation, Baby } from '../../../common/types';
-import { path, prop, sortBy, mergeAll } from 'ramda';
+import type { ConnectionArguments } from '../resolvers/common';
+import type {
+  ActivityLevelOperation,
+  Baby,
+  ActivityFilterInput,
+} from '../../../common/types';
+import {
+  path,
+  prop,
+  map,
+  sortBy,
+  compose,
+  reduce,
+  either,
+  identity,
+  mergeDeepRight,
+  curry,
+} from 'ramda';
+import { fromGlobalId } from '../resolvers/common';
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
@@ -28,7 +44,41 @@ const withPagination = (args: ConnectionArguments) => ({
 });
 
 const withConfigs = (...configs) => {
-  return mergeAll(configs);
+  return reduce(mergeDeepRight, {}, configs);
+};
+
+const toParam = array => array && array.join(',');
+
+const toIdsFilter = ids => {
+  if (!ids) {
+    return;
+  }
+  return ids.map(id => fromGlobalId(id).id).join(',');
+};
+
+const toFilter = toParam;
+
+const withActivityFilters = ({
+  filter,
+}: ConnectionArguments & ActivityFilterInput) => {
+  if (!filter) {
+    return {};
+  }
+
+  const { skillAreas, categories, ages } = filter;
+
+  return {
+    params: {
+      filter: {
+        skill_area_ids: toIdsFilter(skillAreas),
+        category_ids: toIdsFilter(categories),
+        ages: toFilter(ages),
+      },
+    },
+    paramsSerializer(params) {
+      return qs.stringify(params, { arrayFormat: 'brackets' });
+    },
+  };
 };
 
 const sortBySkillArea = sortBy(prop('skill_area_id'));
@@ -100,7 +150,14 @@ export const getSteps = async (
 
 export const getAllActivities = (token: string, args?: ConnectionArguments) => {
   return instance
-    .get('/activities', withConfigs(withToken(token), withPagination(args)))
+    .get(
+      '/activities',
+      withConfigs(
+        withToken(token),
+        withPagination(args),
+        withActivityFilters(args),
+      ),
+    )
     .then(path(['data']));
 };
 
