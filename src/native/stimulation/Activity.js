@@ -8,10 +8,17 @@ import {
   StyleSheet,
   ScrollView,
 } from 'react-native';
+import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActivityActions from './ActivityActions';
 import theme, { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
+import {
+  childContextTypes,
+  handleLayout,
+  getLayoutInitialState,
+  getChildContext,
+} from '../components/withLayout';
 import iconMappings from './iconMappings';
 import Header from './Header';
 import Steps from './Steps';
@@ -24,6 +31,7 @@ type ActivityProps = {
   onToggleFavorite: () => void,
   enableActions: boolean,
   enableNavigation: boolean,
+  onActivityMediaPress?: () => void,
 };
 
 type ActivityActionProps = {
@@ -33,6 +41,7 @@ type ActivityActionProps = {
 };
 
 type ActivityNavigationProps = {
+  onActivityMediaPress: () => void,
   onPreviousActivity?: () => void,
   onNextActivity?: () => void,
   previousSkillAreaName?: string,
@@ -43,6 +52,10 @@ type Props = ActivityProps & ActivityNavigationProps & ActivityActionProps;
 
 export class Activity extends PureComponent {
   props: Props;
+
+  state = {
+    ...getLayoutInitialState(),
+  };
 
   static defaultProps = {
     enableNavigation: false,
@@ -100,6 +113,12 @@ export class Activity extends PureComponent {
   };
 
   scrollView = null;
+
+  static childContextTypes = childContextTypes;
+
+  getChildContext = getChildContext.bind(this);
+
+  handleLayout = handleLayout.bind(this);
 
   scrollToTop = () => {
     if (this.scrollView) {
@@ -190,10 +209,29 @@ export class Activity extends PureComponent {
     const skill = activity.skillArea;
     const { expert } = activity;
 
+    const activityMedia = path(
+      ['media', 'edges', '0', 'node', 'url'],
+      activity,
+    );
+
+    const activityThumb = path(
+      ['media', 'edges', '0', 'node', 'thumb'],
+      activity,
+    );
+
+    const activityMediaType = path(
+      ['media', 'edges', '0', 'node', 'type'],
+      activity,
+    );
+
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={this.handleLayout}>
         <ScrollView
           style={styles.scrollContainer}
+          contentContainerStyle={{
+            alignItems: 'stretch',
+            justifyContent: 'flex-start',
+          }}
           keyboardShouldPersistTaps="handled"
           pagingEnabled={false}
           ref={ref => {
@@ -212,7 +250,14 @@ export class Activity extends PureComponent {
             activityDescription={activity.introduction}
           />
 
-          <Steps steps={activity.steps} activityName={activity.name} />
+          <Steps
+            steps={activity.steps}
+            activityName={activity.name}
+            activityMedia={activityMedia}
+            activityMediaThumbnail={activityThumb}
+            activityMediaType={activityMediaType}
+            onActivityMediaPress={this.props.onActivityMediaPress}
+          />
 
           {enableActions &&
             <ActivityActions
@@ -223,12 +268,12 @@ export class Activity extends PureComponent {
               onIncrease={this.handleLevelIncrease}
               onDecrease={this.handleLevelDecrease}
             />}
+          {enableNavigation &&
+            <View style={styles.nextButtonsContainer}>
+              {this.renderPreviousButton()}
+              {this.renderNextButton()}
+            </View>}
         </ScrollView>
-        {enableNavigation &&
-          <View style={styles.nextButtonsContainer}>
-            {this.renderPreviousButton()}
-            {this.renderNextButton()}
-          </View>}
       </View>
     );
   }

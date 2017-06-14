@@ -16,26 +16,25 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import * as loginActions from '../../common/auth/actions';
-import { Screen } from '../components';
 import Loader from '../components/Loader';
 
-const background = require('../../common/images/loginBackground.png');
+const background = require('../../common/images/loginBackground.jpg');
 const logo = require('../../common/images/loginLogo.png');
 
 const window = Dimensions.get('window');
 
-export class Login extends Component {
-  static navigationOptions = {
-    headerVisible: false,
-  };
+type Props = {
+  actions: any,
+  isFetching: boolean,
+};
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: '',
-    };
-  }
+export class Login extends Component {
+  props: Props;
+
+  state = {
+    email: '',
+    password: '',
+  };
 
   login = () => {
     const { email, password } = this.state;
@@ -58,6 +57,8 @@ export class Login extends Component {
         />
       );
     }
+
+    return null;
   }
 
   render() {
@@ -65,83 +66,74 @@ export class Login extends Component {
 
     const buttonText = isFetching ? 'Logging in...' : 'LOG IN';
     return (
-      <Screen>
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <Image source={background} style={styles.background} />
+        <View style={styles.backgroundFilter} />
+        <KeyboardAwareScrollView
+          style={styles.container}
+          contentContainerStyle={styles.scrollContainer}
+          keyboardShouldPersistTaps="handled"
+        >
+          <View style={{ flex: 1 }}>
+            <Image source={logo} style={styles.logo} />
 
-          <Image source={background} style={styles.background} />
-          <View style={styles.backgroundFilter} />
-          <KeyboardAwareScrollView
-            style={styles.container}
-            contentContainerStyle={styles.scrollContainer}
-            keyboardShouldPersistTaps="handled"
-          >
-            <View style={{ flex: 1 }}>
-              <Image source={logo} style={styles.logo} />
-
-              <View style={styles.inputOuterContainer}>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>EMAIL</Text>
-                  <TextInput
-                    style={styles.textInput}
-                    value={this.state.email}
-                    placeholder="name@example.com"
-                    keyBoardType="email-address"
-                    autoFocus
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    returnKeyType="next"
-                    blurOnSubmit={false}
-                    underlineColorAndroid="#eff1f7"
-                    onChangeText={email => this.setState({ email })}
-                    onSubmitEditing={() => this.passwordInput.focus()}
-                  />
-                </View>
-                <View style={styles.inputContainer}>
-                  <Text style={styles.inputLabel}>PASSWORD</Text>
-                  <TextInput
-                    style={styles.textInput}
-                    value={this.state.password}
-                    ref={input => {
-                      this.passwordInput = input;
-                    }}
-                    secureTextEntry
-                    autoCapitalize="none"
-                    palceholder="password"
-                    autoCorrect={false}
-                    focus={this.state.focusPassword}
-                    onChangeText={password => this.setState({ password })}
-                    returnKeyType="go"
-                    onSubmitEditing={this.login}
-                  />
-                </View>
-                <TouchableHighlight
-                  underlayColor="rgba(0,0,0,0)"
-                  style={styles.oneButton}
-                  onPress={this.login}
-                  disabled={isFetching}
-                >
-                  <View style={styles.submitButtonContainer}>
-                    <View style={styles.submitButton}>
-                      <Text style={styles.submitText}>{buttonText}</Text>
-                    </View>
-                  </View>
-                </TouchableHighlight>
+            <View style={styles.inputOuterContainer}>
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>EMAIL</Text>
+                <TextInput
+                  style={styles.textInput}
+                  value={this.state.email}
+                  placeholder="name@example.com"
+                  keyBoardType="email-address"
+                  autoFocus
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                  returnKeyType="next"
+                  blurOnSubmit={false}
+                  underlineColorAndroid="#eff1f7"
+                  onChangeText={email => this.setState({ email })}
+                  onSubmitEditing={() => this.passwordInput.focus()}
+                />
               </View>
-              {this.renderLoader()}
-
+              <View style={styles.inputContainer}>
+                <Text style={styles.inputLabel}>PASSWORD</Text>
+                <TextInput
+                  style={styles.textInput}
+                  value={this.state.password}
+                  ref={input => {
+                    this.passwordInput = input;
+                  }}
+                  secureTextEntry
+                  autoCapitalize="none"
+                  palceholder="password"
+                  autoCorrect={false}
+                  focus={this.state.focusPassword}
+                  onChangeText={password => this.setState({ password })}
+                  returnKeyType="go"
+                  onSubmitEditing={this.login}
+                />
+              </View>
+              <TouchableHighlight
+                underlayColor="rgba(0,0,0,0)"
+                style={styles.oneButton}
+                onPress={this.login}
+                disabled={isFetching}
+              >
+                <View style={styles.submitButtonContainer}>
+                  <View style={styles.submitButton}>
+                    <Text style={styles.submitText}>{buttonText}</Text>
+                  </View>
+                </View>
+              </TouchableHighlight>
             </View>
-          </KeyboardAwareScrollView>
+            {this.renderLoader()}
 
-        </View>
-      </Screen>
+          </View>
+        </KeyboardAwareScrollView>
+      </View>
     );
   }
 }
-
-Login.propTypes = {
-  actions: React.PropTypes.object.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -186,7 +178,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: window.width,
-    resizeMode: 'stretch',
+    resizeMode: 'cover',
     height: window.height,
   },
   backgroundFilter: {
@@ -219,19 +211,20 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         borderBottomWidth: 1,
-        height: 40,
+        height: 50,
       },
     }),
   },
   inputLabel: {
-    fontSize: 8,
+    fontSize: 12,
     color: '#fff',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   textInput: {
     flex: 1,
     color: '#fff',
-    fontSize: 16,
+    fontSize: 18,
+    lineHeight: 26,
   },
   submitButtonContainer: {
     marginTop: 20,
@@ -249,7 +242,7 @@ const styles = StyleSheet.create({
   },
   submitText: {
     backgroundColor: 'transparent',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: '700',
     color: '#fff',
   },

@@ -1,0 +1,163 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a date 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "flexDirection": "row",
+    "justifyContent": "space-between",
+    "marginRight": 16,
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#FFFFFF",
+    "fontFamily": "System",
+    "fontWeight": "600"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontSize": 18,
+        },
+        Object {
+          "marginRight": 5,
+        },
+        Object {
+          "fontFamily": "Ionicons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    spacing={-0.17}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#FFFFFF",
+        "fontFamily": "System",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "lineHeight": 16,
+        "marginRight": 16,
+      }
+    }
+  >
+    Jun 10 2017
+  </Text>
+</View>
+`;
+
+exports[`it renders an author 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "flexDirection": "row",
+    "justifyContent": "space-between",
+    "marginRight": 16,
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#FFFFFF",
+    "fontFamily": "System",
+    "fontWeight": "600"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flexDirection": "row",
+      "justifyContent": "space-between",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "white",
+          "fontSize": 18,
+        },
+        Object {
+          "marginRight": 5,
+        },
+        Object {
+          "fontFamily": "Ionicons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    spacing={-0.17}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#FFFFFF",
+        "fontFamily": "System",
+        "fontSize": 13,
+        "fontWeight": "600",
+        "lineHeight": 16,
+        "marginRight": 16,
+      }
+    }
+  >
+    Author Name
+  </Text>
+</View>
+`;

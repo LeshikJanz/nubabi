@@ -7,7 +7,7 @@ import { upperFirst } from 'lodash';
 import theme from '../../common/themes/defaultTheme';
 import NubabiIcon from '../../common/icons/nubabi';
 import Stimulation from '../stimulation';
-import Growth from '../growth/Growth';
+import Growth from '../growth/GrowthScreen';
 import Profile from '../profile/Profile';
 import Library from '../library/Library';
 import Memories from '../memories/Memories';

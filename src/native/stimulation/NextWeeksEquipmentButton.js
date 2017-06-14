@@ -1,42 +1,50 @@
-import React, { Component } from 'react';
+// @flow
+import type { LayoutProps } from '../../common/types/types';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
+  TouchableHighlight,
 } from 'react-native';
+import { Overlay, withLayout } from '../components';
 
-const background = require('../../common/images/nextWeeksEquipmentButton.png');
+const background = require('../../common/images/nextWeeksEquipmentButton.jpg');
 
-class NextWeeksEquipmentButton extends Component {
-  setNativeProps(nativeProps) {
-    this._root.setNativeProps(nativeProps);
-  }
+type Props = {
+  onPress: () => void,
+  layout: LayoutProps,
+};
 
-  render() {
-    return (
-      <View
-        style={styles.container}
-        ref={(component) => { this._root = component; }}
-        {...this.props}
+export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
+  const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
+
+  return (
+    <TouchableHighlight
+      style={styles.container}
+      underlayColor="rgba(0,0,0,0)"
+      onPress={onPress}
+    >
+      <Image
+        source={background}
+        style={[{ flex: 1 }, dimensions]}
+        resizeMode="cover"
       >
-        <Image source={background} style={styles.background}>
-          <View style={styles.textContainer}>
-            <View style={styles.overlay} />
-            <Text style={styles.title}>Equipment For</Text>
-            <Text style={styles.title}>Next Week</Text>
-          </View>
-        </Image>
-      </View>
-    );
-  }
-}
+        <Overlay>
+          <Text style={styles.title}>Equipment For</Text>
+          <Text style={styles.title}>Next Week</Text>
+        </Overlay>
+      </Image>
+    </TouchableHighlight>
+  );
+};
 
 const HEIGHT = 130;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 2,
+    flex: 1,
     borderRadius: 4,
     height: HEIGHT,
     backgroundColor: 'red',
@@ -78,10 +86,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     flex: 1,
   },
-  background: {
-    resizeMode: 'contain',
-    width: 175,
-  },
 });
 
-export default NextWeeksEquipmentButton;
+export default withLayout(NextWeeksEquipmentButton);

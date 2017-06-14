@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles GROWTH_SEEN_GLOBAL_INTRO when not seen 1`] = `
+Object {
+  "hasSeenGlobalIntro": false,
+}
+`;
+
+exports[`handles GROWTH_SEEN_GLOBAL_INTRO when seen 1`] = `
+Object {
+  "hasSeenGlobalIntro": true,
+}
+`;

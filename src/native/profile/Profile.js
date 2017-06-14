@@ -7,7 +7,14 @@ import type {
   NavigationOptions,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { View, ScrollView, StyleSheet, Text } from 'react-native';
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Linking,
+} from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
@@ -55,6 +62,8 @@ class Profile extends PureComponent {
   };
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
+  handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
+  handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
 
   render() {
     const { baby } = this.props;
@@ -82,17 +91,24 @@ class Profile extends PureComponent {
                 header="Weight"
                 unit="kg"
                 iconName="weight"
-                onUpdate={() => {}}
+                onUpdate={this.handleUpdateWeight}
               />
               <Measurement
                 amount={baby.height}
                 header="Height"
                 unit="cm"
                 iconName="height"
-                onUpdate={() => {}}
+                onUpdate={this.handleUpdateHeight}
               />
             </View>
-            <Achievements />
+            <TouchableOpacity
+              onPress={() =>
+                Linking.openURL(
+                  'nubabi://content/growth/4IUT9xUt9eUAa6Q6sWC06e',
+                )}
+            >
+              <Achievements />
+            </TouchableOpacity>
             <RecentMemories memories={baby.memories} />
           </ScrollView>
         </View>
@@ -144,7 +160,9 @@ export default compose(
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
       variables: { id: currentBabyId },
+      skip: !currentBabyId,
     }),
     props: ({ data }: GraphQLDataProp<Viewer>) => ({
       data,

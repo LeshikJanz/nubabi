@@ -1,0 +1,187 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "paddingBottom": 24.8,
+    "paddingLeft": 24.8,
+    "paddingRight": 24.8,
+    "paddingTop": 24.8,
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "flexDirection": "row",
+    "justifyContent": "center",
+    "marginLeft": 16,
+    "marginRight": 16,
+    "fontSize": 13.866666666666667,
+    "lineHeight": 16,
+    "color": "#748294",
+    "fontFamily": "System",
+    "fontWeight": "500"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "borderBottomWidth": 1,
+      "borderColor": "rgba(0,0,0,.1)",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingBottom": 24.8,
+      "paddingLeft": 24.8,
+      "paddingRight": 24.8,
+      "paddingTop": 24.8,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#EA3154",
+          "fontSize": 12,
+        },
+        undefined,
+        Object {
+          "fontFamily": "nubabi",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    spacing={-0.88}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#748294",
+        "fontFamily": "System",
+        "fontSize": 13.866666666666667,
+        "fontWeight": "500",
+        "lineHeight": 16,
+        "marginLeft": 16,
+        "marginRight": 16,
+      }
+    }
+  >
+    Ruby
+     is 
+    1 week old
+  </Text>
+</View>
+`;
+
+exports[`it renders correctly 2`] = `
+style = Object {
+    "paddingBottom": 24.8,
+    "paddingLeft": 24.8,
+    "paddingRight": 24.8,
+    "paddingTop": 24.8,
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "flexDirection": "row",
+    "justifyContent": "center",
+    "marginLeft": 16,
+    "marginRight": 16,
+    "fontSize": 13.866666666666667,
+    "lineHeight": 16,
+    "color": "#748294",
+    "fontFamily": "System",
+    "fontWeight": "500"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#FFFFFF",
+      "borderBottomWidth": 1,
+      "borderColor": "rgba(0,0,0,.1)",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 1,
+      "flexDirection": "row",
+      "justifyContent": "center",
+      "paddingBottom": 24.8,
+      "paddingLeft": 24.8,
+      "paddingRight": 24.8,
+      "paddingTop": 24.8,
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#EA3154",
+          "fontSize": 12,
+        },
+        undefined,
+        Object {
+          "fontFamily": "nubabi",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    spacing={-0.88}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#748294",
+        "fontFamily": "System",
+        "fontSize": 13.866666666666667,
+        "fontWeight": "500",
+        "lineHeight": 16,
+        "marginLeft": 16,
+        "marginRight": 16,
+      }
+    }
+  >
+    Ruby
+     is 
+    2 months old
+  </Text>
+</View>
+`;

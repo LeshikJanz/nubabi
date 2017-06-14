@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it displays a loader when loading 1`] = `
+style = Object {}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <RNSpinkit
+    color="#EA3154"
+    size={37}
+    style={
+      Array [
+        Object {
+          "height": 37,
+          "width": 37,
+        },
+        undefined,
+      ]
+    }
+    type="Bounce"
+  />
+</View>
+`;
+
+exports[`it renders the component when data is loading but exists in cache 1`] = `
+style = Object {}
+
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  The component
+</Text>
+`;
+
+exports[`it renders the component when loading is finished 1`] = `
+style = Object {}
+
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  The component
+</Text>
+`;

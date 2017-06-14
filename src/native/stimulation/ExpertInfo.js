@@ -1,20 +1,28 @@
 // @flow
-import type { Expert } from '../../common/types/index';
+import type { Expert, LayoutProps } from '../../common/types/index';
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  TouchableOpacity,
+} from 'react-native';
+import Image from 'react-native-cached-image';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { path, head } from 'ramda';
 import FlipCard from '../shared/FlipView';
-
-const width = Dimensions.get('window').width;
-const infoIcon = require('../../common/images/info_icon.png');
+import withLayout from '../components/withLayout';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   expert: Expert,
   activityDescription: string,
+  layout: LayoutProps,
 };
 
-class ExpertInfo extends Component {
+export class ExpertInfo extends Component {
   props: Props;
 
   state = {
@@ -40,7 +48,7 @@ class ExpertInfo extends Component {
     `,
   };
 
-  renderFront = () => {
+  renderFront = onFlip => {
     const firstName = head(this.props.expert.name.split(' '));
     const avatar = { uri: path(['avatar', 'url'], this.props.expert) };
 
@@ -60,15 +68,27 @@ class ExpertInfo extends Component {
           <Text style={styles.expertDescriptionProfession}>
             {this.props.expert.discipline}
           </Text>
-          <Image style={styles.infoIcon} source={infoIcon} />
+          <TouchableOpacity style={styles.infoIcon} onPress={onFlip}>
+            <Icon
+              name="md-information-circle"
+              size={24}
+              color={theme.colors.primary}
+            />
+          </TouchableOpacity>
         </View>
       </View>
     );
   };
 
-  renderBack = () => {
+  renderBack = onFlip => {
     return (
       <View style={styles.biographyContainer}>
+        <TouchableOpacity
+          onPress={onFlip}
+          style={{ alignSelf: 'flex-end', flex: 1 }}
+        >
+          <Icon name="ios-close-circle" color={theme.colors.gray} size={24} />
+        </TouchableOpacity>
         <Image
           source={{ uri: this.props.expert.avatar.url }}
           style={styles.biographyAvatar}
@@ -83,15 +103,27 @@ class ExpertInfo extends Component {
   };
 
   render() {
+    const width =
+      this.props.layout.viewportWidth || Dimensions.get('window').width;
+
     return (
-      <FlipCard
-        style={{ flex: 1 }}
-        velocity={4}
-        tension={7}
-        friction={5}
-        renderFront={this.renderFront()}
-        renderBack={this.renderBack()}
-      />
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: theme.colors.open.white1,
+          paddingTop: 20,
+          marginTop: 0,
+        }}
+      >
+        <FlipCard
+          style={{ flex: 1 }}
+          velocity={4}
+          tension={7}
+          friction={5}
+          renderFront={onFlip => this.renderFront(onFlip)}
+          renderBack={onFlip => this.renderBack(onFlip)}
+        />
+      </View>
     );
   }
 }
@@ -105,7 +137,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
     padding: 20,
     backgroundColor: '#fff',
-    marginTop: 20,
     borderRadius: 4,
     shadowColor: '#000',
     shadowOpacity: 0.1,
@@ -118,7 +149,6 @@ const styles = StyleSheet.create({
   biographyContainer: {
     marginLeft: 20,
     marginRight: 20,
-    marginTop: 20,
     padding: 20,
     backgroundColor: '#fff',
     borderRadius: 4,
@@ -189,17 +219,11 @@ const styles = StyleSheet.create({
   infoIcon: {
     width: 20,
     height: 20,
-    resizeMode: 'contain',
     position: 'absolute',
     right: 10,
     top: 20,
-  },
-  nextButtonsContainer: {
-    marginTop: 10,
-    backgroundColor: '#fff',
-    width,
-    height: 60,
-    flexDirection: 'row',
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
   },
   closeBiographyButton: {
     position: 'absolute',
@@ -209,4 +233,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ExpertInfo;
+export default withLayout(ExpertInfo);

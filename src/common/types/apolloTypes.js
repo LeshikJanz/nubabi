@@ -1,4 +1,5 @@
 // @flow
+// prettier-ignore
 import type { GraphQLError, DocumentNode, ExecutionResult } from 'graphql';
 
 export interface QueryOptions {
@@ -87,8 +88,8 @@ export interface GraphQLDataProps {
   fetchMore: (
     fetchMoreOptions: FetchMoreQueryOptions & FetchMoreOptions,
   ) => Promise<ApolloQueryResult<any>>,
-  refetch: (variables?: any) => Promise<ApolloQueryResult<any>>,
   startPolling: (pollInterval: number) => void,
+  refetch: (variables?: any) => Promise<ApolloQueryResult<any>>,
   stopPolling: () => void,
   subscribeToMore: (options: SubscribeToMoreOptions) => () => void,
   updateQuery: (
@@ -139,12 +140,10 @@ export type FetchMoreQueryOptions = {
   },
 };
 
-export type WatchQueryOptions =
-  & {
-    query: DocumentNode,
-    metadata?: any,
-  }
-  & ModifiableWatchQueryOptions;
+export type WatchQueryOptions = {
+  query: DocumentNode,
+  metadata?: any,
+} & ModifiableWatchQueryOptions;
 
 export interface MutationOptions {
   mutation: DocumentNode,
@@ -157,9 +156,9 @@ export interface MutationOptions {
 
 export interface DataProxy {
   readQuery<QueryType>(options: DataProxyReadQueryOptions): QueryType,
-  readFragment<FragmentType>(options: DataProxyReadFragmentOptions):
-    | FragmentType
-    | null,
+  readFragment<FragmentType>(
+    options: DataProxyReadFragmentOptions,
+  ): FragmentType | null,
   writeQuery(options: DataProxyWriteQueryOptions): void,
   writeFragment(options: DataProxyWriteFragmentOptions): void,
 }

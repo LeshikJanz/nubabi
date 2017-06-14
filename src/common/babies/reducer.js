@@ -1,5 +1,6 @@
 // @flow
 import type { Action, BabyState } from '../types';
+import { path } from 'ramda';
 
 export const initialState = {
   isFetching: false,
@@ -20,7 +21,8 @@ const reducer = (
       return Object.assign({}, state, {
         isFetching: false,
         failure: false,
-        currentBabyId: state.currentBabyId || action.payload[0].id,
+        currentBabyId: state.currentBabyId ||
+          path(['payload', '0', 'id'], action),
       });
     case 'GET_BABIES_FAILURE': {
       return Object.assign({}, state, {

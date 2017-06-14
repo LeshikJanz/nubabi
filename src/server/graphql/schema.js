@@ -2,6 +2,8 @@ import { Core } from './core.graphqls';
 import { Babies } from './babies.graphqls';
 import { Activities } from './activities.graphqls';
 import { Experts } from './experts.graphqls';
+import { Growth } from './growth.graphqls';
+import { Content } from './content.graphqls';
 
 const {
   makeExecutableSchema,
@@ -11,7 +13,7 @@ const {
 const resolvers = require('./resolvers');
 const mocking = require('./mocks');
 
-const typeDefs = [Core, Babies, Activities, Experts];
+const typeDefs = [Core, Babies, Activities, Experts, Growth, Content];
 
 const schema = makeExecutableSchema({
   typeDefs,

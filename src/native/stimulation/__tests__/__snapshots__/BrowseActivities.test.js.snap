@@ -1,31 +1,188 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "borderBottomLeftRadius": 4,
+    "borderTopLeftRadius": 4,
+    "overflow": "hidden"
+}
+
 <View
+  onLayout={[Function]}
   style={
-    Object {
-      "flex": 1,
-    }
+    Array [
+      Object {
+        "backgroundColor": "#F8F9FC",
+        "flex": 1,
+      },
+      undefined,
+    ]
   }
 >
   <View
     style={
       Object {
         "alignItems": "center",
-        "backgroundColor": "#fff",
+        "backgroundColor": "#f8f9fc",
         "flex": 1,
-        "justifyContent": "center",
+        "flexDirection": "column",
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      ellipsizeMode="tail"
-      style={undefined}
+    <RCTScrollView
+      contentContainerStyle={
+        Object {
+          "paddingBottom": 15,
+        }
+      }
+      dataSource={
+        ListViewDataSource {
+          "items": 1,
+        }
+      }
+      onContentSizeChange={[Function]}
+      onEndReached={[Function]}
+      renderRow={[Function]}
+      renderScrollComponent={[Function]}
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
     >
-      Browse Activities
-    </Text>
+      <View>
+        <View
+          accessibilityComponentType={undefined}
+          accessibilityLabel={undefined}
+          accessibilityTraits={undefined}
+          accessible={true}
+          hasTVPreferredFocus={undefined}
+          hitSlop={undefined}
+          isTVSelectable={true}
+          onLayout={undefined}
+          onResponderGrant={[Function]}
+          onResponderMove={[Function]}
+          onResponderRelease={[Function]}
+          onResponderTerminate={[Function]}
+          onResponderTerminationRequest={[Function]}
+          onStartShouldSetResponder={[Function]}
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              undefined,
+            ]
+          }
+          testID={undefined}
+          tvParallaxProperties={undefined}
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "#fff",
+                "borderRadius": 4,
+                "flexDirection": "row",
+                "height": 100,
+                "marginLeft": 10,
+                "marginRight": 10,
+                "marginTop": 10,
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": 2,
+                  "width": 1,
+                },
+                "shadowOpacity": 0.1,
+                "shadowRadius": 3,
+                "width": 730,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "borderBottomLeftRadius": 4,
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopLeftRadius": 4,
+                  "borderTopWidth": 0,
+                  "overflow": "hidden",
+                }
+              }
+            >
+              <Image
+                source={
+                  Object {
+                    "uri": "http://example.com/test.png",
+                  }
+                }
+                style={
+                  Object {
+                    "height": 100,
+                    "width": 100,
+                  }
+                }
+              />
+            </View>
+            <View
+              style={
+                Object {
+                  "padding": 10,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#454D56",
+                    "fontSize": 16,
+                    "marginBottom": 5,
+                  }
+                }
+              >
+                Test Skill Area
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "color": "#748294",
+                    "fontSize": 14,
+                  }
+                }
+              >
+                Test Activity
+              </Text>
+            </View>
+            <Image
+              source={1}
+              style={
+                Object {
+                  "height": 22,
+                  "position": "absolute",
+                  "resizeMode": "contain",
+                  "right": 10,
+                  "top": 10,
+                  "width": 22,
+                }
+              }
+            />
+          </View>
+        </View>
+      </View>
+    </RCTScrollView>
   </View>
 </View>
 `;

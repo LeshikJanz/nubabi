@@ -6,9 +6,9 @@ export type GraphQLResponseRoot = {
 };
 
 export type GraphQLResponseError = {
-  [propName: string]: any, // 7.2.2 says 'GraphQL servers may provide additional entries to error'
   message: string, // Required for all errors
   locations?: Array<GraphQLResponseErrorLocation>,
+  [propName: string]: any, // 7.2.2 says 'GraphQL servers may provide additional entries to error'
 };
 
 export type GraphQLResponseErrorLocation = {
@@ -33,19 +33,29 @@ export type Viewer = {
   /**  */
   getUser?: User,
   /**  */
-  babies?: BabyConnection,
+  babies: BabyConnection,
   /**  */
   baby?: Baby,
   /**  */
-  allSkillAreas?: SkillAreaConnection,
+  allSkillAreas: SkillAreaConnection,
   /**  */
   allActivities: ActivityConnection,
-  /**  */
-  activity?: Activity,
   /**  */
   allExperts: ExpertConnection,
   /**  */
   expert?: Expert,
+  /**  */
+  allTips: TipConnection,
+  /**  */
+  allQuotes: QuoteConnection,
+  /**  */
+  allArticles: ArticleConnection,
+  /**  */
+  article?: Article,
+  /**  */
+  growthArticle?: GrowthArticle,
+  /** Content articles for library (not blog links) */
+  allLibraryArticles: GrowthArticleConnection,
 };
 
 /**
@@ -90,28 +100,29 @@ export type User = {
   /** The ID of an object */
   id: string,
   /**  */
-  username: string,
-  /**  */
   email?: string,
   /**  */
-  name?: string,
+  firstName?: string,
   /**  */
-  website?: string,
+  lastName?: string,
   /** Date of Birth */
   dob?: any,
   /**  */
   avatar?: Avatar,
   /**  */
-  phone?: string,
+  totalAchievements?: number,
   /**  */
-  createdAt: any,
-  /**  */
-  updatedAt: any,
+  totalMemories?: number,
 };
 
-export type Node = User | Baby | Activity | Expert | SkillArea;
-
-export type Timestampable = User | Baby;
+export type Node =
+  | User
+  | Baby
+  | Expert
+  | SkillArea
+  | Category
+  | Growth
+  | Article;
 
 export type Avatar = {
   __typename: string,
@@ -148,6 +159,8 @@ export type BabyConnection = {
   pageInfo: PageInfo,
   /** A list of edges. */
   edges?: Array<BabyEdge>,
+  /** Count of result set without considering pagination arguments */
+  count: number,
 };
 
 export type BabyEdge = {
@@ -183,7 +196,7 @@ export type Baby = {
   /**  */
   updatedAt?: any,
   /** Relationship to Viewer */
-  relationship?: string,
+  relationship?: BabyRelationshipEnum,
   /**  */
   activities?: ActivityConnection,
   /**  */
@@ -193,10 +206,25 @@ export type Baby = {
   /**  */
   memories?: MemoryConnection,
   /**  */
+  measurements?: Measurements,
+  /**  */
   favoriteActivities: ActivityConnection,
+  /**  */
+  growth: GrowthConnection,
 };
 
+export type Timestampable = Baby;
+
 export type GenderEnum = 'MALE' | 'FEMALE';
+
+export type BabyRelationshipEnum =
+  | 'Parent'
+  | 'Grandparent'
+  | 'Guardian'
+  | 'Relative'
+  | 'Nanny'
+  | 'AuPair'
+  | 'Other';
 
 /**
   description: A connection to a list of items.
@@ -237,6 +265,10 @@ export type Activity = {
   skillArea: SkillArea,
   /**  */
   isFavorite?: boolean,
+  /**  */
+  categories: CategoryConnection,
+  /**  */
+  media: ActivityMediaConnection,
 };
 
 export type Expert = {
@@ -280,6 +312,64 @@ export type SkillAreaImage = {
   /**  */
   height?: number,
 };
+
+/**
+  description: A connection to a list of items.
+*/
+export type CategoryConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<CategoryEdge>,
+};
+
+export type CategoryEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Category,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Category = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  name: string,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type ActivityMediaConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<ActivityMediaEdge>,
+};
+
+export type ActivityMediaEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: ActivityMedia,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type ActivityMedia = {
+  __typename: string,
+  /**  */
+  type: ActivityMediaTypeEnum,
+  /**  */
+  url?: string,
+  /**  */
+  thumb?: string,
+};
+
+export type ActivityMediaTypeEnum = 'IMAGE' | 'VIDEO';
 
 /**
   description: A connection to a list of items.
@@ -347,6 +437,200 @@ export type Memory = {
   image?: Image,
 };
 
+export type Measurements = {
+  __typename: string,
+  /**  */
+  heights: MeasurementConnection,
+  /**  */
+  weights: MeasurementConnection,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type MeasurementConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<MeasurementEdge>,
+};
+
+export type MeasurementEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Measurement,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Measurement = {
+  __typename: string,
+  /**  */
+  value: number,
+  /**  */
+  unit: MeasurementUnitEnum,
+  /**  */
+  recordedAt: any,
+};
+
+export type MeasurementUnitEnum = 'kg' | 'cm' | 'in' | 'lbs';
+
+export type GrowthConnection = {
+  __typename: string,
+  /** Global introduction to the Growth section */
+  introduction: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /**  */
+  edges?: Array<GrowthEdge>,
+};
+
+export type GrowthEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Growth,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Growth = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  title: string,
+  /**  */
+  introduction: string,
+  /**  */
+  content: string,
+  /** Minimum baby age in ageDuration units */
+  minimumAge: number,
+  /** Maximum baby age in ageDuration units */
+  maximumAge: number,
+  /** Age duration */
+  ageDuration: AgeDurationEnum,
+  /** Expert who gave this content's advice */
+  expert: Expert,
+  /** Links to articles (blog posts) */
+  growthDevelopmentArticleLinks: ArticleConnection,
+  /** Links to library content (Growth & Development) */
+  growthDevelopmentContentLinks: GrowthArticleConnection,
+  /** Links to articles (blog posts) */
+  introductionArticleLinks: ArticleConnection,
+  /** Links to library content (introductory section) */
+  introductionContentLinks: GrowthArticleConnection,
+};
+
+export type AgeDurationEnum = 'WEEK' | 'MONTH' | 'YEAR';
+
+/**
+  description: A connection to a list of items.
+*/
+export type ArticleConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<ArticleEdge>,
+};
+
+export type ArticleEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Article,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+/**
+  description: A blog post
+*/
+export type Article = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  title: string,
+  /**  */
+  text: string,
+  /**  */
+  summary: string,
+  /**  */
+  publishedAt: any,
+  /**  */
+  author: Author,
+  /**  */
+  tags?: Array<Tag>,
+  /**  */
+  image: Image,
+  /**  */
+  readingTime: ReadingTime,
+};
+
+export type Content = Article | GrowthArticle | Tip | Quote;
+
+export type Author = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  name: string,
+  /**  */
+  biography?: string,
+  /**  */
+  avatar?: Avatar,
+};
+
+export type Tag = {
+  __typename: string,
+  /**  */
+  id: string,
+  /**  */
+  name: string,
+};
+
+export type ReadingTime = {
+  __typename: string,
+  /**  */
+  text: string,
+  /**  */
+  time: number,
+  /**  */
+  words: number,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type GrowthArticleConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<GrowthArticleEdge>,
+};
+
+export type GrowthArticleEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: GrowthArticle,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type GrowthArticle = {
+  __typename: string,
+  /**  */
+  id: string,
+  /**  */
+  title: string,
+  /**  */
+  text: string,
+  /**  */
+  readingTime: ReadingTime,
+};
+
 /**
   description: A connection to a list of items.
 */
@@ -364,6 +648,13 @@ export type SkillAreaEdge = {
   node: SkillArea,
   /** A cursor for use in pagination. */
   cursor: string,
+};
+
+export type ActivityFilterInput = {
+  /**  */
+  skillAreas?: Array<string>,
+  /**  */
+  categories?: Array<string>,
 };
 
 /**
@@ -385,6 +676,72 @@ export type ExpertEdge = {
   cursor: string,
 };
 
+/**
+  description: A connection to a list of items.
+*/
+export type TipConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<TipEdge>,
+};
+
+export type TipEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Tip,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+/**
+  description: A Tip used in the Did You Know section
+*/
+export type Tip = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  text: string,
+};
+
+/**
+  description: A connection to a list of items.
+*/
+export type QuoteConnection = {
+  __typename: string,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges?: Array<QuoteEdge>,
+};
+
+export type QuoteEdge = {
+  __typename: string,
+  /** The item at the end of the edge. */
+  node: Quote,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Quote = {
+  __typename: string,
+  /** The ID of an object */
+  id: string,
+  /**  */
+  author?: string,
+  /**  */
+  text: string,
+  /**  */
+  title?: string,
+};
+
+export type LibraryArticlesFilterInput = {
+  /**  */
+  section?: string,
+};
+
 export type Mutation = {
   __typename: string,
   /**  */
@@ -393,6 +750,8 @@ export type Mutation = {
   createBaby?: CreateBabyPayload,
   /**  */
   updateBaby?: UpdateBabyPayload,
+  /**  */
+  recordBabyMeasurement?: RecordMeasurementPayload,
   /**  */
   swoopActivity?: ChangeActivityPayload,
   /**  */
@@ -464,6 +823,29 @@ export type UpdateBabyPayload = {
   __typename: string,
   /**  */
   changedBaby?: Baby,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId?: string,
+};
+
+export type RecordMeasurementInput = {
+  /**  */
+  babyId: string,
+  /**  */
+  value: number,
+  /**  */
+  type: MeasurementTypeEnum,
+  /**  */
+  unit: MeasurementUnitEnum,
+};
+
+export type MeasurementTypeEnum = 'height' | 'weight';
+
+export type RecordMeasurementPayload = {
+  __typename: string,
+  /**  */
+  changedMeasurement?: Measurement,
+  /**  */
+  baby: Baby,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId?: string,
 };

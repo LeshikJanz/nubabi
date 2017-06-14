@@ -2,32 +2,44 @@
 import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
-import { View, ScrollView, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import { graphql, gql } from 'react-apollo';
+import { compose, path } from 'ramda';
+import { sample } from 'lodash';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
-import BrowseAllActivitiesButton from './BrowseAllActivitiesButton';
+import BrowseAllActivitiesButton from './BrowseActivitiesButton';
 import CalendarButton from './CalendarButton';
 import FavoritesButton from './FavoritesButton';
 import DidYouKnow from './DidYouKnow';
+import {
+  getChildContext,
+  getLayoutInitialState,
+  childContextTypes,
+  handleLayout,
+} from '../components/withLayout';
 
 type Props = {
   navigation: NavigationProp<*, *>,
+  didYouKnow: ?string,
 };
 
 class Stimulation extends Component {
   props: Props;
+  state = {
+    ...getLayoutInitialState(),
+  };
 
   static navigationOptions: NavigationOptions = {
     title: 'Stimulation',
   };
 
-  constructor(props: Props) {
-    super(props);
-    this.handleThisWeeksActivities = this.handleThisWeeksActivities.bind(this);
-    this.handleNextWeeksEquipment = this.handleNextWeeksEquipment.bind(this);
-    this.handleBrowseActivities = this.handleBrowseActivities.bind(this);
-  }
+  static childContextTypes = childContextTypes;
+
+  getChildContext = getChildContext.bind(this);
+
+  handleLayout = handleLayout.bind(this);
 
   handleThisWeeksActivities = () => {
     this.props.navigation.navigate('thisWeekActivities');
@@ -46,36 +58,27 @@ class Stimulation extends Component {
   };
 
   render() {
+    const { didYouKnow } = this.props;
+
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={this.handleLayout}>
         <View style={styles.actionButtons}>
           <CalendarButton />
           <FavoritesButton onPress={this.handleFavorites} />
         </View>
         <ScrollView style={styles.scrollContainer}>
-          <TouchableHighlight
-            underlayColor="rgba(0,0,0,0)"
-            onPress={this.handleThisWeeksActivities}
+          <ThisWeeksActivitiesButton
             style={styles.oneButton}
-          >
-            <ThisWeeksActivitiesButton />
-          </TouchableHighlight>
+            onPress={this.handleThisWeeksActivities}
+          />
+
           <View style={styles.twoButtons}>
-            <TouchableHighlight
-              underlayColor="rgba(0,0,0,0)"
-              onPress={this.handleNextWeeksEquipment}
-            >
-              <NextWeeksEquipmentButton />
-            </TouchableHighlight>
-            <TouchableHighlight
-              underlayColor="rgba(0,0,0,0)"
-              onPress={this.handleBrowseActivities}
-            >
-              <BrowseAllActivitiesButton />
-            </TouchableHighlight>
+            <NextWeeksEquipmentButton onPress={this.handleNextWeeksEquipment} />
+            <BrowseAllActivitiesButton onPress={this.handleBrowseActivities} />
           </View>
+
           <View style={styles.didYouKnow}>
-            <DidYouKnow />
+            <DidYouKnow text={didYouKnow} />
           </View>
         </ScrollView>
       </View>
@@ -86,10 +89,11 @@ class Stimulation extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     backgroundColor: PANEL_BACKGROUND,
+    paddingBottom: 1,
   },
   actionButtons: {
+    justifyContent: 'center',
     height: 68,
     flexDirection: 'row',
     borderColor: 'rgba(0,0,0,0.1)',
@@ -119,6 +123,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
     marginTop: 5,
     marginBottom: 10,
+    flex: 1,
     shadowColor: 'rgba(0,0,0,0.15)',
     shadowRadius: 3,
     shadowOffset: {
@@ -128,7 +133,6 @@ const styles = StyleSheet.create({
   },
   didYouKnow: {
     marginTop: 5,
-    height: 96,
     marginLeft: 10,
     marginRight: 10,
     shadowColor: '#000',
@@ -141,4 +145,38 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stimulation;
+export default compose(
+  graphql(
+    gql`
+    query Stimulation {
+      viewer {
+        allTips {
+          edges {
+            node {
+              ...DidYouKnow
+            }
+          }
+        }
+      }
+    }
+    ${DidYouKnow.fragments.tips}
+    `,
+    {
+      options: { fetchPolicy: 'cache-and-network' },
+      props: ({ data }) => {
+        let didYouKnow;
+
+        const edges = path(['viewer', 'allTips', 'edges'], data);
+
+        if (edges) {
+          didYouKnow = sample(edges.map(edge => edge.node.text));
+        }
+
+        return {
+          data,
+          didYouKnow,
+        };
+      },
+    },
+  ),
+)(Stimulation);

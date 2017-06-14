@@ -1,0 +1,124 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "zIndex": 999,
+    "backgroundColor": "#fff",
+    "height": 70,
+    "width": 70,
+    "borderRadius": 35,
+    "shadowOpacity": 0.15,
+    "shadowColor": "#000",
+    "shadowOffset": {
+        "width": 0,
+        "height": 1
+    },
+    "shadowRadius": 1,
+    "position": "absolute",
+    "bottom": 45,
+    "right": 15,
+    "flex": 1,
+    "fontSize": 10,
+    "lineHeight": 16,
+    "color": "#EA3154",
+    "fontFamily": "System",
+    "textAlign": "center",
+    "fontWeight": "500"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "backgroundColor": "#fff",
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRadius": 35,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "bottom": 45,
+      "height": 70,
+      "justifyContent": "center",
+      "position": "absolute",
+      "right": 15,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 1,
+      "width": 70,
+      "zIndex": 999,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#EA3154",
+          "fontFamily": "System",
+          "fontSize": 17.950930699588476,
+          "fontWeight": "500",
+          "lineHeight": 20,
+          "textAlign": "center",
+        }
+      }
+    >
+      3
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      numberOfLines={1}
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#EA3154",
+          "fontFamily": "System",
+          "fontSize": 10,
+          "fontWeight": "500",
+          "lineHeight": 16,
+          "textAlign": "center",
+        }
+      }
+    >
+      min read
+    </Text>
+  </View>
+</View>
+`;

@@ -38,12 +38,14 @@ export class ViewActivity extends PureComponent {
     this.props.toggleFavorite({ variables: { input } });
   };
 
+  handleActivityMediaPress = () => {
+    this.props.navigation.navigate('viewActivityMedia', {
+      media: this.props.activity.media,
+    });
+  };
+
   render() {
-    const {
-      activity,
-      babyName,
-      isFavorite,
-    } = this.props;
+    const { activity, babyName, isFavorite } = this.props;
 
     return (
       <Screen>
@@ -52,6 +54,7 @@ export class ViewActivity extends PureComponent {
           babyName={babyName}
           isFavorite={isFavorite}
           onToggleFavorite={this.handleToggleFavorite}
+          onActivityMediaPress={this.handleActivityMediaPress}
         />
       </Screen>
     );
@@ -64,12 +67,13 @@ export default compose(
     gql`
       query ViewActivity($babyId: ID!, $activityId: ID!) {
         viewer {
-          activity(id: $activityId) {
-            ...Activity
-          }
           baby(id: $babyId) {
             id
             name
+            
+            activity(id: $activityId) {
+              ...Activity
+            }
 
             favoriteActivities {
               edges {
@@ -86,6 +90,7 @@ export default compose(
     // TODO: remove duplication with ViewThisWeeksActivity
     {
       options: ownProps => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: {
           babyId: ownProps.currentBabyId,
           activityId: ownProps.navigation.state.params.id,
@@ -99,16 +104,16 @@ export default compose(
         let isFavorite = false;
 
         if (favoriteActivities) {
-          // this should be simplified once activities include favorite info
+          // TODO: this could be simplified if activities include favorite info
           const favorites = pluck('node', favoriteActivities.edges);
-          const activityId = path(['viewer', 'activity', 'id'], data);
+          const activityId = path(['viewer', 'baby', 'activity', 'id'], data);
 
           isFavorite = !!find(propEq('id', activityId), favorites);
         }
 
         return {
           data,
-          activity: path(['viewer', 'activity'], data),
+          activity: path(['viewer', 'baby', 'activity'], data),
           babyName: path(['viewer', 'baby', 'name'], data),
           isFavorite,
         };

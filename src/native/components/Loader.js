@@ -27,17 +27,15 @@ type Props = {
   size?: number,
   color?: string,
   type?: SpinnerType,
-  style?: Object,
+  style?: Object | number,
 };
 
-const Loader = (
-  {
-    size = 37,
-    color = theme.colors.primary,
-    type = 'Bounce',
-    style,
-  }: Props,
-) => (
+const Loader = ({
+  size = 37,
+  color = theme.colors.primary,
+  type = 'Bounce',
+  style,
+}: Props) => (
   <View style={style || styles.container}>
     <Spinner size={size} color={color} type={type} />
   </View>

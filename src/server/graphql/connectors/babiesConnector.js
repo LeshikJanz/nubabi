@@ -1,9 +1,29 @@
 // @flow
-require('axios-debug-log');
+import { getPaginationArguments } from '../resolvers/common';
 
-import type { ActivityLevelOperation } from '../../../common/types';
-import { path, find, prop, propEq } from 'ramda';
+require('axios-debug-log');
+import type { ConnectionArguments } from '../resolvers/common';
+import type {
+  ActivityLevelOperation,
+  Baby,
+  ActivityFilterInput,
+} from '../../../common/types';
+import {
+  path,
+  prop,
+  map,
+  sortBy,
+  compose,
+  reduce,
+  either,
+  identity,
+  mergeDeepRight,
+  curry,
+} from 'ramda';
+import { fromGlobalId } from '../resolvers/common';
+import qs from 'qs';
 import axios from 'axios';
+import S from 'string';
 import config from '../../../common/config/index';
 
 type SwapActivityAction = 'swop' | 'increase' | 'decrease';
@@ -13,11 +33,55 @@ const instance = axios.create({
   responseType: 'json',
 });
 
-const withToken = token => ({
+const withToken = (token: string) => ({
   headers: {
     Authorization: `Bearer ${token}`,
   },
 });
+
+const withPagination = (args: ConnectionArguments) => ({
+  params: getPaginationArguments(args),
+});
+
+const withConfigs = (...configs) => {
+  return reduce(mergeDeepRight, {}, configs);
+};
+
+const toParam = array => array && array.join(',');
+
+const toIdsFilter = ids => {
+  if (!ids) {
+    return;
+  }
+  return ids.map(id => fromGlobalId(id).id).join(',');
+};
+
+const toFilter = toParam;
+
+const withActivityFilters = ({
+  filter,
+}: ConnectionArguments & ActivityFilterInput) => {
+  if (!filter) {
+    return {};
+  }
+
+  const { skillAreas, categories, ages } = filter;
+
+  return {
+    params: {
+      filter: {
+        skill_area_ids: toIdsFilter(skillAreas),
+        category_ids: toIdsFilter(categories),
+        ages: toFilter(ages),
+      },
+    },
+    paramsSerializer(params) {
+      return qs.stringify(params, { arrayFormat: 'brackets' });
+    },
+  };
+};
+
+const sortBySkillArea = sortBy(prop('skill_area_id'));
 
 export const getSkillAreas = (token: string) =>
   instance.get('/skill_areas', withToken(token)).then(path(['data']));
@@ -55,21 +119,46 @@ export const getSkillAreaImage = (obj: mixed) => {
 export const getActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(path(['data']));
+    .then(path(['data']))
+    .then(sortBySkillArea);
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities/favourites`, withToken(token))
-    .then(path(['data']));
+    .then(path(['data']))
+    .then(sortBySkillArea);
 
-export const getActivity = (token: string, id: string) => {
+export const getActivity = (token: string, id: string, babyId: string) => {
   return instance
     .get(`/activities/${id}`, withToken(token))
-    .then(path(['data']));
+    .then(response => ({ babyId, ...path(['data'], response) }));
 };
 
-export const getAllActivities = (token: string) => {
-  return instance.get('/activities', withToken(token)).then(path(['data']));
+export const getSteps = async (
+  firebase,
+  babyId: string,
+  activityId: string,
+  steps: Array<string>,
+) => {
+  const baby = await firebase.getBaby(babyId);
+  const variables = await getTemplateVariables(firebase, baby);
+
+  return steps.map((step, index) => {
+    return makeStringFromTemplate(step, variables);
+  });
+};
+
+export const getAllActivities = (token: string, args?: ConnectionArguments) => {
+  return instance
+    .get(
+      '/activities',
+      withConfigs(
+        withToken(token),
+        withPagination(args),
+        withActivityFilters(args),
+      ),
+    )
+    .then(path(['data']));
 };
 
 export const swoopActivity = (
@@ -141,8 +230,136 @@ export const toggleActivityFavorite = (
   return instance.delete(url, withToken(token)).then(path(['data']));
 };
 
+export const getActivityIntroduction = async (
+  firebase,
+  babyId,
+  introduction,
+) => {
+  return makeStringFromTemplate(
+    introduction,
+    await getTemplateVariables(firebase, await firebase.getBaby(babyId)),
+  );
+};
+
+export const makeStringFromTemplate = (template: string, variables: *) => {
+  const output = Object.keys(variables).reduce((acc, variable) => {
+    return acc.replace(new RegExp(`{${variable}}`, 'g'), variables[variable]);
+  }, template);
+
+  return S(output.replace(/&nbsp;/g, ' '))
+    .stripTags()
+    .unescapeHTML()
+    .toString();
+};
+
+export const getTemplateVariables = async (firebase, baby) => {
+  const viewer = await firebase.getViewer();
+  const viewerName = viewer.firstName || viewer.email;
+
+  return {
+    baby: baby.name,
+    name: viewerName,
+    baby_possessive: baby.name.endsWith('s')
+      ? `${baby.name}`
+      : `${baby.name}'s`,
+  };
+};
+
+export const getGrowthContent = (token: string, baby: Baby) => {
+  // FIXME: filter
+  return instance
+    .get('/content/growth', withToken(token))
+    .then(path(['data']))
+    .then(data => {
+      return data.map(content => {
+        // HACK
+        content.baby = baby; // eslint-disable-line: no-param-reassign
+        return content;
+      });
+    });
+};
+
+export const getGrowthContentById = async (
+  token: string,
+  id: string,
+  baby: Baby,
+  firebase,
+) => {
+  const variables = await getTemplateVariables(firebase, baby);
+  return instance
+    .get(`/content/library/${id}`, withToken(token))
+    .then(path(['data']))
+    .then(data => {
+      const contentId = path(['id'], data);
+      const title = path(['title'], data);
+      const text = makeStringFromTemplate(path(['content'], data), variables);
+
+      return {
+        id: contentId,
+        baby,
+        title,
+        text,
+      };
+    });
+};
+
+export const getIntroductionFor = (
+  token: string,
+  baby: Baby,
+  viewerName: string,
+) => {
+  return instance
+    .get('/content/growth/introduction', withToken(token))
+    .then(path(['data', 'text']))
+    .then(text =>
+      makeStringFromTemplate(text, { name: viewerName, baby: baby.name }),
+    );
+};
+
 export const getExperts = (token: string) =>
   instance.get('/experts', withToken(token)).then(path(['data']));
 
 export const getExpert = (token: string, id: string) =>
   instance.get(`/experts/${id}`, withToken(token)).then(path(['data']));
+
+export const getTips = (token: string) =>
+  instance.get('/content/tips', withToken(token)).then(path(['data']));
+
+export const getQuotes = (token: string) =>
+  instance.get('/content/quotes', withToken(token)).then(path(['data']));
+
+export const getCategories = (token: string) =>
+  instance.get('/categories', withToken(token)).then(path(['data']));
+
+export const getCategory = (token: string, id: string) =>
+  instance.get(`/categories/${id}`, withToken(token)).then(path(['data']));
+
+export const getCategoriesFor = (token: string, categoryIds: Array<string>) => {
+  return Promise.all(categoryIds.map(id => getCategory(token, id))).then(
+    ([...categories]) => categories,
+  );
+};
+
+export const getArticles = (token: string) => {
+  return instance
+    .get('/content/articles', withToken(token))
+    .then(path(['data']));
+};
+
+export const getArticle = (token: string, id: string) => {
+  return instance
+    .get(`/content/articles/${id}`, withToken(token))
+    .then(path(['data']));
+};
+
+export const getLibraryArticles = (token: string, args: mixed) => {
+  let filter = '';
+  const sectionFilter = path(['filter', 'section'], args);
+
+  if (sectionFilter) {
+    filter = `?${qs.stringify({ section: sectionFilter })}`;
+  }
+  return instance
+    .get(`/content/library${filter}`, withToken(token))
+    .then(path(['data']));
+};

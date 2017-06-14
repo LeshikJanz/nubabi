@@ -1,10 +1,8 @@
 import 'react-native';
 import React from 'react';
-import ThisWeeksActivitiesButton from '../ThisWeeksActivitiesButton';
-import renderer from 'react-test-renderer';
+import { ThisWeeksActivitiesButton } from '../ThisWeeksActivitiesButton';
+import { expectRender, layoutTestProp } from '../../shared/testUtils';
 
 test('it renders correctly', () => {
-  const tree = renderer.create(<ThisWeeksActivitiesButton />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<ThisWeeksActivitiesButton layout={layoutTestProp} />);
 });

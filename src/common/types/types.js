@@ -1,19 +1,30 @@
 // @flow
-import type { NavigationScreenProp } from 'react-navigation/src/TypeDefinition';
 import type { Element } from 'react';
 
 // Models
 import type {
+  Query,
   Baby,
+  BabyEdge,
   Activity,
   ActivityConnection,
   ActivityEdge,
+  ActivityMediaTypeEnum as ActivityMediaType,
+  ActivityMedia,
+  ActivityFilterInput,
   Memory,
   User,
   Achievement,
   Expert,
   SkillArea,
+  Growth,
+  GrowthArticle,
+  GrowthArticleEdge,
+  AgeDurationEnum as AgeDuration,
   GenderEnum as Gender,
+  MeasurementTypeEnum as MeasurementType,
+  MeasurementUnitEnum as MeasurementUnit,
+  Tip,
   Image,
   Avatar,
   CreateBabyInput,
@@ -22,32 +33,53 @@ import type {
   ActivityLevelOperationEnum as ActivityLevelOperation,
   AdjustActivityLevelInput,
   ToggleFavoriteInput,
+  RecordMeasurementInput,
+  Article,
+  Tag,
 } from './modelTypes';
 
 export type {
+  Query,
   Baby,
+  BabyEdge,
   Activity,
   ActivityConnection,
   ActivityEdge,
+  ActivityMedia,
+  ActivityFilterInput,
   Memory,
   User,
   Achievement,
   Expert,
   SkillArea,
+  Growth,
+  GrowthArticleEdge,
+  GrowthArticle,
+  AgeDuration,
+  MeasurementType,
+  MeasurementUnit,
   Gender,
   Image,
   Avatar,
+  Tip,
   CreateBabyInput,
   UpdateBabyInput,
   SwoopActivityInput,
   ActivityLevelOperation,
   AdjustActivityLevelInput,
   ToggleFavoriteInput,
+  RecordMeasurementInput,
+  ActivityMediaType,
+  Article,
+  Tag,
 };
 
 export type FirebaseUser = {
   uid: String,
   email: String,
+  firstName?: String,
+  lastName?: String,
+  avatar?: Avatar,
 };
 
 // Deps
@@ -113,11 +145,19 @@ type NavigationConfigProp = {
 };
 
 // We separate the types to get more descriptive error messages
-export type NavigationOptionsGetter = (
-  NavigationConfigProp,
-) => NavigationScreenOptions;
+export type NavigationOptionsGetter = NavigationConfigProp => NavigationScreenOptions;
 
 export type NavigationOptions = NavigationScreenOptions;
+
+export type NavigationProp = NavigationScreenProp<*, *>;
+
+// Layout
+export type LayoutProps = {
+  viewportWidth: number,
+  viewportHeight: number,
+  parentWidth: ?number,
+  parentHeight: ?number,
+};
 
 // State
 
@@ -157,6 +197,10 @@ export type BabyState = {
   +currentBabyId: ?string,
 };
 
+export type GrowthState = {
+  +hasSeenGlobalIntro: boolean,
+};
+
 export type AuthState = {
   +isAuthenticated: boolean,
   +isFetching: boolean,
@@ -193,6 +237,7 @@ export type State = {
   +config: ConfigState,
   +babies: BabyState,
   +device: DeviceState,
+  +growth: GrowthState,
   +navigation: MobileNavigationState,
   +tabs: TabNavigationState,
   +thisWeek: ThisWeekState,
@@ -248,6 +293,16 @@ export type GetBabiesFailureAction = {
   error: true,
 };
 
+export type SeenGrowthGlobalIntroAction = {
+  type: 'GROWTH_SEEN_GLOBAL_INTRO',
+  payload: boolean,
+};
+
+export type SkipGrowthIntroductionAction = {
+  type: 'GROWTH_SKIP_INTRODUCTION',
+  payload: string,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -259,4 +314,6 @@ export type Action =
   | LogoutAction
   | GetBabiesRequestAction
   | GetBabiesSuccessAction
-  | GetBabiesFailureAction;
+  | GetBabiesFailureAction
+  | SeenGrowthGlobalIntroAction
+  | SkipGrowthIntroductionAction;

@@ -2,13 +2,13 @@
 import { combineReducers } from 'redux';
 import type { Action, State } from './types';
 import { reducer as form } from 'redux-form';
-import app from '../../src/common/app/reducer';
-import config from '../../src/common/config/reducer';
-import auth from '../../src/common/auth/reducer';
+import app from './app/reducer';
+import config from './config/reducer';
+import auth from './auth/reducer';
 import device from '../../src/common/device/reducer';
 import viewer from './viewer/reducer';
 import babies from './babies/reducer';
-import thisWeek from '../../src/common/activities/reducer';
+import growth from './growth/reducer';
 import { configureApollo } from './configureApollo';
 
 // stackoverflow.com/q/35622588/233902
@@ -17,9 +17,8 @@ const resetStateOnSignOutReducer = (reducer, initialState) => {
   /* eslint-enable no-unused-vars */
   return (state: State, action: Action) => {
     // TODO: this is too attached to Firebase
-    const userWasSignedOut = action.type === 'ON_AUTH' &&
-      state.viewer &&
-      !action.payload.user;
+    const userWasSignedOut =
+      action.type === 'ON_AUTH' && state.viewer && !action.payload.user;
 
     if (!userWasSignedOut) {
       return reducer(state, action);
@@ -50,9 +49,9 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
     auth,
     config,
     babies,
+    growth,
     device,
     form,
-    thisWeek,
     viewer,
     ...platformReducers,
   });

@@ -1,15 +1,16 @@
 // @flow
-import type { GraphQLDataProp } from '../../common/types';
+import type { GraphQLDataProp, Query } from '../../common/types';
 import React from 'react';
 import hoistStatics from './hoistStatics';
 import Loader from './Loader';
 
-type Props = {
-  data: GraphQLDataProp<*>,
-};
+type Props = GraphQLDataProp<Query>;
 
 const displayLoadingState = Component =>
-  (props: Props) =>
-    props.data.loading ? <Loader {...props} /> : <Component {...props} />;
+  (props: Props) => {
+    const { data } = props;
+    const isLoading = data && data.loading && !data.viewer;
+    return isLoading ? <Loader {...props} /> : <Component {...props} />;
+  };
 
 export default hoistStatics(displayLoadingState);

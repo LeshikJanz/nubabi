@@ -4,13 +4,13 @@ import type {
   GraphQLDataProp,
   State,
   NavigationOptions,
+  LayoutProps,
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
 import {
   View,
   StyleSheet,
-  Image,
   Text,
   Dimensions,
   ScrollView,
@@ -18,6 +18,8 @@ import {
   Easing,
   TouchableOpacity,
 } from 'react-native';
+import Image from 'react-native-cached-image';
+import SVGPath from 'art/modes/svg/path';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
@@ -29,14 +31,14 @@ import theme, {
   NUBABI_RED,
 } from '../../common/themes/defaultTheme';
 import { selectBaby } from '../../common/babies/actions';
-
-const window = Dimensions.get('window');
+import withLayout from '../components/withLayout';
 
 const Icon = Animated.createAnimatedComponent(IonIcon);
 const babyIcon = require('../../common/images/face_icon.jpg');
 
 type Props = {
   navigation: NavigationProp<*, *>,
+  layout: LayoutProps,
   currentBabyId: ?string,
   babies: ?(Baby[]),
   data: GraphQLDataProp<*>,
@@ -54,15 +56,8 @@ class ChooseBaby extends Component {
         avatar {
           url
         }
-        coverImage {
-          url
-        }
       }
     `,
-  };
-
-  static navigationOptions: NavigationOptions = {
-    gesturesEnabled: false,
   };
 
   static contextTypes = {
@@ -164,6 +159,7 @@ class ChooseBaby extends Component {
   render() {
     const { babies } = this.props;
 
+    const width = this.props.layout.viewportWidth;
     let babiesList = [];
 
     // TODO: this is more complicated than it should because we want an
@@ -228,6 +224,31 @@ class ChooseBaby extends Component {
       );
     }
 
+    console.log(this.props);
+
+    const headerShapeWidth = Math.round(
+      this.props.layout.viewportWidth / 0.672,
+    );
+
+    console.log(this.props.layout.viewportHeight);
+    console.log(headerShapeWidth);
+    const shape = new SVGPath()
+      .moveTo(242.0284455, 326.522878)
+      .curveTo(242.828957, 347.908578, 260.418521, 365, 282, 365)
+      .curveTo(303.756979, 365, 321.456854, 347.629474, 321.987736, 326.00031)
+      .curveTo(410.423065, 317.73135, 491.521973, 284.207863, 558, 232.714294)
+      .lineTo(558, 0)
+      .lineTo(0, 0)
+      .lineTo(0, 232.714294)
+      .curveTo(
+        67.9827067,
+        285.373381,
+        151.25565,
+        319.239702,
+        242.028455,
+        326.522878,
+      )
+      .close();
     return (
       <Animated.View style={styles.overlay}>
         <Animated.View
@@ -255,8 +276,8 @@ class ChooseBaby extends Component {
             </Animated.View>
             <ScrollView
               contentContainerStyle={{
+                width,
                 height: 80,
-                width: window.width,
                 paddingLeft: 10,
                 paddingRight: 10,
               }}
@@ -290,7 +311,6 @@ const styles = StyleSheet.create({
     left: 0,
     top: 0,
     position: 'absolute',
-    width: window.width,
     alignItems: 'center',
   },
   babyIconContainerView: {
@@ -370,6 +390,9 @@ export default compose(
     },
   ),
   graphql(query, {
+    options: {
+      fetchPolicy: 'cache-first', // TODO: remove when there's a way to set a default
+    },
     props: ({ data }) => {
       const babies = path(['viewer', 'babies', 'edges'], data);
 
@@ -379,4 +402,5 @@ export default compose(
       };
     },
   }),
+  withLayout,
 )(ChooseBaby);

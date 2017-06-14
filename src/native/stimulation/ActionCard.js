@@ -20,7 +20,12 @@ export const ActionCard = (
     marginHorizontal = 0,
   }: Props,
 ) => (
-  <Card padding={1} marginHorizontal={marginHorizontal} flex={1}>
+  <Card
+    padding={1}
+    marginHorizontal={marginHorizontal}
+    marginVertical={2}
+    flex={1}
+  >
     <Button flexDirection="column" flex={1} onPress={onPress}>
       <Icon
         size={30}

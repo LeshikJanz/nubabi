@@ -45,6 +45,7 @@ export const computeTextStyle = (
     size = 0,
     align,
     bold,
+    medium,
     color = 'black',
     decoration,
     italic,
@@ -65,6 +66,11 @@ export const computeTextStyle = (
   if (bold) {
     const bold = theme.text.bold;
     style = { ...style, fontWeight: bold };
+  }
+
+  if (medium) {
+    const medium = theme.text.medium;
+    style = { ...style, fontWeight: medium };
   }
 
   if (decoration) {

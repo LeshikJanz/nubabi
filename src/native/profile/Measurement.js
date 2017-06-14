@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { gql } from 'react-apollo';
 import NubabiIcon from '../../common/icons/nubabi';
 import theme, {
@@ -8,6 +8,7 @@ import theme, {
   FONT_COLOR,
   NUBABI_RED,
 } from '../../common/themes/defaultTheme';
+import { formatMeasurement } from '../../common/helpers/measurement';
 
 type Props = {
   header: string,
@@ -19,7 +20,7 @@ type Props = {
 
 const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onUpdate}>
       <View style={styles.headerRow}>
         <Text style={styles.header}>{header}</Text>
         <NubabiIcon
@@ -31,15 +32,15 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
       </View>
       <View style={styles.valueRow}>
         {amount
-          ? <Text style={styles.valueText}>{amount}{unit}</Text>
+          ? <Text style={styles.valueText}>
+              {formatMeasurement(amount)}{unit}
+            </Text>
           : <Text style={styles.noDataText}>No Data Yet</Text>}
       </View>
       <View style={styles.updateRow}>
-        <TouchableHighlight>
-          <Text style={styles.updateText} onPress={onUpdate}>Update</Text>
-        </TouchableHighlight>
+        <Text style={styles.updateText} onPress={onUpdate}>Update</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
   noDataText: {
     marginVertical: 10,
     fontSize: 10,
-    color: theme.colors.secondary,
+    color: theme.colors.gray,
   },
   updateRow: {
     alignItems: 'center',

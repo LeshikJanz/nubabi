@@ -1,7 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly 1`] = `
+style = Object {
+    "marginBottom": 16,
+    "paddingBottom": 32,
+    "paddingLeft": 32,
+    "paddingRight": 32,
+    "paddingTop": 32,
+    "flex": 1,
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "stretch",
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "justifyContent": "center",
+    "shadowColor": "#000",
+    "shadowOpacity": 0.15,
+    "shadowRadius": 3,
+    "shadowOffset": {
+        "height": 1,
+        "width": 0
+    }
+}
+
 <View
+  onLayout={[Function]}
   style={
     Object {
       "alignItems": "stretch",
@@ -17,20 +46,17 @@ exports[`it renders correctly 1`] = `
       "borderTopWidth": 0,
       "flex": 1,
       "justifyContent": "center",
-      "marginBottom": 32,
-      "marginLeft": 32,
-      "marginRight": 32,
-      "marginTop": 32,
+      "marginBottom": 16,
       "paddingBottom": 32,
       "paddingLeft": 32,
       "paddingRight": 32,
       "paddingTop": 32,
       "shadowColor": "#000",
       "shadowOffset": Object {
-        "height": 2,
-        "width": 1,
+        "height": 1,
+        "width": 0,
       },
-      "shadowOpacity": 0.1,
+      "shadowOpacity": 0.15,
       "shadowRadius": 3,
     }
   }

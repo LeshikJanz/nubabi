@@ -1,5 +1,11 @@
-import { omit, evolve } from 'ramda';
+// @flow
+import type { MeasurementType, MeasurementUnit } from '../../../common/types';
+import R, { omit, evolve, map, compose } from 'ramda';
 import { decode } from 'base-64';
+import {
+  toCentimeters,
+  toKilograms,
+} from '../../../common/helpers/measurement';
 
 const returnVal = snapshot => snapshot.val();
 const returnValWithKeyAsId = snapshot => {
@@ -57,9 +63,7 @@ const uploadFile = (firebase, refPath, dataUrl) => {
     );
 
     const metadata = { contentType };
-
     const ref = firebase.storage().ref().child(refPath);
-
     const uploadTask = ref.put(content);
 
     uploadTask.on(
@@ -67,7 +71,10 @@ const uploadFile = (firebase, refPath, dataUrl) => {
       () => {
         /* progress */
       },
-      error => reject(error),
+      error => {
+        console.log(error);
+        reject(error);
+      },
       () => {
         ref
           .updateMetadata(metadata)
@@ -77,7 +84,7 @@ const uploadFile = (firebase, refPath, dataUrl) => {
   });
 };
 
-const createOrUpdateBaby = (firebase, values, id) => {
+const createOrUpdateBaby = async (firebase, values, id) => {
   const creating = !id;
 
   const currentUserPath = `/users/${getViewer(firebase).uid}`;
@@ -146,17 +153,131 @@ const createOrUpdateBaby = (firebase, values, id) => {
 };
 
 const getViewer = firebase => firebase.auth().currentUser;
-const get = (firebase, path) =>
+const getViewerWithProfile = async firebase => {
+  const user = getViewer(firebase);
+  if (!user) {
+    return null;
+  }
+
+  const profile = await firebase
+    .database()
+    .ref(`/users/${user.uid}`)
+    .once('value')
+    .then(returnVal);
+
+  return {
+    ...profile,
+    email: user.email,
+    uid: user.uid,
+  };
+};
+
+const get = (firebase, path: string) =>
   firebase.database().ref(path).once('value').then(returnVal);
-const set = (firebase, path, values) =>
+
+const set = (firebase, path: string, values: mixed) =>
   firebase.database().ref(path).set(values);
+
+const getBaby = (firebase, id) => {
+  return firebase
+    .database()
+    .ref()
+    .child(`/babies/${id}`)
+    .once('value')
+    .then(returnValWithKeyAsId);
+};
+
+const assignIdsToCollection = R.mapObjIndexed((value, key) => {
+  return R.assoc('id', key, value);
+});
+
+const timestampToDate = val => new Date(val.TIMESTAMP);
+
+const evolveBabyMeasurement = type => {
+  return R.compose(
+    R.assoc('unit', type === 'weights' ? 'kg' : 'cm'),
+    R.evolve({
+      recordedAt: timestampToDate,
+    }),
+  );
+};
+
+const getBabyMeasurements = (
+  firebase,
+  id: string,
+  type: 'weights' | 'heights',
+) => {
+  return firebase
+    .database()
+    .ref()
+    .child(`/measurements/${id}/${type}`)
+    .once('value')
+    .then(
+      compose(
+        map(evolveBabyMeasurement(type)),
+        R.values,
+        assignIdsToCollection,
+        returnVal,
+      ),
+    );
+};
+
+const getBabyWeights = (firebase, id: string) => {
+  return getBabyMeasurements(firebase, id, 'weights');
+};
+
+const getBabyHeights = (firebase, id: string) => {
+  return getBabyMeasurements(firebase, id, 'heights');
+};
+
+const recordMeasurement = async (firebase, babyId, type, unit, value) => {
+  // TODO: this is currently stored in Firebase, which isn't particularly
+  // good for historical data. We might consider a separate datastore for
+  // this, probably BigQuery if we wish to stay in the Google ecosystem
+
+  const suffix = type === 'weight' ? 'weights' : 'heights';
+  const measurementPrefix = `/measurements/${babyId}/${suffix}`;
+  const measurementKey = firebase.database().ref(measurementPrefix).push().key;
+  const measurementPath = [measurementPrefix, measurementKey].join('/');
+
+  let rawValue = value;
+
+  if (type === 'weight' && unit !== 'kg') {
+    rawValue = toKilograms(value);
+  } else if (type === 'height' && unit !== 'cm') {
+    rawValue = toCentimeters(value);
+  }
+
+  const updates = {};
+  updates[`/babies/${babyId}/${type}`] = rawValue;
+
+  updates[measurementPath] = {
+    value: rawValue,
+    recordedAt: firebase.database.ServerValue,
+  };
+
+  await firebase.database().ref().update(updates);
+  const baby = await getBaby(firebase, babyId);
+
+  const measurement = await get(firebase, measurementPath);
+
+  return {
+    baby,
+    recordedMeasurement: {
+      value: measurement.value,
+      unit: type === 'weight' ? 'kg' : 'cm',
+      recordedAt: new Date(measurement.recordedAt.TIMESTAMP),
+    },
+  };
+};
 
 const firebaseConnector = firebase => {
   return {
     firebase: () => firebase,
-    get: path => get(firebase, path),
-    set: (path, values) => set(firebase, path, values),
+    get: (path: string) => get(firebase, path),
+    set: (path: string, values: mixed) => set(firebase, path, values),
     getViewer: () => getViewer(firebase),
+    getViewerWithProfile: () => getViewerWithProfile(firebase),
     getBabies: () => {
       const currentUserId = getViewer(firebase).uid;
 
@@ -176,29 +297,57 @@ const firebaseConnector = firebase => {
                 .once('value')
                 .then(returnValWithKeyAsId);
             }),
-          ))
-        .then(([...babies]) => babies);
+          ),
+        )
+        .then(([...babies]) => babies)
+        .catch(err => {
+          console.warn(err);
+          return [];
+        });
     },
-    getBaby: id => {
-      return firebase
-        .database()
-        .ref()
-        .child(`/babies/${id}`)
-        .once('value')
-        .then(returnValWithKeyAsId);
+    getBaby: (id: string) => {
+      return getBaby(firebase, id);
     },
-    getRelationship: id => {
+    getRelationship: (id: string) => {
       return firebase
         .database()
         .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
         .once('value')
-        .then(returnVal);
+        .then(returnVal)
+        .then(val => {
+          // To ease migration, will be removed
+          const validRelationships = [
+            'Parent',
+            'Grandparent',
+            'Guardian',
+            'Relative',
+            'Nanny',
+            'AuPair',
+            'Other',
+          ];
+
+          if (!validRelationships.includes(val)) {
+            return 'Other';
+          }
+
+          return val;
+        });
     },
-    createBaby: values => {
+    getBabyWeights: (id: string) => getBabyWeights(firebase, id),
+    getBabyHeights: (id: string) => getBabyHeights(firebase, id),
+    createBaby: (values: mixed) => {
       return createOrUpdateBaby(firebase, values);
     },
-    updateBaby: (id, values) => {
+    updateBaby: (id: string, values: mixed) => {
       return createOrUpdateBaby(firebase, values, id);
+    },
+    recordMeasurement: (
+      id: string,
+      type: MeasurementType,
+      unit: MeasurementUnit,
+      value: number,
+    ) => {
+      return recordMeasurement(firebase, id, type, unit, value);
     },
   };
 };

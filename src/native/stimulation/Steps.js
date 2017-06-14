@@ -1,4 +1,5 @@
 // @flow
+import type { ActivityMediaType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import {
   View,
@@ -6,20 +7,25 @@ import {
   LayoutAnimation,
   StyleSheet,
 } from 'react-native';
+import Image from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { range } from 'ramda';
-import { Card, Text, Box, Image, Button } from '../components';
+import { Card, Text, Box } from '../components';
+import Step from './Step';
 import theme from '../../common/themes/defaultTheme';
 import Icon from 'react-native-vector-icons/Ionicons';
+import withLayout from '../components/withLayout';
 
-type Step = string;
+type StepType = string;
 
 type Props = {
-  steps: Array<Step>,
+  steps: Array<StepType>,
   activityName: string,
+  activityMedia: ?string,
+  activityMediaType: ?ActivityMediaType,
+  activityMediaThumbnail: ?string,
+  onActivityMediaPress: () => void,
 };
-
-const actionCalls = ['begin', 'continue', 'finish'];
 
 class Steps extends PureComponent {
   props: Props;
@@ -32,6 +38,15 @@ class Steps extends PureComponent {
       fragment Steps on Activity {
         name
         steps
+        media {
+          edges {
+            node {
+              type
+              thumb
+              url
+            }
+          }
+        }
       }
     `,
   };
@@ -41,44 +56,16 @@ class Steps extends PureComponent {
     this.setState({ currentStep: index < 0 ? 0 : index });
   };
 
-  renderTitle(step: Step, index: number) {
-    const { activityName } = this.props;
-    let actionCall;
-
-    if (index === 0) {
-      actionCall = 'begin';
-    } else if (index === this.props.steps.length - 1) {
-      actionCall = 'finish';
-    } else {
-      actionCall = 'continue';
-    }
-
-    const title = `Let's ${actionCall} ${activityName}`;
-
-    return (
-      <Box marginBottom={1}>
-        <Text color="black" spacing={-0.43} size={3}>{title}</Text>
-      </Box>
-    );
-  }
-
   renderStep() {
     const step = this.props.steps[this.state.currentStep];
 
-    if (!step) {
-      return null;
-    }
-
     return (
-      <Box>
-        {this.renderTitle(step, this.state.currentStep)}
-        <Text marginBottom={1}>{step}</Text>
-        <Image
-          src={require('../../common/images/centered-paragraph.png')}
-          size={{ width: 290, height: 200 }}
-          opacity={0.2}
-        />
-      </Box>
+      <Step
+        step={step}
+        activityName={this.props.activityName}
+        currentStepIndex={this.state.currentStep}
+        length={this.props.steps.length}
+      />
     );
   }
 
@@ -141,9 +128,37 @@ class Steps extends PureComponent {
     );
   }
 
+  renderMedia() {
+    const { activityMedia, activityMediaType, layout } = this.props;
+    let media;
+
+    if (!activityMedia) {
+      return null;
+    }
+
+    const width = layout.viewportWidth * 0.8;
+
+    if (activityMediaType === 'IMAGE') {
+      media = (
+        <Image style={{ width, height: 200 }} source={{ uri: activityMedia }} />
+      );
+    }
+
+    return (
+      <Box
+        as={TouchableOpacity}
+        onPress={this.props.onActivityMediaPress}
+        padding={1}
+      >
+        {media}
+      </Box>
+    );
+  }
+
   render() {
     return (
-      <Card marginHorizontal={1.2} padding={0}>
+      <Card marginHorizontal={1.2} marginVertical={1} padding={0}>
+        {this.renderMedia()}
         <Box padding={1} margin={0}>
           {this.renderStep()}
         </Box>
@@ -153,4 +168,4 @@ class Steps extends PureComponent {
   }
 }
 
-export default Steps;
+export default withLayout(Steps);

@@ -1,14 +1,10 @@
 // @flow
 import type { SkillArea, Activity } from '../../common/types';
 import React from 'react';
-import {
-  Dimensions,
-  View,
-  Image,
-  TouchableHighlight,
-  Text,
-} from 'react-native';
+import { Dimensions, View, TouchableHighlight, Text } from 'react-native';
+import Image from 'react-native-cached-image';
 import { path } from 'ramda';
+import { Box } from '../components';
 import iconMappings from './iconMappings';
 
 const width = Dimensions.get('window').width;
@@ -20,11 +16,7 @@ type Props = {
 };
 
 export const ActivityListItem = (props: Props) => {
-  const {
-    skillArea,
-    activity,
-    onPress,
-  } = props;
+  const { skillArea, activity, onPress } = props;
 
   return (
     <TouchableHighlight
@@ -33,10 +25,16 @@ export const ActivityListItem = (props: Props) => {
       onPress={onPress}
     >
       <View style={styles.activityRow}>
-        <Image
-          style={styles.skillImage}
-          source={{ uri: path(['image', 'thumb', 'url'], skillArea) }}
-        />
+        <Box
+          overflow="hidden"
+          borderTopLeftRadius={4}
+          borderBottomLeftRadius={4}
+        >
+          <Image
+            style={styles.skillImage}
+            source={{ uri: path(['image', 'thumb', 'url'], skillArea) }}
+          />
+        </Box>
         <View style={styles.textContainer}>
           <Text style={styles.skillName}>{skillArea.name}</Text>
           <Text style={styles.activityName}>{activity.name}</Text>

@@ -13,17 +13,18 @@ const resolvers = {
   },
   Viewer: {
     user(_, args, { connectors: { firebase } }) {
-      return firebase.getViewer();
+      return firebase.getViewerWithProfile();
     },
   },
   User: {
     id: globalIdField('User', obj => obj.uid),
     avatar: obj => ({
       url: obj.avatar,
-      thumb: obj.avatar_thumb ? { url: obj.avatar_thumb } : null,
-      large: null,
+      thumb: obj.avatar ? { url: obj.avatar.thumb } : null,
+      large: obj.avatar ? { url: obj.avatar.original } : null,
     }),
-    name: prop('displayName'),
+    totalAchievements: () => 0, // TODO
+    totalMemories: () => 0, // TODO
   },
   Node: {
     __resolveType(obj) {

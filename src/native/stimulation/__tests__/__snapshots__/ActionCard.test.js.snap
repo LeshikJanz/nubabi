@@ -2,6 +2,7 @@
 
 exports[`it renders correctly 1`] = `
 <View
+  onLayout={[Function]}
   style={
     Object {
       "alignItems": "stretch",
@@ -17,7 +18,7 @@ exports[`it renders correctly 1`] = `
       "borderTopWidth": 0,
       "flex": 1,
       "justifyContent": "center",
-      "marginBottom": 32,
+      "marginBottom": 16,
       "marginLeft": 0,
       "marginRight": 0,
       "marginTop": 32,
@@ -27,10 +28,10 @@ exports[`it renders correctly 1`] = `
       "paddingTop": 16,
       "shadowColor": "#000",
       "shadowOffset": Object {
-        "height": 2,
-        "width": 1,
+        "height": 1,
+        "width": 0,
       },
-      "shadowOpacity": 0.1,
+      "shadowOpacity": 0.15,
       "shadowRadius": 3,
     }
   }
@@ -149,7 +150,7 @@ exports[`it renders correctly 1`] = `
           "borderLeftWidth": 0,
           "borderRightWidth": 0,
           "borderTopWidth": 0,
-          "color": "#9EABBC",
+          "color": "#748294",
           "fontFamily": "System",
           "fontSize": 13,
           "lineHeight": 16,

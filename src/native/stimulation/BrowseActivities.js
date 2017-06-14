@@ -1,97 +1,165 @@
 // @flow
-import type { ActivityEdge, NavigationOptions } from '../../common/types';
-import type { NavigationProp } from 'react-navigation';
-import React, { PureComponent } from 'react';
+import type { SkillArea, LayoutProps } from '../../common/types';
+import React from 'react';
+import { ScrollView } from 'react-native';
 import { compose, path } from 'ramda';
-import { gql, graphql } from 'react-apollo';
-import displayLoadingState from '../components/displayLoadingState';
-import { Screen } from '../components';
-import ActivityList from './ActivityList';
+import { graphql, gql } from 'react-apollo';
+import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { Box, Text, displayLoadingState, withLayout } from '../components';
+import BrowseActivitiesButton from './BrowseActivitiesButton';
+import { toGlobalId } from 'graphql-relay';
 
 type Props = {
-  navigation: NavigationProp<*>,
-  activities: Array<ActivityEdge>,
-  loadMoreEntries: () => void,
+  skillAreas: Array<SkillArea>,
+  onBrowseAll: () => void,
+  onBrowseFiltered: () => void,
+  layout: LayoutProps,
+};
+/*
+  <Box flex={1} alignItems="center" justifyContent="center">
+        <BrowseActivitiesButton onPress={onBrowseAll} />
+      </Box>
+ */
+const skillAreaMargin = 15;
+
+// TODO: remove this being hardcoded when we devise a better way
+// or requirements change
+const indoorsCategoryOptions = {
+  title: 'Indoors',
+  filter: { categories: toGlobalId('Category', 1) },
+};
+const outdoorCategoryOptions = {
+  title: 'Outdoors',
+  filter: { categories: toGlobalId('Category', 2) },
 };
 
-export class BrowseActivities extends PureComponent {
-  props: Props;
+export const BrowseActivities = ({
+  skillAreas,
+  onBrowseAll,
+  onBrowseFiltered,
+  layout,
+}: Props) => {
+  const browseAllActivitiesHeight = Math.round(layout.viewportWidth * 0.2);
+  const skillAreaButtonWidth = Math.round(
+    layout.viewportWidth * 0.5 - skillAreaMargin,
+  );
+  const skillAreaButtonHeight = Math.round(
+    layout.viewportWidth * 0.3 - skillAreaMargin,
+  );
 
-  static navigationOptions: NavigationOptions = {
-    title: 'All Activities',
-  };
-
-  handleNavigate = (id: string, title: string) => {
-    this.props.navigation.navigate('viewActivity', { id, title });
-  };
-
-  render() {
-    return (
-      <Screen>
-        <ActivityList
-          activities={this.props.activities}
-          onActivityItemPress={this.handleNavigate}
-          onLoadMore={this.props.loadMoreEntries}
+  return (
+    <Box as={ScrollView} flex={1}>
+      <Box
+        flex={1}
+        contentSpacing
+        style={() => ({ height: browseAllActivitiesHeight, marginBottom: 0 })}
+      >
+        <BrowseActivitiesButton
+          text="Browse All Activities"
+          onPress={onBrowseAll}
         />
-      </Screen>
-    );
-  }
-}
+      </Box>
+      <Box flex={1}>
+        <Box contentSpacing>
+          <Text medium size={4}>Development Skill</Text>
+        </Box>
+        <Box
+          flex={1}
+          flexDirection="row"
+          flexWrap="wrap"
+          alignItems="flex-start"
+          justifyContent="center"
+        >
+          {skillAreas.map(skillArea => (
+            <Box
+              key={skillArea.id}
+              style={() => ({
+                width: skillAreaButtonWidth,
+                height: skillAreaButtonHeight,
+                margin: 5,
+              })}
+            >
+              <BrowseActivitiesButton
+                text={skillArea.name}
+                image={skillArea.image}
+                onPress={() =>
+                  onBrowseFiltered({
+                    title: skillArea.name,
+                    filter: { skillAreas: [skillArea.id] },
+                  })}
+              />
+            </Box>
+          ))}
+        </Box>
+      </Box>
+      <Box flex={1}>
+        <Box flex={1} contentSpacing>
+          <Text size={4} medium>Category</Text>
+        </Box>
+        <Box
+          flex={1}
+          flexDirection="row"
+          flexWrap="wrap"
+          alignItems="flex-start"
+          justifyContent="center"
+        >
+          <Box
+            style={() => ({
+              width: skillAreaButtonWidth,
+              height: skillAreaButtonHeight,
+              margin: 5,
+            })}
+          >
+            <BrowseActivitiesButton
+              text="Indoors"
+              onPress={() => {
+                onBrowseFiltered(indoorsCategoryOptions);
+              }}
+            />
+          </Box>
+          <Box
+            style={() => ({
+              width: skillAreaButtonWidth,
+              height: skillAreaButtonHeight,
+              margin: 5,
+            })}
+          >
+            <BrowseActivitiesButton
+              text="Outdoors"
+              onPress={() => {
+                onBrowseFiltered(outdoorCategoryOptions);
+              }}
+            />
+          </Box>
+        </Box>
+      </Box>
+    </Box>
+  );
+};
 
-const query = gql`
-  query BrowseActivities($cursor: String) {
-    viewer {
-      allActivities(first: 15, after: $cursor) {
-        edges {
-          node {
-            ...ActivityList
+export default compose(
+  graphql(
+    gql`
+    query BrowseActivities {
+      viewer {
+        allSkillAreas {
+          edges {
+            node {
+              id
+              name
+              image {
+                url
+              }
+            }
           }
-        }
-        pageInfo {
-          endCursor
-          hasNextPage
         }
       }
     }
-  }
-  ${ActivityList.fragments.activities}
-`;
-
-export default compose(
-  graphql(query, {
-    props: ({ data }) => {
-      const { fetchMore } = data;
-      const activities = path(['viewer', 'allActivities', 'edges'], data);
-
-      return {
-        data,
-        activities: activities || [],
-        loadMoreEntries: () => {
-          return fetchMore({
-            query,
-            variables: {
-              cursor: data.viewer.allActivities.pageInfo.endCursor,
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const newEdges = fetchMoreResult.viewer.allActivities.edges;
-              const pageInfo = fetchMoreResult.viewer.allActivities.pageInfo;
-
-              return {
-                viewer: {
-                  allActivities: {
-                    edges: [
-                      ...previousResult.viewer.allActivities.edges,
-                      ...newEdges,
-                    ],
-                    pageInfo,
-                  },
-                },
-              };
-            },
-          });
-        },
-      };
+  `,
+    {
+      props: mapEdgesToProp('viewer.allSkillAreas', 'skillAreas'),
     },
-  }),
+  ),
   displayLoadingState,
+  withLayout,
 )(BrowseActivities);

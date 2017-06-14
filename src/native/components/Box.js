@@ -289,11 +289,7 @@ const computeBoxStyle = (
 };
 
 const Box = (
-  {
-    as,
-    style,
-    ...props
-  }: BoxProps,
+  { as, style, ...props }: BoxProps,
   {
     // Note no $Exact<BoxProps>. It's up to the rendered component.
     View,
@@ -302,6 +298,9 @@ const Box = (
   }: BoxContext,
 ) => {
   const Component = as || View;
+  if (props.contentSpacing) {
+    props = { ...props, ...theme.contentSpacing };
+  }
   const [boxStyle, restProps] = computeBoxStyle(theme, props);
   const rule = renderer.renderRule(() => ({
     ...boxStyle,
@@ -320,5 +319,7 @@ Box.contextTypes = {
   renderer: React.PropTypes.object,
   theme: React.PropTypes.object,
 };
+
+Box.contentSpacing = 0.625;
 
 export default Box;

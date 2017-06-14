@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders a NoContentView if the tester fn does not satisfy 1`] = `
+style = Object {
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#454D56",
+    "fontFamily": "System"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#454D56",
+        "fontFamily": "System",
+        "fontSize": 13,
+        "lineHeight": 16,
+      }
+    }
+  >
+    Nothing found
+  </Text>
+</View>
+`;
+
+exports[`it renders the decorated component if the tester fn passes 1`] = `
+style = Object {
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#454D56",
+    "fontFamily": "System"
+}
+
+<Text
+  accessible={true}
+  allowFontScaling={true}
+  ellipsizeMode="tail"
+>
+  The Component
+</Text>
+`;

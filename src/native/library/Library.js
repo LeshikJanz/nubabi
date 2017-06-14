@@ -1,30 +1,57 @@
-import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import { Screen } from '../components';
+// @flow
+import type { NavigationOptions } from '../../common/types';
+import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
+import React, { PureComponent } from 'react';
+import { Screen, Box } from '../components';
+import ArticleList from './ArticleCardList';
+import HealthHelpButton from './HealthHelpButton';
+import ParentingTipsButton from './ParentingTipsButton';
 
-const Library = () => {
-  return (
-    <Screen>
-      <View style={styles.container}>
-        <Text style={styles.title}>Library</Text>
-        <TouchableHighlight>
-          <Text>Go To Next Scene</Text>
-        </TouchableHighlight>
-      </View>
-    </Screen>
-  );
+type Props = {
+  navigation: NavigationProp<*, *>,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 40,
-    textAlign: 'center',
-  },
-});
+export class Library extends PureComponent {
+  props: Props;
+
+  static navigationOptions: NavigationOptions = {
+    title: 'Library',
+  };
+
+  handleBrowseArticles = () => {
+    this.props.navigation.navigate('browseArticles');
+  };
+
+  handleViewArticle = (id: string) => {
+    this.props.navigation.navigate('viewArticle', { id });
+  };
+
+  handleHealthHelp = () => {
+    this.props.navigation.navigate('healthHelp');
+  };
+
+  handleParentingTips = () => {
+    this.props.navigation.navigate('parentingTips');
+  };
+
+  render() {
+    return (
+      <Screen>
+        <Box flex={1}>
+          <ArticleList
+            onBrowseAll={this.handleBrowseArticles}
+            onViewArticle={this.handleViewArticle}
+          />
+          <Box flex={1} contentSpacing>
+            <ParentingTipsButton onPress={this.handleParentingTips} />
+          </Box>
+          <Box flex={1} contentSpacing>
+            <HealthHelpButton onPress={this.handleHealthHelp} />
+          </Box>
+        </Box>
+      </Screen>
+    );
+  }
+}
 
 export default Library;

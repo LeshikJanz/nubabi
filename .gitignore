@@ -56,10 +56,11 @@ src/common/config/_dev.json
 .envrc
 .tmp
 src/server/firebase/functions/node_modules
-graphql.config.json
 
 
 # a local server I use to test the non-firebase (and Firebase Admin SDK-backed in the future)
 src/server/graphql/server.js
 src/server/graphql/schema.json
 src/server/grahpql/printSchema.js
+
+coverage/

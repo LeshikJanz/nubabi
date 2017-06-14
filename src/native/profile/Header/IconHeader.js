@@ -1,7 +1,8 @@
 // @flow
 import type { Avatar } from '../../../common/types';
 import React from 'react';
-import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import { View, StyleSheet, Dimensions } from 'react-native';
+import Image from 'react-native-cached-image';
 import Svg, { Path, Circle } from 'react-native-svg';
 
 const babyIcon = require('../../../common/images/face_icon.jpg');

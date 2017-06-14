@@ -13,6 +13,7 @@ import {
 } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { reduxForm, Field } from 'redux-form';
+import { DatePicker } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NubabiIcon from '../../../common/icons/nubabi';
@@ -22,6 +23,7 @@ import theme, {
 } from '../../../common/themes/defaultTheme';
 import imagePicker from '../../components/imagePicker';
 import Picker from './Picker';
+import RelationshipDropdown from './RelationshipDropdown';
 import CoverImage from '../Header/CoverImage';
 import IconHeader from '../Header/IconHeader';
 import GenderSelection from './GenderSelection';
@@ -70,10 +72,9 @@ class Form extends Component {
 
   scroll = null;
 
-  updateImageField = name =>
-    ({ data }) => {
-      this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
-    };
+  updateImageField = name => ({ data }) => {
+    this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
+  };
 
   handleCoverImage = () => {
     imagePicker({ title: 'Select Cover Photo' }).then(
@@ -147,6 +148,25 @@ class Form extends Component {
     return <Picker field={field} onPickerOpen={this.scrollToPicker} />;
   };
 
+  renderRelationshipDropdown = field => {
+    return <RelationshipDropdown field={field} />;
+  };
+
+  renderDatePicker = field => {
+    const { label } = field;
+    return (
+      <View style={styles.inputContainer}>
+        <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
+
+        <DatePicker
+          onChange={field.input.onChange}
+          date={field.input.value}
+          format="YYYY-MM-DD"
+        />
+      </View>
+    );
+  };
+
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
@@ -156,6 +176,8 @@ class Form extends Component {
       renderTextInput,
       renderCoverImage,
       renderAvatar,
+      renderRelationshipDropdown,
+      renderDatePicker,
     } = this;
 
     let submitText;
@@ -223,14 +245,14 @@ class Form extends Component {
         <Field
           name="dob"
           label="BORN ON"
-          component={renderTextInput}
+          component={renderDatePicker}
           validate={[required, formattedDate('YYYY-MM-DD')]}
         />
 
         <Field
           name="relationship"
-          label="RELATIONSHIP TO ME"
-          component={renderTextInput}
+          label="RELATIONSHIP TO BABY"
+          component={renderRelationshipDropdown}
           validate={[required]}
         />
 
@@ -340,7 +362,6 @@ const styles = StyleSheet.create({
     color: FONT_COLOR,
     fontSize: 16,
   },
-
   inputLabel: {
     fontSize: 8,
     color: '#a8b3c2',

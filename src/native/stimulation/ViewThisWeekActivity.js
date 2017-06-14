@@ -35,15 +35,15 @@ type Props = {
   babyName: string,
   currentBabyId: string,
   navigation: NavigationProp<*>,
-  swoopActivity: (
-    options: { variables: { input: SwoopActivityInput } },
-  ) => Promise<*>, // TODO
-  changeActivityLevel: (
-    options: { variables: { input: AdjustActivityLevelInput } },
-  ) => Promise<*>,
-  toggleFavorite: (
-    options: { variables: { input: ToggleFavoriteInput } },
-  ) => Promise<*>,
+  swoopActivity: (options: {
+    variables: { input: SwoopActivityInput },
+  }) => Promise<*>, // TODO
+  changeActivityLevel: (options: {
+    variables: { input: AdjustActivityLevelInput },
+  }) => Promise<*>,
+  toggleFavorite: (options: {
+    variables: { input: ToggleFavoriteInput },
+  }) => Promise<*>,
   isFavorite: boolean,
 };
 
@@ -59,7 +59,11 @@ class ViewThisWeeksActivity extends Component {
   }
 
   refreshActivity = ({ data }) => {
-    const newActivity = path(['changeActivity', 'newActivity'], data);
+    const newActivity = pathOr(
+      path(['swoopActivity', 'newActivity'], data),
+      ['changeActivity', 'newActivity'],
+      data,
+    );
 
     if (newActivity) {
       this.props.navigation.setParams({
@@ -125,6 +129,12 @@ class ViewThisWeeksActivity extends Component {
     this.handleNavigateToActivity(this.props.previousActivity);
   };
 
+  handleActivityMediaPress = () => {
+    this.props.navigation.navigate('viewActivityMedia', {
+      media: this.props.activity.media,
+    });
+  };
+
   render() {
     const {
       activity,
@@ -153,6 +163,7 @@ class ViewThisWeeksActivity extends Component {
           onToggleFavorite={this.handleToggleFavorite}
           onLevelIncrease={this.handleLevelIncrease}
           onLevelDecrease={this.handleLevelDecrease}
+          onActivityMediaPress={this.handleActivityMediaPress}
         />
       </Screen>
     );
@@ -222,6 +233,7 @@ export default compose(
     `,
     {
       options: ownProps => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: {
           babyId: ownProps.currentBabyId,
           activityId: ownProps.navigation.state.params.id,

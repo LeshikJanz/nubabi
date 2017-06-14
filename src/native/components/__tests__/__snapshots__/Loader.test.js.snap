@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it can customize the size and color 1`] = `
+style = Object {}
+
 <View
   style={
     Object {
@@ -28,6 +30,8 @@ exports[`it can customize the size and color 1`] = `
 `;
 
 exports[`it renders correctly 1`] = `
+style = Object {}
+
 <View
   style={
     Object {

@@ -36,7 +36,8 @@ const colors = {
   black: open.black0,
   white: open.white0,
   gray: open.gray2,
-  secondary: open.gray2,
+  secondary: open.gray3,
+  panel: open.white1,
 };
 
 const theme: Theme = {
@@ -46,6 +47,9 @@ const theme: Theme = {
     lineHeight: 16,
   }),
   colors,
+  contentSpacing: {
+    padding: 0.625,
+  },
   states: {
     active: {
       darken: 0.2,
@@ -57,6 +61,7 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
+    medium: 500,
     fontFamily: 'System',
   },
   block: {

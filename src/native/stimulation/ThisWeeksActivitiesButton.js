@@ -1,40 +1,56 @@
-import React, { Component } from 'react';
+import type { LayoutProps } from '../../common/types';
+import React from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Image,
+  TouchableHighlight,
 } from 'react-native';
 
 import { PANEL_BUTTON_TEXT } from '../../common/themes/defaultTheme';
+import { Overlay, withLayout } from '../components';
 
-const background = require('../../common/images/thisWeeksActivitiesButton.png');
+const background = require('../../common/images/gross_motor_large.jpg');
 
-class ThisWeeksActivitiesButton extends Component {
-  setNativeProps(nativeProps) {
-    this._root.setNativeProps(nativeProps);
-  }
+type Props = {
+  onPress: () => void,
+  style?: number,
+  layout: LayoutProps,
+};
 
-  render() {
-    const title = "This Week's Activities";
+export const ThisWeeksActivitiesButton = ({
+  onPress,
+  style,
+  layout,
+}: Props) => {
+  const title = "This Week's Activities";
+  const width = {
+    width: layout.viewportWidth,
+  };
 
-    return (
-      <View
-        style={styles.container}
-        ref={(component) => { this._root = component; }}
-        {...this.props}
-      >
-        <Image source={background} style={styles.background} />
-
-        <View style={styles.overlay} />
+  return (
+    <TouchableHighlight
+      style={style}
+      underlayColor="rgba(0,0,0,0)"
+      onPress={onPress}
+    >
+      <View style={styles.container}>
+        <Image
+          source={background}
+          style={[styles.background, width]}
+          resizeMode="cover"
+        >
+          <Overlay />
+        </Image>
 
         <View style={styles.textContainer}>
           <Text style={styles.title}>{title}</Text>
         </View>
       </View>
-    );
-  }
-}
+    </TouchableHighlight>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -72,10 +88,9 @@ const styles = StyleSheet.create({
     paddingTop: 15,
   },
   background: {
-    resizeMode: 'cover',
     height: 140,
     width: 355,
   },
 });
 
-export default ThisWeeksActivitiesButton;
+export default withLayout(ThisWeeksActivitiesButton);

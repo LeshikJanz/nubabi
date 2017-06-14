@@ -1,4 +1,5 @@
 #!/usr/bin/env babel-node
+console.log('Starting schema writer');
 import fs from 'fs';
 import path from 'path';
 import { graphql } from 'graphql';
@@ -20,6 +21,7 @@ const writeSchemaFile = async () => {
       'utf-8',
       'w+',
     );
+    console.log('wrote schema file');
   }
 };
 

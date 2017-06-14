@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
-import Picker from '../Picker';
-import renderer from 'react-test-renderer';
+import Picker, { weekOptions } from '../Picker';
+import { expectRender } from '../../../shared/testUtils';
 
 test('it renders correctly', () => {
   const mockField = {
@@ -12,7 +12,12 @@ test('it renders correctly', () => {
       error: false,
     },
   };
-  const tree = renderer.create(<Picker field={mockField} />).toJSON();
 
-  expect(tree).toMatchSnapshot();
+  expectRender(<Picker field={mockField} />);
+});
+
+test('week options should start at 20 and finish at 43', () => {
+  expect(weekOptions[0].props.value).toEqual(20);
+
+  expect(weekOptions[weekOptions.length - 1].props.value).toEqual(43);
 });

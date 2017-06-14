@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import Image from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
@@ -93,7 +94,7 @@ export default compose(
   connect(({ babies: { currentBabyId } }) => ({ currentBabyId })),
   graphql(
     gql`
-   query getBabyAvatar($id: ID!) {
+   query getBabyAvatar($id: ID) {
      viewer {
        baby(id: $id) {
          id
@@ -106,7 +107,9 @@ export default compose(
   `,
     {
       options: ({ currentBabyId }) => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { id: currentBabyId },
+        skip: !currentBabyId,
       }),
       props: ({ data }) => {
         const avatar = path(['viewer', 'baby', 'avatar'], data);

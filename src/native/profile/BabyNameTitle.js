@@ -10,7 +10,7 @@ type Props = {
 
 export const BabyNameTitle = ({ babyName }: Props) => {
   if (!babyName) {
-    return <Text />;
+    return <Text>Nubabi</Text>;
   }
 
   return <Text>{babyName}</Text>;
@@ -22,7 +22,7 @@ export default compose(
   })),
   graphql(
     gql`
-    query BabyName($id: ID!) {
+    query BabyName($id: ID) {
       viewer {
         baby(id: $id) {
           id
@@ -33,7 +33,9 @@ export default compose(
   `,
     {
       options: ({ currentBabyId }) => ({
+        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { id: currentBabyId },
+        skip: !currentBabyId,
       }),
       props: ({ data }) => ({
         babyName: path(['viewer', 'baby', 'name'], data),
