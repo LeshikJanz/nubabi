@@ -7,6 +7,7 @@
     "flow": "flow",
     "test": "jest",
     "precommit": "lint-staged",
+    "changelog": "conventional-changelog -i CHANGELOG.md -s",
     "firebase:install": "cd src/server/firebase/functions && npm install",
     "firebase:deploy": "firebase deploy",
     "firebase:deploy:functions": "firebase deploy --only functions",
