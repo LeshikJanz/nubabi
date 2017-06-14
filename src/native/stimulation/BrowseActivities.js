@@ -52,7 +52,7 @@ export const BrowseActivities = ({
       <Box
         flex={1}
         contentSpacing
-        style={() => ({ height: browseAllActivitiesHeight })}
+        style={() => ({ height: browseAllActivitiesHeight, marginBottom: 0 })}
       >
         <BrowseActivitiesButton
           text="Browse All Activities"
