@@ -8,6 +8,7 @@ import Markdown from './Markdown';
 import Link from './Link';
 import NoContentView from './NoContentView';
 import Pill from './Pill';
+import PillSwitcher from './PillSwitcher';
 import FAB from './FAB';
 import Overlay from './Overlay';
 import DatePicker from './DatePicker';
@@ -26,6 +27,7 @@ export {
   Link,
   NoContentView,
   Pill,
+  PillSwitcher,
   FAB,
   Overlay,
   DatePicker,

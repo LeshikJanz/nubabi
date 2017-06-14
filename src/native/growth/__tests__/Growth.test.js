@@ -1,8 +1,7 @@
 import 'react-native';
 import React from 'react';
 import { Growth } from '../Growth';
-import renderer from 'react-test-renderer';
-import felaTestContext from '../../shared/felaTestContext';
+import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
 jest.mock('../../components/LineGraph');
@@ -15,9 +14,13 @@ test('it renders correctly', () => {
     },
   };
 
-  const tree = renderer
-    .create(felaTestContext(<Growth baby={baby} />))
-    .toJSON();
+  const onNavigate = jest.fn();
 
-  expect(tree).toMatchSnapshot();
+  expectRender(
+    <Growth
+      baby={baby}
+      onNavigateToWhatYouNeedToKnow={onNavigate}
+      onNavigateToGraphDetail={onNavigate}
+    />,
+  );
 });

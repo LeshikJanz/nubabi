@@ -26,12 +26,17 @@ export class GrowthScreen extends PureComponent {
     this.props.navigation.navigate('developmentRoadmap');
   };
 
+  handleGraphDetail = () => {
+    this.props.navigation.navigate('graphDetail');
+  };
+
   render() {
     return (
       <Screen>
         <Growth
           onNavigateToWhatYouNeedToKnow={this.handleWhatYouNeedToKnow}
           onNavigateToDevelopmentRoadmap={this.handleDevelopmentRoadmap}
+          onNavigateToGraphDetail={this.handleGraphDetail}
         />
       </Screen>
     );

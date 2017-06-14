@@ -47,6 +47,7 @@ import ViewArticleScreen from '../library/ViewArticleScreen';
 import ActivityMediaScreen from '../stimulation/ActivityMediaScreen';
 import ParentingTipsScreen from '../library/ParentingTipsScreen';
 import HealthHelpScreen from '../library/HealthHelpScreen';
+import GraphDetailScreen from '../growth/GraphDetailScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -70,6 +71,7 @@ const routes = {
   editBaby: { screen: EditBaby },
   updateHeight: { screen: UpdateHeightScreen },
   updateWeight: { screen: UpdateWeightScreen },
+  graphDetail: { screen: GraphDetailScreen },
   thisWeekActivities: { screen: ThisWeeksActivities },
   favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },

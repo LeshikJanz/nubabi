@@ -25,6 +25,7 @@ type Props = {
   baby: Baby,
   skipGrowthGlobalIntro: () => void,
   onNavigateToWhatYouNeedToKnow: () => void,
+  onNavigateToGraphDetail: () => void,
 };
 
 const formatName = (name: string) => {
@@ -76,7 +77,7 @@ export class Growth extends Component {
       this.props.baby,
     ).map(edge => {
       return {
-        timestamp: new Date(edge.node.recordedAt).getTime(),
+        recordedAt: new Date(edge.node.recordedAt).getTime(),
         value: edge.node.value,
       };
     });
@@ -112,7 +113,7 @@ export class Growth extends Component {
           <ThisWeekGrowthButton
             onPress={this.props.onNavigateToWhatYouNeedToKnow}
           />
-          <Card padding={0}>
+          <Card padding={0} onPress={this.props.onNavigateToGraphDetail}>
             <Box marginTop={0.5}>
               <Box
                 flexDirection="row"
