@@ -67,7 +67,11 @@ export class Login extends Component {
     const buttonText = isFetching ? 'Logging in...' : 'LOG IN';
     return (
       <View style={styles.container}>
-        <Image source={background} style={styles.background} />
+        <Image
+          source={background}
+          style={styles.background}
+          resizeMode="cover"
+        />
         <View style={styles.backgroundFilter} />
         <KeyboardAwareScrollView
           style={styles.container}
@@ -75,7 +79,7 @@ export class Login extends Component {
           keyboardShouldPersistTaps="handled"
         >
           <View style={{ flex: 1 }}>
-            <Image source={logo} style={styles.logo} />
+            <Image source={logo} style={styles.logo} resizeMode="stretch" />
 
             <View style={styles.inputOuterContainer}>
               <View style={styles.inputContainer}>
@@ -178,7 +182,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: window.width,
-    resizeMode: 'cover',
     height: window.height,
   },
   backgroundFilter: {
@@ -195,7 +198,6 @@ const styles = StyleSheet.create({
     width: 370 * 0.6,
     height: 122 * 0.6,
     marginLeft: (window.width - 370 * 0.6) / 2,
-    resizeMode: 'stretch',
   },
   inputOuterContainer: {
     marginTop: 150,

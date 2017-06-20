@@ -10,13 +10,13 @@ exports[`renders correctly 1`] = `
   }
 >
   <Image
+    resizeMode="cover"
     source={1}
     style={
       Object {
         "flex": 1,
         "height": 1334,
         "position": "absolute",
-        "resizeMode": "cover",
         "top": 0,
         "width": 750,
       }
@@ -72,6 +72,7 @@ exports[`renders correctly 1`] = `
         }
       >
         <Image
+          resizeMode="stretch"
           source={1}
           style={
             Object {
@@ -79,7 +80,6 @@ exports[`renders correctly 1`] = `
               "height": 73.2,
               "marginLeft": 264,
               "marginTop": 100,
-              "resizeMode": "stretch",
               "width": 222,
             }
           }
@@ -270,13 +270,13 @@ exports[`show progress when logging in 1`] = `
   }
 >
   <Image
+    resizeMode="cover"
     source={1}
     style={
       Object {
         "flex": 1,
         "height": 1334,
         "position": "absolute",
-        "resizeMode": "cover",
         "top": 0,
         "width": 750,
       }
@@ -332,6 +332,7 @@ exports[`show progress when logging in 1`] = `
         }
       >
         <Image
+          resizeMode="stretch"
           source={1}
           style={
             Object {
@@ -339,7 +340,6 @@ exports[`show progress when logging in 1`] = `
               "height": 73.2,
               "marginLeft": 264,
               "marginTop": 100,
-              "resizeMode": "stretch",
               "width": 222,
             }
           }

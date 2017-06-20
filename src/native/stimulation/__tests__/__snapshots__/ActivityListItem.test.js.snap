@@ -123,12 +123,12 @@ style = Object {
       </Text>
     </View>
     <Image
+      resizeMode="contain"
       source={1}
       style={
         Object {
           "height": 22,
           "position": "absolute",
-          "resizeMode": "contain",
           "right": 10,
           "top": 10,
           "width": 22,

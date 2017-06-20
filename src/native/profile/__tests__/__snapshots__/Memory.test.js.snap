@@ -31,6 +31,7 @@ exports[`it renders correctly 1`] = `
     }
   >
     <Image
+      resizeMode="stretch"
       source={
         Object {
           "uri": "http://example.com/example.jpeg",
@@ -39,7 +40,6 @@ exports[`it renders correctly 1`] = `
       style={
         Object {
           "height": 78,
-          "resizeMode": "stretch",
           "width": 115,
         }
       }

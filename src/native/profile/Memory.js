@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 
 import { FONT_COLOR } from '../../common/themes/defaultTheme';
 
@@ -12,7 +7,11 @@ const Memory = ({ memory }) => {
   return (
     <View style={styles.memoryView}>
       <View style={styles.memoryImageView}>
-        <Image source={memory.image} style={styles.memoryImage} />
+        <Image
+          source={memory.image}
+          style={styles.memoryImage}
+          resizeMode="stretch"
+        />
       </View>
       <Text style={styles.memoryText}>{memory.caption}</Text>
     </View>
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
     width: 115,
   },
   memoryImage: {
-    resizeMode: 'stretch',
     height: 78,
     width: 115,
   },

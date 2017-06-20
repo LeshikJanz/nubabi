@@ -1,6 +1,6 @@
 // @flow
 import type { State, Baby, BabyEdge } from '../../common/types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
 import { ImageCacheProvider } from 'react-native-cached-image';
 import { graphql, gql } from 'react-apollo';
@@ -25,7 +25,7 @@ type Props = {
   babies: ?Array<BabyEdge>,
 };
 
-class SplashScreen extends PureComponent {
+class SplashScreen extends Component {
   props: Props;
 
   static navigationOptions = {
