@@ -1,5 +1,10 @@
 // @flow
-import type { Baby, State, MeasurementType } from '../../common/types';
+import type {
+  Baby,
+  State,
+  MeasurementType,
+  LayoutProps,
+} from '../../common/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
@@ -15,20 +20,19 @@ import {
   displayLoadingState,
   withLayout,
 } from '../components';
-import Chart from './Chart';
+import GraphDetailChart from './GraphDetailChart';
 import GraphDetailHeader from './GraphDetailHeader';
 import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   baby: Baby,
   navigation: NavigationProp<*>,
+  layout: LayoutProps,
 };
-
-const formatTickX = (date: Date) => date.getMonth() + 1;
-const formatTickY = (value: number) => value;
 
 export class GraphDetail extends PureComponent {
   props: Props;
+
   state = {
     currentMeasurementType: 'weight',
     displayPeriodAs: 'Months',
@@ -59,6 +63,10 @@ export class GraphDetail extends PureComponent {
     this.setState({ displayPeriodAs: value });
   };
 
+  getCurrentUnit() {
+    return this.state.currentMeasurementType === 'weight' ? 'kg' : 'cm';
+  }
+
   renderGraph() {
     const type = this.state.currentMeasurementType;
 
@@ -66,13 +74,10 @@ export class GraphDetail extends PureComponent {
     const data = pluck('node', this.props.baby.measurements[`${type}s`].edges);
 
     return (
-      <Chart
+      <GraphDetailChart
         data={data}
-        width={this.props.layout.viewportWidth - 20}
-        height={Math.round(this.props.layout.viewportWidth * 0.8)}
-        withLegend={/* TODO */ false}
-        formatTickX={formatTickX}
-        formatTickY={formatTickY}
+        width={Math.round(this.props.layout.viewportWidth - 15)}
+        height={Math.round(this.props.layout.viewportWidth * 0.5)}
       />
     );
   }
@@ -85,14 +90,7 @@ export class GraphDetail extends PureComponent {
           {...filter(GraphDetailHeader.fragments.baby, this.props.baby)}
         />
         <Box contentSpacing flexDirection="row" justifyContent="space-around">
-          <Box flex={1}>
-            <PillSwitcher
-              align="flex-start"
-              availableValues={['Months', 'Weeks']}
-              currentValue={this.state.displayPeriodAs}
-              onSelect={this.handleDisplayPeriodAsChange}
-            />
-          </Box>
+          <Box flex={1} />
           <Box
             as={TouchableOpacity}
             flexDirection="row"
@@ -114,10 +112,26 @@ export class GraphDetail extends PureComponent {
             </Box>
           </Box>
         </Box>
-        <Box flex={1} alignItems="center" justifyContent="center">
-          {this.renderGraph()}
-          <Box margin={1}>
-            <Text bold>{this.state.displayPeriodAs}</Text>
+        <Box
+          flex={1}
+          paddingVertical={2}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box flex={1} flexDirection="row" alignItems="center">
+            <Box
+              style={() => ({
+                marginLeft: 25,
+                transform: [
+                  {
+                    rotateZ: '-90deg',
+                  },
+                ],
+              })}
+            >
+              <Text bold>{this.getCurrentUnit()}</Text>
+            </Box>
+            {this.renderGraph()}
           </Box>
         </Box>
       </Box>
