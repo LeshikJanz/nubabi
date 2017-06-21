@@ -128,6 +128,7 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
+        disabled={false}
         ellipsizeMode="tail"
         numberOfLines={2}
         style={

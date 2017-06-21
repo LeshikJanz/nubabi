@@ -19,7 +19,7 @@ style = Object {
     "marginRight": 16,
     "fontSize": 14.791111111111112,
     "lineHeight": 16,
-    "color": "#748294",
+    "color": "#58A4FF",
     "fontFamily": "System",
     "fontWeight": "500",
     "marginBottom": 16,
@@ -79,6 +79,7 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={false}
+        disabled={false}
         ellipsizeMode="tail"
         style={
           Array [
@@ -100,6 +101,7 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
+        disabled={false}
         ellipsizeMode="tail"
         spacing={-0.88}
         style={
@@ -254,6 +256,7 @@ style = Object {
                 <Text
                   accessible={true}
                   allowFontScaling={true}
+                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Object {
@@ -267,6 +270,7 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
+                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -280,6 +284,7 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
+                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -293,6 +298,7 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
+                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -306,6 +312,7 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
+                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -326,6 +333,7 @@ style = Object {
               accessible={true}
               hitSlop={undefined}
               isTVSelectable={true}
+              nativeID={undefined}
               onLayout={undefined}
               onResponderGrant={[Function]}
               onResponderMove={[Function]}
@@ -346,6 +354,7 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={false}
+                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Array [
@@ -375,6 +384,7 @@ style = Object {
         accessible={true}
         hitSlop={undefined}
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -491,6 +501,7 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -518,6 +529,7 @@ style = Object {
         accessible={true}
         hitSlop={undefined}
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -588,6 +600,7 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               spacing={-0.68}
               style={
@@ -597,7 +610,7 @@ style = Object {
                   "borderLeftWidth": 0,
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
-                  "color": "#748294",
+                  "color": "#EA3154",
                   "fontFamily": "System",
                   "fontSize": 20.424170040420666,
                   "lineHeight": 32,
@@ -610,6 +623,7 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={true}
+                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Object {
@@ -618,7 +632,7 @@ style = Object {
                     "borderLeftWidth": 0,
                     "borderRightWidth": 0,
                     "borderTopWidth": 0,
-                    "color": "#748294",
+                    "color": "#EA3154",
                     "fontFamily": "System",
                     "fontSize": 14.791111111111112,
                     "lineHeight": 16,
@@ -633,6 +647,7 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               spacing={-0.68}
               style={
@@ -642,7 +657,7 @@ style = Object {
                   "borderLeftWidth": 0,
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
-                  "color": "#748294",
+                  "color": "#58A4FF",
                   "fontFamily": "System",
                   "fontSize": 20.424170040420666,
                   "lineHeight": 32,
@@ -653,6 +668,7 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={true}
+                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Object {
@@ -661,7 +677,7 @@ style = Object {
                     "borderLeftWidth": 0,
                     "borderRightWidth": 0,
                     "borderTopWidth": 0,
-                    "color": "#748294",
+                    "color": "#58A4FF",
                     "fontFamily": "System",
                     "fontSize": 14.791111111111112,
                     "lineHeight": 16,
@@ -692,6 +708,7 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
+            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {

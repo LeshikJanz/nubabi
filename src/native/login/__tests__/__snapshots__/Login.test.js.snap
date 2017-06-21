@@ -107,6 +107,7 @@ exports[`renders correctly 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -156,6 +157,7 @@ exports[`renders correctly 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -195,6 +197,7 @@ exports[`renders correctly 1`] = `
             hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
+            nativeID={undefined}
             onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -238,6 +241,7 @@ exports[`renders correctly 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
+                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Object {
@@ -367,6 +371,7 @@ exports[`show progress when logging in 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -416,6 +421,7 @@ exports[`show progress when logging in 1`] = `
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -455,6 +461,7 @@ exports[`show progress when logging in 1`] = `
             hasTVPreferredFocus={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
+            nativeID={undefined}
             onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -498,6 +505,7 @@ exports[`show progress when logging in 1`] = `
                 <Text
                   accessible={true}
                   allowFontScaling={true}
+                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Object {

@@ -17,6 +17,7 @@ style = Object {}
     accessible={true}
     hitSlop={undefined}
     isTVSelectable={true}
+    nativeID={undefined}
     onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -39,6 +40,7 @@ style = Object {}
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
     >
       30

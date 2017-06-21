@@ -1,24 +1,14 @@
 // @flow
 import type { Measurement } from '../../common/types';
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import Chart from 'react-native-chart';
-import { memoize, evolve, curry } from 'ramda';
-import moment from 'moment';
 import {
-  VictoryChart,
   VictoryStack,
-  VictoryLabel,
-  VictoryLine,
-  VictoryBar,
   VictoryScatter,
   VictoryArea,
-  VictoryAxis,
   VictoryGroup,
 } from 'victory-native';
-import theme from '../../common/themes/defaultTheme';
-import { Box, Text } from '../components';
 import { scale } from './GraphDetailChart';
+import theme from '../../common/themes/defaultTheme';
 import withLayout from '../components/withLayout';
 
 type Props = {
@@ -27,7 +17,6 @@ type Props = {
 
 export const CombinedChart = ({ data, layout }: Props) => {
   const width = layout.parentWidth;
-  console.log('Combined Chart', data);
   return (
     <VictoryStack
       domain={{ y: 0 }}

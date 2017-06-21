@@ -54,6 +54,7 @@ style = Object {
         accessibilityTraits={undefined}
         accessible={true}
         hitSlop={undefined}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -93,6 +94,7 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
+            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -114,6 +116,7 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={false}
+            disabled={false}
             ellipsizeMode="tail"
             style={
               Array [
@@ -142,6 +145,7 @@ style = Object {
     accessibilityTraits={undefined}
     accessible={true}
     hitSlop={undefined}
+    nativeID={undefined}
     onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}

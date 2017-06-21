@@ -82,6 +82,7 @@ style = Object {
         accessible={true}
         hitSlop={undefined}
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -198,6 +199,7 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -243,6 +245,7 @@ style = Object {
         accessible={true}
         hitSlop={undefined}
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={[Function]}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -359,6 +362,7 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
+              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {

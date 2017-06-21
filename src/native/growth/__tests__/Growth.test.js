@@ -4,7 +4,7 @@ import { Growth } from '../Growth';
 import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
-jest.mock('../../components/LineGraph');
+jest.mock('../CombinedChart', () => () => null);
 
 test('it renders correctly', () => {
   const baby = {

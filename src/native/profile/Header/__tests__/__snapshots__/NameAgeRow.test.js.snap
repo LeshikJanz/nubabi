@@ -38,6 +38,7 @@ exports[`it renders correctly 1`] = `
         hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -62,6 +63,7 @@ exports[`it renders correctly 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -98,6 +100,7 @@ exports[`it renders correctly 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
+        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -141,6 +144,7 @@ exports[`it renders correctly 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -171,6 +175,7 @@ exports[`it renders correctly 1`] = `
       accessible={true}
       hitSlop={undefined}
       isTVSelectable={true}
+      nativeID={undefined}
       onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -195,6 +200,7 @@ exports[`it renders correctly 1`] = `
       <Text
         accessible={true}
         allowFontScaling={false}
+        disabled={false}
         ellipsizeMode="tail"
         style={
           Array [

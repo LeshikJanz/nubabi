@@ -8,6 +8,7 @@ exports[`renders height 1`] = `
   accessible={true}
   hitSlop={undefined}
   isTVSelectable={true}
+  nativeID={undefined}
   onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -47,6 +48,7 @@ exports[`renders height 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -62,6 +64,7 @@ exports[`renders height 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [
@@ -95,6 +98,7 @@ exports[`renders height 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -118,6 +122,7 @@ exports[`renders height 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       onPress={undefined}
       style={
@@ -142,6 +147,7 @@ exports[`renders weight 1`] = `
   accessible={true}
   hitSlop={undefined}
   isTVSelectable={true}
+  nativeID={undefined}
   onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -181,6 +187,7 @@ exports[`renders weight 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -196,6 +203,7 @@ exports[`renders weight 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [
@@ -229,6 +237,7 @@ exports[`renders weight 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -252,6 +261,7 @@ exports[`renders weight 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       onPress={undefined}
       style={

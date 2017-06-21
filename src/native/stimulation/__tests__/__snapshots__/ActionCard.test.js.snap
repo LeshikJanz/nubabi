@@ -47,6 +47,7 @@ exports[`it renders correctly 1`] = `
     accessible={true}
     hitSlop={undefined}
     isTVSelectable={true}
+    nativeID={undefined}
     onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -81,6 +82,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
+      disabled={false}
       ellipsizeMode="tail"
       id={undefined}
       style={
@@ -118,6 +120,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       spacing={-0.31}
       style={
@@ -142,6 +145,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {

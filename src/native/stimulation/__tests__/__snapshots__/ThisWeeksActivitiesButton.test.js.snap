@@ -11,6 +11,7 @@ style = Object {}
   hasTVPreferredFocus={undefined}
   hitSlop={undefined}
   isTVSelectable={true}
+  nativeID={undefined}
   onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -101,6 +102,7 @@ style = Object {}
       <Text
         accessible={true}
         allowFontScaling={true}
+        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
