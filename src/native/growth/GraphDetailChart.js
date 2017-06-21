@@ -4,7 +4,18 @@ import React from 'react';
 import Chart from 'react-native-chart';
 import { memoize, evolve, curry } from 'ramda';
 import moment from 'moment';
+import {
+  VictoryChart,
+  VictoryStack,
+  VictoryLabel,
+  VictoryLine,
+  VictoryScatter,
+  VictoryArea,
+  VictoryAxis,
+  VictoryGroup,
+} from 'victory-native';
 import theme from '../../common/themes/defaultTheme';
+import { Box, Text } from '../components';
 
 type Props = {
   data: Array<Measurement>,
@@ -12,23 +23,15 @@ type Props = {
   height: number,
 };
 
-const measurementToPoint = curry(measurement => [
-  new Date(measurement.recordedAt).getTime(),
-  measurement.value,
-]);
+const measurementToPoint = curry(measurement => ({
+  x: new Date(measurement.recordedAt),
+  y: measurement.value,
+}));
 
 const transformData = memoize(data => data.map(measurementToPoint));
 
-const formatTickX = (timestamp: number, previousTimestamp: ?number) => {
-  const isSameMonth =
-    previousTimestamp &&
-    new Date(timestamp).getMonth() === new Date(previousTimestamp).getMonth();
-
-  if (isSameMonth) {
-    return;
-  }
-
-  return moment(timestamp).format('MMM').toUpperCase();
+const formatTickX = (date: Date) => {
+  return moment(date).format('MMM').toUpperCase();
 };
 
 const formatTickY = (value: number, previousLabel: any) => {
@@ -39,26 +42,63 @@ const formatTickY = (value: number, previousLabel: any) => {
   return value.toFixed(1);
 };
 
-export const GraphDetailChart = ({ data, width, height }: Props) => {
-  console.log(transformData(data));
+const YAxisLabel = ({ angle, text }) => {
   return (
-    <Chart
-      data={[transformData(data)]}
-      style={{ width, height }}
-      type="line"
-      color={['#ec4469']}
-      fillColor={theme.colors.primary}
-      showDataPoint
-      dataPointColor={['#FFFFFF']}
-      dataPointFillColor={[theme.colors.primary]}
-      gridColor="rgba(255,255,255,0.21)"
-      axisLineWidth={0}
-      hideHorizontalGridLines
-      xAxisTransform={formatTickX}
-      yAxisTransform={formatTickY}
-      axisLabelColor={theme.colors.gray}
-      tightBounds
-    />
+    <Box
+      style={() => ({
+        marginLeft: 25,
+        transform: [
+          {
+            rotateZ: `${angle}deg`,
+          },
+        ],
+      })}
+    >
+      <Text bold>{text}</Text>
+    </Box>
+  );
+};
+
+export const GraphDetailChart = ({
+  data,
+  width,
+  height,
+  currentUnit,
+}: Props) => {
+  console.log(transformData(data));
+  const chartData = transformData(data);
+  const scale = { x: 'time', y: 'linear' };
+  const style = {
+    data: { fill: theme.colors.primary },
+    labels: {
+      fontFamily: 'System',
+    },
+  };
+  const pointStyle = {
+    data: { fill: '#ec4469', stroke: '#fff' },
+  };
+
+  const yAxisStyle = {};
+
+  return (
+    <VictoryChart scale={scale}>
+      <VictoryGroup data={chartData}>
+        <VictoryArea style={style} />
+        <VictoryScatter style={pointStyle} />
+        <VictoryAxis
+          dependentAxis
+          label={currentUnit}
+          style={yAxisStyle}
+          axisLabelComponent={<VictoryLabel transform="rotate(-45, 0,0)" />}
+        />
+        <VictoryAxis
+          dependentAxis={false}
+          tickFormat={formatTickX}
+          label="Months"
+          tickCount={4}
+        />
+      </VictoryGroup>
+    </VictoryChart>
   );
 };
 

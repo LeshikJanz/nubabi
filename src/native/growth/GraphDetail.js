@@ -78,6 +78,7 @@ export class GraphDetail extends PureComponent {
         data={data}
         width={Math.round(this.props.layout.viewportWidth - 15)}
         height={Math.round(this.props.layout.viewportWidth * 0.5)}
+        currentUnit={this.getCurrentUnit()}
       />
     );
   }
@@ -119,18 +120,7 @@ export class GraphDetail extends PureComponent {
           justifyContent="center"
         >
           <Box flex={1} flexDirection="row" alignItems="center">
-            <Box
-              style={() => ({
-                marginLeft: 25,
-                transform: [
-                  {
-                    rotateZ: '-90deg',
-                  },
-                ],
-              })}
-            >
-              <Text bold>{this.getCurrentUnit()}</Text>
-            </Box>
+
             {this.renderGraph()}
           </Box>
         </Box>
