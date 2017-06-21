@@ -25,12 +25,12 @@ type Props = {
   height: number,
 };
 
-const measurementToPoint = curry(measurement => ({
+export const measurementToPoint = curry(measurement => ({
   x: new Date(measurement.recordedAt),
   y: measurement.value,
 }));
 
-const transformData = memoize(data => data.map(measurementToPoint));
+export const transformData = memoize(data => data.map(measurementToPoint));
 
 const scale = { x: 'time', y: 'linear' };
 

@@ -19,7 +19,7 @@ import {
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import ThisWeekGrowthButton from './ThisWeekGrowthButton';
-import Chart from './Chart';
+import CombinedChart from './CombinedChart';
 
 type Props = {
   baby: Baby,
@@ -35,13 +35,13 @@ const formatName = (name: string) => {
 const DAY_MS = 86400000;
 
 const defaultData = [
-  { timestamp: new Date(2007, 1, 1).getTime(), value: 83.24 },
-  { timestamp: new Date(2007, 1, 2).getTime(), value: 85.35 },
-  { timestamp: new Date(2007, 1, 3).getTime(), value: 98.84 },
-  { timestamp: new Date(2007, 1, 4).getTime(), value: 79.92 },
-  { timestamp: new Date(2007, 1, 5).getTime(), value: 83.80 },
-  { timestamp: new Date(2007, 1, 6).getTime(), value: 88.47 },
-  { timestamp: new Date(2007, 1, 7).getTime(), value: 94.47 },
+  { recordedAt: new Date(2007, 1, 1), value: 83.24 },
+  { recordedAt: new Date(2007, 1, 2), value: 85.35 },
+  { recordedAt: new Date(2007, 1, 3), value: 98.84 },
+  { recordedAt: new Date(2007, 1, 4), value: 79.92 },
+  { recordedAt: new Date(2007, 1, 5), value: 83.80 },
+  { recordedAt: new Date(2007, 1, 6), value: 88.47 },
+  { recordedAt: new Date(2007, 1, 7), value: 94.47 },
 ];
 
 export class Growth extends Component {
@@ -72,27 +72,21 @@ export class Growth extends Component {
       return defaultData; // TODO: how to handle this?
     }
 
-    const measurements = path(
-      ['measurements', 'heights', 'edges'],
-      this.props.baby,
-    ).map(edge => {
-      return {
-        recordedAt: new Date(edge.node.recordedAt).getTime(),
-        value: edge.node.value,
-      };
+    const measurements = {};
+
+    ['heights', 'weights'].forEach(measurementType => {
+      measurements[measurementType] = path(
+        ['measurements', measurementType, 'edges'],
+        this.props.baby,
+      ).map(edge => {
+        return {
+          recordedAt: new Date(edge.node.recordedAt),
+          value: edge.node.value,
+        };
+      });
     });
 
-    return [
-      // HACK: so it kinda curves so the graph doesn't cut
-      /*
-      {
-        timestamp: moment(this.props.baby.dob).toDate().getTime() - DAY_MS,
-        value: measurements[0].value - 5,
-        point: false,
-      },
-      */
-      ...measurements,
-    ];
+    return measurements;
   }
 
   render() {
@@ -122,28 +116,28 @@ export class Growth extends Component {
                 justifyContent="flex-start"
               >
                 <Text
-                  color="secondary"
+                  color="primary"
                   size={7}
                   marginHorizontal={1}
                   spacing={-0.68}
                   textAlign="center"
                 >
                   {baby.weight}
-                  <Text color="secondary" size={2} marginHorizontal={1}>
+                  <Text color="primary" size={2} marginHorizontal={1}>
                     kg
                   </Text>
                 </Text>
                 <Text
-                  color="secondary"
+                  color="success"
                   size={7}
                   spacing={-0.68}
                   textAlign="center"
                 >
                   {baby.height}
-                  <Text color="secondary" size={2}>cm</Text>
+                  <Text color="success" size={2}>cm</Text>
                 </Text>
               </Box>
-              <Chart data={this.getChartData()} height={120} />
+              <CombinedChart data={this.getChartData()} />
             </Box>
             <Box justifyContent="center" padding={1}>
               <Text size={2}>
@@ -176,6 +170,14 @@ export default compose(
             weight
             height
             measurements {
+              weights {
+                edges {
+                  node {
+                    value
+                    recordedAt
+                  }
+                }
+              }
               heights {
                 edges {
                   node {
