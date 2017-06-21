@@ -1,6 +1,7 @@
 // @flow
 import type { Measurement } from '../../common/types';
 import React from 'react';
+import { StyleSheet } from 'react-native';
 import Chart from 'react-native-chart';
 import { memoize, evolve, curry } from 'ramda';
 import moment from 'moment';
@@ -9,6 +10,7 @@ import {
   VictoryStack,
   VictoryLabel,
   VictoryLine,
+  VictoryBar,
   VictoryScatter,
   VictoryArea,
   VictoryAxis,
@@ -30,73 +32,50 @@ const measurementToPoint = curry(measurement => ({
 
 const transformData = memoize(data => data.map(measurementToPoint));
 
-const formatTickX = (date: Date) => {
-  return moment(date).format('MMM').toUpperCase();
+const scale = { x: 'time', y: 'linear' };
+
+const fontStyle = {
+  fontFamily: 'System',
+  stroke: theme.colors.gray,
 };
 
-const formatTickY = (value: number, previousLabel: any) => {
-  if (previousLabel && previousLabel === value.toFixed(1)) {
-    return;
-  }
-
-  return value.toFixed(1);
+const style = {
+  data: { fill: theme.colors.primary },
+  labels: {
+    ...fontStyle,
+  },
+};
+const pointStyle = {
+  data: { fill: '#ec4469', stroke: '#fff' },
 };
 
-const YAxisLabel = ({ angle, text }) => {
-  return (
-    <Box
-      style={() => ({
-        marginLeft: 25,
-        transform: [
-          {
-            rotateZ: `${angle}deg`,
-          },
-        ],
-      })}
-    >
-      <Text bold>{text}</Text>
-    </Box>
-  );
+const barStyle = {
+  data: {
+    fill: 'transparent',
+    stroke: '#fff',
+    width: StyleSheet.hairlineWidth,
+    opacity: 0.1,
+  },
 };
 
-export const GraphDetailChart = ({
-  data,
-  width,
-  height,
-  currentUnit,
-}: Props) => {
-  console.log(transformData(data));
+const axisStyle = {
+  labels: {
+    ...fontStyle,
+  },
+};
+
+export const GraphDetailChart = ({ data, width, height }: Props) => {
   const chartData = transformData(data);
-  const scale = { x: 'time', y: 'linear' };
-  const style = {
-    data: { fill: theme.colors.primary },
-    labels: {
-      fontFamily: 'System',
-    },
-  };
-  const pointStyle = {
-    data: { fill: '#ec4469', stroke: '#fff' },
-  };
-
-  const yAxisStyle = {};
 
   return (
     <VictoryChart scale={scale}>
       <VictoryGroup data={chartData}>
         <VictoryArea style={style} />
+        <VictoryBar style={barStyle} />
         <VictoryScatter style={pointStyle} />
-        <VictoryAxis
-          dependentAxis
-          label={currentUnit}
-          style={yAxisStyle}
-          axisLabelComponent={<VictoryLabel transform="rotate(-45, 0,0)" />}
-        />
-        <VictoryAxis
-          dependentAxis={false}
-          tickFormat={formatTickX}
-          label="Months"
-          tickCount={4}
-        />
+
+        <VictoryAxis dependentAxis style={axisStyle} />
+        <VictoryAxis dependentAxis={false} style={axisStyle} />
       </VictoryGroup>
     </VictoryChart>
   );

@@ -120,7 +120,18 @@ export class GraphDetail extends PureComponent {
           justifyContent="center"
         >
           <Box flex={1} flexDirection="row" alignItems="center">
-
+            <Box
+              style={() => ({
+                marginLeft: 25,
+                transform: [
+                  {
+                    rotateZ: '-90deg',
+                  },
+                ],
+              })}
+            >
+              <Text bold>{this.getCurrentUnit()}</Text>
+            </Box>
             {this.renderGraph()}
           </Box>
         </Box>
