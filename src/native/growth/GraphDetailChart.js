@@ -2,14 +2,9 @@
 import type { Measurement } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Chart from 'react-native-chart';
-import { memoize, evolve, curry } from 'ramda';
-import moment from 'moment';
+import { memoize, curry } from 'ramda';
 import {
   VictoryChart,
-  VictoryStack,
-  VictoryLabel,
-  VictoryLine,
   VictoryBar,
   VictoryScatter,
   VictoryArea,
@@ -17,7 +12,6 @@ import {
   VictoryGroup,
 } from 'victory-native';
 import theme from '../../common/themes/defaultTheme';
-import { Box, Text } from '../components';
 
 type Props = {
   data: Array<Measurement>,
