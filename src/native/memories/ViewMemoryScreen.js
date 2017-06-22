@@ -1,0 +1,24 @@
+// @flow
+import React, { PureComponent } from 'react';
+import { Screen, Box } from '../components';
+import AddMemoryHeader from './AddMemoryHeader';
+import ViewMemories from './ViewMemories';
+
+export class ViewMemoryScreen extends PureComponent {
+  static navigationOptions = {
+    title: 'Memories',
+  };
+
+  render() {
+    return (
+      <Screen>
+        <AddMemoryHeader />
+        <Box flex={1} style={() => ({ marginTop: 9 })}>
+          <ViewMemories />
+        </Box>
+      </Screen>
+    );
+  }
+}
+
+export default ViewMemoryScreen;

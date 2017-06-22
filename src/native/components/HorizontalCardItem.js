@@ -1,23 +1,32 @@
 // @flow
-// TODO: reuse HorizontalCardItem
-import type { LayoutProps } from '../../common/types';
+import type { LayoutProps, File } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
+// TODO: restore
 import Image from 'react-native-cached-image';
-import { gql } from 'react-apollo';
 import { compose } from 'ramda';
-import { Box, Text, Overlay, withLayout } from '../components';
+import Box from './Box';
+import Text from './Text';
+import Overlay from './Overlay';
+import withLayout from './withLayout';
 
-type Props = {
+export type Props = {
   title: string,
-  image: { url: string },
+  files: Array<File>,
   layout: LayoutProps,
 };
 
-export const ArticleCardItem = ({ title, image, layout }: Props) => {
+export const HorizontalCardItem = ({ title, files, layout }: Props) => {
+  const image = files[0]; // TODO: support video
+
+  // TODO: remove image width style, not needed in ArticleCardItem, add flex
   return (
     <Box flex={1} borderRadius={4} overflow="hidden">
-      <Image source={{ uri: image.url }} style={{ flex: 1 }} resizeMode="cover">
+      <Image
+        source={{ uri: image.url }}
+        style={{ width: layout.parentWidth, height: 80 }}
+        resizeMode="cover"
+      >
         <Overlay />
       </Image>
 
@@ -33,7 +42,7 @@ export const ArticleCardItem = ({ title, image, layout }: Props) => {
           },
         })}
       >
-        <Box justiyContent="center" alignItems="center" padding={0.5}>
+        <Box flex={1} justiyContent="center" alignItems="center" padding={0.5}>
           <Text style={() => ({ width: 100 })} numberOfLines={2} align="center">
             {title}
           </Text>
@@ -43,16 +52,4 @@ export const ArticleCardItem = ({ title, image, layout }: Props) => {
   );
 };
 
-ArticleCardItem.fragments = {
-  item: gql`
-    fragment ArticleListItem on Article {
-      id
-      title
-      image {
-        url
-      }
-    }
-  `,
-};
-
-export default compose(withLayout)(ArticleCardItem);
+export default compose(withLayout)(HorizontalCardItem);

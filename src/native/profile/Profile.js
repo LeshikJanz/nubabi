@@ -43,10 +43,12 @@ class Profile extends PureComponent {
         id
         ...Header
         ...Measurement
+        ...RecentMemories
       }
 
       ${Header.fragments.header}
       ${Measurement.fragments.weight}
+      ${RecentMemories.fragments.memories}
     `,
   };
 
@@ -64,6 +66,11 @@ class Profile extends PureComponent {
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
   handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
   handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
+  handleAddMemory = () => this.props.navigation.navigate('addMemory');
+
+  handleViewMemory = (id: string, title: string) => {
+    this.props.navigation.navigate('viewMemory', { id, title });
+  };
 
   render() {
     const { baby } = this.props;
@@ -101,15 +108,14 @@ class Profile extends PureComponent {
                 onUpdate={this.handleUpdateHeight}
               />
             </View>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL(
-                  'nubabi://content/growth/4IUT9xUt9eUAa6Q6sWC06e',
-                )}
-            >
+            <TouchableOpacity onPress={() => {}}>
               <Achievements />
             </TouchableOpacity>
-            <RecentMemories memories={baby.memories} />
+            <RecentMemories
+              onViewMemory={this.handleViewMemory}
+              onAddMemory={this.handleAddMemory}
+              {...filter(RecentMemories.fragments.memories, baby)}
+            />
           </ScrollView>
         </View>
       </Screen>

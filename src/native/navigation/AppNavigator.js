@@ -48,6 +48,8 @@ import ActivityMediaScreen from '../stimulation/ActivityMediaScreen';
 import ParentingTipsScreen from '../library/ParentingTipsScreen';
 import HealthHelpScreen from '../library/HealthHelpScreen';
 import GraphDetailScreen from '../growth/GraphDetailScreen';
+import ViewMemoryScreen from '../memories/ViewMemoryScreen';
+import AddMemoryScreen from '../memories/AddMemoryScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -93,6 +95,11 @@ const routes = {
   viewActivityMedia: { screen: ActivityMediaScreen },
   parentingTips: { screen: ParentingTipsScreen },
   healthHelp: { screen: HealthHelpScreen },
+  addMemory: { screen: AddMemoryScreen },
+  viewMemory: {
+    screen: ViewMemoryScreen,
+    path: 'memories/:id',
+  },
 };
 
 class TransitionerSwitcher extends PureComponent {

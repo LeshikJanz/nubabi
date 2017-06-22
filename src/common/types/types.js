@@ -4,6 +4,7 @@ import type { Element } from 'react';
 // Models
 import type {
   Query,
+  File,
   Baby,
   BabyEdge,
   Activity,
@@ -13,6 +14,10 @@ import type {
   ActivityMedia,
   ActivityFilterInput,
   Memory,
+  MemoryConnection,
+  MemoryEdge,
+  FileConnection,
+  CommentConnection,
   User,
   Achievement,
   Expert,
@@ -41,6 +46,7 @@ import type {
 
 export type {
   Query,
+  File,
   Baby,
   BabyEdge,
   Activity,
@@ -49,6 +55,10 @@ export type {
   ActivityMedia,
   ActivityFilterInput,
   Memory,
+  MemoryConnection,
+  MemoryEdge,
+  FileConnection,
+  CommentConnection,
   User,
   Achievement,
   Expert,

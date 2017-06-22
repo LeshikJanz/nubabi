@@ -13,35 +13,8 @@ interface Timestampable {
   updatedAt: DateTime
 }
 
-interface ResizableImage {
-  url: String
-  width: Int
-  height: Int
-}
-
-type Image implements ResizableImage {
-  url: String
-  width: Int
-  height: Int
-  large: Image
-  thumb: Image
-}
-
-type Avatar implements ResizableImage {
-  url: String
-  width: Int
-  height: Int
-}
-
-type Avatar {
-  url: String,
-  large: Image,
-  thumb: Image,
-}
-
-input ImageInput {
-  # A Base64-encoded data URI representing the image contents
-  url: String
+type Mutation {
+  ping: String
 }
 
 # Information about pagination in a connection.
@@ -93,7 +66,10 @@ type User implements Node {
 }
 
 type Viewer {
-  allUsers(before: String, after: String, first: Int, last: Int): UserConnection!
+  allUsers(
+    before: String, after: String, first: Int, last: Int
+  ): UserConnection!
+
   user: User
   getUser(id: ID!): User
 }
@@ -123,7 +99,7 @@ type Query {
 input CreateUserInput {
   username: String!
   password: Secret,
-  clientMutationId: ID,
+  clientMutationId: String,
 }
 
 type CreateUserPayload {
@@ -143,6 +119,70 @@ type CreateUserPayload {
   clientMutationId: String
 }
 
-type Mutation {
-  ping: String
+# TODO: make avatar, image, etc use/implement this
+type File {
+  # id: ID!
+
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+
+  # secret: String!
+  # size: Int!
+  # updatedAt: DateTime!
+  url: String!
+}
+
+# A connection to a list of items.
+type FileConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [FileEdge]
+
+  count: Int
+}
+
+type FileEdge {
+  # The item at the end of the edge.
+  node: File!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input FileFilter {
+  contentTypeContains: String
+}
+
+interface ResizableImage {
+  url: String
+  width: Int
+  height: Int
+}
+
+type Image implements ResizableImage {
+  url: String
+  width: Int
+  height: Int
+  large: Image
+  thumb: Image
+}
+
+type Avatar implements ResizableImage {
+  url: String
+  width: Int
+  height: Int
+}
+
+type Avatar {
+  url: String,
+  large: Image,
+  thumb: Image,
+}
+
+input ImageInput {
+  # A Base64-encoded data URI representing the image contents
+  url: String
 }

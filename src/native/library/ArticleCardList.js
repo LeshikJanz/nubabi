@@ -1,4 +1,5 @@
 // @flow
+// TODO: reuse HorizontalCardList
 import type { DataSource } from 'react-native';
 import type { Article } from '../../common/types';
 import React, { PureComponent } from 'react';

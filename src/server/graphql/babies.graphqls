@@ -25,12 +25,24 @@ type Baby implements Node, Timestampable {
   weekBorn: Int!
   createdAt: DateTime!
   updatedAt: DateTime
+
   # Relationship to Viewer
   relationship: BabyRelationship
-  activities(before: String, after: String, first: Int, last: Int): ActivityConnection
+
+  activities(
+    before: String, after: String, first: Int, last: Int
+  ): ActivityConnection
+
   activity(id: ID!): Activity
-  achievements(before: String, after: String, first: Int, last: Int): AchievementConnection
-  memories(filter: MemoryFilter, first: Int, last: Int): MemoryConnection
+
+  achievements(
+    before: String, after: String, first: Int, last: Int
+  ): AchievementConnection
+
+  memories(
+    before: String, after: String, first: Int, last: Int, filter: MemoryFilter
+  ): MemoryConnection
+
   measurements: Measurements
 }
 
@@ -124,8 +136,6 @@ enum MeasurementType {
   weight
 }
 
-
-
 input RecordMeasurementInput {
   babyId: ID!
   value: Float!
@@ -140,74 +150,6 @@ type RecordMeasurementPayload {
 
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
-}
-
-type Achievement {
-  id: ID!
-  badges(
-    upcoming: Boolean
-  ): [Badge]
-}
-
-type Badge {
-  image(
-    # Width of the image that should be returned
-    width: Int,
-    # Height of the image that should be returned
-    height: Int
-  ): Image
-}
-
-# A connection to a list of items.
-type AchievementConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [AchievementEdge]
-
-  # Count of result set without considering pagination arguments
-  count: Int!
-}
-
-type AchievementEdge {
-  # The item at the end of the edge.
-  node: Achievement!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
-enum MemoryFilter {
-  # Returns all memories
-  ALL
-  # Returns recent memories (TODO: consider removal)
-  RECENT
-  # Returns special memories
-  SPECIAL
-}
-
-type Memory {
-  id: ID!
-  description: String
-  image(width: Int, height: Int): Image
-}
-
-# A connection to a list of items.
-type MemoryConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [MemoryEdge]
-}
-
-type MemoryEdge {
-  # The item at the end of the edge.
-  node: Memory!
-
-  # A cursor for use in pagination.
-  cursor: String!
 }
 
 type Measurements {
