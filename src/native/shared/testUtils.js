@@ -33,4 +33,6 @@ export const layoutTestProp = {
   width: 750,
   viewportWidth: 750,
   viewportHeight: 1334,
+  parentWidth: 350,
+  parentHeight: 200,
 };

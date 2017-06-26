@@ -12,7 +12,7 @@ type Props = {
 
 const parentingTipsImage = require('../../common/images/parenting_tips.png');
 
-const Button = withLayout(({ layout }: { layout: LayoutProps }) => {
+export const Button = ({ layout }: { layout: LayoutProps }) => {
   const dimensions = {
     width: Math.round(layout.viewportWidth / 1.03),
     height: Math.round(layout.viewportWidth / 2.5),
@@ -37,12 +37,14 @@ const Button = withLayout(({ layout }: { layout: LayoutProps }) => {
       </Box>
     </Box>
   );
-});
+};
+
+const ButtonWithLayout = withLayout(Button);
 
 export const ParentingTipsButton = ({ onPress }: Props) => {
   return (
     <Card padding={0} onPress={onPress}>
-      <Button />
+      <ButtonWithLayout />
     </Card>
   );
 };

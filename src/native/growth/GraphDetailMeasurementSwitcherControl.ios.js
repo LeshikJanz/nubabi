@@ -2,7 +2,6 @@
 import type {
   GraphDetailMeasurementSwitcherControlProps,
 } from './GraphDetailMeasurementSwitcher';
-import type { Event } from 'react-native';
 import React, { PureComponent } from 'react';
 import { SegmentedControlIOS } from 'react-native';
 import { upperFirst } from 'lodash/fp';

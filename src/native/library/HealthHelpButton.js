@@ -12,7 +12,7 @@ type Props = {
 
 const healthHelpImage = require('../../common/images/health_help.png');
 
-const Button = withLayout(({ layout }: { layout: LayoutProps }) => {
+export const Button = ({ layout }: { layout: LayoutProps }) => {
   const dimensions = {
     width: Math.round(layout.viewportWidth / 1.03),
     height: Math.round(layout.viewportWidth / 2.5),
@@ -37,12 +37,14 @@ const Button = withLayout(({ layout }: { layout: LayoutProps }) => {
       </Box>
     </Box>
   );
-});
+};
+
+export const ButtonWithLayout = withLayout(Button);
 
 export const HealthHelpButton = ({ onPress }: Props) => {
   return (
     <Card padding={0} onPress={onPress}>
-      <Button />
+      <ButtonWithLayout />
     </Card>
   );
 };

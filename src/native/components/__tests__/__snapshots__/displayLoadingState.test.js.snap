@@ -13,7 +13,7 @@ style = Object {}
   }
 >
   <RNSpinkit
-    color="#EA3154"
+    color={4293538132}
     size={37}
     style={
       Array [

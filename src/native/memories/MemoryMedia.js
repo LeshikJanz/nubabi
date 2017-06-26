@@ -22,11 +22,9 @@ const RoundedContainer = ({ children }) => (
   </View>
 );
 export const MemoryMedia = ({ files, layout }: Props) => {
-  const mediaList = files.edges.length > 1
+  return files.edges.length > 1
     ? <MemoryMediaMultiple files={files} layout={layout} />
     : <MemoryMediaSingle media={head(files.edges).node} layout={layout} />;
-
-  return mediaList;
 };
 
 export const MemoryMediaImage = ({ media, layout, small = false }) => {

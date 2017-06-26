@@ -52,6 +52,7 @@ exports[`renders correctly 1`] = `
     extraHeight={75}
     extraScrollHeight={0}
     keyboardDismissMode="interactive"
+    keyboardOpeningTime={250}
     keyboardShouldPersistTaps="handled"
     onScroll={[Function]}
     scrollEventThrottle={0}
@@ -316,6 +317,7 @@ exports[`show progress when logging in 1`] = `
     extraHeight={75}
     extraScrollHeight={0}
     keyboardDismissMode="interactive"
+    keyboardOpeningTime={250}
     keyboardShouldPersistTaps="handled"
     onScroll={[Function]}
     scrollEventThrottle={0}
@@ -532,7 +534,7 @@ exports[`show progress when logging in 1`] = `
           }
         >
           <RNSpinkit
-            color="#FFFFFF"
+            color={4294967295}
             size={40}
             style={
               Array [

@@ -55,8 +55,8 @@ style = Object {}
           "flex": 1,
         },
         Object {
-          "height": undefined,
-          "width": undefined,
+          "height": 200,
+          "width": 350,
         },
       ]
     }
