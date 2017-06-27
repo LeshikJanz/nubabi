@@ -56,7 +56,7 @@ export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
   // TODO: real video
   return (
     <Overlay>
-      {displayMoreIndicator}
+
       <Box
         flex={1}
         alignItems="center"
@@ -64,6 +64,7 @@ export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
         style={() => ({ height: small ? 60 : 180 })}
         borderRadius={4}
       >
+
         <Box
           borderRadius={20}
           backgroundColor="white"
@@ -79,6 +80,7 @@ export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
           />
         </Box>
       </Box>
+      {displayMoreIndicator}
     </Overlay>
   );
 };
