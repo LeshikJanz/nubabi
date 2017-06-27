@@ -17,6 +17,7 @@ const loadingImage = { uri: 'LaunchImage' };
 
 type Props = {
   appOnline: boolean,
+  appStarted: boolean,
   navigation: any,
   isAuthenticated: boolean,
   loadingMessage: ?string,
@@ -59,7 +60,8 @@ class SplashScreen extends Component {
     }
 
     if (!isAuthenticated) {
-      return this.navigateTo('login');
+      this.navigateTo('login');
+      return;
     }
 
     if (baby) {
@@ -77,9 +79,11 @@ class SplashScreen extends Component {
         });
       }
 
-      ImageCacheProvider.cacheMultipleImages(images).then(() =>
-        this.navigateTo('home'),
-      );
+      if (images.length) {
+        ImageCacheProvider.cacheMultipleImages(images).then(() =>
+          this.navigateTo('home'),
+        );
+      }
     } else {
       this.navigateTo('home');
     }
