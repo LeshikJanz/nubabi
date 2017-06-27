@@ -5,9 +5,8 @@ enum MemoryFilter {
   SPECIAL
 }
 
-# TODO: remove
-extend type Viewer {
-  memories: MemoryConnection!
+extend type Baby {
+  memory(id: ID!): Memory
 }
 
 type Memory implements Node, Timestampable {
@@ -62,6 +61,7 @@ type Badge {
 }
 
 type Comment implements Timestampable {
+  id: ID!
   text: String!
   author: User!
   createdAt: DateTime!

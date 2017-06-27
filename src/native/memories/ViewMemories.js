@@ -11,14 +11,18 @@ import Memory from './Memory';
 
 type Props = {
   memories: Array<MemoryType>,
-  onAddComment: () => void,
 };
 
 export class ViewMemories extends PureComponent {
   props: Props;
 
   render() {
-    return <MemoryList memories={this.props.memories} />;
+    return (
+      <MemoryList
+        babyId={this.props.currentBabyId}
+        memories={this.props.memories}
+      />
+    );
   }
 }
 
@@ -35,6 +39,7 @@ export default compose(
           memories {
             edges {
               node {
+                id
                 ...MemoryItem
               }
             }

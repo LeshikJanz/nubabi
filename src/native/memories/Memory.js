@@ -1,6 +1,7 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
+import { LayoutAnimation } from 'react-native';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
@@ -9,11 +10,16 @@ import { Box, Card, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import MemoryMedia from './MemoryMedia';
 import MemoryComments from './MemoryComments';
+import MemoryComment from './MemoryComment';
 
-type Props = MemoryType & {};
+type Props = MemoryType & {
+  babyId: String,
+  onLoadMoreComments: () => Promise<*>,
+};
 
 class Memory extends PureComponent {
   prop: Props;
+
   state = {
     displayAllComments: false,
   };
@@ -37,23 +43,25 @@ class Memory extends PureComponent {
             }
           }
         }
-        comments(last: 3) {
+        # comments are reversed (most-recent first)
+        comments(first: 2) {
           count
           edges {
+            cursor
             node {
-              text
-              author {
-                firstName
-                lastName
-              }
+              id
+              ...MemoryComment
             }
           }
         }
       }
+      ${MemoryComment.fragments.comment}
     `,
   };
 
   toggleAllComments = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+
     this.setState(({ displayAllComments }) => ({
       displayAllComments: !displayAllComments,
     }));
@@ -61,6 +69,8 @@ class Memory extends PureComponent {
 
   render() {
     const {
+      id,
+      babyId,
       author,
       comments: commentsConnection,
       files: filesConnection,
@@ -120,7 +130,9 @@ class Memory extends PureComponent {
             <MemoryMedia files={filesConnection} />
             <MemoryComments
               comments={commentsConnection}
-              onExpand={this.toggleAllComments}
+              memoryId={id}
+              babyId={babyId}
+              onLoadMore={this.toggleAllComments}
               expanded={this.state.displayAllComments}
             />
           </Card>

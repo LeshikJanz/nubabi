@@ -1,8 +1,9 @@
-import { map, identity } from 'ramda';
+import { map, identity, find, propEq, sortBy, prop, reverse } from 'ramda';
 import faker from 'faker';
 import {
   connectionFromArray,
   globalIdField,
+  fromGlobalId,
   connectionFromPromisedArrayWithCount,
 } from './common';
 
@@ -21,6 +22,7 @@ const makeUser = () => ({
 });
 
 const makeComment = index => ({
+  id: faker.random.uuid(),
   text: faker.lorem.sentences(),
   author: makeUser(),
   createdAt: faker.date.past(),
@@ -40,19 +42,21 @@ const makeMemory = () => ({
   title: faker.company.catchPhrase(),
   description: faker.lorem.sentences(4),
   files: randomArray(1, 10, makeFile),
-  comments: randomArray(0, 10, makeComment),
+  comments: reverse(sortByTimestamp(randomArray(0, 10, makeComment))),
 });
 
-const memories = randomArray(1, 10, makeMemory);
+const sortByTimestamp = sortBy(prop('createdAt'));
+
+const memories = sortByTimestamp(randomArray(1, 10, makeMemory));
 
 export const resolvers = {
   Baby: {
     memories: ({ id }, args) => {
       return connectionFromArray(memories, args);
     },
-  },
-  Viewer: {
-    memories: (_, args) => connectionFromArray(memories, args),
+    memory: (_, { id }) => {
+      return find(propEq('id', fromGlobalId(id).id), memories);
+    },
   },
   Memory: {
     id: globalIdField(),
