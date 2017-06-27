@@ -14,7 +14,9 @@ export class ViewMemoryScreen extends PureComponent {
       <Screen>
         <AddMemoryHeader />
         <Box flex={1} style={() => ({ marginTop: 9 })}>
-          <ViewMemories />
+          <ViewMemories
+            navigatedToMemory={this.props.navigation.state.params.id}
+          />
         </Box>
       </Screen>
     );

@@ -11,6 +11,8 @@ import Memory from './Memory';
 
 type Props = {
   memories: Array<MemoryType>,
+  currentBabyId: string,
+  navigatedToMemory: ?string,
 };
 
 export class ViewMemories extends PureComponent {
@@ -21,6 +23,7 @@ export class ViewMemories extends PureComponent {
       <MemoryList
         babyId={this.props.currentBabyId}
         memories={this.props.memories}
+        navigatedToMemory={this.props.navigatedToMemory}
       />
     );
   }
