@@ -15,7 +15,7 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
-import * as loginActions from '../../common/auth/actions';
+import { loginRequest } from '../../common/auth/actions';
 import Loader from '../components/Loader';
 
 const background = require('../../common/images/loginBackground.jpg');
@@ -24,7 +24,7 @@ const logo = require('../../common/images/loginLogo.png');
 const window = Dimensions.get('window');
 
 type Props = {
-  actions: any,
+  loginRequest: typeof loginRequest,
   isFetching: boolean,
 };
 
@@ -38,7 +38,7 @@ export class Login extends Component {
 
   login = () => {
     const { email, password } = this.state;
-    this.props.actions.loginRequest(email, password);
+    this.props.loginRequest(email, password);
   };
 
   renderLoader() {
@@ -139,10 +139,8 @@ export class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(loginActions, dispatch),
-  };
+const mapDispatchToProps = {
+  loginRequest,
 };
 
 const mapStateToProps = state => {
