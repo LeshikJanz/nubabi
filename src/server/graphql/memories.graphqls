@@ -5,6 +5,11 @@ enum MemoryFilter {
   SPECIAL
 }
 
+# TODO: remove
+extend type Viewer {
+  memories: MemoryConnection!
+}
+
 type Memory implements Node, Timestampable {
   id: ID!
   title: String!

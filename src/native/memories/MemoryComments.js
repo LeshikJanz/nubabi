@@ -7,7 +7,7 @@ type Props = {
   comments: CommentConnection,
 };
 
-export const MemoryComments = () => {
+export const MemoryComments = ({ comments }: Props) => {
   return (
     <Box
       borderTopWidth={1}
