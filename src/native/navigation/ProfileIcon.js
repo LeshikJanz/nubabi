@@ -93,17 +93,17 @@ export default compose(
   connect(({ babies: { currentBabyId } }) => ({ currentBabyId })),
   graphql(
     gql`
-   query getBabyAvatar($id: ID) {
-     viewer {
-       baby(id: $id) {
-         id
-         avatar {
-           url
-         }
-       }
-     }
-   } 
-  `,
+      query getBabyAvatar($id: ID) {
+        viewer {
+          baby(id: $id) {
+            id
+            avatar {
+              url
+            }
+          }
+        }
+      }
+    `,
     {
       options: ({ currentBabyId }) => ({
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default

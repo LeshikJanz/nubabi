@@ -45,7 +45,9 @@ export const ThisWeeksActivitiesButton = ({
         </Image>
 
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{title}</Text>
+          <Text style={styles.title}>
+            {title}
+          </Text>
         </View>
       </View>
     </TouchableHighlight>

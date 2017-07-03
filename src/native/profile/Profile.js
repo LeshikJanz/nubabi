@@ -58,9 +58,8 @@ class Profile extends PureComponent {
       shadowOpacity: 0,
     },
     tabBarLabel: () => null,
-    tabBarIcon: ({ tintColor, focused }) => (
-      <ProfileIcon active={focused} tintColor={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor, focused }) =>
+      <ProfileIcon active={focused} tintColor={tintColor} />,
   };
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');

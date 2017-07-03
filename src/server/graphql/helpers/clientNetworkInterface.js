@@ -38,37 +38,40 @@ class ClientNetworkInterfaceWithMiddleware {
 
   query(request) {
     const options = {};
-    return this.applyMiddlewares({ request, options }).
-      then(({ request, options }) => {
-        const context = {
-          connectors: {
-            ...this.connectors,
-            firebase: firebaseConnector(this.connectors.firebase),
-          }
-        };
+    return this.applyMiddlewares({
+      request,
+      options,
+    }).then(({ request, options }) => {
+      const context = {
+        connectors: {
+          ...this.connectors,
+          firebase: firebaseConnector(this.connectors.firebase),
+        },
+      };
 
-        if (options.headers && options.headers.authorization) {
-          context.token = options.headers.authorization.split(' ')[1];
-        }
+      if (options.headers && options.headers.authorization) {
+        context.token = options.headers.authorization.split(' ')[1];
+      }
 
-        return graphql(
-          schema,
-          print(request.query),
-          {},  // root value
-          context,  // context
-          request.variables,
-          request.operationName,
-        );
-      });
+      return graphql(
+        schema,
+        print(request.query),
+        {}, // root value
+        context, // context
+        request.variables,
+        request.operationName,
+      );
+    });
   }
 
   use(middlewares) {
-    middlewares.forEach((middleware) => {
+    middlewares.forEach(middleware => {
       if (typeof middleware.applyMiddleware === 'function') {
         this.middlewares.push(middleware);
       } else {
         throw new Error(
-          'Middleware must implement the applyMiddleware function');
+          'Middleware must implement the applyMiddleware function',
+        );
       }
     });
 

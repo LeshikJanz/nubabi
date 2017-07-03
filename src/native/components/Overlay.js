@@ -12,7 +12,10 @@ export const Overlay = ({ children, layout }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.overlay} />
-      {children && <View style={styles.tile}>{children}</View>}
+      {children &&
+        <View style={styles.tile}>
+          {children}
+        </View>}
     </View>
   );
 };

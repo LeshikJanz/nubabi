@@ -1,8 +1,7 @@
 // @flow
 import type { MeasurementType } from '../../common/types';
 import React from 'react';
-import GraphDetailMeasurementSwitcherControl
-  from './GraphDetailMeasurementSwitcherControl';
+import GraphDetailMeasurementSwitcherControl from './GraphDetailMeasurementSwitcherControl';
 
 type Props = {
   currentMeasurementType: MeasurementType,

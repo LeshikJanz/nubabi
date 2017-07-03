@@ -100,13 +100,14 @@ const setBorderTryEnsureRhythmViaPadding = (style, borderWidthProps) => {
     const borderWidthPropValue = borderWidthProps[borderWidthProp];
     if (typeof borderWidthPropValue !== 'number') return;
     style = { ...style, [borderWidthProp]: borderWidthPropValue };
-    const paddingProp = borderWidthProp === 'borderBottomWidth'
-      ? 'paddingBottom'
-      : borderWidthProp === 'borderLeftWidth'
+    const paddingProp =
+      borderWidthProp === 'borderBottomWidth'
+        ? 'paddingBottom'
+        : borderWidthProp === 'borderLeftWidth'
           ? 'paddingLeft'
           : borderWidthProp === 'borderRightWidth'
-              ? 'paddingRight'
-              : 'paddingTop';
+            ? 'paddingRight'
+            : 'paddingTop';
     const paddingPropValue = style[paddingProp];
     if (typeof paddingPropValue !== 'number') return;
     const compensatedPaddingPropValue = paddingPropValue - borderWidthPropValue;

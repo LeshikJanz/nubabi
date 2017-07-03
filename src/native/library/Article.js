@@ -41,7 +41,8 @@ Article.fragments = {
         name
       }
       publishedAt
-      tags { # TODO: edges
+      tags {
+        # TODO: edges
         id
         name
       }

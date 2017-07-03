@@ -69,7 +69,9 @@ class ActivityActions extends Component {
             justifyContent="space-between"
             alignSelf="flex-start"
           >
-            <Text bold flex={1}>JUST RIGHT FOR NOW</Text>
+            <Text bold flex={1}>
+              JUST RIGHT FOR NOW
+            </Text>
             <Text color="secondary">No change</Text>
           </Box>
         </Box>
@@ -120,12 +122,7 @@ class ActivityActions extends Component {
   }
 
   render() {
-    const {
-      babyName,
-      activityName,
-      skillIcon,
-      onSwoop,
-    } = this.props;
+    const { babyName, activityName, skillIcon, onSwoop } = this.props;
 
     let collapsed = this.state.collapsed;
 

@@ -56,12 +56,14 @@ class MaterialSharedElementTransitioner extends Component {
 
   addSharedItem(sharedItem: SharedItem) {
     this.setSharedItemsState(prevState =>
-      prevState.sharedItems.add(sharedItem));
+      prevState.sharedItems.add(sharedItem),
+    );
   }
 
   removeSharedItem(name: string, containerRouteName: string) {
     this.setSharedItemsState(prevState =>
-      prevState.sharedItems.remove(name, containerRouteName));
+      prevState.sharedItems.remove(name, containerRouteName),
+    );
   }
 
   getChildContext() {
@@ -141,7 +143,8 @@ class MaterialSharedElementTransitioner extends Component {
 
   _render(props: any, prevProps: any) {
     const scenes = props.scenes.map(scene =>
-      this._renderScene({ ...props, scene }));
+      this._renderScene({ ...props, scene }),
+    );
     const overlay = this._renderOverlay(props, prevProps);
     return (
       <View style={styles.scenes}>
@@ -265,8 +268,8 @@ class MaterialSharedElementTransitioner extends Component {
 
   _getBBox(metricsArray: Array<Metrics>) {
     let left, top, right, bottom;
-    left = (top = Number.MAX_VALUE);
-    right = (bottom = Number.MIN_VALUE);
+    left = top = Number.MAX_VALUE;
+    right = bottom = Number.MIN_VALUE;
     metricsArray.forEach(m => {
       if (m.x < left) left = m.x;
       if (m.y < top) top = m.y;
@@ -300,7 +303,7 @@ class MaterialSharedElementTransitioner extends Component {
     const minIdx = Math.min(index, prevIndex);
     const maxIdx = Math.max(index, prevIndex);
     const inputRange = [minIdx, maxIdx];
-    const adaptRange = range => index > prevIndex ? range : range.reverse();
+    const adaptRange = range => (index > prevIndex ? range : range.reverse());
     const left = position.interpolate({
       inputRange,
       outputRange: adaptRange([fromItemBBox.left, toItemBBox.left]),
@@ -371,7 +374,8 @@ class MaterialSharedElementTransitioner extends Component {
       );
     });
     const pairsStr = pairs.map(p =>
-      Object.keys(p).map(k => `${k}: ${JSON.stringify(p[k].metrics)}`));
+      Object.keys(p).map(k => `${k}: ${JSON.stringify(p[k].metrics)}`),
+    );
     console.log(
       'from:',
       fromRoute,
@@ -475,12 +479,12 @@ class MaterialSharedElementTransitioner extends Component {
     if (!this._childNavigationProps) this._childNavigationProps = {};
     let navigation = this._childNavigationProps[scene.key];
     if (!navigation || navigation.state !== scene.route) {
-      navigation = (this._childNavigationProps[
+      navigation = this._childNavigationProps[
         scene.key
       ] = addNavigationHelpers({
         ...this.props.navigation,
         state: scene.route,
-      }));
+      });
     }
     return navigation;
   };

@@ -48,15 +48,17 @@ class RelationshipDropdown extends Component {
   }
 
   renderOptions() {
-    return options.map(option => (
+    return options.map(option =>
       <MenuOption
         key={option.key}
         value={option.key}
         renderTouchable={renderTouchable}
       >
-        <Text>{option.label}</Text>
-      </MenuOption>
-    ));
+        <Text>
+          {option.label}
+        </Text>
+      </MenuOption>,
+    );
   }
 
   renderLabel() {
@@ -85,7 +87,6 @@ class RelationshipDropdown extends Component {
         }}
       >
         <Menu onSelect={this.handleSelect} style={styles.dropdown}>
-
           {this.renderLabel()}
 
           <MenuTrigger style={styles.trigger} renderTouchable={renderTouchable}>
@@ -115,7 +116,6 @@ class RelationshipDropdown extends Component {
                 color={theme.colors.secondary}
               />
             </Box>
-
           </MenuTrigger>
           <MenuOptions optionsContainerStyle={styles.dropdownOptions}>
             {this.renderOptions()}

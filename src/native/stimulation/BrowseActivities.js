@@ -61,7 +61,9 @@ export const BrowseActivities = ({
       </Box>
       <Box flex={1}>
         <Box contentSpacing>
-          <Text medium size={4}>Development Skill</Text>
+          <Text medium size={4}>
+            Development Skill
+          </Text>
         </Box>
         <Box
           flex={1}
@@ -70,7 +72,7 @@ export const BrowseActivities = ({
           alignItems="flex-start"
           justifyContent="center"
         >
-          {skillAreas.map(skillArea => (
+          {skillAreas.map(skillArea =>
             <Box
               key={skillArea.id}
               style={() => ({
@@ -88,13 +90,15 @@ export const BrowseActivities = ({
                     filter: { skillAreas: [skillArea.id] },
                   })}
               />
-            </Box>
-          ))}
+            </Box>,
+          )}
         </Box>
       </Box>
       <Box flex={1}>
         <Box flex={1} contentSpacing>
-          <Text size={4} medium>Category</Text>
+          <Text size={4} medium>
+            Category
+          </Text>
         </Box>
         <Box
           flex={1}
@@ -140,22 +144,22 @@ export const BrowseActivities = ({
 export default compose(
   graphql(
     gql`
-    query BrowseActivities {
-      viewer {
-        allSkillAreas {
-          edges {
-            node {
-              id
-              name
-              image {
-                url
+      query BrowseActivities {
+        viewer {
+          allSkillAreas {
+            edges {
+              node {
+                id
+                name
+                image {
+                  url
+                }
               }
             }
           }
         }
       }
-    }
-  `,
+    `,
     {
       props: mapEdgesToProp('viewer.allSkillAreas', 'skillAreas'),
     },

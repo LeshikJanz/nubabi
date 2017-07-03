@@ -22,7 +22,9 @@ export const Link = ({
 }: Props) => {
   return (
     <TouchableOpacity onPress={() => onOpenURL(url)} style={containerStyle}>
-      <Text color="primary">{title}</Text>
+      <Text color="primary">
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

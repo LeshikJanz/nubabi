@@ -56,9 +56,11 @@ const findContent = (
   collection: Array<Growth>,
 ) => {
   return collection.find((element: Growth) => {
-    return element.ageDuration === ageDuration &&
+    return (
+      element.ageDuration === ageDuration &&
       element.minimumAge >= currentAge &&
-      element.maximumAge <= currentAge;
+      element.maximumAge <= currentAge
+    );
   });
 };
 

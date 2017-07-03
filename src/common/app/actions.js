@@ -38,22 +38,22 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
       // TODO: remove from here, this should be a client concern
       // so we should handle on SplashScreen and Profile (initial tab)
       const fetchBabiesQuery = gql`
-          query getBabies {
-            viewer {
-              user {
-                id
-              }
-              babies {
-                edges {
-                  node {
-                    id
-                    name
-                  }
+        query getBabies {
+          viewer {
+            user {
+              id
+            }
+            babies {
+              edges {
+                node {
+                  id
+                  name
                 }
               }
             }
           }
-        `;
+        }
+      `;
 
       return Observable.merge(
         Observable.of(getBabiesRequest()),

@@ -78,9 +78,13 @@ class ListItem extends Component {
 
     return (
       <Box flexDirection="row" flex={1} justifyContent="center">
-        <Box flex={1}>{children}</Box>
+        <Box flex={1}>
+          {children}
+        </Box>
         <Box marginRight={0.5} marginTop={0.1}>
-          <Text color="secondary">{rightText}</Text>
+          <Text color="secondary">
+            {rightText}
+          </Text>
         </Box>
       </Box>
     );

@@ -7,7 +7,11 @@ export class DevelopmentRoadmapScreen extends PureComponent {
   };
 
   render() {
-    return <Screen>{null}</Screen>;
+    return (
+      <Screen>
+        {null}
+      </Screen>
+    );
   }
 }
 

@@ -9,9 +9,7 @@ import {
   TouchableHighlight,
   Platform,
 } from 'react-native';
-import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
@@ -125,13 +123,14 @@ export class Login extends Component {
               >
                 <View style={styles.submitButtonContainer}>
                   <View style={styles.submitButton}>
-                    <Text style={styles.submitText}>{buttonText}</Text>
+                    <Text style={styles.submitText}>
+                      {buttonText}
+                    </Text>
                   </View>
                 </View>
               </TouchableHighlight>
             </View>
             {this.renderLoader()}
-
           </View>
         </KeyboardAwareScrollView>
       </View>

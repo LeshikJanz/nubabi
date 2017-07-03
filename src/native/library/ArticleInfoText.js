@@ -13,7 +13,9 @@ export const ArticleInfoText = ({ children, icon }: Props) => {
     <Box flexDirection="row" alignItems="center" justifyContent="space-between">
       {icon &&
         <Icon name={icon} size={18} color="white" style={{ marginRight: 5 }} />}
-      <Text color="white" bold spacing={-0.17} marginRight={1}>{children}</Text>
+      <Text color="white" bold spacing={-0.17} marginRight={1}>
+        {children}
+      </Text>
     </Box>
   );
 };

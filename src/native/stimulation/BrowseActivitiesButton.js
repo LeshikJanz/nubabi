@@ -25,10 +25,16 @@ export const BrowseActivitiesButton = ({
   const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
   const background = image ? { uri: image.url } : defaultBackground;
   const caption = text
-    ? <Text style={styles.title}>{text}</Text>
+    ? <Text style={styles.title}>
+        {text}
+      </Text>
     : [
-        <Text key="all" style={styles.title}>Browse</Text>,
-        <Text key="activities" style={styles.title}>Activities</Text>,
+        <Text key="all" style={styles.title}>
+          Browse
+        </Text>,
+        <Text key="activities" style={styles.title}>
+          Activities
+        </Text>,
       ];
 
   return (

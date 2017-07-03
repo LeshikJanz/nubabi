@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 import { FONT_COLOR, NUBABI_RED } from '../../common/themes/defaultTheme';
@@ -17,9 +12,7 @@ const Achievements = () => {
   return (
     <View style={styles.achievementsView}>
       <View style={styles.achievementsHeader}>
-        <Text style={styles.achievementsHeaderText}>
-          Achievements
-        </Text>
+        <Text style={styles.achievementsHeaderText}>Achievements</Text>
         <Icon
           name="ios-add-circle"
           size={24}
@@ -28,18 +21,9 @@ const Achievements = () => {
         />
       </View>
       <View style={styles.achievementsValue}>
-        <Image
-          source={medal1}
-          style={styles.medalIcon}
-        />
-        <Image
-          source={medal2}
-          style={styles.medalIcon}
-        />
-        <Image
-          source={medal3}
-          style={styles.medalIcon}
-        />
+        <Image source={medal1} style={styles.medalIcon} />
+        <Image source={medal2} style={styles.medalIcon} />
+        <Image source={medal3} style={styles.medalIcon} />
       </View>
     </View>
   );

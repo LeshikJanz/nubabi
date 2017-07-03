@@ -6,10 +6,9 @@ import theme from '../../common/themes/defaultTheme';
 export const renderer = createRenderer();
 const FelaProvider = NativeFelaProvider(renderer, theme);
 
-const felaTestContext = component => (
+const felaTestContext = component =>
   <FelaProvider>
     {component}
-  </FelaProvider>
-);
+  </FelaProvider>;
 
 export default felaTestContext;

@@ -41,7 +41,7 @@ export class GraphDetail extends PureComponent {
   static fragments = {
     measurement: gql`
       fragment Measurement on Measurement {
-        recordedAt,
+        recordedAt
         value
       }
     `,
@@ -130,7 +130,9 @@ export class GraphDetail extends PureComponent {
                 ],
               })}
             >
-              <Text bold>{this.getCurrentUnit()}</Text>
+              <Text bold>
+                {this.getCurrentUnit()}
+              </Text>
             </Box>
             {this.renderGraph()}
           </Box>

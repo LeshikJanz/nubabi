@@ -13,7 +13,11 @@ export const BabyNameTitle = ({ babyName }: Props) => {
     return <Text>Nubabi</Text>;
   }
 
-  return <Text>{babyName}</Text>;
+  return (
+    <Text>
+      {babyName}
+    </Text>
+  );
 };
 
 export default compose(
@@ -22,15 +26,15 @@ export default compose(
   })),
   graphql(
     gql`
-    query BabyName($id: ID) {
-      viewer {
-        baby(id: $id) {
-          id
-          name
+      query BabyName($id: ID) {
+        viewer {
+          baby(id: $id) {
+            id
+            name
+          }
         }
       }
-    }
-  `,
+    `,
     {
       options: ({ currentBabyId }) => ({
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default

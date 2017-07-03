@@ -102,7 +102,9 @@ class Memory extends PureComponent {
           />
 
           <Box flex={1} padding={1}>
-            <Text medium color="secondary">{date}</Text>
+            <Text medium color="secondary">
+              {date}
+            </Text>
           </Box>
 
           <Box flexDirection="row" alignItems="center">

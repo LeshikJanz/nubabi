@@ -24,9 +24,11 @@ const activeBoxStyle = () => ({
   borderRadius: 16,
 });
 
-export const MeasurementUnitButton = (
-  { unit, isCurrent, onSelect }: MeasurementUnitButtonProps,
-) => {
+export const MeasurementUnitButton = ({
+  unit,
+  isCurrent,
+  onSelect,
+}: MeasurementUnitButtonProps) => {
   const boxStyleProps = isCurrent
     ? { style: activeBoxStyle }
     : { as: TouchableOpacity, onPress: () => onSelect(unit) };
@@ -43,23 +45,27 @@ export const MeasurementUnitButton = (
       paddingVertical={0.5}
       {...boxStyleProps}
     >
-      <Text {...textStyleProps}>{unit}</Text>
+      <Text {...textStyleProps}>
+        {unit}
+      </Text>
     </Box>
   );
 };
-export const MeasurementUnitSwitcher = (
-  { currentUnit, availableUnits, onSelect }: Props,
-) => {
+export const MeasurementUnitSwitcher = ({
+  currentUnit,
+  availableUnits,
+  onSelect,
+}: Props) => {
   return (
     <Box flexDirection="row" justifyContent="flex-end">
-      {availableUnits.map(unit => (
+      {availableUnits.map(unit =>
         <MeasurementUnitButton
           key={unit}
           unit={unit}
           onSelect={onSelect}
           isCurrent={unit === currentUnit}
-        />
-      ))}
+        />,
+      )}
     </Box>
   );
 };

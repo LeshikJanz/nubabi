@@ -19,7 +19,8 @@ export const HeaderShape = ({
   const boxPath = Math.round(width / 6.46); // 58 portrait 7p
   const headerTopMargin = Math.round(width / 12.17); // 40 portrait 7p
 
-  const curve = `M0 0 C ${width / 2 - headerMargin} ${headerPath}, ${width / 2 + headerMargin} ${headerPath}, ${width} 0`;
+  const curve = `M0 0 C ${width / 2 - headerMargin} ${headerPath}, ${width / 2 +
+    headerMargin} ${headerPath}, ${width} 0`;
   const box = `M0 0 H ${width} V ${boxPath} H 0 L 0 0`;
 
   const dynamicStyle = {

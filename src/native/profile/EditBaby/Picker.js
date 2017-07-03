@@ -60,7 +60,9 @@ class Picker extends Component {
     return (
       <View style={{ flex: 1 }}>
         <TouchableOpacity onPress={this.toggle} style={styles.inputContainer}>
-          <Text>{this.props.field.input.value}</Text>
+          <Text>
+            {this.props.field.input.value}
+          </Text>
         </TouchableOpacity>
         {this.state.displayed ? this.renderPicker() : null}
       </View>

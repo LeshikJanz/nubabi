@@ -30,7 +30,9 @@ export const GraphDetailHeader = ({
             <Text align="center" color="white" size={7}>
               Look how {name}
             </Text>
-            <Text align="center" color="white" size={7}>is growing</Text>
+            <Text align="center" color="white" size={7}>
+              is growing
+            </Text>
           </Box>
 
           <Box

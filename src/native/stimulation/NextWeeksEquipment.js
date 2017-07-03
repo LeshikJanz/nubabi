@@ -4,13 +4,12 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Screen } from '../components';
 
-const NextWeeksEquipment = () => (
+const NextWeeksEquipment = () =>
   <Screen>
     <View style={styles.container}>
       <Text style={styles.title}>Next Weeks Equipment</Text>
     </View>
-  </Screen>
-);
+  </Screen>;
 
 const navigationOptions: NavigationOptions = {
   title: "Next Week's Equipment",

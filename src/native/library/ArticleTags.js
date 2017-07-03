@@ -26,7 +26,7 @@ export const ArticleTags = ({ tags, layout }: Props) => {
         marginTop: -8,
       })}
     >
-      {tags.map(tag => (
+      {tags.map(tag =>
         <Pill
           backgroundColor="#fff"
           borderColor="#E9ECF4"
@@ -34,8 +34,8 @@ export const ArticleTags = ({ tags, layout }: Props) => {
           key={tag.id}
         >
           {tag.name}
-        </Pill>
-      ))}
+        </Pill>,
+      )}
     </Box>
   );
 };

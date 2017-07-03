@@ -3,18 +3,21 @@ import config from '../../common/config';
 
 const { apiUrl } = config;
 
-
 const api = {
   login(email, password) {
     const request = { user: { email, password } };
     return new Promise((resolve, reject) => {
-      agent.post(`${apiUrl}/auth/signin.json`)
+      agent
+        .post(`${apiUrl}/auth/signin.json`)
         .set('Content-Type', 'application/json')
         .send(request)
         .end((err, res) => {
           if (err !== null) {
             if (res === undefined) {
-              reject({ code: 500, errorMessage: 'The was a problem communicating with the server' });
+              reject({
+                code: 500,
+                errorMessage: 'The was a problem communicating with the server',
+              });
             } else {
               let { error } = res.body;
               if (res.status === 401) {
@@ -32,7 +35,8 @@ const api = {
   logout(token) {
     const request = { authentication_token: token };
     return new Promise((resolve, reject) => {
-      agent.delete(`${apiUrl}/auth/signout.json`)
+      agent
+        .delete(`${apiUrl}/auth/signout.json`)
         .set('Content-Type', 'application/json')
         .send(request)
         .end((err, res) => {
@@ -45,7 +49,8 @@ const api = {
   },
   getBabies(token) {
     return new Promise((resolve, reject) => {
-      agent.get(`${apiUrl}/api/babies`)
+      agent
+        .get(`${apiUrl}/api/babies`)
         .set('Content-Type', 'application/json')
         .set('X-Auth-Token', token)
         .end((err, res) => {
@@ -62,7 +67,8 @@ const api = {
   },
   getThisWeeksActivities(babyId, token) {
     return new Promise((resolve, reject) => {
-      agent.get(`${apiUrl}/api/babies/${babyId}/activities`)
+      agent
+        .get(`${apiUrl}/api/babies/${babyId}/activities`)
         .set('Content-Type', 'application/json')
         .set('X-Auth-Token', token)
         .end((err, res) => {

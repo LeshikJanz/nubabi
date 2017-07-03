@@ -43,7 +43,7 @@ const StepTitle = (props: StepTitleProps) => {
 
 export const Step = (props: StepProps) => {
   const { currentStepIndex, activityName, layout, length, step } = props;
-  const width = Math.round(layout.viewportWidth * 0.80);
+  const width = Math.round(layout.viewportWidth * 0.8);
   const height = Math.round(layout.viewportWidth * 0.35);
 
   if (!step) {
@@ -71,7 +71,9 @@ export const Step = (props: StepProps) => {
         size={4}
         lineHeight={26}
         style={() => ({ color: '#6A7683' })}
-      >{step}</Text>
+      >
+        {step}
+      </Text>
     </Box>
   );
 };

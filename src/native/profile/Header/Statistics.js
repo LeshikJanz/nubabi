@@ -11,17 +11,13 @@ const Statistics = ({ achievements, favourites }: Props) => {
   return (
     <View style={styles.stats}>
       <View style={styles.achievements}>
-        <Text style={styles.achievementsHeader}>
-          ACHIEVEMENTS
-        </Text>
+        <Text style={styles.achievementsHeader}>ACHIEVEMENTS</Text>
         <Text style={styles.achievementsValue}>
           {achievements}
         </Text>
       </View>
       <View style={styles.favourites}>
-        <Text style={styles.favouritesHeader}>
-          FAVOURITES
-        </Text>
+        <Text style={styles.favouritesHeader}>FAVOURITES</Text>
         <Text style={styles.favouritesValue}>
           {favourites}
         </Text>

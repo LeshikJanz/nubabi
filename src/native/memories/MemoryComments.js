@@ -31,12 +31,12 @@ export class MemoryComments extends PureComponent {
         padding={0}
         style={() => ({ borderColor: '#E9ECF4' })}
       >
-        {comments.edges.map(edge => (
+        {comments.edges.map(edge =>
           <MemoryComment
             key={edge.node.id}
             {...filter(MemoryComment.fragments.comment, edge.node)}
-          />
-        ))}
+          />,
+        )}
 
         {shouldDisplayIndicator &&
           <Box as={TouchableOpacity} onPress={onLoadMore} contentSpacing>

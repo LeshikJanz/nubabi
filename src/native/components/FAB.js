@@ -36,7 +36,6 @@ export const FAB = ({ onPress, children, size = 70, style = {} }: Props) => {
       })}
     >
       {children}
-
     </Box>
   );
 };

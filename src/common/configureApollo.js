@@ -10,14 +10,14 @@ export const configureApollo = () => {
   if (!client) {
     client = new ApolloClient({
       networkInterface,
-      dataIdFromObject: (obj) => obj.id,
+      dataIdFromObject: obj => obj.id,
     });
   }
 
   return client;
 };
 
-export const configureApolloAuth = (store) => {
+export const configureApolloAuth = store => {
   /* eslint-disable no-param-reassign */
   networkInterface.use([
     {
@@ -30,6 +30,7 @@ export const configureApolloAuth = (store) => {
         req.options.headers.authorization = token ? `Bearer ${token}` : null;
         next();
       },
-    }]);
+    },
+  ]);
   /* eslint-enable no-param-reassign */
 };

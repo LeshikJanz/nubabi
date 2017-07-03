@@ -27,18 +27,16 @@ type Props = {
   layout: LayoutProps,
 };
 
-const Header = (
-  {
-    coverImage,
-    avatar,
-    name,
-    dob,
-    achievements,
-    onEditBaby,
-    favoriteActivities,
-    layout,
-  }: Props,
-) => {
+const Header = ({
+  coverImage,
+  avatar,
+  name,
+  dob,
+  achievements,
+  onEditBaby,
+  favoriteActivities,
+  layout,
+}: Props) => {
   const width = layout.viewportWidth;
 
   return (

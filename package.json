@@ -6,6 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "flow": "flow",
     "test": "jest",
+    "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"src/**/*.js\"",
     "precommit": "lint-staged",
     "changelog": "conventional-changelog -i CHANGELOG.md -s",
     "firebase:install": "cd src/server/firebase/functions && npm install",

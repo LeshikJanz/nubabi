@@ -187,9 +187,8 @@ class ChooseBaby extends Component {
             ? { uri: baby.avatar.url }
             : babyIcon;
 
-          const currentBabyStyle = baby.id === this.props.currentBabyId
-            ? styles.currentBaby
-            : {};
+          const currentBabyStyle =
+            baby.id === this.props.currentBabyId ? styles.currentBaby : {};
 
           return (
             <TouchableOpacity

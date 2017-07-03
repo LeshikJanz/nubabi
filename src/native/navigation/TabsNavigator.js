@@ -13,9 +13,10 @@ import Library from '../library/Library';
 import Memories from '../memories/Memories';
 import { getTabHeaders } from './shared';
 
-const navigationOptions: NavigationOptions = (
-  { navigation, navigationOptions: childOptions },
-) => ({
+const navigationOptions: NavigationOptions = ({
+  navigation,
+  navigationOptions: childOptions,
+}) => ({
   title: upperFirst(navigation.state.key),
   headerMode: 'screen',
   headerVisible: true,
@@ -26,9 +27,8 @@ const navigationOptions: NavigationOptions = (
   },
   headerLeft: getTabHeaders(navigation.navigate).left,
   headerRight: getTabHeaders(navigation.navigate).right,
-  tabBarIcon: ({ tintColor }: *) => (
-    <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />
-  ),
+  tabBarIcon: ({ tintColor }: *) =>
+    <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />,
   tabBarLabel: upperFirst(navigation.state.routeName),
 });
 

@@ -39,7 +39,7 @@ const defaultData = [
   { recordedAt: new Date(2007, 1, 2), value: 85.35 },
   { recordedAt: new Date(2007, 1, 3), value: 98.84 },
   { recordedAt: new Date(2007, 1, 4), value: 79.92 },
-  { recordedAt: new Date(2007, 1, 5), value: 83.80 },
+  { recordedAt: new Date(2007, 1, 5), value: 83.8 },
   { recordedAt: new Date(2007, 1, 6), value: 88.47 },
   { recordedAt: new Date(2007, 1, 7), value: 94.47 },
 ];
@@ -134,7 +134,9 @@ export class Growth extends Component {
                   textAlign="center"
                 >
                   {baby.height}
-                  <Text color="success" size={2}>cm</Text>
+                  <Text color="success" size={2}>
+                    cm
+                  </Text>
                 </Text>
               </Box>
               <CombinedChart data={this.getChartData()} />

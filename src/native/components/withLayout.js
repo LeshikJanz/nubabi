@@ -48,13 +48,12 @@ export function handleLayout(event: Event) {
   const state = this.state.layout;
   const { width: parentWidth, height: parentHeight } = event.nativeEvent.layout;
 
-  const {
-    width: viewportWidth,
-    height: viewportHeight,
-  } = Dimensions.get('window');
+  const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
+    'window',
+  );
 
-  const parentChanged = state.parentWidth !== parentWidth ||
-    state.parentHeight !== parentHeight;
+  const parentChanged =
+    state.parentWidth !== parentWidth || state.parentHeight !== parentHeight;
 
   if (parentChanged) {
     this.setState({

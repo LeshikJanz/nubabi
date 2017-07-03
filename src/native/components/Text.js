@@ -91,14 +91,15 @@ export const computeTextStyle = (
 // usabilitypost.com/2012/11/05/stop-fixing-font-smoothing
 // tldr; Fix font smoothing only for light text on dark background.
 const maybeFixFontSmoothing = (color, backgroundColor) => {
-  const hasColorAndBackgroundColor = color &&
+  const hasColorAndBackgroundColor =
+    color &&
     color !== 'transparent' &&
     backgroundColor &&
     backgroundColor !== 'transparent';
   // console.log(hasColorAndBackgroundColor);
   if (!hasColorAndBackgroundColor) return null;
-  const colorIsLighterThanBackgroundColor = colorLib(color).luminosity() >
-    colorLib(backgroundColor).luminosity();
+  const colorIsLighterThanBackgroundColor =
+    colorLib(color).luminosity() > colorLib(backgroundColor).luminosity();
   if (!colorIsLighterThanBackgroundColor) return null;
   return {
     MozOsxFontSmoothing: 'grayscale',
@@ -131,16 +132,8 @@ const computePlatformTextStyle = (boxStyle, textStyle, fixWebFontSmoothing) => {
 };
 
 const Text = (
-  {
-    as,
-    style,
-    fixWebFontSmoothing = true,
-    ...props
-  }: TextProps,
-  {
-    Text: PlatformText,
-    theme,
-  }: TextContext,
+  { as, style, fixWebFontSmoothing = true, ...props }: TextProps,
+  { Text: PlatformText, theme }: TextContext,
 ) => {
   const [textStyle, restProps] = computeTextStyle(theme, props);
   return (

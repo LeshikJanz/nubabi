@@ -94,11 +94,15 @@ export class ExpertInfo extends Component {
           style={styles.biographyAvatar}
           resizeMode="stretch"
         />
-        <Text style={styles.expertBiographyName}>{this.props.expert.name}</Text>
+        <Text style={styles.expertBiographyName}>
+          {this.props.expert.name}
+        </Text>
         <Text style={styles.expertDescriptionProfession}>
           {this.props.expert.discipline}
         </Text>
-        <Text style={styles.biographyText}>{this.props.expert.biography}</Text>
+        <Text style={styles.biographyText}>
+          {this.props.expert.biography}
+        </Text>
       </View>
     );
   };

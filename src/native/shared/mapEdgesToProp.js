@@ -3,9 +3,10 @@ import { path, pluck, curry } from 'ramda';
 
 function normalizePath(edgesPath: string) {
   const accessor = edgesPath.split('.');
-  const accessorPath = accessor[accessor.length - 1] === 'edges'
-    ? accessor
-    : [...accessor, 'edges'];
+  const accessorPath =
+    accessor[accessor.length - 1] === 'edges'
+      ? accessor
+      : [...accessor, 'edges'];
 
   return accessorPath;
 }

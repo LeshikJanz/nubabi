@@ -10,7 +10,9 @@ type Props = {
 export const NoContentView = ({ message = 'Nothing found' }: Props) => {
   return (
     <Box flex={1} alignItems="center" justifyContent="center">
-      <Text>{message}</Text>
+      <Text>
+        {message}
+      </Text>
     </Box>
   );
 };

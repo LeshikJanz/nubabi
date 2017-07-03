@@ -1,10 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-} from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
 import { CardStack } from 'react-navigation';
 import type { NavigationSceneRendererProps } from 'react-navigation';

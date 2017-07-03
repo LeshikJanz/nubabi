@@ -77,7 +77,9 @@ export const resolvers = {
         id: '1',
         firstName: faker.name.firstName(),
         lastName: faker.name.lastName(),
-        avatar: `https://lorempixel.com/30/30/people/${Math.floor(Math.random() * 10 + 1)}/`,
+        avatar: `https://lorempixel.com/30/30/people/${Math.floor(
+          Math.random() * 10 + 1,
+        )}/`,
       };
     },
   },

@@ -9,7 +9,7 @@ import theme from '../../common/themes/defaultTheme';
 
 type Props = {};
 
-const RoundedContainer = ({ children }) => (
+const RoundedContainer = ({ children }) =>
   <View
     style={{
       flex: 1,
@@ -19,8 +19,7 @@ const RoundedContainer = ({ children }) => (
     }}
   >
     {children}
-  </View>
-);
+  </View>;
 export const MemoryMedia = ({ files, layout }: Props) => {
   return files.edges.length > 1
     ? <MemoryMediaMultiple files={files} layout={layout} />
@@ -56,7 +55,6 @@ export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
   // TODO: real video
   return (
     <Overlay>
-
       <Box
         flex={1}
         alignItems="center"
@@ -64,7 +62,6 @@ export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
         style={() => ({ height: small ? 60 : 180 })}
         borderRadius={4}
       >
-
         <Box
           borderRadius={20}
           backgroundColor="white"
@@ -126,7 +123,9 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
       <Text bold color="white" size={8} align="center">
         + {files.count - 2}
       </Text>
-      <Text bold color="white" size={2} align="center">more</Text>
+      <Text bold color="white" size={2} align="center">
+        more
+      </Text>
     </Box>
   );
 
@@ -138,7 +137,7 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
         alignItems="flex-start"
         justifyContent="space-between"
       >
-        {take(2, files.edges).map((file, index) => (
+        {take(2, files.edges).map((file, index) =>
           <Box
             flex={1}
             key={`${index}-${file.node.url}`}
@@ -147,8 +146,8 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
             style={() => ({ overflow: 'hidden' })}
           >
             <MemoryMediaSingle media={file.node} layout={layout} small />
-          </Box>
-        ))}
+          </Box>,
+        )}
 
         {shouldDisplayMoreButton &&
           <Box
@@ -158,7 +157,6 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
             borderRadius={4}
             style={() => ({ overflow: 'hidden' })}
           >
-
             <MemoryMediaSingle
               media={files.edges[2].node}
               layout={layout}

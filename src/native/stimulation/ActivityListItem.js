@@ -36,8 +36,12 @@ export const ActivityListItem = (props: Props) => {
           />
         </Box>
         <View style={styles.textContainer}>
-          <Text style={styles.skillName}>{skillArea.name}</Text>
-          <Text style={styles.activityName}>{activity.name}</Text>
+          <Text style={styles.skillName}>
+            {skillArea.name}
+          </Text>
+          <Text style={styles.activityName}>
+            {activity.name}
+          </Text>
         </View>
         <Image
           style={styles.skillIcon}

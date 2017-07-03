@@ -48,7 +48,9 @@ export class Settings extends Component {
     }
     return (
       <View style={styles.copyrightContainer}>
-        <Text style={() => styles.copyrightText}>{copyrightText}</Text>
+        <Text style={() => styles.copyrightText}>
+          {copyrightText}
+        </Text>
       </View>
     );
   }

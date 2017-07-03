@@ -7,8 +7,7 @@ import { epics as babyEpics } from './babies/actions';
 
 const epics = [...appEpics, ...authEpics, ...babyEpics];
 
-const configureEpics = (deps: Object) =>
-  (action$: any, { getState }: any) =>
-    combineEpics(...epics)(action$, { ...deps, getState });
+const configureEpics = (deps: Object) => (action$: any, { getState }: any) =>
+  combineEpics(...epics)(action$, { ...deps, getState });
 
 export default configureEpics;

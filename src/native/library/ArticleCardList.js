@@ -83,7 +83,9 @@ export class ArticleList extends PureComponent {
       <Box flexDirection="row" justifyContent="space-between" padding={1}>
         <Text size={2}>Articles</Text>
         <TouchableOpacity onPress={this.props.onBrowseAll}>
-          <Text medium color="primary">SEE ALL</Text>
+          <Text medium color="primary">
+            SEE ALL
+          </Text>
         </TouchableOpacity>
       </Box>
     );

@@ -32,7 +32,7 @@ type Props = {
   onViewGraph: () => void,
   data: GraphQLDataProp<*>,
   babyId: string,
-  updateMeasurement: (any) => Promise<*>,
+  updateMeasurement: any => Promise<*>,
 };
 
 type State = {
@@ -62,13 +62,11 @@ export class UpdateMeasurement extends PureComponent {
       let currentValue = prevState.value;
 
       if (this.props.type === 'weight') {
-        currentValue = unit === 'kg'
-          ? toKilograms(currentValue)
-          : toPounds(currentValue);
+        currentValue =
+          unit === 'kg' ? toKilograms(currentValue) : toPounds(currentValue);
       } else if (this.props.type === 'height') {
-        currentValue = unit === 'cm'
-          ? toCentimeters(currentValue)
-          : toInches(currentValue);
+        currentValue =
+          unit === 'cm' ? toCentimeters(currentValue) : toInches(currentValue);
       }
 
       return {
@@ -120,9 +118,10 @@ export class UpdateMeasurement extends PureComponent {
 
     const availableUnits = type === 'weight' ? ['kg', 'lbs'] : ['cm', 'in'];
 
-    const image = type === 'weight'
-      ? require('../../../common/images/weight.png')
-      : require('../../../common/images/height.png');
+    const image =
+      type === 'weight'
+        ? require('../../../common/images/weight.png')
+        : require('../../../common/images/height.png');
 
     const buttonText = `SET ${this.props.type.toUpperCase()}`;
 

@@ -30,11 +30,13 @@ class PeriodFilter extends PureComponent {
   props: Props;
 
   renderOptions() {
-    return this.props.options.map(option => (
+    return this.props.options.map(option =>
       <MenuOption key={option.key} value={option.key}>
-        <Text>{option.label}</Text>
-      </MenuOption>
-    ));
+        <Text>
+          {option.label}
+        </Text>
+      </MenuOption>,
+    );
   }
 
   render() {

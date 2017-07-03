@@ -23,7 +23,9 @@ class NameAgeRow extends Component {
         </View>
         <View style={styles.profileNameView}>
           <View style={styles.backdropView}>
-            <Text style={styles.babyName}>{this.props.babyName}</Text>
+            <Text style={styles.babyName}>
+              {this.props.babyName}
+            </Text>
           </View>
           <View
             style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}

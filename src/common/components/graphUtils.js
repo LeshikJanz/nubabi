@@ -12,8 +12,8 @@ export type Timestamp = number;
 
 export type LineArgs<T> = {
   data: [T],
-  xAccessor: (T) => Timestamp,
-  yAccessor: (T) => number,
+  xAccessor: (T) => Timestamp, // prettier-ignore
+  yAccessor: (T) => number, // prettier-ignore
   width: number,
   height: number,
 };
@@ -36,21 +36,22 @@ function createScaleY(minY: number, maxY: number, height: number) {
   );
 }
 
-export function createLineGraph(
-  { data, xAccessor, yAccessor, width, height }: LineArgs<*>,
-) {
+export function createLineGraph({
+  data,
+  xAccessor,
+  yAccessor,
+  width,
+  height,
+}: LineArgs<*>) {
   const lastDatum = data[data.length - 1];
 
   const scaleX = createScaleX(xAccessor(data[0]), xAccessor(lastDatum), width);
 
   // Collect all Y values
-  const allYValues = data.reduce(
-    (all, datum) => {
-      all.push(yAccessor(datum));
-      return all;
-    },
-    [],
-  );
+  const allYValues = data.reduce((all, datum) => {
+    all.push(yAccessor(datum));
+    return all;
+  }, []);
 
   // Get the min and max value
   const extentY = d3Array.extent(allYValues);
@@ -83,21 +84,22 @@ export function createLineGraph(
   };
 }
 
-export function createAreaGraph(
-  { data, xAccessor, yAccessor, width, height }: LineArgs<*>,
-) {
+export function createAreaGraph({
+  data,
+  xAccessor,
+  yAccessor,
+  width,
+  height,
+}: LineArgs<*>) {
   const lastDatum = data[data.length - 1];
 
   const scaleX = createScaleX(xAccessor(data[0]), xAccessor(lastDatum), width);
 
   // Collect all Y values
-  const allYValues = data.reduce(
-    (all, datum) => {
-      all.push(yAccessor(datum));
-      return all;
-    },
-    [],
-  );
+  const allYValues = data.reduce((all, datum) => {
+    all.push(yAccessor(datum));
+    return all;
+  }, []);
 
   // Get the min and max value
   const extentY = d3Array.extent(allYValues);

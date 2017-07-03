@@ -7,12 +7,9 @@ import {
   createNavigator,
   StackRouter,
 } from 'react-navigation';
-import CardStackTransitioner
-  from 'react-navigation/src/views/CardStackTransitioner';
+import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitioner';
 
-import type {
-  NavigationRouteConfigMap,
-} from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
+import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import { merge } from 'lodash';
 import theme from '../../common/themes/defaultTheme';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
@@ -30,8 +27,7 @@ import EditBaby from '../profile/EditBaby/EditBaby';
 import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivitiesScreen from '../stimulation/BrowseActivitiesScreen';
-import BrowseActivitiesListScreen
-  from '../stimulation/BrowseActivitiesListScreen';
+import BrowseActivitiesListScreen from '../stimulation/BrowseActivitiesListScreen';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
 import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';

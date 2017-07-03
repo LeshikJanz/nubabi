@@ -8,9 +8,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { reduxForm, Field } from 'redux-form';
 import { DatePicker } from '../../components';
@@ -115,10 +113,14 @@ class Form extends Component {
       <View style={containerStyle}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           {label
-            ? <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
+            ? <Text style={[...labelStyle, { flex: 1 }]}>
+                {label}
+              </Text>
             : null}
           {hasExplicitError
-            ? <Text style={labelStyle}>{error.toUpperCase()}</Text>
+            ? <Text style={labelStyle}>
+                {error.toUpperCase()}
+              </Text>
             : null}
         </View>
         <TextInput {...field.input} style={styles.textInput} />
@@ -156,7 +158,9 @@ class Form extends Component {
     const { label } = field;
     return (
       <View style={styles.inputContainer}>
-        <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
+        <Text style={[styles.inputLabel, { flex: 1 }]}>
+          {label}
+        </Text>
 
         <DatePicker
           onChange={field.input.onChange}

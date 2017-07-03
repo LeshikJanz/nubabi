@@ -37,7 +37,7 @@ const contextWithoutPrivateData = (state, actions) => ({
   },
 });
 
-const createReportingMiddleware = (Raven) => {
+const createReportingMiddleware = Raven => {
   let actions = [];
 
   const setExtraContext = (state, action) => {
@@ -46,20 +46,18 @@ const createReportingMiddleware = (Raven) => {
     Raven.setExtraContext(context);
   };
 
-  return (store: any) =>
-    (next: any) =>
-      (action: Action) => {
-        if (action.type === 'APP_ERROR') {
-          captureException(action.payload, Raven);
-        } else if (action.type === 'ON_AUTH') {
-          setRavenUserContext(action.payload.user, Raven);
-        }
-        setExtraContext(store.getState(), action);
-        return next(action);
-      };
+  return (store: any) => (next: any) => (action: Action) => {
+    if (action.type === 'APP_ERROR') {
+      captureException(action.payload, Raven);
+    } else if (action.type === 'ON_AUTH') {
+      setRavenUserContext(action.payload.user, Raven);
+    }
+    setExtraContext(store.getState(), action);
+    return next(action);
+  };
 };
 
-const register = (unhandledRejection) => {
+const register = unhandledRejection => {
   if (!unhandledRejection) {
     return;
   }
@@ -69,7 +67,6 @@ const register = (unhandledRejection) => {
     captureException(event.detail.reason);
   });
 };
-
 
 const configureReporting = (options: any) => {
   const { appVersion, sentryUrl, unhandledRejection, Raven } = options;

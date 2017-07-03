@@ -35,11 +35,10 @@ const Loader = ({
   color = theme.colors.primary,
   type = 'Bounce',
   style,
-}: Props) => (
+}: Props) =>
   <View style={style || styles.container}>
     <Spinner size={size} color={color} type={type} />
-  </View>
-);
+  </View>;
 
 const styles = {
   container: {

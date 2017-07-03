@@ -1,7 +1,5 @@
 // @flow
-import type {
-  GraphDetailMeasurementSwitcherControlProps,
-} from './GraphDetailMeasurementSwitcher';
+import type { GraphDetailMeasurementSwitcherControlProps } from './GraphDetailMeasurementSwitcher';
 import React, { PureComponent } from 'react';
 import { SegmentedControlIOS } from 'react-native';
 import { upperFirst } from 'lodash/fp';

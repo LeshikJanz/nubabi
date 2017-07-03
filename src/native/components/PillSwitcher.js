@@ -45,7 +45,9 @@ export const PillSwitcherButton = ({
       paddingVertical={0.5}
       {...boxStyleProps}
     >
-      <Text {...textStyleProps}>{value}</Text>
+      <Text {...textStyleProps}>
+        {value}
+      </Text>
     </Box>
   );
 };
@@ -57,14 +59,14 @@ export const PillSwitcher = ({
 }: Props) => {
   return (
     <Box flexDirection="row" justifyContent={align}>
-      {availableValues.map(value => (
+      {availableValues.map(value =>
         <PillSwitcherButton
           key={value}
           value={value}
           onSelect={onSelect}
           isCurrent={value === currentValue}
-        />
-      ))}
+        />,
+      )}
     </Box>
   );
 };

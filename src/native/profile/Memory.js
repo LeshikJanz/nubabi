@@ -13,7 +13,9 @@ const Memory = ({ memory }) => {
           resizeMode="stretch"
         />
       </View>
-      <Text style={styles.memoryText}>{memory.caption}</Text>
+      <Text style={styles.memoryText}>
+        {memory.caption}
+      </Text>
     </View>
   );
 };
