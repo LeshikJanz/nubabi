@@ -3,11 +3,15 @@ import Text from './Text';
 import Button from './Button';
 import AddButton from './AddButton';
 import Image from './Image';
+import Avatar from './Avatar';
 import Card from './Card';
 import HorizontalCardList from './HorizontalCardList';
 import Screen from './Screen';
 import Markdown from './Markdown';
 import Link from './Link';
+import List from './List';
+import ListItem from './ListItem';
+import ListItemSeparator from './ListItemSeparator';
 import NoContentView from './NoContentView';
 import Pill from './Pill';
 import PillSwitcher from './PillSwitcher';
@@ -25,10 +29,14 @@ export {
   Button,
   AddButton,
   Image,
+  Avatar,
   Card,
   HorizontalCardList,
   Markdown,
   Link,
+  List,
+  ListItem,
+  ListItemSeparator,
   NoContentView,
   Pill,
   PillSwitcher,

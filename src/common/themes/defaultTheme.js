@@ -38,6 +38,7 @@ const colors = {
   gray: open.gray2,
   secondary: open.gray3,
   panel: open.white1,
+  separator: open.gray0,
 };
 
 const theme: Theme = {

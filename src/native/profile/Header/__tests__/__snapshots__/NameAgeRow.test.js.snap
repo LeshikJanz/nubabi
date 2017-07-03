@@ -155,7 +155,7 @@ exports[`it renders correctly 1`] = `
             }
           }
         >
-          2 months old
+          3 months old
         </Text>
       </View>
     </View>

@@ -1,20 +1,22 @@
 // @flow
-import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import type { State, Viewer } from '../../common/types';
+import React, { Component } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import { graphql, gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
+import { Box, Text, List, ListItem, ListItemSeparator } from '../components';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
-import UserProfile from './UserProfile';
+import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {
   user: Viewer,
   logout: typeof logout,
   appName: string,
   appVersion: string,
+  onNavigateToNotificationSettings: () => void,
 };
 
 const copyrightHolder = 'MyLearningBaby Ltd';
@@ -46,7 +48,7 @@ export class Settings extends Component {
     }
     return (
       <View style={styles.copyrightContainer}>
-        <Text style={styles.copyrightText}>{copyrightText}</Text>
+        <Text style={() => styles.copyrightText}>{copyrightText}</Text>
       </View>
     );
   }
@@ -58,32 +60,41 @@ export class Settings extends Component {
       return null;
     }
 
-    const userProp = filter(UserProfile.fragments.profile, viewer.user);
-    const viewerProp = filter(UserProfile.fragments.viewer, viewer);
+    const userProp = filter(UserProfileTrigger.fragments.profile, viewer.user);
 
     return (
-      <View style={styles.container}>
-        <UserProfile user={userProp} viewer={viewerProp} />
-        <View style={styles.submitButtonContainer}>
-          <TouchableHighlight
-            underlayColor="rgba(0,0,0,0)"
-            style={styles.oneButton}
-            onPress={this.props.logout}
+      <Box flex={1}>
+        <List>
+          <ListItemSeparator />
+          <UserProfileTrigger user={userProp} />
+          <ListItemSeparator />
+          <ListItem
+            leftIcon="ios-notifications"
+            rightArrow
+            onPress={this.props.onNavigateToNotificationSettings}
           >
-
-            <View style={styles.submitButton}>
-              <Text style={styles.submitText}>LOG OUT</Text>
-            </View>
-          </TouchableHighlight>
-        </View>
-
+            <Text color="secondary">Notifications</Text>
+          </ListItem>
+          <ListItem leftIcon="ios-people" rightArrow last>
+            <Text color="secondary">Family and Friends</Text>
+          </ListItem>
+          <ListItemSeparator />
+          <Box contentSpacing>
+            <Text color="secondary">UNIT PREFERENCES</Text>
+          </Box>
+          <ListItem rightArrow rightText="Kilograms" onPress={() => {}}>
+            <Text color="secondary">Weight</Text>
+          </ListItem>
+          <ListItem rightArrow rightText="Centimeters" last>
+            <Text color="secondary">Height</Text>
+          </ListItem>
+        </List>
         {this.renderCopyright()}
-
-      </View>
+      </Box>
     );
   }
 }
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -126,7 +137,7 @@ const styles = StyleSheet.create({
     color: theme.colors.open.gray3,
     textAlign: 'center',
   },
-});
+};
 
 export default compose(
   connect(
@@ -140,14 +151,12 @@ export default compose(
     gql`
       query UserProfile {
         viewer {
-          ...UserProfileViewer
           user {
             ...UserProfile
           }
         }
       }
-      ${UserProfile.fragments.viewer}
-      ${UserProfile.fragments.profile}
+      ${UserProfileTrigger.fragments.profile}
     `,
     {
       options: { fetchPolicy: 'cache-and-network' },

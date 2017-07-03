@@ -9,10 +9,16 @@ export class SettingsScreen extends PureComponent {
     title: 'Settings',
   };
 
+  handleNotificationSettings = () => {
+    this.props.navigation.navigate('notificationSettings');
+  };
+
   render() {
     return (
       <Screen>
-        <Settings />
+        <Settings
+          onNavigateToNotificationSettings={this.handleNotificationSettings}
+        />
       </Screen>
     );
   }

@@ -50,6 +50,7 @@ import HealthHelpScreen from '../library/HealthHelpScreen';
 import GraphDetailScreen from '../growth/GraphDetailScreen';
 import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
+import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -68,6 +69,7 @@ const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 const routes = {
   settings: { screen: SettingsScreen },
+  notificationSettings: { screen: NotificationSettingsScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
