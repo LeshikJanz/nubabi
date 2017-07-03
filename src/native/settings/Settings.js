@@ -1,12 +1,12 @@
 // @flow
 import type { State, Viewer } from '../../common/types';
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { Box, Text, List, ListItem, ListItemSeparator } from '../components';
+import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import UserProfileTrigger from './UserProfileTrigger';
@@ -91,11 +91,22 @@ export class Settings extends Component {
             <Text color="secondary">Height</Text>
           </ListItem>
         </List>
+        <View style={styles.submitButtonContainer}>
+          <TouchableHighlight
+            underlayColor="rgba(0,0,0,0)"
+            onPress={this.props.logout}
+          >
+            <View style={styles.submitButton}>
+              <Text style={() => styles.submitText}>LOG OUT</Text>
+            </View>
+          </TouchableHighlight>
+        </View>
         {this.renderCopyright()}
       </Box>
     );
   }
 }
+
 const styles = {
   container: {
     flex: 1,

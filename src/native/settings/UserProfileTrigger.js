@@ -8,7 +8,6 @@ import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   user: FirebaseUser,
-  layout: LayoutProps,
 };
 
 export class UserProfileTrigger extends PureComponent {
