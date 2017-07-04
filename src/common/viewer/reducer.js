@@ -1,9 +1,10 @@
+// @flow
 import type { ViewerState, Action } from '../types';
 
 export const initialState = null;
 
 const reducer = (
-  state: ViewerState = initialState,
+  state: ?ViewerState = initialState,
   action: Action,
 ): ViewerState => {
   switch (action.type) {

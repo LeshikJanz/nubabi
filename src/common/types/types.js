@@ -227,6 +227,20 @@ export type ViewerState = {
   +viewer: ?User,
 };
 
+export type SettingsState = {
+  +unitDisplay: {
+    +weight: 'kg' | 'lb',
+    +height: 'cm' | 'in',
+  },
+  +notifications: {
+    +memories: boolean,
+    +stimulation: boolean,
+    +growth: boolean,
+    +activities: boolean,
+    +email: boolean,
+  },
+};
+
 export type TabNavigationState = {
   +index: number,
   +routes: Array<mixed>, // TODO: shape
@@ -253,6 +267,7 @@ export type State = {
   +device: DeviceState,
   +growth: GrowthState,
   +navigation: MobileNavigationState,
+  +settings: SettingsState,
   +tabs: TabNavigationState,
   +thisWeek: ThisWeekState,
   +viewer: ViewerState,
@@ -317,6 +332,14 @@ export type SkipGrowthIntroductionAction = {
   payload: string,
 };
 
+export type SettingsSetValueAction = {
+  type: 'SETTINGS_SET_VALUE',
+  payload: {
+    path: Array<string>,
+    value: any,
+  },
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -330,4 +353,5 @@ export type Action =
   | GetBabiesSuccessAction
   | GetBabiesFailureAction
   | SeenGrowthGlobalIntroAction
-  | SkipGrowthIntroductionAction;
+  | SkipGrowthIntroductionAction
+  | SettingsSetValueAction;

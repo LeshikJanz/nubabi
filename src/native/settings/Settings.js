@@ -1,5 +1,5 @@
 // @flow
-import type { State, Viewer } from '../../common/types';
+import type { State, Viewer, SettingsState } from '../../common/types';
 import React, { Component } from 'react';
 import { TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
@@ -7,16 +7,26 @@ import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
+import { setSettingsValue } from '../../common/settings/reducer';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {
-  user: Viewer,
+  user: { user: Viewer },
+  settings: SettingsState,
   logout: typeof logout,
+  setSettingsValue: typeof setSettingsValue,
   appName: string,
   appVersion: string,
   onNavigateToNotificationSettings: () => void,
+};
+
+const unitDisplayMapping = {
+  kg: 'Kilograms',
+  cm: 'Centimeters',
+  in: 'Inches',
+  lb: 'Pounds',
 };
 
 const copyrightHolder = 'MyLearningBaby Ltd';
@@ -39,6 +49,10 @@ export class Settings extends Component {
     return null;
   }
 
+  getUnitLabel(type: 'weight' | 'height') {
+    return unitDisplayMapping[this.props.settings.unitDisplay[type]];
+  }
+
   renderCopyright() {
     const copyright = `© ${copyrightYear} ${copyrightHolder}.`;
     let copyrightText = `${copyright}`;
@@ -56,6 +70,7 @@ export class Settings extends Component {
   }
 
   render() {
+    console.log(this.props);
     const { user: viewer } = this.props;
 
     if (!viewer) {
@@ -84,10 +99,14 @@ export class Settings extends Component {
           <Box contentSpacing>
             <Text color="secondary">UNIT PREFERENCES</Text>
           </Box>
-          <ListItem rightArrow rightText="Kilograms" onPress={() => {}}>
+          <ListItem
+            rightArrow
+            rightText={this.getUnitLabel('weight')}
+            onPress={() => {}}
+          >
             <Text color="secondary">Weight</Text>
           </ListItem>
-          <ListItem rightArrow rightText="Centimeters" last>
+          <ListItem rightArrow rightText={this.getUnitLabel('height')} last>
             <Text color="secondary">Height</Text>
           </ListItem>
         </List>
@@ -157,8 +176,9 @@ export default compose(
     (state: State) => ({
       appName: state.config.appName,
       appVersion: state.config.appVersion,
+      settings: state.settings,
     }),
-    { logout },
+    { setSettingsValue, logout },
   ),
   graphql(
     gql`

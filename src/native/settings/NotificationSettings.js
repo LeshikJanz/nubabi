@@ -1,7 +1,10 @@
 // @flow
+import type { State } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { partial } from 'ramda';
+import { compose, partial, pick } from 'ramda';
+import { connect } from 'react-redux';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
+import { setSettingsValue } from '../../common/settings/reducer';
 
 class NotificationSettings extends PureComponent {
   state = {
@@ -13,16 +16,18 @@ class NotificationSettings extends PureComponent {
   };
 
   toggle = (setting: string, value: boolean) => {
-    this.setState({ [setting]: value });
+    this.props.setSettingsValue(['notifications', setting], value);
   };
 
-  toggleMemories = partial(this.toggle, ['memoriesEnabled']);
-  toggleStimulation = partial(this.toggle, ['stimulationEnabled']);
-  toggleGrowth = partial(this.toggle, ['growthEnabled']);
-  toggleActivities = partial(this.toggle, ['activityRemindersEnabled']);
-  toggleEmail = partial(this.toggle, ['emailEnabled']);
+  toggleMemories = partial(this.toggle, ['memories']);
+  toggleStimulation = partial(this.toggle, ['stimulation']);
+  toggleGrowth = partial(this.toggle, ['growth']);
+  toggleActivities = partial(this.toggle, ['activities']);
+  toggleEmail = partial(this.toggle, ['email']);
 
   render() {
+    const { notifications } = this.props;
+
     return (
       <Box flex={1}>
         <List>
@@ -30,19 +35,19 @@ class NotificationSettings extends PureComponent {
             <Text color="secondary">PUSH NOTIFICATIONS</Text>
           </Box>
           <ListItem
-            rightToggle={this.state.memoriesEnabled}
+            rightToggle={notifications.memories}
             onRightTogglePress={this.toggleMemories}
           >
             <Text color="secondary">Memories</Text>
           </ListItem>
           <ListItem
-            rightToggle={this.state.stimulationEnabled}
+            rightToggle={notifications.stimulation}
             onRightTogglePress={this.toggleStimulation}
           >
             <Text color="secondary">Stimulation</Text>
           </ListItem>
           <ListItem
-            rightToggle={this.state.growthEnabled}
+            rightToggle={notifications.growth}
             onRightTogglePress={this.toggleGrowth}
             last
           >
@@ -53,7 +58,7 @@ class NotificationSettings extends PureComponent {
             <Text color="secondary">ACTIVITY REMINDER</Text>
           </Box>
           <ListItem
-            rightToggle={this.state.activityRemindersEnabled}
+            rightToggle={notifications.activities}
             onRightTogglePress={this.toggleActivities}
             last
           >
@@ -66,7 +71,7 @@ class NotificationSettings extends PureComponent {
             <Text color="secondary">EMAIL NOTIFICATIONS</Text>
           </Box>
           <ListItem
-            rightToggle={this.state.emailEnabled}
+            rightToggle={notifications.email}
             onRightTogglePress={this.toggleEmail}
             last
           >
@@ -80,4 +85,8 @@ class NotificationSettings extends PureComponent {
   }
 }
 
-export default NotificationSettings;
+export default compose(
+  connect(({ settings }) => pick(['notifications'], settings), {
+    setSettingsValue,
+  }),
+)(NotificationSettings);
