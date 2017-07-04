@@ -21,6 +21,7 @@ const returnValWithKeyAsId = snapshot => {
 
 const isNewImage = image => {
   // Apparently we can't use String.prototype.startsWith on JSC
+  // TODO: confirm
   return image && image.url.indexOf('data:') !== -1;
 };
 

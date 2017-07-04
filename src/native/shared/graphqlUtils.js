@@ -40,3 +40,7 @@ export const isEmptyProp = (propName: string) => props => {
 export const isEmptyPath = (pathArray: Array<string>) => props => {
   return isEmpty(path(pathArray, props));
 };
+
+export const formValues = memoize((obj: mixed) => {
+  return omit(['id', '__typename'], obj);
+});

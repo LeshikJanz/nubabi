@@ -14,7 +14,7 @@ interface Timestampable {
 }
 
 type Mutation {
-  ping: String
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
 # Information about pagination in a connection.
@@ -114,6 +114,21 @@ type CreateUserPayload {
 
   # A view port into your application.
   viewer: Viewer
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+input UpdateUserInput {
+  firstName: String,
+  lastName: String,
+  dob: DateTime,
+  avatar: ImageInput,
+}
+
+type UpdateUserPayload {
+  # The mutated User.
+  changedUser: User
 
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String

@@ -13,11 +13,16 @@ export class SettingsScreen extends PureComponent {
     this.props.navigation.navigate('notificationSettings');
   };
 
+  handleUserProfile = () => {
+    this.props.navigation.navigate('editUser');
+  };
+
   render() {
     return (
       <Screen>
         <Settings
           onNavigateToNotificationSettings={this.handleNotificationSettings}
+          onNavigateToEditProfile={this.handleUserProfile}
         />
       </Screen>
     );

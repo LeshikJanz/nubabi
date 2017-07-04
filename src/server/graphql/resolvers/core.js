@@ -1,4 +1,5 @@
 import { GraphQLString } from 'graphql';
+import { pick } from 'ramda';
 import { GraphQLDate, GraphQLTime, GraphQLDateTime } from 'graphql-iso-date';
 import { nodeFieldResolver, globalIdField, prop } from './common';
 
@@ -18,11 +19,22 @@ const resolvers = {
   },
   User: {
     id: globalIdField('User', obj => obj.uid),
-    avatar: obj => ({
-      url: obj.avatar,
-      thumb: obj.avatar ? { url: obj.avatar.thumb } : null,
-      large: obj.avatar ? { url: obj.avatar.original } : null,
-    }),
+    avatar: obj => {
+      if (!obj.avatar) {
+        return null;
+      }
+
+      const avatars = { url: obj.avatar.original };
+      if (obj.avatar.thumb) {
+        avatars.thumb = { url: obj.avatar.thumb };
+      }
+
+      if (obj.avatar.original) {
+        avatars.large = { url: obj.avatar.original };
+      }
+
+      return avatars;
+    },
     totalAchievements: () => 0, // TODO
     totalMemories: () => 0, // TODO
   },

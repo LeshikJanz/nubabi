@@ -8,6 +8,7 @@ import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   user: FirebaseUser,
+  onPress: () => void,
 };
 
 export class UserProfileTrigger extends PureComponent {
@@ -20,7 +21,7 @@ export class UserProfileTrigger extends PureComponent {
         firstName
         lastName
         avatar {
-          large {
+          thumb {
             url
           }
         }
@@ -40,7 +41,7 @@ export class UserProfileTrigger extends PureComponent {
     const { user } = this.props;
     return (
       <Avatar
-        src={path(['avatar', 'large', 'url'], user)}
+        src={path(['avatar', 'thumb', 'url'], user)}
         fallbackText={this.getInitials()}
         backgroundColor={theme.colors.gray}
         color={theme.colors.white}
@@ -51,7 +52,12 @@ export class UserProfileTrigger extends PureComponent {
   render() {
     const { user } = this.props;
     return (
-      <ListItem avatarLeft={this.renderAvatar()} rightArrow last>
+      <ListItem
+        onPress={this.props.onPress}
+        avatarLeft={this.renderAvatar()}
+        rightArrow
+        last
+      >
         <Text size={2} color="secondary" marginBottom={0.2}>
           {user.firstName} {user.lastName}
         </Text>

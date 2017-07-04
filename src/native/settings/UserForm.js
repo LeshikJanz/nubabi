@@ -1,67 +1,46 @@
 // @flow
-import type { Baby } from '../../../common/types';
+import type { User } from '../../common/types';
 import React, { Component } from 'react';
 import {
-  View,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
-import { reduxForm, Field } from 'redux-form';
-import { DatePicker } from '../../components';
-import hoistStatics from '../../components/hoistStatics';
+import { Field, reduxForm } from 'redux-form';
+import { Avatar, Box, DatePicker } from '../components';
+import hoistStatics from '../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
-import NubabiIcon from '../../../common/icons/nubabi';
 import theme, {
-  NUBABI_RED,
   FONT_COLOR,
-} from '../../../common/themes/defaultTheme';
-import imagePicker from '../../components/imagePicker';
-import Picker from './Picker';
-import RelationshipDropdown from './RelationshipDropdown';
-import CoverImage from '../Header/CoverImage';
-import IconHeader from '../Header/IconHeader';
-import GenderSelection from './GenderSelection';
-import {
-  required,
-  constantValues,
-  maxLength,
-  formattedDate,
-} from '../../shared/formValidation';
+  NUBABI_RED,
+} from '../../common/themes/defaultTheme';
+import imagePicker from '../components/imagePicker';
+import { formattedDate, maxLength, required } from '../shared/formValidation';
 
 type Props = {
   // redux-form uses initialValues prop
-  initialValues: Baby, // eslint-disable-line react/no-unused-prop-types
+  initialValues: User, // eslint-disable-line react/no-unused-prop-types
   onSubmit: () => void,
   handleSubmit: () => void,
   change: () => void,
   loading: Boolean,
-  mode: 'add' | 'edit',
 };
 
-/* Validation
- TODO: extract
- */
-
-class Form extends Component {
+class UserForm extends Component {
   props: Props;
 
   static fragments = {
     form: gql`
-      fragment BabyForm on Baby {
+      fragment UserForm on User {
         id
-        name
-        gender
+        firstName
+        lastName
         dob
-        weekBorn
-        relationship
         avatar {
-          url
-        }
-        coverImage {
           url
         }
       }
@@ -74,22 +53,10 @@ class Form extends Component {
     this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
   };
 
-  handleCoverImage = () => {
-    imagePicker({ title: 'Select Cover Photo' }).then(
-      this.updateImageField('coverImage'),
-    );
-  };
-
   handleAvatar = () => {
     imagePicker({ title: 'Select Avatar' }).then(
       this.updateImageField('avatar'),
     );
-  };
-
-  scrollToPicker = () => {
-    if (this.scroll) {
-      this.scroll.scrollToPosition(0, 180, true);
-    }
   };
 
   renderTextInput(field) {
@@ -129,30 +96,12 @@ class Form extends Component {
   }
 
   renderAvatar(field) {
-    return <IconHeader avatar={field.input.value} />;
-  }
-
-  renderCoverImage(field) {
-    return <CoverImage coverImage={field.input.value} />;
-  }
-
-  renderGenderSelection(field) {
     return (
-      <GenderSelection
-        selectedGender={field.input.value}
-        onChangeGender={field.input.onChange}
-        hasError={field.meta.touched && !!field.meta.error}
-      />
+      <Box margin={2} alignItems="center" justifyContent="center">
+        <Avatar size={200} src={field.input.value.url} />
+      </Box>
     );
   }
-
-  renderPicker = field => {
-    return <Picker field={field} onPickerOpen={this.scrollToPicker} />;
-  };
-
-  renderRelationshipDropdown = field => {
-    return <RelationshipDropdown field={field} />;
-  };
 
   renderDatePicker = field => {
     const { label } = field;
@@ -174,35 +123,16 @@ class Form extends Component {
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
-    const {
-      renderGenderSelection,
-      renderPicker,
-      renderTextInput,
-      renderCoverImage,
-      renderAvatar,
-      renderRelationshipDropdown,
-      renderDatePicker,
-    } = this;
+    const { renderTextInput, renderAvatar, renderDatePicker } = this;
 
-    let submitText;
-
-    if (this.props.loading) {
-      submitText = this.props.mode === 'add' ? 'ADDING...' : 'SAVING...';
-    } else {
-      submitText = this.props.mode === 'add' ? 'ADD BABY' : 'SAVE BABY';
-    }
+    const submitText = this.props.loading ? 'SAVING...' : 'SAVE';
 
     return (
       <KeyboardAwareScrollView
         style={styles.container}
-        contentContainerStyle={styles.scrollContainer}
         keyboardShouldPersistTaps="handled"
-        ref={ref => {
-          this.scroll = ref;
-        }}
       >
         <View style={styles.headerContainer}>
-          <Field name="coverImage" component={renderCoverImage} />
           <Field name="avatar" component={renderAvatar} />
 
           <View style={styles.changeAvatarContainer}>
@@ -217,59 +147,28 @@ class Form extends Component {
               </View>
             </View>
           </View>
-          <View style={styles.changeCoverPhotoView}>
-            <TouchableOpacity
-              style={{ flexDirection: 'row' }}
-              onPress={this.handleCoverImage}
-            >
-              <NubabiIcon
-                style={styles.changeCoverPhotoIcon}
-                name="editProfile"
-              />
-              <Text style={styles.changeCoverPhotoText}>
-                Change Cover Photo
-              </Text>
-            </TouchableOpacity>
-          </View>
         </View>
 
         <Field
-          name="gender"
-          component={renderGenderSelection}
-          validate={[required, constantValues('MALE', 'FEMALE')]}
+          name="firstName"
+          label="FIRST NAME"
+          component={renderTextInput}
+          validate={[required, maxLength(32)]}
         />
 
         <Field
-          name="name"
-          label="NAME"
+          name="lastName"
+          label="FIRST NAME"
           component={renderTextInput}
           validate={[required, maxLength(32)]}
         />
 
         <Field
           name="dob"
-          label="BORN ON"
+          label="DATE OF BIRTH"
           component={renderDatePicker}
-          validate={[required, formattedDate('YYYY-MM-DD')]}
+          validate={[formattedDate('YYYY-MM-DD')]}
         />
-
-        <Field
-          name="relationship"
-          label="RELATIONSHIP TO BABY"
-          component={renderRelationshipDropdown}
-          validate={[required]}
-        />
-
-        <View>
-          <Text style={[styles.inputLabel, { marginHorizontal: 30 }]}>
-            WEEK BABY BORN
-          </Text>
-          <Field
-            name="weekBorn"
-            component={renderPicker}
-            validate={[required]}
-          />
-        </View>
 
         <View style={styles.submitButtonContainer}>
           <TouchableOpacity
@@ -302,8 +201,8 @@ const styles = StyleSheet.create({
   changeAvatarContainer: {
     flex: 1,
     alignItems: 'center',
-    marginLeft: 45,
-    marginTop: -10,
+    marginLeft: 145,
+    marginTop: -55,
   },
   changeAvatarView: {
     height: 24,
@@ -396,7 +295,7 @@ const styles = StyleSheet.create({
 // see: https://github.com/erikras/redux-form/issues/2626
 export default hoistStatics(
   reduxForm({
-    form: 'baby',
+    form: 'user',
     enableReinitialize: true,
   }),
-)(Form);
+)(UserForm);

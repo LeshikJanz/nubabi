@@ -20,6 +20,7 @@ type Props = {
   logout: typeof logout,
   setSettingsValue: typeof setSettingsValue,
   onNavigateToNotificationSettings: () => void,
+  onNavigateToEditProfile: () => void,
 };
 
 const copyrightHolder = 'MyLearningBaby Ltd';
@@ -118,7 +119,10 @@ export class Settings extends Component {
       <Box flex={1}>
         <List>
           <ListItemSeparator />
-          <UserProfileTrigger user={userProp} />
+          <UserProfileTrigger
+            user={userProp}
+            onPress={this.props.onNavigateToEditProfile}
+          />
           <ListItemSeparator />
           <ListItem
             leftIcon="ios-notifications"

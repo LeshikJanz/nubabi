@@ -47,6 +47,7 @@ import GraphDetailScreen from '../growth/GraphDetailScreen';
 import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
+import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -67,6 +68,7 @@ const routes = {
   settings: { screen: SettingsScreen },
   notificationSettings: { screen: NotificationSettingsScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
+  editUser: { screen: EditUserProfileScreen },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   updateHeight: { screen: UpdateHeightScreen },

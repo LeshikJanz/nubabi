@@ -19,6 +19,10 @@ export const maxValue = max => value => {
 };
 
 export const formattedDate = format => value => {
+  if (!value) {
+    return;
+  }
+
   return value && moment(value, format).isValid()
     ? undefined
     : `Must be a date in ${format} format`;
