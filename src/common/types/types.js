@@ -227,18 +227,22 @@ export type ViewerState = {
   +viewer: ?User,
 };
 
+export type UnitDisplaySettingsState = {
+  +weight: 'kg' | 'lbs',
+  +height: 'cm' | 'in',
+};
+
+export type NotificationSettingsState = {
+  +memories: boolean,
+  +stimulation: boolean,
+  +growth: boolean,
+  +activities: boolean,
+  +email: boolean,
+};
+
 export type SettingsState = {
-  +unitDisplay: {
-    +weight: 'kg' | 'lb',
-    +height: 'cm' | 'in',
-  },
-  +notifications: {
-    +memories: boolean,
-    +stimulation: boolean,
-    +growth: boolean,
-    +activities: boolean,
-    +email: boolean,
-  },
+  +unitDisplay: UnitDisplaySettingsState,
+  +notifications: NotificationSettingsState,
 };
 
 export type TabNavigationState = {

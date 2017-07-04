@@ -1,4 +1,5 @@
 // @flow
+import type { MeasurementUnit } from '../../common/types';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { gql } from 'react-apollo';
@@ -13,7 +14,7 @@ import { formatMeasurement } from '../../common/helpers/measurement';
 type Props = {
   header: string,
   amount: ?number,
-  unit: 'kg' | 'cm',
+  unit: MeasurementUnit,
   iconName: string,
   onUpdate: () => void,
 };
@@ -35,7 +36,7 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
       <View style={styles.valueRow}>
         {amount
           ? <Text style={styles.valueText}>
-              {formatMeasurement(amount)}
+              {formatMeasurement(unit, amount)}
               {unit}
             </Text>
           : <Text style={styles.noDataText}>No Data Yet</Text>}

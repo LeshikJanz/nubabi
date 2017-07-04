@@ -1,9 +1,9 @@
 // @flow
 import type { State, Viewer, SettingsState } from '../../common/types';
 import React, { Component } from 'react';
-import { TouchableHighlight, View } from 'react-native';
+import { TouchableHighlight, View, ActionSheetIOS } from 'react-native';
 import { connect } from 'react-redux';
-import { compose, path } from 'ramda';
+import { compose, path, invertObj } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
@@ -15,22 +15,22 @@ import UserProfileTrigger from './UserProfileTrigger';
 type Props = {
   user: { user: Viewer },
   settings: SettingsState,
-  logout: typeof logout,
-  setSettingsValue: typeof setSettingsValue,
   appName: string,
   appVersion: string,
+  logout: typeof logout,
+  setSettingsValue: typeof setSettingsValue,
   onNavigateToNotificationSettings: () => void,
 };
+
+const copyrightHolder = 'MyLearningBaby Ltd';
+const copyrightYear = new Date().getFullYear();
 
 const unitDisplayMapping = {
   kg: 'Kilograms',
   cm: 'Centimeters',
   in: 'Inches',
-  lb: 'Pounds',
+  lbs: 'Pounds',
 };
-
-const copyrightHolder = 'MyLearningBaby Ltd';
-const copyrightYear = new Date().getFullYear();
 
 export class Settings extends Component {
   props: Props;
@@ -53,6 +53,42 @@ export class Settings extends Component {
     return unitDisplayMapping[this.props.settings.unitDisplay[type]];
   }
 
+  handleActionSheet = (options: Array<string>, type: string) => {
+    // TODO: this is iOS only
+    const sheetOptions = [...options, 'Cancel'];
+    const cancelIndex = sheetOptions.length - 1;
+
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: sheetOptions,
+        cancelButtonIndex: cancelIndex,
+        title: 'Choose a Unit',
+        message: 'Set this unit to be displayed in measurements across the app',
+      },
+      selectedIndex => {
+        if (selectedIndex === cancelIndex) {
+          return;
+        }
+
+        const selectedUnit = invertObj(unitDisplayMapping)[
+          sheetOptions[selectedIndex]
+        ];
+
+        if (selectedUnit) {
+          this.props.setSettingsValue(['unitDisplay', type], selectedUnit);
+        }
+      },
+    );
+  };
+
+  handleChooseWeightUnit = () => {
+    this.handleActionSheet(['Kilograms', 'Pounds'], 'weight');
+  };
+
+  handleChooseHeightUnit = () => {
+    this.handleActionSheet(['Centimeters', 'Inches'], 'height');
+  };
+
   renderCopyright() {
     const copyright = `© ${copyrightYear} ${copyrightHolder}.`;
     let copyrightText = `${copyright}`;
@@ -70,7 +106,6 @@ export class Settings extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { user: viewer } = this.props;
 
     if (!viewer) {
@@ -102,11 +137,16 @@ export class Settings extends Component {
           <ListItem
             rightArrow
             rightText={this.getUnitLabel('weight')}
-            onPress={() => {}}
+            onPress={this.handleChooseWeightUnit}
           >
             <Text color="secondary">Weight</Text>
           </ListItem>
-          <ListItem rightArrow rightText={this.getUnitLabel('height')} last>
+          <ListItem
+            rightArrow
+            rightText={this.getUnitLabel('height')}
+            onPress={this.handleChooseHeightUnit}
+            last
+          >
             <Text color="secondary">Height</Text>
           </ListItem>
         </List>

@@ -1,31 +1,28 @@
 // @flow
 import type {
   Baby,
-  State,
-  MeasurementType,
   LayoutProps,
+  MeasurementType,
+  State,
+  UnitDisplaySettingsState,
 } from '../../common/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, StyleSheet } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { compose, pick, path, pluck } from 'ramda';
+import { compose, path, pick, pluck } from 'ramda';
 import { connect } from 'react-redux';
-import {
-  Box,
-  Text,
-  PillSwitcher,
-  displayLoadingState,
-  withLayout,
-} from '../components';
+import { Box, displayLoadingState, Text, withLayout } from '../components';
 import GraphDetailChart from './GraphDetailChart';
 import GraphDetailHeader from './GraphDetailHeader';
 import theme from '../../common/themes/defaultTheme';
+import { convertMeasurements } from '../../common/helpers/measurement';
 
 type Props = {
   baby: Baby,
+  unitDisplay: UnitDisplaySettingsState,
   navigation: NavigationProp<*>,
   layout: LayoutProps,
 };
@@ -47,6 +44,10 @@ export class GraphDetail extends PureComponent {
     `,
   };
 
+  getCurrentUnit() {
+    return this.props.unitDisplay[this.state.currentMeasurementType];
+  }
+
   handleSwitchMeasurement = (type: MeasurementType) => {
     this.setState({ currentMeasurementType: type });
   };
@@ -63,15 +64,13 @@ export class GraphDetail extends PureComponent {
     this.setState({ displayPeriodAs: value });
   };
 
-  getCurrentUnit() {
-    return this.state.currentMeasurementType === 'weight' ? 'kg' : 'cm';
-  }
-
   renderGraph() {
     const type = this.state.currentMeasurementType;
 
-    // TODO: memoize
-    const data = pluck('node', this.props.baby.measurements[`${type}s`].edges);
+    const data = convertMeasurements(
+      this.getCurrentUnit(),
+      pluck('node', this.props.baby.measurements[`${type}s`].edges),
+    );
 
     return (
       <GraphDetailChart
@@ -143,39 +142,40 @@ export class GraphDetail extends PureComponent {
 }
 
 export default compose(
-  connect(({ babies }: State) => ({
+  connect(({ babies, settings }: State) => ({
     currentBabyId: babies.currentBabyId,
+    unitDisplay: settings.unitDisplay,
   })),
   graphql(
     gql`
-    query GraphDetail($currentBabyId: ID!) {
-      viewer {
-        baby(id: $currentBabyId) {
-          id
-          ...GraphDetailHeaderBaby
+      query GraphDetail($currentBabyId: ID!) {
+        viewer {
+          baby(id: $currentBabyId) {
+            id
+            ...GraphDetailHeaderBaby
 
-          measurements {
-            heights {
-              edges {
-                node {
-                  ...Measurement
+            measurements {
+              heights {
+                edges {
+                  node {
+                    ...Measurement
+                  }
                 }
               }
-            }
-            weights {
-              edges {
-                node {
-                  ...Measurement
+              weights {
+                edges {
+                  node {
+                    ...Measurement
+                  }
                 }
               }
             }
           }
         }
       }
-    }
-    ${GraphDetail.fragments.measurement}
-    ${GraphDetailHeader.fragments.baby}
-  `,
+      ${GraphDetail.fragments.measurement}
+      ${GraphDetailHeader.fragments.baby}
+    `,
     {
       options: ownProps => ({
         variables: pick(['currentBabyId'], ownProps),

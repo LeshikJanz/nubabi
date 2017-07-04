@@ -1,31 +1,32 @@
 // @flow
-import type { State, Baby } from '../../common/types';
+import type { Baby, State, UnitDisplaySettingsState } from '../../common/types';
 import type { Event } from 'react-native';
-import React, { Component, PureComponent } from 'react';
-import { ScrollView, LayoutAnimation } from 'react-native';
+import { LayoutAnimation, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { skipGrowthGlobalIntro } from '../../common/growth/reducer';
 import {
   Box,
   Card,
-  Text,
   displayLoadingState,
   showNoContentViewIf,
+  Text,
 } from '../components';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import ThisWeekGrowthButton from './ThisWeekGrowthButton';
 import CombinedChart from './CombinedChart';
+import { formatMeasurement } from '../../common/helpers/measurement';
 
 type Props = {
   baby: Baby,
   skipGrowthGlobalIntro: () => void,
   onNavigateToWhatYouNeedToKnow: () => void,
   onNavigateToGraphDetail: () => void,
+  unitDisplay: UnitDisplaySettingsState,
 };
 
 const formatName = (name: string) => {
@@ -66,6 +67,8 @@ export class Growth extends Component {
   };
 
   getChartData() {
+    const { unitDisplay } = this.props;
+
     if (
       !path(['measurements', 'heights', 'edges', '0', 'node'], this.props.baby)
     ) {
@@ -74,14 +77,17 @@ export class Growth extends Component {
 
     const measurements = {};
 
-    ['heights', 'weights'].forEach(measurementType => {
-      measurements[measurementType] = path(
-        ['measurements', measurementType, 'edges'],
+    ['height', 'weight'].forEach(measurementType => {
+      measurements[`${measurementType}s`] = path(
+        ['measurements', `${measurementType}s`, 'edges'],
         this.props.baby,
       ).map(edge => {
         return {
           recordedAt: new Date(edge.node.recordedAt),
-          value: edge.node.value,
+          value: formatMeasurement(
+            unitDisplay[measurementType],
+            edge.node.value,
+          ),
         };
       });
     });
@@ -90,7 +96,7 @@ export class Growth extends Component {
   }
 
   render() {
-    const { baby } = this.props;
+    const { baby, unitDisplay } = this.props;
     const introduction = baby.growth.introduction;
 
     return (
@@ -122,9 +128,9 @@ export class Growth extends Component {
                   spacing={-0.68}
                   textAlign="center"
                 >
-                  {baby.weight}
+                  {formatMeasurement(unitDisplay.weight, baby.weight)}
                   <Text color="primary" size={2} marginHorizontal={1}>
-                    kg
+                    {unitDisplay.weight}
                   </Text>
                 </Text>
                 <Text
@@ -133,9 +139,9 @@ export class Growth extends Component {
                   spacing={-0.68}
                   textAlign="center"
                 >
-                  {baby.height}
+                  {formatMeasurement(unitDisplay.height, baby.height)}
                   <Text color="success" size={2}>
-                    cm
+                    {unitDisplay.height}
                   </Text>
                 </Text>
               </Box>
@@ -158,6 +164,7 @@ export default compose(
     (state: State) => ({
       currentBabyId: state.babies.currentBabyId,
       hasSeenGlobalIntro: state.growth.hasSeenGlobalIntro,
+      unitDisplay: state.settings.unitDisplay,
     }),
     {
       skipGrowthGlobalIntro,

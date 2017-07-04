@@ -103,7 +103,10 @@ export class UpdateMeasurement extends PureComponent {
   };
 
   valueInCurrentUnit() {
-    return `${formatMeasurement(this.state.value)} ${this.state.currentUnit}`;
+    return `${formatMeasurement(
+      this.state.currentUnit,
+      this.state.value,
+    )} ${this.state.currentUnit}`;
   }
 
   render() {

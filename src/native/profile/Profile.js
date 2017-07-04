@@ -32,6 +32,10 @@ import BabyNameTitle from './BabyNameTitle';
 type Props = {
   navigation: any,
   baby: ?Baby,
+  unitDisplay: {
+    weight: 'kg' | 'lbs',
+    height: 'cm' | 'in',
+  },
 };
 
 class Profile extends PureComponent {
@@ -73,6 +77,8 @@ class Profile extends PureComponent {
 
   render() {
     const { baby } = this.props;
+    const weightUnit = this.props.unitDisplay.weight;
+    const heightUnit = this.props.unitDisplay.height;
 
     // TODO: empty state
     if (!baby) {
@@ -95,14 +101,14 @@ class Profile extends PureComponent {
               <Measurement
                 amount={baby.weight}
                 header="Weight"
-                unit="kg"
+                unit={weightUnit}
                 iconName="weight"
                 onUpdate={this.handleUpdateWeight}
               />
               <Measurement
                 amount={baby.height}
                 header="Height"
-                unit="cm"
+                unit={heightUnit}
                 iconName="height"
                 onUpdate={this.handleUpdateHeight}
               />
@@ -160,8 +166,9 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  connect(({ babies }: State) => ({
+  connect(({ babies, settings }: State) => ({
     currentBabyId: babies.currentBabyId,
+    unitDisplay: settings.unitDisplay,
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({
