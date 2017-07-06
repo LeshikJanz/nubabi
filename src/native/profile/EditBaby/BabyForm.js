@@ -371,25 +371,6 @@ const styles = StyleSheet.create({
     color: '#a8b3c2',
     marginBottom: 4,
   },
-  submitButtonContainer: {
-    marginTop: 20,
-    flex: 1,
-    alignItems: 'center',
-  },
-  submitButton: {
-    backgroundColor: NUBABI_RED,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 100,
-    height: 30,
-    borderRadius: 15,
-  },
-  submitText: {
-    backgroundColor: 'transparent',
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#fff',
-  },
 });
 
 // redux-form hoist statics isn't working, so we use our own hoistStatics

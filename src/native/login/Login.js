@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import {
-  View,
+  Dimensions,
+  Image,
+  Platform,
+  StyleSheet,
   Text,
   TextInput,
-  StyleSheet,
-  Image,
-  Dimensions,
-  TouchableHighlight,
-  Platform,
+  View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import { loginRequest } from '../../common/auth/actions';
-import Loader from '../components/Loader';
+import { SubmitButton } from '../components';
 
 const background = require('../../common/images/loginBackground.jpg');
 const logo = require('../../common/images/loginLogo.png');
@@ -39,30 +37,9 @@ export class Login extends Component {
     this.props.loginRequest(email, password);
   };
 
-  renderLoader() {
-    if (this.props.isFetching) {
-      const type = Platform.select({
-        ios: 'Arc',
-        android: 'FadingCircle',
-      });
-
-      return (
-        <Loader
-          style={styles.loader}
-          size={40}
-          type={type}
-          color={theme.colors.white}
-        />
-      );
-    }
-
-    return null;
-  }
-
   render() {
     const { isFetching } = this.props;
 
-    const buttonText = isFetching ? 'Logging in...' : 'LOG IN';
     return (
       <View style={styles.container}>
         <Image
@@ -115,22 +92,12 @@ export class Login extends Component {
                   onSubmitEditing={this.login}
                 />
               </View>
-              <TouchableHighlight
-                underlayColor="rgba(0,0,0,0)"
-                style={styles.oneButton}
+              <SubmitButton
                 onPress={this.login}
-                disabled={isFetching}
-              >
-                <View style={styles.submitButtonContainer}>
-                  <View style={styles.submitButton}>
-                    <Text style={styles.submitText}>
-                      {buttonText}
-                    </Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
+                loading={isFetching}
+                submitText="LOGIN"
+              />
             </View>
-            {this.renderLoader()}
           </View>
         </KeyboardAwareScrollView>
       </View>

@@ -31,13 +31,13 @@ const resolvers = {
         return null;
       }
 
-      const avatars = { url: obj.avatar.original };
+      const avatars = { url: obj.avatar.url };
       if (obj.avatar.thumb) {
-        avatars.thumb = { url: obj.avatar.thumb };
+        avatars.thumb = { url: obj.avatar.thumb.url };
       }
 
-      if (obj.avatar.original) {
-        avatars.large = { url: obj.avatar.original };
+      if (obj.avatar.large) {
+        avatars.large = { url: obj.avatar.large.url };
       }
 
       return avatars;

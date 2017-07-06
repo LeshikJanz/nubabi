@@ -191,71 +191,63 @@ exports[`renders correctly 1`] = `
             />
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
+                  "alignItems": "center",
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "marginTop": 20,
                 },
-                undefined,
+                Object {},
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
               style={
                 Object {
                   "alignItems": "center",
-                  "flex": 1,
-                  "marginBottom": 50,
-                  "marginTop": 20,
+                  "backgroundColor": "#EA3154",
+                  "borderRadius": 15,
+                  "height": 30,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                  "width": 100,
                 }
               }
+              testID={undefined}
+              tvParallaxProperties={undefined}
             >
-              <View
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                disabled={false}
+                ellipsizeMode="tail"
                 style={
                   Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#ED3154",
-                    "borderRadius": 15,
-                    "height": 30,
-                    "justifyContent": "center",
-                    "width": 100,
+                    "backgroundColor": "transparent",
+                    "color": "#fff",
+                    "fontSize": 12,
+                    "fontWeight": "700",
                   }
                 }
               >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  disabled={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "color": "#fff",
-                      "fontSize": 14,
-                      "fontWeight": "700",
-                    }
-                  }
-                >
-                  LOG IN
-                </Text>
-              </View>
+                LOGIN
+              </Text>
             </View>
           </View>
         </View>
@@ -456,97 +448,57 @@ exports[`show progress when logging in 1`] = `
             />
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            nativeID={undefined}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
-                Object {
-                  "backgroundColor": "transparent",
-                },
-                undefined,
-              ]
-            }
-            testID={undefined}
-            tvParallaxProperties={undefined}
-          >
-            <View
-              style={
                 Object {
                   "alignItems": "center",
                   "flex": 1,
-                  "marginBottom": 50,
+                  "justifyContent": "center",
                   "marginTop": 20,
-                }
-              }
-            >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#ED3154",
-                    "borderRadius": 15,
-                    "height": 30,
-                    "justifyContent": "center",
-                    "width": 100,
-                  }
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  disabled={false}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "color": "#fff",
-                      "fontSize": 14,
-                      "fontWeight": "700",
-                    }
-                  }
-                >
-                  Logging in...
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View
-          style={
-            Object {
-              "position": "absolute",
-              "right": 10,
-              "top": 30,
-            }
-          }
-        >
-          <RNSpinkit
-            color={4294967295}
-            size={40}
-            style={
-              Array [
-                Object {
-                  "height": 40,
-                  "width": 40,
                 },
-                undefined,
+                Object {
+                  "opacity": 0.2,
+                },
               ]
             }
-            type="Arc"
-          />
+          >
+            <View
+              accessibilityComponentType={undefined}
+              accessibilityLabel={undefined}
+              accessibilityTraits={undefined}
+              accessible={true}
+              hitSlop={undefined}
+              isTVSelectable={true}
+              nativeID={undefined}
+              onLayout={undefined}
+              onResponderGrant={[Function]}
+              onResponderMove={[Function]}
+              onResponderRelease={[Function]}
+              onResponderTerminate={[Function]}
+              onResponderTerminationRequest={[Function]}
+              onStartShouldSetResponder={[Function]}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#EA3154",
+                  "borderRadius": 15,
+                  "height": 30,
+                  "justifyContent": "center",
+                  "opacity": 1,
+                  "width": 100,
+                }
+              }
+              testID={undefined}
+              tvParallaxProperties={undefined}
+            >
+              <ActivityIndicator
+                animating={true}
+                color="#FFFFFF"
+                hidesWhenStopped={true}
+                size="small"
+              />
+            </View>
+          </View>
         </View>
       </View>
     </View>

@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { Field, reduxForm } from 'redux-form';
-import { Avatar, Box, DatePicker } from '../components';
+import { Avatar, Box, DatePicker, SubmitButton } from '../components';
 import hoistStatics from '../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme, {
@@ -125,8 +125,6 @@ class UserForm extends Component {
 
     const { renderTextInput, renderAvatar, renderDatePicker } = this;
 
-    const submitText = this.props.loading ? 'SAVING...' : 'SAVE';
-
     return (
       <KeyboardAwareScrollView
         style={styles.container}
@@ -170,17 +168,10 @@ class UserForm extends Component {
           validate={[formattedDate('YYYY-MM-DD')]}
         />
 
-        <View style={styles.submitButtonContainer}>
-          <TouchableOpacity
-            onPress={handleSubmit(submit)}
-            style={styles.submitButton}
-            disable={this.props.loading}
-          >
-            <Text style={styles.submitText}>
-              {submitText}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <SubmitButton
+          onPress={handleSubmit(submit)}
+          loading={this.props.loading}
+        />
       </KeyboardAwareScrollView>
     );
   }

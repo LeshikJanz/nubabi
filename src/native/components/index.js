@@ -2,6 +2,7 @@ import Box from './Box';
 import Text from './Text';
 import Button from './Button';
 import AddButton from './AddButton';
+import SubmitButton from './SubmitButton';
 import Image from './Image';
 import Avatar from './Avatar';
 import Card from './Card';
@@ -28,6 +29,7 @@ export {
   Text,
   Button,
   AddButton,
+  SubmitButton,
   Image,
   Avatar,
   Card,

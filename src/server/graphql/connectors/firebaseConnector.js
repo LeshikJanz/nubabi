@@ -189,9 +189,7 @@ const updateUser = async (firebase, input) => {
       input.avatar.url,
     );
     if (avatarUrl) {
-      // FIXME: remove the thumb version once we've got image resizing
-      updates[`users/${currentUser.uid}/avatar/original`] = avatarUrl;
-      updates[`users/${currentUser.uid}/avatar/thumb`] = avatarUrl;
+      updates[`users/${currentUser.uid}/avatar/url`] = avatarUrl;
     }
   }
 
