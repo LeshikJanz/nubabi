@@ -144,6 +144,8 @@ export const connectionFromBackendMetadata = (promise, args) => {
   return promise.then(data => connectionFromBackendMetadataArray(data, args));
 };
 
+export const toDate = R.constructN(1, Date);
+
 export {
   fromGlobalId,
   globalIdField,

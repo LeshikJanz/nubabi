@@ -173,6 +173,33 @@ const getViewerWithProfile = async firebase => {
   };
 };
 
+const updateUser = async (firebase, input) => {
+  const currentUser = getViewer(firebase);
+  const user = evolve(transforms, omit(['avatar'], input));
+  const updates = {};
+
+  Object.keys(user).forEach(key => {
+    updates[`users/${currentUser.uid}/${key}`] = user[key];
+  });
+
+  if (isNewImage(input.avatar)) {
+    const avatarUrl = await uploadFile(
+      firebase,
+      `users/${currentUser.uid}/avatar`,
+      input.avatar.url,
+    );
+    if (avatarUrl) {
+      // FIXME: remove the thumb version once we've got image resizing
+      updates[`users/${currentUser.uid}/avatar/original`] = avatarUrl;
+      updates[`users/${currentUser.uid}/avatar/thumb`] = avatarUrl;
+    }
+  }
+
+  await firebase.database().ref().update(updates);
+
+  return getViewerWithProfile(firebase);
+};
+
 const get = (firebase, path: string) =>
   firebase.database().ref(path).once('value').then(returnVal);
 
@@ -279,6 +306,7 @@ const firebaseConnector = firebase => {
     set: (path: string, values: mixed) => set(firebase, path, values),
     getViewer: () => getViewer(firebase),
     getViewerWithProfile: () => getViewerWithProfile(firebase),
+    updateUser: input => updateUser(firebase, input),
     getBabies: () => {
       const currentUserId = getViewer(firebase).uid;
 

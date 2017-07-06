@@ -158,7 +158,7 @@ class UserForm extends Component {
 
         <Field
           name="lastName"
-          label="FIRST NAME"
+          label="LAST NAME"
           component={renderTextInput}
           validate={[required, maxLength(32)]}
         />

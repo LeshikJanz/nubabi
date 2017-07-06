@@ -1,7 +1,13 @@
 import { GraphQLString } from 'graphql';
 import { pick } from 'ramda';
 import { GraphQLDate, GraphQLTime, GraphQLDateTime } from 'graphql-iso-date';
-import { nodeFieldResolver, globalIdField, prop } from './common';
+import {
+  nodeFieldResolver,
+  globalIdField,
+  mutationWithClientMutationId,
+  transform,
+  toDate,
+} from './common';
 
 const resolvers = {
   DateTime: GraphQLDateTime,
@@ -19,6 +25,7 @@ const resolvers = {
   },
   User: {
     id: globalIdField('User', obj => obj.uid),
+    dob: transform('dob', toDate),
     avatar: obj => {
       if (!obj.avatar) {
         return null;
@@ -59,7 +66,15 @@ const resolvers = {
     id: globalIdField(),
   },
 
-  Mutation: {},
+  Mutation: {
+    updateUser: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase
+          .updateUser(input)
+          .then(changedUser => ({ changedUser }));
+      },
+    ),
+  },
 };
 
 export default resolvers;

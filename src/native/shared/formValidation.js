@@ -23,9 +23,10 @@ export const formattedDate = format => value => {
     return;
   }
 
-  return value && moment(value, format).isValid()
-    ? undefined
-    : `Must be a date in ${format} format`;
+  if (!moment(value, format).isValid()) {
+    // eslint-disable-next-line consistent-return
+    return `Must be a date in ${format} format`;
+  }
 };
 
 export const constantValues = (...constants) => value => {
