@@ -44,3 +44,5 @@ export const isEmptyPath = (pathArray: Array<string>) => props => {
 export const formValues = memoize((obj: mixed) => {
   return omit(['id', '__typename'], obj);
 });
+
+export const keyExtractor = prop('id');

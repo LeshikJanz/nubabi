@@ -21,6 +21,7 @@ type Props = {
   setSettingsValue: typeof setSettingsValue,
   onNavigateToNotificationSettings: () => void,
   onNavigateToEditProfile: () => void,
+  onNavigateToFriends: () => void,
 };
 
 const copyrightHolder = 'MyLearningBaby Ltd';
@@ -131,7 +132,12 @@ export class Settings extends Component {
           >
             <Text color="secondary">Notifications</Text>
           </ListItem>
-          <ListItem leftIcon="ios-people" rightArrow last>
+          <ListItem
+            leftIcon="ios-people"
+            rightArrow
+            last
+            onPress={this.props.onNavigateToFriends}
+          >
             <Text color="secondary">Family and Friends</Text>
           </ListItem>
           <ListItemSeparator />

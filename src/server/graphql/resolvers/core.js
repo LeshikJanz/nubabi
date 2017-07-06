@@ -1,5 +1,5 @@
 import { GraphQLString } from 'graphql';
-import { pick } from 'ramda';
+import R, { path, prop, pick, assocPath, map, compose, assoc } from 'ramda';
 import { GraphQLDate, GraphQLTime, GraphQLDateTime } from 'graphql-iso-date';
 import {
   nodeFieldResolver,
@@ -7,6 +7,7 @@ import {
   mutationWithClientMutationId,
   transform,
   toDate,
+  connectionFromPromisedArrayWithCount,
 } from './common';
 
 const resolvers = {
@@ -22,9 +23,26 @@ const resolvers = {
     user(_, args, { connectors: { firebase } }) {
       return firebase.getViewerWithProfile();
     },
+    friends: async (_, args, { connectors: { firebase } }) => {
+      const connection = await connectionFromPromisedArrayWithCount(
+        firebase.getFriends(),
+        args,
+      );
+
+      return {
+        ...connection,
+        edges: connection.edges.map(edge => {
+          ['relationship', 'isPending'].forEach(key => {
+            // eslint-disable-next-line no-param-reassign
+            edge[key] = path(['node', key], edge);
+          });
+          return edge;
+        }),
+      };
+    },
   },
   User: {
-    id: globalIdField('User', obj => obj.uid),
+    id: globalIdField('User', obj => obj.id || obj.uid),
     dob: transform('dob', toDate),
     avatar: obj => {
       if (!obj.avatar) {

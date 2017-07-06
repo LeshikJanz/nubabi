@@ -10,6 +10,14 @@ isViewer(uid) {
 
 isNew(ref) { prior(ref) == null }
 
+isFriend(userId) {
+  isSignedIn() && prior(root.users[auth.uid].friends[userId]) !== null
+}
+
+canSeeUser(userId) {
+  isViewer(userId) || isFriend(userId);
+}
+
 type CurrentTimestamp extends Number {
   validate() { this == now }
 }
@@ -75,7 +83,7 @@ path / {
 */
 
 path /users/{uid} {
-  read() { isViewer(uid) }
+  read() { canSeeUser(uid) }
   write() { isViewer(uid) }
 }
 

@@ -1,10 +1,10 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Platform, Linking, BackHandler } from 'react-native';
+import { BackHandler, Linking, Platform } from 'react-native';
 import {
-  NavigationActions,
   createNavigationContainer,
   createNavigator,
+  NavigationActions,
   StackRouter,
 } from 'react-navigation';
 import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitioner';
@@ -48,6 +48,7 @@ import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
+import FriendsScreen from '../settings/FriendsScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -67,6 +68,7 @@ const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 const routes = {
   settings: { screen: SettingsScreen },
   notificationSettings: { screen: NotificationSettingsScreen },
+  friends: { screen: FriendsScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   editUser: { screen: EditUserProfileScreen },
   addBaby: { screen: AddBaby },

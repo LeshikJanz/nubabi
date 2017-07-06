@@ -173,6 +173,49 @@ const getViewerWithProfile = async firebase => {
   };
 };
 
+const getFriends = async firebase => {
+  const user = getViewer(firebase);
+  return firebase
+    .database()
+    .ref(`/users/${user.uid}/friends`)
+    .once('value')
+    .then(returnVal)
+    .then(async data => {
+      if (!data) {
+        return [];
+      }
+
+      const getFriend = async (friend, key) => {
+        if (typeof friend !== 'object') {
+          const record = await firebase
+            .database()
+            .ref(`/users/${key}`)
+            .once('value')
+            .then(returnVal);
+          const relationship = friend; // we store the relationship instead of a boolean
+
+          return {
+            ...record,
+            relationship,
+            isPending: false,
+          };
+        }
+
+        return {
+          ...friend,
+          isPending: true,
+          id: key,
+        };
+      };
+
+      return Promise.all(
+        Object.keys(data).map(key => {
+          return getFriend(data[key], key);
+        }),
+      ).then(R.sortBy(R.prop('isPending')));
+    });
+};
+
 const updateUser = async (firebase, input) => {
   const currentUser = getViewer(firebase);
   const user = evolve(transforms, omit(['avatar'], input));
@@ -304,6 +347,7 @@ const firebaseConnector = firebase => {
     set: (path: string, values: mixed) => set(firebase, path, values),
     getViewer: () => getViewer(firebase),
     getViewerWithProfile: () => getViewerWithProfile(firebase),
+    getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
     getBabies: () => {
       const currentUserId = getViewer(firebase).uid;

@@ -17,12 +17,17 @@ export class SettingsScreen extends PureComponent {
     this.props.navigation.navigate('editUser');
   };
 
+  handleFriends = () => {
+    this.props.navigation.navigate('friends');
+  };
+
   render() {
     return (
       <Screen>
         <Settings
           onNavigateToNotificationSettings={this.handleNotificationSettings}
           onNavigateToEditProfile={this.handleUserProfile}
+          onNavigateToFriends={this.handleFriends}
         />
       </Screen>
     );

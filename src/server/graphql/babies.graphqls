@@ -10,6 +10,14 @@ extend type Mutation {
   recordBabyMeasurement(input: RecordMeasurementInput!): RecordMeasurementPayload
 }
 
+extend type UserEdge {
+  # Relationship to Viewer
+  relationship: BabyRelationship
+
+  # Whether the user is invited but have not accepted yet
+  isPending: Boolean,
+}
+
 type Baby implements Node, Timestampable {
   id: ID!
   name: String!
