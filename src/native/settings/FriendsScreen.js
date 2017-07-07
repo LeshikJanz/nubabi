@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Screen } from '../components';
+import { Screen, Box } from '../components';
 import FriendsHeader from './FriendsHeader';
 import FriendsList from './FriendsList';
 
@@ -9,10 +9,14 @@ export class FriendsScreen extends PureComponent {
     title: 'Family & Friends',
   };
 
+  handleInvite = () => {
+    this.props.navigation.navigate('inviteUser');
+  };
+
   render() {
     return (
       <Screen>
-        <FriendsHeader />
+        <FriendsHeader onAddPress={this.handleInvite} />
         <FriendsList />
       </Screen>
     );

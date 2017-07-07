@@ -49,6 +49,7 @@ import AddMemoryScreen from '../memories/AddMemoryScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
+import InviteUserScreen from '../settings/InviteUserScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -69,6 +70,7 @@ const routes = {
   settings: { screen: SettingsScreen },
   notificationSettings: { screen: NotificationSettingsScreen },
   friends: { screen: FriendsScreen },
+  inviteUser: { screen: InviteUserScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   editUser: { screen: EditUserProfileScreen },
   addBaby: { screen: AddBaby },
