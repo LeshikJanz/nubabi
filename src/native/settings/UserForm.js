@@ -19,7 +19,7 @@ import theme, {
   NUBABI_RED,
 } from '../../common/themes/defaultTheme';
 import imagePicker from '../components/imagePicker';
-import { formattedDate, maxLength, required } from '../shared/formValidation';
+import { formattedDate, maxLength, required } from '../shared/forms';
 
 type Props = {
   // redux-form uses initialValues prop

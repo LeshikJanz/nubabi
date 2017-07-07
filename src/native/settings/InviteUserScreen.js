@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { Screen } from '../components';
+import InviteUser from './InviteUser';
 
 export class InviteUserScreen extends PureComponent {
   static navigationOptions = {
@@ -8,7 +9,11 @@ export class InviteUserScreen extends PureComponent {
   };
 
   render() {
-    return <Screen />;
+    return (
+      <Screen>
+        <InviteUser />
+      </Screen>
+    );
   }
 }
 

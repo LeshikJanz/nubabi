@@ -30,7 +30,7 @@ import {
   constantValues,
   maxLength,
   formattedDate,
-} from '../../shared/formValidation';
+} from '../../shared/forms';
 
 type Props = {
   // redux-form uses initialValues prop
