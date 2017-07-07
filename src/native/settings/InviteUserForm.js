@@ -1,11 +1,12 @@
 // @flow
+import type { InviteUserInput } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation } from 'react-native';
 import { Field, reduxForm } from 'redux-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { forEachObjIndexed, keys } from 'ramda';
+import { forEachObjIndexed } from 'ramda';
 import ContactsWrapper from 'react-native-contacts-wrapper';
+import uuid from 'react-native-uuid';
 import hoistStatics from '../components/hoistStatics';
 import {
   renderTextInput,
@@ -17,8 +18,8 @@ import { Box, Text, SubmitButton, FAB } from '../components';
 
 type Props = {
   handleSubmit: () => void,
+  onSubmit: (values: InviteUserInput) => Promise<*>,
   change: (field: string, value: any) => void,
-  touch: (...keys: Array<string>) => void,
 };
 
 type Contact = {
@@ -33,9 +34,11 @@ export class InviteUserForm extends PureComponent {
     loading: false,
   };
 
-  handleSubmit = () => {
+  handleSubmit = (values: InviteUserInput) => {
     this.setState({ loading: true }, () => {
-      setTimeout(() => this.setState({ loading: false }), 1000);
+      this.props.onSubmit(values).then(() => {
+        this.setState({ loading: false });
+      });
     });
   };
 
@@ -109,6 +112,7 @@ export class InviteUserForm extends PureComponent {
 
           <Field
             name="email"
+            type="email"
             label="EMAIL"
             component={renderTextInput}
             validate={[required, maxLength(32)]}

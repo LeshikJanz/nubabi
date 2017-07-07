@@ -58,6 +58,17 @@ export const renderTextInput = field => {
   ];
 
   const labelStyle = [styles.inputLabel, hasError ? styles.hasError : {}];
+  let typeProps = {
+    keyboardType: 'default',
+  };
+
+  if (field.type === 'email') {
+    typeProps = {
+      keyboardType: 'email-address',
+      autoCapitalize: 'none',
+      autoCorrect: false,
+    };
+  }
 
   return (
     <View style={containerStyle}>
@@ -73,7 +84,7 @@ export const renderTextInput = field => {
             </Text>
           : null}
       </View>
-      <TextInput {...field.input} style={styles.textInput} />
+      <TextInput {...typeProps} {...field.input} style={styles.textInput} />
     </View>
   );
 };

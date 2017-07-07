@@ -101,6 +101,14 @@ path /babies {
   }
 }
 
+path /invites {
+  read() { false }
+  /{id} {
+    create() { isSignedIn() }
+    update() { false }
+  }
+}
+
 path /measurements/{babyId} {
   validate() {
     root.babies[babyId] !== null

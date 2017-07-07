@@ -1,11 +1,9 @@
 // @flow
 import type { Action } from '../common/types';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { persistStore } from 'redux-persist';
-import { withContext } from 'recompose';
 import Raven from 'raven-js';
 import { createRenderer } from 'fela-native';
 import configureStore from '../common/configureStore';

@@ -7,6 +7,12 @@ import {
   toKilograms,
 } from '../../../common/helpers/measurement';
 
+const get = (firebase, path: string) =>
+  firebase.database().ref(path).once('value').then(returnVal);
+
+const set = (firebase, path: string, values: mixed) =>
+  firebase.database().ref(path).set(values);
+
 const returnVal = snapshot => snapshot.val();
 const returnValWithKeyAsId = snapshot => {
   if (!snapshot.val()) {
@@ -241,11 +247,27 @@ const updateUser = async (firebase, input) => {
   return getViewerWithProfile(firebase);
 };
 
-const get = (firebase, path: string) =>
-  firebase.database().ref(path).once('value').then(returnVal);
+const inviteUser = async (firebase, input: InviteUserInput) => {
+  const { inviteToken } = input;
+  const friend = {
+    id: inviteToken,
+    ...omit(['id', 'inviteToken'], input),
+  };
 
-const set = (firebase, path: string, values: mixed) =>
-  firebase.database().ref(path).set(values);
+  const currentUserId = getViewer(firebase).uid;
+
+  const updates = {};
+
+  updates[`users/${currentUserId}/friends/${inviteToken}`] = friend;
+  updates[`invites/${inviteToken}`] = {
+    ...friend,
+    invitedBy: currentUserId,
+    invitedAt: firebase.database.ServerValue.TIMESTAMP,
+  };
+
+  await firebase.database().ref().update(updates);
+  return friend;
+};
 
 const getBaby = (firebase, id) => {
   return firebase
@@ -349,6 +371,7 @@ const firebaseConnector = firebase => {
     getViewerWithProfile: () => getViewerWithProfile(firebase),
     getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
+    inviteUser: input => inviteUser(firebase, input),
     getBabies: () => {
       const currentUserId = getViewer(firebase).uid;
 

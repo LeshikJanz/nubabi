@@ -17,6 +17,27 @@ const keyExtractor = path(['node', 'id']);
 export class FriendsList extends PureComponent {
   props: Props;
 
+  static fragments = {
+    item: gql`
+      fragment FriendListUser on User {
+        id
+        firstName
+        lastName
+        avatar {
+          thumb {
+            url
+          }
+        }
+      }
+    `,
+    edge: gql`
+      fragment FriendListEdge on UserEdge {
+        relationship
+        isPending
+      }
+    `,
+  };
+
   renderItem = ({ item, index }: { item: UserEdge }) => {
     const { node: user, isPending, relationship } = item;
 
@@ -62,39 +83,34 @@ export class FriendsList extends PureComponent {
   }
 }
 
-export default compose(
-  graphql(
-    gql`
-      query FriendsList {
-        viewer {
-          friends {
-            edges {
-              relationship
-              isPending
-              node {
-                id
-                firstName
-                lastName
-                avatar {
-                  thumb {
-                    url
-                  }
-                }
-              }
-            }
+export const query = gql`
+  query FriendsList {
+    viewer {
+      friends {
+        edges {
+          ...FriendListEdge
+
+          node {
+            ...FriendListUser
           }
         }
       }
-    `,
-    {
-      options: {
-        fetchPolicy: 'cache-and-network',
-      },
-      props: ({ data }) => ({
-        data,
-        friends: path(['viewer', 'friends', 'edges'], data),
-      }),
+    }
+  }
+  
+  ${FriendsList.fragments.item}
+  ${FriendsList.fragments.edge}
+`;
+
+export default compose(
+  graphql(query, {
+    options: {
+      fetchPolicy: 'cache-and-network',
     },
-  ),
+    props: ({ data }) => ({
+      data,
+      friends: path(['viewer', 'friends', 'edges'], data),
+    }),
+  }),
   displayLoadingState,
 )(FriendsList);

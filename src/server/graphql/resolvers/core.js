@@ -92,6 +92,25 @@ const resolvers = {
           .then(changedUser => ({ changedUser }));
       },
     ),
+    inviteUser: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        const { inviteToken, relationship } = input;
+        return firebase.inviteUser(input).then(invitedUser => {
+          // eslint-disable-next-line no-param-reassign
+          invitedUser.id = inviteToken;
+
+          return {
+            inviteToken,
+            invitedUser,
+            changedEdge: {
+              relationship,
+              isPending: true,
+              node: invitedUser,
+            },
+          };
+        });
+      },
+    ),
   },
 };
 

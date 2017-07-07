@@ -15,6 +15,7 @@ interface Timestampable {
 
 type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
+  inviteUser(input: InviteUserInput!): InviteUserPayload
 }
 
 # Information about pagination in a connection.
@@ -39,6 +40,17 @@ type UserConnection {
 
   # A list of edges.
   edges: [UserEdge]
+}
+# A connection to a list of items.
+type UserConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  # count: Int!
 }
 
 # An edge in a connection.
@@ -78,17 +90,7 @@ type Viewer {
   ): UserConnection!
 }
 
-# A connection to a list of items.
-type UserConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
 
-  # A list of edges.
-  edges: [UserEdge]
-
-  # Count of filtered result set without considering pagination arguments
-  # count: Int!
-}
 
 type Query {
   viewer: Viewer!
@@ -135,6 +137,23 @@ input UpdateUserInput {
 type UpdateUserPayload {
   # The mutated User.
   changedUser: User
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+input InviteUserInput {
+  inviteToken: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  relationship: BabyRelationship!
+}
+
+type InviteUserPayload {
+  inviteToken: String
+  invitedUser: User
+  changedEdge: UserEdge
 
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String
