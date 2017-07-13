@@ -37,6 +37,7 @@ exports[`it renders collapsed 1`] = `
         ]
       }
       accessible={true}
+      collapsable={undefined}
       hitSlop={undefined}
       isTVSelectable={true}
       nativeID={undefined}
@@ -415,6 +416,7 @@ exports[`it renders collapsed 1`] = `
             ]
           }
           accessible={true}
+          collapsable={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -519,6 +521,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
         ]
       }
       accessible={true}
+      collapsable={undefined}
       hitSlop={undefined}
       isTVSelectable={true}
       nativeID={undefined}
@@ -784,6 +787,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             ]
           }
           accessible={true}
+          collapsable={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -949,6 +953,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             ]
           }
           accessible={true}
+          collapsable={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}
@@ -1114,6 +1119,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             ]
           }
           accessible={true}
+          collapsable={undefined}
           hitSlop={undefined}
           isTVSelectable={true}
           nativeID={undefined}

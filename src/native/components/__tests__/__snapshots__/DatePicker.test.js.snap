@@ -178,6 +178,7 @@ style = Object {}
             tvParallaxProperties={undefined}
           >
             <View
+              collapsable={undefined}
               style={
                 Object {
                   "backgroundColor": "#fff",

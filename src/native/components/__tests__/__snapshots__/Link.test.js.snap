@@ -18,6 +18,7 @@ style = Object {
   accessibilityLabel={undefined}
   accessibilityTraits={undefined}
   accessible={true}
+  collapsable={undefined}
   hitSlop={undefined}
   isTVSelectable={true}
   nativeID={undefined}
