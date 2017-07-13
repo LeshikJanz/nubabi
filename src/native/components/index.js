@@ -7,6 +7,7 @@ import Image from './Image';
 import Avatar from './Avatar';
 import Card from './Card';
 import HorizontalCardList from './HorizontalCardList';
+import HorizontalCardItem from './HorizontalCardItem';
 import Screen from './Screen';
 import Markdown from './Markdown';
 import Link from './Link';
@@ -19,6 +20,7 @@ import PillSwitcher from './PillSwitcher';
 import FAB from './FAB';
 import Overlay from './Overlay';
 import DatePicker from './DatePicker';
+import FormContainer from './FormContainer';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
@@ -29,11 +31,13 @@ export {
   Text,
   Button,
   AddButton,
+  FormContainer,
   SubmitButton,
   Image,
   Avatar,
   Card,
   HorizontalCardList,
+  HorizontalCardItem,
   Markdown,
   Link,
   List,

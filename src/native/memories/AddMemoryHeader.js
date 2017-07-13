@@ -5,9 +5,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Box, Text, AddButton } from '../components';
 import theme from '../../common/themes/defaultTheme';
 
-type Props = {};
+type Props = {
+  onAddMemory: () => void,
+};
 
-export const AddMemoryHeader = () => {
+export const AddMemoryHeader = ({ onAddMemory }: Props) => {
   return (
     <Box
       contentSpacing
@@ -17,6 +19,7 @@ export const AddMemoryHeader = () => {
     >
       <Box
         as={TouchableOpacity}
+        onPress={onAddMemory}
         flex={1}
         flexDirection="row"
         backgroundColor="white"

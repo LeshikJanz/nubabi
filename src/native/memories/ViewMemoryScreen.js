@@ -6,7 +6,7 @@ import ViewMemories from './ViewMemories';
 
 export class ViewMemoryScreen extends PureComponent {
   static navigationOptions = {
-    title: 'Memories',
+    title: 'Memory',
   };
 
   render() {

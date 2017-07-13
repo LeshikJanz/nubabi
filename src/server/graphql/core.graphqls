@@ -13,6 +13,16 @@ interface Timestampable {
   updatedAt: DateTime
 }
 
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
+}
+
 type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   inviteUser(input: InviteUserInput!): InviteUserPayload
@@ -33,14 +43,6 @@ type PageInfo {
   endCursor: String
 }
 
-# A connection to a list of items.
-type UserConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [UserEdge]
-}
 # A connection to a list of items.
 type UserConnection {
   # Information to aid in pagination.
@@ -79,27 +81,15 @@ type User implements Node {
 
 type Viewer {
   allUsers(
-    before: String, after: String, first: Int, last: Int
-  ): UserConnection!
+  before: String, after: String, first: Int, last: Int
+): UserConnection!
 
   user: User!
   getUser(id: ID!): User
 
   friends(
-    before: String, after: String, first: Int, last: Int
-  ): UserConnection!
-}
-
-
-
-type Query {
-  viewer: Viewer!
-
-  # Fetches an object given its ID
-  node(
-    # The ID of an object
-    id: ID!
-  ): Node
+  before: String, after: String, first: Int, last: Int
+): UserConnection!
 }
 
 input CreateUserInput {
@@ -142,6 +132,15 @@ type UpdateUserPayload {
   clientMutationId: String
 }
 
+input AuthProviderSignupData {
+  email: AuthProviderEmail
+}
+
+input AuthProviderEmail {
+  email: String!
+  password: String!
+}
+
 input InviteUserInput {
   inviteToken: String!
   firstName: String!
@@ -168,8 +167,8 @@ type File {
   name: String!
 
   # secret: String!
-  # size: Int!
-  # updatedAt: DateTime!
+  size: Int!
+  updatedAt: DateTime
   url: String!
 }
 
@@ -181,6 +180,7 @@ type FileConnection {
   # A list of edges.
   edges: [FileEdge]
 
+  # Count of filtered result set without considering pagination arguments
   count: Int
 }
 

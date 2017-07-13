@@ -49,11 +49,13 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>Take a photo directly to choose as avatar, cover image and profile pictures</string>
+	<string>Take a photo directly to choose as avatar, cover image, profile pictures and memories</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Select avatars, cover images, and profile pictures</string>
+	<string>Select avatars, cover images, profile pictures and memory media</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Upload voice notes and audio memories</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>nubabi.ttf</string>

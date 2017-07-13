@@ -1,30 +1,21 @@
+// @flow
 import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import { Screen } from '../components';
+import { Box } from '../components';
+import AddMemoryHeader from './AddMemoryHeader';
+import SuggestedMemories from './SuggestedMemories';
 
-const Memories = () => {
-  return (
-    <Screen>
-      <View style={styles.container}>
-        <Text style={styles.title}>Memories</Text>
-        <TouchableHighlight>
-          <Text>Go To Next Scene</Text>
-        </TouchableHighlight>
-      </View>
-    </Screen>
-  );
+type Props = {
+  onAddMemory: () => void,
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 40,
-    textAlign: 'center',
-  },
-});
+export const Memories = ({ onAddMemory }: Props) => {
+  return (
+    <Box flex={1}>
+      <AddMemoryHeader onAddMemory={onAddMemory} />
+      <SuggestedMemories />
+      <Box flex={1} />
+    </Box>
+  );
+};
 
 export default Memories;

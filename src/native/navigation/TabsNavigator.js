@@ -10,7 +10,7 @@ import Stimulation from '../stimulation';
 import Growth from '../growth/GrowthScreen';
 import Profile from '../profile/Profile';
 import Library from '../library/Library';
-import Memories from '../memories/Memories';
+import Memories from '../memories/MemoriesScreen';
 import { getTabHeaders } from './shared';
 
 const navigationOptions: NavigationOptions = ({

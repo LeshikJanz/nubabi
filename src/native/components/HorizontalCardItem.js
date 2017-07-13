@@ -1,53 +1,69 @@
 // @flow
-import type { LayoutProps, File } from '../../common/types';
+import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 // TODO: restore
-import Image from 'react-native-cached-image';
 import { compose } from 'ramda';
 import Box from './Box';
 import Text from './Text';
-import Overlay from './Overlay';
 import withLayout from './withLayout';
+import HorizontalCardItemMedia from './HorizontalCardItemMedia';
 
 export type Props = {
-  title: string,
-  files: Array<File>,
+  title?: string,
+  files?: Array<File>,
+  icon?: string,
   layout: LayoutProps,
+  containerStyle?: Function,
 };
 
-export const HorizontalCardItem = ({ title, files, layout }: Props) => {
-  const image = files[0]; // TODO: support video
+export const HorizontalCardItem = ({
+  title,
+  files,
+  icon,
+  layout,
+  containerStyle,
+}: Props) => {
+  const mediaProps = { layout };
+  if (icon) {
+    mediaProps.icon = icon;
+  } else {
+    mediaProps.image = files[0]; // TODO: support video
+  }
 
   // TODO: remove image width style, not needed in ArticleCardItem, add flex
   return (
     <Box flex={1} borderRadius={4} overflow="hidden">
-      <Image
-        source={{ uri: image.url }}
-        style={{ width: layout.parentWidth, height: 80 }}
-        resizeMode="cover"
-      >
-        <Overlay />
-      </Image>
+      <HorizontalCardItemMedia {...mediaProps} />
 
-      <Box
-        justifyContent="center"
-        style={() => ({
-          shadowRadius: StyleSheet.hairlineWidth,
-          shadowColor: '#000',
-          shadowOpacity: 0.1,
-          shadowOffset: {
-            width: 0,
-            height: -1,
-          },
-        })}
-      >
-        <Box flex={1} justiyContent="center" alignItems="center" padding={0.5}>
-          <Text style={() => ({ width: 100 })} numberOfLines={2} align="center">
-            {title}
-          </Text>
-        </Box>
-      </Box>
+      {title &&
+        <Box
+          justifyContent="center"
+          style={() => ({
+            shadowRadius: StyleSheet.hairlineWidth,
+            shadowColor: '#000',
+            shadowOpacity: 0.1,
+            shadowOffset: {
+              width: 0,
+              height: -1,
+            },
+          })}
+        >
+          <Box
+            flex={1}
+            justiyContent="center"
+            alignItems="center"
+            padding={0.5}
+          >
+            <Text
+              style={() => ({ width: 100 })}
+              numberOfLines={2}
+              align="center"
+            >
+              {title}
+            </Text>
+          </Box>
+        </Box>}
     </Box>
   );
 };

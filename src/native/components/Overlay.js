@@ -6,6 +6,7 @@ import { View, StyleSheet } from 'react-native';
 type Props = {
   children?: any,
   layout: LayoutProps,
+  containerStyle?: Object | number,
 };
 
 export const Overlay = ({ children, layout }: Props) => {

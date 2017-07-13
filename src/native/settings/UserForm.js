@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { Field, reduxForm } from 'redux-form';
-import { Avatar, Box, DatePicker, SubmitButton } from '../components';
+import { Avatar, Box, SubmitButton } from '../components';
 import hoistStatics from '../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme, {
@@ -19,7 +19,12 @@ import theme, {
   NUBABI_RED,
 } from '../../common/themes/defaultTheme';
 import imagePicker from '../components/imagePicker';
-import { formattedDate, maxLength, required } from '../shared/forms';
+import {
+  formattedDate,
+  maxLength,
+  required,
+  renderDatePicker,
+} from '../shared/forms';
 
 type Props = {
   // redux-form uses initialValues prop
@@ -103,27 +108,10 @@ class UserForm extends Component {
     );
   }
 
-  renderDatePicker = field => {
-    const { label } = field;
-    return (
-      <View style={styles.inputContainer}>
-        <Text style={[styles.inputLabel, { flex: 1 }]}>
-          {label}
-        </Text>
-
-        <DatePicker
-          onChange={field.input.onChange}
-          date={field.input.value}
-          format="YYYY-MM-DD"
-        />
-      </View>
-    );
-  };
-
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
-    const { renderTextInput, renderAvatar, renderDatePicker } = this;
+    const { renderTextInput, renderAvatar } = this;
 
     return (
       <KeyboardAwareScrollView

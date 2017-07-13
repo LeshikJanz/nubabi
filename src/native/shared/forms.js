@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import moment from 'moment';
 import theme, { FONT_COLOR } from '../../common/themes/defaultTheme';
+import { DatePicker } from '../components';
 import RelationshipDropdown from '../profile/EditBaby/RelationshipDropdown';
 
 export const required = (value: ?mixed) => {
@@ -44,7 +45,7 @@ export const constantValues = (...constants: Array<string>) => (
 
 export const renderTextInput = field => {
   // we can access errors on field.meta.errors and dirty state and field.meta.touched
-  const { label } = field;
+  const { label, placeholder } = field;
   const { touched, error } = field.meta;
 
   const hasError = touched && error;
@@ -70,6 +71,13 @@ export const renderTextInput = field => {
     };
   }
 
+  const borderProps = {};
+  if (field.underlineColorAndroid) {
+    borderProps.underlineColorAndroid = field.underlineColorAndroid;
+  }
+
+  const multiline = field.multiline || false;
+
   return (
     <View style={containerStyle}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -84,13 +92,39 @@ export const renderTextInput = field => {
             </Text>
           : null}
       </View>
-      <TextInput {...typeProps} {...field.input} style={styles.textInput} />
+      <TextInput
+        {...typeProps}
+        {...borderProps}
+        {...field.input}
+        placeholder={placeholder}
+        multiline={multiline}
+        style={styles.textInput}
+      />
     </View>
   );
 };
 
 export const renderRelationshipDropdown = field => {
   return <RelationshipDropdown field={field} />;
+};
+
+export const renderDatePicker = field => {
+  const { label, dateFormat: format = 'YYYY-MM-DD', mode = 'date' } = field;
+
+  return (
+    <View style={styles.inputContainer}>
+      <Text style={[styles.inputLabel, { flex: 1 }]}>
+        {label}
+      </Text>
+
+      <DatePicker
+        onChange={field.input.onChange}
+        date={field.input.value}
+        format={format}
+        mode={mode}
+      />
+    </View>
+  );
 };
 
 const styles = {

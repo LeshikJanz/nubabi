@@ -9,17 +9,26 @@ import theme from '../../common/themes/defaultTheme';
 
 type Props = {};
 
-const RoundedContainer = ({ children }) =>
+type RoundedContainerProps = {
+  children: any,
+  style: Object | number,
+};
+
+const RoundedContainer = ({ children, style }: RoundedContainerProps) =>
   <View
-    style={{
-      flex: 1,
-      overflow: 'hidden',
-      borderTopLeftRadius: 4,
-      borderTopRightRadius: 4,
-    }}
+    style={[
+      {
+        flex: 1,
+        overflow: 'hidden',
+        borderTopLeftRadius: 4,
+        borderTopRightRadius: 4,
+      },
+      style,
+    ]}
   >
     {children}
   </View>;
+
 export const MemoryMedia = ({ files, layout }: Props) => {
   return files.edges.length > 1
     ? <MemoryMediaMultiple files={files} layout={layout} />
@@ -30,10 +39,11 @@ export const MemoryMediaImage = ({
   media,
   layout,
   small = false,
+  style,
   displayMoreIndicator,
 }) => {
   return (
-    <RoundedContainer>
+    <RoundedContainer style={style}>
       <Image
         source={{ uri: media.url }}
         style={{

@@ -1,5 +1,5 @@
 // @flow
-import type { Action } from '../common/types';
+import type { AppStartedAction } from '../common/types';
 import React, { Component } from 'react';
 import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
@@ -44,7 +44,7 @@ persistStore(
     storage: AsyncStorage,
   },
   () => {
-    store.dispatch(({ type: 'APP_STARTED' }: Action));
+    store.dispatch(({ type: 'APP_STARTED' }: AppStartedAction));
   },
 );
 
@@ -52,6 +52,9 @@ const apollo = configureApollo();
 
 const { renderer } = configureFela(createRenderer);
 const FelaProvider = NativeFelaProvider(renderer, theme);
+
+// TODO: remove after deps update
+console.ignoredYellowBox = ['Warning: checkPropTypes'];
 
 class Main extends Component {
   render() {

@@ -17,6 +17,14 @@ type Props = MemoryType & {
   onLoadMoreComments: () => Promise<*>,
 };
 
+export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
+  const dateStr = inputDateFormat
+    ? moment(date, inputDateFormat)
+    : moment(date);
+
+  return dateStr.format('D MMMM • H:mm').toUpperCase();
+};
+
 class Memory extends PureComponent {
   prop: Props;
 
@@ -77,9 +85,9 @@ class Memory extends PureComponent {
       createdAt,
     } = this.props;
 
-    const date = moment(createdAt).format('D MMMM • H:mm').toUpperCase();
-
+    const date = formatMemoryDate(createdAt);
     const avatar = author.avatar.url;
+
     return (
       <Box
         flex={1}

@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
+import { lifecycle } from 'recompose';
 import DatePickerComponent from 'react-native-datepicker';
+import moment from 'moment';
 import theme from '../../common/themes/defaultTheme';
 
 type Props = {
@@ -8,6 +10,7 @@ type Props = {
   date: string | Date,
   mode?: 'date' | 'datetime' | 'time',
   format?: string,
+  hideText?: boolean,
   minDate?: string | Date,
   maxDate?: string | Date,
   showIcon?: boolean,
@@ -23,6 +26,7 @@ export const DatePicker = ({
   onChange,
   format = 'YYYY-MM-DD',
   mode = 'date',
+  hideText = false,
   showIcon = false,
   minDate,
   maxDate,
@@ -40,6 +44,7 @@ export const DatePicker = ({
       format={format}
       minDate={minDate}
       maxDate={maxDate}
+      hideText={hideText}
       showIcon={showIcon}
       placeholder={placeholder}
       onDateChange={onChange}
@@ -73,4 +78,12 @@ const styles = {
     },
   },
 };
-export default DatePicker;
+export default lifecycle({
+  componentDidMount() {
+    // Trigger onChange so redux-form gets the field
+    // when date is not set (i.e default to current date).
+    if (!this.props.date) {
+      this.props.onChange(moment().format());
+    }
+  },
+})(DatePicker);
