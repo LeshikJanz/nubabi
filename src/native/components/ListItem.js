@@ -103,6 +103,7 @@ class ListItem extends Component {
       last,
       onPress,
       rightToggle,
+      padding = 1,
       onRightTogglePress,
     } = this.props;
 
@@ -113,6 +114,7 @@ class ListItem extends Component {
       borderTopWidth: borderWidth,
       borderColor,
       backgroundColor,
+      padding,
     };
 
     if (onPress) {
@@ -121,7 +123,7 @@ class ListItem extends Component {
     }
 
     return (
-      <Box padding={1} {...containerProps}>
+      <Box {...containerProps}>
         <Box flexDirection="row">
           {avatarLeft && this.renderLeftAvatar(avatarLeft)}
           {leftIcon && this.renderIcon(leftIcon)}

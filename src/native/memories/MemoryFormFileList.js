@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Box } from '../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { type MediaPickerItem } from '../components/mediaPicker';
@@ -23,7 +23,6 @@ class MemoryFormFileList extends PureComponent {
         const onRemove = () => this.props.onRemoveMedia(index);
         return (
           <Box
-            flex={1}
             margin={0.5}
             key={file.name}
             style={() => ({
@@ -91,7 +90,13 @@ class MemoryFormFileList extends PureComponent {
     }
 
     return (
-      <Box flex={1} flexDirection="row" flexWrap="wrap" alignItems="flex-start">
+      <Box
+        flex={1}
+        flexDirection="row"
+        flexWrap="wrap"
+        justifyContent="center"
+        alignItems="center"
+      >
         {fileList}
       </Box>
     );

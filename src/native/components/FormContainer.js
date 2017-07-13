@@ -11,7 +11,7 @@ export const FormContainer = ({ children }: Props) => {
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: '#fff' }}
-      contentContainerStyle={{ flex: 1, paddingVertical: 20 }}
+      contentContainerStyle={{ paddingVertical: 20 }}
       keyboardShouldPersistTaps="handled"
     >
       {children}

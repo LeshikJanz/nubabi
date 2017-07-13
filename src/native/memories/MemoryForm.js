@@ -32,7 +32,7 @@ import MemoryFormFileList from './MemoryFormFileList';
 
 type Props = {
   onSubmit: () => void,
-  handleSubmit: () => void,
+  handleSubmit: (submit: Function) => void,
   submitting: boolean,
   change: (field: string, value: any) => void,
   files: ?Array<File>,
@@ -81,26 +81,45 @@ class MemoryForm extends PureComponent {
     this.props.change('files', reject(isNil, files));
   };
 
+  datePicker = null;
+
+  openDatePicker = () => {
+    if (this.datePicker) {
+      this.datePicker.open();
+    }
+  };
+
   renderDatePicker = field => {
     // $FlowFixMe$
     const format = moment.defaultFormat;
     // TODO: this all would be easier if our DatePicker component
     // allowed for a custom label component or `children` to be passed
     return (
-      <View>
-        <DatePicker
-          mode="datetime"
-          format={format}
-          date={field.input.value}
-          onChange={field.input.onChange}
-          hideText
-        />
-        <Text
-          color="secondary"
-          style={() => ({ position: 'absolute', top: -8, zIndex: -999 })}
+      <View style={{ flex: 1 }}>
+        <ListItem onPress={this.openDatePicker} leftIcon="md-calendar">
+          <Text color="secondary">
+            {formatDate(field.input.value)}
+          </Text>
+        </ListItem>
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            backgroundColor: 'blue',
+          }}
         >
-          {formatDate(field.input.value)}
-        </Text>
+          <DatePicker
+            ref={ref => {
+              this.datePicker = ref;
+            }}
+            mode="datetime"
+            format={format}
+            date={field.input.value}
+            onChange={field.input.onChange}
+            hideText
+          />
+        </View>
       </View>
     );
   };
@@ -111,40 +130,38 @@ class MemoryForm extends PureComponent {
     return (
       <FormContainer>
         <Box flex={1}>
+          <Field
+            name="title"
+            multiline
+            placeholder="Add a title or comment..."
+            underlineColorAndroid="transparent"
+            component={renderTextInput}
+            validate={[required]}
+          />
           <Box flex={1}>
-            <Field
-              name="title"
-              multiline
-              placeholder="Add a title or comment..."
-              underlineColorAndroid="transparent"
-              component={renderTextInput}
-              validate={[required]}
-            />
-          </Box>
-          <Box flex={1} alignItems="flex-start">
             <Field
               name="files"
               component={MemoryFormFileList}
               onRemoveMedia={this.handleRemoveMedia}
             />
           </Box>
-          <List>
-            <ListItem leftIcon="md-calendar">
+          <Box>
+            <List>
               <Field name="createdAt" component={this.renderDatePicker} />
-            </ListItem>
-            <ListItem leftIcon="ios-images" onPress={this.handleAddMedia}>
-              <Text color="secondary">Photo/Video</Text>
-            </ListItem>
-            <ListItem leftIcon="ios-medal">
-              <Text color="secondary">Event</Text>
-            </ListItem>
-            <ListItem leftIcon="ios-mic" last>
-              <Text color="secondary">Voice note</Text>
-            </ListItem>
-          </List>
+              <ListItem leftIcon="ios-images" onPress={this.handleAddMedia}>
+                <Text color="secondary">Photo/Video</Text>
+              </ListItem>
+              <ListItem leftIcon="ios-medal">
+                <Text color="secondary">Event</Text>
+              </ListItem>
+              <ListItem leftIcon="ios-mic" last>
+                <Text color="secondary">Voice note</Text>
+              </ListItem>
+            </List>
+          </Box>
         </Box>
 
-        <Box flex={1} flexDirection="row" alignItems="flex-end">
+        <Box flexDirection="row" alignItems="flex-end">
           <SubmitButton
             submitText="ADD MEMORY"
             onPress={handleSubmit(submit)}
