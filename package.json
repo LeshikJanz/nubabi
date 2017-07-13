@@ -98,7 +98,7 @@
     "rxjs": "^5.2.0",
     "string": "^3.3.3",
     "superagent": "^3.4.3",
-    "victory-native": "^0.12.0"
+    "victory-native": "https://github.com/FormidableLabs/victory-native"
   },
   "devDependencies": {
     "babel-eslint": "^7.1.1",

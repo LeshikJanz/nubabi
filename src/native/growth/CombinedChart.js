@@ -17,6 +17,7 @@ type Props = {
 
 export const CombinedChart = ({ data, layout }: Props) => {
   const width = layout.parentWidth;
+
   return (
     <VictoryStack
       domain={{ y: 0 }}
