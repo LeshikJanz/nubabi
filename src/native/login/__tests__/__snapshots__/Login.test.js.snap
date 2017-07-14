@@ -123,7 +123,7 @@ exports[`renders correctly 1`] = `
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus={true}
+              autoFocus={false}
               blurOnSubmit={false}
               keyBoardType="email-address"
               onChangeText={[Function]}
@@ -381,7 +381,7 @@ exports[`show progress when logging in 1`] = `
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus={true}
+              autoFocus={false}
               blurOnSubmit={false}
               keyBoardType="email-address"
               onChangeText={[Function]}

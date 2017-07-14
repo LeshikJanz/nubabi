@@ -64,7 +64,10 @@ export class Login extends Component {
                   value={this.state.email}
                   placeholder="name@example.com"
                   keyBoardType="email-address"
-                  autoFocus
+                  autoFocus={
+                    typeof jest ===
+                    'undefined' /* TODO: https://github.com/facebook/jest/issues/3707 */
+                  }
                   autoCapitalize="none"
                   autoCorrect={false}
                   returnKeyType="next"
