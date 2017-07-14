@@ -17,3 +17,9 @@ done
 
 echo "Successfully uploaded release artifacts"
 
+# Navigate to project's root
+cd ..
+mkdir buddybuild_artifacts && mkdir buddybuild_artifacts/Jest
+
+echo "Running test for CI..."
+npm test -- --silent --outputFile=buddybuild_artifacts/Jest/jest.json --json
