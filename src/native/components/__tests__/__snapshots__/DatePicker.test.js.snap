@@ -189,37 +189,7 @@ style = Object {}
             >
               <View
                 pointerEvents="auto"
-              >
-                <View
-                  style={
-                    Array [
-                      Object {
-                        "borderTopColor": "#ccc",
-                        "borderTopWidth": 1,
-                        "marginTop": 42,
-                      },
-                      undefined,
-                    ]
-                  }
-                >
-                  <RCTDatePicker
-                    date={1454367600000}
-                    maximumDate={undefined}
-                    minimumDate={undefined}
-                    minuteInterval={undefined}
-                    mode="date"
-                    onChange={[Function]}
-                    onResponderTerminationRequest={[Function]}
-                    onStartShouldSetResponder={[Function]}
-                    style={
-                      Object {
-                        "height": 216,
-                      }
-                    }
-                    timeZoneOffsetInMinutes={undefined}
-                  />
-                </View>
-              </View>
+              />
               <View
                 accessibilityComponentType={undefined}
                 accessibilityLabel={undefined}
