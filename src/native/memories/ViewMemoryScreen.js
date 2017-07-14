@@ -9,10 +9,15 @@ export class ViewMemoryScreen extends PureComponent {
     title: 'Memory',
   };
 
+  // TODO: remove duplication
+  handleNavigateToAddMemory = () => {
+    this.props.navigation.navigate('addMemory');
+  };
+
   render() {
     return (
       <Screen>
-        <AddMemoryHeader />
+        <AddMemoryHeader onAddMemory={this.handleNavigateToAddMemory} />
         <Box flex={1} style={() => ({ marginTop: 9 })}>
           <ViewMemories
             navigatedToMemory={this.props.navigation.state.params.id}

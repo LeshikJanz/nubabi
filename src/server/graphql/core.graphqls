@@ -192,6 +192,19 @@ type FileEdge {
   cursor: String!
 }
 
+input FileInput {
+  name: String!
+  contentType: String!
+  size: Int!
+}
+
+input FileInputBase64 {
+  name: String!
+  url: String!
+  contentType: String!
+  size: Int!
+}
+
 input FileFilter {
   contentTypeContains: String
 }

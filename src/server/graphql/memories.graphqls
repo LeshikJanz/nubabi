@@ -5,6 +5,10 @@ enum MemoryFilter {
   SPECIAL
 }
 
+extend type Mutation {
+  createMemory(input: CreateMemoryInput!): CreateOrUpdateMemoryPayload
+}
+
 extend type Baby {
   memory(id: ID!): Memory
 }
@@ -105,4 +109,22 @@ type AchievementEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+input CreateMemoryInput {
+  babyId: ID!
+  title: String!
+  files: [FileInputBase64]
+
+  # The date chose by the user to represent this Memory's date
+  createdAt: DateTime!
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+type CreateOrUpdateMemoryPayload {
+  memory: Memory
+  edge: MemoryEdge
+  clientMutationId: String
 }

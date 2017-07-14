@@ -5,10 +5,14 @@ import {
   globalIdField,
   fromGlobalId,
   connectionFromPromisedArrayWithCount,
+  toDate,
+  transform,
 } from './common';
 
+const sortByTimestamp = sortBy(prop('createdAt'));
 const secureImage = str => str.replace('http:', 'https:') + '/';
 const title = () => faker.company.catchPhrase();
+
 const randomArray = (low: number, high: number, mapFn: Function = identity) => {
   return map(
     mapFn,
@@ -37,52 +41,38 @@ const makeFile = () => ({
   url: secureImage(faker.image.people()),
 });
 
-const makeMemory = () => ({
-  id: faker.random.uuid(),
-  title: faker.company.catchPhrase(),
-  description: faker.lorem.sentences(4),
-  files: randomArray(1, 10, makeFile),
-  comments: reverse(sortByTimestamp(randomArray(0, 10, makeComment))),
-});
-
-const sortByTimestamp = sortBy(prop('createdAt'));
-
-const memories = sortByTimestamp(randomArray(1, 10, makeMemory));
+const mockComments = reverse(sortByTimestamp(randomArray(0, 10, makeComment)));
 
 export const resolvers = {
   Baby: {
-    memories: ({ id }, args) => {
-      return connectionFromArray(memories, args);
+    memories: ({ id }, args, { connectors: { firebase } }) => {
+      return connectionFromPromisedArrayWithCount(
+        firebase.getMemories(id),
+        args,
+      );
     },
-    memory: (_, { id }) => {
-      return find(propEq('id', fromGlobalId(id).id), memories);
+    memory: (_, { id }, { connectors: { firebase } }) => {
+      return firebase.getMemory(fromGlobalId(id).id);
     },
   },
   Memory: {
     id: globalIdField(),
-    files: ({ files }, args) => {
-      return connectionFromPromisedArrayWithCount(Promise.resolve(files), args);
-    },
-    comments: ({ comments }, args) => {
+    files: ({ files }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
-        Promise.resolve(comments),
+        Promise.resolve(firebase.nestedArrayToArray(files)),
         args,
       );
     },
-    // TODO: remove all these mock resolvers
-    createdAt: () => faker.date.past(),
-    author: () => {
-      // TODO: remove
-      return {
-        id: '1',
-        firstName: faker.name.firstName(),
-        lastName: faker.name.lastName(),
-        avatar: {
-          url: `https://lorempixel.com/30/30/people/${Math.floor(
-            Math.random() * 10 + 1,
-          )}/`,
-        },
-      };
+    comments: ({ comments }, args) => {
+      // TODO
+      return connectionFromPromisedArrayWithCount(
+        Promise.resolve(mockComments),
+        args,
+      );
+    },
+    createdAt: transform('createdAt', toDate),
+    author: ({ authorId }, _, { connectors: { firebase } }) => {
+      return firebase.getUser(authorId);
     },
   },
 };

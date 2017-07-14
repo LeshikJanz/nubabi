@@ -33,9 +33,24 @@ class Memory extends PureComponent {
   };
 
   static fragments = {
+    item: gql`
+      fragment MemoryListItem on Memory {
+        id
+        title
+        files(first: 1) {
+          edges {
+            node {
+              url
+              contentType
+            }
+          }
+        }
+      }
+    `,
     detail: gql`
       fragment MemoryItem on Memory {
         id
+        title
         author {
           avatar {
             url
@@ -80,6 +95,7 @@ class Memory extends PureComponent {
       id,
       babyId,
       author,
+      title,
       comments: commentsConnection,
       files: filesConnection,
       createdAt,
@@ -138,6 +154,11 @@ class Memory extends PureComponent {
         >
           <Card padding={0}>
             <MemoryMedia files={filesConnection} />
+            <Box contentSpacing>
+              <Text medium marginVertical={1} size={2}>
+                {title}
+              </Text>
+            </Box>
             <MemoryComments
               comments={commentsConnection}
               memoryId={id}

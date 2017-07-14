@@ -11,7 +11,7 @@ type Props = {};
 
 type RoundedContainerProps = {
   children: any,
-  style: Object | number,
+  style?: Object | number,
 };
 
 const RoundedContainer = ({ children, style }: RoundedContainerProps) =>

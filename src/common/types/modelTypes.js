@@ -659,6 +659,7 @@ declare type Mutation = {
   swoopActivity: ?ChangeActivityPayload,
   changeActivity: ?ChangeActivityPayload,
   toggleActivityFavorite: ?ToggleFavoritePayload,
+  createMemory: ?CreateOrUpdateMemoryPayload,
 };
 
 declare type UpdateUserInput = {
@@ -790,6 +791,29 @@ declare type ToggleFavoritePayload = {
   clientMutationId: ?string,
 };
 
+declare type CreateMemoryInput = {
+  babyId: string,
+  title: string,
+  files: ?Array<FileInputBase64>,
+  /** The date chose by the user to represent this Memory's date */
+  createdAt: any,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId: ?string,
+};
+
+declare type FileInputBase64 = {
+  name: string,
+  url: string,
+  contentType: string,
+  size: number,
+};
+
+declare type CreateOrUpdateMemoryPayload = {
+  memory: ?Memory,
+  edge: ?MemoryEdge,
+  clientMutationId: ?string,
+};
+
 declare type CreateUserInput = {
   username: string,
   password: ?string,
@@ -817,4 +841,10 @@ declare type AuthProviderSignupData = {
 declare type AuthProviderEmail = {
   email: string,
   password: string,
+};
+
+declare type FileInput = {
+  name: string,
+  contentType: string,
+  size: number,
 };

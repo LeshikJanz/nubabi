@@ -128,7 +128,7 @@ class Profile extends PureComponent {
   }
 }
 
-const query = gql`
+export const query = gql`
   query getBaby($id: ID!) {
     viewer {
       baby(id: $id) {
