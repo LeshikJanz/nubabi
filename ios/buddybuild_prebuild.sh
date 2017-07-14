@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 source ../.env
 cd ..
-echo "Running tests..."
-
-npm test -- --silent
 
 ### fix RN 0.46 error with third-party.sh script
 echo "Fixing RN 0.46 glog compilation error"
