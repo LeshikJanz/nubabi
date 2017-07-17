@@ -78,8 +78,9 @@ type Baby {
   gender: Gender
   weekBorn: Number
 
-  memories: Map<String, Boolean>,
+  memories: Map<String, Boolean>
 
+  createdBy: String // TODO: validate IDs?
   createdAt: InitialTimestamp
   updatedAt: CurrentTimestamp | Null
 }

@@ -1,3 +1,4 @@
+// @flow
 import { map, identity, find, propEq, sortBy, prop, reverse } from 'ramda';
 import faker from 'faker';
 import {
@@ -7,11 +8,12 @@ import {
   connectionFromPromisedArrayWithCount,
   toDate,
   transform,
+  mutationWithClientMutationId,
 } from './common';
+import { addEdgeToMutationResult } from '../../../native/shared/graphqlUtils';
 
 const sortByTimestamp = sortBy(prop('createdAt'));
-const secureImage = str => str.replace('http:', 'https:') + '/';
-const title = () => faker.company.catchPhrase();
+const secureImage = str => `${str.replace('http:', 'https:')}/`;
 
 const randomArray = (low: number, high: number, mapFn: Function = identity) => {
   return map(
@@ -44,6 +46,15 @@ const makeFile = () => ({
 const mockComments = reverse(sortByTimestamp(randomArray(0, 10, makeComment)));
 
 export const resolvers = {
+  Mutation: {
+    createMemory: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase
+          .createMemory(fromGlobalId(input.babyId).id, input)
+          .then(addEdgeToMutationResult);
+      },
+    ),
+  },
   Baby: {
     memories: ({ id }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
