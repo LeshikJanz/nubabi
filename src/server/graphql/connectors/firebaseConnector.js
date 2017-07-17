@@ -286,6 +286,7 @@ const createMemory = async (
 
   const memory = {
     ...omit(['babyId', 'files'], input),
+    id: memoryId,
     babyId,
     authorId: currentUserId,
     createdAt: input.createdAt.getTime(),
