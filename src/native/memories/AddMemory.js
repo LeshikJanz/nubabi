@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
+import { ViewMemories } from './ViewMemories';
 import { addEdgeToFragment } from '../shared/graphqlUtils';
 
 type Props = {
@@ -19,7 +20,7 @@ type Props = {
   onSubmit: (input: CreateMemoryInput) => Promise<ApolloQueryResult<*>>,
 };
 
-export const AddMemory = ({ onSubmit, ...other }: Props) =>
+export const AddMemory = ({ onSubmit }: Props) =>
   <MemoryForm onSubmit={onSubmit} initialValues={{ title: 'Some' }} />;
 
 export default compose(
@@ -40,17 +41,30 @@ export default compose(
     {
       props: ({ mutate, ownProps: { currentBabyId } }) => ({
         onSubmit: (input: CreateMemoryInput) => {
+          // $FlowFixMe$
           return mutate({
             variables: {
               input: assoc('babyId', currentBabyId, input),
             },
-            update: addEdgeToFragment(
-              RecentMemories.fragments.memories,
-              'createMemory',
-              ['memories'],
-              currentBabyId,
-              'head',
-            ),
+            update: (store, data) => {
+              const fragmentOptions = [
+                'createMemory',
+                ['memories'],
+                currentBabyId,
+                'head',
+              ];
+
+              addEdgeToFragment(
+                RecentMemories.fragments.memories,
+                ...fragmentOptions,
+              )(store, data);
+
+              addEdgeToFragment(
+                ViewMemories.fragments.list,
+                ...fragmentOptions,
+                { fragmentName: 'Memories' },
+              )(store, data);
+            },
           });
         },
       }),

@@ -103,7 +103,6 @@ class MemoryFormFileList extends PureComponent {
   }
 
   render() {
-    console.log(this.props.input.value);
     return this.renderFiles();
   }
 }

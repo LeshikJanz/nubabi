@@ -70,13 +70,14 @@ export const addEdgeToFragment = (
   edgePath: Array<string>,
   rootId: string,
   addTo: string = 'tail',
+  fragmentOptions = {},
 ) => (store: DataProxy, { data: payload }: Object) => {
   if (!path([operationName, 'edge'], payload)) {
     return;
   }
 
   const id = rootId;
-  const data = store.readFragment({ fragment, id });
+  const data = store.readFragment({ fragment, id, ...fragmentOptions });
 
   if (last(edgePath) !== 'edges') {
     edgePath.push('edges');
@@ -89,7 +90,7 @@ export const addEdgeToFragment = (
 
   const addWith = addTo === 'head' ? 'unshift' : 'push';
   edges[addWith](payload[operationName].edge);
-  store.writeFragment({ fragment, id, data });
+  store.writeFragment({ fragment, ...fragmentOptions, id, data });
 };
 
 export const addEdgeToMutationResult = (response: any) => {

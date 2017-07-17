@@ -18,6 +18,22 @@ type Props = {
 export class ViewMemories extends PureComponent {
   props: Props;
 
+  static fragments = {
+    list: gql`
+      fragment Memories on Baby {
+        memories {
+          edges {
+            node {
+              id
+              ...MemoryItem
+            }
+          }
+        }
+      }
+      ${Memory.fragments.detail}
+    `,
+  };
+
   render() {
     return (
       <MemoryList
@@ -39,18 +55,12 @@ export default compose(
       viewer {
         baby(id: $babyId) {
           id
-          memories {
-            edges {
-              node {
-                id
-                ...MemoryItem
-              }
-            }
-          }
+          ...Memories
         }
       }
     }
-    ${Memory.fragments.detail}
+    ${ViewMemories.fragments.list}
+
   `,
     {
       options: ({ currentBabyId }) => ({
