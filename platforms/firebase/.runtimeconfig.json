@@ -1,0 +1,10 @@
+{
+  "nubabi_api": {
+    "url": "https://api-staging.nubabi.com/",
+    "token": "12345"
+  },
+  "nubabi": {
+    "api_url": "https://api-staging.nubabi.com/",
+    "token": "12345"
+  }
+}
