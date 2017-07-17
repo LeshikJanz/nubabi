@@ -34,7 +34,8 @@ export const RecentMemories = ({
 RecentMemories.fragments = {
   memories: gql`
     fragment RecentMemories on Baby {
-      memories(last: 5) {
+      # Memories are ordered by "createdAt" in DESC order
+      memories(first: 5) {
         edges {
           node {
             id

@@ -2,6 +2,7 @@
 import { map, identity, find, propEq, sortBy, prop, reverse } from 'ramda';
 import faker from 'faker';
 import {
+  sortByTimestamp,
   connectionFromArray,
   globalIdField,
   fromGlobalId,
@@ -12,7 +13,6 @@ import {
 } from './common';
 import { addEdgeToMutationResult } from '../../../native/shared/graphqlUtils';
 
-const sortByTimestamp = sortBy(prop('createdAt'));
 const secureImage = str => `${str.replace('http:', 'https:')}/`;
 
 const randomArray = (low: number, high: number, mapFn: Function = identity) => {

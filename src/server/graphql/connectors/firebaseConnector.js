@@ -1,5 +1,6 @@
 // @flow
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
+import { sortByTimestamp } from '../resolvers/common';
 import R, { omit, evolve, map, compose, assoc } from 'ramda';
 import { decode } from 'base-64';
 import {
@@ -442,7 +443,11 @@ export const nestedArrayToArray = (input: Object) => {
 };
 
 const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
-  return denormalizeArray(firebase, `/babies/${babyId}/memories`, '/memories');
+  return denormalizeArray(
+    firebase,
+    `/babies/${babyId}/memories`,
+    '/memories',
+  ).then(compose(R.reverse, sortByTimestamp));
 };
 
 const getMemory = (firebase, id: string, args: ConnectionArguments) => {
