@@ -50,13 +50,13 @@ const configureMiddleware = (
       module.hot.accept(() => {
         const configureEpics = require('./configureEpics').default;
 
-        epicMiddleware.replaceEpic(configureEpics(deps));
+        epicMiddleware.replaceEpic(configureEpics(deps, platformEpics));
       });
     } else {
       module.hot.accept('./configureEpics', () => {
         const configureEpics = require('./configureEpics').default;
 
-        epicMiddleware.replaceEpic(configureEpics(deps));
+        epicMiddleware.replaceEpic(configureEpics(deps, platformEpics));
       });
     }
   }
