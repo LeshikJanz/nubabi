@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Action, Deps, MutationResultAction } from '../types';
 import api from '../connectors/mlb';
-import { resetNavigation } from '../../native/navigation/actions';
+import { resetNavigation } from '../navigation/actions';
 
 export function selectBaby(id): Action {
   return {

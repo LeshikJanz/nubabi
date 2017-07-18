@@ -1,6 +1,7 @@
+// @flow
 import type { Action, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
-import { resetNavigation } from '../../native/navigation/actions';
+import { resetNavigation } from '../navigation/actions';
 
 export function loginRequest(email, password, uid): Action {
   return {

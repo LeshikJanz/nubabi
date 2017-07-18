@@ -15,6 +15,8 @@ import NativeFelaProvider from './components/FelaProvider';
 import theme from '../common/themes/defaultTheme';
 import config from '../common/config';
 import Root from './root';
+import { epics as appEpics } from './app/actions';
+import { epics as navigationEpics } from './navigation/actions';
 import navigation from './navigation/reducer';
 import device from './device/reducer';
 
@@ -35,6 +37,7 @@ const store = configureStore({
     device,
   },
   platformMiddleware: [reportingMiddleware],
+  platformEpics: [...appEpics, ...navigationEpics],
 });
 
 persistStore(

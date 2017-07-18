@@ -5,9 +5,15 @@ import { epics as appEpics } from './app/actions';
 import { epics as authEpics } from './auth/actions';
 import { epics as babyEpics } from './babies/actions';
 
-const epics = [...appEpics, ...authEpics, ...babyEpics];
+const commonEpics = [...appEpics, ...authEpics, ...babyEpics];
 
-const configureEpics = (deps: Object) => (action$: any, { getState }: any) =>
-  combineEpics(...epics)(action$, { ...deps, getState });
+const configureEpics = (deps: Object, platformEpics: Array<Function>) => (
+  action$: any,
+  { getState }: any,
+) => {
+  const epics = [...commonEpics, ...platformEpics];
+
+  return combineEpics(...epics)(action$, { ...deps, getState });
+};
 
 export default configureEpics;

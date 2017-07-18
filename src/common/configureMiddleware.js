@@ -21,9 +21,10 @@ const configureMiddleware = (
   initialState: any,
   platformDeps: any,
   platformMiddleware: any,
+  platformEpics: any,
 ) => {
   const deps = configureDeps(initialState, platformDeps);
-  const rootEpic = configureEpics(deps);
+  const rootEpic = configureEpics(deps, platformEpics);
   const epicMiddleware = createEpicMiddleware(rootEpic);
   const apolloMiddleware = configureApollo().middleware();
 
