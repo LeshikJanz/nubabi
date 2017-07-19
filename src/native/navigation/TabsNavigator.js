@@ -10,7 +10,7 @@ import Stimulation from '../stimulation';
 import Growth from '../growth/GrowthScreen';
 import Profile from '../profile/Profile';
 import Library from '../library/Library';
-import Memories from '../memories/MemoriesScreen';
+import MemoriesScreen from '../memories/MemoriesScreen';
 import { getTabHeaders } from './shared';
 
 const navigationOptions: NavigationOptions = ({
@@ -37,7 +37,7 @@ const TabsNavigator = TabNavigator(
     stimulation: { screen: Stimulation },
     growth: { screen: Growth },
     library: { screen: Library },
-    memories: { screen: Memories },
+    memories: { screen: MemoriesScreen },
     profile: { screen: Profile },
   },
   {

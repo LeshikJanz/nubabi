@@ -1,38 +1,82 @@
 // @flow
+import type { File, FileConnection, LayoutProps } from '../../common/types';
 import React from 'react';
-import { View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { head, take } from 'ramda';
+import { compose, head, take } from 'ramda';
+import { connect } from 'react-redux';
 import { Box, Overlay, Text, withLayout } from '../components';
 import theme from '../../common/themes/defaultTheme';
+import { navigate } from '../navigation/actions';
 
-type Props = {};
+type Props = {
+  files: FileConnection,
+  layout: LayoutProps,
+  openGallery: (params: ?Object) => void,
+};
 
 type RoundedContainerProps = {
   children: any,
   style?: Object | number,
+  onPress?: () => void,
 };
 
-const RoundedContainer = ({ children, style }: RoundedContainerProps) =>
-  <View
-    style={[
-      {
-        flex: 1,
-        overflow: 'hidden',
-        borderTopLeftRadius: 4,
-        borderTopRightRadius: 4,
-      },
-      style,
-    ]}
-  >
-    {children}
-  </View>;
+type MemoryMediaSingleProps = {
+  media: File,
+  onMediaPress: (params: ?Object) => void,
+};
 
-export const MemoryMedia = ({ files, layout }: Props) => {
-  return files.edges.length > 1
-    ? <MemoryMediaMultiple files={files} layout={layout} />
-    : <MemoryMediaSingle media={head(files.edges).node} layout={layout} />;
+type MemoryMediaImageProps = MemoryMediaSingleProps & {
+  small?: boolean,
+  style?: Object | number,
+  displayMoreIndicator?: boolean,
+};
+
+type MemoryMediaVideoProps = MemoryMediaSingleProps & {
+  small?: boolean,
+  displayMoreIndicator?: boolean,
+};
+
+type MemoryMediaUnknownProps = {};
+
+type MemoryMediaMultipleProps = {
+  files: FileConnection,
+  layout: LayoutProps,
+  onMediaPress: (params: ?Object) => void,
+};
+
+const RoundedContainer = ({
+  children,
+  style,
+  onPress,
+}: RoundedContainerProps) => {
+  let Container;
+  const containerProps = {};
+
+  if (onPress) {
+    Container = TouchableOpacity;
+    containerProps.onPress = onPress;
+  } else {
+    Container = View;
+  }
+
+  return (
+    <Container
+      style={[
+        {
+          flex: 1,
+          overflow: 'hidden',
+          borderTopLeftRadius: 4,
+          borderTopRightRadius: 4,
+        },
+        style,
+      ]}
+      {...containerProps}
+    >
+      {children}
+    </Container>
+  );
 };
 
 export const MemoryMediaImage = ({
@@ -41,9 +85,10 @@ export const MemoryMediaImage = ({
   small = false,
   style,
   displayMoreIndicator,
-}) => {
+  onMediaPress,
+}: MemoryMediaImageProps) => {
   return (
-    <RoundedContainer style={style}>
+    <RoundedContainer style={style} onPress={onMediaPress}>
       <Image
         source={{ uri: media.url }}
         style={{
@@ -61,7 +106,12 @@ export const MemoryMediaImage = ({
   );
 };
 
-export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
+export const MemoryMediaVideo = ({
+  media,
+  small,
+  displayMoreIndicator,
+  onMediaPress,
+}: MemoryMediaVideoProps) => {
   // TODO: real video
   return (
     <Overlay>
@@ -92,11 +142,14 @@ export const MemoryMediaVideo = ({ media, small, displayMoreIndicator }) => {
   );
 };
 
-export const MemoryMediaUnknown = ({ media, small }) => {
+export const MemoryMediaUnknown = ({
+  media,
+  small,
+}: MemoryMediaUnknownProps) => {
   return null; // TODO
 };
 
-export const MemoryMediaSingle = props => {
+export const MemoryMediaSingle = (props: MemoryMediaSingleProps) => {
   let MediaComponent;
   switch (props.media.contentType.split('/')[0]) {
     case 'video': {
@@ -115,7 +168,11 @@ export const MemoryMediaSingle = props => {
   return <MediaComponent {...props} />;
 };
 
-export const MemoryMediaMultiple = ({ files, layout }) => {
+export const MemoryMediaMultiple = ({
+  files,
+  layout,
+  onMediaPress,
+}: MemoryMediaMultipleProps) => {
   const shouldDisplayMoreButton = files.edges.length >= 3;
 
   const displayMore = (
@@ -155,7 +212,12 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
             borderRadius={4}
             style={() => ({ overflow: 'hidden' })}
           >
-            <MemoryMediaSingle media={file.node} layout={layout} small />
+            <MemoryMediaSingle
+              media={file.node}
+              layout={layout}
+              small
+              onMediaPress={() => onMediaPress({ selectedIndex: index })}
+            />
           </Box>,
         )}
 
@@ -172,6 +234,7 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
               layout={layout}
               small
               displayMoreIndicator={displayMore}
+              onMediaPress={() => onMediaPress({ grid: true })}
             />
           </Box>}
       </Box>
@@ -179,4 +242,31 @@ export const MemoryMediaMultiple = ({ files, layout }) => {
   );
 };
 
-export default withLayout(MemoryMedia);
+export const MemoryMedia = ({ files, layout, openGallery }: Props) => {
+  if (files.edges.length > 1) {
+    return (
+      <MemoryMediaMultiple
+        files={files}
+        layout={layout}
+        onMediaPress={openGallery}
+      />
+    );
+  } else {
+    return (
+      <MemoryMediaSingle
+        media={head(files.edges).node}
+        layout={layout}
+        onMediaPress={() => openGallery({})}
+      />
+    );
+  }
+};
+
+export default compose(
+  connect(null, (dispatch, { files, media }) => ({
+    openGallery: (params = {}) => {
+      dispatch(navigate('gallery', { ...params, files }));
+    },
+  })),
+  withLayout,
+)(MemoryMedia);

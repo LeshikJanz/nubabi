@@ -50,6 +50,7 @@ import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
 import InviteUserScreen from '../settings/InviteUserScreen';
+import GalleryScreen from '../components/GalleryScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -104,6 +105,7 @@ const routes = {
     screen: ViewMemoryScreen,
     path: 'memories/:id',
   },
+  gallery: { screen: GalleryScreen },
 };
 
 class TransitionerSwitcher extends PureComponent {

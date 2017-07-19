@@ -1,0 +1,277 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {}
+
+<RCTScrollView
+  data={
+    Object {
+      "__typename": "MemoryConnection",
+      "edges": Array [
+        Object {
+          "__typename": "MemoryEdge",
+          "node": Object {
+            "__typename": "Memory",
+            "author": Object {
+              "__typename": "User",
+              "avatar": Object {
+                "__typename": "Avatar",
+                "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/users%2FdHY49Iz4O9UByM7ZKBqmJ7GdnX83%2Favatar?alt=media&token=ec13f678-c0c2-4412-a540-e2e58ae08154",
+              },
+            },
+            "comments": Object {
+              "__typename": "CommentConnection",
+              "count": 6,
+              "edges": Array [
+                Object {
+                  "__typename": "CommentEdge",
+                  "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+                  "node": Object {
+                    "__typename": "Comment",
+                    "author": Object {
+                      "__typename": "User",
+                      "firstName": "Cullen",
+                      "lastName": "Kris",
+                    },
+                    "createdAt": "2017-07-15T01:21:12.695Z",
+                    "id": "1dc5dbd2-a591-4421-8fdf-aca5a65b4c26",
+                    "text": "Sint voluptatem odit quam in nam. Veniam neque atque placeat ut provident natus quaerat cum. Debitis non sint voluptate porro. Dolor perferendis repudiandae facilis itaque ipsum itaque dolores harum.",
+                  },
+                },
+                Object {
+                  "__typename": "CommentEdge",
+                  "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+                  "node": Object {
+                    "__typename": "Comment",
+                    "author": Object {
+                      "__typename": "User",
+                      "firstName": "Travis",
+                      "lastName": "Ritchie",
+                    },
+                    "createdAt": "2017-07-03T13:49:13.386Z",
+                    "id": "9af48c8c-a268-46ed-a221-f4883e8c5a7e",
+                    "text": "Distinctio voluptatem sapiente accusamus quibusdam quisquam voluptas facere. Repudiandae facere voluptatibus placeat blanditiis consequatur sequi. Voluptas qui dignissimos. A suscipit odit facere inventore ab repellat.",
+                  },
+                },
+              ],
+            },
+            "createdAt": "2017-07-19T14:53:10.000Z",
+            "files": Object {
+              "__typename": "FileConnection",
+              "count": 5,
+              "edges": Array [
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpQKoih7HypAXCivixG%2F4DFD9E45-6A1F-43CE-BC1B-35D8E20629BF.jpg?alt=media&token=507e6408-3622-47f9-9fda-7bd85680ec16",
+                  },
+                },
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpQKoih7HypAXCivixG%2F42CBB834-24C3-4ACD-9B94-170B3AF30BF8.jpg?alt=media&token=0d8bd3f4-786f-420d-96a5-c43864e3034a",
+                  },
+                },
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpQKoih7HypAXCivixG%2F0131E309-3D46-4EFD-8E0A-684B0F502D98.jpg?alt=media&token=ebae2733-5610-4ee8-9004-5a8dc4f16521",
+                  },
+                },
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpQKoih7HypAXCivixG%2F1F7B7673-7B22-4CDA-96EC-93432057DFD7.jpg?alt=media&token=fd50eb5c-d128-4ddc-ac41-199f163e72bf",
+                  },
+                },
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "video/mp4",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpQKoih7HypAXCivixG%2F0A38D6D4-8F88-4641-98DF-665AA500A198.mp4?alt=media&token=6cc562d6-359d-4555-96f4-348886beca76",
+                  },
+                },
+              ],
+            },
+            "id": "TWVtb3J5Oi1LcFFLb2loN0h5cEFYQ2l2aXhH",
+            "title": "Lots of assets",
+          },
+        },
+        Object {
+          "__typename": "MemoryEdge",
+          "node": Object {
+            "__typename": "Memory",
+            "author": Object {
+              "__typename": "User",
+              "avatar": Object {
+                "__typename": "Avatar",
+                "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/users%2FdHY49Iz4O9UByM7ZKBqmJ7GdnX83%2Favatar?alt=media&token=ec13f678-c0c2-4412-a540-e2e58ae08154",
+              },
+            },
+            "comments": Object {
+              "__typename": "CommentConnection",
+              "count": 6,
+              "edges": Array [
+                Object {
+                  "__typename": "CommentEdge",
+                  "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+                  "node": Object {
+                    "__typename": "Comment",
+                    "author": Object {
+                      "__typename": "User",
+                      "firstName": "Cullen",
+                      "lastName": "Kris",
+                    },
+                    "createdAt": "2017-07-15T01:21:12.695Z",
+                    "id": "1dc5dbd2-a591-4421-8fdf-aca5a65b4c26",
+                    "text": "Sint voluptatem odit quam in nam. Veniam neque atque placeat ut provident natus quaerat cum. Debitis non sint voluptate porro. Dolor perferendis repudiandae facilis itaque ipsum itaque dolores harum.",
+                  },
+                },
+                Object {
+                  "__typename": "CommentEdge",
+                  "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+                  "node": Object {
+                    "__typename": "Comment",
+                    "author": Object {
+                      "__typename": "User",
+                      "firstName": "Travis",
+                      "lastName": "Ritchie",
+                    },
+                    "createdAt": "2017-07-03T13:49:13.386Z",
+                    "id": "9af48c8c-a268-46ed-a221-f4883e8c5a7e",
+                    "text": "Distinctio voluptatem sapiente accusamus quibusdam quisquam voluptas facere. Repudiandae facere voluptatibus placeat blanditiis consequatur sequi. Voluptas qui dignissimos. A suscipit odit facere inventore ab repellat.",
+                  },
+                },
+              ],
+            },
+            "createdAt": "2017-07-17T15:10:43.000Z",
+            "files": Object {
+              "__typename": "FileConnection",
+              "count": 2,
+              "edges": Array [
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpG5XvuMxoJbYIe5pJK%2F34F466A1-ED89-41E3-8411-4A9F2E284E93.jpg?alt=media&token=f14512a1-2a56-41d5-af84-91164b75c6f2",
+                  },
+                },
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpG5XvuMxoJbYIe5pJK%2FA653BDA0-FCBD-4A49-BF46-15D5BA20159A.jpg?alt=media&token=5d64e435-77c7-41da-acf7-84092a0b672e",
+                  },
+                },
+              ],
+            },
+            "id": "TWVtb3J5Oi1LcEc1WHZ1TXhvSmJZSWU1cEpL",
+            "title": "Some",
+          },
+        },
+        Object {
+          "__typename": "MemoryEdge",
+          "node": Object {
+            "__typename": "Memory",
+            "author": Object {
+              "__typename": "User",
+              "avatar": Object {
+                "__typename": "Avatar",
+                "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/users%2FdHY49Iz4O9UByM7ZKBqmJ7GdnX83%2Favatar?alt=media&token=ec13f678-c0c2-4412-a540-e2e58ae08154",
+              },
+            },
+            "comments": Object {
+              "__typename": "CommentConnection",
+              "count": 6,
+              "edges": Array [
+                Object {
+                  "__typename": "CommentEdge",
+                  "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+                  "node": Object {
+                    "__typename": "Comment",
+                    "author": Object {
+                      "__typename": "User",
+                      "firstName": "Cullen",
+                      "lastName": "Kris",
+                    },
+                    "createdAt": "2017-07-15T01:21:12.695Z",
+                    "id": "1dc5dbd2-a591-4421-8fdf-aca5a65b4c26",
+                    "text": "Sint voluptatem odit quam in nam. Veniam neque atque placeat ut provident natus quaerat cum. Debitis non sint voluptate porro. Dolor perferendis repudiandae facilis itaque ipsum itaque dolores harum.",
+                  },
+                },
+                Object {
+                  "__typename": "CommentEdge",
+                  "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+                  "node": Object {
+                    "__typename": "Comment",
+                    "author": Object {
+                      "__typename": "User",
+                      "firstName": "Travis",
+                      "lastName": "Ritchie",
+                    },
+                    "createdAt": "2017-07-03T13:49:13.386Z",
+                    "id": "9af48c8c-a268-46ed-a221-f4883e8c5a7e",
+                    "text": "Distinctio voluptatem sapiente accusamus quibusdam quisquam voluptas facere. Repudiandae facere voluptatibus placeat blanditiis consequatur sequi. Voluptas qui dignissimos. A suscipit odit facere inventore ab repellat.",
+                  },
+                },
+              ],
+            },
+            "createdAt": "2017-07-17T13:44:57.000Z",
+            "files": Object {
+              "__typename": "FileConnection",
+              "count": 1,
+              "edges": Array [
+                Object {
+                  "__typename": "FileEdge",
+                  "node": Object {
+                    "__typename": "File",
+                    "contentType": "image/jpeg",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-KpFn-yiPwewxMbgYF3J%2F943118D1-2D2A-45C8-AF9A-E527C9F2A0F8.jpg?alt=media&token=b15acba6-8e59-4486-bb7e-d443b86facc4",
+                  },
+                },
+              ],
+            },
+            "id": "TWVtb3J5Oi1LcEZuLXlpUHdld3hNYmdZRjNK",
+            "title": "Monty suntanning ",
+          },
+        },
+      ],
+    }
+  }
+  disableVirtualization={false}
+  getItem={[Function]}
+  getItemCount={[Function]}
+  horizontal={false}
+  initialNumToRender={10}
+  keyExtractor={[Function]}
+  maxToRenderPerBatch={10}
+  numColumns={1}
+  onContentSizeChange={[Function]}
+  onEndReachedThreshold={2}
+  onLayout={[Function]}
+  onMomentumScrollEnd={[Function]}
+  onScroll={[Function]}
+  onScrollBeginDrag={[Function]}
+  onScrollEndDrag={[Function]}
+  onViewableItemsChanged={undefined}
+  renderItem={[Function]}
+  renderScrollComponent={[Function]}
+  scrollEventThrottle={50}
+  stickyHeaderIndices={Array []}
+  updateCellsBatchingPeriod={50}
+  windowSize={21}
+>
+  <View />
+</RCTScrollView>
+`;

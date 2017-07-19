@@ -57,7 +57,8 @@ class Memory extends PureComponent {
           }
         }
         createdAt
-        files(first: 3) {
+        # TODO: how to combine pagination with GalleryScreen
+        files {
           count
           edges {
             node {
@@ -100,6 +101,7 @@ class Memory extends PureComponent {
       files: filesConnection,
       createdAt,
     } = this.props;
+    console.log(JSON.stringify(this.props, null, 4));
 
     const date = formatMemoryDate(createdAt);
     const avatar = author.avatar.url;

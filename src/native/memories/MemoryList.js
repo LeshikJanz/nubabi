@@ -8,7 +8,6 @@ import Memory from './Memory';
 type Props = {
   babyId: String,
   memories: Array<MemoryEdge>,
-  navigatedToMemory: ?string,
 };
 
 const keyExtractor = obj => obj.id;

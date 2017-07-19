@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
 import AddMemoryHeader from './AddMemoryHeader';
-import ViewMemories from './ViewMemories';
+import ViewMemory from './ViewMemory';
 
 export class ViewMemoryScreen extends PureComponent {
   static navigationOptions = {
@@ -19,9 +19,7 @@ export class ViewMemoryScreen extends PureComponent {
       <Screen>
         <AddMemoryHeader onAddMemory={this.handleNavigateToAddMemory} />
         <Box flex={1} style={() => ({ marginTop: 9 })}>
-          <ViewMemories
-            navigatedToMemory={this.props.navigation.state.params.id}
-          />
+          <ViewMemory id={this.props.navigation.state.params.id} />
         </Box>
       </Screen>
     );
