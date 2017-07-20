@@ -12,7 +12,9 @@
     "firebase:install": "cd src/server/firebase/functions && npm install",
     "firebase:deploy": "firebase deploy",
     "firebase:deploy:functions": "firebase deploy --only functions",
-    "firebase:deploy:rules": "firebase deploy --only database"
+    "firebase:deploy:rules": "firebase deploy --only database",
+    "server": "babel-node src/server/graphql/server.js",
+    "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=axios babel-node\" -e js,graphqls src/server/graphql/server.js"
   },
   "lint-staged": {
     "*.js": [
@@ -114,6 +116,7 @@
     "eslint-plugin-react": "^6.7.1",
     "eslint-plugin-react-native": "^2.3.1",
     "express": "^4.15.3",
+    "firebase-admin": "^5.0.1",
     "flow-bin": "^0.47.0",
     "graphql-server-express": "^0.7.2",
     "husky": "^0.13.3",

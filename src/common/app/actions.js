@@ -1,4 +1,5 @@
 // @flow
+import axios from 'axios';
 import { Observable } from 'rxjs/Observable';
 
 import type {
@@ -33,6 +34,11 @@ const appStartedEpic = (action$: any, deps: Deps) => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
         firebaseAuth().currentUser.getToken().then(token => {
+          if (__DEV__) {
+            axios.post('http://localhost:8080/graphql-config', {
+              token: `Bearer ${token}`,
+            });
+          }
           observer.next(onAuth(firebaseUser, token));
         });
       } else {
