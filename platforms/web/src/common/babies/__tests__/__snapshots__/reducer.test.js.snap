@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles GET_BABIES_FAILURE 1`] = `
+Object {
+  "currentBabyId": null,
+  "failure": true,
+  "isFetching": false,
+}
+`;
+
+exports[`handles GET_BABIES_REQUEST 1`] = `
+Object {
+  "currentBabyId": null,
+  "failure": false,
+  "isFetching": true,
+}
+`;
+
+exports[`handles GET_BABIES_SUCCESS 1`] = `
+Object {
+  "currentBabyId": 1,
+  "failure": false,
+  "isFetching": false,
+}
+`;
+
+exports[`handles SELECT_BABY 1`] = `
+Object {
+  "currentBabyId": 1,
+  "failure": false,
+  "isFetching": false,
+}
+`;

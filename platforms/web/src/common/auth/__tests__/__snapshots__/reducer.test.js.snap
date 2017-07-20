@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles LOGIN_FAILURE 1`] = `
+Object {
+  "errorMessage": "some error",
+  "failure": true,
+  "isAuthenticated": false,
+  "isFetching": false,
+  "token": null,
+}
+`;
+
+exports[`handles LOGIN_REQUEST 1`] = `
+Object {
+  "errorMessage": "",
+  "isAuthenticated": false,
+  "isFetching": true,
+  "token": null,
+}
+`;
+
+exports[`handles LOGIN_SUCCESS 1`] = `
+Object {
+  "errorMessage": "",
+  "failure": false,
+  "isAuthenticated": true,
+  "isFetching": false,
+  "token": null,
+}
+`;
+
+exports[`handles LOGOUT 1`] = `
+Object {
+  "errorMessage": "",
+  "isAuthenticated": false,
+  "isFetching": false,
+  "token": null,
+}
+`;
+
+exports[`handles ON_AUTH when logged in 1`] = `
+Object {
+  "errorMessage": null,
+  "failure": false,
+  "isAuthenticated": true,
+  "isFetching": false,
+  "token": "FIREBASE_TOKEN",
+}
+`;
+
+exports[`handles ON_AUTH when logged out 1`] = `
+Object {
+  "errorMessage": null,
+  "failure": false,
+  "isAuthenticated": false,
+  "isFetching": false,
+  "token": undefined,
+}
+`;

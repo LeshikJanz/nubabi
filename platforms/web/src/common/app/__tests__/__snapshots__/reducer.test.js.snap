@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles APP_ERROR 1`] = `
+Object {
+  "error": [Error: bar],
+  "online": false,
+  "started": false,
+}
+`;
+
+exports[`handles APP_ONLINE 1`] = `
+Object {
+  "error": null,
+  "online": true,
+  "started": false,
+}
+`;
+
+exports[`maps all actions ending with FAILURE to APP_ERROR 1`] = `
+Object {
+  "error": [Error: foo],
+  "online": false,
+  "started": false,
+}
+`;

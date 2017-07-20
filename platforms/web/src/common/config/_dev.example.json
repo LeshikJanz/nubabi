@@ -1,0 +1,11 @@
+{
+  "appName": "Nubabi",
+  "apiUrl": "http://localhost:3000",
+  "firebase": {
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "storageBucket": "",
+    "messagingSenderId": ""
+  }
+}

@@ -1,0 +1,108 @@
+enum MemoryFilter {
+  # Returns all memories
+  ALL
+  # Returns special memories
+  SPECIAL
+}
+
+extend type Baby {
+  memory(id: ID!): Memory
+}
+
+type Memory implements Node, Timestampable {
+  id: ID!
+  title: String!
+  description: String
+  author: User!
+
+  files(
+    before: String, after: String, first: Int, last: Int, filter: FileFilter
+  ): FileConnection!
+
+  comments(
+    before: String, after: String, first: Int, last: Int
+  ): CommentConnection!
+
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# A connection to a list of items.
+type MemoryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [MemoryEdge]
+}
+
+type MemoryEdge {
+  # The item at the end of the edge.
+  node: Memory!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type Achievement {
+  id: ID!
+  badges(
+    upcoming: Boolean
+  ): [Badge]
+}
+
+type Badge {
+  image(
+    # Width of the image that should be returned
+    width: Int,
+    # Height of the image that should be returned
+    height: Int
+  ): Image
+}
+
+type Comment implements Timestampable {
+  id: ID!
+  text: String!
+  author: User!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# A connection to a list of items.
+type CommentConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [CommentEdge]
+
+  count: Int
+}
+
+type CommentEdge {
+  # The item at the end of the edge.
+  node: Comment!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+# A connection to a list of items.
+type AchievementConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [AchievementEdge]
+
+  # Count of result set without considering pagination arguments
+  count: Int!
+}
+
+type AchievementEdge {
+  # The item at the end of the edge.
+  node: Achievement!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}

@@ -1,0 +1,127 @@
+// Functions
+
+isSignedIn() {
+  auth !== null
+}
+
+isViewer(uid) {
+  isSignedIn() && auth.uid == uid
+}
+
+isNew(ref) { prior(ref) == null }
+
+isFriend(userId) {
+  isSignedIn() && prior(root.users[auth.uid].friends[userId]) !== null
+}
+
+canSeeUser(userId) {
+  isViewer(userId) || isFriend(userId);
+}
+
+type CurrentTimestamp extends Number {
+  validate() { this == now }
+}
+
+type InitialTimestamp extends Number {
+  validate() { initial(this, now) }
+}
+
+type NameString extends String {
+  validate() { this.length > 0 && this.length <= 32 };
+}
+
+type Gender extends String {
+  validate() { this == 'm' || this == 'f' }
+}
+
+// Returns true if the value is intialized to init, or if it retains it's prior
+// value, otherwise.
+initial(value, init) { value == (prior(value) == null ? init : prior(value)) }
+
+// Models
+
+type User {
+  name: NameString
+}
+
+type Image {
+  url: String
+}
+
+type Avatar {
+  url: String
+  large: Image | Null
+  thumb: Image | Null
+}
+
+type Date extends Number {
+}
+
+type Baby {
+  name: NameString
+  avatar: Avatar | Null
+  coverImage: Image | Null
+  dob: Date
+
+  // Weight and height are updated separately to track historical data
+  weight: Number | Null
+  height: Number | Null
+
+  gender: Gender
+  weekBorn: Number
+  createdAt: InitialTimestamp
+  updatedAt: CurrentTimestamp | Null
+}
+
+// Paths
+// FIXME: we shouldn't need this
+/*
+path / {
+  read() { isSignedIn() }
+  write() { isSignedIn() }
+}
+*/
+
+path /users/{uid} {
+  read() { canSeeUser(uid) }
+  write() { isViewer(uid) }
+}
+
+path /users/{uid}/babies/{id} {
+  read() { isViewer(uid) }
+  write() { isViewer(uid) }
+}
+
+path /babies {
+  read() { true }
+
+  /{id} is Baby {
+    create() { isSignedIn() }
+    update() { isSignedIn() }
+  }
+}
+
+path /invites {
+  read() { false }
+  /{id} {
+    create() { isSignedIn() }
+    update() { false }
+  }
+}
+
+path /measurements/{babyId} {
+  validate() {
+    root.babies[babyId] !== null
+  }
+
+  path /weights {
+    read() { isSignedIn() }
+    write() { isSignedIn() } // TODO
+  }
+
+  path /heights {
+    read() { isSignedIn() }
+    write() { isSignedIn() } // TODO
+  }
+}
+

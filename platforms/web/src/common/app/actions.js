@@ -1,0 +1,52 @@
+// @flow
+import { Observable } from 'rxjs/Observable';
+
+import type {
+  Action,
+  AppOnlineAction,
+  AppErrorAction,
+  OnAuthAction,
+  Deps,
+  FirebaseUser,
+} from '../types';
+
+export const appError = (error: Object): AppErrorAction => ({
+  type: 'APP_ERROR',
+  payload: error,
+  error: true,
+});
+
+export const appOnline = (online: boolean): AppOnlineAction => ({
+  type: 'APP_ONLINE',
+  payload: { online },
+});
+
+export const onAuth = (user: ?FirebaseUser, token?: string): OnAuthAction => ({
+  type: 'ON_AUTH',
+  payload: { user, token },
+});
+
+const appStartedEpic = (action$: any, deps: Deps) => {
+  const { firebaseAuth } = deps;
+
+  const onAuth$ = Observable.create(observer => {
+    const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
+      if (firebaseUser) {
+        firebaseAuth().currentUser.getToken().then(token => {
+          observer.next(onAuth(firebaseUser, token));
+        });
+      } else {
+        observer.next(onAuth(firebaseUser));
+      }
+    });
+    return unsubscribe;
+  });
+
+  const streams: Array<any> = [onAuth$];
+
+  return action$
+    .filter((action: Action) => action.type === 'APP_STARTED')
+    .mergeMap(() => Observable.merge(...streams));
+};
+
+export const epics = [appStartedEpic];
