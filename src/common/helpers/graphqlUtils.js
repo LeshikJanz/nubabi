@@ -33,13 +33,13 @@ export const flattenEdges = memoize(connection => {
 
 export const isEmpty = curryN(0, arg => either(isNil, isEmptyOrig)(arg));
 
-export const isEmptyProp = (propName: string) => (props: Object) => {
+export const isEmptyProp = curry((propName: string, props: Object) => {
   return isEmpty(prop(propName, props));
-};
+});
 
-export const isEmptyPath = (pathArray: Array<string>) => (props: Object) => {
+export const isEmptyPath = curry((pathArray: Array<string>, props: Object) => {
   return isEmpty(path(pathArray, props));
-};
+});
 
 export const formValues = memoize((obj: mixed) => {
   return omit(['id', '__typename'], obj);
