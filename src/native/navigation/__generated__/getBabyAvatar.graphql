@@ -1,0 +1,11 @@
+query getBabyAvatar($id: ID) {
+  viewer {
+    baby(id: $id) {
+      id
+      avatar {
+        url
+      }
+    }
+  }
+}
+

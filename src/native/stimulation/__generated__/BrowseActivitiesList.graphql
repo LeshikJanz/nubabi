@@ -1,0 +1,32 @@
+query BrowseActivitiesList($cursor: String, $filter: ActivityFilterInput) {
+  viewer {
+    allActivities(first: 15, after: $cursor, filter: $filter) {
+      edges {
+        node {
+          ...ActivityList
+        }
+      }
+      pageInfo {
+        endCursor
+        hasNextPage
+      }
+    }
+  }
+}
+
+fragment ActivityList on Activity {
+  id
+  name
+  skillArea {
+    id
+    name
+    image {
+      thumb {
+        url
+      }
+    }
+    icon
+    completedIcon
+  }
+}
+

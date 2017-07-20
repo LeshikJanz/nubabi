@@ -1,0 +1,16 @@
+query getBabies {
+  viewer {
+    user {
+      id
+    }
+    babies {
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+

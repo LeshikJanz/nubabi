@@ -46,12 +46,12 @@ class Profile extends PureComponent {
       fragment Profile on Baby {
         id
         ...Header
-        ...Measurement
+        ...CurrentMeasurements
         ...RecentMemories
       }
 
       ${Header.fragments.header}
-      ${Measurement.fragments.weight}
+      ${Measurement.fragments.current}
       ${RecentMemories.fragments.memories}
     `,
   };

@@ -1,0 +1,17 @@
+query Stimulation {
+  viewer {
+    allTips {
+      edges {
+        node {
+          ...DidYouKnow
+        }
+      }
+    }
+  }
+}
+
+fragment DidYouKnow on Tip {
+  id
+  text
+}
+

@@ -1,0 +1,23 @@
+query EditBaby($id: ID!) {
+  viewer {
+    baby(id: $id) {
+      ...BabyForm
+    }
+  }
+}
+
+fragment BabyForm on Baby {
+  id
+  name
+  gender
+  dob
+  weekBorn
+  relationship
+  avatar {
+    url
+  }
+  coverImage {
+    url
+  }
+}
+

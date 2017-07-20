@@ -1,0 +1,39 @@
+query SplashScreen($currentBabyId: ID, $hasCurrentBaby: Boolean!) {
+  viewer {
+    baby(id: $currentBabyId) @include(if: $hasCurrentBaby) {
+      id
+      avatar {
+        url
+      }
+      coverImage {
+        url
+      }
+    }
+    babies {
+      edges {
+        node {
+          id
+          ...ChooseBaby
+        }
+      }
+    }
+    allQuotes {
+      edges {
+        node {
+          id
+          author
+          text
+        }
+      }
+    }
+  }
+}
+
+fragment ChooseBaby on Baby {
+  id
+  name
+  avatar {
+    url
+  }
+}
+

@@ -1,0 +1,31 @@
+query FavoriteActivitiesList($babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      favoriteActivities {
+        edges {
+          node {
+            ...ActivityList
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment ActivityList on Activity {
+  id
+  name
+  skillArea {
+    id
+    name
+    image {
+      thumb {
+        url
+      }
+    }
+    icon
+    completedIcon
+  }
+}
+

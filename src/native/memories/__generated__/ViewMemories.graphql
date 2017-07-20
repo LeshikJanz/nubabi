@@ -1,0 +1,20 @@
+query ViewMemories($babyId: ID) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      ...Memories
+    }
+  }
+}
+
+fragment Memories on Baby {
+  memories {
+    edges {
+      node {
+        id
+        ...MemoryItem
+      }
+    }
+  }
+}
+

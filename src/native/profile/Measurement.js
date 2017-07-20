@@ -51,8 +51,8 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
 };
 
 Measurement.fragments = {
-  weight: gql`
-    fragment Measurement on Baby {
+  current: gql`
+    fragment CurrentMeasurement on Baby {
       weight
       height
     }

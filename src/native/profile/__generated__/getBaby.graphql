@@ -1,0 +1,56 @@
+query getBaby($id: ID!) {
+  viewer {
+    baby(id: $id) {
+      ...Profile
+    }
+  }
+}
+
+fragment Profile on Baby {
+  id
+  ...Header
+  ...CurrentMeasurements
+  ...RecentMemories
+}
+
+fragment Header on Baby {
+  name
+  coverImage {
+    url
+  }
+  avatar {
+    url
+  }
+  dob
+  achievements {
+    count
+  }
+  favoriteActivities {
+    count
+  }
+}
+
+fragment CurrentMeasurements on Baby {
+  height
+  weight
+}
+
+fragment RecentMemories on Baby {
+  memories(first: 5) {
+    edges {
+      node {
+        id
+        title
+        files(first: 1) {
+          edges {
+            node {
+              url
+              contentType
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

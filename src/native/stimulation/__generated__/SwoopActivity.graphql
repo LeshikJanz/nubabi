@@ -1,0 +1,57 @@
+mutation SwoopActivity($input: SwoopActivityInput!) {
+  swoopActivity(input: $input) {
+    newActivity {
+      ...Activity
+    }
+    oldActivityId
+  }
+}
+
+fragment Activity on Activity {
+  id
+  ...HeaderActivity
+  ...ExpertInfoActivity
+  ...ActivityActionsActivity
+  expert {
+    ...ExpertInfo
+  }
+  skillArea {
+    id
+    name
+    image {
+      large {
+        url
+      }
+    }
+    ...HeaderSkill
+    ...ActivityActionsSkill
+  }
+  ...Steps
+}
+
+fragment HeaderActivity on Activity {
+  name
+}
+
+fragment ExpertInfoActivity on Activity {
+  introduction
+}
+
+fragment ActivityActionsActivity on Activity {
+  name
+}
+
+fragment Steps on Activity {
+  name
+  steps
+  media {
+    edges {
+      node {
+        type
+        thumb
+        url
+      }
+    }
+  }
+}
+

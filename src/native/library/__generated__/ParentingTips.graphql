@@ -1,0 +1,17 @@
+query ParentingTips {
+  viewer {
+    allLibraryArticles(filter: {section: "parenting"}) {
+      edges {
+        node {
+          ...GrowthArticleListItem
+        }
+      }
+    }
+  }
+}
+
+fragment GrowthArticleListItem on GrowthArticle {
+  id
+  title
+}
+

@@ -1,0 +1,23 @@
+mutation AddMemory($input: CreateMemoryInput!) {
+  createMemory(input: $input) {
+    edge {
+      node {
+        ...MemoryListItem
+      }
+    }
+  }
+}
+
+fragment MemoryListItem on Memory {
+  id
+  title
+  files(first: 1) {
+    edges {
+      node {
+        url
+        contentType
+      }
+    }
+  }
+}
+

@@ -1,0 +1,32 @@
+query ThisWeeksActivitiesList($babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      activities {
+        edges {
+          cursor
+          node {
+            ...ActivityList
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment ActivityList on Activity {
+  id
+  name
+  skillArea {
+    id
+    name
+    image {
+      thumb {
+        url
+      }
+    }
+    icon
+    completedIcon
+  }
+}
+
