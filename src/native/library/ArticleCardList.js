@@ -14,7 +14,7 @@ import {
   displayLoadingState,
   showNoContentViewIf,
 } from '../components';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import ArticleCardItem from './ArticleCardItem';
 
 type Props = {

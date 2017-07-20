@@ -9,7 +9,7 @@ import Card from './Card';
 import Text from './Text';
 import showNoContentViewIf from './showNoContentViewIf';
 import HorizontalCardItem from './HorizontalCardItem';
-import { isEmptyProp } from '../shared/graphqlUtils';
+import { isEmptyProp } from '../../common/helpers/graphqlUtils';
 
 type HorizontalCardItemType = {
   id: string,

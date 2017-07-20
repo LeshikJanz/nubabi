@@ -5,7 +5,7 @@ import { compose } from 'ramda';
 import { graphql, gql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { displayLoadingState, showNoContentViewIf } from '../components';
-import { isEmptyProp, mapEdgesToProp } from '../shared/graphqlUtils';
+import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import MemoryList from './MemoryList';
 import Memory from './Memory';
 

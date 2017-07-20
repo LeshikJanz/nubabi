@@ -13,7 +13,7 @@ import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
-import { addEdgeToFragment } from '../shared/graphqlUtils';
+import { addEdgeToFragment } from '../../common/helpers/graphqlUtils';
 
 type Props = {
   currentBabyId: string,

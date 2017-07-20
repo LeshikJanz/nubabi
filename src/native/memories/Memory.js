@@ -101,7 +101,6 @@ class Memory extends PureComponent {
       files: filesConnection,
       createdAt,
     } = this.props;
-    console.log(JSON.stringify(this.props, null, 4));
 
     const date = formatMemoryDate(createdAt);
     const avatar = author.avatar.url;

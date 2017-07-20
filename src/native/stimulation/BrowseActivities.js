@@ -4,7 +4,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { compose, path } from 'ramda';
 import { graphql, gql } from 'react-apollo';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import { Box, Text, displayLoadingState, withLayout } from '../components';
 import BrowseActivitiesButton from './BrowseActivitiesButton';
 import { toGlobalId } from 'graphql-relay';

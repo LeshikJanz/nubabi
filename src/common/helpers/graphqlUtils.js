@@ -1,6 +1,6 @@
 // @flow
 import {
-  assoc,
+  curry,
   curryN,
   either,
   isEmpty as isEmptyOrig,
@@ -12,8 +12,6 @@ import {
   prop,
   last,
 } from 'ramda';
-
-export { default as mapEdgesToProp } from './mapEdgesToProp';
 
 export const flattenEdges = memoize(connection => {
   const edges = prop('edges', connection);
@@ -46,6 +44,36 @@ export const isEmptyPath = (pathArray: Array<string>) => (props: Object) => {
 export const formValues = memoize((obj: mixed) => {
   return omit(['id', '__typename'], obj);
 });
+
+function normalizePath(edgesPath: string) {
+  const accessor = edgesPath.split('.');
+  const accessorPath =
+    accessor[accessor.length - 1] === 'edges'
+      ? accessor
+      : [...accessor, 'edges'];
+
+  return accessorPath;
+}
+
+export const mapEdgesToProp = curry(
+  (edgePath: string, propName: string, dataObj: any) => {
+    // TODO: better check if we're passing a destructured data or not
+    const data = dataObj.data ? dataObj.data : dataObj;
+
+    const edges = path(normalizePath(edgePath), data);
+
+    let prop;
+
+    if (edges) {
+      prop = pluck('node', edges);
+    }
+
+    return {
+      data,
+      [propName]: prop,
+    };
+  },
+);
 
 export const addEdge = (
   query: DocumentNode,

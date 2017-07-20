@@ -9,7 +9,7 @@ import { getClosestContentForPeriod } from '../../common/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
 import displayLoadingState from '../components/displayLoadingState';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 
 type Props = {
   growth: ?Array<Growth>,

@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { formValues } from '../shared/graphqlUtils';
+import { formValues } from '../../common/helpers/graphqlUtils';
 import { displayLoadingState } from '../components';
 import UserForm from './UserForm';
 

@@ -11,7 +11,7 @@ import {
   transform,
   mutationWithClientMutationId,
 } from './common';
-import { addEdgeToMutationResult } from '../../../native/shared/graphqlUtils';
+import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
 
 const secureImage = str => `${str.replace('http:', 'https:')}/`;
 

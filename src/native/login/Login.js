@@ -15,7 +15,7 @@ import { loginRequest } from '../../common/auth/actions';
 import { SubmitButton } from '../components';
 
 const background = require('../../common/images/loginBackground.jpg');
-const logo = require('../../common/images/loginLogo.png');
+const logo = require('../../common/images/logo.png');
 
 const window = Dimensions.get('window');
 

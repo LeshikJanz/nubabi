@@ -7,7 +7,7 @@ import { graphql, gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
 import { displayLoadingState, showNoContentViewIf } from '../components';
-import { isEmptyProp } from '../shared/graphqlUtils';
+import { isEmptyProp } from '../../common/helpers/graphqlUtils';
 import Memory from './Memory';
 
 type Props = {

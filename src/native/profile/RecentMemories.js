@@ -3,7 +3,7 @@ import type { MemoryConnection } from '../../common/types';
 import React from 'react';
 import { gql } from 'react-apollo';
 import { HorizontalCardList, AddButton } from '../components';
-import { flattenEdges } from '../shared/graphqlUtils';
+import { flattenEdges } from '../../common/helpers/graphqlUtils';
 
 type Props = {
   memories: MemoryConnection,

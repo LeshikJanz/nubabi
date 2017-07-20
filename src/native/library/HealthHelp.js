@@ -9,7 +9,7 @@ import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, showNoContentViewIf } from '../components';
 import ArticleList from './ArticleList';
 import GrowthArticle from './GrowthArticle';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 
 type Props = {
   onViewArticle: () => void,
