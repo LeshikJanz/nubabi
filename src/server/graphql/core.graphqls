@@ -158,8 +158,17 @@ type InviteUserPayload {
   clientMutationId: String
 }
 
+interface File {
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  url: String
+}
+
 # TODO: make avatar, image, etc use/implement this
-type File {
+type GenericFile implements File {
   # id: ID!
 
   contentType: String!
@@ -215,24 +224,33 @@ interface ResizableImage {
   height: Int
 }
 
-type Image implements ResizableImage {
-  url: String
+type Image implements File, ResizableImage {
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+
+  size: Int!
+  updatedAt: DateTime
+  url: String!
+
   width: Int
   height: Int
   large: Image
   thumb: Image
 }
 
-type Avatar implements ResizableImage {
-  url: String
+type Avatar implements File, ResizableImage {
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+
   width: Int
   height: Int
-}
-
-type Avatar {
-  url: String,
-  large: Image,
-  thumb: Image,
+  large: Image
+  thumb: Image
 }
 
 input ImageInput {

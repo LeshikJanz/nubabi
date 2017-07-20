@@ -63,6 +63,15 @@ const resolvers = {
     totalAchievements: () => 0, // TODO
     totalMemories: () => 0, // TODO
   },
+  File: {
+    __resolveType: ({ contentType }) => {
+      if (contentType.startsWith('image')) {
+        return 'Image';
+      }
+
+      return 'GenericFile';
+    },
+  },
   Node: {
     __resolveType(obj) {
       if (obj.email) {
