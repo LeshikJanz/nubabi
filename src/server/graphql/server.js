@@ -60,13 +60,13 @@ const getTokenFromConfig = () => {
 
 app.use(
   '/graphiql',
-  graphiqlExpress({
+  graphiqlExpress(req => ({
     endpointURL: '/graphql',
     passHeader: __DEV__ && getTokenFromConfig(),
     variables: {
       babyId: 'QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==',
     },
-  }),
+  })),
 );
 
 if (__DEV__) {
