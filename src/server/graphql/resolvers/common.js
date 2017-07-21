@@ -145,6 +145,7 @@ export const connectionFromBackendMetadata = (promise, args) => {
 };
 
 export const toDate = R.constructN(1, Date);
+export const toTimestamp = R.invoker(0, 'getTime');
 export const sortByTimestamp = R.sortBy(R.prop('createdAt'));
 
 export {

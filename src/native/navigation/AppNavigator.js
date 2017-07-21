@@ -46,6 +46,7 @@ import HealthHelpScreen from '../library/HealthHelpScreen';
 import GraphDetailScreen from '../growth/GraphDetailScreen';
 import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
+import EditMemoryScreen from '../memories/EditMemoryScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
@@ -104,6 +105,10 @@ const routes = {
   viewMemory: {
     screen: ViewMemoryScreen,
     path: 'memories/:id',
+  },
+  editMemory: {
+    screen: EditMemoryScreen,
+    path: 'memories/:id/edit',
   },
   gallery: { screen: GalleryScreen },
 };

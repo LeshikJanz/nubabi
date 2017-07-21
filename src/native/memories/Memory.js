@@ -1,7 +1,7 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation } from 'react-native';
+import { LayoutAnimation, TouchableOpacity } from 'react-native';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
@@ -15,6 +15,7 @@ import MemoryComment from './MemoryComment';
 type Props = MemoryType & {
   babyId: String,
   onLoadMoreComments: () => Promise<*>,
+  onEditMemory: (id: string) => void,
 };
 
 export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
@@ -40,8 +41,24 @@ class Memory extends PureComponent {
         files(first: 1) {
           edges {
             node {
+              id
               url
               contentType
+            }
+          }
+        }
+      }
+    `,
+    form: gql`
+      fragment MemoryForm on Memory {
+        title
+        createdAt
+        files {
+          edges {
+            node {
+              id
+              contentType
+              url
             }
           }
         }
@@ -62,6 +79,7 @@ class Memory extends PureComponent {
           count
           edges {
             node {
+              id
               contentType
               url
             }
@@ -81,6 +99,10 @@ class Memory extends PureComponent {
       }
       ${MemoryComment.fragments.comment}
     `,
+  };
+
+  handleEditMemory = () => {
+    this.props.onEditMemory(this.props.id);
   };
 
   toggleAllComments = () => {
@@ -134,12 +156,14 @@ class Memory extends PureComponent {
 
           <Box flexDirection="row" alignItems="center">
             <Icon size={20} color={theme.colors.gray} name="ios-share-alt" />
-            <Icon
-              size={20}
-              color={theme.colors.gray}
-              name="md-brush"
-              style={{ marginLeft: 10 }}
-            />
+            <Box as={TouchableOpacity} onPress={this.handleEditMemory}>
+              <Icon
+                size={20}
+                color={theme.colors.gray}
+                name="md-brush"
+                style={{ marginLeft: 10 }}
+              />
+            </Box>
           </Box>
         </Box>
         <Box

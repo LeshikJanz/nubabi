@@ -8,6 +8,7 @@ import Memory from './Memory';
 type Props = {
   babyId: String,
   memories: Array<MemoryEdge>,
+  onEditMemory: (id: string) => void,
 };
 
 const keyExtractor = obj => obj.id;
@@ -19,6 +20,7 @@ export class MemoryList extends PureComponent {
     return (
       <Memory
         babyId={this.props.babyId}
+        onEditMemory={this.props.onEditMemory}
         {...filter(Memory.fragments.detail, item)}
       />
     );

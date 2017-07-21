@@ -24,7 +24,7 @@ class MemoryFormFileList extends PureComponent {
         return (
           <Box
             margin={0.5}
-            key={file.name}
+            key={file.id || file.name}
             style={() => ({
               width: 120,
               height: 80,

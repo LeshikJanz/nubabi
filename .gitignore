@@ -59,6 +59,7 @@ src/server/firebase/functions/node_modules
 
 
 # a local server I use to test the non-firebase (and Firebase Admin SDK-backed in the future)
+graphql.config.json
 src/server/graphql/schema.json
 src/server/grahpql/printSchema.js
 src/server/graphql/nubabitest1-firebase-adminsdk-r7bmb-8f86f51d8b.json

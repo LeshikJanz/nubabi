@@ -14,12 +14,14 @@ type Props = {
   id: string,
   memory: MemoryType,
   currentBabyId: string,
+  onEditMemory: (id: string) => void,
 };
 
-export const ViewMemory = ({ memory, currentBabyId }: Props) =>
+export const ViewMemory = ({ memory, currentBabyId, onEditMemory }: Props) =>
   <KeyboardAwareScrollView>
     <Memory
       babyId={currentBabyId}
+      onEditMemory={onEditMemory}
       {...filter(Memory.fragments.detail, memory)}
     />
   </KeyboardAwareScrollView>;

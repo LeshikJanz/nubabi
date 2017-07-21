@@ -12,6 +12,7 @@ import Memory from './Memory';
 type Props = {
   memories: Array<MemoryType>,
   currentBabyId: string,
+  onEditMemory: (id: string) => void,
 };
 
 export class ViewMemories extends PureComponent {
@@ -38,6 +39,7 @@ export class ViewMemories extends PureComponent {
       <MemoryList
         babyId={this.props.currentBabyId}
         memories={this.props.memories}
+        onEditMemory={this.props.onEditMemory}
       />
     );
   }

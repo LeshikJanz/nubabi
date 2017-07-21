@@ -15,6 +15,16 @@ export const resolvers = {
       (input, { connectors: { firebase } }) => {
         return firebase
           .createMemory(fromGlobalId(input.babyId).id, input)
+          .then(memory => ({
+            memory,
+            ...addEdgeToMutationResult(memory),
+          }));
+      },
+    ),
+    updateMemory: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase
+          .updateMemory(fromGlobalId(input.id).id, input)
           .then(addEdgeToMutationResult);
       },
     ),

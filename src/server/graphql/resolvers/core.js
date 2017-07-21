@@ -71,6 +71,7 @@ const resolvers = {
 
       return 'GenericFile';
     },
+    id: globalIdField(),
   },
   // Backwards-compatibility for Avatars
   Avatar: {
@@ -79,10 +80,16 @@ const resolvers = {
     size: () => 0, // TODO: fetch size
   },
   Image: {
+    id: globalIdField(),
     contentType: obj => obj.contentType || 'image/jpeg',
     name: obj => obj.name || 'image.jpg',
     size: () => 0, // TODO: fetch size
   },
+  /*
+  Video: {
+    id: globalIdField(),
+  },
+  */
   Node: {
     __resolveType(obj) {
       if (obj.email) {

@@ -14,6 +14,7 @@ import {
   reject,
   union,
   update,
+  append,
 } from 'ramda';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -32,6 +33,7 @@ import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
 
 type Props = {
+  mode?: 'add' | 'edit',
   onSubmit: () => void,
   handleSubmit: (submit: Function) => void,
   submitting: boolean,
@@ -111,6 +113,9 @@ const parseImagesOrVideos = (
 
 class MemoryForm extends PureComponent {
   props: Props;
+  state = {
+    removeFiles: [],
+  };
 
   handleAddMedia = () => {
     mediaPicker().then(parseImagesOrVideos).then(files => {
@@ -119,6 +124,13 @@ class MemoryForm extends PureComponent {
   };
 
   handleRemoveMedia = (index: number) => {
+    const file = this.props.files[index];
+    if (file && file.id) {
+      this.setState(prevState => ({
+        removeFiles: append(file.id, prevState.removeFiles),
+      }));
+    }
+
     this.updateFiles(removeMediaAt(index, this.props.files));
   };
 
@@ -169,8 +181,16 @@ class MemoryForm extends PureComponent {
     );
   };
 
+  handleSubmit = this.props.handleSubmit(input => {
+    this.props.onSubmit({
+      ...input,
+      removeFiles: this.state.removeFiles,
+    });
+  });
+
   render() {
-    const { handleSubmit, onSubmit: submit, layout } = this.props;
+    const { layout } = this.props;
+    const submitText = this.props.mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
 
     return (
       <FormContainer>
@@ -208,8 +228,8 @@ class MemoryForm extends PureComponent {
 
         <Box flexDirection="row" alignItems="flex-end">
           <SubmitButton
-            submitText="ADD MEMORY"
-            onPress={handleSubmit(submit)}
+            submitText={submitText}
+            onPress={this.handleSubmit}
             loading={this.props.submitting}
           />
         </Box>

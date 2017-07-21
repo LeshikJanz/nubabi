@@ -7,6 +7,7 @@ enum MemoryFilter {
 
 extend type Mutation {
   createMemory(input: CreateMemoryInput!): CreateOrUpdateMemoryPayload
+  updateMemory(input: UpdateMemoryInput!): CreateOrUpdateMemoryPayload
 }
 
 extend type Baby {
@@ -127,4 +128,12 @@ type CreateOrUpdateMemoryPayload {
   memory: Memory
   edge: MemoryEdge
   clientMutationId: String
+}
+
+input UpdateMemoryInput {
+  id: ID!
+  title: String
+  createdAt: DateTime
+  files: [FileInputBase64]
+  removeFiles: [ID],
 }

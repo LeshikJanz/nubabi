@@ -1,6 +1,10 @@
 // @flow
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
-import { sortByTimestamp } from '../resolvers/common';
+import {
+  sortByTimestamp,
+  toTimestamp,
+  fromGlobalId,
+} from '../resolvers/common';
 import R, { omit, evolve, map, compose, assoc } from 'ramda';
 import { decode } from 'base-64';
 import {
@@ -275,6 +279,35 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
   return friend;
 };
 
+const uploadMemoryFiles = async (
+  firebase,
+  memoryId,
+  babyId,
+  files,
+): Promise<Array<Object>> => {
+  if (files && files.length) {
+    const storagePath = `/babies/${babyId}/memories/${memoryId}`;
+    return await Promise.all(
+      files.map(async file => {
+        const url = await uploadFile(
+          firebase,
+          [storagePath, file.name].join('/'),
+          file.url,
+        );
+        const id = firebase
+          .database()
+          .ref()
+          .child(`/memories/${memoryId}/files`)
+          .push().key;
+
+        return { id, file: assoc('url', url, file) };
+      }),
+    );
+  }
+
+  return [];
+};
+
 const createMemory = async (
   firebase,
   babyId: string,
@@ -296,30 +329,65 @@ const createMemory = async (
   updates[`/memories/${memoryId}`] = memory;
   updates[`/babies/${babyId}/memories/${memoryId}`] = true;
 
-  if (input.files && input.files.length) {
-    const storagePath = `/babies/${babyId}/memories/${memoryId}`;
-    await Promise.all(
-      input.files.map(async file => {
-        const url = await uploadFile(
-          firebase,
-          [storagePath, file.name].join('/'),
-          file.url,
-        );
-        const id = firebase
-          .database()
-          .ref()
-          .child(`/memories/${memoryId}/files`)
-          .push().key;
+  const files = await uploadMemoryFiles(
+    firebase,
+    memoryId,
+    babyId,
+    input.files,
+  );
 
-        memory.files[id] = assoc('url', url, file);
-      }),
-    );
-  }
+  files.forEach(file => {
+    memory.files[file.id] = file.file;
+  });
 
   await firebase.database().ref().update(updates);
 
   return get(firebase, `/memories/${memoryId}`);
 };
+
+const upsert = (basePath: string, obj: Object) => {
+  const target = {};
+
+  Object.keys(obj).forEach(key => {
+    target[`${basePath}/${key}`] = obj[key];
+  });
+
+  return target;
+};
+
+const updateMemory = async (firebase, id: string, input: any) => {
+  const toFirebaseMemory = {
+    createdAt: toTimestamp,
+  };
+
+  const path = `/memories/${id}`;
+  const memory = compose(
+    assoc('updatedAt', firebase.database.ServerValue.TIMESTAMP),
+    evolve(toFirebaseMemory),
+    omit(['id', 'files', 'removeFiles']),
+  )(input);
+
+  const updates = {
+    ...upsert(path, memory),
+  };
+
+  input.removeFiles.forEach((fileId: string) => {
+    updates[`${path}/files/${fromGlobalId(fileId).id}`] = null;
+  });
+
+  if (input.files.length) {
+    const babyId = (await get(firebase, path)).babyId;
+    const files = await uploadMemoryFiles(firebase, id, babyId, input.files);
+
+    files.forEach(file => {
+      updates[`${path}/files/${file.id}`] = file.file;
+    });
+  }
+
+  await firebase.database().ref().update(updates);
+  return get(firebase, path);
+};
+
 const getBaby = (firebase, id) => {
   return firebase
     .database()
@@ -541,6 +609,7 @@ const firebaseConnector = firebase => {
       return recordMeasurement(firebase, id, type, unit, value);
     },
     createMemory: (babyId, input) => createMemory(firebase, babyId, input),
+    updateMemory: (id, input) => updateMemory(firebase, id, input),
   };
 };
 

@@ -88,8 +88,8 @@ type Viewer {
   getUser(id: ID!): User
 
   friends(
-  before: String, after: String, first: Int, last: Int
-): UserConnection!
+    before: String, after: String, first: Int, last: Int
+  ): UserConnection!
 }
 
 input CreateUserInput {
@@ -159,6 +159,7 @@ type InviteUserPayload {
 }
 
 interface File {
+  id: ID!
   contentType: String!
   createdAt: DateTime!
   name: String!
@@ -169,13 +170,10 @@ interface File {
 
 # TODO: make avatar, image, etc use/implement this
 type GenericFile implements File {
-  # id: ID!
-
+  id: ID!
   contentType: String!
   createdAt: DateTime!
   name: String!
-
-  # secret: String!
   size: Int!
   updatedAt: DateTime
   url: String!
@@ -225,6 +223,7 @@ interface ResizableImage {
 }
 
 type Image implements File, ResizableImage {
+  id: ID!
   contentType: String!
   createdAt: DateTime!
   name: String!
@@ -240,6 +239,7 @@ type Image implements File, ResizableImage {
 }
 
 type Avatar implements File, ResizableImage {
+  id: ID!
   url: String!
   contentType: String!
   createdAt: DateTime!
