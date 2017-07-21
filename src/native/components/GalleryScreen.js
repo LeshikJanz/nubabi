@@ -1,8 +1,10 @@
 // @flow
-import type { File, FileConnection } from '../../common/types';
+import type { File, FileConnection, FileEdge } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import PhotoBrowser from 'react-native-photo-browser';
+import { View, Image } from 'react-native';
+import PhotoBrowser from '../../../react-native-photo-browser';
+import GalleryVideoItem from './GalleryVideoItem';
 import { path } from 'ramda';
 
 type Props = {
@@ -37,14 +39,25 @@ class GalleryScreen extends PureComponent {
     };
   }
 
+  getMediaType(edge: FileEdge) {
+    const { contentType } = edge.node;
+
+    if (contentType.startsWith('image')) {
+      return 'image';
+    } else if (contentType.startsWith('video')) {
+      return 'video';
+    } else if (contentType.startsWith('audio')) {
+      return 'audio';
+    }
+  }
+
   getMediaList() {
     // TODO: image interface
-    return this.props.navigation.state.params.files.edges
-      .filter(edge => edge.node && edge.node.contentType.startsWith('image'))
-      .map(edge => ({
-        thumb: path(['thumb', 'url'], edge.node),
-        photo: edge.node.url,
-      }));
+    return this.props.navigation.state.params.files.edges.map(edge => ({
+      type: this.getMediaType(edge),
+      thumb: path(['thumb', 'url'], edge.node),
+      photo: edge.node.url,
+    }));
   }
 
   handleBack = () => {
@@ -71,6 +84,7 @@ class GalleryScreen extends PureComponent {
         startOnGrid={startOnGrid}
         displaySelectionButtons={false}
         useCircleProgress
+        videoComponent={GalleryVideoItem}
         {...activeMediaProps}
       />
     );

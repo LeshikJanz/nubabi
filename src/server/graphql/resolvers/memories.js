@@ -25,7 +25,10 @@ export const resolvers = {
       (input, { connectors: { firebase } }) => {
         return firebase
           .updateMemory(fromGlobalId(input.id).id, input)
-          .then(addEdgeToMutationResult);
+          .then(memory => ({
+            memory,
+            ...addEdgeToMutationResult(memory),
+          }));
       },
     ),
   },
