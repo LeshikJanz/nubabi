@@ -1,9 +1,5 @@
 // @flow
-import { map, identity, find, propEq, sortBy, prop, reverse } from 'ramda';
-import faker from 'faker';
 import {
-  sortByTimestamp,
-  connectionFromArray,
   globalIdField,
   fromGlobalId,
   connectionFromPromisedArrayWithCount,
@@ -12,38 +8,6 @@ import {
   mutationWithClientMutationId,
 } from './common';
 import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
-
-const secureImage = str => `${str.replace('http:', 'https:')}/`;
-
-const randomArray = (low: number, high: number, mapFn: Function = identity) => {
-  return map(
-    mapFn,
-    new Array(Math.floor(Math.random() * (high - low + 1) + low)),
-  );
-};
-
-const makeUser = () => ({
-  firstName: faker.name.firstName(),
-  lastName: faker.name.lastName(),
-});
-
-const makeComment = index => ({
-  id: faker.random.uuid(),
-  text: faker.lorem.sentences(),
-  author: makeUser(),
-  createdAt: faker.date.past(),
-});
-
-const makeFile = () => ({
-  contentType: faker.random.arrayElement([
-    'image/jpeg',
-    'image/png',
-    'video/mp4',
-  ]),
-  url: secureImage(faker.image.people()),
-});
-
-const mockComments = reverse(sortByTimestamp(randomArray(0, 10, makeComment)));
 
 export const resolvers = {
   Mutation: {
@@ -74,10 +38,9 @@ export const resolvers = {
         args,
       );
     },
-    comments: ({ comments }, args) => {
-      // TODO
+    comments: ({ comments = [] }, args) => {
       return connectionFromPromisedArrayWithCount(
-        Promise.resolve(mockComments),
+        Promise.resolve(comments),
         args,
       );
     },
