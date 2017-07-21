@@ -35,9 +35,11 @@ const appStartedEpic = (action$: any, deps: Deps) => {
       if (firebaseUser) {
         firebaseAuth().currentUser.getToken().then(token => {
           if (__DEV__) {
-            axios.post('http://localhost:8080/graphql-config', {
-              token: `Bearer ${token}`,
-            });
+            axios
+              .post('http://localhost:8080/graphql-config', {
+                token: `Bearer ${token}`,
+              })
+              .catch(() => {});
           }
           observer.next(onAuth(firebaseUser, token));
         });
