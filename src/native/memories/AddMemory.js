@@ -21,7 +21,7 @@ type Props = {
 };
 
 export const AddMemory = ({ onSubmit }: Props) =>
-  <MemoryForm onSubmit={onSubmit} initialValues={{ title: 'Some' }} />;
+  <MemoryForm onSubmit={onSubmit} />;
 
 export default compose(
   connect(({ babies }: State) => pick(['currentBabyId'], babies)),
