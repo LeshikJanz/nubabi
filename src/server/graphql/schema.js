@@ -22,7 +22,7 @@ const schema = makeExecutableSchema({
   resolvers: resolvers.default ? resolvers.default : resolvers,
 });
 
-if (__DEV__) {
+if (typeof __DEV__ !== 'undefined') {
   const mocking = require('./mocks');
   mocks = mocking.default ? mocking.default : mocks;
 }

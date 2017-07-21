@@ -72,6 +72,17 @@ const resolvers = {
       return 'GenericFile';
     },
   },
+  // Backwards-compatibility for Avatars
+  Avatar: {
+    contentType: obj => obj.contentType || 'image/jpeg',
+    name: obj => obj.name || 'avatar.jpg',
+    size: () => 0, // TODO: fetch size
+  },
+  Image: {
+    contentType: obj => obj.contentType || 'image/jpeg',
+    name: obj => obj.name || 'image.jpg',
+    size: () => 0, // TODO: fetch size
+  },
   Node: {
     __resolveType(obj) {
       if (obj.email) {

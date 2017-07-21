@@ -17,7 +17,7 @@ const firebase = admin.initializeApp({
   databaseAuthVariableOverride: null,
 });
 
-const __DEV__ = process.env.NODE_ENV !== 'production';
+global.__DEV__ = process.env.NODE_ENV !== 'production';
 
 app.use(
   '/graphql',
@@ -63,6 +63,9 @@ app.use(
   graphiqlExpress({
     endpointURL: '/graphql',
     passHeader: __DEV__ && getTokenFromConfig(),
+    variables: {
+      babyId: 'QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==',
+    },
   }),
 );
 
