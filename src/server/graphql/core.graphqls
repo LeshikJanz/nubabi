@@ -84,7 +84,7 @@ type Viewer {
   before: String, after: String, first: Int, last: Int
 ): UserConnection!
 
-  user: User!
+  user: User
   getUser(id: ID!): User
 
   friends(

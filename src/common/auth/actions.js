@@ -64,11 +64,11 @@ const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
     });
 };
 
-const logoutEpic = (action$: any, { firebaseAuth, apollo }: Deps) =>
-  action$.filter((action: Action) => action.type === 'LOGOUT').mergeMap(() => {
-    firebaseAuth().signOut();
-    apollo.resetStore();
-    return Observable.of(resetNavigation('login'));
-  });
+const logoutEpic = (action$: any, { firebaseAuth, apollo }: Deps) => {
+  return action$
+    .filter((action: Action) => action.type === 'LOGOUT')
+    .mergeMap(() => Observable.fromPromise(firebaseAuth().signOut()))
+    .mapTo(resetNavigation('login'));
+};
 
 export const epics = [loginEpic, logoutEpic];
