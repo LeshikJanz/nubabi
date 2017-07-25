@@ -12,7 +12,8 @@ const {
 } = require('graphql-tools');
 
 const resolvers = require('./resolvers');
-const mocking = require('./mocks');
+let enableMocks = false;
+let mocks;
 
 const typeDefs = [Core, Babies, Activities, Experts, Growth, Content, Memories];
 
@@ -21,8 +22,10 @@ const schema = makeExecutableSchema({
   resolvers: resolvers.default ? resolvers.default : resolvers,
 });
 
-const enableMocks = false;
-const mocks = mocking.default ? mocking.default : mocks;
+if (typeof __DEV__ !== 'undefined') {
+  const mocking = require('./mocks');
+  mocks = mocking.default ? mocking.default : mocks;
+}
 
 if (enableMocks) {
   addMockFunctionsToSchema({

@@ -63,6 +63,33 @@ const resolvers = {
     totalAchievements: () => 0, // TODO
     totalMemories: () => 0, // TODO
   },
+  File: {
+    __resolveType: ({ contentType }) => {
+      if (contentType.startsWith('image')) {
+        return 'Image';
+      }
+
+      return 'GenericFile';
+    },
+    id: globalIdField(),
+  },
+  // Backwards-compatibility for Avatars
+  Avatar: {
+    contentType: obj => obj.contentType || 'image/jpeg',
+    name: obj => obj.name || 'avatar.jpg',
+    size: () => 0, // TODO: fetch size
+  },
+  Image: {
+    id: globalIdField(),
+    contentType: obj => obj.contentType || 'image/jpeg',
+    name: obj => obj.name || 'image.jpg',
+    size: () => 0, // TODO: fetch size
+  },
+  /*
+  Video: {
+    id: globalIdField(),
+  },
+  */
   Node: {
     __resolveType(obj) {
       if (obj.email) {

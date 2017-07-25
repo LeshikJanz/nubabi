@@ -1,3 +1,4 @@
+// @flow
 /* global __DEV__: false */
 const captureException = (error, Raven) => {
   // TODO:
@@ -47,12 +48,17 @@ const createReportingMiddleware = Raven => {
   };
 
   return (store: any) => (next: any) => (action: Action) => {
-    if (action.type === 'APP_ERROR') {
-      captureException(action.payload, Raven);
-    } else if (action.type === 'ON_AUTH') {
-      setRavenUserContext(action.payload.user, Raven);
+    try {
+      if (action.type === 'APP_ERROR') {
+        captureException(action.payload, Raven);
+      } else if (action.type === 'ON_AUTH') {
+        setRavenUserContext(action.payload.user, Raven);
+      }
+      setExtraContext(store.getState(), action);
+    } catch (err) {
+      console.warn('Error on reporting middleware', err);
     }
-    setExtraContext(store.getState(), action);
+
     return next(action);
   };
 };

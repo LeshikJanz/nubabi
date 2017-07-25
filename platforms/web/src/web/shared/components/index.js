@@ -4,6 +4,7 @@ import AuthenticatedRoute from "./AuthenticatedRoute";
 import Header from "./Header";
 import Home from "./Home";
 import Loader from "./Loader";
+import Test from "./Test";
 
 export default {
   About,
@@ -11,5 +12,6 @@ export default {
   AuthenticatedRoute,
   Header,
   Home,
-  Loader
+  Loader,
+  Test
 };

@@ -23,7 +23,6 @@ import qs from "qs";
 import axios from "axios";
 import S from "string";
 import config from "../../../common/config/index";
-
 require("axios-debug-log");
 
 type SwapActivityAction = "swop" | "increase" | "decrease";

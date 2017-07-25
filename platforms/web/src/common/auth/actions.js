@@ -1,42 +1,42 @@
 // @flow
-import type { Action, Deps } from '../types';
-import { Observable } from 'rxjs/Observable';
-import { resetNavigation } from '../navigation/actions';
+import type { Action, Deps } from "../types";
+import { Observable } from "rxjs/Observable";
+import { resetNavigation } from "../navigation/actions";
 
 export function loginRequest(email, password, uid): Action {
   return {
-    type: 'LOGIN_REQUEST',
+    type: "LOGIN_REQUEST",
     payload: {
       email,
-      password,
+      password
     },
     meta: {
-      uid,
-    },
+      uid
+    }
   };
 }
 
 export function loginSuccess({ email, uid }): Action {
   return {
-    type: 'LOGIN_SUCCESS',
+    type: "LOGIN_SUCCESS",
     payload: { email },
     meta: {
-      token: uid,
-    },
+      token: uid
+    }
   };
 }
 
 export function loginFailure(err): Action {
   return {
-    type: 'LOGIN_FAILURE',
+    type: "LOGIN_FAILURE",
     payload: err,
-    error: true,
+    error: true
   };
 }
 
 export function logout(): Action {
   return {
-    type: 'LOGOUT',
+    type: "LOGOUT"
   };
 }
 
@@ -51,24 +51,30 @@ const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
   };
 
   return action$
-    .filter((action: Action) => action.type === 'LOGIN_REQUEST')
+    .filter((action: Action) => action.type === "LOGIN_REQUEST")
     .mergeMap(action => {
       return Observable.merge(
         signInWithEmailAndPassword(action.payload),
         action$
-          .ofType('APP_ONLINE')
-          .withLatestFrom(action$.ofType('GET_BABIES_SUCCESS'))
+          .ofType("APP_ONLINE")
+          .withLatestFrom(action$.ofType("GET_BABIES_SUCCESS"))
           .take(1)
-          .mapTo(resetNavigation('home')),
+          .mapTo(resetNavigation("home"))
       );
     });
 };
 
-const logoutEpic = (action$: any, { firebaseAuth, apollo }: Deps) =>
-  action$.filter((action: Action) => action.type === 'LOGOUT').mergeMap(() => {
-    firebaseAuth().signOut();
-    apollo.resetStore();
-    return Observable.of(resetNavigation('login'));
-  });
+const logoutEpic = (action$: any, { firebaseAuth, apollo }: Deps) => {
+  return action$
+    .filter((action: Action) => action.type === "LOGOUT")
+    .mergeMap(() =>
+      Observable.fromPromise(firebaseAuth().signOut()).catch(e => {
+        console.log("Signout error", e);
+        return Observable.just({ error: e });
+      })
+    )
+    .mapTo(resetNavigation("login"))
+    .catch(err => console.log(err));
+};
 
 export const epics = [loginEpic, logoutEpic];

@@ -1,6 +1,11 @@
 // @flow
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
-import R, { omit, evolve, map, compose } from 'ramda';
+import {
+  sortByTimestamp,
+  toTimestamp,
+  fromGlobalId,
+} from '../resolvers/common';
+import R, { omit, evolve, map, compose, assoc } from 'ramda';
 import { decode } from 'base-64';
 import {
   toCentimeters,
@@ -179,6 +184,10 @@ const getViewerWithProfile = async firebase => {
   };
 };
 
+const getUser = (firebase, userId: string) => {
+  return get(firebase, `/users/${userId}`);
+};
+
 const getFriends = async firebase => {
   const user = getViewer(firebase);
   return firebase
@@ -191,6 +200,7 @@ const getFriends = async firebase => {
         return [];
       }
 
+      // TODO: use getUser
       const getFriend = async (friend, key) => {
         if (typeof friend !== 'object') {
           const record = await firebase
@@ -267,6 +277,115 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
 
   await firebase.database().ref().update(updates);
   return friend;
+};
+
+const uploadMemoryFiles = async (
+  firebase,
+  memoryId,
+  babyId,
+  files,
+): Promise<Array<Object>> => {
+  if (files && files.length) {
+    const storagePath = `/babies/${babyId}/memories/${memoryId}`;
+    return await Promise.all(
+      files.map(async file => {
+        const url = await uploadFile(
+          firebase,
+          [storagePath, file.name].join('/'),
+          file.url,
+        );
+        const id = firebase
+          .database()
+          .ref()
+          .child(`/memories/${memoryId}/files`)
+          .push().key;
+
+        return { id, file: assoc('url', url, file) };
+      }),
+    );
+  }
+
+  return [];
+};
+
+const createMemory = async (
+  firebase,
+  babyId: string,
+  input: CreateMemoryInput,
+) => {
+  const updates = {};
+  const currentUserId = getViewer(firebase).uid;
+  const memoryId = firebase.database().ref().child('/memories/').push().key;
+
+  const memory = {
+    ...omit(['babyId', 'files'], input),
+    id: memoryId,
+    babyId,
+    authorId: currentUserId,
+    createdAt: input.createdAt.getTime(),
+    files: {},
+  };
+
+  updates[`/memories/${memoryId}`] = memory;
+  updates[`/babies/${babyId}/memories/${memoryId}`] = true;
+
+  const files = await uploadMemoryFiles(
+    firebase,
+    memoryId,
+    babyId,
+    input.files,
+  );
+
+  files.forEach(file => {
+    memory.files[file.id] = file.file;
+  });
+
+  await firebase.database().ref().update(updates);
+
+  return get(firebase, `/memories/${memoryId}`);
+};
+
+const upsert = (basePath: string, obj: Object) => {
+  const target = {};
+
+  Object.keys(obj).forEach(key => {
+    target[`${basePath}/${key}`] = obj[key];
+  });
+
+  return target;
+};
+
+const updateMemory = async (firebase, id: string, input: any) => {
+  const toFirebaseMemory = {
+    createdAt: toTimestamp,
+  };
+
+  const path = `/memories/${id}`;
+  const memory = compose(
+    assoc('updatedAt', firebase.database.ServerValue.TIMESTAMP),
+    evolve(toFirebaseMemory),
+    omit(['id', 'files', 'removeFiles']),
+  )(input);
+
+  const updates = {
+    ...upsert(path, memory),
+  };
+
+  input.removeFiles.forEach((fileId: string) => {
+    updates[`${path}/files/${fromGlobalId(fileId).id}`] = null;
+  });
+
+  if (input.files.length) {
+    const babyId = (await get(firebase, path)).babyId;
+    const files = await uploadMemoryFiles(firebase, id, babyId, input.files);
+
+    files.forEach(file => {
+      updates[`${path}/files/${file.id}`] = file.file;
+    });
+  }
+
+  await firebase.database().ref().update(updates);
+  return get(firebase, path);
 };
 
 const getBaby = (firebase, id) => {
@@ -362,13 +481,57 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
   };
 };
 
+const denormalizeArray = (firebase, denormalizedPath, normalizedPath) => {
+  return firebase
+    .database()
+    .ref()
+    .child(denormalizedPath)
+    .once('value')
+    .then(snap => Object.keys(snap.val()))
+    .then(ids =>
+      Promise.all(
+        ids.map(id => {
+          return firebase
+            .database()
+            .ref()
+            .child(`${normalizedPath}/${id}`)
+            .once('value')
+            .then(returnValWithKeyAsId);
+        }),
+      ),
+    )
+    .then(([...objs]) => objs)
+    .catch(err => {
+      console.warn(err);
+      return [];
+    });
+};
+
+export const nestedArrayToArray = (input: Object) => {
+  return Object.keys(input).map(key => assoc('id', key, input[key]));
+};
+
+const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
+  return denormalizeArray(
+    firebase,
+    `/babies/${babyId}/memories`,
+    '/memories',
+  ).then(compose(R.reverse, sortByTimestamp));
+};
+
+const getMemory = (firebase, id: string, args: ConnectionArguments) => {
+  return get(firebase, `/memories/${id}`);
+};
+
 const firebaseConnector = firebase => {
   return {
     firebase: () => firebase,
     get: (path: string) => get(firebase, path),
     set: (path: string, values: mixed) => set(firebase, path, values),
+    nestedArrayToArray: input => nestedArrayToArray(input),
     getViewer: () => getViewer(firebase),
     getViewerWithProfile: () => getViewerWithProfile(firebase),
+    getUser: id => getUser(firebase, id),
     getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
     inviteUser: input => inviteUser(firebase, input),
@@ -429,6 +592,8 @@ const firebaseConnector = firebase => {
     },
     getBabyWeights: (id: string) => getBabyWeights(firebase, id),
     getBabyHeights: (id: string) => getBabyHeights(firebase, id),
+    getMemories: (babyId, args) => getMemories(firebase, babyId, args),
+    getMemory: id => getMemory(firebase, id),
     createBaby: (values: mixed) => {
       return createOrUpdateBaby(firebase, values);
     },
@@ -443,6 +608,8 @@ const firebaseConnector = firebase => {
     ) => {
       return recordMeasurement(firebase, id, type, unit, value);
     },
+    createMemory: (babyId, input) => createMemory(firebase, babyId, input),
+    updateMemory: (id, input) => updateMemory(firebase, id, input),
   };
 };
 

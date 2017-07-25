@@ -84,12 +84,12 @@ type Viewer {
   before: String, after: String, first: Int, last: Int
 ): UserConnection!
 
-  user: User!
+  user: User
   getUser(id: ID!): User
 
   friends(
-  before: String, after: String, first: Int, last: Int
-): UserConnection!
+    before: String, after: String, first: Int, last: Int
+  ): UserConnection!
 }
 
 input CreateUserInput {
@@ -158,15 +158,22 @@ type InviteUserPayload {
   clientMutationId: String
 }
 
-# TODO: make avatar, image, etc use/implement this
-type File {
-  # id: ID!
-
+interface File {
+  id: ID!
   contentType: String!
   createdAt: DateTime!
   name: String!
+  size: Int!
+  updatedAt: DateTime
+  url: String
+}
 
-  # secret: String!
+# TODO: make avatar, image, etc use/implement this
+type GenericFile implements File {
+  id: ID!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
   size: Int!
   updatedAt: DateTime
   url: String!
@@ -192,6 +199,19 @@ type FileEdge {
   cursor: String!
 }
 
+input FileInput {
+  name: String!
+  contentType: String!
+  size: Int!
+}
+
+input FileInputBase64 {
+  name: String!
+  url: String!
+  contentType: String!
+  size: Int!
+}
+
 input FileFilter {
   contentTypeContains: String
 }
@@ -202,24 +222,35 @@ interface ResizableImage {
   height: Int
 }
 
-type Image implements ResizableImage {
-  url: String
+type Image implements File, ResizableImage {
+  id: ID!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+
+  size: Int!
+  updatedAt: DateTime
+  url: String!
+
   width: Int
   height: Int
   large: Image
   thumb: Image
 }
 
-type Avatar implements ResizableImage {
-  url: String
+type Avatar implements File, ResizableImage {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+
   width: Int
   height: Int
-}
-
-type Avatar {
-  url: String,
-  large: Image,
-  thumb: Image,
+  large: Image
+  thumb: Image
 }
 
 input ImageInput {

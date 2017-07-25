@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { Route } from "react-router-dom";
 import { Section } from "web/elements";
 import Components from "../../components";
+import { containers as authContainers } from "web/auth";
+import { logout } from "common/auth/actions";
 
 import "sanitize.css/sanitize.css";
 
@@ -17,7 +19,7 @@ type Props = {
 
 const Wrapper = styled.div`
   padding: 10px;
-  font-family: ${props => props.theme.font.family};
+  font-family: ${props => props.theme.text.fontFamily};
 `;
 
 export class App extends Component {
@@ -29,15 +31,16 @@ export class App extends Component {
         <Components.Loader active={this.props.isLoading} />
         <Components.Header
           pathname={this.props.pathname}
-          isLoggedIn={this.props.isLoggedIn}
+          isAuthenticated={this.props.isAuthenticated}
           logout={this.props.logout}
         />
         <Section>
           <Route path="/" exact component={Components.Home} />
           <Route path="/about" component={Components.About} />
+          <Route path="/login" component={authContainers.Login} />
           <Components.AuthenticatedRoute
-            path="/estimation"
-            component={Components.Home}
+            path="/test"
+            component={Components.Test}
             props={this.props}
           />
         </Section>
@@ -46,12 +49,18 @@ export class App extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({});
-
-const mapStateToProps = ({ app, router, auth }: State) => ({
-  isLoading: app.isFetching,
-  pathname: router.location.pathname,
-  isLoggedIn: auth.isLoggedIn
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  logout: () => {
+    dispatch(logout());
+  }
 });
+
+const mapStateToProps = ({ app, auth, navigation }: State) => {
+  return {
+    isLoading: app.isFetching,
+    pathname: navigation.location.pathname,
+    isAuthenticated: auth.isAuthenticated
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

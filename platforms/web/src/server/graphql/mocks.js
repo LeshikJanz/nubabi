@@ -1,48 +1,49 @@
-import { globalIdField } from "./resolvers/common";
+import faker from 'faker';
+import { globalIdField } from './resolvers/common';
 
 const mocks = {
   ID: (...args) => globalIdField().resolve(...args),
   Avatar: () => ({
-    url: "",
+    url: faker.image.avatar(),
     thumb: {
-      url: ""
-    }
+      url: faker.image.avatar(),
+    },
   }),
   Expert: (_, args) => {
     if (args.id) {
-      ("");
+      faker.seed(args.id);
     }
-    const card = "";
+    const card = faker.helpers.userCard();
 
     const expert = {
       name: card.name,
-      discipline: "",
-      avatar_url: ""
+      discipline: faker.commerce.department(),
+      avatar_url: faker.image.avatar(),
     };
 
     return expert;
   },
   AchievementConnection: () => ({
-    count: ""
+    count: faker.random.number(20),
   }),
   Baby: () => ({
-    coverImage: { url: "" }
+    coverImage: { url: faker.image.people() },
   }),
   Memory: () => ({
-    description: "",
+    description: faker.lorem.sentence(),
     image: (_, { width = 30, height = 30 }) => ({
-      url: () => "",
+      url: () => faker.image.people(width, height),
       width: () => width,
-      height: () => height
-    })
+      height: () => height,
+    }),
   }),
   Badge: () => ({
     image: (_, { width = 30, height = 30 }) => ({
-      url: () => "",
+      url: () => faker.image.abstract(width, height),
       width,
-      height
-    })
-  })
+      height,
+    }),
+  }),
 };
 
 export default mocks;

@@ -1,85 +1,67 @@
-import { map, identity, find, propEq, sortBy, prop, reverse } from "ramda";
+// @flow
 import {
-  connectionFromArray,
   globalIdField,
   fromGlobalId,
-  connectionFromPromisedArrayWithCount
-} from "./common";
-
-const secureImage = str => str.replace("http:", "https:") + "/";
-const title = () => "";
-const randomArray = (low: number, high: number, mapFn: Function = identity) => {
-  return map(
-    mapFn,
-    new Array(Math.floor(Math.random() * (high - low + 1) + low))
-  );
-};
-
-const makeUser = () => ({
-  firstName: "",
-  lastName: ""
-});
-
-const makeComment = index => ({
-  id: "",
-  text: "",
-  author: makeUser(),
-  createdAt: ""
-});
-
-const makeFile = () => ({
-  contentType: "image/jpeg",
-  url: secureImage("")
-});
-
-const makeMemory = () => ({
-  id: "",
-  title: "",
-  description: "",
-  files: randomArray(1, 10, makeFile),
-  comments: reverse(sortByTimestamp(randomArray(0, 10, makeComment)))
-});
-
-const sortByTimestamp = sortBy(prop("createdAt"));
-
-const memories = sortByTimestamp(randomArray(1, 10, makeMemory));
+  connectionFromPromisedArrayWithCount,
+  toDate,
+  transform,
+  mutationWithClientMutationId,
+} from './common';
+import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
 
 export const resolvers = {
+  Mutation: {
+    createMemory: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase
+          .createMemory(fromGlobalId(input.babyId).id, input)
+          .then(memory => ({
+            memory,
+            ...addEdgeToMutationResult(memory),
+          }));
+      },
+    ),
+    updateMemory: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase
+          .updateMemory(fromGlobalId(input.id).id, input)
+          .then(memory => ({
+            memory,
+            ...addEdgeToMutationResult(memory),
+          }));
+      },
+    ),
+  },
   Baby: {
-    memories: ({ id }, args) => {
-      return connectionFromArray(memories, args);
+    memories: ({ id }, args, { connectors: { firebase } }) => {
+      return connectionFromPromisedArrayWithCount(
+        firebase.getMemories(id),
+        args,
+      );
     },
-    memory: (_, { id }) => {
-      return find(propEq("id", fromGlobalId(id).id), memories);
-    }
+    memory: (_, { id }, { connectors: { firebase } }) => {
+      return firebase.getMemory(fromGlobalId(id).id);
+    },
   },
   Memory: {
     id: globalIdField(),
-    files: ({ files }, args) => {
-      return connectionFromPromisedArrayWithCount(Promise.resolve(files), args);
-    },
-    comments: ({ comments }, args) => {
+    files: ({ files }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
-        Promise.resolve(comments),
-        args
+        Promise.resolve(firebase.nestedArrayToArray(files)),
+        args,
       );
     },
-    // TODO: remove all these mock resolvers
-    createdAt: () => "",
-    author: () => {
-      // TODO: remove
-      return {
-        id: "1",
-        firstName: "",
-        lastName: "",
-        avatar: {
-          url: `https://lorempixel.com/30/30/people/${Math.floor(
-            Math.random() * 10 + 1
-          )}/`
-        }
-      };
-    }
-  }
+    comments: ({ comments = [] }, args) => {
+      return connectionFromPromisedArrayWithCount(
+        Promise.resolve(comments),
+        args,
+      );
+    },
+    createdAt: transform('createdAt', toDate),
+    author: ({ authorId }, _, { connectors: { firebase } }) => {
+      return firebase.getUser(authorId);
+    },
+  },
 };
 
 export default resolvers;

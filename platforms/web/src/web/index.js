@@ -1,6 +1,7 @@
 // @flow
-import type { AppStartedAction } from "../common/types";
-import React, { Component } from "react";
+import type { AppStartedAction } from "common/types";
+import { render } from "react-dom";
+import React from "react";
 import { ApolloProvider } from "react-apollo";
 import { persistStore } from "redux-persist";
 import Raven from "raven-js";
@@ -9,23 +10,19 @@ import {
   routerReducer,
   routerMiddleware
 } from "react-router-redux";
-import createHistory from "history/createBrowserHistory";
+import history from "web/navigation/history";
 import configureStore from "common/configureStore";
 import configureStorage from "common/configureStorage";
 import configureReporting from "common/configureReporting";
 import { configureApollo } from "common/configureApollo";
 import theme from "common/themes/defaultTheme";
 import config from "common/config";
-import Root from "web/root";
 import { ThemeProvider } from "styled-components";
+import { containers } from "web/shared";
+import registerServiceWorker from "./registerServiceWorker";
+import { epics as navigationEpics } from "web/navigation/actions";
 
-declare var module: {
-  hot: {
-    accept(path: string, callback: () => void): void
-  }
-};
-
-const history: History = createHistory();
+const routingMiddlware: Middleware = routerMiddleware((history: History));
 
 const reportingMiddleware = configureReporting({
   sentryUrl: config.sentryUrl,
@@ -38,9 +35,10 @@ const store = configureStore({
     config
   },
   platformReducers: {
-    router: routerReducer
+    navigation: routerReducer
   },
-  platformMiddleware: [reportingMiddleware, { history: History }]
+  platformMiddleware: [reportingMiddleware, routingMiddlware],
+  platformEpics: [...navigationEpics]
 });
 
 persistStore(
@@ -61,15 +59,26 @@ console.ignoredYellowBox = [
   "Using <Image> with children"
 ];
 
-class Main extends Component {
-  render() {
-    return (
-      <ApolloProvider client={apollo} store={store}>
-        <ThemeProvider them={theme}>
-          <Root />
-        </ThemeProvider>
-      </ApolloProvider>
-    );
-  }
+const renderApp = Component => {
+  render(
+    <ApolloProvider client={apollo} store={store}>
+      <ThemeProvider theme={theme}>
+        <ConnectedRouter history={history}>
+          <Component />
+        </ConnectedRouter>
+      </ThemeProvider>
+    </ApolloProvider>,
+    document.getElementById("root")
+  );
+};
+
+renderApp(containers.App);
+
+registerServiceWorker();
+
+if (module.hot) {
+  module.hot.accept("./shared/containers/App", () => {
+    const NextApp = require("./shared/containers/App").default;
+    renderApp(NextApp);
+  });
 }
-export default Main;
