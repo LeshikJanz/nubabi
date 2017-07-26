@@ -14,7 +14,7 @@
     "firebase:deploy:functions": "firebase deploy --only functions",
     "firebase:deploy:rules": "firebase deploy --only database",
     "server": "babel-node src/server/graphql/server.js",
-    "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=axios babel-node\" -e js,graphqls src/server/graphql/server.js"
+    "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=graphqlServer,axios babel-node\" -e js,graphqls src/server/graphql/server.js"
   },
   "lint-staged": {
     "*.js": [
@@ -110,6 +110,7 @@
     "babel-plugin-flow-react-proptypes": "^2.1.3",
     "body-parser": "^1.17.1",
     "buffer": "^5.0.6",
+    "cors": "^2.8.4",
     "eslint": "3.17.1",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-flowtype": "^2.30.4",

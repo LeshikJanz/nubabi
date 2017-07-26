@@ -1,3 +1,4 @@
+// @flow
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
@@ -6,6 +7,9 @@ import admin from 'firebase-admin';
 import config from '../../common/config';
 import firebaseConnector from './connectors/firebaseConnector';
 import fs from 'fs';
+import cors from 'cors';
+
+const debug = require('debug')('graphqlServer');
 const PORT = 8080;
 const serviceAccount = require('./nubabitest1-firebase-adminsdk-r7bmb-8f86f51d8b.json');
 
@@ -19,9 +23,11 @@ const firebase = admin.initializeApp({
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
 
+app.options('/graphql', cors());
 app.use(
   '/graphql',
   bodyParser.json(),
+  cors(),
   graphqlExpress(async request => {
     let token;
     if (request.headers.authorization) {
@@ -53,6 +59,7 @@ app.use(
 
 const getTokenFromConfig = () => {
   const graphqlConfig = __dirname + '/../../../graphql.config.json';
+  // $FlowFixMe$
   const file = require(graphqlConfig, 'utf-8');
   return `"Authorization": "${file.endpoints[0].options.headers
     .Authorization}"`;
@@ -71,6 +78,7 @@ app.use(
 
 if (__DEV__) {
   const graphqlConfig = __dirname + '/../../../graphql.config.json';
+  // $FlowFixMe$
   const file = require(graphqlConfig, 'utf-8');
 
   app.use('/graphql-config', bodyParser.json(), (req, res) => {
@@ -82,5 +90,5 @@ if (__DEV__) {
 }
 
 app.listen(PORT, () => {
-  console.log('GraphQL server listening on port', PORT);
+  debug('GraphQL server listening on port', PORT);
 });

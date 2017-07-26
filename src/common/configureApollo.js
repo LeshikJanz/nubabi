@@ -1,10 +1,20 @@
-import { ApolloClient } from 'apollo-client';
-import ClientNetworkInterface from '../server/graphql/helpers/clientNetworkInterface';
+import { ApolloClient, createNetworkInterface } from 'apollo-client';
 import * as firebase from 'firebase';
+import config from './config';
 
 let client = null; // singleton
+let networkInterface;
 
-const networkInterface = new ClientNetworkInterface({ firebase });
+if (config.graphqlEndpoint && config.graphqlEndpoint !== 'memory://') {
+  networkInterface = createNetworkInterface({
+    uri: config.graphqlEndpoint,
+  });
+} else {
+  const MemoryNetworkInterface = require('../server/graphql/helpers/clientNetworkInterface')
+    .default;
+
+  networkInterface = new MemoryNetworkInterface({ firebase });
+}
 
 export const configureApollo = () => {
   if (!client) {

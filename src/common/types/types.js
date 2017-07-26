@@ -187,6 +187,7 @@ export type ConfigState = {
   +apiUrl: string,
   +firebase: ?Object,
   +sentryUrl: string,
+  +graphqlEndpoint: ?string,
 };
 
 export type GenericDeviceState = {
