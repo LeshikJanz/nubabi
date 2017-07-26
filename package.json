@@ -14,7 +14,7 @@
     "firebase:deploy:functions": "firebase deploy --only functions",
     "firebase:deploy:rules": "firebase deploy --only database",
     "server": "babel-node src/server/graphql/server.js",
-    "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=graphqlServer,axios babel-node\" -e js,graphqls src/server/graphql/server.js"
+    "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=graphqlServer:*,axios babel-node\" -e js,graphqls src/server/graphql/server.js"
   },
   "lint-staged": {
     "*.js": [
