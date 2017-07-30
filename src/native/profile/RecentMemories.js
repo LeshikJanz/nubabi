@@ -4,7 +4,7 @@ import React from 'react';
 import { gql } from 'react-apollo';
 import { HorizontalCardList, AddButton } from '../components';
 import { flattenEdges } from '../../common/helpers/graphqlUtils';
-import { fragments as MemoryMediaFragments } from '../memories/MemoryMedia';
+import { fragments as MemoryMediaFragments } from '../components/MemoryMedia';
 
 type Props = {
   memories: MemoryConnection,
@@ -47,6 +47,11 @@ RecentMemories.fragments = {
                   id
                   contentType
                   url
+                  ... on Video {
+                    thumb {
+                      url
+                    }
+                  }
                 }
               }
             }

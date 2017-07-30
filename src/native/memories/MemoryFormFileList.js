@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { Box } from '../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { type MediaPickerItem } from '../components/mediaPicker';
-import { MemoryMediaSingle } from './MemoryMedia';
+import { MemoryMediaSingle } from '../components/MemoryMedia';
 
 type Props = {
   input: any,

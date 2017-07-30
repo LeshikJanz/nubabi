@@ -1,5 +1,9 @@
 // @flow
-import type { File, FileConnection, LayoutProps } from '../../common/types';
+import type {
+  File,
+  FileConnection,
+  LayoutProps,
+} from '../../common/types/index';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Image from 'react-native-cached-image';
@@ -7,10 +11,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { compose, head, take } from 'ramda';
 import { connect } from 'react-redux';
-import { Box, Overlay, Text, withLayout } from '../components';
+import Box from './Box';
+import Overlay from './Overlay';
+import Text from './Text';
+import withLayout from './withLayout';
 import theme from '../../common/themes/defaultTheme';
 import { navigate } from '../navigation/actions';
-import { hoistStatics } from 'recompose';
 
 type Props = {
   files: FileConnection,
@@ -111,14 +117,14 @@ export const MemoryMediaImage = ({
 export const MemoryMediaVideo = ({
   media,
   small,
+  style = {},
   displayMoreIndicator,
   onMediaPress,
 }: MemoryMediaVideoProps) => {
   // TODO: real video
   const content = (
-    <Overlay>
+    <Overlay style={style}>
       <Box
-        flex={1}
         alignItems="center"
         justifyContent="center"
         style={() => ({ height: small ? 60 : 180 })}
@@ -142,10 +148,21 @@ export const MemoryMediaVideo = ({
       {displayMoreIndicator}
     </Overlay>
   );
+  const containerProps = { flex: 1 };
+
+  if (onMediaPress) {
+    containerProps.as = TouchableOpacity;
+    containerProps.onPress = onMediaPress;
+  }
+
   return (
-    <Box as={TouchableOpacity} onPress={onMediaPress} flex={1}>
+    <Box {...containerProps}>
       {media.thumb
-        ? <Image source={{ uri: media.thumb.url }}>
+        ? <Image
+            source={{ uri: media.thumb.url }}
+            resizeMode="cover"
+            style={{ flex: 1 }}
+          >
             {content}
           </Image>
         : content}

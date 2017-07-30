@@ -8,7 +8,9 @@ import { gql } from 'react-apollo';
 import moment from 'moment';
 import { Box, Card, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
-import MemoryMedia, { fragments as MemoryMediaFragments } from './MemoryMedia';
+import MemoryMedia, {
+  fragments as MemoryMediaFragments,
+} from '../components/MemoryMedia';
 import MemoryComments from './MemoryComments';
 import MemoryComment from './MemoryComment';
 
@@ -72,6 +74,16 @@ class Memory extends PureComponent {
               id
               contentType
               url
+              ... on Image {
+                thumb {
+                  url
+                }
+              }
+              ... on Video {
+                thumb {
+                  url
+                }
+              }
             }
           }
         }

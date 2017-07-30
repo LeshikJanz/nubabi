@@ -146,7 +146,7 @@ export default class PhotoBrowser extends React.Component {
   }
 
   _onGridPhotoTap(index) {
-    this.fullScreenContainer.openPage(index, false);
+    this.fullScreenContainer.getWrappedInstance().openPage(index, false);
     this._toggleFullScreen(true);
   }
 

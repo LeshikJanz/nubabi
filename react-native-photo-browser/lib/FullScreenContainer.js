@@ -315,8 +315,6 @@ export class FullScreenContainer extends React.Component {
     const { controlsDisplayed, currentMedia } = this.state;
     const BottomBarComponent = this.props.bottomBarComponent || BottomBar;
 
-    console.log('scrollEnabled =', this.props.scrollEnabled);
-
     return (
       <View style={styles.flex}>
         <StatusBar
@@ -351,6 +349,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export default connect(state => ({
-  scrollEnabled: R.view(lens, state.ui),
-}))(FullScreenContainer);
+export default connect(
+  state => ({
+    scrollEnabled: R.view(lens, state.ui),
+  }),
+  null,
+  null,
+  { withRef: true },
+)(FullScreenContainer);

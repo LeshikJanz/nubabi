@@ -28,7 +28,7 @@ export const HorizontalCardItem = ({
   if (icon) {
     mediaProps.icon = icon;
   } else {
-    mediaProps.image = files[0]; // TODO: support video
+    mediaProps.image = files[0];
   }
 
   // TODO: remove image width style, not needed in ArticleCardItem, add flex

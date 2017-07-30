@@ -71,14 +71,17 @@ style = Object {
       />
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "alignSelf": "stretch",
-            "backgroundColor": "transparent",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "center",
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "flex": 1,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            },
+            Object {},
+          ]
         }
       >
         <View

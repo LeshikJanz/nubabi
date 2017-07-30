@@ -6,12 +6,12 @@ type Props = {
   children?: any,
 };
 
-export const Overlay = ({ children }: Props) => {
+export const Overlay = ({ children, style = {} }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.overlay} />
       {children &&
-        <View style={styles.tile}>
+        <View style={[styles.tile, style]}>
           {children}
         </View>}
     </View>
