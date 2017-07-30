@@ -57,7 +57,7 @@ export const HorizontalCardItem = ({
           >
             <Text
               style={() => ({ width: 100 })}
-              numberOfLines={2}
+              numberOfLines={1}
               align="center"
             >
               {title}

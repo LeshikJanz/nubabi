@@ -239,6 +239,7 @@ style = Object {
             }
             style={
               Object {
+                "flex": 1,
                 "height": 80,
                 "width": null,
               }
@@ -311,7 +312,7 @@ style = Object {
                 allowFontScaling={true}
                 disabled={false}
                 ellipsizeMode="tail"
-                numberOfLines={2}
+                numberOfLines={1}
                 style={
                   Object {
                     "borderBottomWidth": 0,

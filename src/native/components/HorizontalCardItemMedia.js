@@ -28,7 +28,7 @@ export const HorizontalCardItemMedia = ({ icon, image, layout }: Props) => {
       return (
         <Image
           source={{ uri: image.url }}
-          style={{ width: layout.parentWidth, height: 80 }}
+          style={{ width: layout.parentWidth, height: 80, flex: 1 }}
           resizeMode="cover"
         >
           <Overlay />
