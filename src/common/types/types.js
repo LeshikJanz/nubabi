@@ -200,6 +200,12 @@ export type ThisWeekState = {
   +skillAreas: Array<SkillArea>,
 };
 
+export type UIState = {
+  +gallery: {
+    +scrollEnabled: boolean,
+  },
+};
+
 export type State = {
   +app: AppState,
   +auth: AuthState,
@@ -211,6 +217,7 @@ export type State = {
   +settings: SettingsState,
   +tabs: TabNavigationState,
   +thisWeek: ThisWeekState,
+  +ui: UIState,
   +viewer: ViewerState,
 };
 
@@ -281,6 +288,11 @@ export type SettingsSetValueAction = {
   },
 };
 
+export type ToggleGalleryScrollEnabledAction = {
+  type: 'TOGGLE_GALLERY_SCROLL_ENABLED',
+  payload: boolean,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -295,4 +307,5 @@ export type Action =
   | GetBabiesFailureAction
   | SeenGrowthGlobalIntroAction
   | SkipGrowthIntroductionAction
-  | SettingsSetValueAction;
+  | SettingsSetValueAction
+  | ToggleGalleryScrollEnabledAction;

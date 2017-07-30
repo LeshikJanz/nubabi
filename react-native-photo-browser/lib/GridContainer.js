@@ -52,14 +52,18 @@ export default class GridContainer extends React.Component {
     const photoWidth = screenWidth / itemPerRow - ITEM_MARGIN * 2;
 
     let MediaComponent = Photo;
+    let mediaProps = {};
+
     if (media.type && media.type !== 'image') {
       switch (media.type) {
         case 'video': {
           MediaComponent = this.props.videoComponent;
+          mediaProps.duration = media.duration;
           break;
         }
         case 'audio': {
           MediaComponent = this.props.audioComponent;
+          mediaProps.duration = media.duration;
           break;
         }
         default:
@@ -81,6 +85,7 @@ export default class GridContainer extends React.Component {
             onSelection={isSelected => {
               onMediaSelection(rowID, isSelected);
             }}
+            {...mediaProps}
           />
         </View>
       </TouchableHighlight>

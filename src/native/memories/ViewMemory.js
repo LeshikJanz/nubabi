@@ -19,11 +19,7 @@ type Props = {
 
 export const ViewMemory = ({ memory, currentBabyId, onEditMemory }: Props) =>
   <KeyboardAwareScrollView>
-    <Memory
-      babyId={currentBabyId}
-      onEditMemory={onEditMemory}
-      {...filter(Memory.fragments.detail, memory)}
-    />
+    <Memory babyId={currentBabyId} onEditMemory={onEditMemory} {...memory} />
   </KeyboardAwareScrollView>;
 
 export default compose(

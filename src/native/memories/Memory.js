@@ -8,7 +8,7 @@ import { gql } from 'react-apollo';
 import moment from 'moment';
 import { Box, Card, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
-import MemoryMedia from './MemoryMedia';
+import MemoryMedia, { fragments as MemoryMediaFragments } from './MemoryMedia';
 import MemoryComments from './MemoryComments';
 import MemoryComment from './MemoryComment';
 
@@ -44,6 +44,19 @@ class Memory extends PureComponent {
               id
               url
               contentType
+              # It seems apollo has a bug so we can't expand
+              # MemoryMedia.fragments.files here and work correctly
+              ... on Thumbnailable {
+                thumb {
+                  url
+                }
+              }
+              ... on Audio {
+                duration
+              }
+              ... on Video {
+                duration
+              }
             }
           }
         }
@@ -82,6 +95,23 @@ class Memory extends PureComponent {
               id
               contentType
               url
+              
+              ... on Image {
+                thumb {
+                  url
+                }
+              }
+
+              ... on Audio {
+                duration
+              }
+
+              ... on Video {
+                thumb {
+                  url
+                }
+                duration
+              }
             }
           }
         }

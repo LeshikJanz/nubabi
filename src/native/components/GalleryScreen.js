@@ -56,6 +56,7 @@ class GalleryScreen extends PureComponent {
       type: this.getMediaType(edge),
       thumb: path(['thumb', 'url'], edge.node),
       photo: edge.node.url,
+      duration: path(['duration'], edge.node),
     }));
   }
 

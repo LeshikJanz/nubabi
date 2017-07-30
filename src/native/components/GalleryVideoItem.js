@@ -1,12 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import { Dimensions, Image, View } from 'react-native';
+import { Dimensions, Image, View, PanResponder } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { compose } from 'ramda';
+import { connect } from 'react-redux';
 import Box from './Box';
 import Overlay from './Overlay';
 import Text from './Text';
-import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../../common/themes/defaultTheme';
-import VideoPlayer from 'react-native-video-player';
+import { formatDuration } from '../../common/helpers/formatDuration';
+import GalleryVideoPlayer from './GalleryVideoPlayer';
 
 type Props = {
   thumbnail: ?boolean,
@@ -14,14 +17,14 @@ type Props = {
   height: ?number,
   uri: ?string,
   lazyLoad: ?boolean,
+  duration: ?number,
 };
-
-const thumb = require('../../common/images/thumbnail.png'); // TODO
 
 class GalleryVideoItem extends Component {
   props: Props;
   state = {
     progress: 0,
+    disableGalleryGestures: false,
   };
 
   load() {
@@ -31,12 +34,12 @@ class GalleryVideoItem extends Component {
   }
 
   renderThumbnail() {
-    const { width, height, thumbnail, uri } = this.props;
+    const { width, height, uri, duration } = this.props;
 
     return (
       <View style={{ width, height }}>
         <Image
-          source={thumb}
+          source={{ uri }}
           style={{ flex: 1, width, height, resizeMode: 'cover' }}
         >
           <Overlay>
@@ -56,7 +59,9 @@ class GalleryVideoItem extends Component {
             </Box>
             <View style={{ position: 'absolute', bottom: 0, right: 5 }}>
               <Overlay>
-                <Text color="white">00:00</Text>
+                <Text color="white">
+                  {formatDuration(duration)}
+                </Text>
               </Overlay>
             </View>
           </Overlay>
@@ -65,10 +70,31 @@ class GalleryVideoItem extends Component {
     );
   }
 
-  render() {
-    const { thumbnail, width, height, uri } = this.props;
+  preventGalleryGestures = () => {
+    console.log('on prevent gallery gestures');
+    this.setState({
+      disableGalleryGestures: true,
+    });
+  };
 
-    if (thumbnail) {
+  player = null;
+
+  isPlaying = () => {
+    console.log(this.player && this.player.state.isPlaying);
+    return this.player && this.player.state.isPlaying;
+  };
+
+  render() {
+    const {
+      thumbnail: isThumbnailView,
+      width,
+      height,
+      uri,
+      duration,
+      thumb,
+    } = this.props;
+
+    if (isThumbnailView) {
       return this.renderThumbnail();
     }
 
@@ -81,16 +107,19 @@ class GalleryVideoItem extends Component {
 
     const { progress } = this.state;
 
+    const videoProps = {
+      width: sizeStyle.width,
+      height: sizeStyle.height - 200,
+      uri,
+    };
+
+    if (thumb) {
+      videoProps.thumbnail = { uri: thumb };
+      videoProps.endWithThumbnail = true;
+    }
+
     const content =
-      progress < 1
-        ? null
-        : <VideoPlayer
-            thumbnail={thumb}
-            endWithThumbnail
-            video={{ uri }}
-            videoWidth={sizeStyle.width}
-            videoHeight={sizeStyle.height - 200}
-          />;
+      progress < 1 ? null : <GalleryVideoPlayer {...videoProps} />;
 
     return (
       <View

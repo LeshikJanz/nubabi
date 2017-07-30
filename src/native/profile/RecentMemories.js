@@ -4,6 +4,7 @@ import React from 'react';
 import { gql } from 'react-apollo';
 import { HorizontalCardList, AddButton } from '../components';
 import { flattenEdges } from '../../common/helpers/graphqlUtils';
+import { fragments as MemoryMediaFragments } from '../memories/MemoryMedia';
 
 type Props = {
   memories: MemoryConnection,
@@ -43,8 +44,9 @@ RecentMemories.fragments = {
             files(first: 1) {
               edges {
                 node {
-                  url
+                  id
                   contentType
+                  url
                 }
               }
             }

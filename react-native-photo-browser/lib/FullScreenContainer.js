@@ -14,8 +14,12 @@ import {
 import Constants from './constants';
 import { BottomBar } from './bar';
 import { Photo } from './media';
+import { connect } from 'react-redux';
 
-export default class FullScreenContainer extends React.Component {
+import R from 'ramda';
+import { lens } from '../../src/common/ui/reducer';
+
+export class FullScreenContainer extends React.Component {
   static propTypes = {
     style: View.propTypes.style,
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
@@ -88,6 +92,7 @@ export default class FullScreenContainer extends React.Component {
       currentIndex: props.initialIndex,
       currentMedia: props.mediaList[props.initialIndex],
       controlsDisplayed: props.displayTopBar,
+      scrollEnabled: true,
     };
   }
 
@@ -252,6 +257,7 @@ export default class FullScreenContainer extends React.Component {
             lazyLoad
             useCircleProgress={useCircleProgress}
             uri={media.photo}
+            thumb={media.thumb}
             displaySelectionButtons={displaySelectionButtons}
             selected={media.selected}
             onSelection={isSelected => {
@@ -290,6 +296,11 @@ export default class FullScreenContainer extends React.Component {
         showsVerticalScrollIndicator={false}
         directionalLockEnabled
         scrollEventThrottle={16}
+        scrollEnabled={
+          typeof this.props.scrollEnabled !== 'undefined'
+            ? this.props.scrollEnabled
+            : true
+        }
       />
     );
   }
@@ -304,6 +315,8 @@ export default class FullScreenContainer extends React.Component {
     const { controlsDisplayed, currentMedia } = this.state;
     const BottomBarComponent = this.props.bottomBarComponent || BottomBar;
 
+    console.log('scrollEnabled =', this.props.scrollEnabled);
+
     return (
       <View style={styles.flex}>
         <StatusBar
@@ -314,7 +327,6 @@ export default class FullScreenContainer extends React.Component {
           translucent
         />
         {this._renderScrollableContent()}
-        {console.log(this.photoRefs)}
         <BottomBarComponent
           displayed={controlsDisplayed}
           height={Constants.TOOLBAR_HEIGHT}
@@ -338,3 +350,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
+
+export default connect(state => ({
+  scrollEnabled: R.view(lens, state.ui),
+}))(FullScreenContainer);

@@ -117,9 +117,11 @@ export type Avatar = {
   thumb: ?Image,
 };
 
-export type File = Avatar | Image | GenericFile;
+export type File = Avatar | Image | GenericFile | Video | Audio;
 
 export type ResizableImage = Avatar | Image | SkillAreaImage;
+
+export type Thumbnailable = Avatar | Image | Video;
 
 export type Image = {
   /** The ID of an object */
@@ -873,4 +875,27 @@ export type FileInput = {
   name: string,
   contentType: string,
   size: number,
+};
+
+export type Video = {
+  id: string,
+  url: string,
+  contentType: string,
+  createdAt: any,
+  name: string,
+  size: number,
+  updatedAt: ?any,
+  thumb: ?Image,
+  duration: ?number,
+};
+
+export type Audio = {
+  id: string,
+  url: string,
+  contentType: string,
+  createdAt: any,
+  name: string,
+  size: number,
+  updatedAt: ?any,
+  duration: ?number,
 };

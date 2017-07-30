@@ -222,7 +222,11 @@ interface ResizableImage {
   height: Int
 }
 
-type Image implements File, ResizableImage {
+interface Thumbnailable {
+  thumb: Image
+}
+
+type Image implements File, ResizableImage, Thumbnailable {
   id: ID!
   contentType: String!
   createdAt: DateTime!
@@ -238,7 +242,7 @@ type Image implements File, ResizableImage {
   thumb: Image
 }
 
-type Avatar implements File, ResizableImage {
+type Avatar implements File, ResizableImage, Thumbnailable {
   id: ID!
   url: String!
   contentType: String!
@@ -251,6 +255,29 @@ type Avatar implements File, ResizableImage {
   height: Int
   large: Image
   thumb: Image
+}
+
+type Video implements File, Thumbnailable {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  thumb: Image
+  duration: Int
+}
+
+type Audio implements File {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  duration: Int
 }
 
 input ImageInput {

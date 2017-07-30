@@ -67,6 +67,10 @@ const resolvers = {
     __resolveType: ({ contentType }) => {
       if (contentType.startsWith('image')) {
         return 'Image';
+      } else if (contentType.startsWith('video')) {
+        return 'Video';
+      } else if (contentType.startsWith('audio')) {
+        return 'Audio';
       }
 
       return 'GenericFile';
@@ -77,19 +81,25 @@ const resolvers = {
   Avatar: {
     contentType: obj => obj.contentType || 'image/jpeg',
     name: obj => obj.name || 'avatar.jpg',
-    size: () => 0, // TODO: fetch size
+    size: () => 0, // TODO: fetch size from firebase
   },
   Image: {
     id: globalIdField(),
     contentType: obj => obj.contentType || 'image/jpeg',
     name: obj => obj.name || 'image.jpg',
-    size: () => 0, // TODO: fetch size
+    size: () => 0, // TODO: fetch size from firebase
   },
-  /*
   Video: {
-    id: globalIdField(),
+    id: globalIdField('File'),
+    // TODO: mocked
+    thumb: () => ({
+      url:
+        'https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/lorem%2Fthumbnail.png?alt=media&token=3318131c-abdb-4d5a-acae-e8eba73aaad8',
+    }),
   },
-  */
+  Audio: {
+    id: globalIdField('File'),
+  },
   Node: {
     __resolveType(obj) {
       if (obj.email) {

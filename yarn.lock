@@ -1618,6 +1618,10 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+dataloader@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-1.3.0.tgz#6fec5be4b30a712e4afd30b86b4334566b97673b"
+
 date-fns@^1.27.2:
   version "1.28.5"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.28.5.tgz#257cfc45d322df45ef5658665967ee841cd73faf"
@@ -4394,7 +4398,13 @@ querystringify@0.0.x:
   version "0.0.4"
   resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-0.0.4.tgz#0cf7f84f9463ff0ae51c4c4b142d95be37724d9c"
 
-ramda@^0.24.1:
+ramda-fantasy@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/ramda-fantasy/-/ramda-fantasy-0.8.0.tgz#9e8c37d93ec0a70796cfc10873dd9c50850390f6"
+  dependencies:
+    ramda ">=0.15.0"
+
+ramda@>=0.15.0, ramda@^0.24.1:
   version "0.24.1"
   resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
 
@@ -4601,6 +4611,10 @@ react-native-snap-carousel@^2.1.2:
     lodash.debounce "4.0.8"
     react-addons-shallow-compare "15.5.2"
 
+react-native-sound@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.10.3.tgz#0faf4f101d46c51315c91d701783c0c6a4db3bf6"
+
 react-native-spinkit@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-spinkit/-/react-native-spinkit-1.0.3.tgz#5e83e26a3598a94f45102ee15bd918efa673c76d"
@@ -4638,9 +4652,9 @@ react-native-vector-icons@^4.1.1:
     prop-types "^15.5.8"
     yargs "^6.3.0"
 
-react-native-video-player@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/react-native-video-player/-/react-native-video-player-0.7.0.tgz#db539e1359aeb0fae7150aa231f34c8fdcfce7de"
+react-native-video-player@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-video-player/-/react-native-video-player-0.8.0.tgz#34ecf06873883a9796da3e22b68ad511130b6a2d"
 
 react-native-video-thumbnail@^1.0.1:
   version "1.0.1"

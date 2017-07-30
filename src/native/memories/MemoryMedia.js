@@ -4,11 +4,13 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { gql } from 'react-apollo';
 import { compose, head, take } from 'ramda';
 import { connect } from 'react-redux';
 import { Box, Overlay, Text, withLayout } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { navigate } from '../navigation/actions';
+import { hoistStatics } from 'recompose';
 
 type Props = {
   files: FileConnection,
@@ -153,6 +155,7 @@ export const MemoryMediaUnknown = ({
 
 export const MemoryMediaSingle = (props: MemoryMediaSingleProps) => {
   let MediaComponent;
+
   switch (props.media.contentType.split('/')[0]) {
     case 'video': {
       MediaComponent = MemoryMediaVideo;
@@ -263,6 +266,18 @@ export const MemoryMedia = ({ files, layout, openGallery }: Props) => {
     );
   }
 };
+
+export const fragments = {
+  files: gql`
+    fragment MemoryMediaFile on File {
+      id
+      contentType
+      url
+    }
+  `,
+};
+
+MemoryMedia.fragments = fragments;
 
 export default compose(
   connect(null, (dispatch, { files, media }) => ({

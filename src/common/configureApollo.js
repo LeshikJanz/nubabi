@@ -1,4 +1,5 @@
 import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { IntrospectionFragmentMatcher } from 'react-apollo';
 import * as firebase from 'firebase';
 import config from './config';
 
@@ -21,6 +22,10 @@ export const configureApollo = () => {
     client = new ApolloClient({
       networkInterface,
       dataIdFromObject: obj => obj.id,
+      fragmentMatcher: new IntrospectionFragmentMatcher({
+        introspectionQueryResultData: require('../server/graphql/introspection.json')
+          .data,
+      }),
     });
   }
 
