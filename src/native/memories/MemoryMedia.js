@@ -115,33 +115,40 @@ export const MemoryMediaVideo = ({
   onMediaPress,
 }: MemoryMediaVideoProps) => {
   // TODO: real video
-  return (
-    <Box as={TouchableOpacity} onPress={onMediaPress} flex={1}>
-      <Overlay>
+  const content = (
+    <Overlay>
+      <Box
+        flex={1}
+        alignItems="center"
+        justifyContent="center"
+        style={() => ({ height: small ? 60 : 180 })}
+        borderRadius={4}
+      >
         <Box
-          flex={1}
+          borderRadius={20}
+          backgroundColor="white"
+          style={() => ({ width: 40, height: 40, overflow: 'hidden' })}
           alignItems="center"
           justifyContent="center"
-          style={() => ({ height: small ? 60 : 180 })}
-          borderRadius={4}
         >
-          <Box
-            borderRadius={20}
-            backgroundColor="white"
-            style={() => ({ width: 40, height: 40, overflow: 'hidden' })}
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Icon
-              size={30}
-              style={{ marginLeft: 5, marginTop: 2 }}
-              name="ios-play"
-              color={theme.colors.primary}
-            />
-          </Box>
+          <Icon
+            size={30}
+            style={{ marginLeft: 5, marginTop: 2 }}
+            name="ios-play"
+            color={theme.colors.primary}
+          />
         </Box>
-        {displayMoreIndicator}
-      </Overlay>
+      </Box>
+      {displayMoreIndicator}
+    </Overlay>
+  );
+  return (
+    <Box as={TouchableOpacity} onPress={onMediaPress} flex={1}>
+      {media.thumb
+        ? <Image source={{ uri: media.thumb.url }}>
+            {content}
+          </Image>
+        : content}
     </Box>
   );
 };
