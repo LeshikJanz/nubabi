@@ -19,7 +19,7 @@ export class MemoryComments extends PureComponent {
   props: Props;
 
   render() {
-    const { comments, expanded, onLoadMore, data } = this.props;
+    const { comments, expanded, onLoadMore } = this.props;
 
     const shouldDisplayIndicator =
       comments.count > comments.edges.length && !expanded;

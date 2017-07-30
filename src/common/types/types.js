@@ -3,90 +3,26 @@ import type { Element } from 'react';
 
 // Models
 import type {
-  Query,
-  File,
-  Baby,
-  BabyEdge,
   Activity,
-  ActivityConnection,
-  ActivityEdge,
-  ActivityMediaTypeEnum as ActivityMediaType,
-  ActivityMedia,
-  ActivityFilterInput,
-  Memory,
-  MemoryConnection,
-  MemoryEdge,
-  Comment,
-  FileConnection,
-  CommentConnection,
-  User,
-  Achievement,
+  Avatar,
+  Baby,
   Expert,
   SkillArea,
-  Growth,
-  GrowthArticle,
-  GrowthArticleEdge,
-  AgeDurationEnum as AgeDuration,
-  GenderEnum as Gender,
-  Measurement,
-  MeasurementTypeEnum as MeasurementType,
-  MeasurementUnitEnum as MeasurementUnit,
-  Tip,
-  Image,
-  Avatar,
-  CreateBabyInput,
-  UpdateBabyInput,
-  SwoopActivityInput,
-  ActivityLevelOperationEnum as ActivityLevelOperation,
-  AdjustActivityLevelInput,
-  ToggleFavoriteInput,
-  RecordMeasurementInput,
-  Article,
-  Tag,
+  User,
 } from './modelTypes';
 
-export type {
-  Query,
-  File,
-  Baby,
-  BabyEdge,
-  Activity,
-  ActivityConnection,
-  ActivityEdge,
-  ActivityMedia,
-  ActivityFilterInput,
-  Memory,
-  MemoryConnection,
-  MemoryEdge,
-  Comment,
-  FileConnection,
-  CommentConnection,
-  User,
-  Achievement,
-  Expert,
-  SkillArea,
-  Growth,
-  GrowthArticleEdge,
-  GrowthArticle,
-  AgeDuration,
-  Measurement,
-  MeasurementType,
-  MeasurementUnit,
-  Gender,
-  Image,
-  Avatar,
-  Tip,
-  CreateBabyInput,
-  UpdateBabyInput,
-  SwoopActivityInput,
-  ActivityLevelOperation,
-  AdjustActivityLevelInput,
-  ToggleFavoriteInput,
-  RecordMeasurementInput,
-  ActivityMediaType,
-  Article,
-  Tag,
-};
+export type { OperationComponent, QueryProps } from 'react-apollo';
+
+import type { QueryOpts as QueryOptsApollo, MutationOpts } from 'react-apollo';
+
+export type QueryOpts<T> =
+  | (QueryOptsApollo & {
+      variables: T | Object,
+    })
+  | MutationOpts;
+
+export type { Activity, Avatar, User, SkillArea, Baby };
+export * from './queryTypes';
 
 export type FirebaseUser = {
   uid: String,

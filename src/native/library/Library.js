@@ -1,6 +1,5 @@
 // @flow
-import type { NavigationOptions } from '../../common/types';
-import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
+import type { NavigationProp, NavigationOptions } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
 import ArticleList from './ArticleCardList';
@@ -8,7 +7,7 @@ import HealthHelpButton from './HealthHelpButton';
 import ParentingTipsButton from './ParentingTipsButton';
 
 type Props = {
-  navigation: NavigationProp<*, *>,
+  navigation: NavigationProp,
 };
 
 export class Library extends PureComponent {

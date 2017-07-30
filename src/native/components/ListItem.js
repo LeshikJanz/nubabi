@@ -20,6 +20,7 @@ type Props = {
   last?: boolean,
   rightText?: string,
   onPress?: Function,
+  padding?: number,
 };
 
 class ListItem extends Component {

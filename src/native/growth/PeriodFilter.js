@@ -42,7 +42,7 @@ class PeriodFilter extends PureComponent {
   render() {
     return (
       <MenuContext style={{ flex: 1 }}>
-        <Menu onSelect={this.props.onPeriodSelect} style={styles.dropdown}>
+        <Menu onSelect={this.props.onPeriodSelect}>
           <MenuTrigger>
             <Box
               backgroundColor="white"

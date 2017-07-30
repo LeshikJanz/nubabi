@@ -57,6 +57,7 @@ const { renderer } = configureFela(createRenderer);
 const FelaProvider = NativeFelaProvider(renderer, theme);
 
 // TODO: remove after deps update
+// $FlowFixMe$
 console.ignoredYellowBox = [
   'Warning: checkPropTypes',
   'Using <Image> with children',

@@ -16,7 +16,7 @@ type Props = {
 type PillSwitcherButtonProps = {
   value: string,
   isCurrent: boolean,
-  onSelect: () => void,
+  onSelect: (value: string) => void,
 };
 
 const activeBoxStyle = () => ({

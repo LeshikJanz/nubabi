@@ -23,6 +23,7 @@ export type TextProps = BoxProps & {
   // TODO: shadowColor, shadowOffset, shadowRadius.
   // Custom
   fixWebFontSmoothing?: boolean,
+  medium?: boolean,
 };
 
 type TextContext = {

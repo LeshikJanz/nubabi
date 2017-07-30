@@ -1,15 +1,12 @@
 // @flow
-import type { LayoutProps } from 'react-native';
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 type Props = {
   children?: any,
-  layout: LayoutProps,
-  containerStyle?: Object | number,
 };
 
-export const Overlay = ({ children, layout }: Props) => {
+export const Overlay = ({ children }: Props) => {
   return (
     <View style={{ flex: 1 }}>
       <View style={styles.overlay} />

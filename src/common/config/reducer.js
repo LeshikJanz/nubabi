@@ -7,6 +7,7 @@ const initialState = {
   apiUrl: '',
   firebase: null,
   sentryUrl: '',
+  graphqlEndpoint: null,
 };
 
 const reducer = (state: ConfigState = initialState): ConfigState => state;

@@ -98,7 +98,9 @@ export const addEdgeToFragment = (
   edgePath: Array<string>,
   rootId: string,
   addTo: string = 'tail',
-  fragmentOptions = {},
+  fragmentOptions?:
+    | DataProxyReadFragmentOptions
+    | DataProxyWriteFragmentOptions = {},
 ) => (store: DataProxy, { data: payload }: Object) => {
   if (!path([operationName, 'edge'], payload)) {
     return;

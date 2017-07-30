@@ -1,5 +1,6 @@
 // @flow
 import { getPaginationArguments } from '../resolvers/common';
+import { Reader } from 'ramda-fantasy';
 
 require('axios-debug-log');
 import type { ConnectionArguments } from '../resolvers/common';
@@ -82,9 +83,6 @@ const withActivityFilters = ({
 };
 
 const sortBySkillArea = sortBy(prop('skill_area_id'));
-
-export const getSkillAreas = (token: string) =>
-  instance.get('/skill_areas', withToken(token)).then(path(['data']));
 
 export const getSkillArea = (token: string, id: string) => {
   return instance
@@ -362,4 +360,12 @@ export const getLibraryArticles = (token: string, args: mixed) => {
   return instance
     .get(`/content/library${filter}`, withToken(token))
     .then(path(['data']));
+};
+
+const tokenReader = Reader(env => env.token);
+
+export const getSkillAreas = () => {
+  return Reader.ask.map(token => {
+    return instance.get('/skill_areas', withToken(token)).then(path(['data']));
+  });
 };

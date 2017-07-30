@@ -12,6 +12,8 @@ type Props = {
   size?: number,
   src?: string | number,
   icon?: string,
+  fallbackText?: string,
+  style?: Object | number,
 };
 
 const Container = createComponent(

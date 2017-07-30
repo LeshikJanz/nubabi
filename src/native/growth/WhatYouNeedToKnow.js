@@ -1,5 +1,6 @@
 // @flow
 import type { State, Growth, GraphQLDataProp } from '../../common/types';
+import type { GrowthPeriodOption } from './WhatYouNeedToKnowForPeriod';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation } from 'react-native';
 import { connect } from 'react-redux';
@@ -63,7 +64,7 @@ export class WhatYouNeedToKnow extends PureComponent {
     selectedPeriod: undefined,
   };
 
-  getPeriodOptions() {
+  getPeriodOptions(): Array<GrowthPeriodOption> {
     return this.props.growth.map(node => ({
       ...node,
       label: node.title,
@@ -71,7 +72,9 @@ export class WhatYouNeedToKnow extends PureComponent {
     }));
   }
 
-  getGrowthForCurrentPeriod(options) {
+  getGrowthForCurrentPeriod(
+    options: Array<GrowthPeriodOption>,
+  ): GrowthPeriodOption {
     if (this.state.selectedPeriod) {
       return options.find(period => period.key === this.state.selectedPeriod);
     }
@@ -95,7 +98,6 @@ export class WhatYouNeedToKnow extends PureComponent {
   };
 
   render() {
-    console.log(this.props);
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
 

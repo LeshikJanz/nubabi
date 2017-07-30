@@ -168,7 +168,7 @@ interface File {
   url: String
 }
 
-# TODO: make avatar, image, etc use/implement this
+# TODO: make avatar, image, etc. use/implement this
 type GenericFile implements File {
   id: ID!
   contentType: String!

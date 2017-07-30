@@ -29,7 +29,6 @@ export class Screen extends PureComponent {
 
   render() {
     const { style, children } = this.props;
-    const withAlerts = !this.props.withoutAlerts;
 
     return (
       <View
@@ -37,7 +36,7 @@ export class Screen extends PureComponent {
         onLayout={this.handleLayout}
       >
         {children}
-        {withAlerts && <Alert />}
+        <Alert />
       </View>
     );
   }

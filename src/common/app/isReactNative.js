@@ -6,6 +6,7 @@
 // so we check on added function to Promise prototype added by FBJS
 // This will fail if that ever becomes ES.
 
+// $FlowFixMe$
 const isReactNative = typeof Promise.prototype.finally !== 'undefined';
 
 export default isReactNative;

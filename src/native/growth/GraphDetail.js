@@ -23,7 +23,7 @@ import { convertMeasurements } from '../../common/helpers/measurement';
 type Props = {
   baby: Baby,
   unitDisplay: UnitDisplaySettingsState,
-  navigation: NavigationProp<*>,
+  navigation: NavigationProp<*, *>,
   layout: LayoutProps,
 };
 

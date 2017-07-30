@@ -1,8 +1,7 @@
 // @flow
-import type { File, FileConnection, FileEdge } from '../../common/types';
+import type { FileConnection, FileEdge } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { View, Image } from 'react-native';
 import PhotoBrowser from '../../../react-native-photo-browser';
 import GalleryVideoItem from './GalleryVideoItem';
 import { path } from 'ramda';

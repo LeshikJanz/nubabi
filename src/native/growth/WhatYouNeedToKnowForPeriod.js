@@ -13,7 +13,7 @@ import SectionLinks from './SectionLinks';
 type Props = {
   current: GrowthPeriodOption,
   periods: Array<GrowthPeriodOption>,
-  onPeriodSelect: () => void,
+  onPeriodSelect: (id: string) => void,
 };
 
 export const WhatYouNeedToKnowForPeriod = (props: Props) => {

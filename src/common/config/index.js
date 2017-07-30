@@ -3,7 +3,7 @@
 /* global __DEV__: false */
 
 const config = {
-  appName: process.env.NUBABI_APP_NAME,
+  appName: process.env.NUBABI_APP_NAME || 'app',
   appVersion: process.env.NUBABI_APP_VERSION,
   apiUrl: process.env.NUBABI_API_URL,
   graphqlEndpoint: process.env.NUBABI_GRAPHQL_ENDPOINT,

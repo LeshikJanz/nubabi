@@ -1,11 +1,11 @@
 // @flow
-import type { GrowthContentEdge } from '../../common/types';
+import type { GrowthArticleEdge } from '../../common/types';
 import React from 'react';
 import { Box, Link } from '../components';
 import { pluck, reject, compose, isNil } from 'ramda';
 
 type Props = {
-  links: Array<GrowthContentEdge>,
+  links: Array<GrowthArticleEdge>,
 };
 
 export const SectionLinks = ({ links }: Props) => {

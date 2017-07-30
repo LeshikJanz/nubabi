@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps } from '../../common/types';
+import type { File, LayoutProps } from '../../common/types';
 import React from 'react';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
