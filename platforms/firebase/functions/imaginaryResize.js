@@ -6,7 +6,6 @@ const request = require("request-promise"),
     projectId: "nubabitest1",
     keyFilename: "./keyfile.json"
   }),
-  im = require("imagemagick"),
   path = require("path"),
   os = require("os"),
   fs = require("fs"),
@@ -17,17 +16,20 @@ const request = require("request-promise"),
   sizeOf = require("image-size"),
   errorReporter = require("./errorReporter");
 
+admin.initializeApp(functions.config().firebase);
+
 exports.handler = event => {
-  if (!event.data.exists()) {
+  var eventSnapshot = event.data;
+
+  if (!eventSnapshot.exists()) {
     console.log("No data");
     return;
   }
-  if (event.data.val() === "") {
+  if (eventSnapshot.val() === "") {
     console.log("Empty string");
     return;
   }
-  admin.initializeApp(functions.config().firebase);
-  const url = event.data.val();
+  const url = eventSnapshot.val();
   const bucketName = functions.config().firebase.storageBucket;
   let location = url.replace(
     `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/`,
@@ -59,63 +61,86 @@ exports.handler = event => {
   );
   const file = bucket.file(location);
 
-  return getMetadata(url).then(metadata => {
-    console.log(metadata);
-    console.log(metadata["type"]);
-    console.log(metadata.type);
-    return Promise.all([
-      downloadThumb(url, tempThumbnailPath).then(downloadData => {
-        const mimeType = `image/${metadata["type"]}`;
-        const destFilePath = path.join(
-          path.dirname(location),
-          `thumb_${fileName}`
-        );
-        return uploadToStorage(
-          downloadData.destination,
-          destFilePath,
-          mimeType,
-          bucket
-        ).then(url => {
-          return updateDb(
-            url,
-            "thumb",
-            downloadData.width,
-            downloadData.height,
-            parentPath
+  parentRef.child("contentType").once("value", function(contentTypeSnapshot) {
+    const contentType = contentTypeSnapshot.val();
+    return getMetadata(url).then(metadata => {
+      return Promise.all([
+        updateOriginal(url, metadata, parentPath),
+        downloadThumb(url, tempThumbnailPath).then(downloadData => {
+          const mimeType = contentType;
+          const destFilePath = path.join(
+            path.dirname(location),
+            `thumb_${fileName}`
           );
-        });
-      }),
-      downloadLarge(url, tempLargePath).then(downloadData => {
-        const mimeType = `image/${metadata["type"]}`;
-        const destFilePath = path.join(
-          path.dirname(location),
-          `large_${fileName}`
-        );
-        return uploadToStorage(
-          downloadData.destination,
-          destFilePath,
-          mimeType,
-          bucket
-        ).then(url => {
-          return updateDb(
-            url,
-            "large",
-            downloadData.width,
-            downloadData.height,
-            parentPath
+          return uploadToStorage(
+            downloadData.destination,
+            destFilePath,
+            mimeType,
+            bucket
+          ).then(url => {
+            return updateDb(
+              url,
+              "thumb",
+              downloadData.width,
+              downloadData.height,
+              contentType,
+              tempThumbnailPath,
+              parentPath
+            );
+          });
+        }),
+        downloadLarge(url, tempLargePath).then(downloadData => {
+          const mimeType = contentType;
+          const destFilePath = path.join(
+            path.dirname(location),
+            `large_${fileName}`
           );
+          return uploadToStorage(
+            downloadData.destination,
+            destFilePath,
+            mimeType,
+            bucket
+          ).then(url => {
+            return updateDb(
+              url,
+              "large",
+              downloadData.width,
+              downloadData.height,
+              contentType,
+              tempLargePath,
+              parentPath
+            );
+          });
+        })
+      ]).then(() => {
+        console.log("[FINISHED]");
+        return new Promise((resolve, reject) => {
+          fs.unlinkSync(tempThumbnailPath);
+          fs.unlinkSync(tempLargePath);
+          resolve();
         });
-      })
-    ]).then(() => {
-      console.log("[FINISHED]");
-      return new Promise((resolve, reject) => {
-        fs.unlinkSync(tempThumbnailPath);
-        fs.unlinkSync(tempLargePath);
-        resolve();
       });
     });
   });
 };
+
+function updateOriginal(url, metadata, parentPath) {
+  const originalWidth = metadata.width;
+  const originalHeight = metadata.height;
+  const originalType = metadata.type;
+  return new Promise((resolve, reject) => {
+    const dbRef = admin.database().ref(parentPath);
+    console.log("[updateOriginal] Setting db");
+    const dbData = {
+      width: metadata.width,
+      height: metadata.height
+    };
+    dbRef.update(dbData).then(() => {
+      console.log("[updateOriginal] save complete");
+      resolve();
+    });
+  });
+}
 
 function downloadLarge(originalUrl, destinationPath) {
   return new Promise((resolve, reject) => {
@@ -127,10 +152,11 @@ function downloadLarge(originalUrl, destinationPath) {
       })
       .on("end", () => {
         const dimensions = sizeOf(destinationPath);
+        console.log("SIZE OF DIMENSIONS", dimensions);
         resolve({
           destination: destinationPath,
-          width: `${dimensions.width}`,
-          height: `${dimensions.height}`
+          width: dimensions.width,
+          height: dimensions.height
         });
       })
       .pipe(fs.createWriteStream(destinationPath));
@@ -180,14 +206,31 @@ function getMetadata(url) {
   });
 }
 
-function updateDb(url, fileType, width, height, parentPath) {
+function getFilesizeInBytes(filename) {
+  const stats = fs.statSync(filename);
+  const fileSizeInBytes = stats.size;
+  return fileSizeInBytes;
+}
+
+function updateDb(
+  url,
+  fileType,
+  width,
+  height,
+  contentType,
+  tempFile,
+  parentPath
+) {
   return new Promise((resolve, reject) => {
     const dbRef = admin.database().ref(parentPath);
     console.log("[updateDb] Setting db");
+    const fileSize = getFilesizeInBytes(tempFile);
     const dbData = {
       url,
-      width: `${width}`,
-      height: `${height}`
+      width,
+      height,
+      contentType,
+      size: fileSize
     };
     dbRef.child(fileType).set(dbData).then(() => {
       console.log("[updateDb] save complete");
