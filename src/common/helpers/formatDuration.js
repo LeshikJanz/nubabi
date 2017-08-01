@@ -6,7 +6,7 @@ export const formatDuration = (duration: ?number) => {
 
   const date = new Date(0);
   date.setSeconds(duration);
-  if (date.getHours() > 1) {
+  if (date.getUTCHours() > 0) {
     // we account for 1 since that's the default
     return date.toISOString().substr(11, 8);
   } else {
