@@ -878,6 +878,7 @@ export type FileInput = {
 };
 
 export type Video = {
+  /** The ID of an object */
   id: string,
   url: string,
   contentType: string,
@@ -890,6 +891,7 @@ export type Video = {
 };
 
 export type Audio = {
+  /** The ID of an object */
   id: string,
   url: string,
   contentType: string,

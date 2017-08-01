@@ -35,6 +35,7 @@ import MemoryFormFileList from './MemoryFormFileList';
 type Props = {
   mode?: 'add' | 'edit',
   onSubmit: () => void,
+  onAddVoiceNote: () => void,
   handleSubmit: (submit: Function) => void,
   submitting: boolean,
   change: (field: string, value: any) => void,
@@ -134,6 +135,10 @@ class MemoryForm extends PureComponent {
     this.updateFiles(removeMediaAt(index, this.props.files));
   };
 
+  handleAddVoiceNote = () => {
+    this.props.onAddVoiceNote();
+  };
+
   updateFiles = (files: Array<File>) => {
     this.props.change('files', reject(isNil, files));
   };
@@ -219,7 +224,11 @@ class MemoryForm extends PureComponent {
               <ListItem leftIcon="ios-medal">
                 <Text color="secondary">Event</Text>
               </ListItem>
-              <ListItem leftIcon="ios-mic" last>
+              <ListItem
+                leftIcon="ios-mic"
+                onPress={this.handleAddVoiceNote}
+                last
+              >
                 <Text color="secondary">Voice note</Text>
               </ListItem>
             </List>

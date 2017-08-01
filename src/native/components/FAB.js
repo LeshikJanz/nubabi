@@ -6,7 +6,7 @@ import Text from './Text';
 
 type Props = {
   onPress?: () => void,
-  style?: Object | number,
+  style?: Object,
   children: any,
   size?: number,
 };

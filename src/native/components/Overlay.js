@@ -4,6 +4,7 @@ import { View, StyleSheet } from 'react-native';
 
 type Props = {
   children?: any,
+  style?: Object,
 };
 
 export const Overlay = ({ children, style = {} }: Props) => {

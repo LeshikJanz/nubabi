@@ -18,10 +18,11 @@ import { addEdgeToFragment } from '../../common/helpers/graphqlUtils';
 type Props = {
   currentBabyId: string,
   onSubmit: (input: CreateMemoryInput) => Promise<ApolloQueryResult<*>>,
+  onAddVoiceNote: (id?: string) => void,
 };
 
-export const AddMemory = ({ onSubmit }: Props) =>
-  <MemoryForm onSubmit={onSubmit} />;
+export const AddMemory = ({ onSubmit, onAddVoiceNote }: Props) =>
+  <MemoryForm onSubmit={onSubmit} onAddVoiceNote={onAddVoiceNote} />;
 
 export default compose(
   connect(({ babies }: State) => pick(['currentBabyId'], babies)),

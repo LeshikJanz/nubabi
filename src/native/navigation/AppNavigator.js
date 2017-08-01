@@ -47,6 +47,7 @@ import GraphDetailScreen from '../growth/GraphDetailScreen';
 import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
 import EditMemoryScreen from '../memories/EditMemoryScreen';
+import VoiceRecordingScreen from '../memories/VoiceRecordingScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
@@ -110,6 +111,7 @@ const routes = {
     screen: EditMemoryScreen,
     path: 'memories/:id/edit',
   },
+  voiceRecording: { screen: VoiceRecordingScreen },
   gallery: { screen: GalleryScreen },
 };
 
@@ -226,7 +228,6 @@ const AppNavigator = createCustomNavigator(
     headerMode: 'float',
     // TODO: ensure child options get preserved
     navigationOptions: ({ navigationOptions }) => {
-      // console.log('APP NAVIGATOR', args);
       return {
         headerBackTitle: 'Back',
         headerTintColor: theme.colors.black,

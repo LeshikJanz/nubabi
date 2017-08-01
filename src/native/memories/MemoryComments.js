@@ -82,11 +82,11 @@ export default compose(
     ${MemoryComment.fragments.comment}
   `,
     {
-      options: ownProps => ({
+      options: (ownProps: Props) => ({
         skip: !ownProps.expanded,
         variables: pick(['babyId', 'memoryId'], ownProps),
       }),
-      props({ data, ownProps: { comments: previousComments } }) {
+      props: ({ data, ownProps: { comments: previousComments } }) => {
         return {
           ...data,
           comments: pathOr(

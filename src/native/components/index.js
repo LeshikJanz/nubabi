@@ -9,6 +9,7 @@ import Card from './Card';
 import HorizontalCardList from './HorizontalCardList';
 import HorizontalCardItem from './HorizontalCardItem';
 import Screen from './Screen';
+import Loader from './Loader';
 import Markdown from './Markdown';
 import Link from './Link';
 import List from './List';
@@ -20,6 +21,7 @@ import PillSwitcher from './PillSwitcher';
 import FAB from './FAB';
 import Overlay from './Overlay';
 import DatePicker from './DatePicker';
+import Icon from 'react-native-vector-icons/Ionicons';
 import FormContainer from './FormContainer';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
@@ -28,6 +30,7 @@ import showNoContentViewIf from './showNoContentViewIf';
 export {
   Box,
   Screen,
+  Loader,
   Text,
   Button,
   AddButton,
@@ -35,6 +38,7 @@ export {
   SubmitButton,
   Image,
   Avatar,
+  Icon,
   Card,
   HorizontalCardList,
   HorizontalCardItem,

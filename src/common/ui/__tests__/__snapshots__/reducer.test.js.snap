@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles TOGGLE_GALLERY_SCROLL_ENABLED 1`] = `
+Object {
+  "gallery": Object {
+    "scrollEnabled": true,
+  },
+}
+`;
+
+exports[`handles TOGGLE_GALLERY_SCROLL_ENABLED 2`] = `
+Object {
+  "gallery": Object {
+    "scrollEnabled": false,
+  },
+}
+`;
+
+exports[`it has an initial state 1`] = `
+Object {
+  "gallery": Object {
+    "scrollEnabled": true,
+  },
+}
+`;

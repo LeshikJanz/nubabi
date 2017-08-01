@@ -24,7 +24,7 @@ export const HorizontalCardItem = ({
   layout,
   containerStyle,
 }: Props) => {
-  const mediaProps = { layout };
+  const mediaProps: Object = { layout };
   if (icon) {
     mediaProps.icon = icon;
   } else {

@@ -11,14 +11,18 @@ import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   loading: boolean,
+  disabled?: boolean,
   submitText?: string,
   onPress: () => void,
+  style?: Object,
 };
 
 export const SubmitButton = ({
   loading,
+  disabled = false,
   submitText = 'SAVE',
   onPress,
+  style = {},
 }: Props) => {
   const buttonContent =
     loading === true
@@ -27,14 +31,20 @@ export const SubmitButton = ({
           {submitText}
         </Text>;
 
-  const style = loading === true ? { opacity: 0.2 } : {};
+  if (loading) {
+    style.opacity = 0.2;
+  }
+
+  if (disabled) {
+    style.opacity = theme.states.disabled.opacity;
+  }
 
   return (
     <View style={[styles.submitButtonContainer, style]}>
       <TouchableOpacity
         onPress={onPress}
         style={styles.submitButton}
-        disable={loading}
+        disable={loading || disabled}
       >
         {buttonContent}
       </TouchableOpacity>

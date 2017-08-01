@@ -1,19 +1,28 @@
 // @flow
+import type { NavigationProp } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { Screen } from '../components';
 import AddMemory from './AddMemory';
 
+type Props = {
+  navigation: NavigationProp,
+};
+
 export class AddMemoryScreen extends PureComponent {
+  props: Props;
+
   static navigationOptions = {
     title: 'Add memory',
   };
 
-  handleSubmit = () => {};
+  handleAddVoiceNote = () => {
+    this.props.navigation.navigate('voiceRecording');
+  };
 
   render() {
     return (
       <Screen>
-        <AddMemory />
+        <AddMemory onAddVoiceNote={this.handleAddVoiceNote} />
       </Screen>
     );
   }

@@ -15,7 +15,6 @@ type Props = {
 };
 
 export const HorizontalCardItemMedia = ({ icon, image, layout }: Props) => {
-  console.log(image);
   if (image) {
     if (image.contentType && !image.contentType.startsWith('image')) {
       return (

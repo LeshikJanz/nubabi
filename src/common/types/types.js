@@ -1,7 +1,12 @@
 // @flow
 import type { Element } from 'react';
 
-// Models
+/*
+ ******************************************************************************
+ * Models                                                                     *
+ ******************************************************************************
+ */
+
 import type {
   Activity,
   Avatar,
@@ -10,10 +15,10 @@ import type {
   SkillArea,
   User,
 } from './modelTypes';
+import type { MutationOpts, QueryOpts as QueryOptsApollo } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
 
 export type { OperationComponent, QueryProps } from 'react-apollo';
-
-import type { QueryOpts as QueryOptsApollo, MutationOpts } from 'react-apollo';
 
 export type QueryOpts<T> =
   | (QueryOptsApollo & {
@@ -22,6 +27,13 @@ export type QueryOpts<T> =
   | MutationOpts;
 
 export type { Activity, Avatar, User, SkillArea, Baby };
+export type {
+  Article,
+  File,
+  FileConnection,
+  FileEdge,
+  GrowthArticle,
+} from './modelTypes';
 export * from './queryTypes';
 
 export type FirebaseUser = {
@@ -32,20 +44,7 @@ export type FirebaseUser = {
   avatar?: Avatar,
 };
 
-// Deps
-
-export type Deps = {
-  getState: () => Object,
-  now: () => number,
-  firebase: any,
-  firebaseAuth: Function,
-  firebaseDatabase: any,
-  apollo: Object,
-};
-
 export type Viewer = FirebaseUser; // For the time being
-
-// Data fetching
 
 export type {
   ApolloQueryResult,
@@ -53,7 +52,27 @@ export type {
   InjectedGraphQLDataProps as GraphQLDataProp,
 } from './apolloTypes';
 
-// React Navigation
+/*
+ ******************************************************************************
+ * Deps                                                                       *
+ ******************************************************************************
+ */
+
+export type Deps = {
+  getState: () => Object,
+  now: () => number,
+  firebase: any,
+  firebaseAuth: Function,
+  firebaseDatabase: any,
+  apollo: typeof ApolloClient,
+};
+
+/*
+ ******************************************************************************
+ * React Navigation                                                           *
+ ******************************************************************************
+ */
+
 export type Style =
   | { [key: string]: any }
   | number
@@ -101,7 +120,12 @@ export type NavigationOptions = NavigationScreenOptions;
 
 export type NavigationProp = NavigationScreenProp<*, *>;
 
-// Layout
+/*
+ ******************************************************************************
+ * Layout                                                                     *
+ ******************************************************************************
+ */
+
 export type LayoutProps = {
   viewportWidth: number,
   viewportHeight: number,
@@ -109,7 +133,11 @@ export type LayoutProps = {
   parentHeight: ?number,
 };
 
-// State
+/*
+ ******************************************************************************
+ * State                                                                      *
+ ******************************************************************************
+ */
 
 export type AppState = {
   +error: ?Error,
@@ -221,7 +249,11 @@ export type State = {
   +viewer: ViewerState,
 };
 
-// Actions
+/*
+ ******************************************************************************
+ * Actions                                                                    *
+ ******************************************************************************
+ */
 
 export type AppStartedAction = { type: 'APP_STARTED' };
 

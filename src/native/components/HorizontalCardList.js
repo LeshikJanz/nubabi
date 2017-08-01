@@ -1,6 +1,5 @@
 // @flow
 import type { File } from '../../common/types';
-import type { DataSource } from 'react-native';
 import React, { PureComponent } from 'react';
 import { ListView } from 'react-native';
 import { compose } from 'ramda';
@@ -26,7 +25,7 @@ type Props = {
 };
 
 type State = {
-  ds: DataSource,
+  ds: ListView.DataSource,
 };
 
 export class HorizontalCardList extends PureComponent {

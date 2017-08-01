@@ -18,10 +18,16 @@ import { flattenEdges, isEmptyProp } from '../../common/helpers/graphqlUtils';
 type Props = {
   memory: MemoryType,
   onSubmit: (input: any) => Promise<ApolloQueryResult<*>>,
+  onAddVoiceNote: (id?: string) => void,
   files: Array<File>,
 };
 
-export const EditMemory = ({ memory, onSubmit, files }: Props) => {
+export const EditMemory = ({
+  memory,
+  onSubmit,
+  onAddVoiceNote,
+  files,
+}: Props) => {
   return (
     <MemoryForm
       initialValues={{
@@ -30,6 +36,7 @@ export const EditMemory = ({ memory, onSubmit, files }: Props) => {
       }}
       mode="edit"
       onSubmit={onSubmit}
+      onAddVoiceNote={onAddVoiceNote}
     />
   );
 };

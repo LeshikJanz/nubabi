@@ -18,6 +18,7 @@ type Props = {
   uri: ?string,
   lazyLoad: ?boolean,
   duration: ?number,
+  thumb?: string,
 };
 
 class GalleryVideoItem extends Component {
@@ -107,7 +108,7 @@ class GalleryVideoItem extends Component {
 
     const { progress } = this.state;
 
-    const videoProps = {
+    const videoProps: Object = {
       width: sizeStyle.width,
       height: sizeStyle.height - 200,
       uri,

@@ -1,4 +1,7 @@
+// @flow
+import type { Action, State } from './types';
 import { ApolloClient, createNetworkInterface } from 'apollo-client';
+// $FlowFixMe$
 import { IntrospectionFragmentMatcher } from 'react-apollo';
 import * as firebase from 'firebase';
 import config from './config';
@@ -32,7 +35,7 @@ export const configureApollo = () => {
   return client;
 };
 
-export const configureApolloAuth = store => {
+export const configureApolloAuth = (store: Store<Action, State>) => {
   /* eslint-disable no-param-reassign */
   networkInterface.use([
     {
