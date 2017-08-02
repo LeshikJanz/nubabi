@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import VoiceRecording from './VoiceRecording';
 
 type Props = {
-  memoryId: string,
+  memoryId: ?string,
 };
 
 export class VoiceNoteRecording extends PureComponent {

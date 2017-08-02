@@ -7,7 +7,7 @@ import type {
 
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
-import { assoc, compose, pick } from 'ramda';
+import { assoc, compose, pick, omit } from 'ramda';
 import { connect } from 'react-redux';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
@@ -45,7 +45,11 @@ export default compose(
           // $FlowFixMe$
           return mutate({
             variables: {
-              input: assoc('babyId', currentBabyId, input),
+              input: assoc(
+                'babyId',
+                currentBabyId,
+                omit(['removeFiles'], input),
+              ),
             },
             update: (store, data) => {
               const fragmentOptions = [
