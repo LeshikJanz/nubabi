@@ -114,6 +114,61 @@ export const MemoryMediaImage = ({
   );
 };
 
+export const MemoryMediaAudio = ({
+  media,
+  small,
+  style = {},
+  displayMoreIndicator,
+  onMediaPress,
+}: MemoryMediaVideoProps) => {
+  const content = (
+    <Overlay style={style}>
+      <Box
+        alignItems="center"
+        justifyContent="center"
+        style={() => ({ height: small ? 60 : 180 })}
+        borderRadius={4}
+      >
+        <Box
+          borderRadius={20}
+          backgroundColor="white"
+          style={() => ({ width: 40, height: 40, overflow: 'hidden' })}
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Icon
+            size={30}
+            style={{ marginLeft: 5, marginTop: 2 }}
+            name="ios-play"
+            color={theme.colors.primary}
+          />
+        </Box>
+      </Box>
+      {displayMoreIndicator}
+    </Overlay>
+  );
+  const containerProps = { flex: 1 };
+
+  if (onMediaPress) {
+    containerProps.as = TouchableOpacity;
+    containerProps.onPress = onMediaPress;
+  }
+
+  return (
+    <Box {...containerProps}>
+      {media.thumb
+        ? <Image
+            source={{ uri: media.thumb.url }}
+            resizeMode="cover"
+            style={{ flex: 1 }}
+          >
+            {content}
+          </Image>
+        : content}
+    </Box>
+  );
+};
+
 export const MemoryMediaVideo = ({
   media,
   small,
@@ -121,7 +176,6 @@ export const MemoryMediaVideo = ({
   displayMoreIndicator,
   onMediaPress,
 }: MemoryMediaVideoProps) => {
-  // TODO: real video
   const content = (
     <Overlay style={style}>
       <Box
@@ -187,6 +241,10 @@ export const MemoryMediaSingle = (props: MemoryMediaSingleProps) => {
     }
     case 'image': {
       MediaComponent = MemoryMediaImage;
+      break;
+    }
+    case 'audio': {
+      MediaComponent = MemoryMediaAudio;
       break;
     }
     default: {

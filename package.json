@@ -86,7 +86,7 @@
     "react-native-photo-browser": "^0.3.1",
     "react-native-simple-markdown": "^1.0.60-rc.3",
     "react-native-snap-carousel": "^2.1.2",
-    "react-native-sound": "^0.10.3",
+    "react-native-sound": "https://github.com/blackxored/react-native-sound#feat/preserve-encoding",
     "react-native-spinkit": "^1.0.2",
     "react-native-svg": "^5.2.0",
     "react-native-tab-navigator": "^0.3.3",

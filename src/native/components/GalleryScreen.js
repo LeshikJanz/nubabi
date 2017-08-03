@@ -2,9 +2,10 @@
 import type { FileConnection, FileEdge } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
+import { path } from 'ramda';
 import PhotoBrowser from '../../../react-native-photo-browser';
 import GalleryVideoItem from './GalleryVideoItem';
-import { path } from 'ramda';
+import GalleryAudioItem from './GalleryAudioItem';
 
 type Props = {
   navigation: NavigationProp<*> & {
@@ -84,6 +85,7 @@ class GalleryScreen extends PureComponent {
         startOnGrid={startOnGrid}
         displaySelectionButtons={false}
         useCircleProgress
+        audioComponent={GalleryAudioItem}
         videoComponent={GalleryVideoItem}
         {...activeMediaProps}
       />

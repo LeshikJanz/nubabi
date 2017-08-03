@@ -4619,6 +4619,10 @@ react-native-sound@^0.10.3:
   version "0.10.3"
   resolved "https://registry.yarnpkg.com/react-native-sound/-/react-native-sound-0.10.3.tgz#0faf4f101d46c51315c91d701783c0c6a4db3bf6"
 
+"react-native-sound@https://github.com/blackxored/react-native-sound#feat/preserve-encoding":
+  version "0.10.3"
+  resolved "https://github.com/blackxored/react-native-sound#a97cdbf01b54394e74f3152f16c2d6a95bcfc0dc"
+
 react-native-spinkit@^1.0.2:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-spinkit/-/react-native-spinkit-1.0.3.tgz#5e83e26a3598a94f45102ee15bd918efa673c76d"
