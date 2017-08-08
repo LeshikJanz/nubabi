@@ -35,11 +35,8 @@ class ActivityActions extends Component {
     `,
   };
 
-  componentWillUpdate() {
-    LayoutAnimation.easeInEaseOut();
-  }
-
   toggleCollapsed = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.setState(state => ({
       collapsed: !state.collapsed,
     }));

@@ -15,11 +15,7 @@ type Props = {
   onBrowseFiltered: () => void,
   layout: LayoutProps,
 };
-/*
-  <Box flex={1} alignItems="center" justifyContent="center">
-        <BrowseActivitiesButton onPress={onBrowseAll} />
-      </Box>
- */
+
 const skillAreaMargin = 15;
 
 // TODO: remove this being hardcoded when we devise a better way
