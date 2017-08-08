@@ -1,10 +1,10 @@
 // @flow
-import type { State, File } from '../../common/types';
+import type { File, FileInput, State } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { Platform, View } from 'react-native';
+import { View } from 'react-native';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
-import RNFetchBlob from 'react-native-fetch-blob';
 import {
+  append,
   compose,
   curry,
   isNil,
@@ -14,7 +14,6 @@ import {
   reject,
   union,
   update,
-  append,
 } from 'ramda';
 import { connect } from 'react-redux';
 import moment from 'moment';
@@ -47,70 +46,22 @@ const formatDate = memoize(dateStr => {
   return moment(dateStr).format(dateDisplayFormat).toUpperCase();
 });
 
-const fileToBase64 = (path: string) => {
-  return new Promise((resolve, reject) => {
-    RNFetchBlob.fs
-      .readStream(
-        // file path
-        path,
-        // encoding, should be one of `base64`, `utf8`, `ascii`
-        'base64',
-        // (optional) buffer size, default to 4096 (4095 for BASE64 encoded data)
-        // when reading file in BASE64 encoding, buffer size must be multiples of 3.
-        4095,
-      )
-      .then(ifstream => {
-        let data = '';
-        ifstream.open();
-        ifstream.onData(chunk => {
-          // when encoding is `ascii`, chunk will be an array contains numbers
-          // otherwise it will be a string
-          data += chunk;
-        });
-        ifstream.onError(err => {
-          reject(err);
-        });
-
-        ifstream.onEnd(() => {
-          resolve(data);
-        });
-      });
-  });
-};
-
-const parseImageOrVideo = async (file: MediaPickerItem): File => {
-  if (!file) {
-    return null;
-  }
-
-  if (file.mime.startsWith('video')) {
-    // eslint-disable-next-line no-param-reassign
-    file.data = await fileToBase64(
-      Platform.OS === 'ios' ? file.path.replace('file:///', '') : file.path,
-    );
-  }
-
-  if (!file.data) {
-    return null;
-  }
-
+const parseImageOrVideo = (file: MediaPickerItem): FileInput => {
   return {
-    url: `data:${file.mime};base64,${file.data}`,
+    url: file.path,
     contentType: file.mime,
     name: last(file.path.split('/')),
     size: file.size,
   };
 };
 
+const parseImagesOrVideos = (files: Array<MediaPickerItem>): Array<File> => {
+  return compose(reject(isNil), map(parseImageOrVideo))(files);
+};
+
 const removeMediaAt = curry((index: number, files: Array<File>) => {
   return update(index, null, files);
 });
-
-const parseImagesOrVideos = (
-  files: Array<MediaPickerItem>,
-): Promise<Array<File>> => {
-  return Promise.all(map(parseImageOrVideo)(files)).then(reject(isNil));
-};
 
 class MemoryForm extends PureComponent {
   props: Props;
@@ -119,7 +70,8 @@ class MemoryForm extends PureComponent {
   };
 
   handleAddMedia = () => {
-    mediaPicker().then(parseImagesOrVideos).then(files => {
+    mediaPicker().then(assets => {
+      const files = parseImagesOrVideos(assets);
       this.updateFiles(union(files, this.props.files));
     });
   };
@@ -187,7 +139,7 @@ class MemoryForm extends PureComponent {
   };
 
   handleSubmit = this.props.handleSubmit(input => {
-    this.props.onSubmit({
+    return this.props.onSubmit({
       ...input,
       removeFiles: this.state.removeFiles,
     });

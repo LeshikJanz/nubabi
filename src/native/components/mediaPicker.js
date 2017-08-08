@@ -43,7 +43,6 @@ const defaultOptions = {
   mediaType: 'any',
   multiple: true,
   waitAnimationEnd: false,
-  includeBase64: true,
   loadingLabelText: 'Processing...',
 };
 

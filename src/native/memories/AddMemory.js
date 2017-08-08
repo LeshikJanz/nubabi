@@ -14,6 +14,7 @@ import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
 import { addEdgeToFragment } from '../../common/helpers/graphqlUtils';
+import { processFiles } from '../shared/fileUtils';
 
 type Props = {
   currentBabyId: string,
@@ -41,15 +42,17 @@ export default compose(
     `,
     {
       props: ({ mutate, ownProps: { currentBabyId } }) => ({
-        onSubmit: (input: CreateMemoryInput) => {
+        onSubmit: async (values: CreateMemoryInput) => {
+          const input = {
+            ...values,
+            babyId: currentBabyId,
+            files: await processFiles(values.files),
+          };
+
           // $FlowFixMe$
           return mutate({
             variables: {
-              input: assoc(
-                'babyId',
-                currentBabyId,
-                omit(['removeFiles'], input),
-              ),
+              input: omit(['removeFiles'], input),
             },
             update: (store, data) => {
               const fragmentOptions = [

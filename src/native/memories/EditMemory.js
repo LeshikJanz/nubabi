@@ -14,6 +14,7 @@ import { displayLoadingState, showNoContentViewIf } from '../components';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import { flattenEdges, isEmptyProp } from '../../common/helpers/graphqlUtils';
+import { processFiles } from '../shared/fileUtils';
 
 type Props = {
   memory: MemoryType,
@@ -94,8 +95,9 @@ export default compose(
   `,
     {
       props: ({ mutate, ownProps: { id } }) => ({
-        onSubmit: values => {
+        onSubmit: async values => {
           const input = assoc('id', id, evolve(transforms, values));
+          input.files = await processFiles(input.files);
 
           return mutate({ variables: { input } });
         },
