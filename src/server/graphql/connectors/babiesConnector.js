@@ -1,8 +1,6 @@
 // @flow
-import { getPaginationArguments } from '../resolvers/common';
-import { Reader } from 'ramda-fantasy';
-
 require('axios-debug-log');
+
 import type { ConnectionArguments } from '../resolvers/common';
 import type {
   ActivityLevelOperation,
@@ -21,7 +19,7 @@ import {
   mergeDeepRight,
   curry,
 } from 'ramda';
-import { fromGlobalId } from '../resolvers/common';
+import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
@@ -362,10 +360,6 @@ export const getLibraryArticles = (token: string, args: mixed) => {
     .then(path(['data']));
 };
 
-const tokenReader = Reader(env => env.token);
-
-export const getSkillAreas = () => {
-  return Reader.ask.map(token => {
-    return instance.get('/skill_areas', withToken(token)).then(path(['data']));
-  });
+export const getSkillAreas = (token: string) => {
+  return instance.get('/skill_areas', withToken(token)).then(path(['data']));
 };
