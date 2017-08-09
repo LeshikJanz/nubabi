@@ -3,6 +3,7 @@ import {
   curry,
   curryN,
   either,
+  find,
   isEmpty as isEmptyOrig,
   isNil,
   last,
@@ -10,14 +11,18 @@ import {
   memoize,
   omit,
   path,
+  pathEq,
   pluck,
   prop,
+  set,
   view,
   without,
-  find,
-  pathEq,
-  set,
+  propEq,
 } from 'ramda';
+import {
+  cursorForObjectInConnection as cursorForObjectInConnectionOrig,
+  offsetToCursor,
+} from 'graphql-relay';
 
 export const flattenEdges = memoize(connection => {
   const edges = prop('edges', connection);
@@ -176,5 +181,35 @@ export const addEdgeToMutationResult = (response: any) => {
     },
   };
 };
+
+export const cursorForObjectInConnection = (
+  connection: Array<mixed>,
+  obj: mixed,
+) => {
+  const cursor = cursorForObjectInConnectionOrig(connection, obj);
+
+  // try to find by ID if the original fails
+  if (!cursor && obj.id) {
+    const objInConnectionById = find(propEq('id', obj.id))(connection);
+    if (objInConnectionById) {
+      return offsetToCursor(connection.indexOf(objInConnectionById));
+    }
+  }
+
+  return cursor;
+};
+
+export const addEdgeAndCursorToMutationResult = curry(
+  (connectionGetter: () => Promise<*>, obj: mixed) => {
+    return connectionGetter().then(connection => {
+      return {
+        edge: {
+          node: obj,
+          cursor: cursorForObjectInConnection(connection, obj),
+        },
+      };
+    });
+  },
+);
 
 export const keyExtractor = prop('id');

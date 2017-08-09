@@ -358,7 +358,6 @@ const updateMemory = async (firebase, id: string, input: any) => {
   };
 
   const path = `/memories/${id}`;
-  console.log('firebase', firebase);
   const memory = compose(
     assoc('updatedAt', firebase.database.ServerValue.TIMESTAMP),
     evolve(toFirebaseMemory),

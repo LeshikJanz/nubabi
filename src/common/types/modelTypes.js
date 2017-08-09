@@ -817,7 +817,6 @@ export type FileInputBase64 = {
 };
 
 export type CreateOrUpdateMemoryPayload = {
-  memory: ?Memory,
   edge: ?MemoryEdge,
   clientMutationId: ?string,
 };

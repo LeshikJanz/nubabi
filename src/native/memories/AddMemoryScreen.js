@@ -22,7 +22,10 @@ export class AddMemoryScreen extends PureComponent {
   render() {
     return (
       <Screen>
-        <AddMemory onAddVoiceNote={this.handleAddVoiceNote} />
+        <AddMemory
+          onAddVoiceNote={this.handleAddVoiceNote}
+          goBack={this.props.navigation.goBack}
+        />
       </Screen>
     );
   }

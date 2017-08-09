@@ -9,28 +9,33 @@ import {
   toDate,
   transform,
 } from './common';
-import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
+import { addEdgeAndCursorToMutationResult } from '../../../common/helpers/graphqlUtils';
 
 export const resolvers = {
   Mutation: {
     createMemory: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) => {
+        const babyId = fromGlobalId(input.babyId).id;
+
         return firebase
-          .createMemory(fromGlobalId(input.babyId).id, input)
-          .then(memory => ({
-            memory,
-            ...addEdgeToMutationResult(memory),
-          }));
+          .createMemory(babyId, input)
+          .then(
+            addEdgeAndCursorToMutationResult(() =>
+              firebase.getMemories(babyId),
+            ),
+          );
       },
     ),
     updateMemory: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) => {
         return firebase
           .updateMemory(fromGlobalId(input.id).id, input)
-          .then(memory => ({
-            memory,
-            ...addEdgeToMutationResult(memory),
-          }));
+          .then(memory => {
+            return addEdgeAndCursorToMutationResult(
+              () => firebase.getMemories(memory.babyId),
+              memory,
+            );
+          });
       },
     ),
     deleteMemory: mutationWithClientMutationId(

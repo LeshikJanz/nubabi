@@ -126,7 +126,6 @@ input CreateMemoryInput {
 }
 
 type CreateOrUpdateMemoryPayload {
-  memory: Memory
   edge: MemoryEdge
   clientMutationId: String
 }

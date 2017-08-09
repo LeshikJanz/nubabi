@@ -85,9 +85,12 @@ export default compose(
     gql`
     mutation EditMemory($input: UpdateMemoryInput!) {
       updateMemory(input: $input) {
-        memory {
-          id
-          ...MemoryForm
+        edge {
+          cursor
+          node {
+            id
+            ...MemoryForm
+          }
         }
       }
     }

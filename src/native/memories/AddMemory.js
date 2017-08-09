@@ -4,7 +4,6 @@ import type {
   CreateMemoryInput,
   State,
 } from '../../common/types';
-
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 import { assoc, compose, pick, omit } from 'ramda';
@@ -32,16 +31,17 @@ export default compose(
       mutation AddMemory($input: CreateMemoryInput!) {
         createMemory(input: $input) {
           edge {
+            cursor
             node {
-              ...MemoryListItem
+              ...MemoryItem
             }
           }
         }
       }
-      ${Memory.fragments.item}
+      ${Memory.fragments.detail}
     `,
     {
-      props: ({ mutate, ownProps: { currentBabyId } }) => ({
+      props: ({ mutate, ownProps: { currentBabyId, goBack } }) => ({
         onSubmit: async (values: CreateMemoryInput) => {
           const input = {
             ...values,
@@ -73,7 +73,7 @@ export default compose(
                 { fragmentName: 'Memories' },
               )(store, data);
             },
-          });
+          }).then(() => goBack());
         },
       }),
     },
