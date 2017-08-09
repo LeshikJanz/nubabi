@@ -5,12 +5,18 @@ import {
   either,
   isEmpty as isEmptyOrig,
   isNil,
+  last,
+  lensPath,
   memoize,
   omit,
   path,
   pluck,
   prop,
-  last,
+  view,
+  without,
+  find,
+  pathEq,
+  set,
 } from 'ramda';
 
 export const flattenEdges = memoize(connection => {
@@ -121,6 +127,45 @@ export const addEdgeToFragment = (
   const addWith = addTo === 'head' ? 'unshift' : 'push';
   edges[addWith](payload[operationName].edge);
   store.writeFragment({ fragment, ...fragmentOptions, id, data });
+};
+
+export const removeEdgeFromFragment = (
+  fragment: DocumentNode,
+  edgeId: string,
+  rootId: string,
+  edgePath: Array<string>,
+  fragmentOptions?:
+    | DataProxyReadFragmentOptions
+    | DataProxyWriteFragmentOptions = {},
+) => (store: DataProxy, { data: payload }) => {
+  const data = store.readFragment({ fragment, id: rootId, ...fragmentOptions });
+
+  if (last(edgePath) !== 'edges') {
+    edgePath.push('edges');
+  }
+
+  const edgesPath = lensPath(edgePath);
+  const edges = view(edgesPath, data);
+
+  // By convention we use the first key to fetch the payload
+  // maybe we can use this on addEdges... above
+  const operationName = Object.keys(payload)[0];
+
+  if (!payload[operationName]) {
+    // The operation didn't complete successfully so we return early.
+    return;
+  }
+
+  const edge = find(pathEq(['node', 'id'], edgeId), edges);
+
+  const newEdges = set(edgesPath, without([edge], edges), data);
+
+  store.writeFragment({
+    fragment,
+    ...fragmentOptions,
+    id: rootId,
+    data: newEdges,
+  });
 };
 
 export const addEdgeToMutationResult = (response: any) => {

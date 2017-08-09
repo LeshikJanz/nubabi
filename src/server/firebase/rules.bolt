@@ -15,7 +15,7 @@ isFriend(userId) {
 }
 
 isAuthor(obj) {
-  obj.authorId == auth.uid
+  prior(obj).authorId == auth.uid
 }
 
 canSeeUser(userId) {

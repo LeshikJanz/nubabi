@@ -1,18 +1,29 @@
 // @flow
 import type { NavigationProp } from '../../common/types';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
+import { NavigationActions } from 'react-navigation';
+import { path } from 'ramda';
 import { Screen } from '../components';
 import EditMemory from './EditMemory';
+import EditMemoryHeader from './EditMemoryHeader';
 
 type Props = {
   navigation: NavigationProp,
 };
 
-export class EditMemoryScreen extends PureComponent {
+export class EditMemoryScreen extends Component {
   props: Props;
 
-  static navigationOptions = {
-    title: 'Edit Memory',
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'Edit Memory',
+      headerRight: (
+        <EditMemoryHeader
+          memoryId={navigation.state.params.id}
+          goBack={() => navigation.goBack(navigation.state.params.parentKey)}
+        />
+      ),
+    };
   };
 
   handleAddVoiceNote = () => {

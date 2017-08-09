@@ -1,11 +1,13 @@
 // @flow
+// noinspection ES6UnusedImports
 import {
-  globalIdField,
-  fromGlobalId,
   connectionFromPromisedArrayWithCount,
+  fromGlobalId,
+  globalIdField,
+  mutationWithClientMutationId,
+  runFirebaseTask,
   toDate,
   transform,
-  mutationWithClientMutationId,
 } from './common';
 import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
 
@@ -29,6 +31,14 @@ export const resolvers = {
             memory,
             ...addEdgeToMutationResult(memory),
           }));
+      },
+    ),
+    deleteMemory: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return runFirebaseTask(
+          firebase.deleteMemory(fromGlobalId(input.id).id),
+          memory => ({ memory }),
+        );
       },
     ),
   },

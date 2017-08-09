@@ -21,7 +21,10 @@ export class ViewMemoryScreen extends PureComponent {
   };
 
   handleNavigateToEditMemory = (id: string) => {
-    this.props.navigation.navigate('editMemory', { id });
+    this.props.navigation.navigate('editMemory', {
+      id,
+      parentKey: this.props.navigation.state.key,
+    });
   };
 
   render() {

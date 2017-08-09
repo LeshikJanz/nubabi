@@ -8,6 +8,7 @@ enum MemoryFilter {
 extend type Mutation {
   createMemory(input: CreateMemoryInput!): CreateOrUpdateMemoryPayload
   updateMemory(input: UpdateMemoryInput!): CreateOrUpdateMemoryPayload
+  deleteMemory(input: DeleteMemoryInput!): DeleteMemoryPayload
 }
 
 extend type Baby {
@@ -136,4 +137,15 @@ input UpdateMemoryInput {
   createdAt: DateTime
   files: [FileInputBase64]
   removeFiles: [ID],
+}
+
+input DeleteMemoryInput {
+  id: ID!
+}
+
+type DeleteMemoryPayload {
+  memory: Memory
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
 }

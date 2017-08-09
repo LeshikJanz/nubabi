@@ -667,6 +667,7 @@ export type Mutation = {
   toggleActivityFavorite: ?ToggleFavoritePayload,
   createMemory: ?CreateOrUpdateMemoryPayload,
   updateMemory: ?CreateOrUpdateMemoryPayload,
+  deleteMemory: ?DeleteMemoryPayload,
 };
 
 export type UpdateUserInput = {
@@ -827,6 +828,16 @@ export type UpdateMemoryInput = {
   createdAt: ?any,
   files: ?Array<FileInputBase64>,
   removeFiles: ?Array<string>,
+};
+
+export type DeleteMemoryInput = {
+  id: string,
+};
+
+export type DeleteMemoryPayload = {
+  memory: ?Memory,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId: ?string,
 };
 
 export type CreateUserInput = {

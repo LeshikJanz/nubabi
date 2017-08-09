@@ -1,12 +1,9 @@
 // @flow
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
-import {
-  sortByTimestamp,
-  toTimestamp,
-  fromGlobalId,
-} from '../resolvers/common';
-import R, { omit, evolve, map, compose, assoc } from 'ramda';
+import { sortByTimestamp, toTimestamp } from '../resolvers/common';
+import R, { assoc, compose, evolve, map, omit } from 'ramda';
 import { decode } from 'base-64';
+import Task from 'data.task';
 import {
   toCentimeters,
   toKilograms,
@@ -279,6 +276,16 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
   return friend;
 };
 
+const upsert = (basePath: string, obj: Object) => {
+  const target = {};
+
+  Object.keys(obj).forEach(key => {
+    target[`${basePath}/${key}`] = obj[key];
+  });
+
+  return target;
+};
+
 const uploadMemoryFiles = async (
   firebase,
   memoryId,
@@ -345,16 +352,6 @@ const createMemory = async (
   return get(firebase, `/memories/${memoryId}`);
 };
 
-const upsert = (basePath: string, obj: Object) => {
-  const target = {};
-
-  Object.keys(obj).forEach(key => {
-    target[`${basePath}/${key}`] = obj[key];
-  });
-
-  return target;
-};
-
 const updateMemory = async (firebase, id: string, input: any) => {
   const toFirebaseMemory = {
     createdAt: toTimestamp,
@@ -387,6 +384,28 @@ const updateMemory = async (firebase, id: string, input: any) => {
 
   await firebase.database().ref().update(updates);
   return get(firebase, path);
+};
+
+const deleteMemory = (firebase, memoryId: string) => {
+  return new Task((reject, resolve) => {
+    return get(firebase, `/memories/${memoryId}`).then(resolve).catch(reject);
+  })
+    .map(memory => {
+      const updates = {};
+      updates[`/memories/${memoryId}`] = null;
+      updates[`/babies/${memory.babyId}/memories/${memoryId}`] = null;
+      return { memory, updates };
+    })
+    .chain(({ memory, updates }) => {
+      return new Task((reject, resolve) => {
+        firebase
+          .database()
+          .ref()
+          .update(updates)
+          .then(() => resolve(memory))
+          .catch(reject);
+      });
+    });
 };
 
 const getBaby = (firebase, id) => {
@@ -611,6 +630,7 @@ const firebaseConnector = firebase => {
     },
     createMemory: (babyId, input) => createMemory(firebase, babyId, input),
     updateMemory: (id, input) => updateMemory(firebase, id, input),
+    deleteMemory: id => deleteMemory(firebase, id),
   };
 };
 
