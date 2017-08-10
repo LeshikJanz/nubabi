@@ -8,7 +8,10 @@ import Card from './Card';
 import Text from './Text';
 import showNoContentViewIf from './showNoContentViewIf';
 import HorizontalCardItem from './HorizontalCardItem';
-import { isEmptyProp } from '../../common/helpers/graphqlUtils';
+import {
+  isEmptyProp,
+  isUUID as isOptimistic,
+} from '../../common/helpers/graphqlUtils';
 
 type HorizontalCardItemType = {
   id: string,
@@ -61,13 +64,12 @@ export class HorizontalCardList extends PureComponent {
       this.props.onItemPress(item.id, item.title);
     };
 
+    const cardProps = isOptimistic(item.id)
+      ? { style: () => ({ opacity: 0.5 }) }
+      : { onPress: onViewItem };
+
     return (
-      <Card
-        padding={0}
-        margin={0}
-        justifyContent="flex-start"
-        onPress={onViewItem}
-      >
+      <Card padding={0} margin={0} justifyContent="flex-start" {...cardProps}>
         <HorizontalCardItem key={item.id} {...item} />
       </Card>
     );

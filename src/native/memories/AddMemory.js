@@ -110,7 +110,6 @@ export default compose(
               },
             },
             update: (store, data) => {
-              console.log(data);
               const fragmentOptions = [
                 'createMemory',
                 ['memories'],
