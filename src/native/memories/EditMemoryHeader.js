@@ -10,6 +10,7 @@ import { Icon } from '../components';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
 import { appError } from '../../common/app/actions';
+import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 
 type Props = {
   goBack: () => void,
@@ -67,7 +68,7 @@ export default compose(
     ({ babies }: State) => ({
       currentBabyId: babies.currentBabyId,
     }),
-    { appError },
+    { appError, toggleNetworkActivityIndicator },
   ),
   graphql(
     gql`
@@ -82,6 +83,8 @@ export default compose(
     {
       props: ({ mutate, ownProps }) => ({
         onSubmit: () => {
+          ownProps.toggleNetworkActivityIndicator(true);
+
           // $FlowFixMe$
           return mutate({
             variables: { input: { id: ownProps.memoryId } },
@@ -111,7 +114,7 @@ export default compose(
                 fragmentName: 'Memories',
               })(store, data);
             },
-          });
+          }).finally(() => ownProps.toggleNetworkActivityIndicator(false));
         },
       }),
     },
