@@ -9,9 +9,11 @@ import { removeEdgeFromFragment } from '../../common/helpers/graphqlUtils';
 import { Icon } from '../components';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
+import { appError } from '../../common/app/actions';
 
 type Props = {
   goBack: () => void,
+  appError: (error: Error) => void,
   onSubmit: () => Promise<ApolloQueryResult<*>>,
 };
 
@@ -36,7 +38,16 @@ class EditMemoryHeader extends PureComponent {
   };
 
   handleDelete = () => {
-    this.props.onSubmit().then(() => this.props.goBack());
+    this.props.onSubmit().catch(() =>
+      setTimeout(() => {
+        this.props.appError(
+          new Error(
+            'There was a problem deleting a memory. Please try again later.',
+          ),
+        );
+      }, 1000),
+    );
+    this.props.goBack();
   };
 
   render() {
@@ -52,9 +63,12 @@ class EditMemoryHeader extends PureComponent {
 }
 
 export default compose(
-  connect(({ babies }: State) => ({
-    currentBabyId: babies.currentBabyId,
-  })),
+  connect(
+    ({ babies }: State) => ({
+      currentBabyId: babies.currentBabyId,
+    }),
+    { appError },
+  ),
   graphql(
     gql`
       mutation DeleteMemory($input: DeleteMemoryInput!) {
@@ -71,6 +85,16 @@ export default compose(
           // $FlowFixMe$
           return mutate({
             variables: { input: { id: ownProps.memoryId } },
+            optimisticResponse: {
+              __typename: 'Mutation',
+              deleteMemory: {
+                __typename: 'DeleteMemoryPayload',
+                memory: {
+                  __typename: 'Memory',
+                  id: ownProps.memoryId,
+                },
+              },
+            },
             update: (store, data) => {
               const options = [
                 ownProps.memoryId,
