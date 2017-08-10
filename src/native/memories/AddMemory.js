@@ -56,7 +56,7 @@ export default compose(
             variables: {
               input: omit(['removeFiles'], input),
             },
-            optimisticResponse1: {
+            optimisticResponse: {
               __typename: 'Mutation',
               createMemory: {
                 __typename: 'CreateOrUpdateMemoryPayload',
