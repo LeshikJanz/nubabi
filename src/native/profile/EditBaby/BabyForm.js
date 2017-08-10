@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { reduxForm, Field } from 'redux-form';
-import { DatePicker } from '../../components';
+import { DatePicker, SubmitButton } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NubabiIcon from '../../../common/icons/nubabi';
@@ -37,7 +37,7 @@ type Props = {
   initialValues: Baby, // eslint-disable-line react/no-unused-prop-types
   onSubmit: () => void,
   handleSubmit: () => void,
-  change: () => void,
+  change: (field: string, value: mixed) => void,
   loading: Boolean,
   mode: 'add' | 'edit',
 };
@@ -271,17 +271,12 @@ class Form extends Component {
           />
         </View>
 
-        <View style={styles.submitButtonContainer}>
-          <TouchableOpacity
-            onPress={handleSubmit(submit)}
-            style={styles.submitButton}
-            disable={this.props.loading}
-          >
-            <Text style={styles.submitText}>
-              {submitText}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <SubmitButton
+          onPress={handleSubmit(submit)}
+          loading={this.props.loading}
+          disabled={this.props.loading}
+          submitText={submitText}
+        />
       </KeyboardAwareScrollView>
     );
   }
