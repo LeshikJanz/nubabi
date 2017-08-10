@@ -232,6 +232,7 @@ export type UIState = {
   +gallery: {
     +scrollEnabled: boolean,
   },
+  +showNetworkIndicator: boolean,
 };
 
 export type State = {
@@ -325,6 +326,11 @@ export type ToggleGalleryScrollEnabledAction = {
   payload: boolean,
 };
 
+export type ToggleNetworkIndicatorAction = {
+  type: 'TOGGLE_NETWORK_ACTIVITY_INDICATOR',
+  payload: boolean,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -340,4 +346,5 @@ export type Action =
   | SeenGrowthGlobalIntroAction
   | SkipGrowthIntroductionAction
   | SettingsSetValueAction
-  | ToggleGalleryScrollEnabledAction;
+  | ToggleGalleryScrollEnabledAction
+  | ToggleNetworkIndicatorAction;

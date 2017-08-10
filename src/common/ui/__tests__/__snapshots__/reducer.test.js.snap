@@ -16,10 +16,20 @@ Object {
 }
 `;
 
+exports[`handles TOGGLE_NETWORK_INDICATOR 1`] = `
+Object {
+  "gallery": Object {
+    "scrollEnabled": true,
+  },
+  "showNetworkIndicator": true,
+}
+`;
+
 exports[`it has an initial state 1`] = `
 Object {
   "gallery": Object {
     "scrollEnabled": true,
   },
+  "showNetworkIndicator": false,
 }
 `;
