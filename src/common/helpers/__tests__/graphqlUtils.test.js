@@ -6,8 +6,10 @@ import {
   isEmpty,
   isEmptyPath,
   isEmptyProp,
+  isUUID,
   mapEdgesToProp,
 } from '../graphqlUtils';
+import uuid from 'react-native-uuid';
 
 describe('flattenEdges', () => {
   it('returns an Array from a GraphQL connection', () => {
@@ -113,5 +115,15 @@ describe('addEdgeAndCursorToMutationResult', () => {
     expect(result).toHaveProperty('edge');
     expect(result.edge.cursor).toBeTruthy();
     expect(result.edge.node).toEqual(obj);
+  });
+});
+
+describe('isUUID', () => {
+  it('returns true if the given string is a valid UUID', () => {
+    expect(isUUID(uuid.v4())).toBe(true);
+  });
+
+  it('returns false if the given strring is not a valid UUID', () => {
+    expect(isUUID('foo')).toBe(false);
   });
 });
