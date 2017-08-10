@@ -16,6 +16,7 @@ import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
 import { addEdgeToFragment } from '../../common/helpers/graphqlUtils';
 import { processFiles } from '../shared/fileUtils';
+import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 
 type Props = {
   currentBabyId: string,
@@ -27,7 +28,9 @@ export const AddMemory = ({ onSubmit, onAddVoiceNote }: Props) =>
   <MemoryForm onSubmit={onSubmit} onAddVoiceNote={onAddVoiceNote} />;
 
 export default compose(
-  connect(({ babies }: State) => pick(['currentBabyId'], babies)),
+  connect(({ babies }: State) => pick(['currentBabyId'], babies), {
+    toggleNetworkActivityIndicator,
+  }),
   graphql(
     gql`
       mutation AddMemory($input: CreateMemoryInput!) {
@@ -43,13 +46,20 @@ export default compose(
       ${Memory.fragments.detail}
     `,
     {
-      props: ({ mutate, ownProps: { currentBabyId, goBack } }) => ({
+      props: ({
+        mutate,
+        ownProps: { currentBabyId, goBack, toggleNetworkActivityIndicator },
+      }) => ({
         onSubmit: async (values: CreateMemoryInput) => {
+          toggleNetworkActivityIndicator(true);
+
           const input = {
             ...values,
             babyId: currentBabyId,
             files: await processFiles(values.files),
           };
+
+          goBack();
 
           // $FlowFixMe$
           const mutation = mutate({
@@ -121,25 +131,25 @@ export default compose(
             },
           });
 
-          goBack();
-          return mutation.then(data => {
-            const edges = path(
-              ['data', 'createMemory', 'edge', 'node', 'files', 'edges'],
-              data,
-            );
-            if (!edges) {
-              return null;
-            }
-            const files = pluck('node', edges);
-            const images = pluck(
-              'url',
-              filter(propEq('__typename', 'Image'), files),
-            );
-            if (images.length) {
-              console.log('caching ', images);
-              return ImageCacheProvider.cacheMultipleImages(images);
-            }
-          });
+          return mutation
+            .then(data => {
+              const edges = path(
+                ['data', 'createMemory', 'edge', 'node', 'files', 'edges'],
+                data,
+              );
+              if (!edges) {
+                return null;
+              }
+              const files = pluck('node', edges);
+              const images = pluck(
+                'url',
+                filter(propEq('__typename', 'Image'), files),
+              );
+              if (images.length) {
+                return ImageCacheProvider.cacheMultipleImages(images);
+              }
+            })
+            .finally(() => toggleNetworkActivityIndicator(false));
         },
       }),
     },
