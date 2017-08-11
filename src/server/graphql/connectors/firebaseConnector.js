@@ -1,6 +1,11 @@
 // @flow
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
-import { sortByTimestamp, toTimestamp } from '../resolvers/common';
+// noinspection ES6UnusedImports
+import {
+  sortByTimestamp,
+  toTimestamp,
+  fromGlobalId,
+} from '../resolvers/common';
 import R, { assoc, compose, evolve, map, omit } from 'ramda';
 import { decode } from 'base-64';
 import Task from 'data.task';
