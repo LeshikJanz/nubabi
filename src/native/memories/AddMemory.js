@@ -6,9 +6,10 @@ import type {
 } from '../../common/types';
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
-import { assoc, compose, pick, omit, path, pluck, filter, propEq } from 'ramda';
+import { assoc, compose, filter, omit, path, pick, pluck, propEq } from 'ramda';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
+import base64 from 'base-64';
 import { ImageCacheProvider } from 'react-native-cached-image';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
@@ -28,9 +29,15 @@ export const AddMemory = ({ onSubmit, onAddVoiceNote }: Props) =>
   <MemoryForm onSubmit={onSubmit} onAddVoiceNote={onAddVoiceNote} />;
 
 export default compose(
-  connect(({ babies }: State) => pick(['currentBabyId'], babies), {
-    toggleNetworkActivityIndicator,
-  }),
+  connect(
+    (state: State) => ({
+      currentBabyId: state.babies.currentBabyId,
+      currentUserId: state.viewer.uid,
+    }),
+    {
+      toggleNetworkActivityIndicator,
+    },
+  ),
   graphql(
     gql`
       mutation AddMemory($input: CreateMemoryInput!) {
@@ -48,7 +55,12 @@ export default compose(
     {
       props: ({
         mutate,
-        ownProps: { currentBabyId, goBack, toggleNetworkActivityIndicator },
+        ownProps: {
+          currentBabyId,
+          goBack,
+          toggleNetworkActivityIndicator,
+          currentUserId,
+        },
       }) => ({
         onSubmit: async (values: CreateMemoryInput) => {
           toggleNetworkActivityIndicator(true);
@@ -110,6 +122,21 @@ export default compose(
               },
             },
             update: (store, data) => {
+              // Assign author as the current user if not present (optimistic)
+              if (!data.data.createMemory.edge.node.author) {
+                const userId = base64.encode(`User:${currentUserId}`);
+                const avatar = store.data[`$${userId}.avatar`];
+
+                // eslint-disable-next-line no-param-reassign
+                data.data.createMemory.edge.node.author = {
+                  __typename: 'User',
+                  avatar: {
+                    __typename: 'Avatar',
+                    url: avatar.url,
+                  },
+                };
+              }
+
               const fragmentOptions = [
                 'createMemory',
                 ['memories'],
@@ -130,25 +157,28 @@ export default compose(
             },
           });
 
-          return mutation
-            .then(data => {
-              const edges = path(
-                ['data', 'createMemory', 'edge', 'node', 'files', 'edges'],
-                data,
-              );
-              if (!edges) {
-                return null;
-              }
-              const files = pluck('node', edges);
-              const images = pluck(
-                'url',
-                filter(propEq('__typename', 'Image'), files),
-              );
-              if (images.length) {
-                return ImageCacheProvider.cacheMultipleImages(images);
-              }
-            })
-            .finally(() => toggleNetworkActivityIndicator(false));
+          return (
+            mutation
+              .then(data => {
+                const edges = path(
+                  ['data', 'createMemory', 'edge', 'node', 'files', 'edges'],
+                  data,
+                );
+                if (!edges) {
+                  return null;
+                }
+                const files = pluck('node', edges);
+                const images = pluck(
+                  'url',
+                  filter(propEq('__typename', 'Image'), files),
+                );
+                if (images.length) {
+                  return ImageCacheProvider.cacheMultipleImages(images);
+                }
+              })
+              // $FlowFixMe$
+              .finally(() => toggleNetworkActivityIndicator(false))
+          );
         },
       }),
     },

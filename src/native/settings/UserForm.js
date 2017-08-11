@@ -22,8 +22,8 @@ import imagePicker from '../components/imagePicker';
 import {
   formattedDate,
   maxLength,
-  required,
   renderDatePicker,
+  required,
 } from '../shared/forms';
 
 type Props = {
@@ -45,6 +45,13 @@ class UserForm extends Component {
         firstName
         lastName
         dob
+        avatar {
+          url
+        }
+      }
+    `,
+    avatar: gql`
+      fragment UserAvatar on User {
         avatar {
           url
         }

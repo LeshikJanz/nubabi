@@ -8,6 +8,7 @@ import { gql } from 'react-apollo';
 import moment from 'moment';
 import { Box, Card, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
+import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
 import MemoryMedia, {
   fragments as MemoryMediaFragments,
 } from '../components/MemoryMedia';
@@ -169,13 +170,21 @@ class Memory extends PureComponent {
     const date = formatMemoryDate(createdAt);
     const avatar = author.avatar.url;
 
+    const mainContainerStyle = isOptimistic(id)
+      ? { opacity: theme.states.disabled.opacity }
+      : {};
+
+    const containerProps = isOptimistic(id)
+      ? {}
+      : { onPress: this.handleEditMemory, as: TouchableOpacity };
+
     return (
       <Box
         flex={1}
         contentSpacing
         paddingVertical={0}
         justifyContent="flex-start"
-        style={() => ({ marginTop: -9 })}
+        style={() => ({ marginTop: -9, ...mainContainerStyle })}
       >
         <Box flexDirection="row" alignItems="center">
           <Image
@@ -198,7 +207,7 @@ class Memory extends PureComponent {
 
           <Box flexDirection="row" alignItems="center">
             <Icon size={20} color={theme.colors.gray} name="ios-share-alt" />
-            <Box as={TouchableOpacity} onPress={this.handleEditMemory}>
+            <Box {...containerProps}>
               <Icon
                 size={20}
                 color={theme.colors.gray}

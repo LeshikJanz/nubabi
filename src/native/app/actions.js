@@ -23,6 +23,9 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
           viewer {
             user {
               id
+              avatar {
+                url
+              }
             }
             babies {
               edges {

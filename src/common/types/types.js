@@ -189,7 +189,7 @@ export type AuthState = {
 };
 
 export type ViewerState = {
-  +viewer: ?User,
+  +viewer: ?Viewer,
 };
 
 export type UnitDisplaySettingsState = {

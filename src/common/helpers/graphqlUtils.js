@@ -131,6 +131,7 @@ export const addEdgeToFragment = (
 
   const addWith = addTo === 'head' ? 'unshift' : 'push';
   edges[addWith](payload[operationName].edge);
+
   store.writeFragment({ fragment, ...fragmentOptions, id, data });
 };
 
