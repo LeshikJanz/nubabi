@@ -56,7 +56,7 @@ class GalleryScreen extends PureComponent {
     return this.props.navigation.state.params.files.edges.map(edge => ({
       type: this.getMediaType(edge),
       thumb: path(['thumb', 'url'], edge.node),
-      photo: edge.node.url,
+      photo: edge.node.large ? edge.node.large.url : edge.node.url,
       duration: path(['duration'], edge.node),
     }));
   }
