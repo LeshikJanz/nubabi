@@ -108,6 +108,7 @@ export default compose(
                             id: uuid.v4(),
                             ...file,
                             thumb: null,
+                            large: null,
                           },
                         };
                       }),
