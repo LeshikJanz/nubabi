@@ -113,6 +113,9 @@ class Memory extends PureComponent {
                 thumb {
                   url
                 }
+                large {
+                  url
+                }
               }
 
               ... on Audio {

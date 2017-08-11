@@ -47,6 +47,14 @@ RecentMemories.fragments = {
                   id
                   contentType
                   url
+                  ... on Image {
+                    thumb {
+                      url
+                    }
+                    large {
+                      url
+                    }
+                  }
                   ... on Video {
                     thumb {
                       url

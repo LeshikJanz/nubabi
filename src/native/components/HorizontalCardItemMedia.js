@@ -1,8 +1,9 @@
 // @flow
-import type { File, LayoutProps } from '../../common/types';
+import type { File, Image as ImageType, LayoutProps } from '../../common/types';
 import React from 'react';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { prop, propOr } from 'ramda';
 import Box from './Box';
 import Overlay from './Overlay';
 import theme from '../../common/themes/defaultTheme';
@@ -10,7 +11,7 @@ import { MemoryMediaSingle } from './MemoryMedia';
 
 type Props = {
   icon?: string,
-  image?: File,
+  image?: ImageType,
   layout: LayoutProps,
 };
 
@@ -23,17 +24,19 @@ export const HorizontalCardItemMedia = ({ icon, image, layout }: Props) => {
           style={{ width: layout.parentWidth, height: 80, overflow: 'hidden' }}
         />
       );
-    } else {
-      return (
-        <Image
-          source={{ uri: image.url }}
-          style={{ width: layout.parentWidth, height: 80, flex: 1 }}
-          resizeMode="cover"
-        >
-          <Overlay />
-        </Image>
-      );
     }
+
+    const imageSource = image.thumb || image;
+
+    return (
+      <Image
+        source={{ uri: imageSource.url }}
+        style={{ width: layout.parentWidth, height: 80, flex: 1 }}
+        resizeMode="cover"
+      >
+        <Overlay />
+      </Image>
+    );
   }
 
   if (icon) {
