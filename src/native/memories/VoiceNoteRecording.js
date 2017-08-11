@@ -1,17 +1,13 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import VoiceRecording from './VoiceRecording';
 
 type Props = {
-  memoryId: ?string,
+  goBack: () => void,
 };
 
-export class VoiceNoteRecording extends PureComponent {
-  props: Props;
-
-  render() {
-    return <VoiceRecording />;
-  }
-}
+export const VoiceNoteRecording = ({ goBack }: Props) => {
+  return <VoiceRecording goBack={goBack} />;
+};
 
 export default VoiceNoteRecording;

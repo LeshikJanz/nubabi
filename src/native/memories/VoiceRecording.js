@@ -5,16 +5,22 @@ import { LayoutAnimation, PermissionsAndroid, Platform } from 'react-native';
 import Sound from 'react-native-sound';
 import { AudioRecorder, AudioUtils } from 'react-native-audio';
 import uuid from 'react-native-uuid';
+import { change, formValueSelector } from 'redux-form';
+import { connect } from 'react-redux';
+import { compose, last } from 'ramda';
 import { Box, FAB, Icon, Loader, SubmitButton, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { formatDuration } from '../../common/helpers/formatDuration';
 
-type Props = {};
+type Props = {
+  goBack: () => void,
+};
 
 export class VoiceRecording extends PureComponent {
   props: Props;
   state = {
     isSubmitting: false,
+    isPlaying: false,
     isRecording: false,
     finished: false,
     stoppedRecording: undefined,
@@ -229,7 +235,17 @@ export class VoiceRecording extends PureComponent {
     });
   }
 
-  handleSubmit = () => {};
+  handleSubmit = () => {
+    this.props.change('memory', 'files', [
+      ...this.props.files,
+      {
+        contentType: 'audio/aac',
+        name: last(this.state.audioPath.split('/')),
+        url: this.state.audioPath,
+      },
+    ]);
+    this.props.goBack();
+  };
 
   render() {
     const { isRecording, isSubmitting, isPlaying } = this.state;
@@ -326,4 +342,15 @@ export class VoiceRecording extends PureComponent {
   }
 }
 
-export default VoiceRecording;
+const selector = formValueSelector('memory');
+
+export default compose(
+  connect(
+    (state: State) => ({
+      files: selector(state, 'files'),
+    }),
+    {
+      change,
+    },
+  ),
+)(VoiceRecording);

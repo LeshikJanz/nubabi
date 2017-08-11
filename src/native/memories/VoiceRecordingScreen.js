@@ -20,7 +20,10 @@ export class VoiceRecordingScreen extends PureComponent {
 
     return (
       <Screen>
-        <VoiceNoteRecording memoryId={memoryId} />
+        <VoiceNoteRecording
+          memoryId={memoryId}
+          goBack={this.props.navigation.goBack}
+        />
       </Screen>
     );
   }

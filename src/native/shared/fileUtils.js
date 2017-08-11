@@ -50,6 +50,10 @@ export const processFiles = async files => {
           file,
         );
 
+        if (!file.size) {
+          input.size = (await RNFetchBlob.fs.stat(url)).size;
+        }
+
         return input;
       }
 
