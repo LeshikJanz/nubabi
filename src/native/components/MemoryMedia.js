@@ -95,10 +95,12 @@ export const MemoryMediaImage = ({
   displayMoreIndicator,
   onMediaPress,
 }: MemoryMediaImageProps) => {
+  const imageSource = media.thumb || media;
+
   return (
     <RoundedContainer style={style} onPress={onMediaPress}>
       <Image
-        source={{ uri: media.url }}
+        source={{ uri: imageSource.url }}
         style={{
           flex: 1,
           height: small ? 60 : 180,
