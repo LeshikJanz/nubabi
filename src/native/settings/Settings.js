@@ -13,7 +13,7 @@ import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {
-  user: { user: Viewer },
+  user?: { user: Viewer },
   settings: SettingsState,
   appName: string,
   appVersion: string,
