@@ -10,7 +10,7 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#EA3154",
-    "fontFamily": "System"
+    "fontFamily": "SF Pro Text"
 }
 
 <View
@@ -62,7 +62,7 @@ style = Object {
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#EA3154",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
           "lineHeight": 16,
         }

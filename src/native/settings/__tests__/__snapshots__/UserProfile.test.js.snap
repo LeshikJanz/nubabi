@@ -25,7 +25,7 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#748294",
-    "fontFamily": "System",
+    "fontFamily": "SF Pro Text",
     "letterSpacing": -0.21,
     "alignSelf": "center"
 }
@@ -128,7 +128,7 @@ style = Object {
             "borderRightWidth": 0,
             "borderTopWidth": 0,
             "color": "#748294",
-            "fontFamily": "System",
+            "fontFamily": "SF Pro Text",
             "fontSize": 14.791111111111112,
             "lineHeight": 16,
             "marginBottom": 3.2,
@@ -152,7 +152,7 @@ style = Object {
             "borderRightWidth": 0,
             "borderTopWidth": 0,
             "color": "#748294",
-            "fontFamily": "System",
+            "fontFamily": "SF Pro Text",
             "fontSize": 13,
             "letterSpacing": -0.21,
             "lineHeight": 16,

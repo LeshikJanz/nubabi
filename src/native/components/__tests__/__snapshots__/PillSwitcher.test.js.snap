@@ -19,7 +19,7 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#748294",
-    "fontFamily": "System",
+    "fontFamily": "SF Pro Text",
     "fontWeight": "600"
 }
 
@@ -68,7 +68,7 @@ style = Object {
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#454D56",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
           "fontWeight": "600",
           "lineHeight": 16,
@@ -126,7 +126,7 @@ style = Object {
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#748294",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
           "lineHeight": 16,
         }
@@ -157,7 +157,7 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#748294",
-    "fontFamily": "System",
+    "fontFamily": "SF Pro Text",
     "fontWeight": "600"
 }
 
@@ -206,7 +206,7 @@ style = Object {
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#454D56",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
           "fontWeight": "600",
           "lineHeight": 16,
@@ -264,7 +264,7 @@ style = Object {
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#748294",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
           "lineHeight": 16,
         }

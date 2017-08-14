@@ -63,7 +63,7 @@ const theme: Theme = {
   text: {
     bold: 600,
     medium: 500,
-    fontFamily: 'System',
+    fontFamily: 'SF Pro Text',
   },
   block: {
     marginBottom: 1,
