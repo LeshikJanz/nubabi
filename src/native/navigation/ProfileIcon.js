@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Image from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
-import { compose, path } from 'ramda';
+import { compose, path, prop } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import color from 'color';
@@ -111,10 +111,10 @@ export default compose(
         skip: !currentBabyId,
       }),
       props: ({ data }) => {
-        const avatar = path(['viewer', 'baby', 'avatar'], data);
+        const avatar = path(['viewer', 'baby', 'avatar', 'url'], data);
 
         return {
-          avatarSource: avatar && { uri: avatar.url },
+          avatarSource: { uri: avatar },
         };
       },
     },
