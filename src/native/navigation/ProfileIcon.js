@@ -114,7 +114,7 @@ export default compose(
         const avatar = path(['viewer', 'baby', 'avatar'], data);
 
         return {
-          avatarSource: avatar ? { uri: avatar.url } : null,
+          avatarSource: avatar && { uri: avatar.url },
         };
       },
     },
