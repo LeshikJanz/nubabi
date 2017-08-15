@@ -70,6 +70,7 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 		<string>SF-Pro-Text-Regular.otf</string>
+		<string>SF-Pro-Text-Light.otf</string>
 		<string>SF-Pro-Display-Regular.otf</string>
 	</array>
 	<key>UIRequiredDeviceCapabilities</key>

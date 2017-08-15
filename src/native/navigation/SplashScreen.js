@@ -1,9 +1,16 @@
 // @flow
-import type { State, Baby, BabyEdge } from '../../common/types';
+import type { Baby, BabyEdge, State } from '../../common/types';
 import React, { Component } from 'react';
-import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
+import {
+  Animated,
+  Image,
+  LayoutAnimation,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { ImageCacheProvider } from 'react-native-cached-image';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import { sample } from 'lodash';
@@ -12,6 +19,9 @@ import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
 import ChooseBaby from '../profile/ChooseBaby';
+import Svg, { G, Path } from 'react-native-svg';
+import * as Animatable from 'react-native-animatable';
+import RocketHorse from '../components/RocketHorse';
 
 const loadingImage = { uri: 'LaunchImage' };
 
@@ -28,10 +38,36 @@ type Props = {
 
 class SplashScreen extends Component {
   props: Props;
+  state = {
+    rotation: new Animated.Value(0),
+  };
 
   static navigationOptions = {
     headerVisible: false,
   };
+
+  componentWillMount() {
+    // $FlowFixMe$
+    Animatable.initializeRegistryWithDefinitions({
+      rotatingHorse: {
+        0: {
+          transform: [{ rotate: '0deg' }],
+        },
+        0.5: {
+          transform: [{ rotate: '-30deg' }],
+        },
+        0.7: {
+          transform: [{ rotate: '0deg' }],
+        },
+        0.9: {
+          transform: [{ rotate: '30deg' }],
+        },
+        1: {
+          transform: [{ rotate: '0deg' }],
+        },
+      },
+    });
+  }
 
   shouldComponentUpdate(nextProps) {
     if (
@@ -45,19 +81,20 @@ class SplashScreen extends Component {
   }
 
   componentDidUpdate() {
-    LayoutAnimation.configureNext({
-      ...LayoutAnimation.Presets.spring,
-      duration: 400,
-    });
-
     setTimeout(this.handleNextScreen, 2000);
   }
 
   handleNextScreen = () => {
     const { appOnline, isAuthenticated, baby, babies } = this.props;
+
     if (!appOnline) {
       return;
     }
+
+    LayoutAnimation.configureNext({
+      ...LayoutAnimation.Presets.spring,
+      duration: 400,
+    });
 
     if (!isAuthenticated) {
       this.navigateTo('login');
@@ -103,7 +140,7 @@ class SplashScreen extends Component {
 
   renderLoadingMessage() {
     if (!this.props.appStarted) {
-      return null;
+      return <View style={styles.loadingMessageContainer} />;
     }
 
     const loadingMessage =
@@ -111,9 +148,27 @@ class SplashScreen extends Component {
 
     return (
       <View style={styles.loadingMessageContainer}>
-        <Text style={styles.loadingMessage}>
-          {loadingMessage}
-        </Text>
+        <Animatable.Text style={styles.loadingMessage} animation="fadeIn">
+          <Text style={{ fontWeight: theme.text.light.toString() }}>
+            <Image
+              source={require('../../common/images/quote-mark-left.png')}
+              style={[styles.quoteDimensions, { marginTop: -5 }]}
+            />{' '}
+            {loadingMessage}{' '}
+            <Image
+              source={require('../../common/images/quote-mark-right.png')}
+              style={[
+                styles.quoteDimensions,
+                {
+                  bottom: 0,
+                  right: 2,
+                  marginTop: -5,
+                },
+              ]}
+            />
+          </Text>
+        </Animatable.Text>
+
         {this.props.author &&
           <View
             style={{
@@ -125,14 +180,33 @@ class SplashScreen extends Component {
             <Text
               style={{
                 textAlign: 'center',
-                fontSize: 14,
-                color: theme.colors.open.gray0,
-                fontStyle: 'italic',
+                fontSize: 13,
+                color: '#F8F9FC',
+                fontWeight: theme.text.medium.toString(),
               }}
             >
-              {this.props.author}
+              - {this.props.author}
             </Text>
           </View>}
+      </View>
+    );
+  }
+
+  renderLoadingIndicator() {
+    const rotate = this.state.rotation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['-45deg', '45deg'],
+    });
+
+    return (
+      <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <Animatable.View
+          iterationCount="infinite"
+          animation="rotatingHorse"
+          easing="ease-out-cubic"
+        >
+          <RocketHorse />
+        </Animatable.View>
       </View>
     );
   }
@@ -140,7 +214,12 @@ class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={loadingImage} style={styles.textContainer}>
+        <Image
+          source={loadingImage}
+          resizeMode="stretch"
+          style={styles.textContainer}
+        >
+          {this.renderLoadingIndicator()}
           {this.renderLoadingMessage()}
         </Image>
         <Alert />
@@ -160,18 +239,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   loadingMessageContainer: {
-    marginTop: 100,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    marginTop: 40,
   },
   loadingMessage: {
     width: 274, // TODO: I don't like this
-    margin: 20,
-    color: theme.colors.open.gray0,
+    marginVertical: 20,
+    marginHorizontal: 5,
+    color: '#F8F9FC',
     textAlign: 'center',
-    fontSize: 14,
-    lineHeight: 26,
+    fontSize: 17,
+    lineHeight: 22,
+  },
+  quoteDimensions: {
+    width: 7,
+    height: 11.45,
+    zIndex: 999,
   },
 });
 
