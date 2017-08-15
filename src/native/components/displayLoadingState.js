@@ -2,7 +2,7 @@
 import type { GraphQLDataProp, Query } from '../../common/types';
 import React from 'react';
 import hoistStatics from './hoistStatics';
-import Loader from './Loader';
+import Loader from './RocketHorseLoader';
 
 type Props = GraphQLDataProp<Query>;
 

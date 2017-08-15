@@ -12,7 +12,9 @@ export const createTestRenderer = () => (Component: any) => {
   const component = testRenderer.create(felaTestContext(Component));
 
   const snapshot = component.toJSON();
-  snapshot.felaRules = felaNativeToStyleObject(felaRenderer.cache);
+  if (snapshot) {
+    snapshot.felaRules = felaNativeToStyleObject(felaRenderer.cache);
+  }
 
   return snapshot;
 };

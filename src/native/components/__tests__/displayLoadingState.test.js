@@ -3,6 +3,9 @@ import React from 'react';
 import displayLoadingState from '../displayLoadingState';
 import { expectRender } from '../../shared/testUtils';
 
+// TODO: better mocking, this shoulds null on the snapshot
+jest.mock('../RocketHorseLoader');
+
 const Inner = () => <Text>The component</Text>;
 const Component = displayLoadingState(Inner);
 

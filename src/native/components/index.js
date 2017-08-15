@@ -9,7 +9,7 @@ import Card from './Card';
 import HorizontalCardList from './HorizontalCardList';
 import HorizontalCardItem from './HorizontalCardItem';
 import Screen from './Screen';
-import Loader from './Loader';
+import Loader from './SpinLoader';
 import Markdown from './Markdown';
 import Link from './Link';
 import List from './List';

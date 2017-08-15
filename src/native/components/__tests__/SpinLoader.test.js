@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import Loader from '../Loader';
+import Loader from '../SpinLoader';
 import { expectRender } from '../../shared/testUtils';
 
 jest.mock('Alert');

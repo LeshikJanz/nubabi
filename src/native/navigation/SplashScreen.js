@@ -19,9 +19,8 @@ import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
 import ChooseBaby from '../profile/ChooseBaby';
-import Svg, { G, Path } from 'react-native-svg';
 import * as Animatable from 'react-native-animatable';
-import RocketHorse from '../components/RocketHorse';
+import RocketHorseLoader from '../components/RocketHorseLoader';
 
 const loadingImage = { uri: 'LaunchImage' };
 
@@ -38,9 +37,6 @@ type Props = {
 
 class SplashScreen extends Component {
   props: Props;
-  state = {
-    rotation: new Animated.Value(0),
-  };
 
   static navigationOptions = {
     headerVisible: false,
@@ -48,25 +44,6 @@ class SplashScreen extends Component {
 
   componentWillMount() {
     // $FlowFixMe$
-    Animatable.initializeRegistryWithDefinitions({
-      rotatingHorse: {
-        0: {
-          transform: [{ rotate: '0deg' }],
-        },
-        0.5: {
-          transform: [{ rotate: '-30deg' }],
-        },
-        0.7: {
-          transform: [{ rotate: '0deg' }],
-        },
-        0.9: {
-          transform: [{ rotate: '30deg' }],
-        },
-        1: {
-          transform: [{ rotate: '0deg' }],
-        },
-      },
-    });
   }
 
   shouldComponentUpdate(nextProps) {
@@ -193,20 +170,9 @@ class SplashScreen extends Component {
   }
 
   renderLoadingIndicator() {
-    const rotate = this.state.rotation.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['-45deg', '45deg'],
-    });
-
     return (
       <View style={{ flex: 1, justifyContent: 'flex-end' }}>
-        <Animatable.View
-          iterationCount="infinite"
-          animation="rotatingHorse"
-          easing="ease-out-cubic"
-        >
-          <RocketHorse />
-        </Animatable.View>
+        <RocketHorseLoader splash />
       </View>
     );
   }
