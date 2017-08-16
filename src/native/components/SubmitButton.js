@@ -59,32 +59,19 @@ export class SubmitButton extends PureComponent {
       this.props.loading === true &&
       this.state.isAnimating
     ) {
-      // this.buttonView.setAnimation({
-      //   style: {
-      //     perspective: 400
-      //   },
-      //   0: {
-      //     width: 30,
-      //   },
-      //   1: {
-      //     width:
-      //   }
-      // });
-      const originalWidth = StyleSheet.flatten([
-        styles.submitButton,
-        this.props.buttonStyle || {},
-      ]).width;
-
-      console.log(originalWidth);
-      this.buttonView.transitionTo({ width: originalWidth }, 500);
-      this.setState({ isAnimating: false });
+      this.buttonView.expandingButton(500).then(() => {
+        this.setState({ isAnimating: false });
+      });
     }
   }
 
   handleOnPress = () => {
     this.setState({ isAnimating: true }, () => {
-      this.buttonView.transitionTo({ width: 30 }, 500);
-      this.props.onPress();
+      this.buttonView.collapsingButton(500).then(endState => {
+        if (endState.finished) {
+          this.props.onPress();
+        }
+      });
     });
   };
 
