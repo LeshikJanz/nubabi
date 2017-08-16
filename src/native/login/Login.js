@@ -62,7 +62,7 @@ export class Login extends Component {
                   style={styles.textInput}
                   value={this.state.email}
                   placeholder="Email"
-                  placeholderTextColor="white"
+                  placeholderTextColor="rgba(255,255,255,.78)"
                   selectionColor="white"
                   keyBoardType="email-address"
                   autoFocus={
@@ -88,7 +88,7 @@ export class Login extends Component {
                   secureTextEntry
                   autoCapitalize="none"
                   placeholder="Password"
-                  placeholderTextColor="white"
+                  placeholderTextColor="rgba(255,255,255,.78)"
                   selectionColor="white"
                   autoCorrect={false}
                   focus={this.state.focusPassword}
