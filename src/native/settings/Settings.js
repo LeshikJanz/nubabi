@@ -199,7 +199,7 @@ const styles = {
   submitText: {
     backgroundColor: 'transparent',
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: theme.text.bold.toString(),
     color: '#fff',
   },
   inputLabel: {

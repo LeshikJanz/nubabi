@@ -90,7 +90,7 @@ exports[`it renders collapsed 1`] = `
             "color": "#748294",
             "fontFamily": "SF Pro Text",
             "fontSize": 13,
-            "fontWeight": "600",
+            "fontWeight": "700",
             "lineHeight": 16,
           }
         }
@@ -209,7 +209,7 @@ exports[`it renders collapsed 1`] = `
           "color": "#EA3154",
           "fontFamily": "SF Pro Text",
           "fontSize": 13,
-          "fontWeight": "600",
+          "fontWeight": "700",
           "letterSpacing": -0.19,
           "lineHeight": 16,
         }
@@ -364,7 +364,7 @@ exports[`it renders collapsed 1`] = `
                 "flex": 1,
                 "fontFamily": "SF Pro Text",
                 "fontSize": 13,
-                "fontWeight": "600",
+                "fontWeight": "700",
                 "lineHeight": 16,
               }
             }
@@ -470,7 +470,7 @@ exports[`it renders collapsed 1`] = `
                 "color": "#FFFFFF",
                 "fontFamily": "SF Pro Text",
                 "fontSize": 14.791111111111112,
-                "fontWeight": "600",
+                "fontWeight": "700",
                 "lineHeight": 16,
               }
             }
@@ -574,7 +574,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
             "color": "#748294",
             "fontFamily": "SF Pro Text",
             "fontSize": 13,
-            "fontWeight": "600",
+            "fontWeight": "700",
             "lineHeight": 16,
           }
         }
@@ -693,7 +693,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
           "color": "#EA3154",
           "fontFamily": "SF Pro Text",
           "fontSize": 13,
-          "fontWeight": "600",
+          "fontWeight": "700",
           "letterSpacing": -0.19,
           "lineHeight": 16,
         }
@@ -876,7 +876,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 "color": "#454D56",
                 "fontFamily": "SF Pro Text",
                 "fontSize": 13,
-                "fontWeight": "600",
+                "fontWeight": "700",
                 "letterSpacing": -0.88,
                 "lineHeight": 16,
                 "textAlign": "center",
@@ -1042,7 +1042,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 "color": "#454D56",
                 "fontFamily": "SF Pro Text",
                 "fontSize": 13,
-                "fontWeight": "600",
+                "fontWeight": "700",
                 "letterSpacing": -0.88,
                 "lineHeight": 16,
                 "textAlign": "center",
@@ -1208,7 +1208,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 "color": "#454D56",
                 "fontFamily": "SF Pro Text",
                 "fontSize": 13,
-                "fontWeight": "600",
+                "fontWeight": "700",
                 "letterSpacing": -0.88,
                 "lineHeight": 16,
                 "textAlign": "center",

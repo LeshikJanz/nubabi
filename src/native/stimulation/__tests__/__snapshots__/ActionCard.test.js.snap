@@ -134,7 +134,7 @@ exports[`it renders correctly 1`] = `
           "color": "#454D56",
           "fontFamily": "SF Pro Text",
           "fontSize": 13,
-          "fontWeight": "600",
+          "fontWeight": "700",
           "letterSpacing": -0.88,
           "lineHeight": 16,
           "textAlign": "center",

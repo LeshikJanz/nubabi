@@ -16,7 +16,7 @@ style = Object {
     "lineHeight": 16,
     "color": "#748294",
     "fontFamily": "SF Pro Text",
-    "fontWeight": "600",
+    "fontWeight": "700",
     "flex": 1,
     "flexDirection": "row",
     "justifyContent": "space-around",
@@ -64,7 +64,7 @@ style = Object {
           "color": "#33B7EB",
           "fontFamily": "SF Pro Text",
           "fontSize": 13,
-          "fontWeight": "600",
+          "fontWeight": "700",
           "lineHeight": 16,
           "marginBottom": 16,
         }
@@ -130,7 +130,7 @@ style = Object {
               "color": "#454D56",
               "fontFamily": "SF Pro Text",
               "fontSize": 13.866666666666667,
-              "fontWeight": "600",
+              "fontWeight": "700",
               "lineHeight": 16,
             }
           }

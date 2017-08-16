@@ -24,7 +24,7 @@ style = Object {
     "lineHeight": 16,
     "color": "#454D56",
     "fontFamily": "SF Pro Text",
-    "fontWeight": "600",
+    "fontWeight": "700",
     "marginLeft": 8,
     "justifyContent": "center"
 }
@@ -166,7 +166,7 @@ style = Object {
             "color": "#454D56",
             "fontFamily": "SF Pro Text",
             "fontSize": 13,
-            "fontWeight": "600",
+            "fontWeight": "700",
             "lineHeight": 16,
           }
         }
