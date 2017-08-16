@@ -1,20 +1,14 @@
 import 'react-native';
 import React from 'react';
 import { Login } from '../Login';
-import renderer from 'react-test-renderer';
+import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
 
 test('renders correctly', () => {
-  const tree = renderer
-    .create(<Login isFetching={false} actions={{}} />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<Login isFetching={false} actions={{}} />);
 });
 
 test('show progress when logging in', () => {
-  const tree = renderer.create(<Login isFetching actions={{}} />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<Login isFetching actions={{}} />);
 });

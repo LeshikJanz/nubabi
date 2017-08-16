@@ -5,15 +5,14 @@ import {
   Image,
   Platform,
   StyleSheet,
-  Text,
   TextInput,
   View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
+import { Link, SubmitButton, Text } from '../components';
 import { loginRequest } from '../../common/auth/actions';
-import { SubmitButton } from '../components';
 
 const background = require('../../common/images/loginBackground.jpg');
 const logo = require('../../common/images/logo.png');
@@ -59,11 +58,12 @@ export class Login extends Component {
 
             <View style={styles.inputOuterContainer}>
               <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>EMAIL</Text>
                 <TextInput
                   style={styles.textInput}
                   value={this.state.email}
-                  placeholder="name@example.com"
+                  placeholder="Email"
+                  placeholderTextColor="white"
+                  selectionColor="white"
                   keyBoardType="email-address"
                   autoFocus={
                     typeof jest ===
@@ -79,7 +79,6 @@ export class Login extends Component {
                 />
               </View>
               <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>PASSWORD</Text>
                 <TextInput
                   style={styles.textInput}
                   value={this.state.password}
@@ -88,7 +87,9 @@ export class Login extends Component {
                   }}
                   secureTextEntry
                   autoCapitalize="none"
-                  palceholder="password"
+                  placeholder="Password"
+                  placeholderTextColor="white"
+                  selectionColor="white"
                   autoCorrect={false}
                   focus={this.state.focusPassword}
                   onChangeText={password => this.setState({ password })}
@@ -99,7 +100,37 @@ export class Login extends Component {
               <SubmitButton
                 onPress={this.login}
                 loading={isFetching}
-                submitText="LOGIN"
+                submitText="LOG IN"
+                containerStyle={{
+                  marginTop: 50,
+                }}
+                buttonStyle={{
+                  width: 139,
+                  height: 40,
+                  borderRadius: 20,
+                }}
+                textStyle={{
+                  fontSize: 17,
+                  fontFamily: 'SF Pro Display',
+                }}
+              />
+            </View>
+          </View>
+          <View style={{ alignItems: 'center', marginBottom: 15 }}>
+            <Text size={1} color="white" style={() => ({ marginBottom: 5 })}>
+              Don't have an account yet?
+            </Text>
+
+            <View style={{ flexDirection: 'row' }}>
+              <Text color="white">Sign up for free on</Text>
+              <Link
+                title="Nubabi.com"
+                color="white"
+                url="https://nubabi.com"
+                textStyle={{
+                  marginLeft: 5,
+                  fontWeight: theme.text.bold,
+                }}
               />
             </View>
           </View>
@@ -181,7 +212,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         borderBottomWidth: 1,
-        height: 50,
+        height: 40,
       },
     }),
   },
@@ -194,7 +225,8 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#fff',
     fontSize: 18,
-    lineHeight: 26,
+    lineHeight: 24,
+    letterSpacing: -0.41,
   },
   submitButtonContainer: {
     marginTop: 20,

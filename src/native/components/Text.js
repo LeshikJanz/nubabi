@@ -1,8 +1,8 @@
 // @flow
 // Adapted from steida's text props
 import type { BoxProps } from './Box';
-import type { Color, Theme } from '../../common/themes/types';
 import Box from './Box';
+import type { Color, Theme } from '../../common/themes/types';
 import React from 'react';
 import colorLib from 'color';
 import isReactNative from '../../common/app/isReactNative';
@@ -60,6 +60,14 @@ export const computeTextStyle = (
     fontFamily,
   };
 
+  /* Switch to SF Pro Display font if size is greater than 16
+   * (Apple recommends higher but given how our Text's are setup we chose
+   * 16.
+   */
+  if (style.fontSize > 16) {
+    style = { ...style, fontFamily: 'SF Pro Display' };
+  }
+
   if (align) {
     style = { ...style, textAlign: align };
   }
@@ -98,10 +106,14 @@ const maybeFixFontSmoothing = (color, backgroundColor) => {
     backgroundColor &&
     backgroundColor !== 'transparent';
   // console.log(hasColorAndBackgroundColor);
-  if (!hasColorAndBackgroundColor) return null;
+  if (!hasColorAndBackgroundColor) {
+    return null;
+  }
   const colorIsLighterThanBackgroundColor =
     colorLib(color).luminosity() > colorLib(backgroundColor).luminosity();
-  if (!colorIsLighterThanBackgroundColor) return null;
+  if (!colorIsLighterThanBackgroundColor) {
+    return null;
+  }
   return {
     MozOsxFontSmoothing: 'grayscale',
     WebkitFontSmoothing: 'antialiased',

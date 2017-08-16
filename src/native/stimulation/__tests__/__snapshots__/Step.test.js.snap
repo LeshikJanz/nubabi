@@ -11,7 +11,7 @@ style = Object {
     "fontSize": 16.828997530864196,
     "lineHeight": 26,
     "color": "#6A7683",
-    "fontFamily": "SF Pro Text"
+    "fontFamily": "SF Pro Display"
 }
 
 <View
@@ -51,7 +51,7 @@ style = Object {
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#454D56",
-          "fontFamily": "SF Pro Text",
+          "fontFamily": "SF Pro Display",
           "fontSize": 16.828997530864196,
           "lineHeight": 21,
         }
@@ -73,7 +73,7 @@ style = Object {
         "borderRightWidth": 0,
         "borderTopWidth": 0,
         "color": "#6A7683",
-        "fontFamily": "SF Pro Text",
+        "fontFamily": "SF Pro Display",
         "fontSize": 16.828997530864196,
         "lineHeight": 26,
         "marginBottom": 16,
