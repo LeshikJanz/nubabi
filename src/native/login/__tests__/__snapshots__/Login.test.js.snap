@@ -95,7 +95,7 @@ style = Object {
               "alignItems": "center",
               "height": 73.2,
               "marginLeft": 264,
-              "marginTop": 100,
+              "marginTop": 135,
               "width": 222,
             }
           }
@@ -469,7 +469,7 @@ style = Object {
               "alignItems": "center",
               "height": 73.2,
               "marginLeft": 264,
-              "marginTop": 100,
+              "marginTop": 135,
               "width": 222,
             }
           }
