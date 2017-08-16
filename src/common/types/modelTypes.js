@@ -515,6 +515,7 @@ export type Article = {
   tags: ?Array<Tag>,
   image: Image,
   readingTime: ReadingTime,
+  blogUrl: ?string,
 };
 
 export type Content = Article | GrowthArticle | Tip | Quote;

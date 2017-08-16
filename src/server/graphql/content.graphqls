@@ -78,6 +78,7 @@ type Article implements Node, Content {
   tags: [Tag]
   image: Image!
   readingTime: ReadingTime!
+  blogUrl: String
 }
 
 # A connection to a list of items.

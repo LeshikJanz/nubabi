@@ -49,7 +49,7 @@ export const ViewArticle = ({ article, layout }: Props) => {
 
   const shareTitle = 'Share Nubabi Article';
   const shareMessage = `Read "${article.title}" on Nubabi`;
-  const shareUrl = `nubabi://articles/${article.id}`;
+  const shareUrl = article.blogUrl || `nubabi://articles/${article.id}`;
 
   // TODO: where to get tags
   return (

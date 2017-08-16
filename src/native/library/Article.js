@@ -49,6 +49,7 @@ Article.fragments = {
       image {
         url
       }
+      blogUrl
     }
   `,
 };

@@ -69,6 +69,8 @@ export const resolvers = {
       };
     },
     readingTime: readingTime('body'),
+    blogUrl: ({ slug }) =>
+      `https://blog.mylearningbabyguide.com/articles/${slug}`,
   },
   Author: {
     id: globalIdField(),
