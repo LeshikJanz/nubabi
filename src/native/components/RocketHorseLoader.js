@@ -15,13 +15,13 @@ Animatable.initializeRegistryWithDefinitions({
     0: {
       transform: [{ rotate: '0deg' }],
     },
-    0.5: {
+    0.4: {
       transform: [{ rotate: '-30deg' }],
     },
-    0.7: {
+    0.6: {
       transform: [{ rotate: '0deg' }],
     },
-    0.9: {
+    0.8: {
       transform: [{ rotate: '30deg' }],
     },
     1: {
@@ -44,7 +44,8 @@ export class RocketHorseLoader extends PureComponent {
           useNativeDriver
           iterationCount="infinite"
           animation="rotatingHorse"
-          easing="ease-out-cubic"
+          easing="ease"
+          duration={1500}
           style={{
             alignItems: 'center',
             justifyContent: 'center',
@@ -66,7 +67,8 @@ export class RocketHorseLoader extends PureComponent {
         useNativeDriver
         iterationCount="infinite"
         animation="rotatingHorse"
-        easing="ease-out-cubic"
+        easing="ease"
+        duration={1500}
       >
         <RocketHorse />
       </Animatable.View>

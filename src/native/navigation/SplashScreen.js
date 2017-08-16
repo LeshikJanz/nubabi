@@ -42,10 +42,6 @@ class SplashScreen extends Component {
     headerVisible: false,
   };
 
-  componentWillMount() {
-    // $FlowFixMe$
-  }
-
   shouldComponentUpdate(nextProps) {
     if (
       typeof this.props.loadingMessage === 'undefined' &&
