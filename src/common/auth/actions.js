@@ -6,7 +6,7 @@ import { resetNavigation } from '../navigation/actions';
 export function loginRequest(
   email: string,
   password: string,
-  uid: string,
+  uid?: string,
 ): Action {
   return {
     type: 'LOGIN_REQUEST',

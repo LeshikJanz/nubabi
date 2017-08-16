@@ -32,7 +32,7 @@ type RoundedContainerProps = {
 
 type MemoryMediaSingleProps = {
   media: File,
-  onMediaPress: (params: ?Object) => void,
+  onMediaPress?: (params: ?Object) => void,
 };
 
 type MemoryMediaImageProps = MemoryMediaSingleProps & {

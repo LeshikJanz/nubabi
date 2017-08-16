@@ -273,7 +273,7 @@ export type OnAuthAction = {
 export type LoginRequestAction = {
   type: 'LOGIN_REQUEST',
   payload: { email: string, password: string },
-  meta: { uid: string },
+  meta: { uid?: string },
 };
 
 export type LoginSuccessAction = {
