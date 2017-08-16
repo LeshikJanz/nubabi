@@ -65,10 +65,6 @@ export class Login extends Component {
                   placeholderTextColor="rgba(255,255,255,.78)"
                   selectionColor="white"
                   keyBoardType="email-address"
-                  autoFocus={
-                    typeof jest ===
-                    'undefined' /* TODO: https://github.com/facebook/jest/issues/3707 */
-                  }
                   autoCapitalize="none"
                   autoCorrect={false}
                   returnKeyType="next"
