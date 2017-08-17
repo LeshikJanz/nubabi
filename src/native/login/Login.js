@@ -50,11 +50,7 @@ export class Login extends Component {
 
     return (
       <View style={styles.container}>
-        <Image
-          source={background}
-          style={styles.background}
-          resizeMode="cover"
-        />
+        <Image source={background} style={styles.background} />
         <View style={styles.backgroundFilter} />
         <KeyboardAwareScrollView
           style={styles.container}
@@ -155,7 +151,7 @@ const mapStateToProps = state => {
     auth: state.auth,
   };
 };
-
+console.log(window.width);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -197,12 +193,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(116,130,148,0.55)',
   },
   logo: {
+    // 140 width 67.6 height 81.3 marginLeft
     position: 'absolute',
     alignItems: 'center',
-    top: 135,
-    width: 370 * 0.6,
-    height: 122 * 0.6,
-    marginLeft: (window.width - 370 * 0.6) / 2,
+    top: 140,
+    width: 354 * 0.6,
+    height: 112 * 0.6,
+    marginLeft: (window.width - 354 * 0.6) / 2,
   },
   inputOuterContainer: {
     marginTop: 250,
