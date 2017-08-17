@@ -51,7 +51,6 @@ export const ViewArticle = ({ article, layout }: Props) => {
   const shareMessage = `Read "${article.title}" on Nubabi`;
   const shareUrl = article.blogUrl || `nubabi://articles/${article.id}`;
 
-  // TODO: where to get tags
   return (
     <Box flex={1} as={ScrollView} backgroundColor="white">
       <HeaderContainer style={headerContainerStyle}>
