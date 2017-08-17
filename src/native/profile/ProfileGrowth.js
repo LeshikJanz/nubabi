@@ -48,7 +48,7 @@ export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
           </Text>
 
           <TouchableOpacity
-            style={{ marginVertical: 5 }}
+            style={{ marginVertical: 5, alignItems: 'flex-end' }}
             onPress={onViewGrowth}
           >
             <Text color="primary" medium>
