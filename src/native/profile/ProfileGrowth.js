@@ -16,6 +16,10 @@ type Props = {
   onViewGrowth: () => void,
 };
 
+const skipIntroductionGreeting = (str: string) => {
+  return str.replace(/^Hi (.*),\s+/, '');
+};
+
 export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
   return (
     <Box contentSpacing>
@@ -40,7 +44,7 @@ export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
           style={() => ({ borderColor: '#EDF0F9' })}
         >
           <Text color="secondary" numberOfLines={4}>
-            {growth.current.introduction}
+            {skipIntroductionGreeting(growth.current.introduction)}
           </Text>
 
           <TouchableOpacity
