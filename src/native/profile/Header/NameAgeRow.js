@@ -108,18 +108,17 @@ const styles = StyleSheet.create({
   babyAge: {
     color: '#fff',
     textAlign: 'center',
-    fontSize: 10,
+    fontSize: 14,
     backgroundColor: 'rgba(0,0,0,0)',
   },
   babyAgeBackground: {
     borderColor: NUBABI_RED,
-    borderRadius: 10,
+    borderRadius: 14,
     borderWidth: 1,
     backgroundColor: NUBABI_RED,
     marginTop: 5,
-    padding: 2,
-    paddingLeft: 5,
-    paddingRight: 5,
+    padding: 4,
+    paddingHorizontal: 10,
   },
 });
 

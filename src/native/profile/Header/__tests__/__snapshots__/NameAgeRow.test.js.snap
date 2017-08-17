@@ -132,12 +132,11 @@ exports[`it renders correctly 1`] = `
           Object {
             "backgroundColor": "#ED3154",
             "borderColor": "#ED3154",
-            "borderRadius": 10,
+            "borderRadius": 14,
             "borderWidth": 1,
             "marginTop": 5,
-            "padding": 2,
-            "paddingLeft": 5,
-            "paddingRight": 5,
+            "padding": 4,
+            "paddingHorizontal": 10,
           }
         }
       >
@@ -150,7 +149,7 @@ exports[`it renders correctly 1`] = `
             Object {
               "backgroundColor": "rgba(0,0,0,0)",
               "color": "#fff",
-              "fontSize": 10,
+              "fontSize": 14,
               "textAlign": "center",
             }
           }
