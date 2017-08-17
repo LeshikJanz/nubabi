@@ -42,7 +42,7 @@ const TabsNavigator = TabNavigator(
   },
   {
     initialRouteName: 'profile',
-    order: ['stimulation', 'growth', 'profile', 'library', 'memories'],
+    order: ['growth', 'stimulation', 'profile', 'library', 'memories'],
     tabBarOptions: {
       style: {
         backgroundColor: '#fff',
