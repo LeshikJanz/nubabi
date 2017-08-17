@@ -43,7 +43,7 @@ export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
           borderBottomWidth={1}
           style={() => ({ borderColor: '#EDF0F9' })}
         >
-          <Text color="secondary" numberOfLines={4}>
+          <Text color="secondary" numberOfLines={3}>
             {skipIntroductionGreeting(growth.current.introduction)}
           </Text>
 
