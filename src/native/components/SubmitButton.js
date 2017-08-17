@@ -63,10 +63,11 @@ export class SubmitButton extends PureComponent {
           },
         },
         () => {
-          this.timeout = setTimeout(
-            () => this.setState({ isAnimating: false }),
-            1000,
-          );
+          this.timeout = setTimeout(() => {
+            this.setState({ isAnimating: false }, () => {
+              this.submitTextView && this.submitTextView.fadeIn();
+            });
+          }, 1000);
         },
       );
     }
@@ -142,7 +143,10 @@ export class SubmitButton extends PureComponent {
     if (!loading && !isAnimating) {
       const TextContainer = props => {
         return typeof jest === 'undefined'
-          ? <Animatable.Text animation="fadeIn" {...props} />
+          ? <Animatable.Text
+              {...props}
+              ref={ref => (this.submitTextView = ref)}
+            />
           : <Text {...props} />;
       };
 
