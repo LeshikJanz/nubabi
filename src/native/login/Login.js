@@ -32,9 +32,17 @@ export class Login extends Component {
     password: '',
   };
 
+  submitButton = null;
+
   login = () => {
     const { email, password } = this.state;
     this.props.loginRequest(email, password);
+  };
+
+  loginViaKeyboard = () => {
+    if (this.submitButton) {
+      this.submitButton.touchableHandlePress();
+    }
   };
 
   render() {
@@ -90,10 +98,11 @@ export class Login extends Component {
                   focus={this.state.focusPassword}
                   onChangeText={password => this.setState({ password })}
                   returnKeyType="go"
-                  onSubmitEditing={this.login}
+                  onSubmitEditing={this.loginViaKeyboard}
                 />
               </View>
               <SubmitButton
+                innerRef={ref => (this.submitButton = ref)}
                 onPress={this.login}
                 loading={isFetching}
                 submitText="LOG IN"

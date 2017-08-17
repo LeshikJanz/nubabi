@@ -120,6 +120,8 @@ export class SubmitButton extends PureComponent {
       style.opacity = theme.states.disabled.opacity;
     }
 
+    const buttonProps = this.props.innerRef ? { ref: this.props.innerRef } : {};
+
     return (
       <View style={[styles.submitButtonContainer, style, containerStyle]}>
         <Animatable.View
@@ -129,6 +131,7 @@ export class SubmitButton extends PureComponent {
           <TouchableOpacity
             onPress={this.handleOnPress}
             disable={loading || disabled}
+            {...buttonProps}
           >
             {buttonContent}
           </TouchableOpacity>
