@@ -79,7 +79,7 @@ export default compose(
       // Since Firebase returns the same url for files we
       // workaround this by using refetchQueries
       options: {
-        refetchQueries: ['getBaby', 'getBabyAvatar'],
+        refetchQueries: ['Profile', 'getBabyAvatar'],
       },
     },
   ),

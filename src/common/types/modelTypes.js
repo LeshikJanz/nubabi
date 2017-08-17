@@ -449,6 +449,8 @@ export type GrowthConnection = {
   /** Information to aid in pagination. */
   pageInfo: PageInfo,
   edges: ?Array<GrowthEdge>,
+  /** The current growth based on the baby's dob (returns the last content if we can't find a closer one) */
+  current: ?Growth,
 };
 
 export type GrowthEdge = {

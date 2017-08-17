@@ -1,20 +1,13 @@
 // @flow
 import type {
-  State,
   Baby,
-  Viewer,
   GraphQLDataProp,
   NavigationOptions,
+  State,
+  Viewer,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Linking,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
@@ -22,12 +15,12 @@ import { filter } from 'graphql-anywhere';
 import theme from '../../common/themes/defaultTheme';
 import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
-import Measurement from './Measurement';
 import Header from './Header/Header';
-import Achievements from './Achievements';
 import RecentMemories from './RecentMemories';
 import ProfileIcon from '../navigation/ProfileIcon';
 import BabyNameTitle from './BabyNameTitle';
+import ProfileActivities from './ProfileActivities';
+import ProfileGrowth from './ProfileGrowth';
 
 type Props = {
   navigation: any,
@@ -46,12 +39,14 @@ class Profile extends PureComponent {
       fragment Profile on Baby {
         id
         ...Header
-        ...CurrentMeasurements
+        ...ProfileGrowth
+        ...ProfileActivities
         ...RecentMemories
       }
 
       ${Header.fragments.header}
-      ${Measurement.fragments.current}
+      ${ProfileGrowth.fragments.growth}
+      ${ProfileActivities.fragments.list}
       ${RecentMemories.fragments.memories}
     `,
   };
@@ -67,13 +62,16 @@ class Profile extends PureComponent {
   };
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
-  handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
-  handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
   handleAddMemory = () => this.props.navigation.navigate('addMemory');
-
+  handleViewActivities = () =>
+    this.props.navigation.navigate('thisWeekActivities');
+  handleViewActivity = (id: string, title: string) => {
+    this.props.navigation.navigate('viewActivity', { id, title });
+  };
   handleViewMemory = (id: string, title: string) => {
     this.props.navigation.navigate('viewMemory', { id, title });
   };
+  handleViewGrowth = () => this.props.navigation.navigate('whatYouNeedToKnow');
 
   render() {
     const { baby } = this.props;
@@ -95,27 +93,20 @@ class Profile extends PureComponent {
           <ScrollView style={styles.scrollContainer}>
             <Header
               {...filter(Header.fragments.header, baby)}
+              weightUnit={weightUnit}
+              heightUnit={heightUnit}
               onEditBaby={this.handleEditBaby}
             />
-            <View style={styles.measurementsRow}>
-              <Measurement
-                amount={baby.weight}
-                header="Weight"
-                unit={weightUnit}
-                iconName="weight"
-                onUpdate={this.handleUpdateWeight}
-              />
-              <Measurement
-                amount={baby.height}
-                header="Height"
-                unit={heightUnit}
-                iconName="height"
-                onUpdate={this.handleUpdateHeight}
-              />
-            </View>
-            <TouchableOpacity onPress={() => {}}>
-              <Achievements />
-            </TouchableOpacity>
+            <ProfileGrowth
+              {...filter(ProfileGrowth.fragments.growth, baby)}
+              onViewGrowth={this.handleViewGrowth}
+            />
+            <ProfileActivities
+              {...filter(ProfileActivities.fragments.list, baby)}
+              babyName={baby.name}
+              onViewActivity={this.handleViewActivity}
+              onViewAll={this.handleViewActivities}
+            />
             <RecentMemories
               onViewMemory={this.handleViewMemory}
               onAddMemory={this.handleAddMemory}
@@ -129,7 +120,7 @@ class Profile extends PureComponent {
 }
 
 export const query = gql`
-  query getBaby($id: ID!) {
+  query Profile($id: ID!) {
     viewer {
       baby(id: $id) {
         ...Profile

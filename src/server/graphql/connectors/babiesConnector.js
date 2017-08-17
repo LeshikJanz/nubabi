@@ -1,4 +1,6 @@
 // @flow
+import formatPossessive from '../../../common/helpers/formatPossessive';
+
 require('axios-debug-log');
 
 import type { ConnectionArguments } from '../resolvers/common';
@@ -18,6 +20,7 @@ import {
   identity,
   mergeDeepRight,
   curry,
+  assoc,
 } from 'ramda';
 import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import qs from 'qs';
@@ -115,7 +118,12 @@ export const getSkillAreaImage = (obj: mixed) => {
 export const getActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(path(['data']))
+    .then(data => {
+      return path(['data'], data).map(activity => {
+        // Assign babyId so it can be used by activity introduction
+        return assoc('babyId', babyId, activity);
+      });
+    })
     .then(sortBySkillArea);
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
@@ -255,9 +263,7 @@ export const getTemplateVariables = async (firebase, baby) => {
   return {
     baby: baby.name,
     name: viewerName,
-    baby_possessive: baby.name.endsWith('s')
-      ? `${baby.name}`
-      : `${baby.name}'s`,
+    baby_possessive: formatPossessive(baby.name),
   };
 };
 

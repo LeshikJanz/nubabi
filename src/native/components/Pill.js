@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 type Props = {
   children: any,
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const Pill = (props: Props) => {
-  const { children } = props;
+  const { children, style: styleProp } = props;
 
   const style = {};
   const styleProps = ['backgroundColor', 'color', 'borderColor'];
@@ -21,27 +21,39 @@ export const Pill = (props: Props) => {
     }
   });
 
+  if (typeof children === 'string') {
+    return (
+      <Text style={[styles.pillContainer, styles.pillText, style, styleProp]}>
+        {children}
+      </Text>
+    );
+  }
+
   return (
-    <Text style={[styles.pill, style]}>
+    <View style={[styles.pillContainer, style, styleProp]}>
       {children}
-    </Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  pill: {
+  pillContainer: {
     backgroundColor: '#33B7EB',
     overflow: 'hidden',
-    color: '#fff',
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#33B7EB',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pillText: {
+    color: '#fff',
     marginTop: 5,
     paddingTop: 3,
     paddingBottom: 3,
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 12,
-    borderWidth: 1,
-    borderColor: '#33B7EB',
   },
 });
 

@@ -1,6 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly 1`] = `
+style = Object {}
+
 <View
   style={
     Object {
@@ -32,10 +34,11 @@ exports[`it renders correctly 1`] = `
           "color": "#fff",
           "fontSize": 12,
           "fontWeight": "700",
+          "marginBottom": 5,
         }
       }
     >
-      ACHIEVEMENTS
+      WEIGHT
     </Text>
     <Text
       accessible={true}
@@ -49,7 +52,8 @@ exports[`it renders correctly 1`] = `
         }
       }
     >
-      5
+      60
+      kg
     </Text>
   </View>
   <View
@@ -70,10 +74,11 @@ exports[`it renders correctly 1`] = `
           "color": "#fff",
           "fontSize": 12,
           "fontWeight": "700",
+          "marginBottom": 5,
         }
       }
     >
-      FAVOURITES
+      HEIGHT
     </Text>
     <Text
       accessible={true}
@@ -87,7 +92,8 @@ exports[`it renders correctly 1`] = `
         }
       }
     >
-      10
+      150
+      cm
     </Text>
   </View>
 </View>

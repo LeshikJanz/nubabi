@@ -310,7 +310,7 @@ export default compose(
     `,
     {
       name: 'toggleFavorite',
-      options: { refetchQueries: ['ViewThisWeekActivity', 'getBaby'] },
+      options: { refetchQueries: ['ViewThisWeekActivity', 'Profile'] },
     },
   ),
   displayLoadingState,

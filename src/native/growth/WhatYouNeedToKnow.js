@@ -72,6 +72,7 @@ export class WhatYouNeedToKnow extends PureComponent {
     }));
   }
 
+  // TODO: use new 'current' implementation in schema instead
   getGrowthForCurrentPeriod(
     options: Array<GrowthPeriodOption>,
   ): GrowthPeriodOption {

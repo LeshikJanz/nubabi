@@ -153,7 +153,7 @@ const mapStateToProps = state => {
     auth: state.auth,
   };
 };
-console.log(window.width);
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

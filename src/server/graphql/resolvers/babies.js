@@ -1,4 +1,4 @@
-import { pick, assocPath } from 'ramda';
+import { pick, assocPath, last } from 'ramda';
 import * as connector from '../connectors/babiesConnector';
 import {
   prop,
@@ -10,6 +10,7 @@ import {
   fromGlobalId,
   mutationWithClientMutationId,
 } from './common';
+import { getClosestContentForPeriod } from '../../../common/growth/reducer';
 
 const resolvers = {
   Viewer: {
@@ -67,12 +68,15 @@ const resolvers = {
       ),
 
     growth: async (baby, args, { token, connectors: { firebase } }, info) => {
-      const connection = await connectionFromPromisedArray(
-        connector.getGrowthContent(token, baby),
-        args,
-      );
+      const content = await connector.getGrowthContent(token, baby);
+
+      const connection = connectionFromArray(content, args);
 
       const viewer = await firebase.getViewer();
+
+      // TODO: PERF don't do this unless we ask for current in the query
+      connection.current =
+        getClosestContentForPeriod(content, baby.dob) || last(content);
 
       if (
         typeof info.variableValues.hasSeenGlobalIntro !== 'undefined' &&

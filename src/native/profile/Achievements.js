@@ -11,7 +11,7 @@ const medal3 = require('../../common/images/medal3.png');
 const Achievements = () => {
   return (
     <View style={styles.achievementsView}>
-      <View style={styles.achievementsHeader}>
+      <View style={styles.weightHeader}>
         <Text style={styles.achievementsHeaderText}>Achievements</Text>
         <Icon
           name="ios-add-circle"
@@ -20,7 +20,7 @@ const Achievements = () => {
           style={{ marginTop: -2, marginRight: -4 }}
         />
       </View>
-      <View style={styles.achievementsValue}>
+      <View style={styles.weightValue}>
         <Image source={medal1} style={styles.medalIcon} />
         <Image source={medal2} style={styles.medalIcon} />
         <Image source={medal3} style={styles.medalIcon} />
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
   },
-  achievementsHeader: {
+  weightHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     color: FONT_COLOR,
     fontSize: 18,
   },
-  achievementsValue: {
+  weightValue: {
     flexDirection: 'row',
     marginTop: 10,
   },
