@@ -51,7 +51,7 @@ export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
             onPress={onViewGrowth}
           >
             <Text color="primary" medium>
-              Read More
+              Read more
             </Text>
           </TouchableOpacity>
         </Box>
