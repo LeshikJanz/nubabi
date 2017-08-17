@@ -9,7 +9,6 @@ import { formatAge } from '../../common/helpers/formatAge';
 import ExpertAdvice from '../growth/ExpertAdvice';
 
 type Props = {
-  dob: string,
   growth: {
     current: Growth,
   },
@@ -20,7 +19,7 @@ const skipIntroductionGreeting = (str: string) => {
   return str.replace(/^Hi (.*),\s+/, '');
 };
 
-export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
+export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
   return (
     <Box contentSpacing>
       <Card padding={0}>
@@ -34,7 +33,7 @@ export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
             style={{ padding: 2, paddingHorizontal: 8, borderRadius: 20 }}
           >
             <Text bold color="success" style={() => ({ letterSpacing: -0.41 })}>
-              {formatAge(dob)}
+              {growth.current.title}
             </Text>
           </Pill>
         </Box>
@@ -71,11 +70,12 @@ ProfileGrowth.fragments = {
   growth: gql`
     fragment ProfileGrowth on Baby {
       id
-      dob
       growth {
         current {
           id
           introduction
+          title
+          maximumAge
           expert {
             id
             ...ExpertAdvice
