@@ -95,7 +95,8 @@ style = Object {
               "alignItems": "center",
               "height": 73.2,
               "marginLeft": 264,
-              "marginTop": 135,
+              "position": "absolute",
+              "top": 135,
               "width": 222,
             }
           }
@@ -103,7 +104,7 @@ style = Object {
         <View
           style={
             Object {
-              "marginTop": 150,
+              "marginTop": 250,
             }
           }
         >
@@ -468,7 +469,8 @@ style = Object {
               "alignItems": "center",
               "height": 73.2,
               "marginLeft": 264,
-              "marginTop": 135,
+              "position": "absolute",
+              "top": 135,
               "width": 222,
             }
           }
@@ -476,7 +478,7 @@ style = Object {
         <View
           style={
             Object {
-              "marginTop": 150,
+              "marginTop": 250,
             }
           }
         >

@@ -197,15 +197,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(116,130,148,0.55)',
   },
   logo: {
+    position: 'absolute',
     alignItems: 'center',
-    marginTop: 135,
+    top: 135,
     width: 370 * 0.6,
     height: 122 * 0.6,
     marginLeft: (window.width - 370 * 0.6) / 2,
   },
   inputOuterContainer: {
-    marginTop: 150,
-    //flex: 1,
+    marginTop: 250,
   },
   inputContainer: {
     // flex: 1,
