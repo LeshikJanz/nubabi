@@ -27,7 +27,7 @@ export const ProfileGrowth = ({ dob, growth, onViewGrowth }: Props) => {
           <Pill
             backgroundColor="rgba(51, 183, 235, .1)"
             borderColor="transparent"
-            style={{ padding: 2, paddingHorizontal: 8, borderRadius: 12 }}
+            style={{ padding: 2, paddingHorizontal: 8, borderRadius: 20 }}
           >
             <Text bold color="success" style={() => ({ letterSpacing: -0.41 })}>
               {formatAge(dob)}
