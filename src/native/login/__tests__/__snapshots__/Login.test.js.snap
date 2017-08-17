@@ -160,7 +160,6 @@ style = Object {
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              focus={undefined}
               onChangeText={[Function]}
               onSubmitEditing={[Function]}
               placeholder="Password"
@@ -533,7 +532,6 @@ style = Object {
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              focus={undefined}
               onChangeText={[Function]}
               onSubmitEditing={[Function]}
               placeholder="Password"
@@ -562,9 +560,7 @@ style = Object {
                   "justifyContent": "center",
                   "marginTop": 20,
                 },
-                Object {
-                  "opacity": 0.2,
-                },
+                Object {},
                 Object {
                   "marginTop": 50,
                 },

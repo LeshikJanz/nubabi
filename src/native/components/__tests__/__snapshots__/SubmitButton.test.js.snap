@@ -12,9 +12,7 @@ style = Object {}
         "justifyContent": "center",
         "marginTop": 20,
       },
-      Object {
-        "opacity": 0.2,
-      },
+      Object {},
       Object {},
     ]
   }

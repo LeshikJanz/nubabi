@@ -1,14 +1,8 @@
 // @flow
 import type { Baby, BabyEdge, State } from '../../common/types';
 import React, { Component } from 'react';
-import {
-  Animated,
-  Image,
-  LayoutAnimation,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { Image, LayoutAnimation, StyleSheet, Text, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { ImageCacheProvider } from 'react-native-cached-image';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -19,7 +13,6 @@ import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
 import ChooseBaby from '../profile/ChooseBaby';
-import * as Animatable from 'react-native-animatable';
 import RocketHorseLoader from '../components/RocketHorseLoader';
 
 const loadingImage = { uri: 'LaunchImage' };

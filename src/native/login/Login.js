@@ -32,6 +32,7 @@ export class Login extends Component {
     password: '',
   };
 
+  passwordInput = null;
   submitButton = null;
 
   login = () => {
@@ -75,7 +76,8 @@ export class Login extends Component {
                   blurOnSubmit={false}
                   underlineColorAndroid="#eff1f7"
                   onChangeText={email => this.setState({ email })}
-                  onSubmitEditing={() => this.passwordInput.focus()}
+                  onSubmitEditing={() =>
+                    this.passwordInput && this.passwordInput.focus()}
                 />
               </View>
               <View style={styles.inputContainer}>
@@ -91,7 +93,6 @@ export class Login extends Component {
                   placeholderTextColor="rgba(255,255,255,.78)"
                   selectionColor="white"
                   autoCorrect={false}
-                  focus={this.state.focusPassword}
                   onChangeText={password => this.setState({ password })}
                   returnKeyType="go"
                   onSubmitEditing={this.loginViaKeyboard}
@@ -99,6 +100,7 @@ export class Login extends Component {
               </View>
               <SubmitButton
                 innerRef={ref => (this.submitButton = ref)}
+                animatedWidth={40}
                 onPress={this.login}
                 loading={isFetching}
                 submitText="LOG IN"
@@ -193,7 +195,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(116,130,148,0.55)',
   },
   logo: {
-    // 140 width 67.6 height 81.3 marginLeft
     position: 'absolute',
     alignItems: 'center',
     top: 140,

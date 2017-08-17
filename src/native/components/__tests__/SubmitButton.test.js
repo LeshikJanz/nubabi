@@ -5,6 +5,7 @@ import { expectRender } from '../../shared/testUtils';
 
 const onPress = jest.fn();
 
+// Skipped until how to deal with mocking Animatable
 test('it renders correctly by default', () => {
   expectRender(<SubmitButton loading={false} onPress={onPress} />);
 });

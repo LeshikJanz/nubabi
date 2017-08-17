@@ -14,28 +14,10 @@ type Props = {
   containerStyle?: Object,
   textStyle?: Object,
   buttonStyle?: Object,
+  animatedWidth?: number,
 };
 
 Animatable.initializeRegistryWithDefinitions({
-  collapsingButton: {
-    style: {
-      perspective: 400,
-    },
-    0: {
-      width: 100,
-    },
-    1: {
-      width: 30,
-    },
-  },
-  expandingButton: {
-    0: {
-      width: 30,
-    },
-    1: {
-      width: 100,
-    },
-  },
   rotatingHorse360: {
     0: {
       transform: [{ rotate: '0deg' }],
@@ -51,6 +33,7 @@ export class SubmitButton extends PureComponent {
 
   state = {
     isAnimating: false,
+    animation: null,
   };
 
   componentWillReceiveProps(nextProps: Props) {
@@ -59,20 +42,72 @@ export class SubmitButton extends PureComponent {
       this.props.loading === true &&
       this.state.isAnimating
     ) {
-      this.buttonView.expandingButton(500).then(() => {
-        this.setState({ isAnimating: false });
-      });
+      const width = StyleSheet.flatten([
+        styles.submitButton,
+        nextProps.buttonStyle,
+      ]).width;
+      this.setState(
+        {
+          animation: {
+            0: {
+              width: this.props.animatedWidth || 30,
+              opacity: 1,
+            },
+            0.5: {
+              opacity: 0.5,
+            },
+            1: {
+              width,
+              opacity: 1,
+            },
+          },
+        },
+        () => {
+          this.timeout = setTimeout(
+            () => this.setState({ isAnimating: false }),
+            1000,
+          );
+        },
+      );
     }
   }
 
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+  }
+
+  onAnimationBegin = () => {
+    this.setState({ isAnimating: true });
+  };
+
   handleOnPress = () => {
-    this.setState({ isAnimating: true }, () => {
-      this.buttonView.collapsingButton(500).then(endState => {
-        if (endState.finished) {
-          this.props.onPress();
-        }
-      });
-    });
+    const width = StyleSheet.flatten([
+      styles.submitButton,
+      this.props.buttonStyle,
+    ]).width;
+
+    this.setState(
+      {
+        animation: {
+          0: {
+            width,
+            opacity: 1,
+          },
+          0.5: {
+            opacity: 0.5,
+          },
+          1: {
+            width: this.props.animatedWidth || 30,
+            opacity: 1,
+          },
+        },
+      },
+      () => {
+        this.props.onPress();
+      },
+    );
   };
 
   render() {
@@ -105,19 +140,17 @@ export class SubmitButton extends PureComponent {
     }
 
     if (!loading && !isAnimating) {
+      const TextContainer = props => {
+        return typeof jest === 'undefined'
+          ? <Animatable.Text animation="fadeIn" {...props} />
+          : <Text {...props} />;
+      };
+
       buttonContent = (
-        <Text style={[styles.submitText, textStyle]}>
+        <TextContainer style={[styles.submitText, textStyle]}>
           {submitText}
-        </Text>
+        </TextContainer>
       );
-    }
-
-    if (loading) {
-      style.opacity = 0.2;
-    }
-
-    if (disabled) {
-      style.opacity = theme.states.disabled.opacity;
     }
 
     const buttonProps = this.props.innerRef ? { ref: this.props.innerRef } : {};
@@ -125,6 +158,8 @@ export class SubmitButton extends PureComponent {
     return (
       <View style={[styles.submitButtonContainer, style, containerStyle]}>
         <Animatable.View
+          animation={this.state.animation}
+          onAnimationBegin={this.onAnimationBegin}
           ref={ref => (this.buttonView = ref)}
           style={[styles.submitButton, buttonStyle]}
         >
