@@ -42,7 +42,7 @@ export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
           borderBottomWidth={1}
           style={() => ({ borderColor: '#EDF0F9' })}
         >
-          <Text size={2} color="secondary" numberOfLines={3}>
+          <Text size={2} color="secondary" numberOfLines={3} lineHeight={20}>
             {skipIntroductionGreeting(growth.current.introduction)}
           </Text>
 
