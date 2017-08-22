@@ -41,7 +41,7 @@ export const EmptyMemories = ({
               style={{ width: 36, height: 35 }}
               resizeMode="contain"
             />
-            <Text marginTop={0.5} size={4}>
+            <Text marginTop={0.5} size={6}>
               Recent Memories
             </Text>
           </Box>
