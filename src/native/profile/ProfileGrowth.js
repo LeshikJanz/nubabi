@@ -25,7 +25,7 @@ export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
       <Card padding={0}>
         <Box contentSpacing flexDirection="row">
           <Box flex={1}>
-            <Text size={4}>This Week's Growth</Text>
+            <Text size={6}>This Week's Growth</Text>
           </Box>
           <Pill
             backgroundColor="rgba(51, 183, 235, .1)"
@@ -42,7 +42,7 @@ export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
           borderBottomWidth={1}
           style={() => ({ borderColor: '#EDF0F9' })}
         >
-          <Text color="secondary" numberOfLines={3}>
+          <Text size={2} color="secondary" numberOfLines={3}>
             {skipIntroductionGreeting(growth.current.introduction)}
           </Text>
 
@@ -50,7 +50,7 @@ export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
             style={{ marginVertical: 5, alignItems: 'flex-end' }}
             onPress={onViewGrowth}
           >
-            <Text color="primary" medium>
+            <Text color="primary" medium size={2}>
               Read more
             </Text>
           </TouchableOpacity>

@@ -37,7 +37,7 @@ export const RecentMemories = ({
     <HorizontalCardList
       items={items}
       headerTitle="Recent Memories"
-      headerTitleSize={4}
+      headerTitleSize={6}
       headerRight={headerRight}
       onItemPress={onViewMemory}
     />

@@ -80,7 +80,7 @@ export class ProfileActivities extends PureComponent {
         </Box>
         <Box flex={1}>
           <TouchableOpacity onPress={onPress}>
-            <Text color="primary" medium marginBottom={0.5}>
+            <Text color="primary" medium marginBottom={0.5} size={2}>
               {activity.name}
             </Text>
           </TouchableOpacity>
@@ -106,7 +106,7 @@ export class ProfileActivities extends PureComponent {
       <Box contentSpacing>
         <Card padding={0}>
           <Box contentSpacing paddingBottom={0}>
-            <Text size={4}>
+            <Text size={6}>
               {formatPossessive(babyName)} Week Ahead
             </Text>
           </Box>
@@ -115,7 +115,7 @@ export class ProfileActivities extends PureComponent {
           </Box>
           <Box contentSpacing alignItems="flex-end">
             <TouchableOpacity onPress={onViewAll}>
-              <Text color="primary" medium>
+              <Text color="primary" medium size={2}>
                 See all activities
               </Text>
             </TouchableOpacity>
