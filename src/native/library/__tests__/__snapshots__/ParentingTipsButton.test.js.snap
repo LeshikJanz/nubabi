@@ -3,10 +3,10 @@
 exports[`it renders correctly 1`] = `
 style = Object {
     "marginBottom": 16,
-    "paddingBottom": 16,
-    "paddingLeft": 16,
-    "paddingRight": 16,
-    "paddingTop": 16,
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10,
+    "paddingTop": 10,
     "flex": 1,
     "backgroundColor": "#FFFFFF",
     "borderColor": "#9EABBC",
@@ -28,10 +28,10 @@ style = Object {
         "width": 0
     },
     "overflow": "hidden",
-    "fontSize": 14.791111111111112,
-    "lineHeight": 16,
+    "fontSize": 19.147659412894374,
+    "lineHeight": 32,
     "color": "#454D56",
-    "fontFamily": "SF Pro Text"
+    "fontFamily": "SF Pro Display"
 }
 
 <View
@@ -141,6 +141,7 @@ style = Object {
       </View>
     </Image>
     <View
+      contentSpacing={true}
       style={
         Object {
           "borderBottomWidth": 0,
@@ -148,11 +149,10 @@ style = Object {
           "borderLeftWidth": 0,
           "borderRightWidth": 0,
           "borderTopWidth": 0,
-          "justifyContent": "center",
-          "paddingBottom": 16,
-          "paddingLeft": 16,
-          "paddingRight": 16,
-          "paddingTop": 16,
+          "paddingBottom": 10,
+          "paddingLeft": 10,
+          "paddingRight": 10,
+          "paddingTop": 10,
         }
       }
     >
@@ -169,9 +169,9 @@ style = Object {
             "borderRightWidth": 0,
             "borderTopWidth": 0,
             "color": "#454D56",
-            "fontFamily": "SF Pro Text",
-            "fontSize": 14.791111111111112,
-            "lineHeight": 16,
+            "fontFamily": "SF Pro Display",
+            "fontSize": 19.147659412894374,
+            "lineHeight": 32,
           }
         }
       >

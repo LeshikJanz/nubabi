@@ -32,8 +32,8 @@ export const Button = ({ layout }: { layout: LayoutProps }) => {
       >
         <Overlay />
       </Image>
-      <Box justifyContent="center" padding={1}>
-        <Text size={2}>Health Help</Text>
+      <Box contentSpacing>
+        <Text size={6}>Health Help</Text>
       </Box>
     </Box>
   );

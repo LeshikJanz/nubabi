@@ -80,8 +80,13 @@ export class ArticleList extends PureComponent {
 
   renderHeader = () => {
     return (
-      <Box flexDirection="row" justifyContent="space-between" padding={1}>
-        <Text size={2}>Articles</Text>
+      <Box
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        padding={1}
+      >
+        <Text size={6}>Articles</Text>
         <TouchableOpacity onPress={this.props.onBrowseAll}>
           <Text medium color="primary">
             SEE ALL
