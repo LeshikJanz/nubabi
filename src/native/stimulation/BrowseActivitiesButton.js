@@ -1,8 +1,7 @@
 // @flow
 import type { Image as ImageType, LayoutProps } from '../../common/types/types';
 import React from 'react';
-import { Text, StyleSheet, TouchableHighlight } from 'react-native';
-import Image from 'react-native-cached-image';
+import { Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
 import { Overlay, withLayout } from '../components';
 
 type Props = {
@@ -45,7 +44,7 @@ export const BrowseActivitiesButton = ({
     >
       <Image
         source={background}
-        style={[styles.background, { flex: 1 }, dimensions]}
+        style={[{ flex: 1 }, dimensions]}
         resizeMode="cover"
       >
         <Overlay>

@@ -9,8 +9,8 @@ import { sample } from 'lodash';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
-import BrowseAllActivitiesButton from './BrowseActivitiesButton';
-import CalendarButton from './CalendarButton';
+import ActivityHistoryButton from './ActivityHistoryButton';
+import BrowseActivitiesHeaderButton from './BrowseActivitiesHeaderButton';
 import FavoritesButton from './FavoritesButton';
 import DidYouKnow from './DidYouKnow';
 import {
@@ -63,8 +63,8 @@ class Stimulation extends Component {
     return (
       <View style={styles.container} onLayout={this.handleLayout}>
         <View style={styles.actionButtons}>
-          <CalendarButton />
           <FavoritesButton onPress={this.handleFavorites} />
+          <BrowseActivitiesHeaderButton onPress={this.handleBrowseActivities} />
         </View>
         <ScrollView style={styles.scrollContainer}>
           <ThisWeeksActivitiesButton
@@ -74,7 +74,7 @@ class Stimulation extends Component {
 
           <View style={styles.twoButtons}>
             <NextWeeksEquipmentButton onPress={this.handleNextWeeksEquipment} />
-            <BrowseAllActivitiesButton onPress={this.handleBrowseActivities} />
+            <ActivityHistoryButton onPress={() => {}} />
           </View>
 
           <View style={styles.didYouKnow}>
@@ -105,7 +105,6 @@ const styles = StyleSheet.create({
   },
   oneButton: {
     flex: 1,
-    height: 210,
     shadowColor: '#000',
     shadowOpacity: 0.15,
     shadowRadius: 3,
@@ -115,21 +114,14 @@ const styles = StyleSheet.create({
     },
   },
   twoButtons: {
-    height: 130,
     marginLeft: 10,
     marginRight: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     backgroundColor: 'transparent',
     marginTop: 5,
     marginBottom: 10,
     flex: 1,
-    shadowColor: 'rgba(0,0,0,0.15)',
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
   },
   didYouKnow: {
     marginTop: 5,

@@ -19,10 +19,10 @@ const DidYouKnow = ({ text = defaultText }: Props) => {
     <View style={styles.container}>
       <Image style={styles.icon} source={icon} />
       <View style={styles.textContainer}>
-        <Text color="black" size={4}>
+        <Text color="black" size={6}>
           Did you know
         </Text>
-        <Text size={2} lineHeight={20}>
+        <Text size={2} lineHeight={20} color="secondary">
           {text}
         </Text>
       </View>
@@ -53,7 +53,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     flex: 1,
     marginRight: 5,
-    //width: 250,
   },
   title: {
     color: PANEL_BUTTON_TEXT,

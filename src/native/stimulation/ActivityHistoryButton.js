@@ -4,16 +4,16 @@ import React from 'react';
 import { Image } from 'react-native';
 import { Box, Card, Text } from '../components';
 
-const background = require('../../common/images/next-week-equipment.png');
+const background = require('../../common/images/activity-history.png');
 
 type Props = {
   onPress: () => void,
   layout: LayoutProps,
 };
 
-export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
+export const ActivityHistoryButton = ({ onPress, layout }: Props) => {
   return (
-    <Card padding={0} onPress={onPress}>
+    <Card padding={0} onPress={onPress} style={() => ({ marginLeft: 16 })}>
       <Box flex={1} alignItems="center" justifyContent="center">
         <Image
           source={background}
@@ -22,10 +22,10 @@ export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
         />
         <Box contentSpacing>
           <Text size={6} lineHeight={24} align="center">
-            Equipment For
+            Activity
           </Text>
           <Text size={6} lineHeight={24} align="center">
-            Next Week
+            History
           </Text>
         </Box>
       </Box>
@@ -33,4 +33,4 @@ export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
   );
 };
 
-export default NextWeeksEquipmentButton;
+export default ActivityHistoryButton;

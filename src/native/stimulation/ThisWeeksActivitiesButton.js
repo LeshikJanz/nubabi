@@ -1,15 +1,10 @@
+// @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableHighlight,
-} from 'react-native';
-
-import { PANEL_BUTTON_TEXT } from '../../common/themes/defaultTheme';
-import { Overlay, withLayout } from '../components';
+import { Image } from 'react-native';
+import { Box, Card, Icon, Overlay, Text, withLayout } from '../components';
+import theme from '../../common/themes/defaultTheme';
+import formatDate from '../../common/helpers/formatDate';
 
 const background = require('../../common/images/gross_motor_large.jpg');
 
@@ -24,75 +19,62 @@ export const ThisWeeksActivitiesButton = ({
   style,
   layout,
 }: Props) => {
-  const title = "This Week's Activities";
-  const width = {
-    width: layout.viewportWidth,
+  const dimensions = {
+    width: layout.viewportWidth - 20,
+    height: layout.viewportWidth * 0.6,
   };
 
   return (
-    <TouchableHighlight
-      style={style}
-      underlayColor="rgba(0,0,0,0)"
-      onPress={onPress}
-    >
-      <View style={styles.container}>
-        <Image
-          source={background}
-          style={[styles.background, width]}
-          resizeMode="cover"
-        >
-          <Overlay />
-        </Image>
-
-        <View style={styles.textContainer}>
-          <Text style={styles.title}>
-            {title}
-          </Text>
-        </View>
-      </View>
-    </TouchableHighlight>
+    <Box contentSpacing>
+      <Card padding={0} onPress={onPress}>
+        <Box style={() => ({ borderRadius: 4, overflow: 'hidden' })}>
+          <Image
+            source={background}
+            style={[{ flex: 1 }, dimensions]}
+            resizeMode="cover"
+          >
+            <Overlay
+              style={{
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                paddingTop: 16,
+                paddingLeft: 16,
+              }}
+            >
+              <Box
+                alignItems="center"
+                justifyContent="center"
+                flexDirection="row"
+              >
+                <Icon
+                  name="md-calendar"
+                  size={20}
+                  color="white"
+                  style={{ marginTop: 2 }}
+                />
+                <Text color="white" marginLeft={0.5} bold>
+                  {formatDate(new Date())}
+                </Text>
+              </Box>
+            </Overlay>
+          </Image>
+          <Box contentSpacing flexDirection="row" justifyContent="center">
+            <Text flex={1} size={6}>
+              This Week's Activities
+            </Text>
+            <Box alignItems="center" justifyContent="center">
+              <Icon
+                color={theme.colors.secondary}
+                name="ios-arrow-forward"
+                size={20}
+                style={{ marginTop: 2 }}
+              />
+            </Box>
+          </Box>
+        </Box>
+      </Card>
+    </Box>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 2,
-    borderRadius: 4,
-    height: 97,
-    margin: 10,
-    marginTop: 10,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOpacity: 1,
-    shadowRadius: 1,
-    shadowOffset: {
-      height: 100,
-      width: 200,
-    },
-    overflow: 'hidden',
-  },
-  overlay: {
-    width: 355,
-    height: 140,
-    position: 'absolute',
-    backgroundColor: '#748294',
-    opacity: 0.3,
-    top: 0,
-  },
-  title: {
-    fontSize: 16,
-    justifyContent: 'center',
-    color: PANEL_BUTTON_TEXT,
-  },
-  textContainer: {
-    paddingLeft: 10,
-    justifyContent: 'center',
-    paddingTop: 15,
-  },
-  background: {
-    height: 140,
-    width: 355,
-  },
-});
 
 export default withLayout(ThisWeeksActivitiesButton);
