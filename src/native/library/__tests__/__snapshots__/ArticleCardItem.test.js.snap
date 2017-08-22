@@ -28,7 +28,7 @@ style = Object {
     "alignItems": "center",
     "fontSize": 13,
     "lineHeight": 16,
-    "color": "#454D56",
+    "color": "#748294",
     "fontFamily": "SF Pro Text",
     "textAlign": "center",
     "width": 100
@@ -138,7 +138,7 @@ style = Object {
             "borderLeftWidth": 0,
             "borderRightWidth": 0,
             "borderTopWidth": 0,
-            "color": "#454D56",
+            "color": "#748294",
             "fontFamily": "SF Pro Text",
             "fontSize": 13,
             "lineHeight": 16,

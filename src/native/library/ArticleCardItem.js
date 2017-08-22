@@ -34,7 +34,12 @@ export const ArticleCardItem = ({ title, image, layout }: Props) => {
         })}
       >
         <Box justiyContent="center" alignItems="center" padding={0.5}>
-          <Text style={() => ({ width: 100 })} numberOfLines={2} align="center">
+          <Text
+            color="secondary"
+            style={() => ({ width: 100 })}
+            numberOfLines={2}
+            align="center"
+          >
             {title}
           </Text>
         </Box>
