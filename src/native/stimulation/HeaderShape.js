@@ -7,12 +7,14 @@ type Props = {
   width: number,
   style?: Object | number,
   fillShape?: string,
+  strokeShape?: string,
 };
 
 export const HeaderShape = ({
   width,
   style: styleProp,
   fillShape = '#fff',
+  strokeShape = 'transparent',
 }: Props) => {
   const headerMargin = Math.round(width / 7.5); // 50 portrait 7p
   const headerPath = Math.round(width / 5); // 75 portrait 7p
@@ -32,7 +34,7 @@ export const HeaderShape = ({
   return (
     <Svg style={[styles.headerShape, dynamicStyle, styleProp]}>
       <G>
-        <Path d={curve + box} stroke="transparent" fill={fillShape} />
+        <Path d={curve + box} stroke={strokeShape} fill={fillShape} />
       </G>
     </Svg>
   );

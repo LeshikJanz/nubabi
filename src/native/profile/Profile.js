@@ -71,6 +71,7 @@ class Profile extends PureComponent {
   handleViewMemory = (id: string, title: string) => {
     this.props.navigation.navigate('viewMemory', { id, title });
   };
+  handleNavigateToMemories = () => this.props.navigation.navigate('memories');
   handleViewGrowth = () => this.props.navigation.navigate('whatYouNeedToKnow');
 
   render() {
@@ -108,8 +109,10 @@ class Profile extends PureComponent {
               onViewAll={this.handleViewActivities}
             />
             <RecentMemories
+              babyName={baby.name}
               onViewMemory={this.handleViewMemory}
               onAddMemory={this.handleAddMemory}
+              onViewAll={this.handleNavigateToMemories}
               {...filter(RecentMemories.fragments.memories, baby)}
             />
           </ScrollView>

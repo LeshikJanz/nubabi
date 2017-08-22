@@ -2,28 +2,40 @@
 import type { MemoryConnection } from '../../common/types';
 import React from 'react';
 import { gql } from 'react-apollo';
-import { HorizontalCardList, AddButton } from '../components';
+import { AddButton, HorizontalCardList } from '../components';
+import EmptyMemories from './EmptyMemories';
 import { flattenEdges } from '../../common/helpers/graphqlUtils';
-import { fragments as MemoryMediaFragments } from '../components/MemoryMedia';
 
 type Props = {
   memories: MemoryConnection,
+  babyName: string,
   onViewMemory: () => void,
   onAddMemory: () => void,
+  onViewAll: () => void,
 };
 
 export const RecentMemories = ({
   memories,
+  babyName,
   onViewMemory,
   onAddMemory,
+  onViewAll,
 }: Props) => {
+  const items = flattenEdges(memories);
+
+  if (!items.length) {
+    return (
+      <EmptyMemories babyName={babyName} onNavigateToMemories={onViewAll} />
+    );
+  }
+
   const headerRight = (
     <AddButton style={{ marginRight: 10 }} onPress={onAddMemory} />
   );
 
   return (
     <HorizontalCardList
-      items={flattenEdges(memories)}
+      items={items}
       headerTitle="Recent Memories"
       headerTitleSize={4}
       headerRight={headerRight}

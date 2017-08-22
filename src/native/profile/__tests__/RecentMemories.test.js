@@ -1,7 +1,7 @@
 import 'react-native';
 import React from 'react';
-import RecentMemories from '../RecentMemories';
-import { expectRender } from '../../shared/testUtils';
+import { RecentMemories } from '../RecentMemories';
+import { expectRender, layoutTestProp } from '../../shared/testUtils';
 
 test('it renders correctly', () => {
   const onItemPress = jest.fn();
@@ -26,6 +26,10 @@ test('it renders correctly', () => {
   };
 
   expectRender(
-    <RecentMemories memories={memories} onItemPress={onItemPress} />,
+    <RecentMemories
+      memories={memories}
+      onItemPress={onItemPress}
+      layout={layoutTestProp}
+    />,
   );
 });
