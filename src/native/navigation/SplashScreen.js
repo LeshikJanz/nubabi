@@ -62,11 +62,6 @@ class SplashScreen extends Component {
       return;
     }
 
-    LayoutAnimation.configureNext({
-      ...LayoutAnimation.Presets.spring,
-      duration: 400,
-    });
-
     if (baby) {
       const avatar = path(['avatar', 'url'], baby);
       const coverImage = path(['coverImage', 'url'], baby);
