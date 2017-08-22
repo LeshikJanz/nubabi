@@ -1,7 +1,7 @@
 // @flow
 import type { File, FileInput, State } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { LayoutAnimation, View } from 'react-native';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import {
   append,
@@ -92,6 +92,7 @@ class MemoryForm extends PureComponent {
   };
 
   updateFiles = (files: Array<File>) => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.props.change('files', reject(isNil, files));
   };
 
