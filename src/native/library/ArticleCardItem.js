@@ -1,4 +1,5 @@
 // @flow
+// TODO: reuse HorizontalCardItem
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -33,7 +34,12 @@ export const ArticleCardItem = ({ title, image, layout }: Props) => {
         })}
       >
         <Box justiyContent="center" alignItems="center" padding={0.5}>
-          <Text style={() => ({ width: 100 })} numberOfLines={2} align="center">
+          <Text
+            color="secondary"
+            style={() => ({ width: 100 })}
+            numberOfLines={2}
+            align="center"
+          >
             {title}
           </Text>
         </Box>

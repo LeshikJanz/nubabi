@@ -1,6 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#FFFFFF",
+    "fontFamily": "SF Pro Text",
+    "marginBottom": 5,
+    "marginLeft": 5,
+    "fontWeight": "700"
+}
+
 <View
   style={
     Object {
@@ -16,7 +31,6 @@ exports[`renders correctly 1`] = `
         "flex": 1,
         "height": 1334,
         "position": "absolute",
-        "resizeMode": "cover",
         "top": 0,
         "width": 750,
       }
@@ -52,6 +66,7 @@ exports[`renders correctly 1`] = `
     extraHeight={75}
     extraScrollHeight={0}
     keyboardDismissMode="interactive"
+    keyboardOpeningTime={250}
     keyboardShouldPersistTaps="handled"
     onScroll={[Function]}
     scrollEventThrottle={0}
@@ -72,22 +87,23 @@ exports[`renders correctly 1`] = `
         }
       >
         <Image
+          resizeMode="stretch"
           source={1}
           style={
             Object {
               "alignItems": "center",
-              "height": 73.2,
-              "marginLeft": 264,
-              "marginTop": 100,
-              "resizeMode": "stretch",
-              "width": 222,
+              "height": 67.2,
+              "marginLeft": 268.8,
+              "position": "absolute",
+              "top": 140,
+              "width": 212.4,
             }
           }
         />
         <View
           style={
             Object {
-              "marginTop": 150,
+              "marginTop": 250,
             }
           }
         >
@@ -97,43 +113,31 @@ exports[`renders correctly 1`] = `
                 "borderBottomWidth": 1,
                 "borderColor": "#eff1f7",
                 "flexDirection": "column",
-                "height": 50,
+                "height": 40,
                 "marginBottom": 15,
                 "marginHorizontal": 30,
                 "paddingBottom": 5,
               }
             }
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#fff",
-                  "fontSize": 12,
-                  "marginBottom": 6,
-                }
-              }
-            >
-              EMAIL
-            </Text>
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus={true}
               blurOnSubmit={false}
               keyBoardType="email-address"
               onChangeText={[Function]}
               onSubmitEditing={[Function]}
-              placeholder="name@example.com"
+              placeholder="Email"
+              placeholderTextColor="rgba(255,255,255,.78)"
               returnKeyType="next"
+              selectionColor="white"
               style={
                 Object {
                   "color": "#fff",
                   "flex": 1,
                   "fontSize": 18,
-                  "lineHeight": 26,
+                  "letterSpacing": -0.41,
+                  "lineHeight": 24,
                 }
               }
               underlineColorAndroid="#eff1f7"
@@ -146,106 +150,106 @@ exports[`renders correctly 1`] = `
                 "borderBottomWidth": 1,
                 "borderColor": "#eff1f7",
                 "flexDirection": "column",
-                "height": 50,
+                "height": 40,
                 "marginBottom": 15,
                 "marginHorizontal": 30,
                 "paddingBottom": 5,
               }
             }
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#fff",
-                  "fontSize": 12,
-                  "marginBottom": 6,
-                }
-              }
-            >
-              PASSWORD
-            </Text>
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              focus={undefined}
               onChangeText={[Function]}
               onSubmitEditing={[Function]}
-              palceholder="password"
+              placeholder="Password"
+              placeholderTextColor="rgba(255,255,255,.78)"
               returnKeyType="go"
               secureTextEntry={true}
+              selectionColor="white"
               style={
                 Object {
                   "color": "#fff",
                   "flex": 1,
                   "fontSize": 18,
-                  "lineHeight": 26,
+                  "letterSpacing": -0.41,
+                  "lineHeight": 24,
                 }
               }
               value=""
             />
           </View>
           <View
-            accessibilityComponentType={undefined}
-            accessibilityLabel={undefined}
-            accessibilityTraits={undefined}
-            accessible={true}
-            hasTVPreferredFocus={undefined}
-            hitSlop={undefined}
-            isTVSelectable={true}
-            onLayout={undefined}
-            onResponderGrant={[Function]}
-            onResponderMove={[Function]}
-            onResponderRelease={[Function]}
-            onResponderTerminate={[Function]}
-            onResponderTerminationRequest={[Function]}
-            onStartShouldSetResponder={[Function]}
             style={
               Array [
                 Object {
-                  "backgroundColor": "transparent",
+                  "alignItems": "center",
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "marginTop": 20,
                 },
-                undefined,
+                Object {},
+                Object {
+                  "marginTop": 50,
+                },
               ]
             }
-            testID={undefined}
-            tvParallaxProperties={undefined}
           >
             <View
+              collapsable={undefined}
               style={
                 Object {
                   "alignItems": "center",
-                  "flex": 1,
-                  "marginBottom": 50,
-                  "marginTop": 20,
+                  "backgroundColor": "#EA3154",
+                  "borderRadius": 20,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "width": 139,
                 }
               }
             >
               <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hitSlop={undefined}
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
                 style={
                   Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#ED3154",
-                    "borderRadius": 15,
-                    "height": 30,
-                    "justifyContent": "center",
-                    "width": 100,
+                    "opacity": 1,
                   }
                 }
+                testID={undefined}
+                tvParallaxProperties={undefined}
               >
                 <Text
                   accessible={true}
                   allowFontScaling={true}
+                  disabled={false}
                   ellipsizeMode="tail"
                   style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "color": "#fff",
-                      "fontSize": 14,
-                      "fontWeight": "700",
-                    }
+                    Array [
+                      Object {
+                        "backgroundColor": "transparent",
+                        "color": "#fff",
+                        "fontSize": 12,
+                        "fontWeight": "700",
+                      },
+                      Object {
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 17,
+                      },
+                    ]
                   }
                 >
                   LOG IN
@@ -255,12 +259,135 @@ exports[`renders correctly 1`] = `
           </View>
         </View>
       </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "marginBottom": 15,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "color": "#FFFFFF",
+              "fontFamily": "SF Pro Text",
+              "fontSize": 13.866666666666667,
+              "lineHeight": 16,
+              "marginBottom": 5,
+            }
+          }
+        >
+          Don't have an account yet?
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "color": "#FFFFFF",
+                "fontFamily": "SF Pro Text",
+                "fontSize": 13,
+                "lineHeight": 16,
+              }
+            }
+          >
+            Sign up for free on
+          </Text>
+          <View
+            accessibilityComponentType={undefined}
+            accessibilityLabel={undefined}
+            accessibilityTraits={undefined}
+            accessible={true}
+            collapsable={undefined}
+            hitSlop={undefined}
+            isTVSelectable={true}
+            nativeID={undefined}
+            onLayout={undefined}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "opacity": 1,
+              }
+            }
+            testID={undefined}
+            tvParallaxProperties={undefined}
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#FFFFFF",
+                  "fontFamily": "SF Pro Text",
+                  "fontSize": 13,
+                  "fontWeight": "700",
+                  "lineHeight": 16,
+                  "marginLeft": 5,
+                }
+              }
+            >
+              Nubabi.com
+            </Text>
+          </View>
+        </View>
+      </View>
     </View>
   </RCTScrollView>
 </View>
 `;
 
 exports[`show progress when logging in 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#FFFFFF",
+    "fontFamily": "SF Pro Text",
+    "marginBottom": 5,
+    "marginLeft": 5,
+    "fontWeight": "700"
+}
+
 <View
   style={
     Object {
@@ -276,7 +403,6 @@ exports[`show progress when logging in 1`] = `
         "flex": 1,
         "height": 1334,
         "position": "absolute",
-        "resizeMode": "cover",
         "top": 0,
         "width": 750,
       }
@@ -312,6 +438,7 @@ exports[`show progress when logging in 1`] = `
     extraHeight={75}
     extraScrollHeight={0}
     keyboardDismissMode="interactive"
+    keyboardOpeningTime={250}
     keyboardShouldPersistTaps="handled"
     onScroll={[Function]}
     scrollEventThrottle={0}
@@ -332,22 +459,23 @@ exports[`show progress when logging in 1`] = `
         }
       >
         <Image
+          resizeMode="stretch"
           source={1}
           style={
             Object {
               "alignItems": "center",
-              "height": 73.2,
-              "marginLeft": 264,
-              "marginTop": 100,
-              "resizeMode": "stretch",
-              "width": 222,
+              "height": 67.2,
+              "marginLeft": 268.8,
+              "position": "absolute",
+              "top": 140,
+              "width": 212.4,
             }
           }
         />
         <View
           style={
             Object {
-              "marginTop": 150,
+              "marginTop": 250,
             }
           }
         >
@@ -357,43 +485,31 @@ exports[`show progress when logging in 1`] = `
                 "borderBottomWidth": 1,
                 "borderColor": "#eff1f7",
                 "flexDirection": "column",
-                "height": 50,
+                "height": 40,
                 "marginBottom": 15,
                 "marginHorizontal": 30,
                 "paddingBottom": 5,
               }
             }
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#fff",
-                  "fontSize": 12,
-                  "marginBottom": 6,
-                }
-              }
-            >
-              EMAIL
-            </Text>
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              autoFocus={true}
               blurOnSubmit={false}
               keyBoardType="email-address"
               onChangeText={[Function]}
               onSubmitEditing={[Function]}
-              placeholder="name@example.com"
+              placeholder="Email"
+              placeholderTextColor="rgba(255,255,255,.78)"
               returnKeyType="next"
+              selectionColor="white"
               style={
                 Object {
                   "color": "#fff",
                   "flex": 1,
                   "fontSize": 18,
-                  "lineHeight": 26,
+                  "letterSpacing": -0.41,
+                  "lineHeight": 24,
                 }
               }
               underlineColorAndroid="#eff1f7"
@@ -406,55 +522,159 @@ exports[`show progress when logging in 1`] = `
                 "borderBottomWidth": 1,
                 "borderColor": "#eff1f7",
                 "flexDirection": "column",
-                "height": 50,
+                "height": 40,
                 "marginBottom": 15,
                 "marginHorizontal": 30,
                 "paddingBottom": 5,
               }
             }
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              ellipsizeMode="tail"
-              style={
-                Object {
-                  "color": "#fff",
-                  "fontSize": 12,
-                  "marginBottom": 6,
-                }
-              }
-            >
-              PASSWORD
-            </Text>
             <TextInput
               autoCapitalize="none"
               autoCorrect={false}
-              focus={undefined}
               onChangeText={[Function]}
               onSubmitEditing={[Function]}
-              palceholder="password"
+              placeholder="Password"
+              placeholderTextColor="rgba(255,255,255,.78)"
               returnKeyType="go"
               secureTextEntry={true}
+              selectionColor="white"
               style={
                 Object {
                   "color": "#fff",
                   "flex": 1,
                   "fontSize": 18,
-                  "lineHeight": 26,
+                  "letterSpacing": -0.41,
+                  "lineHeight": 24,
                 }
               }
               value=""
             />
           </View>
           <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "flex": 1,
+                  "justifyContent": "center",
+                  "marginTop": 20,
+                },
+                Object {},
+                Object {
+                  "marginTop": 50,
+                },
+              ]
+            }
+          >
+            <View
+              collapsable={undefined}
+              style={
+                Object {
+                  "alignItems": "center",
+                  "backgroundColor": "#EA3154",
+                  "borderRadius": 20,
+                  "height": 40,
+                  "justifyContent": "center",
+                  "width": 139,
+                }
+              }
+            >
+              <View
+                accessibilityComponentType={undefined}
+                accessibilityLabel={undefined}
+                accessibilityTraits={undefined}
+                accessible={true}
+                collapsable={undefined}
+                hitSlop={undefined}
+                isTVSelectable={true}
+                nativeID={undefined}
+                onLayout={undefined}
+                onResponderGrant={[Function]}
+                onResponderMove={[Function]}
+                onResponderRelease={[Function]}
+                onResponderTerminate={[Function]}
+                onResponderTerminationRequest={[Function]}
+                onStartShouldSetResponder={[Function]}
+                style={
+                  Object {
+                    "opacity": 1,
+                  }
+                }
+                testID={undefined}
+                tvParallaxProperties={undefined}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "marginBottom": 15,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "color": "#FFFFFF",
+              "fontFamily": "SF Pro Text",
+              "fontSize": 13.866666666666667,
+              "lineHeight": 16,
+              "marginBottom": 5,
+            }
+          }
+        >
+          Don't have an account yet?
+        </Text>
+        <View
+          style={
+            Object {
+              "flexDirection": "row",
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            disabled={false}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "color": "#FFFFFF",
+                "fontFamily": "SF Pro Text",
+                "fontSize": 13,
+                "lineHeight": 16,
+              }
+            }
+          >
+            Sign up for free on
+          </Text>
+          <View
             accessibilityComponentType={undefined}
             accessibilityLabel={undefined}
             accessibilityTraits={undefined}
             accessible={true}
-            hasTVPreferredFocus={undefined}
+            collapsable={undefined}
             hitSlop={undefined}
             isTVSelectable={true}
+            nativeID={undefined}
             onLayout={undefined}
             onResponderGrant={[Function]}
             onResponderMove={[Function]}
@@ -463,80 +683,37 @@ exports[`show progress when logging in 1`] = `
             onResponderTerminationRequest={[Function]}
             onStartShouldSetResponder={[Function]}
             style={
-              Array [
-                Object {
-                  "backgroundColor": "transparent",
-                },
-                undefined,
-              ]
+              Object {
+                "opacity": 1,
+              }
             }
             testID={undefined}
             tvParallaxProperties={undefined}
           >
-            <View
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              disabled={false}
+              ellipsizeMode="tail"
               style={
                 Object {
-                  "alignItems": "center",
-                  "flex": 1,
-                  "marginBottom": 50,
-                  "marginTop": 20,
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#FFFFFF",
+                  "fontFamily": "SF Pro Text",
+                  "fontSize": 13,
+                  "fontWeight": "700",
+                  "lineHeight": 16,
+                  "marginLeft": 5,
                 }
               }
             >
-              <View
-                style={
-                  Object {
-                    "alignItems": "center",
-                    "backgroundColor": "#ED3154",
-                    "borderRadius": 15,
-                    "height": 30,
-                    "justifyContent": "center",
-                    "width": 100,
-                  }
-                }
-              >
-                <Text
-                  accessible={true}
-                  allowFontScaling={true}
-                  ellipsizeMode="tail"
-                  style={
-                    Object {
-                      "backgroundColor": "transparent",
-                      "color": "#fff",
-                      "fontSize": 14,
-                      "fontWeight": "700",
-                    }
-                  }
-                >
-                  Logging in...
-                </Text>
-              </View>
-            </View>
+              Nubabi.com
+            </Text>
           </View>
-        </View>
-        <View
-          style={
-            Object {
-              "position": "absolute",
-              "right": 10,
-              "top": 30,
-            }
-          }
-        >
-          <RNSpinkit
-            color="#FFFFFF"
-            size={40}
-            style={
-              Array [
-                Object {
-                  "height": 40,
-                  "width": 40,
-                },
-                undefined,
-              ]
-            }
-            type="Arc"
-          />
         </View>
       </View>
     </View>

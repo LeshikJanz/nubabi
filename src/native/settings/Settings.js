@@ -1,24 +1,38 @@
 // @flow
+import type { State, Viewer, SettingsState } from '../../common/types';
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
-import type { State, Viewer } from '../../common/types';
+import { TouchableHighlight, View, ActionSheetIOS } from 'react-native';
 import { connect } from 'react-redux';
-import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { compose, path, invertObj } from 'ramda';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
+import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
+import { setSettingsValue } from '../../common/settings/reducer';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
-import UserProfile from './UserProfile';
+import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {
-  user: Viewer,
-  logout: typeof logout,
+  user?: { user: Viewer },
+  settings: SettingsState,
   appName: string,
   appVersion: string,
+  logout: typeof logout,
+  setSettingsValue: typeof setSettingsValue,
+  onNavigateToNotificationSettings: () => void,
+  onNavigateToEditProfile: () => void,
+  onNavigateToFriends: () => void,
 };
 
 const copyrightHolder = 'MyLearningBaby Ltd';
 const copyrightYear = new Date().getFullYear();
+
+const unitDisplayMapping = {
+  kg: 'Kilograms',
+  cm: 'Centimeters',
+  in: 'Inches',
+  lbs: 'Pounds',
+};
 
 export class Settings extends Component {
   props: Props;
@@ -37,6 +51,46 @@ export class Settings extends Component {
     return null;
   }
 
+  getUnitLabel(type: 'weight' | 'height') {
+    return unitDisplayMapping[this.props.settings.unitDisplay[type]];
+  }
+
+  handleActionSheet = (options: Array<string>, type: string) => {
+    // TODO: this is iOS only
+    const sheetOptions = [...options, 'Cancel'];
+    const cancelIndex = sheetOptions.length - 1;
+
+    ActionSheetIOS.showActionSheetWithOptions(
+      {
+        options: sheetOptions,
+        cancelButtonIndex: cancelIndex,
+        title: 'Choose a Unit',
+        message: 'Set this unit to be displayed in measurements across the app',
+      },
+      selectedIndex => {
+        if (selectedIndex === cancelIndex) {
+          return;
+        }
+
+        const selectedUnit = invertObj(unitDisplayMapping)[
+          sheetOptions[selectedIndex]
+        ];
+
+        if (selectedUnit) {
+          this.props.setSettingsValue(['unitDisplay', type], selectedUnit);
+        }
+      },
+    );
+  };
+
+  handleChooseWeightUnit = () => {
+    this.handleActionSheet(['Kilograms', 'Pounds'], 'weight');
+  };
+
+  handleChooseHeightUnit = () => {
+    this.handleActionSheet(['Centimeters', 'Inches'], 'height');
+  };
+
   renderCopyright() {
     const copyright = `© ${copyrightYear} ${copyrightHolder}.`;
     let copyrightText = `${copyright}`;
@@ -46,7 +100,9 @@ export class Settings extends Component {
     }
     return (
       <View style={styles.copyrightContainer}>
-        <Text style={styles.copyrightText}>{copyrightText}</Text>
+        <Text style={() => styles.copyrightText}>
+          {copyrightText}
+        </Text>
       </View>
     );
   }
@@ -58,32 +114,69 @@ export class Settings extends Component {
       return null;
     }
 
-    const userProp = filter(UserProfile.fragments.profile, viewer.user);
-    const viewerProp = filter(UserProfile.fragments.viewer, viewer);
+    const userProp = filter(UserProfileTrigger.fragments.profile, viewer.user);
 
     return (
-      <View style={styles.container}>
-        <UserProfile user={userProp} viewer={viewerProp} />
+      <Box flex={1}>
+        <List>
+          <ListItemSeparator />
+          <UserProfileTrigger
+            user={userProp}
+            onPress={this.props.onNavigateToEditProfile}
+          />
+          <ListItemSeparator />
+          <ListItem
+            leftIcon="ios-notifications"
+            rightArrow
+            onPress={this.props.onNavigateToNotificationSettings}
+          >
+            <Text color="secondary">Notifications</Text>
+          </ListItem>
+          <ListItem
+            leftIcon="ios-people"
+            rightArrow
+            last
+            onPress={this.props.onNavigateToFriends}
+          >
+            <Text color="secondary">Family and Friends</Text>
+          </ListItem>
+          <ListItemSeparator />
+          <Box contentSpacing>
+            <Text color="secondary">UNIT PREFERENCES</Text>
+          </Box>
+          <ListItem
+            rightArrow
+            rightText={this.getUnitLabel('weight')}
+            onPress={this.handleChooseWeightUnit}
+          >
+            <Text color="secondary">Weight</Text>
+          </ListItem>
+          <ListItem
+            rightArrow
+            rightText={this.getUnitLabel('height')}
+            onPress={this.handleChooseHeightUnit}
+            last
+          >
+            <Text color="secondary">Height</Text>
+          </ListItem>
+        </List>
         <View style={styles.submitButtonContainer}>
           <TouchableHighlight
             underlayColor="rgba(0,0,0,0)"
-            style={styles.oneButton}
             onPress={this.props.logout}
           >
-
             <View style={styles.submitButton}>
-              <Text style={styles.submitText}>LOG OUT</Text>
+              <Text style={() => styles.submitText}>LOG OUT</Text>
             </View>
           </TouchableHighlight>
         </View>
-
         {this.renderCopyright()}
-
-      </View>
+      </Box>
     );
   }
 }
-const styles = StyleSheet.create({
+
+const styles = {
   container: {
     flex: 1,
     justifyContent: 'center',
@@ -106,7 +199,7 @@ const styles = StyleSheet.create({
   submitText: {
     backgroundColor: 'transparent',
     fontSize: 12,
-    fontWeight: '700',
+    fontWeight: theme.text.bold.toString(),
     color: '#fff',
   },
   inputLabel: {
@@ -126,28 +219,27 @@ const styles = StyleSheet.create({
     color: theme.colors.open.gray3,
     textAlign: 'center',
   },
-});
+};
 
 export default compose(
   connect(
     (state: State) => ({
       appName: state.config.appName,
       appVersion: state.config.appVersion,
+      settings: state.settings,
     }),
-    { logout },
+    { setSettingsValue, logout },
   ),
   graphql(
     gql`
       query UserProfile {
         viewer {
-          ...UserProfileViewer
           user {
             ...UserProfile
           }
         }
       }
-      ${UserProfile.fragments.viewer}
-      ${UserProfile.fragments.profile}
+      ${UserProfileTrigger.fragments.profile}
     `,
     {
       options: { fetchPolicy: 'cache-and-network' },

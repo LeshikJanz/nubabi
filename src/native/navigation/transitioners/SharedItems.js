@@ -5,7 +5,7 @@ export type Metrics = {
   y: number,
   width: number,
   height: number,
-}
+};
 
 export class SharedItem {
   name: string;
@@ -15,8 +15,12 @@ export class SharedItem {
   metrics: ?Metrics;
 
   constructor(
-    name: string, containerRouteName: string, reactElement: React.Element<*>,
-    nativeHandle: any, metrics: ?Metrics) {
+    name: string,
+    containerRouteName: string,
+    reactElement: React.Element<*>,
+    nativeHandle: any,
+    metrics: ?Metrics,
+  ) {
     this.name = name;
     this.containerRouteName = containerRouteName;
     this.reactElement = reactElement;
@@ -25,7 +29,7 @@ export class SharedItem {
   }
 
   scaleRelativeTo(other: SharedItem) {
-    const validate = (i) => {
+    const validate = i => {
       if (!i.metrics) {
         throw new Error(`No metrics in ${i.name}:${i.containerRouteName}`);
       }
@@ -39,13 +43,19 @@ export class SharedItem {
   }
 
   clone() {
-    return new SharedItem(this.name, this.containerRouteName, this.reactElement,
-      this.nativeHandle, this.metrics);
+    return new SharedItem(
+      this.name,
+      this.containerRouteName,
+      this.reactElement,
+      this.nativeHandle,
+      this.metrics,
+    );
   }
 
   toString() {
     return `${this.name} ${this.containerRouteName} ${JSON.stringify(
-      this.metrics)}`;
+      this.metrics,
+    )}`;
   }
 }
 
@@ -58,7 +68,7 @@ export type UpdateRequest = {
   name: string,
   containerRouteName: string,
   metrics: ?Metrics,
-}
+};
 
 class SharedItems {
   _items: Array<SharedItem>;
@@ -68,7 +78,7 @@ class SharedItems {
   }
 
   _findIndex(name: string, containerRouteName: string): number {
-    return this._items.findIndex((i) => {
+    return this._items.findIndex(i => {
       return i.name === name && i.containerRouteName === containerRouteName;
     });
   }
@@ -78,7 +88,9 @@ class SharedItems {
   }
 
   add(item: SharedItem): SharedItems {
-    if (this._findIndex(item.name, item.containerRouteName) >= 0) { return this; }
+    if (this._findIndex(item.name, item.containerRouteName) >= 0) {
+      return this;
+    }
 
     return new SharedItems([...this._items, item]);
   }
@@ -88,7 +100,8 @@ class SharedItems {
     if (index >= 0) {
       const newItems = [
         ...this._items.slice(0, index),
-        ...this._items.slice(index + 1)];
+        ...this._items.slice(index + 1),
+      ];
       return new SharedItems(newItems);
     }
     return this;
@@ -103,7 +116,7 @@ class SharedItems {
     if (indexedRequests.every(r => r.index < 0)) return this;
 
     const newItems = Array.from(this._items);
-    indexedRequests.forEach((r) => {
+    indexedRequests.forEach(r => {
       if (r.index >= 0) {
         const newItem = newItems[r.index].clone();
         newItem.metrics = r.metrics;
@@ -115,13 +128,14 @@ class SharedItems {
 
   removeAllMetrics(): SharedItems {
     if (this._items.some(i => !!i.metrics)) {
-      const newItems = this._items.map((item) => {
+      const newItems = this._items.map(item => {
         const newItem = item.clone();
         newItem.metrics = null;
         return newItem;
       });
       return new SharedItems(newItems);
-    } return this;
+    }
+    return this;
   }
 
   _getNamePairMap(fromRoute: string, toRoute: string) {
@@ -143,11 +157,15 @@ class SharedItems {
 
   isMeatured(p: ItemPair) {
     const isNumber = n => typeof n === 'number';
-    const metricsValid = (m: Metrics) => m &&
-    [m.x, m.y, m.width, m.height].every(isNumber);
+    const metricsValid = (m: Metrics) =>
+      m && [m.x, m.y, m.width, m.height].every(isNumber);
     const { fromItem, toItem } = p;
-    return fromItem && toItem
-      && metricsValid(fromItem.metrics) && metricsValid(toItem.metrics);
+    return (
+      fromItem &&
+      toItem &&
+      metricsValid(fromItem.metrics) &&
+      metricsValid(toItem.metrics)
+    );
   }
 
   getMeasuredItemPairs(fromRoute: string, toRoute: string): Array<ItemPair> {
@@ -158,7 +176,8 @@ class SharedItems {
 
   findMatchByName(name: string, routeToExclude: string): ?SharedItem {
     return this._items.find(
-      i => i.name === name && i.containerRouteName !== routeToExclude);
+      i => i.name === name && i.containerRouteName !== routeToExclude,
+    );
   }
 
   areMetricsReadyForAllPairs(fromRoute: string, toRoute: string): boolean {

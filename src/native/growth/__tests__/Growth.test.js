@@ -1,23 +1,46 @@
 import 'react-native';
 import React from 'react';
 import { Growth } from '../Growth';
-import renderer from 'react-test-renderer';
-import felaTestContext from '../../shared/felaTestContext';
+import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
-jest.mock('../../components/LineGraph');
+jest.mock('../CombinedChart', () => () => null);
 
 test('it renders correctly', () => {
   const baby = {
     name: 'TestBaby',
+    weight: 30,
+    height: 30,
     growth: {
       introduction: 'My Test Baby intro',
     },
   };
 
-  const tree = renderer
-    .create(felaTestContext(<Growth baby={baby} />))
-    .toJSON();
+  const unitDisplay = {
+    weight: 'kg',
+    height: 'cm',
+  };
 
-  expect(tree).toMatchSnapshot();
+  const onNavigate = jest.fn();
+
+  expectRender(
+    <Growth
+      baby={baby}
+      onNavigateToWhatYouNeedToKnow={onNavigate}
+      onNavigateToGraphDetail={onNavigate}
+      unitDisplay={unitDisplay}
+    />,
+  );
+
+  unitDisplay.weight = 'lbs';
+  unitDisplay.height = 'cm';
+
+  expectRender(
+    <Growth
+      baby={baby}
+      onNavigateToWhatYouNeedToKnow={onNavigate}
+      onNavigateToGraphDetail={onNavigate}
+      unitDisplay={unitDisplay}
+    />,
+  );
 });

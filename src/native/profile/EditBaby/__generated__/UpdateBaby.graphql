@@ -1,0 +1,23 @@
+mutation UpdateBaby($input: UpdateBabyInput!) {
+  updateBaby(input: $input) {
+    changedBaby {
+      ...BabyForm
+    }
+  }
+}
+
+fragment BabyForm on Baby {
+  id
+  name
+  gender
+  dob
+  weekBorn
+  relationship
+  avatar {
+    url
+  }
+  coverImage {
+    url
+  }
+}
+

@@ -1,0 +1,29 @@
+query FriendsList {
+  viewer {
+    friends {
+      edges {
+        ...FriendListEdge
+        node {
+          ...FriendListUser
+        }
+      }
+    }
+  }
+}
+
+fragment FriendListEdge on UserEdge {
+  relationship
+  isPending
+}
+
+fragment FriendListUser on User {
+  id
+  firstName
+  lastName
+  avatar {
+    thumb {
+      url
+    }
+  }
+}
+

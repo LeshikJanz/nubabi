@@ -28,19 +28,23 @@ style = Object {}
   />
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "alignSelf": "stretch",
-        "backgroundColor": "transparent",
-        "flex": 1,
-        "flexDirection": "column",
-        "justifyContent": "center",
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "stretch",
+          "backgroundColor": "transparent",
+          "flex": 1,
+          "flexDirection": "column",
+          "justifyContent": "center",
+        },
+        Object {},
+      ]
     }
   >
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
     >
       Some text

@@ -36,6 +36,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -45,8 +46,8 @@ exports[`it renders correctly 1`] = `
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#454D56",
-          "fontFamily": "System",
-          "fontSize": 16.828997530864196,
+          "fontFamily": "SF Pro Display",
+          "fontSize": 19.147659412894374,
           "lineHeight": 32,
         }
       }
@@ -56,6 +57,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -64,8 +66,8 @@ exports[`it renders correctly 1`] = `
           "borderLeftWidth": 0,
           "borderRightWidth": 0,
           "borderTopWidth": 0,
-          "color": "#454D56",
-          "fontFamily": "System",
+          "color": "#748294",
+          "fontFamily": "SF Pro Text",
           "fontSize": 14.791111111111112,
           "lineHeight": 20,
         }

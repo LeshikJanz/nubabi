@@ -1,18 +1,15 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Platform, Linking, BackHandler } from 'react-native';
+import { BackHandler, Linking, Platform } from 'react-native';
 import {
-  NavigationActions,
   createNavigationContainer,
   createNavigator,
+  NavigationActions,
   StackRouter,
 } from 'react-navigation';
-import CardStackTransitioner
-  from 'react-navigation/src/views/CardStackTransitioner';
+import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitioner';
 
-import type {
-  NavigationRouteConfigMap,
-} from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
+import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import { merge } from 'lodash';
 import theme from '../../common/themes/defaultTheme';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
@@ -30,8 +27,7 @@ import EditBaby from '../profile/EditBaby/EditBaby';
 import ThisWeeksActivities from '../stimulation/ThisWeeksActivities';
 import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivitiesScreen from '../stimulation/BrowseActivitiesScreen';
-import BrowseActivitiesListScreen
-  from '../stimulation/BrowseActivitiesListScreen';
+import BrowseActivitiesListScreen from '../stimulation/BrowseActivitiesListScreen';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
 import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
@@ -47,6 +43,16 @@ import ViewArticleScreen from '../library/ViewArticleScreen';
 import ActivityMediaScreen from '../stimulation/ActivityMediaScreen';
 import ParentingTipsScreen from '../library/ParentingTipsScreen';
 import HealthHelpScreen from '../library/HealthHelpScreen';
+import GraphDetailScreen from '../growth/GraphDetailScreen';
+import ViewMemoryScreen from '../memories/ViewMemoryScreen';
+import AddMemoryScreen from '../memories/AddMemoryScreen';
+import EditMemoryScreen from '../memories/EditMemoryScreen';
+import VoiceRecordingScreen from '../memories/VoiceRecordingScreen';
+import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
+import EditUserProfileScreen from '../settings/EditUserProfileScreen';
+import FriendsScreen from '../settings/FriendsScreen';
+import InviteUserScreen from '../settings/InviteUserScreen';
+import GalleryScreen from '../components/GalleryScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -65,11 +71,16 @@ const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 const routes = {
   settings: { screen: SettingsScreen },
+  notificationSettings: { screen: NotificationSettingsScreen },
+  friends: { screen: FriendsScreen },
+  inviteUser: { screen: InviteUserScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
+  editUser: { screen: EditUserProfileScreen },
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   updateHeight: { screen: UpdateHeightScreen },
   updateWeight: { screen: UpdateWeightScreen },
+  graphDetail: { screen: GraphDetailScreen },
   thisWeekActivities: { screen: ThisWeeksActivities },
   favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
@@ -91,6 +102,17 @@ const routes = {
   viewActivityMedia: { screen: ActivityMediaScreen },
   parentingTips: { screen: ParentingTipsScreen },
   healthHelp: { screen: HealthHelpScreen },
+  addMemory: { screen: AddMemoryScreen },
+  viewMemory: {
+    screen: ViewMemoryScreen,
+    path: 'memories/:id',
+  },
+  editMemory: {
+    screen: EditMemoryScreen,
+    path: 'memories/:id/edit',
+  },
+  voiceRecording: { screen: VoiceRecordingScreen },
+  gallery: { screen: GalleryScreen },
 };
 
 class TransitionerSwitcher extends PureComponent {
@@ -206,7 +228,6 @@ const AppNavigator = createCustomNavigator(
     headerMode: 'float',
     // TODO: ensure child options get preserved
     navigationOptions: ({ navigationOptions }) => {
-      // console.log('APP NAVIGATOR', args);
       return {
         headerBackTitle: 'Back',
         headerTintColor: theme.colors.black,

@@ -1,9 +1,10 @@
 // @flow
-import type { State, Baby, BabyEdge } from '../../common/types';
-import React, { PureComponent } from 'react';
-import { StyleSheet, View, Image, LayoutAnimation, Text } from 'react-native';
+import type { Baby, BabyEdge, State } from '../../common/types';
+import React, { Component } from 'react';
+import { Image, LayoutAnimation, StyleSheet, Text, View } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { ImageCacheProvider } from 'react-native-cached-image';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import { sample } from 'lodash';
@@ -12,11 +13,13 @@ import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
 import ChooseBaby from '../profile/ChooseBaby';
+import RocketHorseLoader from '../components/RocketHorseLoader';
 
 const loadingImage = { uri: 'LaunchImage' };
 
 type Props = {
   appOnline: boolean,
+  appStarted: boolean,
   navigation: any,
   isAuthenticated: boolean,
   loadingMessage: ?string,
@@ -25,7 +28,7 @@ type Props = {
   babies: ?Array<BabyEdge>,
 };
 
-class SplashScreen extends PureComponent {
+class SplashScreen extends Component {
   props: Props;
 
   static navigationOptions = {
@@ -44,22 +47,19 @@ class SplashScreen extends PureComponent {
   }
 
   componentDidUpdate() {
-    LayoutAnimation.configureNext({
-      ...LayoutAnimation.Presets.spring,
-      duration: 400,
-    });
-
     setTimeout(this.handleNextScreen, 2000);
   }
 
   handleNextScreen = () => {
     const { appOnline, isAuthenticated, baby, babies } = this.props;
+
     if (!appOnline) {
       return;
     }
 
     if (!isAuthenticated) {
-      return this.navigateTo('login');
+      this.navigateTo('login');
+      return;
     }
 
     if (baby) {
@@ -77,9 +77,11 @@ class SplashScreen extends PureComponent {
         });
       }
 
-      ImageCacheProvider.cacheMultipleImages(images).then(() =>
-        this.navigateTo('home'),
-      );
+      if (images.length) {
+        ImageCacheProvider.cacheMultipleImages(images).then(() =>
+          this.navigateTo('home'),
+        );
+      }
     } else {
       this.navigateTo('home');
     }
@@ -99,7 +101,7 @@ class SplashScreen extends PureComponent {
 
   renderLoadingMessage() {
     if (!this.props.appStarted) {
-      return null;
+      return <View style={styles.loadingMessageContainer} />;
     }
 
     const loadingMessage =
@@ -107,9 +109,27 @@ class SplashScreen extends PureComponent {
 
     return (
       <View style={styles.loadingMessageContainer}>
-        <Text style={styles.loadingMessage}>
-          {loadingMessage}
-        </Text>
+        <Animatable.Text style={styles.loadingMessage} animation="fadeIn">
+          <Text style={{ fontWeight: theme.text.light.toString() }}>
+            <Image
+              source={require('../../common/images/quote-mark-left.png')}
+              style={[styles.quoteDimensions, { marginTop: -5 }]}
+            />{' '}
+            {loadingMessage}{' '}
+            <Image
+              source={require('../../common/images/quote-mark-right.png')}
+              style={[
+                styles.quoteDimensions,
+                {
+                  bottom: 0,
+                  right: 2,
+                  marginTop: -5,
+                },
+              ]}
+            />
+          </Text>
+        </Animatable.Text>
+
         {this.props.author &&
           <View
             style={{
@@ -121,14 +141,22 @@ class SplashScreen extends PureComponent {
             <Text
               style={{
                 textAlign: 'center',
-                fontSize: 14,
-                color: theme.colors.open.gray0,
-                fontStyle: 'italic',
+                fontSize: 13,
+                color: '#F8F9FC',
+                fontWeight: theme.text.medium.toString(),
               }}
             >
-              {this.props.author}
+              - {this.props.author}
             </Text>
           </View>}
+      </View>
+    );
+  }
+
+  renderLoadingIndicator() {
+    return (
+      <View style={{ flex: 1, justifyContent: 'flex-end' }}>
+        <RocketHorseLoader splash />
       </View>
     );
   }
@@ -136,7 +164,12 @@ class SplashScreen extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <Image source={loadingImage} style={styles.textContainer}>
+        <Image
+          source={loadingImage}
+          resizeMode="stretch"
+          style={styles.textContainer}
+        >
+          {this.renderLoadingIndicator()}
           {this.renderLoadingMessage()}
         </Image>
         <Alert />
@@ -156,18 +189,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   loadingMessageContainer: {
-    marginTop: 100,
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    marginTop: 40,
   },
   loadingMessage: {
     width: 274, // TODO: I don't like this
-    margin: 20,
-    color: theme.colors.open.gray0,
+    marginVertical: 20,
+    marginHorizontal: 5,
+    color: '#F8F9FC',
     textAlign: 'center',
-    fontSize: 14,
-    lineHeight: 26,
+    fontSize: 17,
+    lineHeight: 22,
+  },
+  quoteDimensions: {
+    width: 7,
+    height: 11.45,
+    zIndex: 999,
   },
 });
 

@@ -57,7 +57,7 @@ export class ExpertInfo extends Component {
         <Text style={styles.descriptionHeader}>
           Our expert {firstName} says:
         </Text>
-        <Image source={avatar} style={styles.avatar} />
+        <Image source={avatar} style={styles.avatar} resizeMode="stretch" />
         <Text style={styles.descriptionText}>
           {this.props.activityDescription}
         </Text>
@@ -92,12 +92,17 @@ export class ExpertInfo extends Component {
         <Image
           source={{ uri: this.props.expert.avatar.url }}
           style={styles.biographyAvatar}
+          resizeMode="stretch"
         />
-        <Text style={styles.expertBiographyName}>{this.props.expert.name}</Text>
+        <Text style={styles.expertBiographyName}>
+          {this.props.expert.name}
+        </Text>
         <Text style={styles.expertDescriptionProfession}>
           {this.props.expert.discipline}
         </Text>
-        <Text style={styles.biographyText}>{this.props.expert.biography}</Text>
+        <Text style={styles.biographyText}>
+          {this.props.expert.biography}
+        </Text>
       </View>
     );
   };
@@ -171,7 +176,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 40,
     height: 40,
-    resizeMode: 'stretch',
     top: 10,
     right: 10,
     borderRadius: 20,
@@ -179,7 +183,6 @@ const styles = StyleSheet.create({
   biographyAvatar: {
     width: 60,
     height: 60,
-    resizeMode: 'stretch',
     borderRadius: 30,
   },
   descriptionText: {

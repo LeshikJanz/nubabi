@@ -1,0 +1,29 @@
+query MemoryComments($babyId: ID, $memoryId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      memory(id: $memoryId) {
+        id
+        comments {
+          count
+          edges {
+            node {
+              id
+              ...MemoryComment
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment MemoryComment on Comment {
+  text
+  createdAt
+  author {
+    firstName
+    lastName
+  }
+}
+

@@ -130,7 +130,7 @@ export default compose(
     `,
     {
       name: 'toggleFavorite',
-      options: { refetchQueries: ['ViewActivity', 'getBaby'] },
+      options: { refetchQueries: ['ViewActivity', 'Profile'] },
     },
   ),
   displayLoadingState,

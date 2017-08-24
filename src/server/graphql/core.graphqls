@@ -13,35 +13,19 @@ interface Timestampable {
   updatedAt: DateTime
 }
 
-interface ResizableImage {
-  url: String
-  width: Int
-  height: Int
+type Query {
+  viewer: Viewer!
+
+  # Fetches an object given its ID
+  node(
+    # The ID of an object
+    id: ID!
+  ): Node
 }
 
-type Image implements ResizableImage {
-  url: String
-  width: Int
-  height: Int
-  large: Image
-  thumb: Image
-}
-
-type Avatar implements ResizableImage {
-  url: String
-  width: Int
-  height: Int
-}
-
-type Avatar {
-  url: String,
-  large: Image,
-  thumb: Image,
-}
-
-input ImageInput {
-  # A Base64-encoded data URI representing the image contents
-  url: String
+type Mutation {
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
+  inviteUser(input: InviteUserInput!): InviteUserPayload
 }
 
 # Information about pagination in a connection.
@@ -66,6 +50,9 @@ type UserConnection {
 
   # A list of edges.
   edges: [UserEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  # count: Int!
 }
 
 # An edge in a connection.
@@ -85,7 +72,7 @@ type User implements Node {
   lastName: String
 
   # Date of Birth
-  dob: DateTime
+  dob: Date
   avatar: Avatar
 
   totalAchievements: Int
@@ -93,37 +80,24 @@ type User implements Node {
 }
 
 type Viewer {
-  allUsers(before: String, after: String, first: Int, last: Int): UserConnection!
+  allUsers(
+  before: String, after: String, first: Int, last: Int
+): UserConnection!
+
   user: User
   getUser(id: ID!): User
-}
 
-# A connection to a list of items.
-type UserConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [UserEdge]
-
-  # Count of filtered result set without considering pagination arguments
-  # count: Int!
-}
-
-type Query {
-  viewer: Viewer!
-
-  # Fetches an object given its ID
-  node(
-    # The ID of an object
-    id: ID!
-  ): Node
+  friends(
+    before: String, after: String, first: Int, last: Int
+  ): UserConnection!
 }
 
 input CreateUserInput {
   username: String!
   password: Secret,
-  clientMutationId: ID,
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String,
 }
 
 type CreateUserPayload {
@@ -143,6 +117,170 @@ type CreateUserPayload {
   clientMutationId: String
 }
 
-type Mutation {
-  ping: String
+input UpdateUserInput {
+  firstName: String,
+  lastName: String,
+  dob: Date,
+  avatar: ImageInput,
+}
+
+type UpdateUserPayload {
+  # The mutated User.
+  changedUser: User
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+input AuthProviderSignupData {
+  email: AuthProviderEmail
+}
+
+input AuthProviderEmail {
+  email: String!
+  password: String!
+}
+
+input InviteUserInput {
+  inviteToken: String!
+  firstName: String!
+  lastName: String!
+  email: String!
+  relationship: BabyRelationship!
+}
+
+type InviteUserPayload {
+  inviteToken: String
+  invitedUser: User
+  changedEdge: UserEdge
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+interface File {
+  id: ID!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  url: String
+}
+
+# TODO: make avatar, image, etc. use/implement this
+type GenericFile implements File {
+  id: ID!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  url: String!
+}
+
+# A connection to a list of items.
+type FileConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [FileEdge]
+
+  # Count of filtered result set without considering pagination arguments
+  count: Int
+}
+
+type FileEdge {
+  # The item at the end of the edge.
+  node: File!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input FileInput {
+  name: String!
+  contentType: String!
+  size: Int!
+}
+
+input FileInputBase64 {
+  name: String!
+  url: String!
+  contentType: String!
+  size: Int!
+}
+
+input FileFilter {
+  contentTypeContains: String
+}
+
+interface ResizableImage {
+  url: String
+  width: Int
+  height: Int
+}
+
+interface Thumbnailable {
+  thumb: Image
+}
+
+type Image implements File, ResizableImage, Thumbnailable {
+  id: ID!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+
+  size: Int!
+  updatedAt: DateTime
+  url: String!
+
+  width: Int
+  height: Int
+  large: Image
+  thumb: Image
+}
+
+type Avatar implements File, ResizableImage, Thumbnailable {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+
+  width: Int
+  height: Int
+  large: Image
+  thumb: Image
+}
+
+type Video implements File, Thumbnailable {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  thumb: Image
+  duration: Int
+}
+
+type Audio implements File {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  duration: Int
+}
+
+input ImageInput {
+  # A Base64-encoded data URI representing the image contents
+  url: String
 }

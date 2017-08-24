@@ -7,6 +7,7 @@ const paths = [
   ['apollo', ['data']],
   ['babies', ['currentBabyId']],
   ['growth', ['hasSeenGlobalIntro', 'skippedIntroductions']],
+  ['settings'],
   ['viewer'],
 ];
 

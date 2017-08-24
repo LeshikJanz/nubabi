@@ -1,0 +1,6 @@
+mutation ToggleFavorite($input: ToggleFavoriteInput!) {
+  toggleActivityFavorite(input: $input) {
+    wasFavorited
+  }
+}
+

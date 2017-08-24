@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs/Observable';
 import { Action, Deps, MutationResultAction } from '../types';
 import api from '../connectors/mlb';
-import { resetNavigation } from '../../native/navigation/actions';
+import { resetNavigation } from '../navigation/actions';
 
 export function selectBaby(id): Action {
   return {
@@ -49,8 +49,10 @@ export function getThisWeeksActivitiesFailure(err): Action {
 const createBabyEpic = (action$: any) => {
   return action$
     .filter((action: MutationResultAction) => {
-      return action.type === 'APOLLO_MUTATION_RESULT' &&
-        action.operationName === 'CreateBaby';
+      return (
+        action.type === 'APOLLO_MUTATION_RESULT' &&
+        action.operationName === 'CreateBaby'
+      );
     })
     .mergeMap(({ result: { data } }) => {
       if (data.createBaby) {
@@ -73,6 +75,7 @@ const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) =>
         api.getThisWeeksActivities(api.getBabies(getState().auth.token)),
       )
         .map(response => getThisWeeksActivitiesSuccess(response))
-        .catch(err => Observable.of(getThisWeeksActivitiesFailure(err))));
+        .catch(err => Observable.of(getThisWeeksActivitiesFailure(err))),
+    );
 
 export const epics = [fetchThisWeekActivitiesEpic, createBabyEpic];

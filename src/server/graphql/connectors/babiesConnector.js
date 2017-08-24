@@ -1,7 +1,8 @@
 // @flow
-import { getPaginationArguments } from '../resolvers/common';
+import formatPossessive from '../../../common/helpers/formatPossessive';
 
 require('axios-debug-log');
+
 import type { ConnectionArguments } from '../resolvers/common';
 import type {
   ActivityLevelOperation,
@@ -19,8 +20,9 @@ import {
   identity,
   mergeDeepRight,
   curry,
+  assoc,
 } from 'ramda';
-import { fromGlobalId } from '../resolvers/common';
+import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
@@ -83,9 +85,6 @@ const withActivityFilters = ({
 
 const sortBySkillArea = sortBy(prop('skill_area_id'));
 
-export const getSkillAreas = (token: string) =>
-  instance.get('/skill_areas', withToken(token)).then(path(['data']));
-
 export const getSkillArea = (token: string, id: string) => {
   return instance
     .get(`/skill_areas/${id}`, withToken(token))
@@ -119,7 +118,12 @@ export const getSkillAreaImage = (obj: mixed) => {
 export const getActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(path(['data']))
+    .then(data => {
+      return path(['data'], data).map(activity => {
+        // Assign babyId so it can be used by activity introduction
+        return assoc('babyId', babyId, activity);
+      });
+    })
     .then(sortBySkillArea);
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
@@ -259,9 +263,7 @@ export const getTemplateVariables = async (firebase, baby) => {
   return {
     baby: baby.name,
     name: viewerName,
-    baby_possessive: baby.name.endsWith('s')
-      ? `${baby.name}`
-      : `${baby.name}'s`,
+    baby_possessive: formatPossessive(baby.name),
   };
 };
 
@@ -362,4 +364,8 @@ export const getLibraryArticles = (token: string, args: mixed) => {
   return instance
     .get(`/content/library${filter}`, withToken(token))
     .then(path(['data']));
+};
+
+export const getSkillAreas = (token: string) => {
+  return instance.get('/skill_areas', withToken(token)).then(path(['data']));
 };

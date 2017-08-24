@@ -1,76 +1,341 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly 1`] = `
+style = Object {
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "paddingBottom": 8,
+    "paddingLeft": 8,
+    "paddingRight": 8,
+    "paddingTop": 8,
+    "flexDirection": "row",
+    "justifyContent": "center",
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#454D56",
+    "fontFamily": "SF Pro Text",
+    "marginBottom": 16,
+    "marginLeft": 0,
+    "marginRight": 0,
+    "marginTop": 0,
+    "backgroundColor": "#FFFFFF",
+    "alignItems": "center",
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "shadowColor": "#000",
+    "shadowOpacity": 0.1,
+    "shadowRadius": 0.5,
+    "shadowOffset": {
+        "width": 0,
+        "height": -1
+    },
+    "overflow": "hidden",
+    "textAlign": "center",
+    "width": 100
+}
+
 <View
   style={
     Object {
-      "height": 75,
-      "marginBottom": 100,
-      "marginLeft": 10,
-      "marginRight": -10,
-      "marginTop": 10,
-      "padding": 7,
-      "paddingRight": 10,
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flex": 1,
     }
   }
 >
   <View
     style={
       Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
         "flexDirection": "row",
         "justifyContent": "space-between",
-        "marginBottom": 5,
+        "paddingBottom": 16,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 16,
       }
     }
   >
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
-          "color": "#4e555f",
-          "fontSize": 18,
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#454D56",
+          "fontFamily": "SF Pro Display",
+          "fontSize": 19.147659412894374,
+          "lineHeight": 32,
         }
       }
     >
       Recent Memories
     </Text>
-    <Text
+    <View
+      accessibilityComponentType={undefined}
+      accessibilityLabel={undefined}
+      accessibilityTraits={undefined}
       accessible={true}
-      allowFontScaling={false}
-      ellipsizeMode="tail"
+      collapsable={undefined}
+      hitSlop={undefined}
+      isTVSelectable={true}
+      nativeID={undefined}
+      onLayout={undefined}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
       style={
-        Array [
-          Object {
-            "color": "#ED3154",
-            "fontSize": 24,
-          },
-          Object {
-            "marginRight": 28,
-            "marginTop": -2,
-          },
-          Object {
-            "fontFamily": "Ionicons",
-            "fontStyle": "normal",
-            "fontWeight": "normal",
-          },
-        ]
+        Object {
+          "justifyContent": "center",
+          "marginRight": 10,
+          "opacity": 1,
+        }
       }
+      testID={undefined}
+      tvParallaxProperties={undefined}
     >
-      
-    </Text>
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        disabled={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#EA3154",
+              "fontSize": 24,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
   </View>
   <RCTScrollView
-    horizontal={true}
-    showsHorizontalScrollIndicator={false}
-    style={
+    contentContainerStyle={
       Object {
-        "height": 125,
+        "paddingHorizontal": 10,
       }
     }
+    dataSource={
+      ListViewDataSource {
+        "items": 1,
+      }
+    }
+    horizontal={true}
+    initialListSize={5}
+    removeClippedSubviews={false}
+    renderRow={[Function]}
+    renderScrollComponent={[Function]}
+    renderSeparator={[Function]}
+    showsHorizontalScrollIndicator={false}
+    showsVerticalScrollIndicator={false}
   >
-    <View />
+    <View>
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        collapsable={undefined}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        nativeID={undefined}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "stretch",
+            "backgroundColor": "#FFFFFF",
+            "borderBottomLeftRadius": 4,
+            "borderBottomRightRadius": 4,
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopLeftRadius": 4,
+            "borderTopRightRadius": 4,
+            "borderTopWidth": 0,
+            "flex": 1,
+            "justifyContent": "flex-start",
+            "marginBottom": 16,
+            "marginLeft": 0,
+            "marginRight": 0,
+            "marginTop": 0,
+            "opacity": 1,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "paddingRight": 0,
+            "paddingTop": 0,
+            "shadowColor": "#000",
+            "shadowOffset": Object {
+              "height": 1,
+              "width": 0,
+            },
+            "shadowOpacity": 0.15,
+            "shadowRadius": 3,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}
+      >
+        <View
+          style={
+            Object {
+              "borderBottomLeftRadius": 4,
+              "borderBottomRightRadius": 4,
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopLeftRadius": 4,
+              "borderTopRightRadius": 4,
+              "borderTopWidth": 0,
+              "flex": 1,
+              "overflow": "hidden",
+            }
+          }
+        >
+          <Image
+            resizeMode="cover"
+            source={
+              Object {
+                "uri": "https://lorempixel.com/80/80/",
+              }
+            }
+            style={
+              Object {
+                "flex": 1,
+                "height": 80,
+                "width": null,
+              }
+            }
+          >
+            <View
+              style={
+                Object {
+                  "flex": 1,
+                }
+              }
+            >
+              <View
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "backgroundColor": "rgb(116, 130, 148)",
+                    "bottom": 0,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "left": 0,
+                    "opacity": 0.4,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  }
+                }
+              />
+            </View>
+          </Image>
+          <View
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "justifyContent": "center",
+                "shadowColor": "#000",
+                "shadowOffset": Object {
+                  "height": -1,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.1,
+                "shadowRadius": 0.5,
+              }
+            }
+          >
+            <View
+              justiyContent="center"
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "flex": 1,
+                  "paddingBottom": 8,
+                  "paddingLeft": 8,
+                  "paddingRight": 8,
+                  "paddingTop": 8,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                disabled={false}
+                ellipsizeMode="tail"
+                numberOfLines={1}
+                style={
+                  Object {
+                    "borderBottomWidth": 0,
+                    "borderColor": "#9EABBC",
+                    "borderLeftWidth": 0,
+                    "borderRightWidth": 0,
+                    "borderTopWidth": 0,
+                    "color": "#454D56",
+                    "fontFamily": "SF Pro Text",
+                    "fontSize": 13,
+                    "lineHeight": 16,
+                    "textAlign": "center",
+                    "width": 100,
+                  }
+                }
+              >
+                A memory
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
   </RCTScrollView>
 </View>
 `;

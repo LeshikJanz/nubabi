@@ -8,6 +8,8 @@ type Props = {
   url: string,
   onOpenURL?: (url: string) => void,
   containerStyle?: Object | number,
+  textStyle?: Object,
+  color?: string,
 };
 
 export const openURL = (url: string) => {
@@ -18,11 +20,15 @@ export const Link = ({
   title,
   url,
   onOpenURL = openURL,
-  containerStyle,
+  containerStyle = {},
+  textStyle = {},
+  color = 'primary',
 }: Props) => {
   return (
     <TouchableOpacity onPress={() => onOpenURL(url)} style={containerStyle}>
-      <Text color="primary">{title}</Text>
+      <Text color={color} style={() => textStyle}>
+        {title}
+      </Text>
     </TouchableOpacity>
   );
 };

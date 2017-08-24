@@ -1,117 +1,307 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly 1`] = `
-style = Object {}
+style = Object {
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10,
+    "paddingTop": 10,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "marginBottom": 16,
+    "flex": 1,
+    "backgroundColor": "#FFFFFF",
+    "alignItems": "center",
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "justifyContent": "center",
+    "shadowColor": "#000",
+    "shadowOpacity": 0.15,
+    "shadowRadius": 3,
+    "shadowOffset": {
+        "height": 1,
+        "width": 0
+    },
+    "borderRadius": 4,
+    "overflow": "hidden",
+    "flexDirection": "row",
+    "marginLeft": 8,
+    "fontSize": 19.147659412894374,
+    "lineHeight": 32,
+    "color": "#454D56",
+    "fontFamily": "SF Pro Display",
+    "fontWeight": "700"
+}
 
 <View
-  accessibilityComponentType={undefined}
-  accessibilityLabel={undefined}
-  accessibilityTraits={undefined}
-  accessible={true}
-  hasTVPreferredFocus={undefined}
-  hitSlop={undefined}
-  isTVSelectable={true}
-  onLayout={undefined}
-  onResponderGrant={[Function]}
-  onResponderMove={[Function]}
-  onResponderRelease={[Function]}
-  onResponderTerminate={[Function]}
-  onResponderTerminationRequest={[Function]}
-  onStartShouldSetResponder={[Function]}
+  contentSpacing={true}
   style={
-    Array [
-      Object {
-        "backgroundColor": "transparent",
-      },
-      undefined,
-    ]
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+    }
   }
-  testID={undefined}
-  tvParallaxProperties={undefined}
 >
   <View
+    onLayout={[Function]}
+    onPress={undefined}
     style={
       Object {
-        "backgroundColor": "#fff",
-        "borderRadius": 4,
-        "flex": 2,
-        "height": 97,
-        "margin": 10,
-        "marginTop": 10,
-        "overflow": "hidden",
+        "alignItems": "stretch",
+        "backgroundColor": "#FFFFFF",
+        "borderBottomLeftRadius": 4,
+        "borderBottomRightRadius": 4,
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopLeftRadius": 4,
+        "borderTopRightRadius": 4,
+        "borderTopWidth": 0,
+        "flex": 1,
+        "justifyContent": "center",
+        "marginBottom": 16,
+        "paddingBottom": 0,
+        "paddingLeft": 0,
+        "paddingRight": 0,
+        "paddingTop": 0,
         "shadowColor": "#000",
         "shadowOffset": Object {
-          "height": 100,
-          "width": 200,
+          "height": 1,
+          "width": 0,
         },
-        "shadowOpacity": 1,
-        "shadowRadius": 1,
+        "shadowOpacity": 0.15,
+        "shadowRadius": 3,
       }
     }
   >
-    <Image
-      resizeMode="cover"
-      source={1}
+    <View
       style={
-        Array [
-          Object {
-            "height": 140,
-            "width": 355,
-          },
-          Object {
-            "width": 750,
-          },
-        ]
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRadius": 4,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "overflow": "hidden",
+        }
       }
     >
-      <View
+      <Image
+        resizeMode="cover"
+        source={1}
         style={
-          Object {
-            "flex": 1,
-          }
+          Array [
+            Object {
+              "flex": 1,
+            },
+            Object {
+              "height": 450,
+              "width": 730,
+            },
+          ]
         }
       >
         <View
           style={
             Object {
-              "alignItems": "center",
-              "backgroundColor": "rgb(116, 130, 148)",
-              "bottom": 0,
               "flex": 1,
-              "justifyContent": "center",
-              "left": 0,
-              "opacity": 0.4,
-              "position": "absolute",
-              "right": 0,
-              "top": 0,
             }
           }
-        />
-      </View>
-    </Image>
-    <View
-      style={
-        Object {
-          "justifyContent": "center",
-          "paddingLeft": 10,
-          "paddingTop": 15,
-        }
-      }
-    >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        ellipsizeMode="tail"
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "rgb(116, 130, 148)",
+                "bottom": 0,
+                "flex": 1,
+                "justifyContent": "center",
+                "left": 0,
+                "opacity": 0.4,
+                "position": "absolute",
+                "right": 0,
+                "top": 0,
+              }
+            }
+          />
+          <View
+            style={
+              Array [
+                Object {
+                  "alignItems": "center",
+                  "alignSelf": "stretch",
+                  "backgroundColor": "transparent",
+                  "flex": 1,
+                  "flexDirection": "column",
+                  "justifyContent": "center",
+                },
+                Object {
+                  "alignItems": "flex-start",
+                  "justifyContent": "flex-start",
+                  "paddingLeft": 16,
+                  "paddingTop": 16,
+                },
+              ]
+            }
+          >
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "flexDirection": "row",
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                disabled={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "white",
+                      "fontSize": 20,
+                    },
+                    Object {
+                      "marginTop": 2,
+                    },
+                    Object {
+                      "fontFamily": "Ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                disabled={false}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "borderBottomWidth": 0,
+                    "borderColor": "#9EABBC",
+                    "borderLeftWidth": 0,
+                    "borderRightWidth": 0,
+                    "borderTopWidth": 0,
+                    "color": "#FFFFFF",
+                    "fontFamily": "SF Pro Text",
+                    "fontSize": 13,
+                    "fontWeight": "700",
+                    "lineHeight": 16,
+                    "marginLeft": 8,
+                  }
+                }
+              >
+                AUGUST 20 2017
+              </Text>
+            </View>
+          </View>
+        </View>
+      </Image>
+      <View
+        contentSpacing={true}
         style={
           Object {
-            "color": "#454D56",
-            "fontSize": 16,
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "flexDirection": "row",
             "justifyContent": "center",
+            "paddingBottom": 10,
+            "paddingLeft": 10,
+            "paddingRight": 10,
+            "paddingTop": 10,
           }
         }
       >
-        This Week's Activities
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "color": "#454D56",
+              "flex": 1,
+              "fontFamily": "SF Pro Display",
+              "fontSize": 19.147659412894374,
+              "lineHeight": 32,
+            }
+          }
+        >
+          This Week's Activities
+        </Text>
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={false}
+            disabled={false}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#748294",
+                  "fontSize": 20,
+                },
+                Object {
+                  "marginTop": 2,
+                },
+                Object {
+                  "fontFamily": "Ionicons",
+                  "fontStyle": "normal",
+                  "fontWeight": "normal",
+                },
+              ]
+            }
+          >
+            
+          </Text>
+        </View>
+      </View>
     </View>
   </View>
 </View>

@@ -1,4 +1,5 @@
 // @flow
+// TODO: reuse HorizontalCardList
 import type { DataSource } from 'react-native';
 import type { Article } from '../../common/types';
 import React, { PureComponent } from 'react';
@@ -13,7 +14,7 @@ import {
   displayLoadingState,
   showNoContentViewIf,
 } from '../components';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import ArticleCardItem from './ArticleCardItem';
 
 type Props = {
@@ -79,10 +80,17 @@ export class ArticleList extends PureComponent {
 
   renderHeader = () => {
     return (
-      <Box flexDirection="row" justifyContent="space-between" padding={1}>
-        <Text size={2}>Articles</Text>
+      <Box
+        flexDirection="row"
+        justifyContent="space-between"
+        alignItems="center"
+        padding={1}
+      >
+        <Text size={6}>Articles</Text>
         <TouchableOpacity onPress={this.props.onBrowseAll}>
-          <Text medium color="primary">SEE ALL</Text>
+          <Text medium color="primary">
+            SEE ALL
+          </Text>
         </TouchableOpacity>
       </Box>
     );

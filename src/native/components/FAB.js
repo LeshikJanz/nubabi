@@ -6,7 +6,7 @@ import Text from './Text';
 
 type Props = {
   onPress?: () => void,
-  style?: Object | number,
+  style?: Object,
   children: any,
   size?: number,
 };
@@ -36,7 +36,6 @@ export const FAB = ({ onPress, children, size = 70, style = {} }: Props) => {
       })}
     >
       {children}
-
     </Box>
   );
 };

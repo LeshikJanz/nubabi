@@ -4,7 +4,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { compose, path } from 'ramda';
 import { graphql, gql } from 'react-apollo';
-import mapEdgesToProp from '../shared/mapEdgesToProp';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import { Box, Text, displayLoadingState, withLayout } from '../components';
 import BrowseActivitiesButton from './BrowseActivitiesButton';
 import { toGlobalId } from 'graphql-relay';
@@ -15,11 +15,7 @@ type Props = {
   onBrowseFiltered: () => void,
   layout: LayoutProps,
 };
-/*
-  <Box flex={1} alignItems="center" justifyContent="center">
-        <BrowseActivitiesButton onPress={onBrowseAll} />
-      </Box>
- */
+
 const skillAreaMargin = 15;
 
 // TODO: remove this being hardcoded when we devise a better way
@@ -61,7 +57,9 @@ export const BrowseActivities = ({
       </Box>
       <Box flex={1}>
         <Box contentSpacing>
-          <Text medium size={4}>Development Skill</Text>
+          <Text medium size={4}>
+            Development Skill
+          </Text>
         </Box>
         <Box
           flex={1}
@@ -70,7 +68,7 @@ export const BrowseActivities = ({
           alignItems="flex-start"
           justifyContent="center"
         >
-          {skillAreas.map(skillArea => (
+          {skillAreas.map(skillArea =>
             <Box
               key={skillArea.id}
               style={() => ({
@@ -88,13 +86,15 @@ export const BrowseActivities = ({
                     filter: { skillAreas: [skillArea.id] },
                   })}
               />
-            </Box>
-          ))}
+            </Box>,
+          )}
         </Box>
       </Box>
       <Box flex={1}>
         <Box flex={1} contentSpacing>
-          <Text size={4} medium>Category</Text>
+          <Text size={4} medium>
+            Category
+          </Text>
         </Box>
         <Box
           flex={1}
@@ -140,22 +140,22 @@ export const BrowseActivities = ({
 export default compose(
   graphql(
     gql`
-    query BrowseActivities {
-      viewer {
-        allSkillAreas {
-          edges {
-            node {
-              id
-              name
-              image {
-                url
+      query BrowseActivities {
+        viewer {
+          allSkillAreas {
+            edges {
+              node {
+                id
+                name
+                image {
+                  url
+                }
               }
             }
           }
         }
       }
-    }
-  `,
+    `,
     {
       props: mapEdgesToProp('viewer.allSkillAreas', 'skillAreas'),
     },

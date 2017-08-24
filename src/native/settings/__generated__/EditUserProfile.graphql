@@ -1,0 +1,18 @@
+query EditUserProfile {
+  viewer {
+    user {
+      ...UserForm
+    }
+  }
+}
+
+fragment UserForm on User {
+  id
+  firstName
+  lastName
+  dob
+  avatar {
+    url
+  }
+}
+

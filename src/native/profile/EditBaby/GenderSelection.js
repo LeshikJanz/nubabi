@@ -12,15 +12,16 @@ type Props = {
   hasError: Boolean,
 };
 
-const GenderError = () => (
+const GenderError = () =>
   <View style={{ alignItems: 'center', justifyContent: 'center' }}>
     <Text style={styles.errorLabel}>YOU MUST SELECT A GENDER</Text>
-  </View>
-);
+  </View>;
 
-const GenderSelection = (
-  { selectedGender, onChangeGender, hasError }: Props,
-) => {
+const GenderSelection = ({
+  selectedGender,
+  onChangeGender,
+  hasError,
+}: Props) => {
   return (
     <View style={{ flex: 1, marginBottom: 20 }}>
       <View style={styles.genderContainer}>

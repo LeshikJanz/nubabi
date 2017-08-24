@@ -12,6 +12,7 @@ type Options = {
   platformReducers?: Object,
   platformMiddleware?: Array<Function>,
   platformStoreEnhancers?: Array<Function>,
+  platformEpics: Array<Function>,
 };
 
 const configureStore = (options: Options) => {
@@ -21,6 +22,7 @@ const configureStore = (options: Options) => {
     platformMiddleware = [],
     platformReducers = {},
     platformStoreEnhancers = [],
+    platformEpics = [],
   } = options;
 
   const reducer = configureReducer(platformReducers, initialState);
@@ -29,14 +31,17 @@ const configureStore = (options: Options) => {
     initialState,
     platformDeps,
     platformMiddleware,
+    platformEpics,
   );
 
   // Add Redux DevTools support
   // TODO: use only on prod
   // This is straight from the docs, seriously eslint, is fine
   /* eslint-disable */
-  const composeEnhancers = typeof window !== 'undefined' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const composeEnhancers =
+    (typeof window !== 'undefined' &&
+      window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose;
   /* eslint-enable */
 
   // $FlowFixMe

@@ -1,14 +1,14 @@
 // @flow
-import type { NavigationOptions } from '../../common/types';
-import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
+import type { NavigationProp, NavigationOptions } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
 import ArticleList from './ArticleCardList';
 import HealthHelpButton from './HealthHelpButton';
 import ParentingTipsButton from './ParentingTipsButton';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 type Props = {
-  navigation: NavigationProp<*, *>,
+  navigation: NavigationProp,
 };
 
 export class Library extends PureComponent {
@@ -37,7 +37,7 @@ export class Library extends PureComponent {
   render() {
     return (
       <Screen>
-        <Box flex={1}>
+        <KeyboardAwareScrollView contentContainerStyle={{ flex: 1 }}>
           <ArticleList
             onBrowseAll={this.handleBrowseArticles}
             onViewArticle={this.handleViewArticle}
@@ -48,7 +48,7 @@ export class Library extends PureComponent {
           <Box flex={1} contentSpacing>
             <HealthHelpButton onPress={this.handleHealthHelp} />
           </Box>
-        </Box>
+        </KeyboardAwareScrollView>
       </Screen>
     );
   }

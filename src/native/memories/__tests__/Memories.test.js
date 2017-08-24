@@ -1,12 +1,9 @@
 import 'react-native';
 import React from 'react';
-import Memories from '../Memories';
-import renderer from 'react-test-renderer';
+import { Memories } from '../Memories';
+import { expectRender } from '../../shared/testUtils';
 
-jest.mock('../../components/Alert');
-
+jest.mock('../ViewMemories', () => () => null);
 test('it renders correctly', () => {
-  const tree = renderer.create(<Memories />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<Memories />);
 });

@@ -9,18 +9,16 @@ const Root = ({ dispatch, navigation }: Props) => {
     state: navigation,
   });
 
-  return (
-    <AppNavigator navigation={nav} />
-  );
+  return <AppNavigator navigation={nav} />;
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     dispatch,
   };
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     navigation: state.navigation,
     isAuthenticated: state.auth.isAuthenticated,

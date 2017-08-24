@@ -3,6 +3,7 @@ import type { Event } from 'react-native';
 import React, { PureComponent } from 'react';
 import { View, Dimensions } from 'react-native';
 import Alert from './Alert';
+import NetworkIndicator from './NetworkIndicator';
 import {
   childContextTypes,
   getChildContext,
@@ -37,6 +38,7 @@ export class Screen extends PureComponent {
       >
         {children}
         <Alert />
+        <NetworkIndicator />
       </View>
     );
   }

@@ -1,29 +1,29 @@
 // @flow
 import type {
-  State,
   Activity as ActivityType,
   ActivityEdge,
-  SwoopActivityInput,
   ActivityLevelOperation,
   AdjustActivityLevelInput,
-  ToggleFavoriteInput,
   NavigationOptionsGetter,
+  State,
+  SwoopActivityInput,
+  ToggleFavoriteInput,
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import {
+  assocPath,
   compose,
+  find,
+  findIndex,
   path,
   pathOr,
-  update,
-  assocPath,
-  findIndex,
-  propEq,
-  find,
   pluck,
+  propEq,
+  update,
 } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { Screen } from '../components/index';
 import displayLoadingState from '../components/displayLoadingState';
 import Activity from './Activity';
@@ -47,7 +47,7 @@ type Props = {
   isFavorite: boolean,
 };
 
-class ViewThisWeeksActivity extends Component {
+class ViewThisWeeksActivity extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptionsGetter = ({ navigation }) => ({
@@ -310,7 +310,7 @@ export default compose(
     `,
     {
       name: 'toggleFavorite',
-      options: { refetchQueries: ['ViewThisWeekActivity', 'getBaby'] },
+      options: { refetchQueries: ['ViewThisWeekActivity', 'Profile'] },
     },
   ),
   displayLoadingState,

@@ -1,4 +1,12 @@
 // @flow
+import type { MeasurementUnit, Measurement } from '../types';
+import { memoize, curry, map, evolve } from 'ramda';
+
+export const DEFAULT_UNITS = {
+  weight: 'kg',
+  height: 'cm',
+};
+
 export function toPounds(value: number) {
   return value * 2.20462;
 }
@@ -15,10 +23,26 @@ export function toCentimeters(value: number) {
   return value * 2.54;
 }
 
-export function formatMeasurement(value: number) {
-  if (!Number.isInteger(value)) {
-    return +value.toFixed(2);
-  }
+export const convertMeasurements = memoize(
+  curry((unit: MeasurementUnit, data: Array<Measurement>) => {
+    return map(evolve({ value: formatMeasurement(unit) }), data);
+  }),
+);
 
-  return value;
-}
+export const formatMeasurement = memoize(
+  curry((unit: MeasurementUnit, value: number) => {
+    let measurementValue = value;
+
+    if (unit === 'in') {
+      measurementValue = toInches(value);
+    } else if (unit === 'lbs') {
+      measurementValue = toPounds(value);
+    }
+
+    if (!Number.isInteger(measurementValue)) {
+      return +measurementValue.toFixed(2);
+    }
+
+    return measurementValue;
+  }),
+);

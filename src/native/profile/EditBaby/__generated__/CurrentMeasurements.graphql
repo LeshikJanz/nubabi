@@ -1,0 +1,14 @@
+query CurrentMeasurements($babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      ...CurrentMeasurements
+    }
+  }
+}
+
+fragment CurrentMeasurements on Baby {
+  height
+  weight
+}
+

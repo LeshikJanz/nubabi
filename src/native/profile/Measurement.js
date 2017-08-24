@@ -1,4 +1,5 @@
 // @flow
+import type { MeasurementUnit } from '../../common/types';
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { gql } from 'react-apollo';
@@ -13,7 +14,7 @@ import { formatMeasurement } from '../../common/helpers/measurement';
 type Props = {
   header: string,
   amount: ?number,
-  unit: 'kg' | 'cm',
+  unit: MeasurementUnit,
   iconName: string,
   onUpdate: () => void,
 };
@@ -22,7 +23,9 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
   return (
     <TouchableOpacity style={styles.container} onPress={onUpdate}>
       <View style={styles.headerRow}>
-        <Text style={styles.header}>{header}</Text>
+        <Text style={styles.header}>
+          {header}
+        </Text>
         <NubabiIcon
           name={iconName}
           size={17}
@@ -33,20 +36,23 @@ const Measurement = ({ header, amount, unit, iconName, onUpdate }: Props) => {
       <View style={styles.valueRow}>
         {amount
           ? <Text style={styles.valueText}>
-              {formatMeasurement(amount)}{unit}
+              {formatMeasurement(unit, amount)}
+              {unit}
             </Text>
           : <Text style={styles.noDataText}>No Data Yet</Text>}
       </View>
       <View style={styles.updateRow}>
-        <Text style={styles.updateText} onPress={onUpdate}>Update</Text>
+        <Text style={styles.updateText} onPress={onUpdate}>
+          Update
+        </Text>
       </View>
     </TouchableOpacity>
   );
 };
 
 Measurement.fragments = {
-  weight: gql`
-    fragment Measurement on Baby {
+  current: gql`
+    fragment CurrentMeasurements on Baby {
       weight
       height
     }

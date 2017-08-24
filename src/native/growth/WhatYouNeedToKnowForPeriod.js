@@ -13,7 +13,7 @@ import SectionLinks from './SectionLinks';
 type Props = {
   current: GrowthPeriodOption,
   periods: Array<GrowthPeriodOption>,
-  onPeriodSelect: () => void,
+  onPeriodSelect: (id: string) => void,
 };
 
 export const WhatYouNeedToKnowForPeriod = (props: Props) => {
@@ -52,7 +52,9 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
             <SectionLinks links={introductionContentLinks} />
           </Box>
           <Box paddingHorizontal={1}>
-            <Text marginVertical={1} size={3} bold>Growth & Development</Text>
+            <Text marginVertical={1} size={3} bold>
+              Growth & Development
+            </Text>
             <Markdown text={current.content} style={textStyle} />
             <SectionLinks links={growthDevelopmentContentLinks} />
           </Box>

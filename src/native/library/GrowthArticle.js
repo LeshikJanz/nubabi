@@ -14,7 +14,7 @@ const textStyle = {
   },
 };
 
-export function viewGrowthArticle(id) {
+export function viewGrowthArticle(id: string) {
   this.props.navigation.navigate('viewGrowthContent', { id });
 }
 

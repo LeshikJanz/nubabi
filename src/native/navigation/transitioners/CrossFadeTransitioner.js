@@ -1,10 +1,6 @@
 /* eslint-disable */
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-  Animated,
-} from 'react-native';
+import { View, StyleSheet, Animated } from 'react-native';
 
 import { CardStack } from 'react-navigation';
 import type { NavigationSceneRendererProps } from 'react-navigation';
@@ -25,11 +21,12 @@ class CrossFadeTransitioner extends Component {
       },
     });
     return (
-      <CardStack mode="card"
-                 navigation={this.props.navigation}
-                 router={this.props.router}
-                 transitionConfig={transitionConfig}
-                 headerMode="none"
+      <CardStack
+        mode="card"
+        navigation={this.props.navigation}
+        router={this.props.router}
+        transitionConfig={transitionConfig}
+        headerMode="none"
       />
     );
   }

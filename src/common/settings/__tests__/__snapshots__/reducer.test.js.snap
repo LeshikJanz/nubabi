@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`handles SETTINGS_SET_VALUE 1`] = `
+Object {
+  "notifications": Object {
+    "activities": false,
+    "email": true,
+    "growth": true,
+    "memories": undefined,
+    "stimulation": true,
+  },
+  "unitDisplay": Object {
+    "height": "cm",
+    "weight": "kg",
+  },
+}
+`;
+
+exports[`has an initial state 1`] = `
+Object {
+  "notifications": Object {
+    "activities": false,
+    "email": true,
+    "growth": true,
+    "memories": true,
+    "stimulation": true,
+  },
+  "unitDisplay": Object {
+    "height": "cm",
+    "weight": "kg",
+  },
+}
+`;

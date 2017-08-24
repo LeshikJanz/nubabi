@@ -5,3 +5,11 @@ Object {
   "email": "foo@example.com",
 }
 `;
+
+exports[`handles ON_AUTH 2`] = `
+Object {
+  "user": undefined,
+}
+`;
+
+exports[`has an initial state 1`] = `null`;

@@ -54,6 +54,9 @@ type GrowthConnection {
   pageInfo: PageInfo!
 
   edges: [GrowthEdge]
+
+  # The current growth based on the baby's dob (returns the last content if we can't find a closer one)
+  current: Growth
 }
 
 type GrowthEdge {

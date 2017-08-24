@@ -11,15 +11,13 @@ type Props = {
   marginHorizontal?: number,
 };
 
-export const ActionCard = (
-  {
-    onPress,
-    text,
-    hint,
-    icon,
-    marginHorizontal = 0,
-  }: Props,
-) => (
+export const ActionCard = ({
+  onPress,
+  text,
+  hint,
+  icon,
+  marginHorizontal = 0,
+}: Props) =>
   <Card
     padding={1}
     marginHorizontal={marginHorizontal}
@@ -43,9 +41,10 @@ export const ActionCard = (
         {text}
       </Text>
 
-      <Text color="secondary" align="center">{hint}</Text>
+      <Text color="secondary" align="center">
+        {hint}
+      </Text>
     </Button>
-  </Card>
-);
+  </Card>;
 
 export default ActionCard;

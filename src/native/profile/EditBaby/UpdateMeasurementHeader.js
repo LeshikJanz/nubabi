@@ -39,7 +39,9 @@ export const UpdateMeasurementHeader = ({ onViewGraph }: Props) => {
         })}
       >
         <Icon size={17} name="md-calendar" color={theme.colors.gray} />
-        <Text medium size={1} marginLeft={0.5}>{date}</Text>
+        <Text medium size={1} marginLeft={0.5}>
+          {date}
+        </Text>
       </Box>
       <Box
         as={TouchableOpacity}
@@ -51,7 +53,9 @@ export const UpdateMeasurementHeader = ({ onViewGraph }: Props) => {
         paddingLeft={1}
       >
         <NubabiIcon name="growth" color={theme.colors.primary} />
-        <Text medium size={1} marginLeft={0.5}>View Graph</Text>
+        <Text medium size={1} marginLeft={0.5}>
+          View Graph
+        </Text>
       </Box>
     </Box>
   );

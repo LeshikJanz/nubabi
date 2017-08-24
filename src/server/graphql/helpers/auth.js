@@ -1,9 +1,9 @@
 // @flow
 type Request = {
   headers: {
-    [key: string]: any
-  }
-}
+    [key: string]: any,
+  },
+};
 
 export function getTokenFromRequest(request: Request) {
   let token = null;

@@ -1,30 +1,26 @@
+// @flow
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
-  TextInput,
-  StyleSheet,
-  Image,
   Dimensions,
-  TouchableHighlight,
+  Image,
   Platform,
+  StyleSheet,
+  TextInput,
+  View,
 } from 'react-native';
-import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
-import * as loginActions from '../../common/auth/actions';
-import Loader from '../components/Loader';
+import { Link, SubmitButton, Text } from '../components';
+import { loginRequest } from '../../common/auth/actions';
 
 const background = require('../../common/images/loginBackground.jpg');
-const logo = require('../../common/images/loginLogo.png');
+const logo = require('../../common/images/logo.png');
 
 const window = Dimensions.get('window');
 
 type Props = {
-  actions: any,
+  loginRequest: typeof loginRequest,
   isFetching: boolean,
 };
 
@@ -36,35 +32,23 @@ export class Login extends Component {
     password: '',
   };
 
+  passwordInput = null;
+  submitButton = null;
+
   login = () => {
     const { email, password } = this.state;
-    this.props.actions.loginRequest(email, password);
+    this.props.loginRequest(email, password);
   };
 
-  renderLoader() {
-    if (this.props.isFetching) {
-      const type = Platform.select({
-        ios: 'Arc',
-        android: 'FadingCircle',
-      });
-
-      return (
-        <Loader
-          style={styles.loader}
-          size={40}
-          type={type}
-          color={theme.colors.white}
-        />
-      );
+  loginViaKeyboard = () => {
+    if (this.submitButton) {
+      this.submitButton.touchableHandlePress();
     }
-
-    return null;
-  }
+  };
 
   render() {
     const { isFetching } = this.props;
 
-    const buttonText = isFetching ? 'Logging in...' : 'LOG IN';
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} />
@@ -75,28 +59,28 @@ export class Login extends Component {
           keyboardShouldPersistTaps="handled"
         >
           <View style={{ flex: 1 }}>
-            <Image source={logo} style={styles.logo} />
+            <Image source={logo} style={styles.logo} resizeMode="stretch" />
 
             <View style={styles.inputOuterContainer}>
               <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>EMAIL</Text>
                 <TextInput
                   style={styles.textInput}
                   value={this.state.email}
-                  placeholder="name@example.com"
+                  placeholder="Email"
+                  placeholderTextColor="rgba(255,255,255,.78)"
+                  selectionColor="white"
                   keyBoardType="email-address"
-                  autoFocus
                   autoCapitalize="none"
                   autoCorrect={false}
                   returnKeyType="next"
                   blurOnSubmit={false}
                   underlineColorAndroid="#eff1f7"
                   onChangeText={email => this.setState({ email })}
-                  onSubmitEditing={() => this.passwordInput.focus()}
+                  onSubmitEditing={() =>
+                    this.passwordInput && this.passwordInput.focus()}
                 />
               </View>
               <View style={styles.inputContainer}>
-                <Text style={styles.inputLabel}>PASSWORD</Text>
                 <TextInput
                   style={styles.textInput}
                   value={this.state.password}
@@ -105,29 +89,53 @@ export class Login extends Component {
                   }}
                   secureTextEntry
                   autoCapitalize="none"
-                  palceholder="password"
+                  placeholder="Password"
+                  placeholderTextColor="rgba(255,255,255,.78)"
+                  selectionColor="white"
                   autoCorrect={false}
-                  focus={this.state.focusPassword}
                   onChangeText={password => this.setState({ password })}
                   returnKeyType="go"
-                  onSubmitEditing={this.login}
+                  onSubmitEditing={this.loginViaKeyboard}
                 />
               </View>
-              <TouchableHighlight
-                underlayColor="rgba(0,0,0,0)"
-                style={styles.oneButton}
+              <SubmitButton
+                innerRef={ref => (this.submitButton = ref)}
+                animatedWidth={40}
                 onPress={this.login}
-                disabled={isFetching}
-              >
-                <View style={styles.submitButtonContainer}>
-                  <View style={styles.submitButton}>
-                    <Text style={styles.submitText}>{buttonText}</Text>
-                  </View>
-                </View>
-              </TouchableHighlight>
+                loading={isFetching}
+                submitText="LOG IN"
+                containerStyle={{
+                  marginTop: 50,
+                }}
+                buttonStyle={{
+                  width: 139,
+                  height: 40,
+                  borderRadius: 20,
+                }}
+                textStyle={{
+                  fontSize: 17,
+                  fontFamily: 'SF Pro Display',
+                }}
+              />
             </View>
-            {this.renderLoader()}
+          </View>
+          <View style={{ alignItems: 'center', marginBottom: 15 }}>
+            <Text size={1} color="white" style={() => ({ marginBottom: 5 })}>
+              Don't have an account yet?
+            </Text>
 
+            <View style={{ flexDirection: 'row' }}>
+              <Text color="white">Sign up for free on</Text>
+              <Link
+                title="Nubabi.com"
+                color="white"
+                url="https://nubabi.com"
+                textStyle={{
+                  marginLeft: 5,
+                  fontWeight: theme.text.bold,
+                }}
+              />
+            </View>
           </View>
         </KeyboardAwareScrollView>
       </View>
@@ -135,10 +143,8 @@ export class Login extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(loginActions, dispatch),
-  };
+const mapDispatchToProps = {
+  loginRequest,
 };
 
 const mapStateToProps = state => {
@@ -178,7 +184,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     width: window.width,
-    resizeMode: 'cover',
     height: window.height,
   },
   backgroundFilter: {
@@ -190,16 +195,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(116,130,148,0.55)',
   },
   logo: {
+    position: 'absolute',
     alignItems: 'center',
-    marginTop: 100,
-    width: 370 * 0.6,
-    height: 122 * 0.6,
-    marginLeft: (window.width - 370 * 0.6) / 2,
-    resizeMode: 'stretch',
+    top: 140,
+    width: 354 * 0.6,
+    height: 112 * 0.6,
+    marginLeft: (window.width - 354 * 0.6) / 2,
   },
   inputOuterContainer: {
-    marginTop: 150,
-    //flex: 1,
+    marginTop: 250,
   },
   inputContainer: {
     // flex: 1,
@@ -211,7 +215,7 @@ const styles = StyleSheet.create({
     ...Platform.select({
       ios: {
         borderBottomWidth: 1,
-        height: 50,
+        height: 40,
       },
     }),
   },
@@ -224,7 +228,8 @@ const styles = StyleSheet.create({
     flex: 1,
     color: '#fff',
     fontSize: 18,
-    lineHeight: 26,
+    lineHeight: 24,
+    letterSpacing: -0.41,
   },
   submitButtonContainer: {
     marginTop: 20,

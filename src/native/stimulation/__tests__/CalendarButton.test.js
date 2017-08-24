@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import CalendarButton from '../CalendarButton';
+import CalendarButton from '../BrowseActivitiesHeaderButton';
 import renderer from 'react-test-renderer';
 
 test('it renders correctly', () => {

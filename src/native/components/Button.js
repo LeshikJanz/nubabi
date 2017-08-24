@@ -6,16 +6,17 @@ import React from 'react';
 import Text, { computeTextStyle } from './Text';
 import isReactNative from '../../common/app/isReactNative';
 
-export type ButtonProps = ColorProps & TextProps & {
-  // For blindness accessibility features. Consider making it mandatory.
-  accessibilityLabel?: string,
-  boxStyle?: (theme: Theme) => Object,
-  children?: any,
-  disabled?: boolean,
-  onPress?: (e?: SyntheticMouseEvent) => any,
-  outline?: boolean,
-  textStyle?: (theme: Theme) => Object,
-};
+export type ButtonProps = ColorProps &
+  TextProps & {
+    // For blindness accessibility features. Consider making it mandatory.
+    accessibilityLabel?: string,
+    boxStyle?: (theme: Theme) => Object,
+    children?: any,
+    disabled?: boolean,
+    onPress?: (e?: SyntheticMouseEvent) => any,
+    outline?: boolean,
+    textStyle?: (theme: Theme) => Object,
+  };
 
 type ButtonContext = {
   Button: () => React.Element<*>,
@@ -34,10 +35,7 @@ const Button = (
     textStyle,
     ...props
   }: ButtonProps,
-  {
-    Button: PlatformButton,
-    theme,
-  }: ButtonContext,
+  { Button: PlatformButton, theme }: ButtonContext,
 ) => {
   const platformProps = isReactNative
     ? {
@@ -112,17 +110,12 @@ const Button = (
   // the rest. We can also use boxStyle and textStyle props for further styling.
   const [computedTextStyle, allBoxProps] = computeTextStyle(theme, props);
   // To prevent "Unknown prop" warning, we have to remove color props.
-  const boxProps = colorProps.reduce(
-    (props, prop) => {
-      delete props[prop];
-      return props;
-    },
-    allBoxProps,
-  );
+  const boxProps = colorProps.reduce((props, prop) => {
+    delete props[prop];
+    return props;
+  }, allBoxProps);
   const childrenIsText = typeof children === 'string';
-  const {
-    borderRadius = theme.button.borderRadius,
-  } = props;
+  const { borderRadius = theme.button.borderRadius } = props;
 
   return (
     <Box

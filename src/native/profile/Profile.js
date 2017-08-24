@@ -1,20 +1,13 @@
 // @flow
 import type {
-  State,
   Baby,
-  Viewer,
   GraphQLDataProp,
   NavigationOptions,
+  State,
+  Viewer,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import {
-  View,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Linking,
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
@@ -22,16 +15,20 @@ import { filter } from 'graphql-anywhere';
 import theme from '../../common/themes/defaultTheme';
 import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
-import Measurement from './Measurement';
 import Header from './Header/Header';
-import Achievements from './Achievements';
 import RecentMemories from './RecentMemories';
 import ProfileIcon from '../navigation/ProfileIcon';
 import BabyNameTitle from './BabyNameTitle';
+import ProfileActivities from './ProfileActivities';
+import ProfileGrowth from './ProfileGrowth';
 
 type Props = {
   navigation: any,
   baby: ?Baby,
+  unitDisplay: {
+    weight: 'kg' | 'lbs',
+    height: 'cm' | 'in',
+  },
 };
 
 class Profile extends PureComponent {
@@ -42,11 +39,15 @@ class Profile extends PureComponent {
       fragment Profile on Baby {
         id
         ...Header
-        ...Measurement
+        ...ProfileGrowth
+        ...ProfileActivities
+        ...RecentMemories
       }
 
       ${Header.fragments.header}
-      ${Measurement.fragments.weight}
+      ${ProfileGrowth.fragments.growth}
+      ${ProfileActivities.fragments.list}
+      ${RecentMemories.fragments.memories}
     `,
   };
 
@@ -56,17 +57,27 @@ class Profile extends PureComponent {
       shadowOpacity: 0,
     },
     tabBarLabel: () => null,
-    tabBarIcon: ({ tintColor, focused }) => (
-      <ProfileIcon active={focused} tintColor={tintColor} />
-    ),
+    tabBarIcon: ({ tintColor, focused }) =>
+      <ProfileIcon active={focused} tintColor={tintColor} />,
   };
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
-  handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
-  handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
+  handleAddMemory = () => this.props.navigation.navigate('addMemory');
+  handleViewActivities = () =>
+    this.props.navigation.navigate('thisWeekActivities');
+  handleViewActivity = (id: string, title: string) => {
+    this.props.navigation.navigate('viewActivity', { id, title });
+  };
+  handleViewMemory = (id: string, title: string) => {
+    this.props.navigation.navigate('viewMemory', { id, title });
+  };
+  handleNavigateToMemories = () => this.props.navigation.navigate('memories');
+  handleViewGrowth = () => this.props.navigation.navigate('whatYouNeedToKnow');
 
   render() {
     const { baby } = this.props;
+    const weightUnit = this.props.unitDisplay.weight;
+    const heightUnit = this.props.unitDisplay.height;
 
     // TODO: empty state
     if (!baby) {
@@ -83,33 +94,27 @@ class Profile extends PureComponent {
           <ScrollView style={styles.scrollContainer}>
             <Header
               {...filter(Header.fragments.header, baby)}
+              weightUnit={weightUnit}
+              heightUnit={heightUnit}
               onEditBaby={this.handleEditBaby}
             />
-            <View style={styles.measurementsRow}>
-              <Measurement
-                amount={baby.weight}
-                header="Weight"
-                unit="kg"
-                iconName="weight"
-                onUpdate={this.handleUpdateWeight}
-              />
-              <Measurement
-                amount={baby.height}
-                header="Height"
-                unit="cm"
-                iconName="height"
-                onUpdate={this.handleUpdateHeight}
-              />
-            </View>
-            <TouchableOpacity
-              onPress={() =>
-                Linking.openURL(
-                  'nubabi://content/growth/4IUT9xUt9eUAa6Q6sWC06e',
-                )}
-            >
-              <Achievements />
-            </TouchableOpacity>
-            <RecentMemories memories={baby.memories} />
+            <ProfileGrowth
+              {...filter(ProfileGrowth.fragments.growth, baby)}
+              onViewGrowth={this.handleViewGrowth}
+            />
+            <ProfileActivities
+              {...filter(ProfileActivities.fragments.list, baby)}
+              babyName={baby.name}
+              onViewActivity={this.handleViewActivity}
+              onViewAll={this.handleViewActivities}
+            />
+            <RecentMemories
+              babyName={baby.name}
+              onViewMemory={this.handleViewMemory}
+              onAddMemory={this.handleAddMemory}
+              onViewAll={this.handleNavigateToMemories}
+              {...filter(RecentMemories.fragments.memories, baby)}
+            />
           </ScrollView>
         </View>
       </Screen>
@@ -117,8 +122,8 @@ class Profile extends PureComponent {
   }
 }
 
-const query = gql`
-  query getBaby($id: ID!) {
+export const query = gql`
+  query Profile($id: ID!) {
     viewer {
       baby(id: $id) {
         ...Profile
@@ -155,8 +160,9 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  connect(({ babies }: State) => ({
+  connect(({ babies, settings }: State) => ({
     currentBabyId: babies.currentBabyId,
+    unitDisplay: settings.unitDisplay,
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({

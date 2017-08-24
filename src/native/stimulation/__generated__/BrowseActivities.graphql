@@ -1,0 +1,16 @@
+query BrowseActivities {
+  viewer {
+    allSkillAreas {
+      edges {
+        node {
+          id
+          name
+          image {
+            url
+          }
+        }
+      }
+    }
+  }
+}
+

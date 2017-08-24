@@ -9,19 +9,26 @@ type Props = {
   avatar: Avatar,
   name: string,
   discipline: string,
+  withHeader?: boolean,
 };
 
-export const ExpertAdvice = ({ name, discipline, avatar }: Props) => {
+export const ExpertAdvice = ({
+  name,
+  discipline,
+  avatar,
+  withHeader = true,
+}: Props) => {
   return (
     <Box borderBottomWidth={1} style={() => ({ borderColor: '#E9ECF4' })}>
       <Box padding={1}>
-        <Text
-          bold
-          style={theme => ({ color: theme.colors.open.blue0 })}
-          marginBottom={1}
-        >
-          EXPERT ADVICE BY
-        </Text>
+        {withHeader &&
+          <Text
+            bold
+            style={theme => ({ color: theme.colors.open.blue0 })}
+            marginBottom={1}
+          >
+            EXPERT ADVICE BY
+          </Text>}
         <Box flex={1} flexDirection="row" justifyContent="center">
           <Image
             source={{ uri: avatar.url }}

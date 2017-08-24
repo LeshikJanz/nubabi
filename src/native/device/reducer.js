@@ -15,8 +15,10 @@ const initialState = {
 };
 
 /* eslint-disable no-unused-vars */
-const reducer = (state: MobileDeviceState = initialState,
-                 action: Action): DeviceState => {
+const reducer = (
+  state: MobileDeviceState = initialState,
+  action: Action,
+): DeviceState => {
   // TODO: react-native-device-info
   return state;
 };

@@ -1,27 +1,36 @@
 // @flow
-import type { LayoutProps } from '../../common/types';
+import type { LayoutProps, Measurement } from '../../common/types';
 import React from 'react';
-import { compose } from 'ramda';
-import { getContext } from 'recompose';
 import theme from '../../common/themes/defaultTheme';
 import { LineGraph } from '../components/LineGraph';
-import PropTypes from 'prop-types';
 import withLayout from '../components/withLayout';
-
-type Measurement = {
-  timestamp: number,
-  value: number,
-};
 
 type Props = {
   data: Array<Measurement>,
   layout: LayoutProps,
+  width?: number,
+  height?: number,
+  withLegend?: boolean,
+  measurementX?: Measurement => number,
+  measurementY?: Measurement => number,
+  formatTickX?: Date => string,
+  formatTickY?: number => string,
 };
 
-const measurementX = x => x.timestamp;
-const measurementY = y => y.value;
+const defaultMeasurementX = x => new Date(x.recordedAt).getTime();
+const defaultMeasurementY = y => parseFloat(y.value.toFixed(2));
 
-export const Chart = ({ data, layout }: Props) => {
+export const Chart = ({
+  data,
+  layout,
+  width,
+  height,
+  withLegend = false,
+  measurementX = defaultMeasurementX,
+  measurementY = defaultMeasurementY,
+  formatTickX,
+  formatTickY,
+}: Props) => {
   const { parentWidth, viewportHeight } = layout;
   const graphHeight = viewportHeight * 0.2;
 
@@ -32,8 +41,11 @@ export const Chart = ({ data, layout }: Props) => {
       yAccessor={measurementY}
       strokeColor="#EC4469"
       fillColor={theme.colors.primary}
-      width={parentWidth}
-      height={graphHeight}
+      width={width || parentWidth}
+      height={height || graphHeight}
+      withLegend={withLegend}
+      formatTickX={formatTickX}
+      formatTickY={formatTickY}
     />
   );
 };

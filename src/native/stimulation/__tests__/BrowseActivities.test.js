@@ -4,6 +4,7 @@ import { BrowseActivities } from '../BrowseActivitiesListScreen';
 import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
+jest.mock('../../components/NetworkIndicator');
 
 test('it renders correctly', () => {
   const activityEdges = [

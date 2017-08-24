@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import { UserProfile } from '../UserProfile';
+import { UserProfileTrigger } from '../UserProfileTrigger';
 import { expectRender } from '../../shared/testUtils';
 
 test('it renders correctly', () => {
@@ -17,5 +17,5 @@ test('it renders correctly', () => {
     lastName: 'Foo',
   };
 
-  expectRender(<UserProfile user={user} viewer={viewer} />);
+  expectRender(<UserProfileTrigger user={user} viewer={viewer} />);
 });

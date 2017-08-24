@@ -9,6 +9,8 @@ import device from '../../src/common/device/reducer';
 import viewer from './viewer/reducer';
 import babies from './babies/reducer';
 import growth from './growth/reducer';
+import settings from './settings/reducer';
+import ui from './ui/reducer';
 import { configureApollo } from './configureApollo';
 
 // stackoverflow.com/q/35622588/233902
@@ -52,6 +54,8 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
     growth,
     device,
     form,
+    settings,
+    ui,
     viewer,
     ...platformReducers,
   });

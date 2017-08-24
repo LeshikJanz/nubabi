@@ -45,8 +45,10 @@ exports[`it renders correctly 1`] = `
       ]
     }
     accessible={true}
+    collapsable={undefined}
     hitSlop={undefined}
     isTVSelectable={true}
+    nativeID={undefined}
     onLayout={undefined}
     onResponderGrant={[Function]}
     onResponderMove={[Function]}
@@ -81,6 +83,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
+      disabled={false}
       ellipsizeMode="tail"
       id={undefined}
       style={
@@ -118,6 +121,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       spacing={-0.31}
       style={
@@ -128,9 +132,9 @@ exports[`it renders correctly 1`] = `
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#454D56",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
-          "fontWeight": "600",
+          "fontWeight": "700",
           "letterSpacing": -0.88,
           "lineHeight": 16,
           "textAlign": "center",
@@ -142,6 +146,7 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
+      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -151,7 +156,7 @@ exports[`it renders correctly 1`] = `
           "borderRightWidth": 0,
           "borderTopWidth": 0,
           "color": "#748294",
-          "fontFamily": "System",
+          "fontFamily": "SF Pro Text",
           "fontSize": 13,
           "lineHeight": 16,
           "textAlign": "center",

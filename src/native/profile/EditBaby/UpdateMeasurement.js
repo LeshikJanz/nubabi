@@ -2,6 +2,7 @@
 import type {
   GraphQLDataProp,
   RecordMeasurementInput,
+  UnitDisplaySettingsState,
 } from '../../../common/types';
 import React, { PureComponent } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
@@ -14,13 +15,7 @@ import UpdateMeasurementHeader from './UpdateMeasurementHeader';
 import MeasurementUnitSwitcher, {
   type MeasurementUnit,
 } from './MeasurementUnitSwitcher';
-import {
-  toCentimeters,
-  toInches,
-  toKilograms,
-  toPounds,
-  formatMeasurement,
-} from '../../../common/helpers/measurement';
+import { formatMeasurement } from '../../../common/helpers/measurement';
 import displayLoadingState from '../../components/displayLoadingState';
 import theme from '../../../common/themes/defaultTheme';
 import UpdateAmountButton from './UpdateAmountButton';
@@ -32,11 +27,12 @@ type Props = {
   onViewGraph: () => void,
   data: GraphQLDataProp<*>,
   babyId: string,
-  updateMeasurement: (any) => Promise<*>,
+  updateMeasurement: (any) => Promise<*>, // prettier-ignore
+  unitDisplay: UnitDisplaySettingsState,
 };
 
 type State = {
-  currentUnit: MeasurementUnit,
+  value: number,
 };
 
 export class UpdateMeasurement extends PureComponent {
@@ -44,8 +40,10 @@ export class UpdateMeasurement extends PureComponent {
   state: State;
 
   state = {
-    value: pathOr(0, ['viewer', 'baby', this.props.type], this.props.data),
-    currentUnit: this.props.type === 'weight' ? 'kg' : 'cm',
+    value: formatMeasurement(
+      this.props.unitDisplay[this.props.type],
+      pathOr(0, ['viewer', 'baby', this.props.type], this.props.data),
+    ),
   };
 
   static fragments = {
@@ -57,32 +55,11 @@ export class UpdateMeasurement extends PureComponent {
     `,
   };
 
-  handleUnitSwitch = (unit: MeasurementUnit) => {
-    this.setState(prevState => {
-      let currentValue = prevState.value;
-
-      if (this.props.type === 'weight') {
-        currentValue = unit === 'kg'
-          ? toKilograms(currentValue)
-          : toPounds(currentValue);
-      } else if (this.props.type === 'height') {
-        currentValue = unit === 'cm'
-          ? toCentimeters(currentValue)
-          : toInches(currentValue);
-      }
-
-      return {
-        currentUnit: unit,
-        value: parseFloat(currentValue.toFixed(2)),
-      };
-    });
-  };
-
   handleSubmit = () => {
     const input: RecordMeasurementInput = {
       babyId: this.props.babyId,
       type: this.props.type,
-      unit: this.state.currentUnit,
+      unit: this.props.unitDisplay[this.props.type],
       value: this.state.value,
     };
 
@@ -105,24 +82,18 @@ export class UpdateMeasurement extends PureComponent {
   };
 
   valueInCurrentUnit() {
-    return `${formatMeasurement(this.state.value)} ${this.state.currentUnit}`;
+    return `${+this.state.value.toFixed(2)} ${this.props.unitDisplay[
+      this.props.type
+    ]}`;
   }
 
   render() {
     const { onViewGraph, type } = this.props;
-    let unit: MeasurementUnit;
 
-    if (this.state.currentUnit) {
-      unit = this.state.currentUnit;
-    } else {
-      unit = this.props.type === 'weight' ? 'kg' : 'cm';
-    }
-
-    const availableUnits = type === 'weight' ? ['kg', 'lbs'] : ['cm', 'in'];
-
-    const image = type === 'weight'
-      ? require('../../../common/images/weight.png')
-      : require('../../../common/images/height.png');
+    const image =
+      type === 'weight'
+        ? require('../../../common/images/weight.png')
+        : require('../../../common/images/height.png');
 
     const buttonText = `SET ${this.props.type.toUpperCase()}`;
 
@@ -130,11 +101,6 @@ export class UpdateMeasurement extends PureComponent {
       <Box flex={1}>
         <UpdateMeasurementHeader onViewGraph={onViewGraph} />
         <Box backgroundColor="white" flex={1} padding={1}>
-          <MeasurementUnitSwitcher
-            currentUnit={unit}
-            availableUnits={availableUnits}
-            onSelect={this.handleUnitSwitch}
-          />
           <Box alignItems="center" justifyContent="center" flex={1}>
             <Image
               source={image}
@@ -223,7 +189,10 @@ export const mutation = gql`
 `;
 
 export default compose(
-  connect(({ babies: { currentBabyId } }) => ({ babyId: currentBabyId })),
+  connect(({ babies: { currentBabyId }, settings }) => ({
+    babyId: currentBabyId,
+    unitDisplay: settings.unitDisplay,
+  })),
   graphql(mutation, { name: 'updateMeasurement' }),
   graphql(
     gql`

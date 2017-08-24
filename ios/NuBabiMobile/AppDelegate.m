@@ -19,6 +19,7 @@
 {
   NSURL *jsCodeLocation;
 
+  /* Setup BuddyBuild SDK */
   [BuddyBuildSDK setup];
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
@@ -30,9 +31,15 @@
 
   self.rootView = rootView;
 
+  /* Set background color to match splash screen */
   self.defaultBackground = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   rootView.backgroundColor = self.defaultBackground;
   
+  /*
+   * Set root view's background to the splash screen (LaunchImage)
+   *
+   * This is to have a smooth splash screen experience while RN initializes.
+   */
   NSArray *allPngImageNames = [[NSBundle mainBundle] pathsForResourcesOfType:@"png" inDirectory:nil];
   for (NSString *imgName in allPngImageNames){
     if ([imgName containsString:@"LaunchImage"]){
@@ -45,7 +52,8 @@
       }
     }
   }
-
+  
+  /* Subscribe to RN's event for when JavaScript finishes loading */
   [[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(javascriptLoadEvent:) 
         name:@"RCTContentDidAppearNotification"
@@ -64,6 +72,9 @@
   return YES;
 }
 
+/*
+ * Restore the root view's background color once RN finishes loading
+ */
 - (void) javascriptLoadEvent:(NSNotification *) notification
 {
   if ([[notification name] isEqualToString:@"RCTContentDidAppearNotification"]) {
@@ -79,6 +90,7 @@
   }
 }
 
+/* Deep linking handler */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {

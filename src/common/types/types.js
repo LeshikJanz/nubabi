@@ -1,78 +1,40 @@
 // @flow
 import type { Element } from 'react';
 
-// Models
-import type {
-  Query,
-  Baby,
-  BabyEdge,
-  Activity,
-  ActivityConnection,
-  ActivityEdge,
-  ActivityMediaTypeEnum as ActivityMediaType,
-  ActivityMedia,
-  ActivityFilterInput,
-  Memory,
-  User,
-  Achievement,
-  Expert,
-  SkillArea,
-  Growth,
-  GrowthArticle,
-  GrowthArticleEdge,
-  AgeDurationEnum as AgeDuration,
-  GenderEnum as Gender,
-  MeasurementTypeEnum as MeasurementType,
-  MeasurementUnitEnum as MeasurementUnit,
-  Tip,
-  Image,
-  Avatar,
-  CreateBabyInput,
-  UpdateBabyInput,
-  SwoopActivityInput,
-  ActivityLevelOperationEnum as ActivityLevelOperation,
-  AdjustActivityLevelInput,
-  ToggleFavoriteInput,
-  RecordMeasurementInput,
-  Article,
-  Tag,
-} from './modelTypes';
+/*
+ ******************************************************************************
+ * Models                                                                     *
+ ******************************************************************************
+ */
 
-export type {
-  Query,
-  Baby,
-  BabyEdge,
+import type {
   Activity,
-  ActivityConnection,
-  ActivityEdge,
-  ActivityMedia,
-  ActivityFilterInput,
-  Memory,
-  User,
-  Achievement,
+  Avatar,
+  Baby,
   Expert,
   SkillArea,
-  Growth,
-  GrowthArticleEdge,
-  GrowthArticle,
-  AgeDuration,
-  MeasurementType,
-  MeasurementUnit,
-  Gender,
-  Image,
-  Avatar,
-  Tip,
-  CreateBabyInput,
-  UpdateBabyInput,
-  SwoopActivityInput,
-  ActivityLevelOperation,
-  AdjustActivityLevelInput,
-  ToggleFavoriteInput,
-  RecordMeasurementInput,
-  ActivityMediaType,
+  User,
+} from './modelTypes';
+import type { MutationOpts, QueryOpts as QueryOptsApollo } from 'react-apollo';
+import { ApolloClient } from 'apollo-client';
+
+export type { OperationComponent, QueryProps } from 'react-apollo';
+
+export type QueryOpts<T> =
+  | (QueryOptsApollo & {
+      variables: T | Object,
+    })
+  | MutationOpts;
+
+export type { Activity, Avatar, User, SkillArea, Baby };
+export type {
   Article,
-  Tag,
-};
+  File,
+  FileConnection,
+  FileEdge,
+  GrowthArticle,
+} from './modelTypes';
+export * from './queryTypes';
 
 export type FirebaseUser = {
   uid: String,
@@ -82,20 +44,7 @@ export type FirebaseUser = {
   avatar?: Avatar,
 };
 
-// Deps
-
-export type Deps = {
-  getState: () => Object,
-  now: () => number,
-  firebase: any,
-  firebaseAuth: Function,
-  firebaseDatabase: any,
-  apollo: Object,
-};
-
 export type Viewer = FirebaseUser; // For the time being
-
-// Data fetching
 
 export type {
   ApolloQueryResult,
@@ -103,7 +52,27 @@ export type {
   InjectedGraphQLDataProps as GraphQLDataProp,
 } from './apolloTypes';
 
-// React Navigation
+/*
+ ******************************************************************************
+ * Deps                                                                       *
+ ******************************************************************************
+ */
+
+export type Deps = {
+  getState: () => Object,
+  now: () => number,
+  firebase: any,
+  firebaseAuth: Function,
+  firebaseDatabase: any,
+  apollo: typeof ApolloClient,
+};
+
+/*
+ ******************************************************************************
+ * React Navigation                                                           *
+ ******************************************************************************
+ */
+
 export type Style =
   | { [key: string]: any }
   | number
@@ -151,7 +120,12 @@ export type NavigationOptions = NavigationScreenOptions;
 
 export type NavigationProp = NavigationScreenProp<*, *>;
 
-// Layout
+/*
+ ******************************************************************************
+ * Layout                                                                     *
+ ******************************************************************************
+ */
+
 export type LayoutProps = {
   viewportWidth: number,
   viewportHeight: number,
@@ -159,7 +133,11 @@ export type LayoutProps = {
   parentHeight: ?number,
 };
 
-// State
+/*
+ ******************************************************************************
+ * State                                                                      *
+ ******************************************************************************
+ */
 
 export type AppState = {
   +error: ?Error,
@@ -173,6 +151,7 @@ export type ConfigState = {
   +apiUrl: string,
   +firebase: ?Object,
   +sentryUrl: string,
+  +graphqlEndpoint: ?string,
 };
 
 export type GenericDeviceState = {
@@ -210,7 +189,25 @@ export type AuthState = {
 };
 
 export type ViewerState = {
-  +viewer: ?User,
+  +viewer: ?Viewer,
+};
+
+export type UnitDisplaySettingsState = {
+  +weight: 'kg' | 'lbs',
+  +height: 'cm' | 'in',
+};
+
+export type NotificationSettingsState = {
+  +memories: boolean,
+  +stimulation: boolean,
+  +growth: boolean,
+  +activities: boolean,
+  +email: boolean,
+};
+
+export type SettingsState = {
+  +unitDisplay: UnitDisplaySettingsState,
+  +notifications: NotificationSettingsState,
 };
 
 export type TabNavigationState = {
@@ -231,6 +228,13 @@ export type ThisWeekState = {
   +skillAreas: Array<SkillArea>,
 };
 
+export type UIState = {
+  +gallery: {
+    +scrollEnabled: boolean,
+  },
+  +showNetworkIndicator: boolean,
+};
+
 export type State = {
   +app: AppState,
   +auth: AuthState,
@@ -239,12 +243,18 @@ export type State = {
   +device: DeviceState,
   +growth: GrowthState,
   +navigation: MobileNavigationState,
+  +settings: SettingsState,
   +tabs: TabNavigationState,
   +thisWeek: ThisWeekState,
+  +ui: UIState,
   +viewer: ViewerState,
 };
 
-// Actions
+/*
+ ******************************************************************************
+ * Actions                                                                    *
+ ******************************************************************************
+ */
 
 export type AppStartedAction = { type: 'APP_STARTED' };
 
@@ -263,7 +273,7 @@ export type OnAuthAction = {
 export type LoginRequestAction = {
   type: 'LOGIN_REQUEST',
   payload: { email: string, password: string },
-  meta: { uid: string },
+  meta: { uid?: string },
 };
 
 export type LoginSuccessAction = {
@@ -303,6 +313,24 @@ export type SkipGrowthIntroductionAction = {
   payload: string,
 };
 
+export type SettingsSetValueAction = {
+  type: 'SETTINGS_SET_VALUE',
+  payload: {
+    path: Array<string>,
+    value: any,
+  },
+};
+
+export type ToggleGalleryScrollEnabledAction = {
+  type: 'TOGGLE_GALLERY_SCROLL_ENABLED',
+  payload: boolean,
+};
+
+export type ToggleNetworkIndicatorAction = {
+  type: 'TOGGLE_NETWORK_ACTIVITY_INDICATOR',
+  payload: boolean,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -316,4 +344,7 @@ export type Action =
   | GetBabiesSuccessAction
   | GetBabiesFailureAction
   | SeenGrowthGlobalIntroAction
-  | SkipGrowthIntroductionAction;
+  | SkipGrowthIntroductionAction
+  | SettingsSetValueAction
+  | ToggleGalleryScrollEnabledAction
+  | ToggleNetworkIndicatorAction;

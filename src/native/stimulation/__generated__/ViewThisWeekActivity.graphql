@@ -1,0 +1,87 @@
+query ViewThisWeekActivity($babyId: ID!, $activityId: ID!, $cursor: String!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      name
+      activity(id: $activityId) {
+        ...Activity
+      }
+      nextActivity: activities(first: 1, after: $cursor) {
+        ...ActivityNavigation
+      }
+      previousActivity: activities(first: 1, before: $cursor) {
+        ...ActivityNavigation
+      }
+      favoriteActivities {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment Activity on Activity {
+  id
+  ...HeaderActivity
+  ...ExpertInfoActivity
+  ...ActivityActionsActivity
+  expert {
+    ...ExpertInfo
+  }
+  skillArea {
+    id
+    name
+    image {
+      large {
+        url
+      }
+    }
+    ...HeaderSkill
+    ...ActivityActionsSkill
+  }
+  ...Steps
+}
+
+fragment ActivityNavigation on ActivityConnection {
+  edges {
+    cursor
+    node {
+      id
+      name
+      skillArea {
+        id
+        name
+      }
+    }
+  }
+}
+
+fragment HeaderActivity on Activity {
+  name
+}
+
+fragment ExpertInfoActivity on Activity {
+  introduction
+}
+
+fragment ActivityActionsActivity on Activity {
+  name
+}
+
+fragment Steps on Activity {
+  name
+  steps
+  media {
+    edges {
+      node {
+        type
+        thumb
+        url
+      }
+    }
+  }
+}
+

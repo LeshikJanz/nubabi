@@ -26,7 +26,7 @@ export const ArticleListItem = ({ title, image, layout }: Props) => {
     >
       {imageSource &&
         <Image
-          source={{ uri: image.url }}
+          source={{ uri: imageSource }}
           style={{ flex: 1 }}
           resizeMode="cover"
         >

@@ -11,9 +11,9 @@ export type ColorProps = {
 
 export type Theme = {|
   typography: {|
-    fontSize: (number) => number,
+    fontSize: number => number,
     lineHeight: number,
-    rhythm: (number) => number,
+    rhythm: number => number,
   |},
   colors: {
     [color: Color]: string,

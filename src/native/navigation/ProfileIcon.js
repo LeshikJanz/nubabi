@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Image from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
-import { compose, path } from 'ramda';
+import { compose, path, prop } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import color from 'color';
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 40 / 2,
-    resizeMode: 'stretch',
     zIndex: 300,
   },
   tabSquare: {
@@ -94,17 +93,17 @@ export default compose(
   connect(({ babies: { currentBabyId } }) => ({ currentBabyId })),
   graphql(
     gql`
-   query getBabyAvatar($id: ID) {
-     viewer {
-       baby(id: $id) {
-         id
-         avatar {
-           url
-         }
-       }
-     }
-   } 
-  `,
+      query getBabyAvatar($id: ID) {
+        viewer {
+          baby(id: $id) {
+            id
+            avatar {
+              url
+            }
+          }
+        }
+      }
+    `,
     {
       options: ({ currentBabyId }) => ({
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
@@ -112,10 +111,10 @@ export default compose(
         skip: !currentBabyId,
       }),
       props: ({ data }) => {
-        const avatar = path(['viewer', 'baby', 'avatar'], data);
+        const avatar = path(['viewer', 'baby', 'avatar', 'url'], data);
 
         return {
-          avatarSource: avatar ? { uri: avatar.url } : null,
+          avatarSource: { uri: avatar },
         };
       },
     },

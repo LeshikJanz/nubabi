@@ -10,7 +10,7 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#EA3154",
-    "fontFamily": "System"
+    "fontFamily": "SF Pro Text"
 }
 
 <View
@@ -18,8 +18,10 @@ style = Object {
   accessibilityLabel={undefined}
   accessibilityTraits={undefined}
   accessible={true}
+  collapsable={undefined}
   hitSlop={undefined}
   isTVSelectable={true}
+  nativeID={undefined}
   onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -38,6 +40,7 @@ style = Object {
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     style={
       Object {
@@ -47,7 +50,7 @@ style = Object {
         "borderRightWidth": 0,
         "borderTopWidth": 0,
         "color": "#EA3154",
-        "fontFamily": "System",
+        "fontFamily": "SF Pro Text",
         "fontSize": 13,
         "lineHeight": 16,
       }

@@ -1,0 +1,41 @@
+query Memory($id: ID!, $babyId: ID) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      memory(id: $id) {
+        ...MemoryItem
+      }
+    }
+  }
+}
+
+fragment MemoryItem on Memory {
+  id
+  title
+  author {
+    avatar {
+      url
+    }
+  }
+  createdAt
+  files {
+    count
+    edges {
+      node {
+        contentType
+        url
+      }
+    }
+  }
+  comments(first: 2) {
+    count
+    edges {
+      cursor
+      node {
+        id
+        ...MemoryComment
+      }
+    }
+  }
+}
+

@@ -30,17 +30,19 @@ class PeriodFilter extends PureComponent {
   props: Props;
 
   renderOptions() {
-    return this.props.options.map(option => (
+    return this.props.options.map(option =>
       <MenuOption key={option.key} value={option.key}>
-        <Text>{option.label}</Text>
-      </MenuOption>
-    ));
+        <Text>
+          {option.label}
+        </Text>
+      </MenuOption>,
+    );
   }
 
   render() {
     return (
       <MenuContext style={{ flex: 1 }}>
-        <Menu onSelect={this.props.onPeriodSelect} style={styles.dropdown}>
+        <Menu onSelect={this.props.onPeriodSelect}>
           <MenuTrigger>
             <Box
               backgroundColor="white"

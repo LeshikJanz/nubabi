@@ -1,0 +1,34 @@
+query GraphDetail($currentBabyId: ID!) {
+  viewer {
+    baby(id: $currentBabyId) {
+      id
+      ...GraphDetailHeaderBaby
+      measurements {
+        heights {
+          edges {
+            node {
+              ...Measurement
+            }
+          }
+        }
+        weights {
+          edges {
+            node {
+              ...Measurement
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment GraphDetailHeaderBaby on Baby {
+  name
+}
+
+fragment Measurement on Measurement {
+  recordedAt
+  value
+}
+

@@ -36,10 +36,18 @@ export const ActivityListItem = (props: Props) => {
           />
         </Box>
         <View style={styles.textContainer}>
-          <Text style={styles.skillName}>{skillArea.name}</Text>
-          <Text style={styles.activityName}>{activity.name}</Text>
+          <Text style={styles.skillName}>
+            {skillArea.name}
+          </Text>
+          <Text style={styles.activityName}>
+            {activity.name}
+          </Text>
         </View>
-        <Image style={styles.skillIcon} source={iconMappings(skillArea.icon)} />
+        <Image
+          style={styles.skillIcon}
+          source={iconMappings(skillArea.icon)}
+          resizeMode="contain"
+        />
       </View>
     </TouchableHighlight>
   );
@@ -82,7 +90,6 @@ const styles = {
   skillIcon: {
     width: 22,
     height: 22,
-    resizeMode: 'contain',
     position: 'absolute',
     right: 10,
     top: 10,

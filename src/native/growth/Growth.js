@@ -1,30 +1,32 @@
 // @flow
-import type { State, Baby } from '../../common/types';
+import type { Baby, State, UnitDisplaySettingsState } from '../../common/types';
 import type { Event } from 'react-native';
-import React, { Component, PureComponent } from 'react';
-import { ScrollView, LayoutAnimation } from 'react-native';
+import { LayoutAnimation, ScrollView } from 'react-native';
+import React, { Component } from 'react';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { skipGrowthGlobalIntro } from '../../common/growth/reducer';
 import {
   Box,
   Card,
-  Text,
   displayLoadingState,
   showNoContentViewIf,
+  Text,
 } from '../components';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import ThisWeekGrowthButton from './ThisWeekGrowthButton';
-import Chart from './Chart';
+import CombinedChart from './CombinedChart';
+import { formatMeasurement } from '../../common/helpers/measurement';
 
 type Props = {
   baby: Baby,
   skipGrowthGlobalIntro: () => void,
   onNavigateToWhatYouNeedToKnow: () => void,
+  onNavigateToGraphDetail: () => void,
+  unitDisplay: UnitDisplaySettingsState,
 };
 
 const formatName = (name: string) => {
@@ -34,13 +36,13 @@ const formatName = (name: string) => {
 const DAY_MS = 86400000;
 
 const defaultData = [
-  { timestamp: new Date(2007, 1, 1).getTime(), value: 83.24 },
-  { timestamp: new Date(2007, 1, 2).getTime(), value: 85.35 },
-  { timestamp: new Date(2007, 1, 3).getTime(), value: 98.84 },
-  { timestamp: new Date(2007, 1, 4).getTime(), value: 79.92 },
-  { timestamp: new Date(2007, 1, 5).getTime(), value: 83.80 },
-  { timestamp: new Date(2007, 1, 6).getTime(), value: 88.47 },
-  { timestamp: new Date(2007, 1, 7).getTime(), value: 94.47 },
+  { recordedAt: new Date(2007, 1, 1), value: 83.24 },
+  { recordedAt: new Date(2007, 1, 2), value: 85.35 },
+  { recordedAt: new Date(2007, 1, 3), value: 98.84 },
+  { recordedAt: new Date(2007, 1, 4), value: 79.92 },
+  { recordedAt: new Date(2007, 1, 5), value: 83.8 },
+  { recordedAt: new Date(2007, 1, 6), value: 88.47 },
+  { recordedAt: new Date(2007, 1, 7), value: 94.47 },
 ];
 
 export class Growth extends Component {
@@ -65,37 +67,36 @@ export class Growth extends Component {
   };
 
   getChartData() {
+    const { unitDisplay } = this.props;
+
     if (
       !path(['measurements', 'heights', 'edges', '0', 'node'], this.props.baby)
     ) {
       return defaultData; // TODO: how to handle this?
     }
 
-    const measurements = path(
-      ['measurements', 'heights', 'edges'],
-      this.props.baby,
-    ).map(edge => {
-      return {
-        timestamp: new Date(edge.node.recordedAt).getTime(),
-        value: edge.node.value,
-      };
+    const measurements = {};
+
+    ['height', 'weight'].forEach(measurementType => {
+      measurements[`${measurementType}s`] = path(
+        ['measurements', `${measurementType}s`, 'edges'],
+        this.props.baby,
+      ).map(edge => {
+        return {
+          recordedAt: new Date(edge.node.recordedAt),
+          value: formatMeasurement(
+            unitDisplay[measurementType],
+            edge.node.value,
+          ),
+        };
+      });
     });
 
-    return [
-      // HACK: so it kinda curves so the graph doesn't cut
-      /*
-      {
-        timestamp: moment(this.props.baby.dob).toDate().getTime() - DAY_MS,
-        value: measurements[0].value - 5,
-        point: false,
-      },
-      */
-      ...measurements,
-    ];
+    return measurements;
   }
 
   render() {
-    const { baby } = this.props;
+    const { baby, unitDisplay } = this.props;
     const introduction = baby.growth.introduction;
 
     return (
@@ -112,7 +113,7 @@ export class Growth extends Component {
           <ThisWeekGrowthButton
             onPress={this.props.onNavigateToWhatYouNeedToKnow}
           />
-          <Card padding={0}>
+          <Card padding={0} onPress={this.props.onNavigateToGraphDetail}>
             <Box marginTop={0.5}>
               <Box
                 flexDirection="row"
@@ -121,28 +122,30 @@ export class Growth extends Component {
                 justifyContent="flex-start"
               >
                 <Text
-                  color="secondary"
+                  color="primary"
                   size={7}
                   marginHorizontal={1}
                   spacing={-0.68}
                   textAlign="center"
                 >
-                  {baby.weight}
-                  <Text color="secondary" size={2} marginHorizontal={1}>
-                    kg
+                  {formatMeasurement(unitDisplay.weight, baby.weight)}
+                  <Text color="primary" size={2} marginHorizontal={1}>
+                    {unitDisplay.weight}
                   </Text>
                 </Text>
                 <Text
-                  color="secondary"
+                  color="success"
                   size={7}
                   spacing={-0.68}
                   textAlign="center"
                 >
-                  {baby.height}
-                  <Text color="secondary" size={2}>cm</Text>
+                  {formatMeasurement(unitDisplay.height, baby.height)}
+                  <Text color="success" size={2}>
+                    {unitDisplay.height}
+                  </Text>
                 </Text>
               </Box>
-              <Chart data={this.getChartData()} height={120} />
+              <CombinedChart data={this.getChartData()} />
             </Box>
             <Box justifyContent="center" padding={1}>
               <Text size={2}>
@@ -161,6 +164,7 @@ export default compose(
     (state: State) => ({
       currentBabyId: state.babies.currentBabyId,
       hasSeenGlobalIntro: state.growth.hasSeenGlobalIntro,
+      unitDisplay: state.settings.unitDisplay,
     }),
     {
       skipGrowthGlobalIntro,
@@ -175,6 +179,14 @@ export default compose(
             weight
             height
             measurements {
+              weights {
+                edges {
+                  node {
+                    value
+                    recordedAt
+                  }
+                }
+              }
               heights {
                 edges {
                   node {

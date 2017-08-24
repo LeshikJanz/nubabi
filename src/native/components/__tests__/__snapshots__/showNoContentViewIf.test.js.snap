@@ -13,7 +13,7 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#454D56",
-    "fontFamily": "System"
+    "fontFamily": "SF Pro Text"
 }
 
 <View
@@ -33,6 +33,7 @@ style = Object {
   <Text
     accessible={true}
     allowFontScaling={true}
+    disabled={false}
     ellipsizeMode="tail"
     style={
       Object {
@@ -42,7 +43,7 @@ style = Object {
         "borderRightWidth": 0,
         "borderTopWidth": 0,
         "color": "#454D56",
-        "fontFamily": "System",
+        "fontFamily": "SF Pro Text",
         "fontSize": 13,
         "lineHeight": 16,
       }
@@ -66,12 +67,13 @@ style = Object {
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#454D56",
-    "fontFamily": "System"
+    "fontFamily": "SF Pro Text"
 }
 
 <Text
   accessible={true}
   allowFontScaling={true}
+  disabled={false}
   ellipsizeMode="tail"
 >
   The Component

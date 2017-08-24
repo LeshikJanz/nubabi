@@ -11,6 +11,7 @@ style = Object {}
   hasTVPreferredFocus={undefined}
   hitSlop={undefined}
   isTVSelectable={true}
+  nativeID={undefined}
   onLayout={undefined}
   onResponderGrant={[Function]}
   onResponderMove={[Function]}
@@ -52,7 +53,6 @@ style = Object {}
     source={1}
     style={
       Array [
-        undefined,
         Object {
           "flex": 1,
         },
@@ -88,19 +88,23 @@ style = Object {}
       />
       <View
         style={
-          Object {
-            "alignItems": "center",
-            "alignSelf": "stretch",
-            "backgroundColor": "transparent",
-            "flex": 1,
-            "flexDirection": "column",
-            "justifyContent": "center",
-          }
+          Array [
+            Object {
+              "alignItems": "center",
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "flex": 1,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            },
+            Object {},
+          ]
         }
       >
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -118,6 +122,7 @@ style = Object {}
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {

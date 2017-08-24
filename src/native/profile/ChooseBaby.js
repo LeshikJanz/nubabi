@@ -187,9 +187,8 @@ class ChooseBaby extends Component {
             ? { uri: baby.avatar.url }
             : babyIcon;
 
-          const currentBabyStyle = baby.id === this.props.currentBabyId
-            ? styles.currentBaby
-            : {};
+          const currentBabyStyle =
+            baby.id === this.props.currentBabyId ? styles.currentBaby : {};
 
           return (
             <TouchableOpacity
@@ -198,7 +197,11 @@ class ChooseBaby extends Component {
               onPress={() => this.selectBaby(baby.id)}
             >
               <View style={styles.babyIconView}>
-                <Image source={avatarSource} style={styles.babyIcon} />
+                <Image
+                  source={avatarSource}
+                  style={styles.babyIcon}
+                  resizeMode="stretch"
+                />
               </View>
               <Text style={[styles.babyName, currentBabyStyle]}>
                 {baby.name}
@@ -329,7 +332,6 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 40 / 2,
-    resizeMode: 'stretch',
   },
   babyName: {
     fontSize: 10,

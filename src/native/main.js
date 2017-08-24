@@ -1,11 +1,9 @@
 // @flow
-import type { Action } from '../common/types';
+import type { AppStartedAction } from '../common/types';
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { persistStore } from 'redux-persist';
-import { withContext } from 'recompose';
 import Raven from 'raven-js';
 import { createRenderer } from 'fela-native';
 import configureStore from '../common/configureStore';
@@ -17,6 +15,8 @@ import NativeFelaProvider from './components/FelaProvider';
 import theme from '../common/themes/defaultTheme';
 import config from '../common/config';
 import Root from './root';
+import { epics as appEpics } from './app/actions';
+import { epics as navigationEpics } from './navigation/actions';
 import navigation from './navigation/reducer';
 import device from './device/reducer';
 
@@ -37,6 +37,7 @@ const store = configureStore({
     device,
   },
   platformMiddleware: [reportingMiddleware],
+  platformEpics: [...appEpics, ...navigationEpics],
 });
 
 persistStore(
@@ -46,7 +47,7 @@ persistStore(
     storage: AsyncStorage,
   },
   () => {
-    store.dispatch(({ type: 'APP_STARTED' }: Action));
+    store.dispatch(({ type: 'APP_STARTED' }: AppStartedAction));
   },
 );
 
@@ -54,6 +55,13 @@ const apollo = configureApollo();
 
 const { renderer } = configureFela(createRenderer);
 const FelaProvider = NativeFelaProvider(renderer, theme);
+
+// TODO: remove after deps update
+// $FlowFixMe$
+console.ignoredYellowBox = [
+  'Warning: checkPropTypes',
+  'Using <Image> with children',
+];
 
 class Main extends Component {
   render() {

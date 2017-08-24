@@ -21,12 +21,14 @@ export const HealthcareNotice = () => {
         />
       </Box>
       <Box flex={1} justifyContent="space-around">
-        <Text bold lineHeight={20} size={2}>Please Note</Text>
+        <Text bold lineHeight={20} size={2}>
+          Please Note
+        </Text>
 
         <Text color="secondary" lineHeight={17}>
-          This information does not replace your health care provider and
-          should you be concerned in any way, we recommend that you please
-          consult with them or visit your nearest clinic.
+          This information does not replace your health care provider and should
+          you be concerned in any way, we recommend that you please consult with
+          them or visit your nearest clinic.
         </Text>
       </Box>
     </Card>

@@ -170,7 +170,9 @@ export class Activity extends PureComponent {
           <Icon name="md-arrow-back" style={styles.navigationIcon} />
           <View style={[styles.navigationSkillContainer, { marginLeft: 10 }]}>
             <Text style={styles.previousButtonText}>Back</Text>
-            <Text>{this.props.previousSkillAreaName}</Text>
+            <Text>
+              {this.props.previousSkillAreaName}
+            </Text>
           </View>
         </View>
       </TouchableHighlight>

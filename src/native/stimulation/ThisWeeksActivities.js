@@ -5,7 +5,7 @@ import type {
   NavigationOptions,
 } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import { graphql, gql } from 'react-apollo';
@@ -18,7 +18,7 @@ type Props = {
   navigation: NavigationProp<*, *>,
 };
 
-class ThisWeeksActivities extends Component {
+class ThisWeeksActivities extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {
@@ -73,14 +73,9 @@ export default compose(
         variables: { babyId: currentBabyId },
       }),
       props: ({ data }) => {
-        const activities = path(
-          ['viewer', 'baby', 'activities', 'edges'],
-          data,
-        );
-
         return {
           data,
-          activities: activities || [],
+          activities: path(['viewer', 'baby', 'activities', 'edges'], data),
         };
       },
     },

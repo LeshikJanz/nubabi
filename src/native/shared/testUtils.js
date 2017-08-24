@@ -12,7 +12,9 @@ export const createTestRenderer = () => (Component: any) => {
   const component = testRenderer.create(felaTestContext(Component));
 
   const snapshot = component.toJSON();
-  snapshot.felaRules = felaNativeToStyleObject(felaRenderer.cache);
+  if (snapshot) {
+    snapshot.felaRules = felaNativeToStyleObject(felaRenderer.cache);
+  }
 
   return snapshot;
 };
@@ -33,4 +35,6 @@ export const layoutTestProp = {
   width: 750,
   viewportWidth: 750,
   viewportHeight: 1334,
+  parentWidth: 350,
+  parentHeight: 200,
 };

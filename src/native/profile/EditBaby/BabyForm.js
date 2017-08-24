@@ -8,12 +8,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import {
-  KeyboardAwareScrollView,
-} from 'react-native-keyboard-aware-scroll-view';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { reduxForm, Field } from 'redux-form';
-import { DatePicker } from '../../components';
+import { DatePicker, SubmitButton } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NubabiIcon from '../../../common/icons/nubabi';
@@ -32,14 +30,14 @@ import {
   constantValues,
   maxLength,
   formattedDate,
-} from './formValidation';
+} from '../../shared/forms';
 
 type Props = {
   // redux-form uses initialValues prop
   initialValues: Baby, // eslint-disable-line react/no-unused-prop-types
   onSubmit: () => void,
   handleSubmit: () => void,
-  change: () => void,
+  change: (field: string, value: mixed) => void,
   loading: Boolean,
   mode: 'add' | 'edit',
 };
@@ -115,10 +113,14 @@ class Form extends Component {
       <View style={containerStyle}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
           {label
-            ? <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
+            ? <Text style={[...labelStyle, { flex: 1 }]}>
+                {label}
+              </Text>
             : null}
           {hasExplicitError
-            ? <Text style={labelStyle}>{error.toUpperCase()}</Text>
+            ? <Text style={labelStyle}>
+                {error.toUpperCase()}
+              </Text>
             : null}
         </View>
         <TextInput {...field.input} style={styles.textInput} />
@@ -156,7 +158,9 @@ class Form extends Component {
     const { label } = field;
     return (
       <View style={styles.inputContainer}>
-        <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
+        <Text style={[styles.inputLabel, { flex: 1 }]}>
+          {label}
+        </Text>
 
         <DatePicker
           onChange={field.input.onChange}
@@ -267,17 +271,12 @@ class Form extends Component {
           />
         </View>
 
-        <View style={styles.submitButtonContainer}>
-          <TouchableOpacity
-            onPress={handleSubmit(submit)}
-            style={styles.submitButton}
-            disable={this.props.loading}
-          >
-            <Text style={styles.submitText}>
-              {submitText}
-            </Text>
-          </TouchableOpacity>
-        </View>
+        <SubmitButton
+          onPress={handleSubmit(submit)}
+          loading={this.props.loading}
+          disabled={this.props.loading}
+          submitText={submitText}
+        />
       </KeyboardAwareScrollView>
     );
   }
@@ -366,25 +365,6 @@ const styles = StyleSheet.create({
     fontSize: 8,
     color: '#a8b3c2',
     marginBottom: 4,
-  },
-  submitButtonContainer: {
-    marginTop: 20,
-    flex: 1,
-    alignItems: 'center',
-  },
-  submitButton: {
-    backgroundColor: NUBABI_RED,
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: 100,
-    height: 30,
-    borderRadius: 15,
-  },
-  submitText: {
-    backgroundColor: 'transparent',
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#fff',
   },
 });
 

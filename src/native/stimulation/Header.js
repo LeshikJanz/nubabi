@@ -63,7 +63,9 @@ const Header = ({
 
       <HeaderTextSection width={width}>
         <HeaderTitle text={activityName} />
-        <Pill>{skillName}</Pill>
+        <Pill>
+          {skillName}
+        </Pill>
       </HeaderTextSection>
 
       <HeaderShape width={width} />
@@ -130,7 +132,7 @@ Header.fragments = {
   activity: gql`
     fragment HeaderActivity on Activity {
       name
-    },
+    }
   `,
 };
 

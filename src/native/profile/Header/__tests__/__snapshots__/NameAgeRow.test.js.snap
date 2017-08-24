@@ -38,6 +38,7 @@ exports[`it renders correctly 1`] = `
         hasTVPreferredFocus={undefined}
         hitSlop={undefined}
         isTVSelectable={true}
+        nativeID={undefined}
         onLayout={undefined}
         onResponderGrant={[Function]}
         onResponderMove={[Function]}
@@ -62,6 +63,7 @@ exports[`it renders correctly 1`] = `
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -98,6 +100,7 @@ exports[`it renders correctly 1`] = `
       <Text
         accessible={true}
         allowFontScaling={true}
+        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -129,29 +132,29 @@ exports[`it renders correctly 1`] = `
           Object {
             "backgroundColor": "#ED3154",
             "borderColor": "#ED3154",
-            "borderRadius": 10,
+            "borderRadius": 14,
             "borderWidth": 1,
             "marginTop": 5,
-            "padding": 2,
-            "paddingLeft": 5,
-            "paddingRight": 5,
+            "padding": 4,
+            "paddingHorizontal": 10,
           }
         }
       >
         <Text
           accessible={true}
           allowFontScaling={true}
+          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
               "backgroundColor": "rgba(0,0,0,0)",
               "color": "#fff",
-              "fontSize": 10,
+              "fontSize": 14,
               "textAlign": "center",
             }
           }
         >
-          2 months old
+          1 month old
         </Text>
       </View>
     </View>
@@ -169,8 +172,10 @@ exports[`it renders correctly 1`] = `
       accessibilityLabel={undefined}
       accessibilityTraits={undefined}
       accessible={true}
+      collapsable={undefined}
       hitSlop={undefined}
       isTVSelectable={true}
+      nativeID={undefined}
       onLayout={undefined}
       onResponderGrant={[Function]}
       onResponderMove={[Function]}
@@ -195,6 +200,7 @@ exports[`it renders correctly 1`] = `
       <Text
         accessible={true}
         allowFontScaling={false}
+        disabled={false}
         ellipsizeMode="tail"
         style={
           Array [

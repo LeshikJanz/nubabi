@@ -13,7 +13,7 @@ import { gql } from 'react-apollo';
 import CoverImage from './CoverImage';
 import IconHeader from './IconHeader';
 import NameAgeRow from './NameAgeRow';
-import Statistics from './Statistics';
+import Measurements from './Measurements';
 import withLayout from '../../components/withLayout';
 
 type Props = {
@@ -21,24 +21,26 @@ type Props = {
   avatar: Avatar,
   name: String,
   dob: Date,
-  achievements?: Achievement[],
-  favoriteActivities: ActivityConnection,
+  height: number,
+  weight: number,
+  weightUnit: 'kg' | 'lbs',
+  heightUnit: 'cm' | 'in',
   onEditBaby: () => void,
   layout: LayoutProps,
 };
 
-const Header = (
-  {
-    coverImage,
-    avatar,
-    name,
-    dob,
-    achievements,
-    onEditBaby,
-    favoriteActivities,
-    layout,
-  }: Props,
-) => {
+const Header = ({
+  coverImage,
+  avatar,
+  name,
+  dob,
+  height,
+  weight,
+  heightUnit,
+  weightUnit,
+  onEditBaby,
+  layout,
+}: Props) => {
   const width = layout.viewportWidth;
 
   return (
@@ -46,9 +48,11 @@ const Header = (
       <CoverImage coverImage={coverImage} />
       <IconHeader avatar={avatar} />
       <NameAgeRow babyName={name} birthDate={dob} onEditBaby={onEditBaby} />
-      <Statistics
-        achievements={pathOr(0, ['count'], achievements)}
-        favourites={pathOr(0, ['count'], favoriteActivities)}
+      <Measurements
+        height={height}
+        weight={weight}
+        heightUnit={heightUnit}
+        weightUnit={weightUnit}
       />
     </View>
   );
@@ -65,12 +69,8 @@ Header.fragments = {
         url
       }
       dob
-      achievements {
-        count
-      }
-      favoriteActivities {
-        count
-      }
+      height
+      weight
     }
   `,
 };

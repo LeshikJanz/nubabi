@@ -1,5 +1,6 @@
 // @flow
 import type { Theme } from './types';
+import Color from 'color';
 import typography from './typography';
 
 export const NUBABI_RED = '#ED3154';
@@ -38,6 +39,9 @@ const colors = {
   gray: open.gray2,
   secondary: open.gray3,
   panel: open.white1,
+  separator: open.gray0,
+  // This is Apple's recommended background, we're not using it yet
+  background: Color('#F8F8F8').alpha(0.8).toString(),
 };
 
 const theme: Theme = {
@@ -60,9 +64,10 @@ const theme: Theme = {
     },
   },
   text: {
-    bold: 600,
+    bold: 700,
     medium: 500,
-    fontFamily: 'System',
+    light: 300,
+    fontFamily: 'SF Pro Text',
   },
   block: {
     marginBottom: 1,

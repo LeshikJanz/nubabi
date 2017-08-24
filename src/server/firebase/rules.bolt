@@ -10,6 +10,22 @@ isViewer(uid) {
 
 isNew(ref) { prior(ref) == null }
 
+isFriend(userId) {
+  isSignedIn() && prior(root.users[auth.uid].friends[userId]) !== null
+}
+
+isAuthor(obj) {
+  prior(obj).authorId == auth.uid
+}
+
+canSeeUser(userId) {
+  isViewer(userId) || isFriend(userId)
+}
+
+canSeeMemory(memory) {
+  isAuthor(memory) || isFriend(auth.uid)
+}
+
 type CurrentTimestamp extends Number {
   validate() { this == now }
 }
@@ -19,7 +35,7 @@ type InitialTimestamp extends Number {
 }
 
 type NameString extends String {
-  validate() { this.length > 0 && this.length <= 32 };
+  validate() { this.length > 0 && this.length <= 32 }
 }
 
 type Gender extends String {
@@ -61,35 +77,35 @@ type Baby {
 
   gender: Gender
   weekBorn: Number
+
+  memories: Map<String, Boolean>
+
+  createdBy: String // TODO: validate IDs?
   createdAt: InitialTimestamp
   updatedAt: CurrentTimestamp | Null
 }
 
-// Paths
-// FIXME: we shouldn't need this
-/*
-path / {
-  read() { isSignedIn() }
-  write() { isSignedIn() }
+type Memory extends Object {
 }
-*/
+
+// Paths
 
 path /users/{uid} {
-  read() { isViewer(uid) }
+  read()  { canSeeUser(uid) }
   write() { isViewer(uid) }
 }
 
 path /users/{uid}/babies/{id} {
-  read() { isViewer(uid) }
+  read()  { isViewer(uid) }
   write() { isViewer(uid) }
 }
 
 path /babies {
-  read() { true }
+  read() { true } // TODO
 
   /{id} is Baby {
     create() { isSignedIn() }
-    update() { isSignedIn() }
+    update() { isSignedIn() } // TODO
   }
 }
 
@@ -106,6 +122,23 @@ path /measurements/{babyId} {
   path /heights {
     read() { isSignedIn() }
     write() { isSignedIn() } // TODO
+  }
+}
+
+path /invites {
+  read() { false }
+  /{id} {
+    create() { isSignedIn() }
+    update() { false }
+  }
+}
+
+path /memories {
+  /{id} {
+    read() { canSeeMemory(this) }
+    create() { isSignedIn() }
+    update() { isAuthor(this) }
+    delete() { isAuthor(this) }
   }
 }
 

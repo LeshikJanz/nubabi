@@ -6,6 +6,7 @@ import type {
   SeenGrowthGlobalIntroAction,
 } from '../types';
 import moment from 'moment';
+import { prop } from 'ramda';
 
 type Action = SeenGrowthGlobalIntroAction;
 
@@ -56,9 +57,18 @@ const findContent = (
   collection: Array<Growth>,
 ) => {
   return collection.find((element: Growth) => {
-    return element.ageDuration === ageDuration &&
-      element.minimumAge >= currentAge &&
-      element.maximumAge <= currentAge;
+    const isRaw = typeof element['age_duration'] !== 'undefined';
+    const minimumAge = prop(isRaw ? 'age_min' : 'minimumAge')(element);
+    const maximumAge = prop(isRaw ? 'age_max' : 'maximumAge')(element);
+    const contentAgeDuration = isRaw
+      ? prop('age_duration', element).toUpperCase()
+      : prop('ageDuration', element);
+
+    return (
+      contentAgeDuration === ageDuration &&
+      minimumAge >= currentAge &&
+      maximumAge <= currentAge
+    );
   });
 };
 

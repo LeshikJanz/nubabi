@@ -144,6 +144,15 @@ export const connectionFromBackendMetadata = (promise, args) => {
   return promise.then(data => connectionFromBackendMetadataArray(data, args));
 };
 
+export const toDate = R.constructN(1, Date);
+export const toTimestamp = R.invoker(0, 'getTime');
+export const sortByTimestamp = R.sortBy(R.prop('createdAt'));
+
+export const runFirebaseTask = (fn, successHandler) =>
+  new Promise((resolve, reject) => {
+    fn.fork(err => reject(err), (...args) => resolve(successHandler(...args)));
+  });
+
 export {
   fromGlobalId,
   globalIdField,
