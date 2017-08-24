@@ -2,6 +2,7 @@
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { Image } from 'react-native';
+import moment from 'moment';
 import { Box, Card, Icon, Overlay, Text, withLayout } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import formatDate from '../../common/helpers/formatDate';
@@ -23,6 +24,8 @@ export const ThisWeeksActivitiesButton = ({
     width: layout.viewportWidth - 20,
     height: layout.viewportWidth * 0.6,
   };
+
+  const date = moment().startOf('week').toDate();
 
   return (
     <Box contentSpacing>
@@ -53,7 +56,7 @@ export const ThisWeeksActivitiesButton = ({
                   style={{ marginTop: 2 }}
                 />
                 <Text color="white" marginLeft={0.5} bold>
-                  {formatDate(new Date())}
+                  {formatDate(date)}
                 </Text>
               </Box>
             </Overlay>
