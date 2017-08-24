@@ -2,27 +2,22 @@
 import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
-import { View, ScrollView, StyleSheet } from 'react-native';
-import { graphql, gql } from 'react-apollo';
-import { compose, path } from 'ramda';
-import { sample } from 'lodash';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
 import ActivityHistoryButton from './ActivityHistoryButton';
 import BrowseActivitiesHeaderButton from './BrowseActivitiesHeaderButton';
 import FavoritesButton from './FavoritesButton';
-import DidYouKnow from './DidYouKnow';
 import {
+  childContextTypes,
   getChildContext,
   getLayoutInitialState,
-  childContextTypes,
   handleLayout,
 } from '../components/withLayout';
 
 type Props = {
   navigation: NavigationProp<*, *>,
-  didYouKnow: ?string,
 };
 
 class Stimulation extends Component {
@@ -58,8 +53,6 @@ class Stimulation extends Component {
   };
 
   render() {
-    const { didYouKnow } = this.props;
-
     return (
       <View style={styles.container} onLayout={this.handleLayout}>
         <View style={styles.actionButtons}>
@@ -75,10 +68,6 @@ class Stimulation extends Component {
           <View style={styles.twoButtons}>
             <NextWeeksEquipmentButton onPress={this.handleNextWeeksEquipment} />
             <ActivityHistoryButton onPress={() => {}} />
-          </View>
-
-          <View style={styles.didYouKnow}>
-            <DidYouKnow text={didYouKnow} />
           </View>
         </ScrollView>
       </View>
@@ -123,52 +112,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flex: 1,
   },
-  didYouKnow: {
-    marginTop: 5,
-    marginLeft: 10,
-    marginRight: 10,
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowRadius: 3,
-    shadowOffset: {
-      height: 1,
-      width: 1,
-    },
-  },
 });
 
-export default compose(
-  graphql(
-    gql`
-    query Stimulation {
-      viewer {
-        allTips {
-          edges {
-            node {
-              ...DidYouKnow
-            }
-          }
-        }
-      }
-    }
-    ${DidYouKnow.fragments.tips}
-    `,
-    {
-      options: { fetchPolicy: 'cache-and-network' },
-      props: ({ data }) => {
-        let didYouKnow;
-
-        const edges = path(['viewer', 'allTips', 'edges'], data);
-
-        if (edges) {
-          didYouKnow = sample(edges.map(edge => edge.node.text));
-        }
-
-        return {
-          data,
-          didYouKnow,
-        };
-      },
-    },
-  ),
-)(Stimulation);
+export default Stimulation;
