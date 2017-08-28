@@ -20,11 +20,6 @@ export class BrowseActivitiesScreen extends PureComponent {
   props: Props;
   static navigationOptions = {
     title: 'Activities',
-    headerRight: (
-      <TouchableOpacity style={{ padding: 10 }}>
-        <Icon name="ios-funnel-outline" size={20} />
-      </TouchableOpacity>
-    ),
   };
 
   handleBrowseAll = () => {
