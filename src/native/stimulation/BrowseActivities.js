@@ -1,13 +1,21 @@
 // @flow
-import type { SkillArea, LayoutProps } from '../../common/types';
+import type { LayoutProps, SkillArea } from '../../common/types';
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
-import { Box, Text, displayLoadingState, withLayout } from '../components';
+import {
+  Box,
+  Card,
+  displayLoadingState,
+  Text,
+  withLayout,
+} from '../components';
 import BrowseActivitiesButton from './BrowseActivitiesButton';
 import { toGlobalId } from 'graphql-relay';
+import iconMappings, { backgroundMappings } from './iconMappings';
+import ScreenActionSubheader from './ScreenActionSubheader';
 
 type Props = {
   skillAreas: Array<SkillArea>,
@@ -29,13 +37,15 @@ const outdoorCategoryOptions = {
   filter: { categories: toGlobalId('Category', 2) },
 };
 
+const indoorsCategoryImage = require('../../common/images/category-indoors.png');
+const outdoorsCategoryImage = require('../../common/images/category-outdoors.png');
+
 export const BrowseActivities = ({
   skillAreas,
   onBrowseAll,
   onBrowseFiltered,
   layout,
 }: Props) => {
-  const browseAllActivitiesHeight = Math.round(layout.viewportWidth * 0.2);
   const skillAreaButtonWidth = Math.round(
     layout.viewportWidth * 0.5 - skillAreaMargin,
   );
@@ -45,56 +55,18 @@ export const BrowseActivities = ({
 
   return (
     <Box as={ScrollView} flex={1}>
-      <Box
-        flex={1}
-        contentSpacing
-        style={() => ({ height: browseAllActivitiesHeight, marginBottom: 0 })}
-      >
-        <BrowseActivitiesButton
-          text="Browse All Activities"
-          onPress={onBrowseAll}
-        />
-      </Box>
-      <Box flex={1}>
-        <Box contentSpacing>
-          <Text medium size={4}>
-            Development Skill
-          </Text>
-        </Box>
-        <Box
-          flex={1}
-          flexDirection="row"
-          flexWrap="wrap"
-          alignItems="flex-start"
-          justifyContent="center"
-        >
-          {skillAreas.map(skillArea =>
-            <Box
-              key={skillArea.id}
-              style={() => ({
-                width: skillAreaButtonWidth,
-                height: skillAreaButtonHeight,
-                margin: 5,
-              })}
-            >
-              <BrowseActivitiesButton
-                text={skillArea.name}
-                image={skillArea.image}
-                onPress={() =>
-                  onBrowseFiltered({
-                    title: skillArea.name,
-                    filter: { skillAreas: [skillArea.id] },
-                  })}
-              />
-            </Box>,
-          )}
-        </Box>
-      </Box>
+      <ScreenActionSubheader
+        leftIcon="ios-search"
+        leftTitle={['Custom', 'Search']}
+        rightIcon="ios-eye"
+        rightTitle={['View all', 'Activities']}
+        onLeftPress={() => {}}
+        onRightPress={onBrowseAll}
+      />
+
       <Box flex={1}>
         <Box flex={1} contentSpacing>
-          <Text size={4} medium>
-            Category
-          </Text>
+          <Text size={6}>By Category</Text>
         </Box>
         <Box
           flex={1}
@@ -112,6 +84,7 @@ export const BrowseActivities = ({
           >
             <BrowseActivitiesButton
               text="Indoors"
+              image={indoorsCategoryImage}
               onPress={() => {
                 onBrowseFiltered(indoorsCategoryOptions);
               }}
@@ -126,11 +99,68 @@ export const BrowseActivities = ({
           >
             <BrowseActivitiesButton
               text="Outdoors"
+              image={outdoorsCategoryImage}
               onPress={() => {
                 onBrowseFiltered(outdoorCategoryOptions);
               }}
             />
           </Box>
+        </Box>
+      </Box>
+
+      <Box flex={1}>
+        <Box contentSpacing>
+          <Text size={6}>Development Skills</Text>
+        </Box>
+        <Box
+          flex={1}
+          flexDirection="row"
+          flexWrap="wrap"
+          alignItems="flex-start"
+          justifyContent="center"
+        >
+          {skillAreas.map(skillArea =>
+            <Card
+              padding={0}
+              key={skillArea.id}
+              alignItems="center"
+              justifyContent="center"
+              style={() => ({
+                width: skillAreaButtonWidth,
+                margin: 5,
+                flex: 0,
+              })}
+              onPress={() =>
+                onBrowseFiltered({
+                  title: skillArea.name,
+                  filter: { skillAreas: [skillArea.id] },
+                })}
+            >
+              <Box
+                style={() => ({
+                  width: 45,
+                  height: 45,
+                  backgroundColor: backgroundMappings(skillArea.icon),
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  borderRadius: 45 / 2,
+                  marginVertical: 16,
+                })}
+              >
+                <Image
+                  source={iconMappings(skillArea.icon)}
+                  style={{
+                    width: 24,
+                    height: 24,
+                  }}
+                  resizeMode="contain"
+                />
+              </Box>
+              <Text size={4} marginBottom={0.5}>
+                {skillArea.name}
+              </Text>
+            </Card>,
+          )}
         </Box>
       </Box>
     </Box>
@@ -147,9 +177,7 @@ export default compose(
               node {
                 id
                 name
-                image {
-                  url
-                }
+                icon
               }
             }
           }

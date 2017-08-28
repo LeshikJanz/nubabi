@@ -1,13 +1,13 @@
 // @flow
 import type { Image as ImageType, LayoutProps } from '../../common/types/types';
 import React from 'react';
-import { Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { Image, StyleSheet, Text, TouchableHighlight } from 'react-native';
 import { Overlay, withLayout } from '../components';
 
 type Props = {
   onPress: () => void,
   layout: LayoutProps,
-  image?: ImageType,
+  image?: ImageType | number,
   text?: String,
   style?: Object | number,
 };
@@ -22,7 +22,13 @@ export const BrowseActivitiesButton = ({
   text,
 }: Props) => {
   const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
-  const background = image ? { uri: image.url } : defaultBackground;
+  let background = image || defaultBackground;
+
+  // If we pass a RN image is set as background, otherwise get URL
+  if (background && typeof background !== 'number') {
+    background = { uri: image.url };
+  }
+
   const caption = text
     ? <Text style={styles.title}>
         {text}
