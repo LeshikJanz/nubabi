@@ -49,6 +49,9 @@ type Props = {
 
 class ViewThisWeeksActivity extends PureComponent {
   props: Props;
+  state = {
+    isLoading: false,
+  };
 
   static navigationOptions: NavigationOptionsGetter = ({ navigation }) => ({
     title: navigation.state.params.title,
@@ -71,6 +74,8 @@ class ViewThisWeeksActivity extends PureComponent {
         title: newActivity.name,
       });
     }
+
+    this.setState({ isLoading: false });
   };
 
   handleSwoop = () => {
@@ -79,9 +84,11 @@ class ViewThisWeeksActivity extends PureComponent {
       babyId: this.props.currentBabyId,
     };
 
-    this.props
-      .swoopActivity({ variables: { input } })
-      .then(this.refreshActivity);
+    this.setState({ isLoading: true }, () => {
+      this.props
+        .swoopActivity({ variables: { input } })
+        .then(this.refreshActivity);
+    });
   };
 
   handleLevel = (type: ActivityLevelOperation) => {
@@ -91,9 +98,11 @@ class ViewThisWeeksActivity extends PureComponent {
       level: type,
     };
 
-    this.props
-      .changeActivityLevel({ variables: { input } })
-      .then(this.refreshActivity);
+    this.setState({ isLoading: true }, () => {
+      this.props
+        .changeActivityLevel({ variables: { input } })
+        .then(this.refreshActivity);
+    });
   };
 
   handleLevelIncrease = () => this.handleLevel('INCREASE');
@@ -136,6 +145,7 @@ class ViewThisWeeksActivity extends PureComponent {
   };
 
   render() {
+    const { isLoading } = this.state;
     const {
       activity,
       nextActivity,
@@ -154,6 +164,7 @@ class ViewThisWeeksActivity extends PureComponent {
           enableActions
           activity={activity}
           isFavorite={isFavorite}
+          isLoading={isLoading}
           babyName={babyName}
           previousSkillAreaName={previousSkillAreaName}
           nextSkillAreaName={nextSkillAreaName}

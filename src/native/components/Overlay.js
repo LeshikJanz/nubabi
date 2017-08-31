@@ -1,16 +1,17 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 type Props = {
   children?: any,
   style?: Object,
+  overlayStyle?: Object,
 };
 
-export const Overlay = ({ children, style = {} }: Props) => {
+export const Overlay = ({ children, style = {}, overlayStyle = {} }: Props) => {
   return (
     <View style={{ flex: 1 }}>
-      <View style={styles.overlay} />
+      <View style={[styles.overlay, overlayStyle]} />
       {children &&
         <View style={[styles.tile, style]}>
           {children}

@@ -3,22 +3,23 @@ import type { Activity as ActivityType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import {
   LayoutAnimation,
-  View,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableHighlight,
-  StyleSheet,
-  ScrollView,
+  View,
 } from 'react-native';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ActivityContainer from './ActivityContainer';
 import ActivityActions from './ActivityActions';
 import theme, { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import {
   childContextTypes,
-  handleLayout,
-  getLayoutInitialState,
   getChildContext,
+  getLayoutInitialState,
+  handleLayout,
 } from '../components/withLayout';
 import iconMappings from './iconMappings';
 import Header from './Header';
@@ -33,6 +34,7 @@ type ActivityProps = {
   enableActions: boolean,
   enableNavigation: boolean,
   onActivityMediaPress?: () => void,
+  isLoading?: boolean,
 };
 
 type ActivityActionProps = {
@@ -206,6 +208,7 @@ export class Activity extends PureComponent {
       isFavorite,
       enableNavigation,
       enableActions,
+      isLoading,
     } = this.props;
 
     const skill = activity.skillArea;
@@ -227,56 +230,58 @@ export class Activity extends PureComponent {
     );
 
     return (
-      <View style={styles.container} onLayout={this.handleLayout}>
-        <ScrollView
-          style={styles.scrollContainer}
-          contentContainerStyle={{
-            alignItems: 'stretch',
-            justifyContent: 'flex-start',
-          }}
-          keyboardShouldPersistTaps="handled"
-          pagingEnabled={false}
-          ref={ref => {
-            this.scrollView = ref;
-          }}
-        >
-          <Header
-            skillName={skill.name}
-            skillImage={skill.image.large}
-            activityName={activity.name}
-            isFavoriteActivity={isFavorite}
-            onToggleFavorite={this.props.onToggleFavorite}
-          />
-          <ExpertInfo
-            expert={expert}
-            activityDescription={activity.introduction}
-          />
-
-          <Steps
-            steps={activity.steps}
-            activityName={activity.name}
-            activityMedia={activityMedia}
-            activityMediaThumbnail={activityThumb}
-            activityMediaType={activityMediaType}
-            onActivityMediaPress={this.props.onActivityMediaPress}
-          />
-
-          {enableActions &&
-            <ActivityActions
-              babyName={babyName}
+      <ActivityContainer isLoading={isLoading}>
+        <View style={styles.container} onLayout={this.handleLayout}>
+          <ScrollView
+            style={styles.scrollContainer}
+            contentContainerStyle={{
+              alignItems: 'stretch',
+              justifyContent: 'flex-start',
+            }}
+            keyboardShouldPersistTaps="handled"
+            pagingEnabled={false}
+            ref={ref => {
+              this.scrollView = ref;
+            }}
+          >
+            <Header
+              skillName={skill.name}
+              skillImage={skill.image.large}
               activityName={activity.name}
-              skillIcon={iconMappings(skill.icon)}
-              onSwoop={this.handleSwoop}
-              onIncrease={this.handleLevelIncrease}
-              onDecrease={this.handleLevelDecrease}
-            />}
-          {enableNavigation &&
-            <View style={styles.nextButtonsContainer}>
-              {this.renderPreviousButton()}
-              {this.renderNextButton()}
-            </View>}
-        </ScrollView>
-      </View>
+              isFavoriteActivity={isFavorite}
+              onToggleFavorite={this.props.onToggleFavorite}
+            />
+            <ExpertInfo
+              expert={expert}
+              activityDescription={activity.introduction}
+            />
+
+            <Steps
+              steps={activity.steps}
+              activityName={activity.name}
+              activityMedia={activityMedia}
+              activityMediaThumbnail={activityThumb}
+              activityMediaType={activityMediaType}
+              onActivityMediaPress={this.props.onActivityMediaPress}
+            />
+
+            {enableActions &&
+              <ActivityActions
+                babyName={babyName}
+                activityName={activity.name}
+                skillIcon={iconMappings(skill.icon)}
+                onSwoop={this.handleSwoop}
+                onIncrease={this.handleLevelIncrease}
+                onDecrease={this.handleLevelDecrease}
+              />}
+            {enableNavigation &&
+              <View style={styles.nextButtonsContainer}>
+                {this.renderPreviousButton()}
+                {this.renderNextButton()}
+              </View>}
+          </ScrollView>
+        </View>
+      </ActivityContainer>
     );
   }
 }
