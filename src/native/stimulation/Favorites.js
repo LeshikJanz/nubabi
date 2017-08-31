@@ -43,6 +43,7 @@ class FavoriteActivities extends PureComponent {
           activities={this.props.activities}
           emptyMessage="No activities have been favorited yet."
           onActivityItemPress={this.handleNavigate}
+          onRefresh={this.props.data.refetch}
         />
       </Screen>
     );
