@@ -251,6 +251,7 @@ export class Activity extends PureComponent {
               isFavoriteActivity={isFavorite}
               onToggleFavorite={this.props.onToggleFavorite}
             />
+
             <ExpertInfo
               expert={expert}
               activityDescription={activity.introduction}
