@@ -2,6 +2,7 @@
 import type { Activity as ActivityType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import {
+  LayoutAnimation,
   View,
   Text,
   TouchableHighlight,
@@ -122,39 +123,38 @@ export class Activity extends PureComponent {
 
   scrollToTop = () => {
     if (this.scrollView) {
-      this.scrollView.scrollTo({ x: 0, y: 0 });
+      this.scrollView.scrollTo({ x: 0, y: 0, animated: false });
     }
   };
 
+  componentWillUpdate(nextProps: Props) {
+    if (nextProps.activity.id !== this.props.activity.id) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      this.scrollToTop();
+    }
+  }
+
   handlePreviousActivity = () => {
-    this.scrollToTop();
     /* $FlowFixMe */
     this.props.onPreviousActivity();
   };
 
   handleNextActivity = () => {
-    this.scrollToTop();
     /* $FlowFixMe */
     this.props.onNextActivity();
   };
 
   handleLevelIncrease = () => {
-    this.scrollToTop();
-
     /* $FlowFixMe */
     this.props.onLevelIncrease();
   };
 
   handleLevelDecrease = () => {
-    this.scrollToTop();
-
     /* $FlowFixMe */
     this.props.onLevelDecrease();
   };
 
   handleSwoop = () => {
-    this.scrollToTop();
-
     /* $FlowFixMe */
     this.props.onSwoop();
   };
