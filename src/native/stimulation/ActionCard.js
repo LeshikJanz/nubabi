@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Card, Button, Text } from '../components/index';
+import { Box, Button, Card, Text } from '../components/index';
 import Icon from './ActionIcon';
 
 type Props = {
@@ -19,31 +19,37 @@ export const ActionCard = ({
   marginHorizontal = 0,
 }: Props) =>
   <Card
-    padding={1}
+    padding={0}
     marginHorizontal={marginHorizontal}
     marginVertical={2}
     flex={1}
+    justifyContent="space-between"
   >
     <Button flexDirection="column" flex={1} onPress={onPress}>
-      <Icon
-        size={30}
-        color="primary"
-        name={icon}
-        style={{ textAlign: 'center' }}
-      />
+      <Box flex={1}>
+        <Icon
+          size={30}
+          color="primary"
+          name={icon}
+          style={{ textAlign: 'center' }}
+        />
 
-      <Text
-        bold
-        spacing={-0.31}
-        align="center"
-        style={theme => ({ letterSpacing: theme.heading.letterSpacing })}
-      >
-        {text}
-      </Text>
+        <Text
+          marginTop={0.5}
+          bold
+          spacing={-0.31}
+          align="center"
+          style={theme => ({ letterSpacing: theme.heading.letterSpacing })}
+        >
+          {text}
+        </Text>
+      </Box>
 
-      <Text color="secondary" align="center">
-        {hint}
-      </Text>
+      <Box justifyContent="flex-end" marginTop={0.5}>
+        <Text color="secondary" align="center">
+          {hint}
+        </Text>
+      </Box>
     </Button>
   </Card>;
 

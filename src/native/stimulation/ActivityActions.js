@@ -19,7 +19,7 @@ class ActivityActions extends Component {
   props: Props;
 
   state = {
-    collapsed: true,
+    collapsed: false,
   };
 
   static fragments = {
