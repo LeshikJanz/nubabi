@@ -16,10 +16,13 @@ import ArticleListItem from './ArticleListItem';
 import theme from '../../common/themes/defaultTheme';
 import { withNetworkIndicatorActions } from '../../common/helpers/graphqlUtils';
 import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
+import withPullToRefresh from '../components/withPullToRefresh';
 
 type Props = {
   articles: Array<ArticleType>,
   onRefresh: () => Promise<*>,
+  refreshing: boolean,
+  handleRefresh: () => void,
   onViewArticle: (id: string) => void,
   toggleNetworkActivityIndicator: typeof toggleNetworkActivityIndicator,
 };
@@ -29,22 +32,6 @@ const keyExtractor = item => item.id;
 
 export class ArticleList extends PureComponent {
   props: Props;
-  state = {
-    refreshing: false,
-  };
-
-  handleRefresh = () => {
-    const { toggleNetworkActivityIndicator: toggleNetwork } = this.props;
-    toggleNetwork(true);
-
-    this.setState({ refreshing: true }, () => {
-      // $FlowFixMe$
-      this.props.onRefresh().finally(() => {
-        toggleNetwork(false);
-        this.setState({ refreshing: false });
-      });
-    });
-  };
 
   renderItem = ({ item: article }: { item: ArticleType }) => {
     const viewArticle = () => {
@@ -67,18 +54,19 @@ export class ArticleList extends PureComponent {
   };
 
   render() {
-    const { articles } = this.props;
+    const { articles, refreshing, handleRefresh } = this.props;
+
     return (
       <FlatList
         data={articles}
         keyExtractor={keyExtractor}
         renderItem={this.renderItem}
         ListFooterComponent={Separator}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleRefresh}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
     );
   }
 }
 
-export default compose(withNetworkIndicatorActions)(ArticleList);
+export default compose(withPullToRefresh)(ArticleList);
