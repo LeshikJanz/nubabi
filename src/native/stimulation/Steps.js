@@ -44,11 +44,6 @@ class Steps extends PureComponent {
     `,
   };
 
-  goToStep = (index: number) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({ currentStep: index < 0 ? 0 : index });
-  };
-
   renderSteps() {
     return this.props.steps.map((step, index) => {
       return <Step key={index} step={step} index={index} />;

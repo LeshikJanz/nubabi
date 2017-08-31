@@ -52,18 +52,19 @@ export const Step = (props: StepProps) => {
   }
 
   return (
-    <Box
-      contentSpacing
-      flexDirection="row"
-      alignItems="flex-start"
-      justifyContent="center"
-      marginLeft={1}
-    >
-      <ListItemNumber number={index + 1} />
-      <Box>
-        <Text size={4} lineHeight={26} style={() => ({ color: '#6A7683' })}>
-          {step}
-        </Text>
+    <Box contentSpacing>
+      <Box flexDirection="row" alignItems="flex-start" justifyContent="center">
+        <Box>
+          <ListItemNumber
+            number={index + 1}
+            style={{ marginLeft: 0, marginRight: 0 }}
+          />
+        </Box>
+        <Box flex={1} marginLeft={0.5}>
+          <Text size={4} lineHeight={26} style={() => ({ color: '#6A7683' })}>
+            {step}
+          </Text>
+        </Box>
       </Box>
     </Box>
   );

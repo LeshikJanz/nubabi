@@ -12,8 +12,12 @@ type Props = {
   style?: Object,
 };
 
-export const ListItemNumber = ({ number }: { number: number }) =>
-  <View style={styles.listItemRounded}>
+type ListItemNumberProps = {
+  number: number,
+  style?: Object,
+};
+export const ListItemNumber = ({ number, style }: ListItemNumberProps) =>
+  <View style={[styles.listItemRounded, style]}>
     <Text style={styles.listItemRoundedNumber}>
       {number}
     </Text>
