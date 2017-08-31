@@ -10,6 +10,7 @@ import ArticleListItem from './ArticleListItem';
 import {
   mapEdgesToProp,
   withNetworkIndicator,
+  withNetworkIndicatorActions,
 } from '../../common/helpers/graphqlUtils';
 import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 
@@ -36,7 +37,7 @@ export const BrowseArticles = ({
 };
 
 export default compose(
-  connect(null, { toggleNetworkActivityIndicator }),
+  withNetworkIndicatorActions,
   graphql(
     gql`
       query BrowseArticles {

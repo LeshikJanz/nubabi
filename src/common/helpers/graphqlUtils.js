@@ -23,6 +23,7 @@ import {
   cursorForObjectInConnection as cursorForObjectInConnectionOrig,
   offsetToCursor,
 } from 'graphql-relay';
+import { connect } from 'react-redux';
 import { toggleNetworkActivityIndicator } from '../ui/reducer';
 
 export const flattenEdges = memoize(connection => {
@@ -230,3 +231,7 @@ export const withNetworkIndicator = curry(
     return operation().then(() => networkIndicatorToggler(false));
   },
 );
+
+export const withNetworkIndicatorActions = connect(null, {
+  toggleNetworkActivityIndicator,
+});
