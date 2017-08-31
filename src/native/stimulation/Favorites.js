@@ -1,25 +1,24 @@
 // @flow
-// FIXME: This uses SegmentedControlIOS thus not cross-platform
 import type {
-  State,
   ActivityEdge,
+  GraphQLDataProp,
   NavigationOptions,
+  State,
 } from '../../common/types';
 import type { Event } from 'react-native';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { View, Text, SegmentedControlIOS } from 'react-native';
 import { connect } from 'react-redux';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { compose, path } from 'ramda';
 import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
 import ActivityList from './ActivityList';
-import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   activities: Array<ActivityEdge>,
   navigation: NavigationProp<*>,
+  data: GraphQLDataProp<*>,
 };
 
 class FavoriteActivities extends PureComponent {

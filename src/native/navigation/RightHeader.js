@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import NubabiIcon from '../../common/icons/nubabi';
 import { HEADER_FONT_COLOR } from '../../common/themes/defaultTheme';
 
@@ -10,7 +10,10 @@ type Props = {
 
 const RightHeader = ({ navigate }: Props) =>
   <View style={{ flexDirection: 'row' }}>
-    <TouchableOpacity style={styles.headerIcon}>
+    <TouchableOpacity
+      style={styles.headerIcon}
+      onPress={() => navigate('notifications')}
+    >
       <NubabiIcon
         name="alerts"
         style={{ color: HEADER_FONT_COLOR, fontSize: 17 }}

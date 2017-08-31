@@ -53,6 +53,7 @@ import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
 import InviteUserScreen from '../settings/InviteUserScreen';
 import GalleryScreen from '../components/GalleryScreen';
+import NotificationsScreen from '../notifications/NotificationsScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -71,6 +72,7 @@ const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 const routes = {
   settings: { screen: SettingsScreen },
+  notifications: { screen: NotificationsScreen },
   notificationSettings: { screen: NotificationSettingsScreen },
   friends: { screen: FriendsScreen },
   inviteUser: { screen: InviteUserScreen },
