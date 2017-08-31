@@ -14,11 +14,14 @@ import { filter } from 'graphql-anywhere';
 import { Box, Card } from '../components';
 import ArticleListItem from './ArticleListItem';
 import theme from '../../common/themes/defaultTheme';
+import { withNetworkIndicatorActions } from '../../common/helpers/graphqlUtils';
+import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 
 type Props = {
   articles: Array<ArticleType>,
   onRefresh: () => Promise<*>,
   onViewArticle: (id: string) => void,
+  toggleNetworkActivityIndicator: typeof toggleNetworkActivityIndicator,
 };
 
 const Separator = () => <Box contentSpacing />;
@@ -31,8 +34,13 @@ export class ArticleList extends PureComponent {
   };
 
   handleRefresh = () => {
+    const { toggleNetworkActivityIndicator: toggleNetwork } = this.props;
+    toggleNetwork(true);
+
     this.setState({ refreshing: true }, () => {
-      this.props.onRefresh().then(() => {
+      // $FlowFixMe$
+      this.props.onRefresh().finally(() => {
+        toggleNetwork(false);
         this.setState({ refreshing: false });
       });
     });
@@ -73,4 +81,4 @@ export class ArticleList extends PureComponent {
   }
 }
 
-export default ArticleList;
+export default compose(withNetworkIndicatorActions)(ArticleList);

@@ -7,37 +7,29 @@ import { connect } from 'react-redux';
 import { displayLoadingState, showNoContentViewIf } from '../components';
 import ArticleList from './ArticleList';
 import ArticleListItem from './ArticleListItem';
-import {
-  mapEdgesToProp,
-  withNetworkIndicator,
-  withNetworkIndicatorActions,
-} from '../../common/helpers/graphqlUtils';
-import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
+import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 
 type Props = {
   data: GraphQLDataProp<*>,
   articles: Array<Article>,
   onViewArticle: () => void,
-  toggleNetworkActivityIndicator: typeof toggleNetworkActivityIndicator,
 };
 
 export const BrowseArticles = ({
   articles,
   onViewArticle,
-  toggleNetworkActivityIndicator,
   data: { refetch },
 }: Props) => {
   return (
     <ArticleList
       articles={articles}
       onViewArticle={onViewArticle}
-      onRefresh={withNetworkIndicator(toggleNetworkActivityIndicator, refetch)}
+      onRefresh={refetch}
     />
   );
 };
 
 export default compose(
-  withNetworkIndicatorActions,
   graphql(
     gql`
       query BrowseArticles {
