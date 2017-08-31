@@ -219,7 +219,8 @@ class Form extends Component {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.textInput}>
-            {formatMeasurement(unitDisplay[name], value)} {unitDisplay[name]}
+            {value && formatMeasurement(unitDisplay[name], value)}{' '}
+            {unitDisplay[name]}}
           </Text>
           <TouchableOpacity onPress={update}>
             <Text style={{ color: theme.colors.secondary }}>EDIT</Text>
