@@ -10,11 +10,14 @@ import BabyNameTitle from '../BabyNameTitle';
 import BabyForm from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
 
+type Props = {
+  baby: Baby,
+  mutate: () => Promise<*>,
+  navigation: NavigationProp,
+};
+
 class EditBaby extends Component {
-  props: {
-    baby: Baby,
-    mutate: () => Promise<*>,
-  };
+  props: Props;
 
   static navigationOptions: NavigationOptions = {
     title: <BabyNameTitle />,
@@ -29,6 +32,10 @@ class EditBaby extends Component {
   };
 
   scroll = null;
+
+  handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
+  handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
+
   resetSubmit = () => this.setState({ submitting: false });
 
   handleSubmit = values => {
@@ -54,6 +61,8 @@ class EditBaby extends Component {
           mode="edit"
           initialValues={omit(['id', '__typename'], this.props.baby)}
           onSubmit={this.handleSubmit}
+          onUpdateWeight={this.handleUpdateWeight}
+          onUpdateHeight={this.handleUpdateHeight}
           loading={this.state.submitting}
         />
       </Screen>

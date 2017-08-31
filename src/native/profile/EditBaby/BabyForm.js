@@ -2,22 +2,24 @@
 import type { Baby } from '../../../common/types';
 import React, { Component } from 'react';
 import {
-  View,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
-import { reduxForm, Field } from 'redux-form';
+import { compose } from 'ramda';
+import { connect } from 'react-redux';
+import { Field, reduxForm } from 'redux-form';
 import { DatePicker, SubmitButton } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import NubabiIcon from '../../../common/icons/nubabi';
 import theme, {
-  NUBABI_RED,
   FONT_COLOR,
+  NUBABI_RED,
 } from '../../../common/themes/defaultTheme';
 import imagePicker from '../../components/imagePicker';
 import Picker from './Picker';
@@ -26,11 +28,13 @@ import CoverImage from '../Header/CoverImage';
 import IconHeader from '../Header/IconHeader';
 import GenderSelection from './GenderSelection';
 import {
-  required,
   constantValues,
-  maxLength,
   formattedDate,
+  maxLength,
+  required,
 } from '../../shared/forms';
+import { unitDisplaySelector } from '../../../common/settings/reducer';
+import { formatMeasurement } from '../../../common/helpers/measurement';
 
 type Props = {
   // redux-form uses initialValues prop
@@ -58,6 +62,8 @@ class Form extends Component {
         dob
         weekBorn
         relationship
+        weight
+        height
         avatar {
           url
         }
@@ -171,6 +177,58 @@ class Form extends Component {
     );
   };
 
+  renderMeasurementInput = field => {
+    // TODO: remove duplication with renderTextInput, extract
+    // we can access errors on field.meta.errors and dirty state and field.meta.touched
+    const { unitDisplay } = this.props;
+    const { label, input: { name, value } } = field;
+    const { touched, error } = field.meta;
+
+    const hasError = touched && error;
+    // We don't want to show required as an error since the coloring
+    // should suffice
+    const hasExplicitError = hasError && error !== 'Required';
+
+    const containerStyle = [
+      styles.inputContainer,
+      hasError ? styles.inputContainerError : {},
+      name === 'weight' ? { marginTop: 15 } : {},
+    ];
+
+    const labelStyle = [styles.inputLabel, hasError ? styles.hasError : {}];
+    const updaters = {
+      height: 'onUpdateHeight',
+      weight: 'onUpdateWeight',
+    };
+
+    const update = this.props[updaters[name]];
+
+    return (
+      <View style={containerStyle}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          {label
+            ? <Text style={[...labelStyle, { flex: 1 }]}>
+                {label}
+              </Text>
+            : null}
+          {hasExplicitError
+            ? <Text style={labelStyle}>
+                {error.toUpperCase()}
+              </Text>
+            : null}
+        </View>
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={styles.textInput}>
+            {formatMeasurement(unitDisplay[name], value)} {unitDisplay[name]}
+          </Text>
+          <TouchableOpacity onPress={update}>
+            <Text style={{ color: theme.colors.secondary }}>EDIT</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
@@ -182,6 +240,7 @@ class Form extends Component {
       renderAvatar,
       renderRelationshipDropdown,
       renderDatePicker,
+      renderMeasurementInput,
     } = this;
 
     let submitText;
@@ -255,7 +314,7 @@ class Form extends Component {
 
         <Field
           name="relationship"
-          label="RELATIONSHIP TO BABY"
+          label="RELATIONSHIP TO ME"
           component={renderRelationshipDropdown}
           validate={[required]}
         />
@@ -270,6 +329,18 @@ class Form extends Component {
             validate={[required]}
           />
         </View>
+
+        <Field
+          name="weight"
+          label="WEIGHT"
+          component={renderMeasurementInput}
+        />
+
+        <Field
+          name="height"
+          label="HEIGHT"
+          component={renderMeasurementInput}
+        />
 
         <SubmitButton
           onPress={handleSubmit(submit)}
@@ -371,8 +442,11 @@ const styles = StyleSheet.create({
 // redux-form hoist statics isn't working, so we use our own hoistStatics
 // see: https://github.com/erikras/redux-form/issues/2626
 export default hoistStatics(
-  reduxForm({
-    form: 'baby',
-    enableReinitialize: true,
-  }),
+  compose(
+    connect(state => ({ unitDisplay: unitDisplaySelector(state) })),
+    reduxForm({
+      form: 'baby',
+      enableReinitialize: true,
+    }),
+  ),
 )(Form);

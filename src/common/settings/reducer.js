@@ -1,6 +1,7 @@
 // @flow
 import type { SettingsState, SettingsSetValueAction } from '../types';
 import { assocPath } from 'ramda';
+import { createSelector } from 'reselect';
 
 type SettingsAction = SettingsSetValueAction;
 
@@ -27,6 +28,8 @@ export function setSettingsValue(path: Array<string>, value: any) {
     },
   };
 }
+
+export const unitDisplaySelector = (state: State) => state.settings.unitDisplay;
 
 export default function reducer(
   state: SettingsState = initialState,
