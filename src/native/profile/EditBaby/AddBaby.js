@@ -29,6 +29,7 @@ class AddBaby extends Component {
   resetSubmit = () => this.setState({ submitting: false });
 
   handleSubmit = values => {
+    console.log('handle submit called');
     const input = {
       ...values,
       avatar: values.avatar ? { url: values.avatar.url } : null,
@@ -36,10 +37,7 @@ class AddBaby extends Component {
     };
 
     this.setState({ submitting: true }, () => {
-      this.props
-        .mutate({ variables: { input } })
-        .then(this.resetSubmit)
-        .catch(this.resetSubmit);
+      this.props.mutate({ variables: { input } }).finally(this.resetSubmit);
     });
   };
 

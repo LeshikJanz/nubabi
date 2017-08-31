@@ -44,6 +44,10 @@ type Props = {
   change: (field: string, value: mixed) => void,
   loading: Boolean,
   mode: 'add' | 'edit',
+  unitDisplay: {
+    weight: 'kg' | 'lbs',
+    height: 'cm' | 'in',
+  },
 };
 
 /* Validation
@@ -129,7 +133,11 @@ class Form extends Component {
               </Text>
             : null}
         </View>
-        <TextInput {...field.input} style={styles.textInput} />
+        <TextInput
+          {...field.input}
+          placeholder={field.placeholder}
+          style={styles.textInput}
+        />
       </View>
     );
   }
@@ -202,6 +210,9 @@ class Form extends Component {
     };
 
     const update = this.props[updaters[name]];
+    const measurementText =
+      value &&
+      `${formatMeasurement(unitDisplay[name], value)} ${unitDisplay[name]}`;
 
     return (
       <View style={containerStyle}>
@@ -219,8 +230,7 @@ class Form extends Component {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.textInput}>
-            {value && formatMeasurement(unitDisplay[name], value)}{' '}
-            {unitDisplay[name]}}
+            {measurementText}
           </Text>
           <TouchableOpacity onPress={update}>
             <Text style={{ color: theme.colors.secondary }}>EDIT</Text>
@@ -229,6 +239,66 @@ class Form extends Component {
       </View>
     );
   };
+
+  renderMeasurementsSection() {
+    const { mode, unitDisplay } = this.props;
+    const { renderTextInput, renderMeasurementInput } = this;
+
+    if (mode === 'add') {
+      return (
+        <View style={{ marginTop: 15 }}>
+          <View style={{ flexDirection: 'row' }}>
+            <Field
+              name="weight"
+              placeholder={`Weight (${unitDisplay.weight})`}
+              component={renderTextInput}
+              validate={[required]}
+            />
+            <Field
+              name="height"
+              placeholder={`Height (${unitDisplay.height})`}
+              component={renderTextInput}
+              validate={[required]}
+            />
+          </View>
+          <View
+            style={{
+              marginTop: 5,
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  color: theme.colors.secondary,
+                  textAlign: 'center',
+                  fontSize: 10,
+                }}
+              >
+                A guess is fine, you can record new measurements at any time
+              </Text>
+            </View>
+          </View>
+        </View>
+      );
+    }
+    return (
+      <View>
+        <Field
+          name="weight"
+          label="WEIGHT"
+          component={renderMeasurementInput}
+        />
+
+        <Field
+          name="height"
+          label="HEIGHT"
+          component={renderMeasurementInput}
+        />
+      </View>
+    );
+  }
 
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
@@ -241,7 +311,6 @@ class Form extends Component {
       renderAvatar,
       renderRelationshipDropdown,
       renderDatePicker,
-      renderMeasurementInput,
     } = this;
 
     let submitText;
@@ -331,17 +400,7 @@ class Form extends Component {
           />
         </View>
 
-        <Field
-          name="weight"
-          label="WEIGHT"
-          component={renderMeasurementInput}
-        />
-
-        <Field
-          name="height"
-          label="HEIGHT"
-          component={renderMeasurementInput}
-        />
+        {this.renderMeasurementsSection()}
 
         <SubmitButton
           onPress={handleSubmit(submit)}
