@@ -23,6 +23,7 @@ import {
   cursorForObjectInConnection as cursorForObjectInConnectionOrig,
   offsetToCursor,
 } from 'graphql-relay';
+import { toggleNetworkActivityIndicator } from '../ui/reducer';
 
 export const flattenEdges = memoize(connection => {
   const edges = prop('edges', connection);
@@ -221,7 +222,10 @@ export const isUUID = (str: string) =>
   );
 
 export const withNetworkIndicator = curry(
-  (networkIndicatorToggler, operation) => () => {
+  (
+    networkIndicatorToggler: typeof toggleNetworkActivityIndicator,
+    operation: () => Promise<*>,
+  ) => () => {
     networkIndicatorToggler(true);
     return operation().then(() => networkIndicatorToggler(false));
   },
