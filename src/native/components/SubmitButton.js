@@ -115,8 +115,6 @@ export class SubmitButton extends PureComponent {
       textStyle = {},
     } = this.props;
 
-    console.log(loading);
-
     const { isAnimating } = this.state;
 
     let buttonContent;
