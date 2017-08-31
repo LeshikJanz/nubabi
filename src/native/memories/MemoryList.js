@@ -1,15 +1,19 @@
 // @flow
-import type { MemoryEdge, Memory as MemoryType } from '../../common/types';
+import type { Memory as MemoryType, MemoryEdge } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
+import { compose } from 'ramda';
 import { filter } from 'graphql-anywhere';
 import Memory from './Memory';
+import withPullToRefresh, {
+  type PullToRefreshProps,
+} from '../components/withPullToRefresh';
 
 type Props = {
   babyId: String,
   memories: Array<MemoryEdge>,
   onEditMemory: (id: string) => void,
-};
+} & PullToRefreshProps;
 
 const keyExtractor = obj => obj.id;
 
@@ -27,16 +31,18 @@ export class MemoryList extends PureComponent {
   };
 
   render() {
-    const { memories } = this.props;
+    const { memories, refreshing, handleRefresh } = this.props;
 
     return (
       <FlatList
         data={memories}
         keyExtractor={keyExtractor}
         renderItem={this.renderItem}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
     );
   }
 }
 
-export default MemoryList;
+export default compose(withPullToRefresh)(MemoryList);

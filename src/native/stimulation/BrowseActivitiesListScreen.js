@@ -36,6 +36,7 @@ export class BrowseActivities extends PureComponent {
           activities={this.props.activities}
           onActivityItemPress={this.handleNavigate}
           onLoadMore={this.props.loadMoreEntries}
+          onRefresh={this.props.data.refetch}
         />
       </Screen>
     );

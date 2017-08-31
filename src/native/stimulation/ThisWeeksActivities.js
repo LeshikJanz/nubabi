@@ -40,6 +40,7 @@ class ThisWeeksActivities extends PureComponent {
         <ActivityList
           activities={this.props.activities}
           onActivityItemPress={this.handleThisWeeksActivity}
+          onRefresh={this.props.data.refetch}
         />
       </Screen>
     );

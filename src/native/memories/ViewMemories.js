@@ -40,6 +40,7 @@ export class ViewMemories extends PureComponent {
         babyId={this.props.currentBabyId}
         memories={this.props.memories}
         onEditMemory={this.props.onEditMemory}
+        onRefresh={this.props.data.refetch}
       />
     );
   }
