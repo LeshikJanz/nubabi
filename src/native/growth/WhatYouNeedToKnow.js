@@ -44,6 +44,10 @@ export class WhatYouNeedToKnow extends PureComponent {
               id
               title
               text # for preloading
+              section {
+                id
+                name
+              }
             }
           }
         }
@@ -53,6 +57,10 @@ export class WhatYouNeedToKnow extends PureComponent {
               id
               title
               text # for preloading
+              section {
+                id
+                name
+              }
             }
           }
         }

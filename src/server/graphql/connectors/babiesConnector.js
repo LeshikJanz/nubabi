@@ -295,12 +295,14 @@ export const getGrowthContentById = async (
       const contentId = path(['id'], data);
       const title = path(['title'], data);
       const text = makeStringFromTemplate(path(['content'], data), variables);
+      const section = prop('section', data);
 
       return {
         id: contentId,
         baby,
         title,
         text,
+        section,
       };
     });
 };

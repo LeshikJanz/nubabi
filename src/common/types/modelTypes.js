@@ -563,6 +563,12 @@ export type GrowthArticle = {
   title: string,
   text: string,
   readingTime: ReadingTime,
+  section: GrowthArticleSection,
+};
+
+export type GrowthArticleSection = {
+  id: string,
+  name: string,
 };
 
 /**
