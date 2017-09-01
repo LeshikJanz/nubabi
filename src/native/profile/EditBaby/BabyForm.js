@@ -384,7 +384,7 @@ class Form extends Component {
 
         <Field
           name="relationship"
-          label="RELATIONSHIP TO ME"
+          label="RELATIONSHIP TO BABY"
           component={renderRelationshipDropdown}
           validate={[required]}
         />
