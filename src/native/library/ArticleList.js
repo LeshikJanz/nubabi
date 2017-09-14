@@ -11,7 +11,7 @@ import { FlatList } from 'react-native';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { Box, Card } from '../components';
+import { Box, Card, ListSeparator } from '../components';
 import ArticleListItem from './ArticleListItem';
 import theme from '../../common/themes/defaultTheme';
 import { withNetworkIndicatorActions } from '../../common/helpers/graphqlUtils';
@@ -27,7 +27,6 @@ type Props = {
   toggleNetworkActivityIndicator: typeof toggleNetworkActivityIndicator,
 };
 
-const Separator = () => <Box contentSpacing />;
 const keyExtractor = item => item.id;
 
 export class ArticleList extends PureComponent {
@@ -61,7 +60,7 @@ export class ArticleList extends PureComponent {
         data={articles}
         keyExtractor={keyExtractor}
         renderItem={this.renderItem}
-        ListFooterComponent={Separator}
+        ListFooterComponent={ListSeparator}
         refreshing={refreshing}
         onRefresh={handleRefresh}
       />
