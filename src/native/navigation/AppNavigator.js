@@ -29,6 +29,7 @@ import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivitiesScreen from '../stimulation/BrowseActivitiesScreen';
 import BrowseActivitiesListScreen from '../stimulation/BrowseActivitiesListScreen';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
+import ActivityHistoryScreen from '../stimulation/ActivityHistoryScreen';
 import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
 import UpdateHeightScreen from '../profile/EditBaby/UpdateHeightScreen';
@@ -71,6 +72,7 @@ type State = {
 const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 const routes = {
+  // Settings
   settings: { screen: SettingsScreen },
   notifications: { screen: NotificationsScreen },
   notificationSettings: { screen: NotificationSettingsScreen },
@@ -78,11 +80,13 @@ const routes = {
   inviteUser: { screen: InviteUserScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   editUser: { screen: EditUserProfileScreen },
+  // Profile
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   updateHeight: { screen: UpdateHeightScreen },
   updateWeight: { screen: UpdateWeightScreen },
   graphDetail: { screen: GraphDetailScreen },
+  // Stimulation
   thisWeekActivities: { screen: ThisWeeksActivities },
   favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
@@ -90,6 +94,9 @@ const routes = {
   browseActivitiesList: { screen: BrowseActivitiesListScreen },
   viewActivity: { screen: ViewActivity },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
+  activityHistory: { screen: ActivityHistoryScreen },
+  viewActivityMedia: { screen: ActivityMediaScreen },
+  // Growth
   whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
   developmentRoadmap: { screen: DevelopmentRoadmapScreen },
   viewGrowthContent: {
@@ -101,9 +108,9 @@ const routes = {
     screen: ViewArticleScreen,
     path: 'articles/:id',
   },
-  viewActivityMedia: { screen: ActivityMediaScreen },
   parentingTips: { screen: ParentingTipsScreen },
   healthHelp: { screen: HealthHelpScreen },
+  // Memories
   addMemory: { screen: AddMemoryScreen },
   viewMemory: {
     screen: ViewMemoryScreen,
