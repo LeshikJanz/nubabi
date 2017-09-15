@@ -1,10 +1,9 @@
 // @flow
 import type { Baby, State, NavigationOptions } from '../../../common/types';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose, path, omit } from 'ramda';
-import displayLoadingState from '../../components/displayLoadingState';
+import { displayLoadingState, withCurrentBaby } from '../../components';
 import { Screen } from '../../components/';
 import BabyNameTitle from '../BabyNameTitle';
 import BabyForm from './BabyForm';
@@ -71,7 +70,7 @@ class EditBaby extends Component {
 }
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
     mutation UpdateBaby($input: UpdateBabyInput!) {

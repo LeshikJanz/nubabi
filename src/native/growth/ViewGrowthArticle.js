@@ -17,6 +17,7 @@ import {
   withLayout,
   displayLoadingState,
   showNoContentViewIf,
+  withCurrentBaby,
 } from '../components';
 import GrowthArticle from '../library/GrowthArticle';
 import HeaderContainer from '../stimulation/HeaderContainer';
@@ -69,9 +70,7 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
 
 export default compose(
   withLayout,
-  connect((state: State) => ({
-    currentBabyId: state.babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
     query ViewGrowthArticle($id: ID!, $babyId: ID!) {

@@ -1,12 +1,15 @@
 // @flow
-import type { State, Memory as MemoryType } from '../../common/types';
-import React, { PureComponent } from 'react';
+import type { Memory as MemoryType } from '../../common/types';
+import React from 'react';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { connect } from 'react-redux';
-import { displayLoadingState, showNoContentViewIf } from '../components';
+import {
+  displayLoadingState,
+  showNoContentViewIf,
+  withCurrentBaby,
+} from '../components';
 import { isEmptyProp } from '../../common/helpers/graphqlUtils';
 import Memory from './Memory';
 
@@ -17,15 +20,14 @@ type Props = {
   onEditMemory: (id: string) => void,
 };
 
-export const ViewMemory = ({ memory, currentBabyId, onEditMemory }: Props) =>
+export const ViewMemory = ({ memory, currentBabyId, onEditMemory }: Props) => (
   <KeyboardAwareScrollView>
     <Memory babyId={currentBabyId} onEditMemory={onEditMemory} {...memory} />
-  </KeyboardAwareScrollView>;
+  </KeyboardAwareScrollView>
+);
 
 export default compose(
-  connect(({ babies }: State) => ({
-    currentBabyId: babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
       query Memory($id: ID!, $babyId: ID) {

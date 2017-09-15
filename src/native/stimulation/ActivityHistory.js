@@ -3,8 +3,11 @@ import type { State } from '../../common/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { connect } from 'react-redux';
-import { displayLoadingState, showNoContentViewIf } from '../components';
+import {
+  displayLoadingState,
+  showNoContentViewIf,
+  withCurrentBaby,
+} from '../components';
 import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import ActivityHistoryList from './ActivityHistoryList';
 import ActivityHistoryItem from './ActivityHistoryItem';
@@ -16,9 +19,7 @@ export const ActivityHistory = (props: Props) => {
 };
 
 export default compose(
-  connect((state: State) => ({
-    currentBabyId: state.babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
       query ActivityHistory($babyId: ID!) {

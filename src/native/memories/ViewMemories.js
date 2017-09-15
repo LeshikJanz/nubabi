@@ -1,10 +1,13 @@
 // @flow
-import type { State, Memory as MemoryType } from '../../common/types';
+import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
-import { graphql, gql } from 'react-apollo';
-import { connect } from 'react-redux';
-import { displayLoadingState, showNoContentViewIf } from '../components';
+import { gql, graphql } from 'react-apollo';
+import {
+  displayLoadingState,
+  showNoContentViewIf,
+  withCurrentBaby,
+} from '../components';
 import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import MemoryList from './MemoryList';
 import Memory from './Memory';
@@ -47,22 +50,20 @@ export class ViewMemories extends PureComponent {
 }
 
 export default compose(
-  connect(({ babies }: State) => ({
-    currentBabyId: babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
-    query ViewMemories($babyId: ID) {
-      viewer {
-        baby(id: $babyId) {
-          id
-          ...Memories
+      query ViewMemories($babyId: ID) {
+        viewer {
+          baby(id: $babyId) {
+            id
+            ...Memories
+          }
         }
       }
-    }
-    ${ViewMemories.fragments.list}
+      ${ViewMemories.fragments.list}
 
-  `,
+    `,
     {
       options: ({ currentBabyId }) => ({
         variables: { babyId: currentBabyId },

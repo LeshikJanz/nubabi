@@ -1,17 +1,14 @@
 // @flow
 import type {
-  State,
-  ToggleFavoriteInput,
   Activity as ActivityType,
   NavigationOptionsGetter,
+  ToggleFavoriteInput,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import { compose, path, pluck, find, propEq } from 'ramda';
-import { graphql, gql } from 'react-apollo';
-import { Screen } from '../components';
+import { compose, find, path, pluck, propEq } from 'ramda';
+import { gql, graphql } from 'react-apollo';
+import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import Activity from './Activity';
-import displayLoadingState from '../components/displayLoadingState';
 
 type Props = {
   activity: ActivityType,
@@ -62,7 +59,7 @@ export class ViewActivity extends PureComponent {
 }
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
       query ViewActivity($babyId: ID!, $activityId: ID!) {
@@ -70,7 +67,7 @@ export default compose(
           baby(id: $babyId) {
             id
             name
-            
+
             activity(id: $activityId) {
               ...Activity
             }

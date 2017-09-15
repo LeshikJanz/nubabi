@@ -1,16 +1,10 @@
 // @flow
-import type {
-  State,
-  ActivityEdge,
-  NavigationOptions,
-} from '../../common/types';
+import type { ActivityEdge, NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
-import displayLoadingState from '../components/displayLoadingState';
-import { Screen } from '../components';
+import { gql, graphql } from 'react-apollo';
+import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import ActivityList from './ActivityList';
 
 type Props = {
@@ -48,7 +42,7 @@ class ThisWeeksActivities extends PureComponent {
 }
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
       query ThisWeeksActivitiesList($babyId: ID!) {

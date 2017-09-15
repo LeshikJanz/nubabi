@@ -3,16 +3,13 @@ import type {
   ActivityEdge,
   GraphQLDataProp,
   NavigationOptions,
-  State,
 } from '../../common/types';
 import type { Event } from 'react-native';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose, path } from 'ramda';
-import displayLoadingState from '../components/displayLoadingState';
-import { Screen } from '../components';
+import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import ActivityList from './ActivityList';
 
 type Props = {
@@ -50,7 +47,7 @@ class FavoriteActivities extends PureComponent {
 }
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
       query FavoriteActivitiesList($babyId: ID!) {

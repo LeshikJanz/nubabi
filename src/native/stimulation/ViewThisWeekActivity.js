@@ -5,13 +5,11 @@ import type {
   ActivityLevelOperation,
   AdjustActivityLevelInput,
   NavigationOptionsGetter,
-  State,
   SwoopActivityInput,
   ToggleFavoriteInput,
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import {
   assocPath,
   compose,
@@ -24,8 +22,7 @@ import {
   update,
 } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { Screen } from '../components/index';
-import displayLoadingState from '../components/displayLoadingState';
+import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import Activity from './Activity';
 
 type Props = {
@@ -209,7 +206,7 @@ const updateQueries = {
 };
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
       query ViewThisWeekActivity($babyId: ID!, $activityId: ID!, $cursor: String!) {

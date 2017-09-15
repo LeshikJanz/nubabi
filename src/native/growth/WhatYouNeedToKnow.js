@@ -3,9 +3,9 @@ import type { State, Growth, GraphQLDataProp } from '../../common/types';
 import type { GrowthPeriodOption } from './WhatYouNeedToKnowForPeriod';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation } from 'react-native';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose, path } from 'ramda';
+import { withCurrentBaby } from '../components';
 import { getClosestContentForPeriod } from '../../common/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
@@ -121,9 +121,7 @@ export class WhatYouNeedToKnow extends PureComponent {
 }
 
 export default compose(
-  connect((state: State) => ({
-    currentBabyId: state.babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
       query WhatYouNeedToKnow($babyId: ID!) {
