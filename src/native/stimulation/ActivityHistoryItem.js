@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { memoize } from 'ramda';
+import { gql } from 'react-apollo';
 import { Box, Card, Icon, Text } from '../components';
 import moment from 'moment';
 import theme from '../../common/themes/defaultTheme';
@@ -20,7 +21,7 @@ const getCalendarText = memoize((date: Date) => {
   return `${month}\n${day}`.toUpperCase();
 });
 
-const getLabel = memoize((startDate: Date, endDate: Date) => {
+export const getLabel = memoize((startDate: Date, endDate: Date) => {
   const start = moment(startDate).format('D MMMM');
   const end = moment(endDate).format('D MMMM YYYY');
 
@@ -71,6 +72,16 @@ export const ActivityHistoryItem = ({
       </Box>
     </Card>
   );
+};
+
+ActivityHistoryItem.fragments = {
+  item: gql`
+    fragment ActivityHistoryItem on ActivityHistory {
+      id
+      startDate
+      endDate
+    }
+  `,
 };
 
 export default ActivityHistoryItem;

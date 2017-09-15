@@ -24,14 +24,15 @@ export const ArticleListItem = ({ title, image, layout }: Props) => {
       borderBottomLeftRadius={4}
       overflow="hidden"
     >
-      {imageSource &&
+      {imageSource && (
         <Image
           source={{ uri: imageSource }}
           style={{ flex: 1 }}
           resizeMode="cover"
         >
           <Overlay />
-        </Image>}
+        </Image>
+      )}
 
       <Box
         flex={2}

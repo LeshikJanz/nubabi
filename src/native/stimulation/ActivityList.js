@@ -39,6 +39,7 @@ class ActivityList extends PureComponent {
           icon
           completedIcon
         }
+        equipment
       }
     `,
   };
@@ -114,9 +115,7 @@ class ActivityList extends PureComponent {
             alignSelf: 'center',
           }}
         >
-          <Text>
-            {this.props.emptyMessage}
-          </Text>
+          <Text>{this.props.emptyMessage}</Text>
         </View>
       );
     }
@@ -142,11 +141,7 @@ class ActivityList extends PureComponent {
   }
 
   render() {
-    return (
-      <View style={styles.container}>
-        {this.renderItems()}
-      </View>
-    );
+    return <View style={styles.container}>{this.renderItems()}</View>;
   }
 }
 

@@ -30,6 +30,7 @@ import BrowseActivitiesScreen from '../stimulation/BrowseActivitiesScreen';
 import BrowseActivitiesListScreen from '../stimulation/BrowseActivitiesListScreen';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
 import ActivityHistoryScreen from '../stimulation/ActivityHistoryScreen';
+import ActivityHistoryDetailScreen from '../stimulation/ActivityHistoryDetailScreen';
 import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
 import UpdateHeightScreen from '../profile/EditBaby/UpdateHeightScreen';
@@ -94,8 +95,9 @@ const routes = {
   browseActivitiesList: { screen: BrowseActivitiesListScreen },
   viewActivity: { screen: ViewActivity },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
-  activityHistory: { screen: ActivityHistoryScreen },
   viewActivityMedia: { screen: ActivityMediaScreen },
+  activityHistory: { screen: ActivityHistoryScreen },
+  activityHistoryDetail: { screen: ActivityHistoryDetailScreen },
   // Growth
   whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
   developmentRoadmap: { screen: DevelopmentRoadmapScreen },

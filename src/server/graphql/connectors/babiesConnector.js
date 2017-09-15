@@ -1,32 +1,31 @@
 // @flow
 import formatPossessive from '../../../common/helpers/formatPossessive';
-
-require('axios-debug-log');
-
 import type { ConnectionArguments } from '../resolvers/common';
+import { getPaginationArguments, fromGlobalId } from '../resolvers/common';
 import type {
+  ActivityFilterInput,
   ActivityLevelOperation,
   Baby,
-  ActivityFilterInput,
 } from '../../../common/types';
 import {
-  path,
-  prop,
-  map,
-  sortBy,
+  assoc,
   compose,
-  reduce,
+  curry,
   either,
   identity,
+  map,
   mergeDeepRight,
-  curry,
-  assoc,
+  path,
+  prop,
+  reduce,
+  sortBy,
 } from 'ramda';
-import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
 import config from '../../../common/config/index';
+
+require('axios-debug-log');
 
 type SwapActivityAction = 'swop' | 'increase' | 'decrease';
 
@@ -83,6 +82,21 @@ const withActivityFilters = ({
   };
 };
 
+// TODO: API should be consistent with the other Activity filters
+// ex: filter: { run_id: ID }
+const withPeriodFilter = ({ filter }) => {
+  if (!filter) {
+    return {};
+  }
+
+  const { periodId } = filter;
+  return {
+    params: {
+      filter: fromGlobalId(periodId).id,
+    },
+  };
+};
+
 const sortBySkillArea = sortBy(prop('skill_area_id'));
 
 export const getSkillArea = (token: string, id: string) => {
@@ -115,9 +129,12 @@ export const getSkillAreaImage = (obj: mixed) => {
   return null;
 };
 
-export const getActivities = (token: string, babyId: string) =>
+export const getActivities = (token: string, babyId: string, args = {}) =>
   instance
-    .get(`/babies/${babyId}/activities`, withToken(token))
+    .get(
+      `/babies/${babyId}/activities`,
+      withConfigs(withToken(token), withPeriodFilter(args)),
+    )
     .then(data => {
       return path(['data'], data).map(activity => {
         // Assign babyId so it can be used by activity introduction
@@ -131,6 +148,12 @@ export const getFavoriteActivities = (token: string, babyId: string) =>
     .get(`/babies/${babyId}/activities/favourites`, withToken(token))
     .then(path(['data']))
     .then(sortBySkillArea);
+
+export const getActivityHistory = (token: string, babyId: string) => {
+  return instance
+    .get(`/babies/${babyId}/history`, withToken(token))
+    .then(path(['data']));
+};
 
 export const getActivity = (token: string, id: string, babyId: string) => {
   return instance

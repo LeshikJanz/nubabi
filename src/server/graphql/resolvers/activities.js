@@ -124,6 +124,12 @@ export const resolvers = {
     thumb: prop('thumb_url'),
   },
 
+  ActivityHistory: {
+    id: globalIdField('ActivityHistory', obj => obj.run_id),
+    startDate: prop('start_date'),
+    endDate: prop('end_date'),
+  },
+
   SkillArea: {
     id: globalIdField(),
     completedIcon: prop('completed_icon'),

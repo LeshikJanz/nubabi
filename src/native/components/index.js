@@ -28,6 +28,7 @@ import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
 import withPullToRefresh from './withPullToRefresh';
+import withCurrentBaby from './withCurrentBaby';
 
 export {
   Box,
@@ -60,4 +61,5 @@ export {
   displayLoadingState,
   showNoContentViewIf,
   withPullToRefresh,
+  withCurrentBaby,
 };
