@@ -27,6 +27,10 @@ import { connect } from 'react-redux';
 import { toggleNetworkActivityIndicator } from '../ui/reducer';
 
 export const flattenEdges = memoize(connection => {
+  if (!connection) {
+    return [];
+  }
+
   const edges = prop('edges', connection);
 
   if (!edges || !edges.length) {
