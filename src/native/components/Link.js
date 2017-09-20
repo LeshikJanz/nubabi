@@ -20,7 +20,7 @@ export const Link = ({
   title,
   url,
   onOpenURL = openURL,
-  containerStyle = {},
+  containerStyle,
   textStyle = {},
   color = 'primary',
 }: Props) => {

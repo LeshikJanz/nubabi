@@ -20,7 +20,7 @@ if (config.graphqlEndpoint && config.graphqlEndpoint !== 'memory://') {
   networkInterface = new MemoryNetworkInterface({ firebase });
 }
 
-export const configureApollo = () => {
+export const configureApollo = (): ApolloClient => {
   if (!client) {
     client = new ApolloClient({
       networkInterface,

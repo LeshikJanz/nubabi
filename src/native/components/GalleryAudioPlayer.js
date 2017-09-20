@@ -52,6 +52,11 @@ class GalleryAudioPlayer extends PureComponent {
   };
 
   togglePlaying = () => {
+    if (!this.state.sound) {
+      // TODO: dispatch APP_ERROR
+      return null;
+    }
+
     return this.state.isPlaying ? this.pause() : this.play();
   };
 

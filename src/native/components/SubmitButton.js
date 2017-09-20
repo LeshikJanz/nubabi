@@ -19,9 +19,11 @@ type Props = {
 
 Animatable.initializeRegistryWithDefinitions({
   rotatingHorse360: {
+    // $FlowFixMe$
     0: {
       transform: [{ rotate: '0deg' }],
     },
+    // $FlowFixMe$
     1: {
       transform: [{ rotate: '360deg' }],
     },
@@ -47,13 +49,16 @@ export class SubmitButton extends PureComponent {
         this.setState({
           isAnimating: true,
           animation: {
+            // $FlowFixMe$
             0: {
               width,
               opacity: 1,
             },
+            // $FlowFixMe$
             0.5: {
               opacity: 0.5,
             },
+            // $FlowFixMe$
             1: {
               width: nextProps.animatedWidth || 30,
               opacity: 1,
@@ -135,12 +140,14 @@ export class SubmitButton extends PureComponent {
 
     if (!loading && !isAnimating) {
       const TextContainer = props => {
-        return typeof jest === 'undefined'
-          ? <Animatable.Text
-              {...props}
-              ref={ref => (this.submitTextView = ref)}
-            />
-          : <Text {...props} />;
+        return typeof jest === 'undefined' ? (
+          <Animatable.Text
+            {...props}
+            ref={ref => (this.submitTextView = ref)}
+          />
+        ) : (
+          <Text {...props} />
+        );
       };
 
       buttonContent = (

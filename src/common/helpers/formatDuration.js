@@ -5,11 +5,12 @@ export const formatDuration = (duration: ?number) => {
   }
 
   const date = new Date(0);
-  date.setSeconds(duration);
+  date.setSeconds(duration || 0);
+
   if (date.getUTCHours() > 0) {
     // we account for 1 since that's the default
     return date.toISOString().substr(11, 8);
-  } else {
-    return date.toISOString().substr(14, 5);
   }
+
+  return date.toISOString().substr(14, 5);
 };

@@ -32,7 +32,9 @@ export type {
   File,
   FileConnection,
   FileEdge,
+  Image,
   GrowthArticle,
+  Measurement,
 } from './modelTypes';
 export * from './queryTypes';
 

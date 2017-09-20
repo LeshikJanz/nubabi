@@ -21,7 +21,7 @@ type HorizontalCardItemType = {
 
 type Props = {
   items: Array<HorizontalCardItemType>,
-  onItemPress: (id: string) => void,
+  onItemPress: (id: string, title: string) => void,
   headerTitle?: string,
   headerTitleSize?: number,
   headerRight?: React.Element<*>,

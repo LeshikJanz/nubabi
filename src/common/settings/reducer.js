@@ -1,7 +1,6 @@
 // @flow
-import type { SettingsState, SettingsSetValueAction } from '../types';
+import type { SettingsSetValueAction, SettingsState, State } from '../types';
 import { assocPath } from 'ramda';
-import { createSelector } from 'reselect';
 
 type SettingsAction = SettingsSetValueAction;
 
