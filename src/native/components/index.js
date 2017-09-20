@@ -16,6 +16,7 @@ import Link from './Link';
 import List from './List';
 import ListItem from './ListItem';
 import ListItemSeparator from './ListItemSeparator';
+import ListItemArrow from './ListItemArrow';
 import NoContentView from './NoContentView';
 import Pill from './Pill';
 import PillSwitcher from './PillSwitcher';
@@ -51,6 +52,7 @@ export {
   ListSeparator,
   ListItem,
   ListItemSeparator,
+  ListItemArrow,
   NoContentView,
   Pill,
   PillSwitcher,

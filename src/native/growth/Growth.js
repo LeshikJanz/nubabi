@@ -17,8 +17,8 @@ import {
 } from '../components';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
-import ThisWeekGrowthButton from './ThisWeekGrowthButton';
-import CombinedChart from './CombinedChart';
+import WhatYouNeedToKnowButton from './WhatYouNeedToKnowButton';
+import GrowthChartButton from './GrowthChartButton';
 import { formatMeasurement } from '../../common/helpers/measurement';
 
 type Props = {
@@ -27,10 +27,6 @@ type Props = {
   onNavigateToWhatYouNeedToKnow: () => void,
   onNavigateToGraphDetail: () => void,
   unitDisplay: UnitDisplaySettingsState,
-};
-
-const formatName = (name: string) => {
-  return name.endsWith('s') ? `${name}'` : `${name}'s`;
 };
 
 const DAY_MS = 86400000;
@@ -66,38 +62,15 @@ export class Growth extends Component {
     this.props.skipGrowthGlobalIntro();
   };
 
-  getChartData() {
-    const { unitDisplay } = this.props;
-
-    if (
-      !path(['measurements', 'heights', 'edges', '0', 'node'], this.props.baby)
-    ) {
-      return defaultData; // TODO: how to handle this?
-    }
-
-    const measurements = {};
-
-    ['height', 'weight'].forEach(measurementType => {
-      measurements[`${measurementType}s`] = path(
-        ['measurements', `${measurementType}s`, 'edges'],
-        this.props.baby,
-      ).map(edge => {
-        return {
-          recordedAt: new Date(edge.node.recordedAt),
-          value: formatMeasurement(
-            unitDisplay[measurementType],
-            edge.node.value,
-          ),
-        };
-      });
-    });
-
-    return measurements;
-  }
-
   render() {
     const { baby, unitDisplay } = this.props;
     const introduction = baby.growth.introduction;
+
+    const lastMeasurement = (type: 'weights' | 'heights', data) =>
+      path(['measurements', type, 'edges', '0', 'node'], data);
+
+    const height = lastMeasurement('heights', baby);
+    const weight = lastMeasurement('weights', baby);
 
     return (
       <ScrollView
@@ -110,49 +83,16 @@ export class Growth extends Component {
             text={introduction}
             onSkip={this.handleIntroductionSkip}
           />
-          <ThisWeekGrowthButton
+          <WhatYouNeedToKnowButton
             onPress={this.props.onNavigateToWhatYouNeedToKnow}
           />
-          <Card padding={0} onPress={this.props.onNavigateToGraphDetail}>
-            <Box marginTop={0.5}>
-              <Box
-                flexDirection="row"
-                marginBottom={1}
-                alignItems="flex-start"
-                justifyContent="flex-start"
-              >
-                <Text
-                  color="primary"
-                  size={7}
-                  marginHorizontal={1}
-                  spacing={-0.68}
-                  textAlign="center"
-                >
-                  {formatMeasurement(unitDisplay.weight, baby.weight)}
-                  <Text color="primary" size={2} marginHorizontal={1}>
-                    {unitDisplay.weight}
-                  </Text>
-                </Text>
-                <Text
-                  color="success"
-                  size={7}
-                  spacing={-0.68}
-                  textAlign="center"
-                >
-                  {formatMeasurement(unitDisplay.height, baby.height)}
-                  <Text color="success" size={2}>
-                    {unitDisplay.height}
-                  </Text>
-                </Text>
-              </Box>
-              <CombinedChart data={this.getChartData()} />
-            </Box>
-            <Box justifyContent="center" padding={1}>
-              <Text size={2}>
-                {formatName(baby.name)} Growth Chart
-              </Text>
-            </Box>
-          </Card>
+          <GrowthChartButton
+            babyName={baby.name}
+            weight={weight}
+            height={height}
+            unitDisplay={this.props.unitDisplay}
+            onPress={this.props.onNavigateToGraphDetail}
+          />
         </Box>
       </ScrollView>
     );
@@ -176,10 +116,8 @@ export default compose(
         viewer {
           baby(id: $babyId) {
             id
-            weight
-            height
             measurements {
-              weights {
+              weights(last: 1) {
                 edges {
                   node {
                     value
@@ -187,7 +125,7 @@ export default compose(
                   }
                 }
               }
-              heights {
+              heights(last: 1) {
                 edges {
                   node {
                     value

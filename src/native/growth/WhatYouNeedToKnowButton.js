@@ -1,8 +1,8 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { Image, Dimensions } from 'react-native';
-import { Box, Card, Text, Overlay } from '../components';
+import { Image } from 'react-native';
+import { Box, Card, ListItemArrow, Overlay, Text } from '../components';
 import withLayout from '../components/withLayout';
 
 type Props = {
@@ -32,8 +32,17 @@ export const ThisWeekGrowth = withLayout(
         >
           <Overlay />
         </Image>
-        <Box justifyContent="center" padding={1}>
-          <Text size={2}>This Week's Growth</Text>
+        <Box
+          flexDirection="row"
+          justifyContent="center"
+          alignItems="center"
+          paddingHorizontal={1}
+          paddingVertical={0.5}
+        >
+          <Text flex={1} size={4}>
+            What you need to know
+          </Text>
+          <ListItemArrow />
         </Box>
       </Box>
     );

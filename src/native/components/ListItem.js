@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Switch } from 'react-native';
 import Box from './Box';
 import Text from './Text';
+import ListItemArrow from './ListItemArrow';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../../common/themes/defaultTheme';
 
@@ -35,15 +36,7 @@ class ListItem extends Component {
   }
 
   renderRightArrow() {
-    return (
-      <Box alignItems="center" justifyContent="center">
-        <Icon
-          color={theme.colors.secondary}
-          name="ios-arrow-forward"
-          size={20}
-        />
-      </Box>
-    );
+    return <ListItemArrow />;
   }
 
   renderIcon(iconName: string) {
@@ -79,13 +72,9 @@ class ListItem extends Component {
 
     return (
       <Box flexDirection="row" flex={1} justifyContent="center">
-        <Box flex={1}>
-          {children}
-        </Box>
+        <Box flex={1}>{children}</Box>
         <Box marginRight={0.5} marginTop={0.1}>
-          <Text color="secondary">
-            {rightText}
-          </Text>
+          <Text color="secondary">{rightText}</Text>
         </Box>
       </Box>
     );
@@ -137,9 +126,7 @@ class ListItem extends Component {
             {typeof rightToggle !== 'undefined' && this.renderRightToggle()}
           </Box>
 
-          <Box alignSelf="center">
-            {rightArrow && this.renderRightArrow()}
-          </Box>
+          <Box alignSelf="center">{rightArrow && this.renderRightArrow()}</Box>
         </Box>
       </Box>
     );

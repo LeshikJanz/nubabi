@@ -2,26 +2,26 @@
 
 exports[`it renders correctly 1`] = `
 style = Object {
-    "paddingBottom": 16,
+    "paddingBottom": 8,
     "paddingLeft": 16,
     "paddingRight": 16,
-    "paddingTop": 16,
+    "paddingTop": 8,
     "backgroundColor": "#FFFFFF",
     "borderColor": "#9EABBC",
     "borderBottomWidth": 0,
     "borderLeftWidth": 0,
     "borderRightWidth": 0,
-    "borderTopWidth": 0,
-    "alignItems": "flex-start",
+    "borderTopWidth": 1,
+    "alignItems": "center",
     "flexDirection": "row",
-    "justifyContent": "flex-start",
-    "marginLeft": 16,
+    "justifyContent": "center",
+    "marginLeft": -20,
     "marginRight": 16,
-    "fontSize": 14.791111111111112,
+    "fontSize": 13,
     "lineHeight": 16,
-    "color": "#58A4FF",
+    "color": "#748294",
     "fontFamily": "SF Pro Text",
-    "fontWeight": "500",
+    "fontWeight": "300",
     "marginBottom": 16,
     "flex": 1,
     "borderBottomLeftRadius": 4,
@@ -35,10 +35,12 @@ style = Object {
         "height": 1,
         "width": 0
     },
-    "marginTop": 8,
+    "marginTop": 9,
     "height": 48,
     "width": 48,
-    "overflow": "hidden"
+    "overflow": "hidden",
+    "letterSpacing": -0.71,
+    "borderTopColor": "#E0E4E7"
 }
 
 <RCTScrollView
@@ -490,16 +492,18 @@ style = Object {
           <View
             style={
               Object {
+                "alignItems": "center",
                 "borderBottomWidth": 0,
                 "borderColor": "#9EABBC",
                 "borderLeftWidth": 0,
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
+                "flexDirection": "row",
                 "justifyContent": "center",
-                "paddingBottom": 16,
+                "paddingBottom": 8,
                 "paddingLeft": 16,
                 "paddingRight": 16,
-                "paddingTop": 16,
+                "paddingTop": 8,
               }
             }
           >
@@ -516,14 +520,51 @@ style = Object {
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
                   "color": "#454D56",
-                  "fontFamily": "SF Pro Text",
-                  "fontSize": 14.791111111111112,
-                  "lineHeight": 16,
+                  "flex": 1,
+                  "fontFamily": "SF Pro Display",
+                  "fontSize": 16.828997530864196,
+                  "lineHeight": 32,
                 }
               }
             >
-              This Week's Growth
+              What you need to know
             </Text>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                disabled={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#748294",
+                      "fontSize": 20,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "Ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -584,14 +625,18 @@ style = Object {
               "borderLeftWidth": 0,
               "borderRightWidth": 0,
               "borderTopWidth": 0,
-              "marginTop": 8,
+              "flex": 1,
+              "paddingBottom": 32,
+              "paddingLeft": 16,
+              "paddingRight": 16,
+              "paddingTop": 32,
             }
           }
         >
           <View
             style={
               Object {
-                "alignItems": "flex-start",
+                "alignItems": "center",
                 "borderBottomWidth": 0,
                 "borderColor": "#9EABBC",
                 "borderLeftWidth": 0,
@@ -599,16 +644,10 @@ style = Object {
                 "borderTopWidth": 0,
                 "flexDirection": "row",
                 "justifyContent": "flex-start",
-                "marginBottom": 16,
               }
             }
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-              spacing={-0.68}
+            <View
               style={
                 Object {
                   "borderBottomWidth": 0,
@@ -616,22 +655,22 @@ style = Object {
                   "borderLeftWidth": 0,
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
-                  "color": "#EA3154",
-                  "fontFamily": "SF Pro Display",
-                  "fontSize": 20.424170040420666,
-                  "lineHeight": 32,
-                  "marginLeft": 16,
-                  "marginRight": 16,
+                  "flex": 1,
+                  "flexDirection": "row",
                 }
               }
-              textAlign="center"
             >
-              30
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                disabled={false}
-                ellipsizeMode="tail"
+              <Image
+                resizeMode="contain"
+                source={1}
+                style={
+                  Object {
+                    "flex": 1,
+                    "height": 69,
+                  }
+                }
+              />
+              <View
                 style={
                   Object {
                     "borderBottomWidth": 0,
@@ -639,24 +678,108 @@ style = Object {
                     "borderLeftWidth": 0,
                     "borderRightWidth": 0,
                     "borderTopWidth": 0,
-                    "color": "#EA3154",
-                    "fontFamily": "SF Pro Text",
-                    "fontSize": 14.791111111111112,
-                    "lineHeight": 16,
-                    "marginLeft": 16,
-                    "marginRight": 16,
                   }
                 }
               >
-                kg
-              </Text>
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-              spacing={-0.68}
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "flex": 1,
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 32.08820937230901,
+                        "fontWeight": "300",
+                        "letterSpacing": -0.71,
+                        "lineHeight": 48,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 19.147659412894374,
+                        "fontWeight": "300",
+                        "lineHeight": 32,
+                        "marginLeft": 2,
+                        "marginTop": 9,
+                      }
+                    }
+                  >
+                    kg
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "justifyContent": "flex-end",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#748294",
+                        "fontFamily": "SF Pro Text",
+                        "fontSize": 13,
+                        "lineHeight": 16,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View
               style={
                 Object {
                   "borderBottomWidth": 0,
@@ -664,20 +787,24 @@ style = Object {
                   "borderLeftWidth": 0,
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
-                  "color": "#58A4FF",
-                  "fontFamily": "SF Pro Display",
-                  "fontSize": 20.424170040420666,
-                  "lineHeight": 32,
+                  "flex": 1,
+                  "flexDirection": "row",
                 }
               }
-              textAlign="center"
             >
-              30
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                disabled={false}
-                ellipsizeMode="tail"
+              <Image
+                resizeMode="contain"
+                source={1}
+                style={
+                  Object {
+                    "flex": 1,
+                    "height": 69,
+                    "marginLeft": -20,
+                    "width": 23,
+                  }
+                }
+              />
+              <View
                 style={
                   Object {
                     "borderBottomWidth": 0,
@@ -685,31 +812,128 @@ style = Object {
                     "borderLeftWidth": 0,
                     "borderRightWidth": 0,
                     "borderTopWidth": 0,
-                    "color": "#58A4FF",
-                    "fontFamily": "SF Pro Text",
-                    "fontSize": 14.791111111111112,
-                    "lineHeight": 16,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "marginLeft": -20,
                   }
                 }
               >
-                cm
-              </Text>
-            </Text>
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "flex": 1,
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 32.08820937230901,
+                        "fontWeight": "300",
+                        "letterSpacing": -0.71,
+                        "lineHeight": 48,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 19.147659412894374,
+                        "fontWeight": "300",
+                        "lineHeight": 32,
+                        "marginLeft": 2,
+                        "marginTop": 9,
+                      }
+                    }
+                  >
+                    cm
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "justifyContent": "flex-end",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#748294",
+                        "fontFamily": "SF Pro Text",
+                        "fontSize": 13,
+                        "lineHeight": 16,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
         <View
           style={
             Object {
+              "alignItems": "center",
               "borderBottomWidth": 0,
               "borderColor": "#9EABBC",
               "borderLeftWidth": 0,
               "borderRightWidth": 0,
-              "borderTopWidth": 0,
+              "borderTopColor": "#E0E4E7",
+              "borderTopWidth": 1,
+              "flexDirection": "row",
               "justifyContent": "center",
-              "paddingBottom": 16,
+              "paddingBottom": 8,
               "paddingLeft": 16,
               "paddingRight": 16,
-              "paddingTop": 16,
+              "paddingTop": 8,
             }
           }
         >
@@ -726,15 +950,52 @@ style = Object {
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
                 "color": "#454D56",
-                "fontFamily": "SF Pro Text",
-                "fontSize": 14.791111111111112,
-                "lineHeight": 16,
+                "flex": 1,
+                "fontFamily": "SF Pro Display",
+                "fontSize": 16.828997530864196,
+                "lineHeight": 32,
               }
             }
           >
             TestBaby's
              Growth Chart
           </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              disabled={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#748294",
+                    "fontSize": 20,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
         </View>
       </View>
     </View>
@@ -744,26 +1005,26 @@ style = Object {
 
 exports[`it renders correctly 2`] = `
 style = Object {
-    "paddingBottom": 16,
+    "paddingBottom": 8,
     "paddingLeft": 16,
     "paddingRight": 16,
-    "paddingTop": 16,
+    "paddingTop": 8,
     "backgroundColor": "#FFFFFF",
     "borderColor": "#9EABBC",
     "borderBottomWidth": 0,
     "borderLeftWidth": 0,
     "borderRightWidth": 0,
-    "borderTopWidth": 0,
-    "alignItems": "flex-start",
+    "borderTopWidth": 1,
+    "alignItems": "center",
     "flexDirection": "row",
-    "justifyContent": "flex-start",
-    "marginLeft": 16,
+    "justifyContent": "center",
+    "marginLeft": -20,
     "marginRight": 16,
-    "fontSize": 14.791111111111112,
+    "fontSize": 13,
     "lineHeight": 16,
-    "color": "#58A4FF",
+    "color": "#748294",
     "fontFamily": "SF Pro Text",
-    "fontWeight": "500",
+    "fontWeight": "300",
     "marginBottom": 16,
     "flex": 1,
     "borderBottomLeftRadius": 4,
@@ -777,10 +1038,12 @@ style = Object {
         "height": 1,
         "width": 0
     },
-    "marginTop": 8,
+    "marginTop": 9,
     "height": 48,
     "width": 48,
-    "overflow": "hidden"
+    "overflow": "hidden",
+    "letterSpacing": -0.71,
+    "borderTopColor": "#E0E4E7"
 }
 
 <RCTScrollView
@@ -1234,16 +1497,18 @@ style = Object {
           <View
             style={
               Object {
+                "alignItems": "center",
                 "borderBottomWidth": 0,
                 "borderColor": "#9EABBC",
                 "borderLeftWidth": 0,
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
+                "flexDirection": "row",
                 "justifyContent": "center",
-                "paddingBottom": 16,
+                "paddingBottom": 8,
                 "paddingLeft": 16,
                 "paddingRight": 16,
-                "paddingTop": 16,
+                "paddingTop": 8,
               }
             }
           >
@@ -1260,14 +1525,51 @@ style = Object {
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
                   "color": "#454D56",
-                  "fontFamily": "SF Pro Text",
-                  "fontSize": 14.791111111111112,
-                  "lineHeight": 16,
+                  "flex": 1,
+                  "fontFamily": "SF Pro Display",
+                  "fontSize": 16.828997530864196,
+                  "lineHeight": 32,
                 }
               }
             >
-              This Week's Growth
+              What you need to know
             </Text>
+            <View
+              style={
+                Object {
+                  "alignItems": "center",
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "justifyContent": "center",
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={false}
+                disabled={false}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {
+                      "color": "#748294",
+                      "fontSize": 20,
+                    },
+                    undefined,
+                    Object {
+                      "fontFamily": "Ionicons",
+                      "fontStyle": "normal",
+                      "fontWeight": "normal",
+                    },
+                  ]
+                }
+              >
+                
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -1328,14 +1630,18 @@ style = Object {
               "borderLeftWidth": 0,
               "borderRightWidth": 0,
               "borderTopWidth": 0,
-              "marginTop": 8,
+              "flex": 1,
+              "paddingBottom": 32,
+              "paddingLeft": 16,
+              "paddingRight": 16,
+              "paddingTop": 32,
             }
           }
         >
           <View
             style={
               Object {
-                "alignItems": "flex-start",
+                "alignItems": "center",
                 "borderBottomWidth": 0,
                 "borderColor": "#9EABBC",
                 "borderLeftWidth": 0,
@@ -1343,16 +1649,10 @@ style = Object {
                 "borderTopWidth": 0,
                 "flexDirection": "row",
                 "justifyContent": "flex-start",
-                "marginBottom": 16,
               }
             }
           >
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-              spacing={-0.68}
+            <View
               style={
                 Object {
                   "borderBottomWidth": 0,
@@ -1360,22 +1660,22 @@ style = Object {
                   "borderLeftWidth": 0,
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
-                  "color": "#EA3154",
-                  "fontFamily": "SF Pro Display",
-                  "fontSize": 20.424170040420666,
-                  "lineHeight": 32,
-                  "marginLeft": 16,
-                  "marginRight": 16,
+                  "flex": 1,
+                  "flexDirection": "row",
                 }
               }
-              textAlign="center"
             >
-              66.14
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                disabled={false}
-                ellipsizeMode="tail"
+              <Image
+                resizeMode="contain"
+                source={1}
+                style={
+                  Object {
+                    "flex": 1,
+                    "height": 69,
+                  }
+                }
+              />
+              <View
                 style={
                   Object {
                     "borderBottomWidth": 0,
@@ -1383,24 +1683,108 @@ style = Object {
                     "borderLeftWidth": 0,
                     "borderRightWidth": 0,
                     "borderTopWidth": 0,
-                    "color": "#EA3154",
-                    "fontFamily": "SF Pro Text",
-                    "fontSize": 14.791111111111112,
-                    "lineHeight": 16,
-                    "marginLeft": 16,
-                    "marginRight": 16,
                   }
                 }
               >
-                lbs
-              </Text>
-            </Text>
-            <Text
-              accessible={true}
-              allowFontScaling={true}
-              disabled={false}
-              ellipsizeMode="tail"
-              spacing={-0.68}
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "flex": 1,
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 32.08820937230901,
+                        "fontWeight": "300",
+                        "letterSpacing": -0.71,
+                        "lineHeight": 48,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 19.147659412894374,
+                        "fontWeight": "300",
+                        "lineHeight": 32,
+                        "marginLeft": 2,
+                        "marginTop": 9,
+                      }
+                    }
+                  >
+                    lbs
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "justifyContent": "flex-end",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#748294",
+                        "fontFamily": "SF Pro Text",
+                        "fontSize": 13,
+                        "lineHeight": 16,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                </View>
+              </View>
+            </View>
+            <View
               style={
                 Object {
                   "borderBottomWidth": 0,
@@ -1408,20 +1792,24 @@ style = Object {
                   "borderLeftWidth": 0,
                   "borderRightWidth": 0,
                   "borderTopWidth": 0,
-                  "color": "#58A4FF",
-                  "fontFamily": "SF Pro Display",
-                  "fontSize": 20.424170040420666,
-                  "lineHeight": 32,
+                  "flex": 1,
+                  "flexDirection": "row",
                 }
               }
-              textAlign="center"
             >
-              30
-              <Text
-                accessible={true}
-                allowFontScaling={true}
-                disabled={false}
-                ellipsizeMode="tail"
+              <Image
+                resizeMode="contain"
+                source={1}
+                style={
+                  Object {
+                    "flex": 1,
+                    "height": 69,
+                    "marginLeft": -20,
+                    "width": 23,
+                  }
+                }
+              />
+              <View
                 style={
                   Object {
                     "borderBottomWidth": 0,
@@ -1429,31 +1817,128 @@ style = Object {
                     "borderLeftWidth": 0,
                     "borderRightWidth": 0,
                     "borderTopWidth": 0,
-                    "color": "#58A4FF",
-                    "fontFamily": "SF Pro Text",
-                    "fontSize": 14.791111111111112,
-                    "lineHeight": 16,
+                    "flex": 1,
+                    "justifyContent": "center",
+                    "marginLeft": -20,
                   }
                 }
               >
-                cm
-              </Text>
-            </Text>
+                <View
+                  style={
+                    Object {
+                      "alignItems": "center",
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "flex": 1,
+                      "flexDirection": "row",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 32.08820937230901,
+                        "fontWeight": "300",
+                        "letterSpacing": -0.71,
+                        "lineHeight": 48,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#454D56",
+                        "fontFamily": "SF Pro Display",
+                        "fontSize": 19.147659412894374,
+                        "fontWeight": "300",
+                        "lineHeight": 32,
+                        "marginLeft": 2,
+                        "marginTop": 9,
+                      }
+                    }
+                  >
+                    cm
+                  </Text>
+                </View>
+                <View
+                  style={
+                    Object {
+                      "borderBottomWidth": 0,
+                      "borderColor": "#9EABBC",
+                      "borderLeftWidth": 0,
+                      "borderRightWidth": 0,
+                      "borderTopWidth": 0,
+                      "justifyContent": "flex-end",
+                    }
+                  }
+                >
+                  <Text
+                    accessible={true}
+                    allowFontScaling={true}
+                    disabled={false}
+                    ellipsizeMode="tail"
+                    style={
+                      Object {
+                        "borderBottomWidth": 0,
+                        "borderColor": "#9EABBC",
+                        "borderLeftWidth": 0,
+                        "borderRightWidth": 0,
+                        "borderTopWidth": 0,
+                        "color": "#748294",
+                        "fontFamily": "SF Pro Text",
+                        "fontSize": 13,
+                        "lineHeight": 16,
+                      }
+                    }
+                  >
+                    N/A
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
         <View
           style={
             Object {
+              "alignItems": "center",
               "borderBottomWidth": 0,
               "borderColor": "#9EABBC",
               "borderLeftWidth": 0,
               "borderRightWidth": 0,
-              "borderTopWidth": 0,
+              "borderTopColor": "#E0E4E7",
+              "borderTopWidth": 1,
+              "flexDirection": "row",
               "justifyContent": "center",
-              "paddingBottom": 16,
+              "paddingBottom": 8,
               "paddingLeft": 16,
               "paddingRight": 16,
-              "paddingTop": 16,
+              "paddingTop": 8,
             }
           }
         >
@@ -1470,15 +1955,52 @@ style = Object {
                 "borderRightWidth": 0,
                 "borderTopWidth": 0,
                 "color": "#454D56",
-                "fontFamily": "SF Pro Text",
-                "fontSize": 14.791111111111112,
-                "lineHeight": 16,
+                "flex": 1,
+                "fontFamily": "SF Pro Display",
+                "fontSize": 16.828997530864196,
+                "lineHeight": 32,
               }
             }
           >
             TestBaby's
              Growth Chart
           </Text>
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "justifyContent": "center",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={false}
+              disabled={false}
+              ellipsizeMode="tail"
+              style={
+                Array [
+                  Object {
+                    "color": "#748294",
+                    "fontSize": 20,
+                  },
+                  undefined,
+                  Object {
+                    "fontFamily": "Ionicons",
+                    "fontStyle": "normal",
+                    "fontWeight": "normal",
+                  },
+                ]
+              }
+            >
+              
+            </Text>
+          </View>
         </View>
       </View>
     </View>
