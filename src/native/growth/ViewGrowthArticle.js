@@ -54,6 +54,10 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
   const section = path(['section', 'name'], article);
   const image = headerImage[section || 'default'];
 
+  if (section) {
+    overlayStyle.backgroundColor = 'transparent';
+  }
+
   return (
     <Box flex={1} as={ScrollView}>
       <Box backgroundColor="white">
