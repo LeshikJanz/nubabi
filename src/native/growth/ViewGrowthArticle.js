@@ -4,7 +4,7 @@ import type {
   LayoutProps,
 } from '../../common/types';
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { Image, ScrollView, View } from 'react-native';
 import { compose, path, pathOr } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
@@ -35,6 +35,11 @@ const headerImage = {
   default: require('../../common/images/gross_motor_large.jpg'),
 };
 
+const headerIcon = {
+  Parenting: require('../../common/images/section-parenting-icon.png'),
+  Health: require('../../common/images/section-health-icon.png'),
+};
+
 export const ViewGrowthArticle = ({ article, layout }: Props) => {
   const { title } = article;
   const width = layout.viewportWidth;
@@ -45,8 +50,8 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
     overlayStyle,
   } = getHeaderStyles(width);
 
-  const section = pathOr('default', ['section', 'name'], article);
-  const image = headerImage[section];
+  const section = path(['section', 'name'], article);
+  const image = headerImage[section || 'default'];
 
   return (
     <Box flex={1} as={ScrollView} backgroundColor="white">
@@ -56,6 +61,18 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
         <HeaderOverlay overlayStyle={overlayStyle} />
 
         <HeaderTextSection width={width}>
+          {section && (
+            <Image
+              source={headerIcon[section]}
+              style={{
+                width: 36,
+                height: 24,
+                marginBottom: 16,
+                marginTop: -16,
+              }}
+              resizeMode="contain"
+            />
+          )}
           <HeaderTitle text={title} />
         </HeaderTextSection>
 
