@@ -20,11 +20,9 @@ const Root = ({ dispatch, navigation }: Props) => {
   return <AppNavigator navigation={nav} />;
 };
 
-export default connect((state: State) => {
-  return {
-    navigation: state.navigation,
-    isAuthenticated: state.auth.isAuthenticated,
-    appStarted: state.app.started,
-    appOnline: state.app.online,
-  };
-})(Root);
+export default connect((state: State) => ({
+  navigation: state.navigation,
+  isAuthenticated: state.auth.isAuthenticated,
+  appStarted: state.app.started,
+  appOnline: state.app.online,
+}))(Root);
