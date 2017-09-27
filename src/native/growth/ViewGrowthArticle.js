@@ -1,23 +1,19 @@
 // @flow
 import type {
-  State,
   GrowthArticle as GrowthArticleType,
   LayoutProps,
 } from '../../common/types';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
-import { compose, path } from 'ramda';
-import { connect } from 'react-redux';
-import { graphql, gql } from 'react-apollo';
+import { compose, path, pathOr } from 'ramda';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import {
   Box,
-  FAB,
-  Text,
-  withLayout,
   displayLoadingState,
   showNoContentViewIf,
   withCurrentBaby,
+  withLayout,
 } from '../components';
 import GrowthArticle from '../library/GrowthArticle';
 import HeaderContainer from '../stimulation/HeaderContainer';
@@ -33,6 +29,12 @@ type Props = {
   layout: LayoutProps,
 };
 
+const headerImage = {
+  Parenting: require('../../common/images/section-parenting-header.png'),
+  Health: require('../../common/images/section-health-header.png'),
+  default: require('../../common/images/gross_motor_large.jpg'),
+};
+
 export const ViewGrowthArticle = ({ article, layout }: Props) => {
   const { title } = article;
   const width = layout.viewportWidth;
@@ -43,7 +45,8 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
     overlayStyle,
   } = getHeaderStyles(width);
 
-  const image = require('../../common/images/gross_motor_large.jpg');
+  const section = pathOr('default', ['section', 'name'], article);
+  const image = headerImage[section];
 
   return (
     <Box flex={1} as={ScrollView} backgroundColor="white">
@@ -73,15 +76,15 @@ export default compose(
   withCurrentBaby,
   graphql(
     gql`
-    query ViewGrowthArticle($id: ID!, $babyId: ID!) {
-      viewer {
-        growthArticle(id: $id, babyId: $babyId) {
-          ...GrowthArticle
+      query ViewGrowthArticle($id: ID!, $babyId: ID!) {
+        viewer {
+          growthArticle(id: $id, babyId: $babyId) {
+            ...GrowthArticle
+          }
         }
       }
-    }
-    ${GrowthArticle.fragments.growth}
-  `,
+      ${GrowthArticle.fragments.growth}
+    `,
     {
       options: ownProps => ({
         fetchPolicy: 'cache-and-network',

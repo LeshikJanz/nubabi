@@ -35,6 +35,9 @@ GrowthArticle.fragments = {
       readingTime {
         text
       }
+      section {
+        name
+      }
     }
   `,
   item: gql`
