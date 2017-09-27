@@ -23,6 +23,7 @@ import HeaderTitle from '../stimulation/HeaderTitle';
 import getHeaderStyles from '../stimulation/getHeaderStyles';
 import HeaderTextSection from '../stimulation/HeaderTextSection';
 import HeaderShape from '../stimulation/HeaderShape';
+import HealthcareNotice from './HealthcareNotice';
 
 type Props = {
   article: GrowthArticleType,
@@ -54,36 +55,40 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
   const image = headerImage[section || 'default'];
 
   return (
-    <Box flex={1} as={ScrollView} backgroundColor="white">
-      <HeaderContainer style={headerContainerStyle}>
-        <HeaderImage source={image} style={headerImageStyle} />
+    <Box flex={1} as={ScrollView}>
+      <Box backgroundColor="white">
+        <HeaderContainer style={headerContainerStyle}>
+          <HeaderImage source={image} style={headerImageStyle} />
 
-        <HeaderOverlay overlayStyle={overlayStyle} />
+          <HeaderOverlay overlayStyle={overlayStyle} />
 
-        <HeaderTextSection width={width}>
-          {section && (
-            <Image
-              source={headerIcon[section]}
-              style={{
-                width: 36,
-                height: 24,
-                marginBottom: 16,
-                marginTop: -16,
-              }}
-              resizeMode="contain"
-            />
-          )}
-          <HeaderTitle text={title} />
-        </HeaderTextSection>
+          <HeaderTextSection width={width}>
+            {section && (
+              <Image
+                source={headerIcon[section]}
+                style={{
+                  width: 36,
+                  height: 24,
+                  marginBottom: 16,
+                  marginTop: -16,
+                }}
+                resizeMode="contain"
+              />
+            )}
+            <HeaderTitle text={title} />
+          </HeaderTextSection>
 
-        <HeaderShape width={width} />
+          <HeaderShape width={width} />
 
-        <View style={{ flex: 1, marginTop: -8 }} />
-      </HeaderContainer>
+          <View style={{ flex: 1, marginTop: -8 }} />
+        </HeaderContainer>
 
-      <Box padding={1} backgroundColor="white">
-        <GrowthArticle {...filter(GrowthArticle.fragments.growth, article)} />
+        <Box padding={1} backgroundColor="white">
+          <GrowthArticle {...filter(GrowthArticle.fragments.growth, article)} />
+        </Box>
       </Box>
+
+      {section === 'Health' && <HealthcareNotice />}
     </Box>
   );
 };
