@@ -12,7 +12,7 @@ import GrowthArticle from './GrowthArticle';
 import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 
 type Props = {
-  onViewArticle: () => void,
+  onViewArticle: (id: string, section: string) => void,
   data: GraphQLDataProp<*>,
   articles: Array<GrowthArticleType>,
 };

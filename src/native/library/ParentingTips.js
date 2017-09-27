@@ -14,7 +14,7 @@ import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 type Props = {
   data: GraphQLDataProp<*>,
   articles: Array<GrowthArticleType>,
-  onViewArticle: () => void,
+  onViewArticle: (id: string, section: string) => void,
 };
 
 export const ParentingTips = ({

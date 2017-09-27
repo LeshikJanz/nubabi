@@ -2,19 +2,15 @@
 // TODO: maybe we can get rid of this component and pass
 // mode="cards" and mode="list" to ArticleList instead
 // if the differences aren't too many
-import type {
-  Article as ArticleType,
-  GraphQLDataProp,
-} from '../../common/types';
+import type { Article as ArticleType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
-import { compose } from 'ramda';
+import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { Box, Card, ListSeparator } from '../components';
+import { Card, ListSeparator } from '../components';
 import ArticleListItem from './ArticleListItem';
 import theme from '../../common/themes/defaultTheme';
-import { withNetworkIndicatorActions } from '../../common/helpers/graphqlUtils';
 import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 import withPullToRefresh from '../components/withPullToRefresh';
 
@@ -23,7 +19,7 @@ type Props = {
   onRefresh: () => Promise<*>,
   refreshing: boolean,
   handleRefresh: () => void,
-  onViewArticle: (id: string) => void,
+  onViewArticle: (id: string, section: string) => void,
   toggleNetworkActivityIndicator: typeof toggleNetworkActivityIndicator,
 };
 
@@ -34,7 +30,7 @@ export class ArticleList extends PureComponent {
 
   renderItem = ({ item: article }: { item: ArticleType }) => {
     const viewArticle = () => {
-      this.props.onViewArticle(article.id);
+      this.props.onViewArticle(article.id, path(['section', 'name'], article));
     };
 
     return (

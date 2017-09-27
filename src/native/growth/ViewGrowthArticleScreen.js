@@ -1,9 +1,11 @@
 // @flow
+import type { NavigationOptionsGetter } from '../../common/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
-import type { NavigationOptions } from '../../common/types';
 import React, { PureComponent } from 'react';
+import { path } from 'ramda';
 import { Screen } from '../components';
 import ViewGrowthArticle from './ViewGrowthArticle';
+import { getSectionTitle } from './SectionLinks';
 
 type Props = {
   navigation: NavigationProp<*, *>,
@@ -12,9 +14,9 @@ type Props = {
 export class ViewGrowthArticleScreen extends PureComponent {
   props: Props;
 
-  static navigationOptions: NavigationOptions = {
-    title: 'Articles',
-  };
+  static navigationOptions: NavigationOptionsGetter = ({ navigation }) => ({
+    title: getSectionTitle(path(['state', 'params', 'section'], navigation)),
+  });
 
   render() {
     return (

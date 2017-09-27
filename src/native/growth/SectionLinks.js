@@ -69,23 +69,24 @@ const SectionIcon = ({ name }: { name: string }) => {
 export const Section = ({ name, links }: SectionProps) => {
   return (
     <Box contentSpacing>
-      {name &&
+      {name && (
         <Box flexDirection="row" marginBottom={1}>
           <SectionIcon name={name} />
 
           <Text medium color="secondary">
             {name.toUpperCase()}
           </Text>
-        </Box>}
-
-      {links.map(link =>
-        <SectionLinkItem key={link.id} id={link.id} title={link.title} />,
+        </Box>
       )}
+
+      {links.map(link => (
+        <SectionLinkItem key={link.id} id={link.id} title={link.title} />
+      ))}
     </Box>
   );
 };
 
-function getSectionTitle(sectionName: string) {
+export function getSectionTitle(sectionName: string) {
   return sectionMappings[sectionName];
 }
 
