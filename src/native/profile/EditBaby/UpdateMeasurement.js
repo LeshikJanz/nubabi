@@ -5,20 +5,16 @@ import type {
   UnitDisplaySettingsState,
 } from '../../../common/types';
 import React, { PureComponent } from 'react';
-import { Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { graphql, gql } from 'react-apollo';
+import { Image, TextInput } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, pathOr } from 'ramda';
-import { Box, Text, Button } from '../../components';
+import { Box, Button, Text } from '../../components';
 import UpdateMeasurementHeader from './UpdateMeasurementHeader';
-import MeasurementUnitSwitcher, {
-  type MeasurementUnit,
-} from './MeasurementUnitSwitcher';
 import { formatMeasurement } from '../../../common/helpers/measurement';
 import displayLoadingState from '../../components/displayLoadingState';
 import theme from '../../../common/themes/defaultTheme';
-import UpdateAmountButton from './UpdateAmountButton';
 
 type UpdateMeasurementType = 'weight' | 'height';
 
@@ -60,32 +56,21 @@ export class UpdateMeasurement extends PureComponent {
       babyId: this.props.babyId,
       type: this.props.type,
       unit: this.props.unitDisplay[this.props.type],
-      value: this.state.value,
+      value: parseFloat(this.state.value),
     };
 
     this.props.updateMeasurement({ variables: { input } });
   };
 
-  handleIncrement = () => this.updateValue(1);
-  handleDecrement = () => this.updateValue(-1);
-  handleIncrementPoint = () => this.updateValue(0.01);
-  handleDecrementPoint = () => this.updateValue(-0.01);
+  getCurrentValue = () => {
+    if (!this.state.value) {
+      return '';
+    }
 
-  updateValue = (amount: number) => {
-    this.setState(prevState => {
-      const newAmount = prevState.value + amount;
-
-      return {
-        value: newAmount < 0 ? 0 : parseFloat(newAmount.toFixed(2)),
-      };
-    });
+    return typeof this.state.value === 'string'
+      ? this.state.value
+      : `${+this.state.value.toFixed(2)}`;
   };
-
-  valueInCurrentUnit() {
-    return `${+this.state.value.toFixed(2)} ${this.props.unitDisplay[
-      this.props.type
-    ]}`;
-  }
 
   render() {
     const { onViewGraph, type } = this.props;
@@ -98,64 +83,70 @@ export class UpdateMeasurement extends PureComponent {
     const buttonText = `SET ${this.props.type.toUpperCase()}`;
 
     return (
-      <Box flex={1}>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: '#fff' }}
+        contentContainerStyle={{ flex: 1 }}
+        keyboardShouldPersistTaps="handled"
+      >
         <UpdateMeasurementHeader onViewGraph={onViewGraph} />
-        <Box backgroundColor="white" flex={1} padding={1}>
-          <Box alignItems="center" justifyContent="center" flex={1}>
-            <Image
-              source={image}
-              style={{ width: 176, height: 110 }}
-              resizeMode="contain"
-            />
-            <Box flexDirection="row" alignItems="center">
-              <Box flexDirection="row" alignItems="center">
-                <UpdateAmountButton onPress={this.handleDecrement}>
-                  <Icon
-                    name="ios-arrow-dropdown"
-                    size={36}
-                    color={theme.colors.primary}
+        <Box flex={1} padding={1}>
+          <Box flex={1}>
+            <Box flex={1} justifyContent="center" alignItems="center">
+              <Image
+                source={image}
+                style={{
+                  width: 176,
+                  height: 110,
+                }}
+                resizeMode="contain"
+              />
+            </Box>
+            <Box flex={1} alignItems="center" justifyContent="center">
+              <Box
+                flexDirection="row"
+                alignItems="center"
+                justifyContent="center"
+                marginHorizontal={5}
+                paddingBottom={0.5}
+                borderBottomWidth={1}
+                style={() => ({
+                  borderColor: '#C5CDD7',
+                })}
+              >
+                <Box flex={1}>
+                  <TextInput
+                    value={this.getCurrentValue()}
+                    onChangeText={value => {
+                      this.setState({ value });
+                    }}
+                    keyboardType="decimal-pad"
+                    style={{
+                      flex: 1,
+                      color: theme.colors.black,
+                      fontSize: 41,
+                      fontFamily: 'SF Pro Display',
+                      fontWeight: '200',
+                      letterSpacing: -1.09,
+                      lineHeight: 48,
+                    }}
                   />
-                </UpdateAmountButton>
-
-                <UpdateAmountButton onPress={this.handleDecrementPoint}>
-                  <Icon
-                    name="ios-locate-outline"
-                    size={22}
-                    color={theme.colors.primary}
-                  />
-                </UpdateAmountButton>
-              </Box>
-
-              <Box flex={1}>
-                <Text
-                  marginVertical={2}
-                  size={18}
-                  spacing={-1.09}
-                  align="center"
+                </Box>
+                <Box
+                  alignItems="center"
+                  justifyContent="center"
+                  padding={0.5}
                   style={() => ({
-                    fontWeight: '200',
+                    backgroundColor: '#E9ECF4',
+                    borderRadius: 4,
                   })}
                 >
-                  {this.valueInCurrentUnit()}
-                </Text>
-              </Box>
-
-              <Box flexDirection="row" alignItems="center">
-                <UpdateAmountButton onPress={this.handleIncrementPoint}>
-                  <Icon
-                    name="ios-locate-outline"
-                    size={22}
-                    color={theme.colors.primary}
-                  />
-                </UpdateAmountButton>
-
-                <UpdateAmountButton onPress={this.handleIncrement}>
-                  <Icon
-                    name="ios-arrow-dropup"
-                    size={36}
-                    color={theme.colors.primary}
-                  />
-                </UpdateAmountButton>
+                  <Text
+                    size={10}
+                    style={() => ({ fontWeight: '200', letterSpacing: -1.09 })}
+                  >
+                    {this.props.unitDisplay[this.props.type]}
+                  </Text>
+                </Box>
               </Box>
             </Box>
           </Box>
@@ -171,7 +162,7 @@ export class UpdateMeasurement extends PureComponent {
             </Button>
           </Box>
         </Box>
-      </Box>
+      </KeyboardAwareScrollView>
     );
   }
 }
