@@ -36,6 +36,7 @@ GrowthArticle.fragments = {
         text
       }
       section {
+        id
         name
       }
     }
@@ -45,6 +46,7 @@ GrowthArticle.fragments = {
       id
       title
       section {
+        id
         name
       }
     }
