@@ -175,11 +175,15 @@ class MemoryForm extends PureComponent {
         marginBottom={1}
         alignItems="center"
         justifyContent="center"
+        backgroundColor="white"
+        borderRadius={4}
+        borderColor="separator"
+        borderWidth={1}
+        padding={0.5}
       >
         {this.props.mode === 'edit' && (
           <FloatingRemoveButton
             onPress={this.handleRemoveSuggestedMemoryType}
-            style={{ top: -4, right: -6 }}
           />
         )}
         <Image
