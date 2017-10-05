@@ -34,6 +34,7 @@ import { renderTextInput, required } from '../shared/forms';
 import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
 import { findSuggestedMemoryById } from './SuggestedMemories';
+import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
 
 type Props = {
   mode?: 'add' | 'edit',
@@ -170,17 +171,7 @@ class MemoryForm extends PureComponent {
     }
 
     return (
-      <Box
-        marginLeft={1}
-        marginBottom={1}
-        alignItems="center"
-        justifyContent="center"
-        backgroundColor="white"
-        borderRadius={4}
-        borderColor="separator"
-        borderWidth={1}
-        padding={0.5}
-      >
+      <SuggestedMemoryCardContainer>
         {this.props.mode === 'edit' && (
           <FloatingRemoveButton
             onPress={this.handleRemoveSuggestedMemoryType}
@@ -190,12 +181,11 @@ class MemoryForm extends PureComponent {
           source={suggestedMemoryType.image}
           style={{ width: 52, height: 52 }}
         />
-      </Box>
+      </SuggestedMemoryCardContainer>
     );
   };
 
   render() {
-    console.log(this.props);
     const { layout } = this.props;
     const { suggestedMemoryType } = this.props.initialValues;
     const submitText = this.props.mode === 'edit' ? 'SAVE' : 'ADD MEMORY';

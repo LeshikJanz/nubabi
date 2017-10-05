@@ -1,7 +1,7 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, TouchableOpacity } from 'react-native';
+import { LayoutAnimation, TouchableOpacity, View } from 'react-native';
 import Image from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
@@ -9,11 +9,11 @@ import moment from 'moment';
 import { Box, Card, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
-import MemoryMedia, {
-  fragments as MemoryMediaFragments,
-} from '../components/MemoryMedia';
+import MemoryMedia from '../components/MemoryMedia';
 import MemoryComments from './MemoryComments';
 import MemoryComment from './MemoryComment';
+import { findSuggestedMemoryById } from './SuggestedMemories';
+import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
 
 type Props = MemoryType & {
   babyId: String,
@@ -63,6 +63,7 @@ class Memory extends PureComponent {
             }
           }
         }
+        suggestedMemoryType
       }
     `,
     form: gql`
@@ -109,7 +110,7 @@ class Memory extends PureComponent {
               id
               contentType
               url
-              
+
               ... on Image {
                 thumb {
                   url
@@ -132,6 +133,7 @@ class Memory extends PureComponent {
             }
           }
         }
+
         # comments are reversed (most-recent first)
         comments(first: 2) {
           count
@@ -143,6 +145,8 @@ class Memory extends PureComponent {
             }
           }
         }
+
+        suggestedMemoryType
       }
       ${MemoryComment.fragments.comment}
     `,
@@ -168,6 +172,7 @@ class Memory extends PureComponent {
       title,
       comments: commentsConnection,
       files: filesConnection,
+      suggestedMemoryType,
       createdAt,
     } = this.props;
 
@@ -181,6 +186,10 @@ class Memory extends PureComponent {
     const containerProps = isOptimistic(id)
       ? {}
       : { onPress: this.handleEditMemory, as: TouchableOpacity };
+
+    const suggestedMemory = suggestedMemoryType
+      ? findSuggestedMemoryById(suggestedMemoryType)
+      : null;
 
     return (
       <Box
@@ -233,7 +242,12 @@ class Memory extends PureComponent {
           })}
         >
           <Card padding={0}>
-            <MemoryMedia files={filesConnection} />
+            <Box flexDirection="row" flex={1}>
+              <MemoryMedia
+                files={filesConnection}
+                suggestedMemoryType={suggestedMemory}
+              />
+            </Box>
             <Box contentSpacing>
               <Text medium marginVertical={1} size={2}>
                 {title}

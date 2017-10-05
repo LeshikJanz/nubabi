@@ -52,9 +52,10 @@ type MemoryMediaMultipleProps = {
   files: FileConnection,
   layout: LayoutProps,
   onMediaPress: (params: ?Object) => void,
+  isMemoryTypeDisplayed?: boolean,
 };
 
-const RoundedContainer = ({
+export const RoundedContainer = ({
   children,
   style,
   onPress,
@@ -107,10 +108,7 @@ export const MemoryMediaImage = ({
         }}
         resizeMode="cover"
       >
-        {displayMoreIndicator &&
-          <Overlay>
-            {displayMoreIndicator}
-          </Overlay>}
+        {displayMoreIndicator && <Overlay>{displayMoreIndicator}</Overlay>}
       </Image>
     </RoundedContainer>
   );
@@ -158,15 +156,17 @@ export const MemoryMediaAudio = ({
 
   return (
     <Box {...containerProps}>
-      {media.thumb
-        ? <Image
-            source={{ uri: media.thumb.url }}
-            resizeMode="cover"
-            style={{ flex: 1 }}
-          >
-            {content}
-          </Image>
-        : content}
+      {media.thumb ? (
+        <Image
+          source={{ uri: media.thumb.url }}
+          resizeMode="cover"
+          style={{ flex: 1 }}
+        >
+          {content}
+        </Image>
+      ) : (
+        content
+      )}
     </Box>
   );
 };
@@ -213,15 +213,17 @@ export const MemoryMediaVideo = ({
 
   return (
     <Box {...containerProps}>
-      {media.thumb
-        ? <Image
-            source={{ uri: media.thumb.url }}
-            resizeMode="cover"
-            style={{ flex: 1 }}
-          >
-            {content}
-          </Image>
-        : content}
+      {media.thumb ? (
+        <Image
+          source={{ uri: media.thumb.url }}
+          resizeMode="cover"
+          style={{ flex: 1 }}
+        >
+          {content}
+        </Image>
+      ) : (
+        content
+      )}
     </Box>
   );
 };
@@ -261,8 +263,10 @@ export const MemoryMediaMultiple = ({
   files,
   layout,
   onMediaPress,
+  suggestedMemoryType,
 }: MemoryMediaMultipleProps) => {
-  const shouldDisplayMoreButton = files.edges.length >= 3;
+  const displayLimit = suggestedMemoryType ? 2 : 3;
+  const shouldDisplayMoreButton = files.edges.length >= displayLimit;
 
   const displayMore = (
     <Box
@@ -277,7 +281,7 @@ export const MemoryMediaMultiple = ({
       })}
     >
       <Text bold color="white" size={8} align="center">
-        + {files.count - 2}
+        + {files.count - displayLimit + 1}
       </Text>
       <Text bold color="white" size={2} align="center">
         more
@@ -293,7 +297,26 @@ export const MemoryMediaMultiple = ({
         alignItems="flex-start"
         justifyContent="space-between"
       >
-        {take(2, files.edges).map((file, index) =>
+        {suggestedMemoryType && (
+          <Box
+            flex={1}
+            key="memory-type"
+            margin={0.5}
+            borderRadius={4}
+            borderColor="separator"
+            borderWidth={1}
+            alignItems="center"
+            justifyContent="center"
+            style={() => ({ overflow: 'hidden', padding: 5 })}
+          >
+            <Image
+              source={suggestedMemoryType.image}
+              style={{ flex: 1, height: 60 }}
+              resizeMode="contain"
+            />
+          </Box>
+        )}
+        {take(displayLimit - 1, files.edges).map((file, index) => (
           <Box
             flex={1}
             key={`${index}-${file.node.url}`}
@@ -307,10 +330,10 @@ export const MemoryMediaMultiple = ({
               small
               onMediaPress={() => onMediaPress({ selectedIndex: index })}
             />
-          </Box>,
-        )}
+          </Box>
+        ))}
 
-        {shouldDisplayMoreButton &&
+        {shouldDisplayMoreButton && (
           <Box
             flex={1}
             key="more"
@@ -325,30 +348,37 @@ export const MemoryMediaMultiple = ({
               displayMoreIndicator={displayMore}
               onMediaPress={() => onMediaPress({ grid: true })}
             />
-          </Box>}
+          </Box>
+        )}
       </Box>
     </Box>
   );
 };
 
-export const MemoryMedia = ({ files, layout, openGallery }: Props) => {
-  if (files.edges.length > 1) {
+export const MemoryMedia = ({
+  files,
+  layout,
+  openGallery,
+  suggestedMemoryType,
+}: Props) => {
+  if (files.edges.length > 1 || suggestedMemoryType) {
     return (
       <MemoryMediaMultiple
         files={files}
         layout={layout}
         onMediaPress={openGallery}
-      />
-    );
-  } else {
-    return (
-      <MemoryMediaSingle
-        media={head(files.edges).node}
-        layout={layout}
-        onMediaPress={() => openGallery({})}
+        suggestedMemoryType={suggestedMemoryType}
       />
     );
   }
+
+  return (
+    <MemoryMediaSingle
+      media={head(files.edges).node}
+      layout={layout}
+      onMediaPress={() => openGallery({})}
+    />
+  );
 };
 
 export const fragments = {
