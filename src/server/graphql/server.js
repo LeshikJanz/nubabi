@@ -9,6 +9,7 @@ import firebaseConnector from './connectors/firebaseConnector';
 import fs from 'fs';
 import cors from 'cors';
 
+global.__DEV__ = process.env.NODE_ENV !== 'production';
 const debug = require('debug')('graphqlServer:server');
 const PORT = 8080;
 const serviceAccount = require('./nubabitest1-firebase-adminsdk-r7bmb-8f86f51d8b.json');
@@ -20,8 +21,6 @@ const firebase = admin.initializeApp({
   databaseURL: config.firebase.databaseURL,
   databaseAuthVariableOverride: null,
 });
-
-global.__DEV__ = process.env.NODE_ENV !== 'production';
 
 app.options('/graphql', cors());
 app.use(
@@ -82,6 +81,7 @@ if (__DEV__) {
   const file = require(graphqlConfig, 'utf-8');
   const debug = require('debug')('dev');
 
+  // $FlowFixMe$
   app.use('/graphql-config', bodyParser.json(), (req, res) => {
     file.endpoints[0].options.headers.Authorization = req.body.token;
     fs.writeFileSync(graphqlConfig, JSON.stringify(file, null, 2), 'utf-8');

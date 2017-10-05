@@ -1,7 +1,7 @@
 // @flow
 import type { File, FileInput, State } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, View } from 'react-native';
+import { Image, LayoutAnimation, View } from 'react-native';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import {
   append,
@@ -11,6 +11,8 @@ import {
   last,
   map,
   memoize,
+  path,
+  pathOr,
   reject,
   union,
   update,
@@ -20,6 +22,7 @@ import moment from 'moment';
 import {
   Box,
   DatePicker,
+  FloatingRemoveButton,
   FormContainer,
   List,
   ListItem,
@@ -30,20 +33,24 @@ import {
 import { renderTextInput, required } from '../shared/forms';
 import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
+import { findSuggestedMemoryById } from './SuggestedMemories';
 
 type Props = {
   mode?: 'add' | 'edit',
-  onSubmit: () => void,
+  onSubmit: (input: Object) => void,
   onAddVoiceNote: () => void,
   handleSubmit: (submit: Function) => void,
   submitting: boolean,
   change: (field: string, value: any) => void,
   files: ?Array<File>,
+  initialValues: Object,
 };
 
 const dateDisplayFormat = 'D MMMM • H:mm';
 const formatDate = memoize(dateStr => {
-  return moment(dateStr).format(dateDisplayFormat).toUpperCase();
+  return moment(dateStr)
+    .format(dateDisplayFormat)
+    .toUpperCase();
 });
 
 const parseImageOrVideo = (file: MediaPickerItem): FileInput => {
@@ -68,6 +75,8 @@ class MemoryForm extends PureComponent {
   state = {
     removeFiles: [],
   };
+
+  datePicker = null;
 
   handleAddMedia = () => {
     mediaPicker().then(assets => {
@@ -96,12 +105,22 @@ class MemoryForm extends PureComponent {
     this.props.change('files', reject(isNil, files));
   };
 
-  datePicker = null;
-
   openDatePicker = () => {
     if (this.datePicker) {
       this.datePicker.open();
     }
+  };
+
+  handleSubmit = this.props.handleSubmit(input => {
+    return this.props.onSubmit({
+      ...input,
+      removeFiles: this.state.removeFiles,
+    });
+  });
+
+  handleRemoveSuggestedMemoryType = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.props.change('suggestedMemoryType', null);
   };
 
   renderDatePicker = field => {
@@ -112,9 +131,7 @@ class MemoryForm extends PureComponent {
     return (
       <View style={{ flex: 1 }}>
         <ListItem onPress={this.openDatePicker} leftIcon="md-calendar">
-          <Text color="secondary">
-            {formatDate(field.input.value)}
-          </Text>
+          <Text color="secondary">{formatDate(field.input.value)}</Text>
         </ListItem>
         <View
           style={{
@@ -139,28 +156,65 @@ class MemoryForm extends PureComponent {
     );
   };
 
-  handleSubmit = this.props.handleSubmit(input => {
-    return this.props.onSubmit({
-      ...input,
-      removeFiles: this.state.removeFiles,
-    });
-  });
+  renderSuggestedMemoryType = field => {
+    const suggestedMemoryId = field.input.value;
+
+    if (!suggestedMemoryId) {
+      return null;
+    }
+
+    const suggestedMemoryType = findSuggestedMemoryById(suggestedMemoryId);
+
+    if (!suggestedMemoryType) {
+      return null;
+    }
+
+    return (
+      <Box
+        marginLeft={1}
+        marginBottom={1}
+        alignItems="center"
+        justifyContent="center"
+      >
+        {this.props.mode === 'edit' && (
+          <FloatingRemoveButton
+            onPress={this.handleRemoveSuggestedMemoryType}
+            style={{ top: -4, right: -6 }}
+          />
+        )}
+        <Image
+          source={suggestedMemoryType.image}
+          style={{ width: 52, height: 52 }}
+        />
+      </Box>
+    );
+  };
 
   render() {
+    console.log(this.props);
     const { layout } = this.props;
+    const { suggestedMemoryType } = this.props.initialValues;
     const submitText = this.props.mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
 
     return (
       <FormContainer>
         <Box flex={1}>
-          <Field
-            name="title"
-            multiline
-            placeholder="Add a title or comment..."
-            underlineColorAndroid="transparent"
-            component={renderTextInput}
-            validate={[required]}
-          />
+          <Box flex={1} flexDirection="row" alignItems="center">
+            {suggestedMemoryType && (
+              <Field
+                name="suggestedMemoryType"
+                component={this.renderSuggestedMemoryType}
+              />
+            )}
+            <Field
+              name="title"
+              multiline
+              placeholder="Add a title or comment..."
+              underlineColorAndroid="transparent"
+              component={renderTextInput}
+              validate={[required]}
+            />
+          </Box>
           <Box flex={1}>
             <Field
               name="files"

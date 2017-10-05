@@ -21,6 +21,7 @@ import NoContentView from './NoContentView';
 import Pill from './Pill';
 import PillSwitcher from './PillSwitcher';
 import FAB from './FAB';
+import FloatingRemoveButton from './FloatingRemoveButton';
 import Overlay from './Overlay';
 import DatePicker from './DatePicker';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -57,6 +58,7 @@ export {
   Pill,
   PillSwitcher,
   FAB,
+  FloatingRemoveButton,
   Overlay,
   DatePicker,
   withLayout,

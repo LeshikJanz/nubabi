@@ -4,6 +4,7 @@ import type {
   CreateMemoryInput,
   State,
 } from '../../common/types';
+import type { SuggestedMemoryType } from './SuggestedMemories';
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 import { assoc, compose, filter, omit, path, pick, pluck, propEq } from 'ramda';
@@ -25,8 +26,31 @@ type Props = {
   onAddVoiceNote: (id?: string) => void,
 };
 
-export const AddMemory = ({ onSubmit, onAddVoiceNote }: Props) =>
-  <MemoryForm onSubmit={onSubmit} onAddVoiceNote={onAddVoiceNote} />;
+const suggestedMemoryTypeProps = (
+  suggestedMemoryType: ?SuggestedMemoryType,
+) => {
+  if (!suggestedMemoryType) {
+    return {};
+  }
+
+  return {
+    title: suggestedMemoryType.title,
+    suggestedMemoryType: suggestedMemoryType.id,
+  };
+};
+
+export const AddMemory = ({
+  onSubmit,
+  onAddVoiceNote,
+  suggestedMemoryType,
+}: Props) => (
+  <MemoryForm
+    onSubmit={onSubmit}
+    onAddVoiceNote={onAddVoiceNote}
+    initialValues={suggestedMemoryTypeProps(suggestedMemoryType)}
+    suggestedMemoryType={suggestedMemoryType}
+  />
+);
 
 export default compose(
   connect(

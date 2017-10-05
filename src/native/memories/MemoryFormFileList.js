@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Box } from '../components';
+import { Box, FloatingRemoveButton } from '../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { type MediaPickerItem } from '../components/mediaPicker';
 import { MemoryMediaSingle } from '../components/MemoryMedia';
@@ -37,46 +37,7 @@ class MemoryFormFileList extends PureComponent {
               },
             })}
           >
-            <Box
-              as={TouchableOpacity}
-              onPress={onRemove}
-              style={() => ({
-                position: 'absolute',
-                top: -5,
-                right: -5,
-                zIndex: 999,
-                width: 20,
-                height: 20,
-                backgroundColor: 'transparent',
-              })}
-            >
-              <Box
-                flex={1}
-                backgroundColor="primary"
-                style={() => ({
-                  borderRadius: 20 / 2,
-                  overflow: 'hidden',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderColor: '#fff',
-                  borderWidth: 1,
-                  shadowColor: '#000',
-                  shadowOpacity: 0.15,
-                  shadowRadius: 3,
-                  shadowOffset: {
-                    height: 1,
-                    width: 0,
-                  },
-                })}
-              >
-                <Icon
-                  name="ios-close"
-                  size={18}
-                  color="#fff"
-                  style={{ marginTop: 1 }}
-                />
-              </Box>
-            </Box>
+            <FloatingRemoveButton onPress={onRemove} />
             <MemoryMediaSingle
               media={file}
               style={{

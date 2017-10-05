@@ -69,6 +69,7 @@ class Memory extends PureComponent {
       fragment MemoryForm on Memory {
         title
         createdAt
+        suggestedMemoryType
         files {
           edges {
             node {

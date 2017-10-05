@@ -31,6 +31,8 @@ type Memory implements Node, Timestampable {
 
   createdAt: DateTime!
   updatedAt: DateTime
+
+  suggestedMemoryType: String
 }
 
 # A connection to a list of items.
@@ -120,6 +122,10 @@ input CreateMemoryInput {
 
   # The date chose by the user to represent this Memory's date
   createdAt: DateTime!
+
+  # A string identifier of the suggested memory that was selected
+  # when creating this memory
+  suggestedMemoryType: String
 
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String

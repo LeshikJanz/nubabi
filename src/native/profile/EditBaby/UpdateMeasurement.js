@@ -51,6 +51,16 @@ export class UpdateMeasurement extends PureComponent {
     `,
   };
 
+  getCurrentValue = () => {
+    if (!this.state.value) {
+      return '';
+    }
+
+    return typeof this.state.value === 'string'
+      ? this.state.value
+      : `${+this.state.value.toFixed(2)}`;
+  };
+
   handleSubmit = () => {
     const input: RecordMeasurementInput = {
       babyId: this.props.babyId,
@@ -60,16 +70,6 @@ export class UpdateMeasurement extends PureComponent {
     };
 
     this.props.updateMeasurement({ variables: { input } });
-  };
-
-  getCurrentValue = () => {
-    if (!this.state.value) {
-      return '';
-    }
-
-    return typeof this.state.value === 'string'
-      ? this.state.value
-      : `${+this.state.value.toFixed(2)}`;
   };
 
   render() {

@@ -132,7 +132,7 @@ export const connectionFromBackendMetadataArray = data => {
     count: meta.total,
     pageInfo: {
       startCursor: cursorProp(firstEdge), // TODO: backend meta should do this
-      endCursor: cursorProp(lastEdge), // TODO: above
+      endCursor: cursorProp(lastEdge), // TODO: see above
       pageSize: meta.pageSize,
       hasNextPage: meta.hasNextPage,
       hasPrevPage: meta.hasPrevPage,
