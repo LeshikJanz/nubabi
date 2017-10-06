@@ -6,7 +6,7 @@ import type {
   SeenGrowthGlobalIntroAction,
 } from '../types';
 import moment from 'moment';
-import { prop } from 'ramda';
+import { prop, merge } from 'ramda';
 
 type Action = SeenGrowthGlobalIntroAction;
 
@@ -75,10 +75,12 @@ const findContent = (
 function reducer(state: GrowthState = initialState, action: Action) {
   switch (action.type) {
     case 'GROWTH_SEEN_GLOBAL_INTRO': {
-      return {
-        ...state,
+      return merge(state, {
         hasSeenGlobalIntro: action.payload,
-      };
+      });
+    }
+    case 'RESET_TIPS': {
+      return merge(state, { hasSeenGlobalIntro: false });
     }
     default: {
       return state;

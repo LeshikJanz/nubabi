@@ -2,9 +2,12 @@
 import type { NavigationProp, State } from '../common/types';
 import type { Dispatch } from 'redux';
 import React from 'react';
+import { View } from 'react-native';
+import Alert from './components/Alert';
 import { connect } from 'react-redux';
 import { addNavigationHelpers } from 'react-navigation';
 import AppNavigator from './navigation/AppNavigator';
+import NetworkIndicator from './components/NetworkIndicator';
 
 type Props = {
   navigation: NavigationProp,
@@ -17,7 +20,13 @@ const Root = ({ dispatch, navigation }: Props) => {
     state: navigation,
   });
 
-  return <AppNavigator navigation={nav} />;
+  return (
+    <View style={{ width: '100%', height: '100%' }}>
+      <AppNavigator navigation={nav} />
+      <Alert />
+      <NetworkIndicator />
+    </View>
+  );
 };
 
 export default connect((state: State) => ({

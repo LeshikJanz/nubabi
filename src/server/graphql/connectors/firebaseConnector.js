@@ -2,9 +2,9 @@
 import type { MeasurementType, MeasurementUnit } from '../../../common/types';
 // noinspection ES6UnusedImports
 import {
+  fromGlobalId,
   sortByTimestamp,
   toTimestamp,
-  fromGlobalId,
 } from '../resolvers/common';
 import R, { assoc, compose, evolve, map, omit } from 'ramda';
 import { decode } from 'base-64';
@@ -15,10 +15,17 @@ import {
 } from '../../../common/helpers/measurement';
 
 const get = (firebase, path: string) =>
-  firebase.database().ref(path).once('value').then(returnVal);
+  firebase
+    .database()
+    .ref(path)
+    .once('value')
+    .then(returnVal);
 
 const set = (firebase, path: string, values: mixed) =>
-  firebase.database().ref(path).set(values);
+  firebase
+    .database()
+    .ref(path)
+    .set(values);
 
 const returnVal = snapshot => snapshot.val();
 const returnValWithKeyAsId = snapshot => {
@@ -73,11 +80,16 @@ const uploadFile = (firebase, refPath, dataUrl) => {
     const contentType = match[1];
 
     const content = new Uint8Array(
-      decode(match[3]).split('').map(c => c.charCodeAt(0)),
+      decode(match[3])
+        .split('')
+        .map(c => c.charCodeAt(0)),
     );
 
     const metadata = { contentType };
-    const ref = firebase.storage().ref().child(refPath);
+    const ref = firebase
+      .storage()
+      .ref()
+      .child(refPath);
     const uploadTask = ref.put(content);
 
     uploadTask.on(
@@ -105,7 +117,11 @@ const createOrUpdateBaby = async (firebase, values, id) => {
 
   const path = id
     ? `babies/${id}`
-    : `babies/${firebase.database().ref().child('babies').push().key}`;
+    : `babies/${firebase
+        .database()
+        .ref()
+        .child('babies')
+        .push().key}`;
 
   const object = toFirebaseBaby(values);
 
@@ -114,7 +130,11 @@ const createOrUpdateBaby = async (firebase, values, id) => {
   object[creating ? 'createdAt' : 'updatedAt'] = TIMESTAMP;
 
   const promises = [
-    firebase.database().ref().child(path).update(object),
+    firebase
+      .database()
+      .ref()
+      .child(path)
+      .update(object),
     firebase
       .database()
       .ref()
@@ -254,7 +274,10 @@ const updateUser = async (firebase, input) => {
     }
   }
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
 
   return getViewerWithProfile(firebase);
 };
@@ -277,7 +300,10 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
     invitedAt: firebase.database.ServerValue.TIMESTAMP,
   };
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
   return friend;
 };
 
@@ -327,7 +353,11 @@ const createMemory = async (
 ) => {
   const updates = {};
   const currentUserId = getViewer(firebase).uid;
-  const memoryId = firebase.database().ref().child('/memories/').push().key;
+  const memoryId = firebase
+    .database()
+    .ref()
+    .child('/memories/')
+    .push().key;
 
   const memory = {
     ...omit(['babyId', 'files'], input),
@@ -352,7 +382,10 @@ const createMemory = async (
     memory.files[file.id] = file.file;
   });
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
 
   return get(firebase, `/memories/${memoryId}`);
 };
@@ -386,13 +419,18 @@ const updateMemory = async (firebase, id: string, input: any) => {
     });
   }
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
   return get(firebase, path);
 };
 
 const deleteMemory = (firebase, memoryId: string) => {
   return new Task((reject, resolve) => {
-    return get(firebase, `/memories/${memoryId}`).then(resolve).catch(reject);
+    return get(firebase, `/memories/${memoryId}`)
+      .then(resolve)
+      .catch(reject);
   })
     .map(memory => {
       const updates = {};
@@ -410,6 +448,43 @@ const deleteMemory = (firebase, memoryId: string) => {
           .catch(reject);
       });
     });
+};
+
+const toggleMemoryLike = (firebase, memoryId: string, isLiked: boolean) => {
+  return new Task(async (reject, resolve) => {
+    const currentUserId = getViewer(firebase).uid;
+    const updates = {};
+    updates[`/memories/${memoryId}/likes/${currentUserId}`] = isLiked
+      ? true
+      : null;
+    updates[`/users/${currentUserId}/likes/memories/${memoryId}`] = isLiked
+      ? true
+      : null;
+
+    try {
+      await firebase
+        .database()
+        .ref()
+        .update(updates);
+      const memory = await get(firebase, `/memories/${memoryId}`);
+      resolve(memory);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+const isMemoryLikedByViewer = async (firebase, memoryId: string) => {
+  try {
+    const currentUserId = getViewer(firebase).uid;
+    const like = await get(
+      firebase,
+      `/users/${currentUserId}/likes/memories/${memoryId}`,
+    );
+    return like !== null;
+  } catch (err) {
+    return null;
+  }
 };
 
 const getBaby = (firebase, id) => {
@@ -471,7 +546,10 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
 
   const suffix = type === 'weight' ? 'weights' : 'heights';
   const measurementPrefix = `/measurements/${babyId}/${suffix}`;
-  const measurementKey = firebase.database().ref(measurementPrefix).push().key;
+  const measurementKey = firebase
+    .database()
+    .ref(measurementPrefix)
+    .push().key;
   const measurementPath = [measurementPrefix, measurementKey].join('/');
 
   let rawValue = value;
@@ -490,7 +568,10 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
     recordedAt: firebase.database.ServerValue,
   };
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
   const baby = await getBaby(firebase, babyId);
 
   const measurement = await get(firebase, measurementPath);
@@ -532,6 +613,10 @@ const denormalizeArray = (firebase, denormalizedPath, normalizedPath) => {
 };
 
 export const nestedArrayToArray = (input: Object) => {
+  if (!input) {
+    return [];
+  }
+
   return Object.keys(input).map(key => assoc('id', key, input[key]));
 };
 
@@ -546,6 +631,12 @@ const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
 const getMemory = (firebase, id: string, args: ConnectionArguments) => {
   return get(firebase, `/memories/${id}`);
 };
+
+const getMemoryLikes = async (
+  firebase,
+  id: string,
+  args: ConnectionArguments,
+) => {};
 
 const firebaseConnector = firebase => {
   return {
@@ -635,6 +726,11 @@ const firebaseConnector = firebase => {
     createMemory: (babyId, input) => createMemory(firebase, babyId, input),
     updateMemory: (id, input) => updateMemory(firebase, id, input),
     deleteMemory: id => deleteMemory(firebase, id),
+    toggleMemoryLike: (memoryId, isLiked) =>
+      toggleMemoryLike(firebase, memoryId, isLiked),
+    isMemoryLikedByViewer: memoryId =>
+      isMemoryLikedByViewer(firebase, memoryId),
+    getMemoryLikes: memoryId => getMemoryLikes(firebase, memoryId),
   };
 };
 

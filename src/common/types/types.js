@@ -34,6 +34,7 @@ export type {
   FileEdge,
   Image,
   GrowthArticle,
+  Memory,
   Measurement,
 } from './modelTypes';
 export * from './queryTypes';

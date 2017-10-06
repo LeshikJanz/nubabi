@@ -1,13 +1,22 @@
 // @flow
-import type { State, Viewer, SettingsState } from '../../common/types';
+import type { SettingsState, State, Viewer } from '../../common/types';
 import React, { Component } from 'react';
-import { TouchableHighlight, View, ActionSheetIOS } from 'react-native';
+import {
+  ActionSheetIOS,
+  ScrollView,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import { connect } from 'react-redux';
-import { compose, path, invertObj } from 'ramda';
+import { compose, invertObj, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
-import { setSettingsValue } from '../../common/settings/reducer';
+import {
+  resetSettings,
+  resetTips,
+  setSettingsValue,
+} from '../../common/settings/reducer';
 import { logout } from '../../common/auth/actions';
 import theme, { NUBABI_RED } from '../../common/themes/defaultTheme';
 import UserProfileTrigger from './UserProfileTrigger';
@@ -19,6 +28,8 @@ type Props = {
   appVersion: string,
   logout: typeof logout,
   setSettingsValue: typeof setSettingsValue,
+  resetTips: typeof resetTips,
+  resetSettings: typeof resetSettings,
   onNavigateToNotificationSettings: () => void,
   onNavigateToEditProfile: () => void,
   onNavigateToFriends: () => void,
@@ -100,9 +111,7 @@ export class Settings extends Component {
     }
     return (
       <View style={styles.copyrightContainer}>
-        <Text style={() => styles.copyrightText}>
-          {copyrightText}
-        </Text>
+        <Text style={() => styles.copyrightText}>{copyrightText}</Text>
       </View>
     );
   }
@@ -117,7 +126,7 @@ export class Settings extends Component {
     const userProp = filter(UserProfileTrigger.fragments.profile, viewer.user);
 
     return (
-      <Box flex={1}>
+      <Box flex={1} as={ScrollView}>
         <List>
           <ListItemSeparator />
           <UserProfileTrigger
@@ -140,7 +149,6 @@ export class Settings extends Component {
           >
             <Text color="secondary">Family and Friends</Text>
           </ListItem>
-          <ListItemSeparator />
           <Box contentSpacing>
             <Text color="secondary">UNIT PREFERENCES</Text>
           </Box>
@@ -158,6 +166,13 @@ export class Settings extends Component {
             last
           >
             <Text color="secondary">Height</Text>
+          </ListItem>
+          <Box contentSpacing />
+          <ListItem onPress={this.props.resetTips}>
+            <Text color="secondary">Reset all tips & suggestions</Text>
+          </ListItem>
+          <ListItem onPress={this.props.resetSettings} last>
+            <Text color="primary">Reset all settings</Text>
           </ListItem>
         </List>
         <View style={styles.submitButtonContainer}>
@@ -228,7 +243,7 @@ export default compose(
       appVersion: state.config.appVersion,
       settings: state.settings,
     }),
-    { setSettingsValue, logout },
+    { setSettingsValue, resetSettings, resetTips, logout },
   ),
   graphql(
     gql`

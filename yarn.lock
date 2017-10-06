@@ -4560,6 +4560,10 @@ react-native-audio@^3.2.2:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/react-native-audio/-/react-native-audio-3.2.2.tgz#0fcbda338c9cc85aabed595f9c762fa6eebbdb88"
 
+react-native-autogrow-textinput@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-autogrow-textinput/-/react-native-autogrow-textinput-4.1.0.tgz#a7e5b17eb3c16ab08e31bbfb88d92488ed87f276"
+
 react-native-cached-image@^1.3.5:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/react-native-cached-image/-/react-native-cached-image-1.3.5.tgz#c41ba97a9223b0c3d58970f2e3f0fb79a22e739e"

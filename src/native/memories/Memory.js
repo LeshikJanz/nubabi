@@ -1,19 +1,19 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, TouchableOpacity, View } from 'react-native';
-import Image from 'react-native-cached-image';
+import { LayoutAnimation, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
+import { filter } from 'graphql-anywhere';
 import moment from 'moment';
-import { Box, Card, Text } from '../components';
+import { Box, Card, Pill, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
 import MemoryMedia from '../components/MemoryMedia';
-import MemoryComments from './MemoryComments';
-import MemoryComment from './MemoryComment';
 import { findSuggestedMemoryById } from './SuggestedMemories';
-import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
+import LikeMemoryButton from './LikeMemoryButton';
+import MemoryCommentsSummary from './MemoryCommentsSummary';
+import LikesSummary from './LikesSummary';
 
 type Props = MemoryType & {
   babyId: String,
@@ -31,10 +31,6 @@ export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
 
 class Memory extends PureComponent {
   prop: Props;
-
-  state = {
-    displayAllComments: false,
-  };
 
   static fragments = {
     item: gql`
@@ -64,6 +60,9 @@ class Memory extends PureComponent {
           }
         }
         suggestedMemoryType
+        comments {
+          count
+        }
       }
     `,
     form: gql`
@@ -96,11 +95,6 @@ class Memory extends PureComponent {
       fragment MemoryItem on Memory {
         id
         title
-        author {
-          avatar {
-            url
-          }
-        }
         createdAt
         # TODO: how to combine pagination with GalleryScreen
         files {
@@ -133,51 +127,38 @@ class Memory extends PureComponent {
             }
           }
         }
-
-        # comments are reversed (most-recent first)
-        comments(first: 2) {
-          count
-          edges {
-            cursor
-            node {
-              id
-              ...MemoryComment
-            }
-          }
-        }
-
+        
         suggestedMemoryType
+        
+        ...MemoryCommentsSummary
+        ...LikeMemoryButton
       }
-      ${MemoryComment.fragments.comment}
+      ${MemoryCommentsSummary.fragments.summary}
+      ${LikeMemoryButton.fragments.item}
     `,
+  };
+
+  handleViewMemory = () => {
+    this.props.onViewMemory(this.props.id);
   };
 
   handleEditMemory = () => {
     this.props.onEditMemory(this.props.id);
   };
 
-  toggleAllComments = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
-    this.setState(({ displayAllComments }) => ({
-      displayAllComments: !displayAllComments,
-    }));
-  };
-
   render() {
     const {
       id,
       babyId,
-      author,
       title,
       comments: commentsConnection,
       files: filesConnection,
       suggestedMemoryType,
       createdAt,
+      onToggleLike,
     } = this.props;
 
     const date = formatMemoryDate(createdAt);
-    const avatar = author.avatar.url;
 
     const mainContainerStyle = isOptimistic(id)
       ? { opacity: theme.states.disabled.opacity }
@@ -197,28 +178,29 @@ class Memory extends PureComponent {
         contentSpacing
         paddingVertical={0}
         justifyContent="flex-start"
-        style={() => ({ marginTop: -9, ...mainContainerStyle })}
+        style={() => mainContainerStyle}
       >
         <Box flexDirection="row" alignItems="center">
-          <Image
+          <Pill
             style={{
-              width: 30,
-              height: 30,
-              overflow: 'hidden',
-              borderRadius: 15,
-              borderColor: '#CFD6DF',
-              borderWidth: 2,
+              backgroundColor: 'white',
+              paddingVertical: 5,
+              paddingHorizontal: 7,
+              borderColor: '#E9ECF4',
+              zIndex: 999,
             }}
-            source={{ uri: avatar }}
-          />
-
-          <Box flex={1} padding={1}>
-            <Text medium color="secondary">
+          >
+            <Text medium style={() => ({ color: theme.colors.open.gray3 })}>
               {date}
             </Text>
-          </Box>
+          </Pill>
 
-          <Box flexDirection="row" alignItems="center">
+          <Box
+            flex={1}
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="flex-end"
+          >
             <Icon size={20} color={theme.colors.gray} name="ios-share-alt" />
             <Box {...containerProps}>
               <Icon
@@ -236,30 +218,35 @@ class Memory extends PureComponent {
             borderColor: '#E9ECF4',
             borderLeftWidth: 2,
             marginLeft: 15,
-            marginTop: -9,
             paddingLeft: 15,
             paddingTop: 9,
           })}
         >
-          <Card padding={0}>
+          <Card padding={0} onPress={this.handleViewMemory}>
             <Box flexDirection="row" flex={1}>
               <MemoryMedia
                 files={filesConnection}
                 suggestedMemoryType={suggestedMemory}
               />
             </Box>
-            <Box contentSpacing>
-              <Text medium marginVertical={1} size={2}>
-                {title}
-              </Text>
+            <Box
+              flex={1}
+              contentSpacing
+              borderTopWidth={1}
+              style={() => ({ borderColor: '#E9ECF4' })}
+            >
+              <Box flexDirection="row" paddingVertical={0.3}>
+                <Text medium size={2} flex={1}>
+                  {title}
+                </Text>
+                <LikeMemoryButton
+                  withCount
+                  onToggleLike={onToggleLike}
+                  {...filter(LikeMemoryButton.fragments.item, this.props)}
+                />
+              </Box>
+              <MemoryCommentsSummary connection={commentsConnection} />
             </Box>
-            <MemoryComments
-              comments={commentsConnection}
-              memoryId={id}
-              babyId={babyId}
-              onLoadMore={this.toggleAllComments}
-              expanded={this.state.displayAllComments}
-            />
           </Card>
         </Box>
       </Box>

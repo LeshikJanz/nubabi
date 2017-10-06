@@ -59,6 +59,7 @@ export const RoundedContainer = ({
   children,
   style,
   onPress,
+  isDetailed,
 }: RoundedContainerProps) => {
   let Container;
   const containerProps = {};
@@ -78,6 +79,8 @@ export const RoundedContainer = ({
           overflow: 'hidden',
           borderTopLeftRadius: 4,
           borderTopRightRadius: 4,
+          borderBottomLeftRadius: isDetailed ? 4 : 0,
+          borderBottomRightRadius: isDetailed ? 4 : 0,
         },
         style,
       ]}
@@ -95,11 +98,16 @@ export const MemoryMediaImage = ({
   style,
   displayMoreIndicator,
   onMediaPress,
+  isDetailed,
 }: MemoryMediaImageProps) => {
   const imageSource = media.thumb || media;
 
   return (
-    <RoundedContainer style={style} onPress={onMediaPress}>
+    <RoundedContainer
+      style={style}
+      onPress={onMediaPress}
+      isDetailed={isDetailed}
+    >
       <Image
         source={{ uri: imageSource.url }}
         style={{
@@ -360,6 +368,7 @@ export const MemoryMedia = ({
   layout,
   openGallery,
   suggestedMemoryType,
+  isDetailed = false,
 }: Props) => {
   if (files.edges.length > 1 || suggestedMemoryType) {
     return (
@@ -377,6 +386,7 @@ export const MemoryMedia = ({
       media={head(files.edges).node}
       layout={layout}
       onMediaPress={() => openGallery({})}
+      isDetailed={isDetailed}
     />
   );
 };

@@ -9,13 +9,14 @@ extend type Mutation {
   createMemory(input: CreateMemoryInput!): CreateOrUpdateMemoryPayload
   updateMemory(input: UpdateMemoryInput!): CreateOrUpdateMemoryPayload
   deleteMemory(input: DeleteMemoryInput!): DeleteMemoryPayload
+  toggleMemoryLike(input: ToggleMemoryLikeInput!): ToggleMemoryLikePayload
 }
 
 extend type Baby {
   memory(id: ID!): Memory
 }
 
-type Memory implements Node, Timestampable {
+type Memory implements Node, Timestampable, Commentable, Likeable {
   id: ID!
   title: String!
   description: String
@@ -33,6 +34,10 @@ type Memory implements Node, Timestampable {
   updatedAt: DateTime
 
   suggestedMemoryType: String
+  likes(
+    before: String, after: String, first: Int, last: Int
+  ): LikeConnection!
+  isLikedByViewer: Boolean!,
 }
 
 # A connection to a list of items.
@@ -150,6 +155,18 @@ input DeleteMemoryInput {
 
 type DeleteMemoryPayload {
   memory: Memory
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+input ToggleMemoryLikeInput {
+  id: ID!
+  isLiked: Boolean!
+}
+
+type ToggleMemoryLikePayload {
+  edge: MemoryEdge
 
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String

@@ -22,6 +22,15 @@ export const appOnline = (online: boolean): AppOnlineAction => ({
   payload: { online },
 });
 
+export const appSuccess = (message: string) => ({
+  type: 'APP_SUCCESS',
+  payload: message,
+});
+
+export const alertShown = {
+  type: 'ALERT_SHOWN',
+};
+
 export const onAuth = (user: ?FirebaseUser, token?: string): OnAuthAction => ({
   type: 'ON_AUTH',
   payload: { user, token },
@@ -33,16 +42,18 @@ const appStartedEpic = (action$: any, deps: Deps) => {
   const onAuth$ = Observable.create(observer => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
-        firebaseAuth().currentUser.getToken().then(token => {
-          if (__DEV__) {
-            axios
-              .post('http://localhost:8080/graphql-config', {
-                token: `Bearer ${token}`,
-              })
-              .catch(() => {});
-          }
-          observer.next(onAuth(firebaseUser, token));
-        });
+        firebaseAuth()
+          .currentUser.getToken()
+          .then(token => {
+            if (__DEV__) {
+              axios
+                .post('http://localhost:8080/graphql-config', {
+                  token: `Bearer ${token}`,
+                })
+                .catch(() => {});
+            }
+            observer.next(onAuth(firebaseUser, token));
+          });
       } else {
         observer.next(onAuth(firebaseUser));
       }
@@ -57,4 +68,10 @@ const appStartedEpic = (action$: any, deps: Deps) => {
     .mergeMap(() => Observable.merge(...streams));
 };
 
-export const epics = [appStartedEpic];
+const resetSettingsEpic = (action$: any) => {
+  return action$
+    .filter(action => action.type === 'RESET_SETTINGS')
+    .mapTo(appSuccess('Settings has been reset'));
+};
+
+export const epics = [appStartedEpic, resetSettingsEpic];

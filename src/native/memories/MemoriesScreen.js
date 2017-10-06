@@ -14,6 +14,10 @@ export class MemoriesScreen extends PureComponent {
     title: 'Memories',
   };
 
+  handleNavigateToMemory = (id: string) => {
+    this.props.navigation.navigate('viewMemory', { id });
+  };
+
   handleNavigateToAddMemory = (suggestedMemoryId?: string) => {
     this.props.navigation.navigate('addMemory', { suggestedMemoryId });
   };
@@ -26,6 +30,7 @@ export class MemoriesScreen extends PureComponent {
     return (
       <Screen>
         <Memories
+          onViewMemory={this.handleNavigateToMemory}
           onAddMemory={this.handleNavigateToAddMemory}
           onEditMemory={this.handleNavigateToEditMemory}
         />

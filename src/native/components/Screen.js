@@ -36,8 +36,6 @@ export class Screen extends PureComponent {
         onLayout={this.handleLayout}
       >
         {children}
-        <Alert />
-        <NetworkIndicator />
       </View>
     );
   }

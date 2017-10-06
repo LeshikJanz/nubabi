@@ -284,3 +284,39 @@ input ImageInput {
   # A Base64-encoded data URI representing the image contents
   url: String
 }
+
+interface Likeable {
+  id: ID!
+  likes(
+    before: String, after: String, first: Int, last: Int
+  ): LikeConnection
+}
+
+# A connection to a list of items.
+type LikeConnection {
+  # Count of filtered result set without considering pagination arguments
+  count: Int
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [LikeEdge]
+}
+
+type LikeEdge {
+  # The user that performed the like
+  actor: User!
+
+  # The Likeable item at the end of the edge.
+  node: Likeable!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+interface Commentable {
+  comments(
+    before: String, after: String, first: Int, last: Int
+  ): CommentConnection!
+}

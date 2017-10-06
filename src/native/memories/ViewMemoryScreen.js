@@ -12,31 +12,14 @@ export class ViewMemoryScreen extends PureComponent {
   props: Props;
 
   static navigationOptions = {
-    title: 'Memory',
-  };
-
-  // TODO: remove duplication
-  handleNavigateToAddMemory = () => {
-    this.props.navigation.navigate('addMemory');
-  };
-
-  handleNavigateToEditMemory = (id: string) => {
-    this.props.navigation.navigate('editMemory', {
-      id,
-      parentKey: this.props.navigation.state.key,
-    });
+    title: 'Memory Details',
   };
 
   render() {
     return (
       <Screen>
-        <AddMemoryHeader onAddMemory={this.handleNavigateToAddMemory} />
-
         <Box flex={1} style={() => ({ marginTop: 9 })}>
-          <ViewMemory
-            id={this.props.navigation.state.params.id}
-            onEditMemory={this.handleNavigateToEditMemory}
-          />
+          <ViewMemory id={this.props.navigation.state.params.id} />
         </Box>
       </Screen>
     );

@@ -1,7 +1,6 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React from 'react';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
@@ -12,18 +11,22 @@ import {
 } from '../components';
 import { isEmptyProp } from '../../common/helpers/graphqlUtils';
 import Memory from './Memory';
+import MemoryDetail from './MemoryDetail';
+import toggleMemoryLike from './toggleMemoryLike';
 
 type Props = {
   id: string,
   memory: MemoryType,
   currentBabyId: string,
-  onEditMemory: (id: string) => void,
+  onToggleLike: Function, // TODO
 };
 
-export const ViewMemory = ({ memory, currentBabyId, onEditMemory }: Props) => (
-  <KeyboardAwareScrollView>
-    <Memory babyId={currentBabyId} onEditMemory={onEditMemory} {...memory} />
-  </KeyboardAwareScrollView>
+export const ViewMemory = ({ memory, currentBabyId, onToggleLike }: Props) => (
+  <MemoryDetail
+    babyId={currentBabyId}
+    onToggleMemoryLike={onToggleLike}
+    {...memory}
+  />
 );
 
 export default compose(
@@ -53,6 +56,7 @@ export default compose(
       }),
     },
   ),
+  toggleMemoryLike,
   showNoContentViewIf(isEmptyProp('memory')),
   displayLoadingState,
 )(ViewMemory);

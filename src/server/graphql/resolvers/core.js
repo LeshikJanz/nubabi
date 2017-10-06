@@ -120,7 +120,11 @@ const resolvers = {
     },
     id: globalIdField(),
   },
-
+  LikeEdge: {
+    actor: ({ node: { id: userId } }, _, { connectors: { firebase } }) => {
+      return firebase.getUser(userId);
+    },
+  },
   Mutation: {
     updateUser: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) => {

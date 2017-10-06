@@ -1,12 +1,16 @@
 // @flow
 import React from 'react';
-import { Box, HorizontalCardList, Text } from '../components';
-import { __, find, memoize, propEq } from 'ramda';
+import { LayoutAnimation, TouchableOpacity } from 'react-native';
+import { Box, HorizontalCardList, Icon, Text } from '../components';
+import { compose, find, propEq } from 'ramda';
+import { connect } from 'react-redux';
 import theme from '../../common/themes/defaultTheme';
 import SuggestedMemory from './SuggestedMemory';
+import { setSettingsValue } from '../../common/settings/reducer';
 
 type Props = {
   onAddMemory: (title?: string) => void,
+  onDismiss: () => void,
 };
 
 export type SuggestedMemoryType = {
@@ -48,18 +52,21 @@ export const suggestedMemories = [
   },
 ];
 
-// export const findSuggestedMemoryById = memoize(filter(propEquals('id', __))(suggestedMemories));
 export const findSuggestedMemoryById = (id: string) =>
   find(propEq('id', id), suggestedMemories);
-const renderHeader = () => (
-  <Box contentSpacing>
-    <Text bold color="secondary">
+
+const renderHeader = ({ onDismiss }) => (
+  <Box contentSpacing flexDirection="row" alignItems="center">
+    <Text flex={1} bold color="secondary">
       SUGGESTED MEMORIES
     </Text>
+    <TouchableOpacity onPress={onDismiss}>
+      <Icon name="ios-close" size={20} color={theme.colors.secondary} />
+    </TouchableOpacity>
   </Box>
 );
 
-export const SuggestedMemories = ({ onAddMemory }: Props) => {
+export const SuggestedMemories = ({ onAddMemory, onDismiss }: Props) => {
   // TODO: remove bound function
   return (
     <Box backgroundColor="white">
@@ -74,10 +81,17 @@ export const SuggestedMemories = ({ onAddMemory }: Props) => {
         renderRow={item => (
           <SuggestedMemory {...item} onAddMemory={onAddMemory} />
         )}
-        renderHeader={renderHeader}
+        renderHeader={() => renderHeader({ onDismiss })}
       />
     </Box>
   );
 };
 
-export default SuggestedMemories;
+export default compose(
+  connect(null, dispatch => ({
+    onDismiss: () => {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      dispatch(setSettingsValue(['memories', 'displaySuggestions'], false));
+    },
+  })),
+)(SuggestedMemories);

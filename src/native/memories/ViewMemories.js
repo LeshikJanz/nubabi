@@ -11,10 +11,12 @@ import {
 import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import MemoryList from './MemoryList';
 import Memory from './Memory';
+import toggleMemoryLike from './toggleMemoryLike';
 
 type Props = {
   memories: Array<MemoryType>,
   currentBabyId: string,
+  onViewMemory: (id: string) => void,
   onEditMemory: (id: string) => void,
 };
 
@@ -42,6 +44,8 @@ export class ViewMemories extends PureComponent {
       <MemoryList
         babyId={this.props.currentBabyId}
         memories={this.props.memories}
+        onViewMemory={this.props.onViewMemory}
+        onToggleLikeMemory={this.props.onToggleLike}
         onEditMemory={this.props.onEditMemory}
         onRefresh={this.props.data.refetch}
       />
@@ -72,6 +76,7 @@ export default compose(
       props: mapEdgesToProp('viewer.baby.memories', 'memories'),
     },
   ),
+  toggleMemoryLike,
   showNoContentViewIf(isEmptyProp('memories')),
   displayLoadingState,
 )(ViewMemories);
