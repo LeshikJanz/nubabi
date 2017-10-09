@@ -21,11 +21,11 @@ export const Memories = ({
   onEditMemory,
   shouldDisplaySuggestions,
 }: Props) => {
-  // TODO: we lost pull to refresh by having a ScrollView here
   const viewMemories = (
     <ViewMemories onViewMemory={onViewMemory} onEditMemory={onEditMemory} />
   );
 
+  // TODO: we lost pull to refresh by having a ScrollView here
   return (
     <Box flex={1}>
       <AddMemoryHeader onAddMemory={onAddMemory} />

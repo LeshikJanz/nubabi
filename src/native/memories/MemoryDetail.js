@@ -70,6 +70,7 @@ class MemoryDetail extends PureComponent {
               </Pill>
             </Box>
             <Box
+              flex={1}
               flexDirection="row"
               alignItems="center"
               borderColor="separator"
