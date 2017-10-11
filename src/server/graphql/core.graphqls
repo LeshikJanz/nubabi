@@ -26,6 +26,7 @@ type Query {
 type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   inviteUser(input: InviteUserInput!): InviteUserPayload
+  createComment(input: CreateCommentInput!): CreateOrUpdateCommentPayload
 }
 
 # Information about pagination in a connection.
@@ -319,4 +320,45 @@ interface Commentable {
   comments(
     before: String, after: String, first: Int, last: Int
   ): CommentConnection!
+}
+
+type Comment implements Timestampable {
+  id: ID!
+  text: String!
+  author: User!
+  commentable: Commentable!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# A connection to a list of items.
+type CommentConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [CommentEdge]
+
+  count: Int
+}
+
+type CommentEdge {
+  # The item at the end of the edge.
+  node: Comment!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input CreateCommentInput {
+  id: ID!
+  commentableType: String!
+  text: String!
+}
+
+type CreateOrUpdateCommentPayload {
+  edge: CommentEdge
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
 }

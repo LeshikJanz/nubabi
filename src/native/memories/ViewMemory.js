@@ -1,7 +1,7 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React from 'react';
-import { compose, path } from 'ramda';
+import { assoc, compose, merge, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import {
@@ -9,9 +9,12 @@ import {
   showNoContentViewIf,
   withCurrentBaby,
 } from '../components';
-import { isEmptyProp } from '../../common/helpers/graphqlUtils';
-import Memory from './Memory';
+import {
+  addEdgeToFragment,
+  isEmptyProp,
+} from '../../common/helpers/graphqlUtils';
 import MemoryDetail from './MemoryDetail';
+import MemoryComments from './MemoryComments';
 import toggleMemoryLike from './toggleMemoryLike';
 
 type Props = {
@@ -19,12 +22,19 @@ type Props = {
   memory: MemoryType,
   currentBabyId: string,
   onToggleLike: Function, // TODO
+  onAddComment: Function, // TODO
 };
 
-export const ViewMemory = ({ memory, currentBabyId, onToggleLike }: Props) => (
+export const ViewMemory = ({
+  memory,
+  currentBabyId,
+  onToggleLike,
+  onAddComment,
+}: Props) => (
   <MemoryDetail
     babyId={currentBabyId}
     onToggleMemoryLike={onToggleLike}
+    onAddComment={onAddComment}
     {...memory}
   />
 );
@@ -38,12 +48,12 @@ export default compose(
           baby(id: $babyId) {
             id
             memory(id: $id) {
-              ...MemoryItem
+              ...MemoryDetail
             }
           }
         }
       }
-      ${Memory.fragments.detail}
+      ${MemoryDetail.fragments.detail}
     `,
     {
       options: ({ id, currentBabyId }) => ({
@@ -57,6 +67,83 @@ export default compose(
     },
   ),
   toggleMemoryLike,
+  graphql(
+    gql`
+      mutation AddCommentToMemory($input: CreateCommentInput!) {
+        createComment(input: $input) {
+          edge {
+            cursor
+            node {
+              id
+              createdAt
+              text
+              author {
+                id
+                firstName
+                lastName
+                avatar {
+                  url
+                }
+              }
+              commentable {
+                ... on Node {
+                  id
+                }
+                comments {
+                  count
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    {
+      props: ({ mutate, ownProps: { id } }) => ({
+        onAddComment: input => {
+          // $FlowFixMe
+          return mutate({
+            variables: {
+              input: merge(input, { id, commentableType: 'memory' }),
+            },
+            update: addEdgeToFragment(
+              MemoryComments.fragments.detail,
+              'createComment',
+              ['comments'],
+              id,
+              'head',
+            ),
+            // TODO:
+            /*
+            optimisticResponse: {
+              __typename: 'Mutation',
+              createComment: {
+                __typename: 'CreateOrUpdateCommentPayload',
+                edge: {
+                  __typename: 'CommentEdge',
+                  node: {
+                    __typename: 'Comment',
+                    id: uuid.v4(),
+                    text: input.text,
+                    createdAt: new Date(),
+                  },
+                },
+              },
+            },
+            update: (store, data) => {
+              addEdgeToFragment(
+                MemoryComments.fragments.detail,
+                'createComment',
+                ['comments'],
+                id,
+              )(store, data);
+            },
+            */
+          });
+        },
+      }),
+    },
+  ),
   showNoContentViewIf(isEmptyProp('memory')),
   displayLoadingState,
 )(ViewMemory);

@@ -350,7 +350,7 @@ export const MemoryMediaMultiple = ({
             style={() => ({ overflow: 'hidden' })}
           >
             <MemoryMediaSingle
-              media={files.edges[2].node}
+              media={files.edges[displayLimit - 1].node}
               layout={layout}
               small
               displayMoreIndicator={displayMore}

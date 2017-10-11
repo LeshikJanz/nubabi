@@ -74,9 +74,9 @@ export const resolvers = {
         args,
       );
     },
-    comments: ({ comments = [] }, args) => {
+    comments: ({ id }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
-        Promise.resolve(comments),
+        firebase.getComments('MEMORY', id),
         args,
       );
     },
@@ -93,10 +93,6 @@ export const resolvers = {
         args,
       );
     },
-  },
-
-  CommentConnection: {
-    count: () => 4,
   },
 };
 

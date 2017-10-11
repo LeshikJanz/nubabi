@@ -140,5 +140,17 @@ path /memories {
     update() { isAuthor(this) }
     delete() { isAuthor(this) }
   }
+  /{id}/comments/{commentId} {
+    create() { isSignedIn() /* TODO */ }
+  }
+}
+
+path /comments {
+  /{id} {
+    read() { true /* TODO */ }
+    create() { isSignedIn() }
+    update() { isAuthor(this) }
+    delete() { isAuthor(this) }
+  }
 }
 

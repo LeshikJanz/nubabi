@@ -6,7 +6,17 @@ import {
   sortByTimestamp,
   toTimestamp,
 } from '../resolvers/common';
-import R, { assoc, compose, evolve, map, omit } from 'ramda';
+import R, {
+  always,
+  assoc,
+  compose,
+  cond,
+  equals,
+  evolve,
+  map,
+  merge,
+  omit,
+} from 'ramda';
 import { decode } from 'base-64';
 import Task from 'data.task';
 import {
@@ -607,7 +617,6 @@ const denormalizeArray = (firebase, denormalizedPath, normalizedPath) => {
     )
     .then(([...objs]) => objs)
     .catch(err => {
-      console.warn(err);
       return [];
     });
 };
@@ -637,6 +646,67 @@ const getMemoryLikes = async (
   id: string,
   args: ConnectionArguments,
 ) => {};
+
+const commentablePathFor = cond([[equals('MEMORY'), always('memories')]]);
+
+const createComment = async (firebase, input) => {
+  const currentUserId = getViewer(firebase).uid;
+  const commentableId = fromGlobalId(input.id).id;
+  const commentableType = input.commentableType.toUpperCase();
+  const commentId = firebase
+    .database()
+    .ref()
+    .child('comments')
+    .push().key;
+
+  const commentablePath = commentablePathFor(commentableType);
+
+  const updates = {};
+  updates[`/comments/${commentId}`] = merge(omit(['id'], input), {
+    commentableId,
+    id: commentId,
+    authorId: currentUserId,
+    createdAt: firebase.database.ServerValue.TIMESTAMP,
+  });
+  updates[`/${commentablePath}/${commentableId}/comments/${commentId}`] = true;
+
+  try {
+    await firebase
+      .database()
+      .ref()
+      .update(updates);
+  } catch (err) {
+    return null;
+  }
+
+  return get(firebase, `/comments/${commentId}`);
+};
+
+type CommentableTypes = 'MEMORY';
+
+const getComments = (
+  firebase,
+  commentableType: CommentableTypes,
+  commentableId: string,
+) => {
+  const prefix = commentablePathFor(commentableType);
+  const commentablePath = `/${prefix}/${commentableId}/comments`;
+
+  return denormalizeArray(firebase, commentablePath, '/comments').then(
+    compose(R.reverse, sortByTimestamp),
+  );
+};
+
+const getCommentable = (
+  firebase,
+  commentableType: CommentableTypes,
+  commentableId: string,
+) => {
+  return get(
+    firebase,
+    `${commentablePathFor(commentableType)}/${commentableId}`,
+  );
+};
 
 const firebaseConnector = firebase => {
   return {
@@ -731,6 +801,11 @@ const firebaseConnector = firebase => {
     isMemoryLikedByViewer: memoryId =>
       isMemoryLikedByViewer(firebase, memoryId),
     getMemoryLikes: memoryId => getMemoryLikes(firebase, memoryId),
+    createComment: input => createComment(firebase, input),
+    getComments: (commentableType, commentableId) =>
+      getComments(firebase, commentableType, commentableId),
+    getCommentable: (commentableType, commentableId) =>
+      getCommentable(firebase, commentableType, commentableId),
   };
 };
 

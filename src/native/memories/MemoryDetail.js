@@ -1,11 +1,12 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { Image } from 'react-native';
+import { Image, LayoutAnimation, TouchableOpacity } from 'react-native';
 import { AutoGrowingTextInput as TextInput } from 'react-native-autogrow-textinput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
+import { isEmpty } from 'ramda';
 import { Box, Icon, Pill, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { formatMemoryDate } from './Memory';
@@ -13,17 +14,84 @@ import MemoryMedia from '../components/MemoryMedia';
 import { findSuggestedMemoryById } from './SuggestedMemories';
 import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
 import LikesSummary from './LikesSummary';
+import MemoryComments from './MemoryComments';
+import LikeMemoryButton from './LikeMemoryButton';
 
 type Props = MemoryType & {
   babyId: String,
   onToggleMemoryLike: Function, // TODO
+  onAddComment: Function, // TODO
 };
 
 class MemoryDetail extends PureComponent {
   prop: Props;
 
+  static fragments = {
+    detail: gql`
+      fragment MemoryDetail on Memory {
+        id
+        title
+        createdAt
+        # TODO: how to combine pagination with GalleryScreen
+        files {
+          count
+          edges {
+            node {
+              id
+              contentType
+              url
+
+              ... on Image {
+                thumb {
+                  url
+                }
+                large {
+                  url
+                }
+              }
+
+              ... on Audio {
+                duration
+              }
+
+              ... on Video {
+                thumb {
+                  url
+                }
+                duration
+              }
+            }
+          }
+        }
+
+        suggestedMemoryType
+
+        ...MemoryComments
+        ...LikeMemoryButton
+      }
+      ${MemoryComments.fragments.detail}
+      ${LikeMemoryButton.fragments.item}
+    `,
+  };
+
   state = {
     comment: '',
+  };
+
+  commentInput = null;
+
+  handleAddComment = () => {
+    if (isEmpty(this.state.comment)) {
+      return;
+    }
+    const text = this.state.comment;
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.setState({ comment: '' }, () => {
+      // $FlowFixMe$
+      this.commentInput.blur();
+    });
+
+    this.props.onAddComment({ text });
   };
 
   render() {
@@ -38,6 +106,7 @@ class MemoryDetail extends PureComponent {
       suggestedMemoryType,
       createdAt,
       onToggleMemoryLike,
+      onAddComment,
     } = this.props;
 
     const date = formatMemoryDate(createdAt);
@@ -51,6 +120,7 @@ class MemoryDetail extends PureComponent {
         style={{ flex: 1 }}
         contentContainerStyle={{ flex: 1 }}
         extraHeight={79}
+        keyboardShouldPersistTaps="handled"
       >
         <Box flex={1}>
           <Box flex={1} contentSpacing>
@@ -120,6 +190,7 @@ class MemoryDetail extends PureComponent {
               isLikedByViewer={isLikedByViewer}
               onToggleLike={onToggleMemoryLike}
             />
+            <MemoryComments memoryId={id} babyId={babyId} />
           </Box>
         </Box>
         <Box
@@ -144,6 +215,7 @@ class MemoryDetail extends PureComponent {
                 borderRadius: 4,
               }}
               value={this.state.comment}
+              ref={ref => (this.commentInput = ref)}
               placeholder="Write a comment"
               placeholderTextColor={theme.colors.secondary}
               onChangeText={text => this.setState({ comment: text })}
@@ -151,11 +223,13 @@ class MemoryDetail extends PureComponent {
               maxHeight={60}
             />
             <Box
+              as={TouchableOpacity}
               marginLeft={0.5}
               paddingVertical={0.5}
               justifyContent="center"
               alignItems="center"
               style={() => ({ marginTop: 5 })}
+              onPress={this.handleAddComment}
             >
               <Icon name="md-send" size={24} color={theme.colors.secondary} />
             </Box>

@@ -232,7 +232,7 @@ export const withNetworkIndicator = curry(
     operation: () => Promise<*>,
   ) => () => {
     networkIndicatorToggler(true);
-    return operation().then(() => networkIndicatorToggler(false));
+    return operation().finally(() => networkIndicatorToggler(false));
   },
 );
 
