@@ -30,7 +30,7 @@ import {
   Text,
   withLayout,
 } from '../components';
-import { renderTextInput, required } from '../shared/forms';
+import { isEditable, renderTextInput, required } from '../shared/forms';
 import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
 import { findSuggestedMemoryById } from './SuggestedMemories';
@@ -131,7 +131,11 @@ class MemoryForm extends PureComponent {
     // allowed for a custom label component or `children` to be passed
     return (
       <View style={{ flex: 1 }}>
-        <ListItem onPress={this.openDatePicker} leftIcon="md-calendar">
+        <ListItem
+          editable={field.editable}
+          onPress={this.openDatePicker}
+          leftIcon="md-calendar"
+        >
           <Text color="secondary">{formatDate(field.input.value)}</Text>
         </ListItem>
         <View
@@ -172,7 +176,8 @@ class MemoryForm extends PureComponent {
 
     return (
       <SuggestedMemoryCardContainer>
-        {this.props.mode === 'edit' && (
+        {this.props.mode === 'edit' &&
+        isEditable(field) && (
           <FloatingRemoveButton
             onPress={this.handleRemoveSuggestedMemoryType}
           />
@@ -186,9 +191,10 @@ class MemoryForm extends PureComponent {
   };
 
   render() {
-    const { layout } = this.props;
     const { suggestedMemoryType } = this.props.initialValues;
     const submitText = this.props.mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
+    const isSubmitting = this.props.submitting;
+    const editableProps = { editable: !isSubmitting };
 
     return (
       <FormContainer>
@@ -196,11 +202,13 @@ class MemoryForm extends PureComponent {
           <Box flex={1} flexDirection="row" alignItems="center">
             {suggestedMemoryType && (
               <Field
+                {...editableProps}
                 name="suggestedMemoryType"
                 component={this.renderSuggestedMemoryType}
               />
             )}
             <Field
+              {...editableProps}
               name="title"
               multiline
               placeholder="Add a title or comment..."
@@ -211,6 +219,7 @@ class MemoryForm extends PureComponent {
           </Box>
           <Box flex={1}>
             <Field
+              {...editableProps}
               name="files"
               component={MemoryFormFileList}
               onRemoveMedia={this.handleRemoveMedia}
@@ -218,14 +227,27 @@ class MemoryForm extends PureComponent {
           </Box>
           <Box>
             <List>
-              <Field name="createdAt" component={this.renderDatePicker} />
-              <ListItem leftIcon="ios-images" onPress={this.handleAddMedia}>
+              <Field
+                name="createdAt"
+                component={this.renderDatePicker}
+                {...editableProps}
+              />
+              <ListItem
+                leftIcon="ios-images"
+                onPress={this.handleAddMedia}
+                {...editableProps}
+              >
                 <Text color="secondary">Photo/Video</Text>
               </ListItem>
-              <ListItem leftIcon="ios-medal">
+              <ListItem
+                leftIcon="ios-medal"
+                onPress={() => {}}
+                {...editableProps}
+              >
                 <Text color="secondary">Event</Text>
               </ListItem>
               <ListItem
+                {...editableProps}
                 leftIcon="ios-mic"
                 onPress={this.handleAddVoiceNote}
                 last

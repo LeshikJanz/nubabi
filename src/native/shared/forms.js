@@ -43,8 +43,13 @@ export const constantValues = (...constants: Array<string>) => (
     : undefined;
 };
 
+export const isEditable = field => {
+  return typeof field.editable !== 'undefined' ? field.editable : true;
+};
+
 export const renderTextInput = field => {
   // we can access errors on field.meta.errors and dirty state and field.meta.touched
+  console.log(field);
   const { label, placeholder } = field;
   const { touched, error } = field.meta;
 
@@ -77,20 +82,18 @@ export const renderTextInput = field => {
   }
 
   const multiline = field.multiline || false;
+  const editable =
+    typeof field.editable !== 'undefined' ? field.editable : true;
 
   return (
     <View style={containerStyle}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-        {label
-          ? <Text style={[...labelStyle, { flex: 1 }]}>
-              {label}
-            </Text>
-          : null}
-        {hasExplicitError
-          ? <Text style={labelStyle}>
-              {error.toUpperCase()}
-            </Text>
-          : null}
+        {label ? (
+          <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
+        ) : null}
+        {hasExplicitError ? (
+          <Text style={labelStyle}>{error.toUpperCase()}</Text>
+        ) : null}
       </View>
       <TextInput
         {...typeProps}
@@ -99,6 +102,7 @@ export const renderTextInput = field => {
         placeholder={placeholder}
         multiline={multiline}
         style={styles.textInput}
+        editable={editable}
       />
     </View>
   );
@@ -113,9 +117,7 @@ export const renderDatePicker = field => {
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={[styles.inputLabel, { flex: 1 }]}>
-        {label}
-      </Text>
+      <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
 
       <DatePicker
         onChange={field.input.onChange}

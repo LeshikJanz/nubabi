@@ -1,11 +1,12 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { TouchableOpacity, Switch } from 'react-native';
 import Box from './Box';
 import Text from './Text';
 import ListItemArrow from './ListItemArrow';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../../common/themes/defaultTheme';
+import { isEditable } from '../shared/forms';
 
 type Props = {
   children: any,
@@ -22,10 +23,15 @@ type Props = {
   rightText?: string,
   onPress?: Function,
   padding?: number,
+  editable: boolean,
 };
 
-class ListItem extends Component {
+class ListItem extends PureComponent {
   props: Props;
+
+  static defaultProps = {
+    editable: true,
+  };
 
   renderLeftAvatar(leftAvatar: React.Element<*>) {
     return (
@@ -107,7 +113,7 @@ class ListItem extends Component {
       padding,
     };
 
-    if (onPress) {
+    if (isEditable(this.props) && onPress) {
       containerProps.as = TouchableOpacity;
       containerProps.onPress = onPress;
     }

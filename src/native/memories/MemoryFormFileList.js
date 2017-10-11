@@ -5,14 +5,20 @@ import { Box, FloatingRemoveButton } from '../components';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { type MediaPickerItem } from '../components/mediaPicker';
 import { MemoryMediaSingle } from '../components/MemoryMedia';
+import { isEditable } from '../shared/forms';
 
 type Props = {
   input: any,
   onRemoveMedia: (index: number) => void,
+  editable: boolean,
 };
 
 class MemoryFormFileList extends PureComponent {
   props: Props;
+
+  static defaultProps = {
+    editable: true,
+  };
 
   renderFiles() {
     let fileList;
@@ -37,7 +43,9 @@ class MemoryFormFileList extends PureComponent {
               },
             })}
           >
-            <FloatingRemoveButton onPress={onRemove} />
+            {isEditable(this.props) && (
+              <FloatingRemoveButton onPress={onRemove} />
+            )}
             <MemoryMediaSingle
               media={file}
               style={{
