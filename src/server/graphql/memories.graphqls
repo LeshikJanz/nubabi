@@ -120,6 +120,7 @@ input UpdateMemoryInput {
   createdAt: DateTime
   files: [FileInputBase64]
   removeFiles: [ID],
+  suggestedMemoryType: String,
 }
 
 input DeleteMemoryInput {
