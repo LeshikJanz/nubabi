@@ -67,6 +67,7 @@ class Memory extends PureComponent {
     `,
     form: gql`
       fragment MemoryForm on Memory {
+        id
         title
         createdAt
         suggestedMemoryType

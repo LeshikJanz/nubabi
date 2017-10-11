@@ -1,4 +1,5 @@
 // @flow
+import type { ToggleMemoryLikeInput } from '../../common/types';
 import React from 'react';
 import { LayoutAnimation, TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';

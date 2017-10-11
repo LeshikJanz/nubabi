@@ -5,7 +5,8 @@ import type {
   Memory as MemoryType,
 } from '../../common/types';
 import React from 'react';
-import { assoc, compose, evolve, filter, path, pick, uniq } from 'ramda';
+import { InteractionManager } from 'react-native';
+import { assoc, compose, evolve, filter, omit, path, pick, uniq } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter as gqlFilter } from 'graphql-anywhere';
 import {
@@ -15,7 +16,11 @@ import {
 } from '../components';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
-import { flattenEdges, isEmptyProp } from '../../common/helpers/graphqlUtils';
+import {
+  flattenEdges,
+  isEmptyProp,
+  withNetworkIndicatorActions,
+} from '../../common/helpers/graphqlUtils';
 import { processFiles } from '../shared/fileUtils';
 
 type Props = {
@@ -51,6 +56,7 @@ const transforms = {
 
 export default compose(
   withCurrentBaby,
+  withNetworkIndicatorActions,
   graphql(
     gql`
       query EditMemory($id: ID!, $babyId: ID!) {
@@ -99,12 +105,29 @@ export default compose(
       ${Memory.fragments.form}
     `,
     {
-      props: ({ mutate, ownProps: { id } }) => ({
+      props: ({
+        mutate,
+        ownProps: { id, toggleNetworkActivityIndicator },
+      }) => ({
         onSubmit: async values => {
-          const input = assoc('id', id, evolve(transforms, values));
-          input.files = await processFiles(input.files);
+          return InteractionManager.runAfterInteractions({
+            gen: async () => {
+              toggleNetworkActivityIndicator(true);
+              const input = assoc('id', id, evolve(transforms, values));
+              input.files = await processFiles(input.files);
 
-          return mutate({ variables: { input } });
+              // $FlowFixMe$
+              return mutate({
+                variables: { input },
+                // TODO: this is NOT the best solutions but we're hitting too many
+                // weird bugs with this (i.e Nothing found on memory list if you
+                // navigate back prior to result getting back. Tried optimistic
+                // response and #update as well without too much difference,
+                // this is the simplest that makes it work.
+                refetchQueries: ['ViewMemories'],
+              }).finally(() => toggleNetworkActivityIndicator(false));
+            },
+          });
         },
       }),
     },

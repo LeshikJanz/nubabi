@@ -66,7 +66,6 @@ export default compose(
         }
       }
       ${ViewMemories.fragments.list}
-
     `,
     {
       options: ({ currentBabyId }) => ({

@@ -16,7 +16,10 @@ import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
-import { addEdgeToFragment } from '../../common/helpers/graphqlUtils';
+import {
+  addEdgeToFragment,
+  getTypenameForFile,
+} from '../../common/helpers/graphqlUtils';
 import { processFiles } from '../shared/fileUtils';
 import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 
@@ -117,18 +120,10 @@ export default compose(
                       count: input.files.length,
                       // $FlowFixMe$
                       edges: input.files.map(file => {
-                        let typename = 'GenericFile';
-                        if (file.contentType.startsWith('image')) {
-                          typename = 'Image';
-                        } else if (file.contentType.startsWith('video')) {
-                          typename = 'Video';
-                        } else if (file.contentType.startsWith('audio')) {
-                          typename = 'Audio';
-                        }
                         return {
                           __typename: 'FileEdge',
                           node: {
-                            __typename: typename,
+                            __typename: getTypenameForFile(file),
                             id: uuid.v4(),
                             ...file,
                             thumb: null,

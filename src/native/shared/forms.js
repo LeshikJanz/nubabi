@@ -49,7 +49,6 @@ export const isEditable = field => {
 
 export const renderTextInput = field => {
   // we can access errors on field.meta.errors and dirty state and field.meta.touched
-  console.log(field);
   const { label, placeholder } = field;
   const { touched, error } = field.meta;
 

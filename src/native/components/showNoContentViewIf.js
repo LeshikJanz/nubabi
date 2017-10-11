@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { branch, renderComponent } from 'recompose';
-import { pathOr } from 'ramda';
 import NoContentView from './NoContentView';
 
 type TesterFn = (props: any) => boolean;
@@ -9,6 +8,9 @@ type TesterFn = (props: any) => boolean;
 const showNoContentViewIf = (testerFn: TesterFn, Component: *) => {
   return branch(
     props => {
+      if (Object.keys(props).includes('memories')) {
+        console.log(props);
+      }
       if (props.data && props.data.loading) {
         return false;
       }

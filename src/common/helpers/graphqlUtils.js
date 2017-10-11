@@ -1,5 +1,8 @@
 // @flow
 import {
+  always,
+  compose,
+  cond,
   curry,
   curryN,
   either,
@@ -16,6 +19,8 @@ import {
   prop,
   propEq,
   set,
+  startsWith,
+  T,
   view,
   without,
 } from 'ramda';
@@ -239,3 +244,15 @@ export const withNetworkIndicator = curry(
 export const withNetworkIndicatorActions = connect(null, {
   toggleNetworkActivityIndicator,
 });
+
+export const getTypenameForFile = (file: { contentType: string }) => {
+  return compose(
+    cond([
+      [startsWith('image'), always('Image')],
+      [startsWith('video'), always('Video')],
+      [startsWith('audio'), always('Audio')],
+      [T, always('GenericFile')],
+    ]),
+    prop('contentType'),
+  )(file);
+};
