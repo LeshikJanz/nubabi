@@ -110,6 +110,7 @@ export default compose(
         ownProps: { id, toggleNetworkActivityIndicator },
       }) => ({
         onSubmit: async values => {
+          // $FlowFixMe$
           return InteractionManager.runAfterInteractions({
             gen: async () => {
               toggleNetworkActivityIndicator(true);

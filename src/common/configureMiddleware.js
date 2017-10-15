@@ -41,6 +41,7 @@ const configureMiddleware = (
   if (enableLogger) {
     const logger = createLoggerMiddleware({
       collapsed: true,
+      predicate: (getState, action) => action.type !== '@@redux-form/CHANGE',
     });
     middleware.push(logger);
   }
