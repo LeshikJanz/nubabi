@@ -1,12 +1,11 @@
 // @flow
 import type { State } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { Text } from 'react-native';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
+import { onlyUpdateForKeys } from 'recompose';
 import theme from '../../common/themes/defaultTheme';
 import DropdownAlert from 'react-native-dropdownalert';
-import { alertShown } from '../../common/app/actions';
 
 type AlertProps = {
   error?: Error,
@@ -22,7 +21,7 @@ export class Alert extends PureComponent {
 
     if (error || success) {
       if (error && error !== oldError) {
-        const message = error.message;
+        const message = error.message ? error.message : error;
         this.showError(message);
       }
 
@@ -67,4 +66,5 @@ export default compose(
     error: state.app.error,
     success: state.app.success,
   })),
+  onlyUpdateForKeys(['success', 'error', 'info']),
 )(Alert);

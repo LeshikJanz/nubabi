@@ -5,10 +5,27 @@ import type {
   Memory as MemoryType,
 } from '../../common/types';
 import React from 'react';
-import { InteractionManager } from 'react-native';
-import { assoc, compose, evolve, filter, omit, path, pick, uniq } from 'ramda';
+import {
+  ap,
+  assoc,
+  compose,
+  evolve,
+  filter,
+  findIndex,
+  lensIndex,
+  lensPath,
+  map,
+  merge,
+  omit,
+  path,
+  pathEq,
+  set,
+  uniq,
+  view,
+} from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter as gqlFilter } from 'graphql-anywhere';
+import uuid from 'react-native-uuid';
 import {
   displayLoadingState,
   showNoContentViewIf,
@@ -16,12 +33,15 @@ import {
 } from '../components';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
+import { ViewMemories } from './ViewMemories';
+import RecentMemories from '../profile/RecentMemories';
 import {
   flattenEdges,
+  getTypenameForFile,
   isEmptyProp,
+  replaceEdgeInFragment,
   withNetworkIndicatorActions,
 } from '../../common/helpers/graphqlUtils';
-import { processFiles } from '../shared/fileUtils';
 
 type Props = {
   memory: MemoryType,
@@ -98,36 +118,77 @@ export default compose(
             node {
               id
               ...MemoryForm
+              ...MemoryItem
             }
           }
         }
       }
       ${Memory.fragments.form}
+      ${Memory.fragments.detail}
     `,
     {
       props: ({
         mutate,
-        ownProps: { id, toggleNetworkActivityIndicator },
+        ownProps: { id, toggleNetworkActivityIndicator, currentBabyId, goBack },
       }) => ({
         onSubmit: async values => {
           // $FlowFixMe$
-          return InteractionManager.runAfterInteractions({
-            gen: async () => {
-              toggleNetworkActivityIndicator(true);
-              const input = assoc('id', id, evolve(transforms, values));
-              input.files = await processFiles(input.files);
+          toggleNetworkActivityIndicator(true);
+          goBack();
 
-              // $FlowFixMe$
-              return mutate({
-                variables: { input },
-                // TODO: this is NOT the best solutions but we're hitting too many
-                // weird bugs with this (i.e Nothing found on memory list if you
-                // navigate back prior to result getting back. Tried optimistic
-                // response and #update as well without too much difference,
-                // this is the simplest that makes it work.
-                refetchQueries: ['ViewMemories'],
-              }).finally(() => toggleNetworkActivityIndicator(false));
+          const input = assoc('id', id, evolve(transforms, values));
+          const newFiles = compose(
+            edges => ({
+              __typename: 'FileConnection',
+              count: edges.length,
+              edges,
+            }),
+            map(file => ({
+              __typename: 'FileEdge',
+              node: merge(file, {
+                __typename: getTypenameForFile(file),
+                id: file.id || uuid.v4(),
+                thumb: file.thumb || null,
+                large: file.large || null,
+              }),
+            })),
+            filter(file => !input.removeFiles.includes(file.id)),
+          )(values.files);
+
+          // $FlowFixMe$
+          return mutate({
+            variables: { input },
+            optimisticResponse: {
+              __typename: 'Mutation',
+              updateMemory: {
+                __typename: 'CreateOrUpdateMemoryPayload',
+                edge: {
+                  __typename: 'MemoryEdge',
+                  node: {
+                    __typename: 'Memory',
+                    id,
+                    ...omit(['removeFiles'], values),
+                    files: newFiles,
+                  },
+                },
+              },
             },
+            // $FlowFixMe$
+            update: (store, data) => {
+              const memory = path(['data', 'updateMemory', 'edge'], data);
+
+              if (memory) {
+                replaceEdgeInFragment(
+                  memory,
+                  RecentMemories.fragments.memories,
+                  currentBabyId,
+                  ['memories', 'edges'],
+                  { fragmentName: 'RecentMemories' },
+                )(store, data);
+              }
+            },
+          }).finally(() => {
+            toggleNetworkActivityIndicator(false);
           });
         },
       }),

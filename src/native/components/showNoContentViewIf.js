@@ -8,9 +8,6 @@ type TesterFn = (props: any) => boolean;
 const showNoContentViewIf = (testerFn: TesterFn, Component: *) => {
   return branch(
     props => {
-      if (Object.keys(props).includes('memories')) {
-        console.log(props);
-      }
       if (props.data && props.data.loading) {
         return false;
       }

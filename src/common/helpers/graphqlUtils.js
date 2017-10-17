@@ -7,9 +7,11 @@ import {
   curryN,
   either,
   find,
+  findIndex,
   isEmpty as isEmptyOrig,
   isNil,
   last,
+  lensIndex,
   lensPath,
   memoize,
   omit,
@@ -185,6 +187,70 @@ export const removeEdgeFromFragment = (
   });
 };
 
+const findEdgeIndex = (id, edges) => {
+  return findIndex(pathEq(['node', 'id'], id), edges);
+};
+
+export const replaceEdge = (
+  data: any,
+  edgePath: Array<string>,
+  edge: Object,
+) => {
+  const edgesPath = lensPath(edgePath);
+  const oldEdges = view(edgesPath, data);
+  const edgeIndex = findEdgeIndex(edge.node.id, oldEdges);
+  const indexLens = lensIndex(edgeIndex);
+
+  if (edgeIndex !== -1) {
+    const newEdges = set(indexLens, edge, oldEdges);
+    return set(edgesPath, newEdges, data);
+  }
+
+  return null;
+};
+
+const updateFragment = curry(
+  (
+    updaterFn: Function,
+    fragment: DocumentNode,
+    rootId: string,
+    fragmentOptions?:
+      | DataProxyReadFragmentOptions
+      | DataProxyWriteFragmentOptions = {},
+  ) => (store, data) => {
+    const oldData = store.readFragment({
+      fragment,
+      id: rootId,
+      ...fragmentOptions,
+    });
+    console.log(oldData);
+    const newData = updaterFn(oldData);
+    console.log(newData);
+    if (newData) {
+      store.writeFragment({
+        fragment,
+        id: rootId,
+        ...fragmentOptions,
+        data: newData,
+      });
+    }
+  },
+);
+
+export const replaceEdgeInFragment = (
+  edge: mixed,
+  fragment: DocumentNode,
+  rootId: string,
+  edgePath: Array<string>,
+  fragmentOptions?:
+    | DataProxyReadFragmentOptions
+    | DataProxyWriteFragmentOptions = {},
+) => {
+  return updateFragment(fragmentData =>
+    replaceEdge(fragmentData, edgePath, edge),
+  );
+};
+
 export const addEdgeToMutationResult = (response: any) => {
   // TODO: cursors?
   return {
@@ -255,4 +321,19 @@ export const getTypenameForFile = (file: { contentType: string }) => {
     ]),
     prop('contentType'),
   )(file);
+};
+
+export const optimisticResponse = (
+  operationName: string,
+  payloadName: string,
+  response,
+  variables,
+) => {
+  return {
+    __typename: 'Mutation',
+    [operationName]: {
+      __typename: payloadName,
+      ...response,
+    },
+  };
 };

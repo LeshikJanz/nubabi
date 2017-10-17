@@ -47,6 +47,7 @@ persistStore(
     storage: AsyncStorage,
   },
   () => {
+    // $FlowFixMe$
     store.dispatch(({ type: 'APP_STARTED' }: AppStartedAction));
   },
 );

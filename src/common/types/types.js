@@ -147,6 +147,7 @@ export type AppState = {
   +error: ?Error,
   +online: boolean,
   +started: boolean,
+  +success: ?string,
 };
 
 export type ConfigState = {

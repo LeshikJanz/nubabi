@@ -1,6 +1,7 @@
 // @flow
 import type { NavigationProp } from '../../common/types';
 import React, { Component } from 'react';
+import { InteractionManager } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 import { path } from 'ramda';
 import { Screen } from '../components';
@@ -31,12 +32,26 @@ export class EditMemoryScreen extends Component {
     this.props.navigation.navigate('voiceRecording', { id });
   };
 
+  handleGoBack = () => {
+    InteractionManager.runAfterInteractions(() => {
+      if (this.props.navigation.state.routeName === 'editMemory') {
+        this.props.navigation.goBack(
+          this.props.navigation.state.params.parentKey,
+        );
+      }
+    });
+  };
+
   render() {
     const id = this.props.navigation.state.params.id;
 
     return (
       <Screen>
-        <EditMemory id={id} onAddVoiceNote={this.handleAddVoiceNote} />
+        <EditMemory
+          id={id}
+          onAddVoiceNote={this.handleAddVoiceNote}
+          goBack={this.handleGoBack}
+        />
       </Screen>
     );
   }

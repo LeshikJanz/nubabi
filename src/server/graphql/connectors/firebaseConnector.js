@@ -73,10 +73,13 @@ const toFirebaseBaby = values => {
   );
 };
 
-const uploadFile = (firebase, refPath, dataUrl) => {
-  return new Promise((resolve, reject) => {
+const uploadFile = (firebase, refPath, file) => {
+  return new Promise(async (resolve, reject) => {
+    const fileUrl = file.url;
+
+    console.log('uploading', file.url);
     /*
-     * We can't use data_url with putSring since Firebase is unconditionally
+     * We can't use data_url with putString since Firebase is unconditionally
      * using `atob` which fails on RN when run on JSC.
      */
     /* eslint-disable no-useless-escape */
@@ -86,20 +89,51 @@ const uploadFile = (firebase, refPath, dataUrl) => {
     /* eslint-enable no-useless-escape */
 
     // data_url is in format data:image/jpeg;base64,<content>
-    const match = dataUrlRegExp.exec(dataUrl);
-    const contentType = match[1];
+    const match = dataUrlRegExp.exec(fileUrl);
 
-    const content = new Uint8Array(
-      decode(match[3])
-        .split('')
-        .map(c => c.charCodeAt(0)),
-    );
-
-    const metadata = { contentType };
     const ref = firebase
       .storage()
       .ref()
       .child(refPath);
+
+    const isDataUri = !!match;
+
+    let contentType;
+    let content;
+    let blob;
+
+    const OldXMLHttpRequest = window.XMLHttpRequest;
+    const OldBlob = window.Blob;
+
+    if (isDataUri) {
+      contentType = match[1];
+
+      content = new Uint8Array(
+        decode(match[3])
+          .split('')
+          .map(c => c.charCodeAt(0)),
+      );
+    } else {
+      // TODO: check we're running under React Native, dont rely on input only
+      const { Platform } = require('react-native');
+      const RNFetchBlob = require('react-native-fetch-blob').default;
+      const Blob = RNFetchBlob.polyfill.Blob;
+      window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+      window.Blob = Blob;
+
+      const uploadUri = file.url;
+      const uri = RNFetchBlob.wrap(uploadUri);
+      contentType = file.contentType || 'application/octet-stream';
+
+      try {
+        blob = await Blob.build(uri, { type: contentType });
+        content = blob;
+      } catch (err) {
+        reject(err);
+      }
+    }
+
+    const metadata = { contentType };
     const uploadTask = ref.put(content);
 
     uploadTask.on(
@@ -108,13 +142,23 @@ const uploadFile = (firebase, refPath, dataUrl) => {
         /* progress */
       },
       error => {
+        window.XMLHttpRequest = OldXMLHttpRequest;
+        window.Blob = OldBlob;
         console.log(error);
         reject(error);
       },
       () => {
+        // We did a Blob upload, close it and restore polyfilled values
+        if (blob) {
+          blob.close();
+          window.XMLHttpRequest = OldXMLHttpRequest;
+          window.Blob = OldBlob;
+        }
+        console.log('uploaded', file.url);
         ref
           .updateMetadata(metadata)
-          .then(resolve(uploadTask.snapshot.downloadURL));
+          .then(resolve(uploadTask.snapshot.downloadURL))
+          .catch(err => console.log(err));
       },
     );
   });
@@ -157,7 +201,7 @@ const createOrUpdateBaby = async (firebase, values, id) => {
 
   images.forEach(key => {
     if (isNewImage(values[key])) {
-      const content = values[key].url;
+      const content = values[key];
       promises.unshift(
         uploadFile(firebase, `${path}/${key}`, content).then(url => {
           return firebase
@@ -277,7 +321,7 @@ const updateUser = async (firebase, input) => {
     const avatarUrl = await uploadFile(
       firebase,
       `users/${currentUser.uid}/avatar`,
-      input.avatar.url,
+      input.avatar,
     );
     if (avatarUrl) {
       updates[`users/${currentUser.uid}/avatar/url`] = avatarUrl;
@@ -340,7 +384,7 @@ const uploadMemoryFiles = async (
         const url = await uploadFile(
           firebase,
           [storagePath, file.name].join('/'),
-          file.url,
+          file,
         );
         const id = firebase
           .database()
