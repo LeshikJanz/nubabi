@@ -1,8 +1,11 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+// @flow
+
+// TODO: remove after deps update
+// $FlowFixMe$
+console.ignoredYellowBox = [
+  'Warning: checkPropTypes',
+  'Using <Image> with children',
+];
 
 import { AppRegistry } from 'react-native';
 import setup from './src/native/main';
