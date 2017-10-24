@@ -18,3 +18,40 @@ fragment Memories on Baby {
   }
 }
 
+
+fragment MemoryItem on Memory {
+  id
+  title
+  createdAt
+  # TODO: how to combine pagination with GalleryScreen
+  files {
+    count
+    edges {
+      node {
+        id
+        contentType
+        url
+
+        ... on Image {
+          thumb {
+            url
+          }
+          large {
+            url
+          }
+        }
+
+        ... on Audio {
+          duration
+        }
+
+        ... on Video {
+          thumb {
+            url
+          }
+          duration
+        }
+      }
+    }
+  }
+}
