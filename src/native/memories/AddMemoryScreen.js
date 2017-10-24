@@ -1,6 +1,7 @@
 // @flow
 import type { NavigationProp } from '../../common/types';
 import React, { PureComponent } from 'react';
+import { InteractionManager } from 'react-native';
 import { compose, path } from 'ramda';
 import { withProps } from 'recompose';
 import { Screen } from '../components';
@@ -26,12 +27,16 @@ export class AddMemoryScreen extends PureComponent {
     this.props.navigation.navigate('voiceRecording');
   };
 
+  handleGoBack = () => {
+    InteractionManager.runAfterInteractions(this.props.navigation.goBack);
+  };
+
   render() {
     return (
       <Screen>
         <AddMemory
           onAddVoiceNote={this.handleAddVoiceNote}
-          goBack={this.props.navigation.goBack}
+          goBack={this.handleGoBack}
           suggestedMemoryType={this.props.suggestedMemoryType}
         />
       </Screen>

@@ -6,6 +6,7 @@ import type {
 } from '../../common/types';
 import type { SuggestedMemoryType } from './SuggestedMemories';
 import React from 'react';
+import { InteractionManager } from 'react-native';
 import { gql, graphql } from 'react-apollo';
 import {
   assoc,
@@ -214,11 +215,12 @@ export default compose(
 
                 return Promise.resolve();
               })
-              .catch(() =>
+              .catch(err => {
+                console.log(err);
                 appError(
                   'There was an error creating this memory. Please try again later.',
-                ),
-              )
+                );
+              })
               // $FlowFixMe$
               .finally(() => toggleNetworkActivityIndicator(false))
           );
