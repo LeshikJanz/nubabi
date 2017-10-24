@@ -23,7 +23,6 @@ import {
   toCentimeters,
   toKilograms,
 } from '../../../common/helpers/measurement';
-import isReactNative from '../../../common/app/isReactNative';
 
 const get = (firebase, path: string) =>
   firebase
@@ -336,6 +335,34 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
     .ref()
     .update(updates);
   return friend;
+};
+
+const getBabies = firebase => {
+  const currentUserId = getViewer(firebase).uid;
+
+  return firebase
+    .database()
+    .ref()
+    .child(`/users/${currentUserId}/babies`)
+    .once('value')
+    .then(snap => Object.keys(snap.val()))
+    .then(babyIds =>
+      Promise.all(
+        babyIds.map(babyId => {
+          return firebase
+            .database()
+            .ref()
+            .child(`/babies/${babyId}`)
+            .once('value')
+            .then(returnValWithKeyAsId);
+        }),
+      ),
+    )
+    .then(([...babies]) => babies)
+    .catch(err => {
+      console.warn(err);
+      return [];
+    });
 };
 
 const upsert = (basePath: string, obj: Object) => {
@@ -699,6 +726,32 @@ const createComment = async (firebase, input) => {
   return get(firebase, `/comments/${commentId}`);
 };
 
+const getRelationship = (firebase, id) => {
+  return firebase
+    .database()
+    .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
+    .once('value')
+    .then(returnVal)
+    .then(val => {
+      // To ease migration, will be removed
+      const validRelationships = [
+        'Parent',
+        'Grandparent',
+        'Guardian',
+        'Relative',
+        'Nanny',
+        'AuPair',
+        'Other',
+      ];
+
+      if (!validRelationships.includes(val)) {
+        return 'Other';
+      }
+
+      return val;
+    });
+};
+
 type CommentableTypes = 'MEMORY';
 
 const getComments = (
@@ -737,79 +790,22 @@ const firebaseConnector = firebase => {
     getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
     inviteUser: input => inviteUser(firebase, input),
-    getBabies: () => {
-      const currentUserId = getViewer(firebase).uid;
-
-      return firebase
-        .database()
-        .ref()
-        .child(`/users/${currentUserId}/babies`)
-        .once('value')
-        .then(snap => Object.keys(snap.val()))
-        .then(babyIds =>
-          Promise.all(
-            babyIds.map(babyId => {
-              return firebase
-                .database()
-                .ref()
-                .child(`/babies/${babyId}`)
-                .once('value')
-                .then(returnValWithKeyAsId);
-            }),
-          ),
-        )
-        .then(([...babies]) => babies)
-        .catch(err => {
-          console.warn(err);
-          return [];
-        });
-    },
-    getBaby: (id: string) => {
-      return getBaby(firebase, id);
-    },
-    getRelationship: (id: string) => {
-      return firebase
-        .database()
-        .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
-        .once('value')
-        .then(returnVal)
-        .then(val => {
-          // To ease migration, will be removed
-          const validRelationships = [
-            'Parent',
-            'Grandparent',
-            'Guardian',
-            'Relative',
-            'Nanny',
-            'AuPair',
-            'Other',
-          ];
-
-          if (!validRelationships.includes(val)) {
-            return 'Other';
-          }
-
-          return val;
-        });
-    },
+    getBabies: () => getBabies(firebase),
+    getBaby: (id: string) => getBaby(firebase, id),
+    getRelationship: (id: string) => getRelationship(firebase, id),
     getBabyWeights: (id: string) => getBabyWeights(firebase, id),
     getBabyHeights: (id: string) => getBabyHeights(firebase, id),
     getMemories: (babyId, args) => getMemories(firebase, babyId, args),
     getMemory: id => getMemory(firebase, id),
-    createBaby: (values: mixed) => {
-      return createOrUpdateBaby(firebase, values);
-    },
-    updateBaby: (id: string, values: mixed) => {
-      return createOrUpdateBaby(firebase, values, id);
-    },
+    createBaby: (values: mixed) => createOrUpdateBaby(firebase, values),
+    updateBaby: (id: string, values: mixed) =>
+      createOrUpdateBaby(firebase, values, id),
     recordMeasurement: (
       id: string,
       type: MeasurementType,
       unit: MeasurementUnit,
       value: number,
-    ) => {
-      return recordMeasurement(firebase, id, type, unit, value);
-    },
+    ) => recordMeasurement(firebase, id, type, unit, value),
     createMemory: (babyId, input) => createMemory(firebase, babyId, input),
     updateMemory: (id, input) => updateMemory(firebase, id, input),
     deleteMemory: id => deleteMemory(firebase, id),
