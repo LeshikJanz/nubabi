@@ -111,8 +111,6 @@ const uploadFile = (firebase, refPath, file) => {
       .ref()
       .child(refPath);
 
-    console.log('uploading', file.url);
-
     // TODO: RN check
     const RNFetchBlob = require('react-native-fetch-blob').default;
     const uploadUri = file.url;
@@ -132,7 +130,6 @@ const uploadFile = (firebase, refPath, file) => {
           reject(error);
         },
         () => {
-          console.log('uploaded', file.url);
           blob.close();
           ref
             .updateMetadata(metadata)
@@ -383,7 +380,6 @@ const uploadMemoryFiles = (
 };
 
 const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
-  console.time('createMemory');
   const updates = {};
   const currentUserId = getViewer(firebase).uid;
   const memoryId = firebase
@@ -417,7 +413,6 @@ const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
     })
     .then(() => get(firebase, `/memories/${memoryId}`))
     .then(result => {
-      console.timeEnd('createMemory');
       return result;
     });
 };
