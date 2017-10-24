@@ -1,6 +1,6 @@
 // @flow
 import type { AppStartedAction } from '../common/types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { persistStore } from 'redux-persist';
@@ -57,14 +57,7 @@ const apollo = configureApollo();
 const { renderer } = configureFela(createRenderer);
 const FelaProvider = NativeFelaProvider(renderer, theme);
 
-// TODO: remove after deps update
-// $FlowFixMe$
-console.ignoredYellowBox = [
-  'Warning: checkPropTypes',
-  'Using <Image> with children',
-];
-
-class Main extends Component {
+class Main extends PureComponent {
   render() {
     return (
       <ApolloProvider client={apollo} store={store}>
