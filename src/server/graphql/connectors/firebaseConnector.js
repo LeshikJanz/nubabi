@@ -24,15 +24,6 @@ import {
   toKilograms,
 } from '../../../common/helpers/measurement';
 import isReactNative from '../../../common/app/isReactNative';
-let RNFetchBlob;
-let Blob;
-
-if (isReactNative && typeof jest === 'undefined') {
-  RNFetchBlob = require('react-native-fetch-blob').default;
-  Blob = RNFetchBlob.polyfill.Blob;
-  window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-  window.Blob = Blob;
-}
 
 const get = (firebase, path: string) =>
   firebase
@@ -122,6 +113,8 @@ const uploadFile = (firebase, refPath, file) => {
 
     console.log('uploading', file.url);
 
+    // TODO: RN check
+    const RNFetchBlob = require('react-native-fetch-blob').default;
     const uploadUri = file.url;
     const uri = RNFetchBlob.wrap(uploadUri);
     const contentType = file.contentType || 'application/octet-stream';
