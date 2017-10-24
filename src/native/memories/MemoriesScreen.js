@@ -7,6 +7,7 @@ import Memories from './Memories';
 type Props = {
   navigation: NavigationProp,
 };
+
 export class MemoriesScreen extends PureComponent {
   props: Props;
 
@@ -19,7 +20,15 @@ export class MemoriesScreen extends PureComponent {
   };
 
   handleNavigateToAddMemory = (suggestedMemoryId?: string) => {
-    this.props.navigation.navigate('addMemory', { suggestedMemoryId });
+    this.props.navigation.navigate('addMemory', {
+      /*
+       For some reason we're passed down an event here sometimes
+       That ends up blocking the interaction with the Add Memory button
+       in header
+       */
+      suggestedMemoryId:
+        typeof suggestedMemoryId === 'string' ? suggestedMemoryId : null,
+    });
   };
 
   handleNavigateToEditMemory = (id: string) => {
