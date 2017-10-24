@@ -61,8 +61,8 @@ LikeMemoryButton.fragments = {
 export default hoistStatics(
   compose(
     withHandlers({
-      onToggle: ({ id, onToggleLike, isLikedByViewer }) => () =>
-        onToggleLike(id, !isLikedByViewer),
+      onToggle: ({ id, onToggleLike, isLikedByViewer, likes }) => () =>
+        onToggleLike(id, !isLikedByViewer, likes.count),
     }),
   ),
 )(LikeMemoryButton);

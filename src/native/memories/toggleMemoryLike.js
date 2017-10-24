@@ -1,5 +1,7 @@
 // @flow
 import { gql, graphql } from 'react-apollo';
+import { merge } from 'ramda';
+import { optimisticResponse } from '../../common/helpers/graphqlUtils';
 
 export const toggleMemoryLike = graphql(
   gql`
@@ -19,7 +21,7 @@ export const toggleMemoryLike = graphql(
   `,
   {
     props: ({ mutate }) => ({
-      onToggleLike: (id, isLiked) =>
+      onToggleLike: (id, isLiked, likeCount) =>
         mutate({
           variables: {
             input: {
@@ -27,6 +29,24 @@ export const toggleMemoryLike = graphql(
               isLiked,
             },
           },
+          optimisticResponse: optimisticResponse(
+            'toggleMemoryLike',
+            'ToggleMemoryLikePayload',
+            {
+              edge: {
+                __typename: 'MemoryEdge',
+                node: {
+                  __typename: 'Memory',
+                  id,
+                  isLikedByViewer: isLiked,
+                  likes: {
+                    __typename: 'LikeConnection',
+                    count: isLiked ? likeCount + 1 : likeCount - 1,
+                  },
+                },
+              },
+            },
+          ),
         }),
     }),
   },

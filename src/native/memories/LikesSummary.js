@@ -38,9 +38,10 @@ export const LikesSummary = ({
     >
       {count ? summaryText : noLikesText}
       <LikeMemoryButton
+        id={id}
         isLikedByViewer={isLikedByViewer}
         onToggleLike={onToggleLike}
-        id={id}
+        likes={{ count }}
       />
     </Box>
   );
