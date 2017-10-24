@@ -23,6 +23,16 @@ import {
   toCentimeters,
   toKilograms,
 } from '../../../common/helpers/measurement';
+import isReactNative from '../../../common/app/isReactNative';
+let RNFetchBlob;
+let Blob;
+
+if (isReactNative && typeof jest === 'undefined') {
+  RNFetchBlob = require('react-native-fetch-blob').default;
+  Blob = RNFetchBlob.polyfill.Blob;
+  window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
+  window.Blob = Blob;
+}
 
 const get = (firebase, path: string) =>
   firebase
@@ -73,94 +83,71 @@ const toFirebaseBaby = values => {
   );
 };
 
-const uploadFile = (firebase, refPath, file) => {
-  return new Promise(async (resolve, reject) => {
-    const fileUrl = file.url;
-
-    console.log('uploading', file.url);
-    /*
+const uploadFileFromDataUri = () => {
+  /*
      * We can't use data_url with putString since Firebase is unconditionally
      * using `atob` which fails on RN when run on JSC.
      */
-    /* eslint-disable no-useless-escape */
-    const dataUrlRegExp = new RegExp(
-      /data:([\w\/\+]+);(charset=[\w-]+|base64).*,([a-zA-Z0-9+\/]+={0,2})/g,
-    );
-    /* eslint-enable no-useless-escape */
+  /* eslint-disable no-useless-escape */
+  const dataUrlRegExp = new RegExp(
+    /data:([\w\/\+]+);(charset=[\w-]+|base64).*,([a-zA-Z0-9+\/]+={0,2})/g,
+  );
+  /* eslint-enable no-useless-escape */
 
-    // data_url is in format data:image/jpeg;base64,<content>
-    const match = dataUrlRegExp.exec(fileUrl);
+  // data_url is in format data:image/jpeg;base64,<content>
+  const match = dataUrlRegExp.exec(fileUrl);
 
+  const ref = firebase
+    .storage()
+    .ref()
+    .child(refPath);
+
+  const isDataUri = !!match;
+
+  const contentType = match[1];
+
+  const content = new Uint8Array(
+    decode(match[3])
+      .split('')
+      .map(c => c.charCodeAt(0)),
+  );
+};
+
+const uploadFile = (firebase, refPath, file) => {
+  return new Promise((resolve, reject) => {
     const ref = firebase
       .storage()
       .ref()
       .child(refPath);
 
-    const isDataUri = !!match;
+    console.log('uploading', file.url);
 
-    let contentType;
-    let content;
-    let blob;
+    const uploadUri = file.url;
+    const uri = RNFetchBlob.wrap(uploadUri);
+    const contentType = file.contentType || 'application/octet-stream';
 
-    const OldXMLHttpRequest = window.XMLHttpRequest;
-    const OldBlob = window.Blob;
+    return Blob.build(uri, { type: contentType }).then(blob => {
+      const metadata = { contentType };
+      const uploadTask = ref.put(blob);
 
-    if (isDataUri) {
-      contentType = match[1];
-
-      content = new Uint8Array(
-        decode(match[3])
-          .split('')
-          .map(c => c.charCodeAt(0)),
-      );
-    } else {
-      // TODO: check we're running under React Native, dont rely on input only
-      const { Platform } = require('react-native');
-      const RNFetchBlob = require('react-native-fetch-blob').default;
-      const Blob = RNFetchBlob.polyfill.Blob;
-      window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-      window.Blob = Blob;
-
-      const uploadUri = file.url;
-      const uri = RNFetchBlob.wrap(uploadUri);
-      contentType = file.contentType || 'application/octet-stream';
-
-      try {
-        blob = await Blob.build(uri, { type: contentType });
-        content = blob;
-      } catch (err) {
-        reject(err);
-      }
-    }
-
-    const metadata = { contentType };
-    const uploadTask = ref.put(content);
-
-    uploadTask.on(
-      firebase.storage.TaskEvent.STATE_CHANGED,
-      () => {
-        /* progress */
-      },
-      error => {
-        window.XMLHttpRequest = OldXMLHttpRequest;
-        window.Blob = OldBlob;
-        console.log(error);
-        reject(error);
-      },
-      () => {
-        // We did a Blob upload, close it and restore polyfilled values
-        if (blob) {
+      uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        () => {
+          /* progress */
+        },
+        error => {
+          reject(error);
+        },
+        () => {
+          console.log('uploaded', file.url);
           blob.close();
-          window.XMLHttpRequest = OldXMLHttpRequest;
-          window.Blob = OldBlob;
-        }
-        console.log('uploaded', file.url);
-        ref
-          .updateMetadata(metadata)
-          .then(resolve(uploadTask.snapshot.downloadURL))
-          .catch(err => console.log(err));
-      },
-    );
+          ref
+            .updateMetadata(metadata)
+            .then(resolve(uploadTask.snapshot.downloadURL))
+            .catch(err => reject(err));
+        },
+      );
+    });
   });
 };
 
@@ -371,7 +358,7 @@ const upsert = (basePath: string, obj: Object) => {
   return target;
 };
 
-const uploadMemoryFiles = async (
+const uploadMemoryFiles = (
   firebase,
   memoryId,
   babyId,
@@ -379,32 +366,31 @@ const uploadMemoryFiles = async (
 ): Promise<Array<Object>> => {
   if (files && files.length) {
     const storagePath = `/babies/${babyId}/memories/${memoryId}`;
-    return await Promise.all(
-      files.map(async file => {
-        const url = await uploadFile(
+
+    return Promise.all(
+      files.map(file => {
+        return uploadFile(
           firebase,
           [storagePath, file.name].join('/'),
           file,
-        );
-        const id = firebase
-          .database()
-          .ref()
-          .child(`/memories/${memoryId}/files`)
-          .push().key;
+        ).then(url => {
+          const id = firebase
+            .database()
+            .ref()
+            .child(`/memories/${memoryId}/files`)
+            .push().key;
 
-        return { id, file: assoc('url', url, file) };
+          return { id, file: assoc('url', url, file) };
+        });
       }),
     );
   }
 
-  return [];
+  return Promise.resolve([]);
 };
 
-const createMemory = async (
-  firebase,
-  babyId: string,
-  input: CreateMemoryInput,
-) => {
+const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
+  console.time('createMemory');
   const updates = {};
   const currentUserId = getViewer(firebase).uid;
   const memoryId = firebase
@@ -425,23 +411,22 @@ const createMemory = async (
   updates[`/memories/${memoryId}`] = memory;
   updates[`/babies/${babyId}/memories/${memoryId}`] = true;
 
-  const files = await uploadMemoryFiles(
-    firebase,
-    memoryId,
-    babyId,
-    input.files,
-  );
-
-  files.forEach(file => {
-    memory.files[file.id] = file.file;
-  });
-
-  await firebase
-    .database()
-    .ref()
-    .update(updates);
-
-  return get(firebase, `/memories/${memoryId}`);
+  return uploadMemoryFiles(firebase, memoryId, babyId, input.files)
+    .then(files => {
+      files.forEach(file => (memory.files[file.id] = file.file));
+      return files;
+    })
+    .then(() => {
+      firebase
+        .database()
+        .ref()
+        .update(updates);
+    })
+    .then(() => get(firebase, `/memories/${memoryId}`))
+    .then(result => {
+      console.timeEnd('createMemory');
+      return result;
+    });
 };
 
 const updateMemory = async (firebase, id: string, input: any) => {
