@@ -62,6 +62,6 @@ src/server/firebase/functions/node_modules
 graphql.config.json
 src/server/graphql/schema.json
 src/server/grahpql/printSchema.js
-src/server/graphql/nubabitest1-firebase-adminsdk-r7bmb-8f86f51d8b.json
+src/server/graphql/nubabitest1-firebase-adminsdk-*.json
 
 coverage/
