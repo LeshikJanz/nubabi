@@ -38,6 +38,9 @@ export class SubmitButton extends PureComponent {
     animation: null,
   };
 
+  componentWillMount() {
+    this.isMounted = true;
+  }
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.loading !== this.props.loading) {
       const width = StyleSheet.flatten([
@@ -88,9 +91,11 @@ export class SubmitButton extends PureComponent {
           },
           () => {
             this.timeout = setTimeout(() => {
-              this.setState({ isAnimating: false }, () => {
-                this.submitTextView && this.submitTextView.fadeIn();
-              });
+              if (this._isMounted) {
+                this.setState({ isAnimating: false }, () => {
+                  this.submitTextView && this.submitTextView.fadeIn();
+                });
+              }
             }, 1000);
           },
         );
@@ -103,6 +108,7 @@ export class SubmitButton extends PureComponent {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+    this._isMounted = false;
   }
 
   handleOnPress = () => {
