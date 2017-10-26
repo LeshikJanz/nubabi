@@ -26,6 +26,7 @@ style = Object {
     "paddingRight": 8,
     "paddingTop": 8,
     "alignItems": "center",
+    "flexDirection": "row",
     "fontSize": 13,
     "lineHeight": 16,
     "color": "#454D56",
@@ -131,12 +132,7 @@ style = Object {
         }
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-        numberOfLines={1}
+      <View
         style={
           Object {
             "borderBottomWidth": 0,
@@ -144,17 +140,36 @@ style = Object {
             "borderLeftWidth": 0,
             "borderRightWidth": 0,
             "borderTopWidth": 0,
-            "color": "#454D56",
-            "fontFamily": "SF Pro Text",
-            "fontSize": 13,
-            "lineHeight": 16,
-            "textAlign": "center",
-            "width": 100,
+            "flexDirection": "row",
           }
         }
       >
-        Item
-      </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          disabled={false}
+          ellipsizeMode="tail"
+          numberOfLines={1}
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "color": "#454D56",
+              "flex": 1,
+              "fontFamily": "SF Pro Text",
+              "fontSize": 13,
+              "lineHeight": 16,
+              "textAlign": "center",
+              "width": 100,
+            }
+          }
+        >
+          Item
+        </Text>
+      </View>
     </View>
   </View>
 </View>

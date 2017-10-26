@@ -1,9 +1,10 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 // TODO: restore
 import { compose } from 'ramda';
+import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
 import Box from './Box';
 import Text from './Text';
 import withLayout from './withLayout';
@@ -18,6 +19,7 @@ export type Props = {
 };
 
 export const HorizontalCardItem = ({
+  id,
   title,
   files,
   icon,
@@ -36,7 +38,7 @@ export const HorizontalCardItem = ({
     <Box flex={1} borderRadius={4} overflow="hidden">
       <HorizontalCardItemMedia {...mediaProps} />
 
-      {title &&
+      {title && (
         <Box
           justifyContent="center"
           style={() => ({
@@ -55,15 +57,19 @@ export const HorizontalCardItem = ({
             alignItems="center"
             padding={0.5}
           >
-            <Text
-              style={() => ({ width: 100 })}
-              numberOfLines={1}
-              align="center"
-            >
-              {title}
-            </Text>
+            <Box flexDirection="row">
+              <Text
+                style={() => ({ width: 100, flex: 1 })}
+                numberOfLines={1}
+                align="center"
+              >
+                {title}
+              </Text>
+              {isOptimistic(id) && <ActivityIndicator />}
+            </Box>
           </Box>
-        </Box>}
+        </Box>
+      )}
     </Box>
   );
 };

@@ -1,7 +1,7 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
@@ -13,7 +13,6 @@ import MemoryMedia from '../components/MemoryMedia';
 import { findSuggestedMemoryById } from './SuggestedMemories';
 import LikeMemoryButton from './LikeMemoryButton';
 import MemoryCommentsSummary from './MemoryCommentsSummary';
-import LikesSummary from './LikesSummary';
 
 type Props = MemoryType & {
   babyId: String,
@@ -128,9 +127,9 @@ class Memory extends PureComponent {
             }
           }
         }
-        
+
         suggestedMemoryType
-        
+
         ...MemoryCommentsSummary
         ...LikeMemoryButton
       }
@@ -168,6 +167,10 @@ class Memory extends PureComponent {
     const containerProps = isOptimistic(id)
       ? {}
       : { onPress: this.handleEditMemory, as: TouchableOpacity };
+
+    const cardProps = isOptimistic(id)
+      ? {}
+      : { onPress: this.handleViewMemory };
 
     const suggestedMemory = suggestedMemoryType
       ? findSuggestedMemoryById(suggestedMemoryType)
@@ -223,7 +226,7 @@ class Memory extends PureComponent {
             paddingTop: 9,
           })}
         >
-          <Card padding={0} onPress={this.handleViewMemory}>
+          <Card padding={0} {...cardProps}>
             <Box flexDirection="row" flex={1}>
               <MemoryMedia
                 files={filesConnection}
@@ -240,11 +243,15 @@ class Memory extends PureComponent {
                 <Text medium size={2} flex={1}>
                   {title}
                 </Text>
-                <LikeMemoryButton
-                  withCount
-                  onToggleLike={onToggleLike}
-                  {...filter(LikeMemoryButton.fragments.item, this.props)}
-                />
+                {isOptimistic(id) ? (
+                  <ActivityIndicator />
+                ) : (
+                  <LikeMemoryButton
+                    withCount
+                    onToggleLike={onToggleLike}
+                    {...filter(LikeMemoryButton.fragments.item, this.props)}
+                  />
+                )}
               </Box>
               <MemoryCommentsSummary connection={commentsConnection} />
             </Box>
