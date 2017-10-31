@@ -168,9 +168,6 @@ export class Settings extends Component {
             <Text color="secondary">Height</Text>
           </ListItem>
           <Box contentSpacing />
-          <ListItem onPress={this.props.resetTips}>
-            <Text color="secondary">Reset all tips & suggestions</Text>
-          </ListItem>
           <ListItem onPress={this.props.resetSettings} last>
             <Text color="primary">Reset all settings</Text>
           </ListItem>
