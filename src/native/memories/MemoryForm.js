@@ -235,24 +235,10 @@ class MemoryForm extends PureComponent {
               <ListItem
                 leftIcon="ios-images"
                 onPress={this.handleAddMedia}
+                last
                 {...editableProps}
               >
                 <Text color="secondary">Photo/Video</Text>
-              </ListItem>
-              <ListItem
-                leftIcon="ios-medal"
-                onPress={() => {}}
-                {...editableProps}
-              >
-                <Text color="secondary">Event</Text>
-              </ListItem>
-              <ListItem
-                {...editableProps}
-                leftIcon="ios-mic"
-                onPress={this.handleAddVoiceNote}
-                last
-              >
-                <Text color="secondary">Voice note</Text>
               </ListItem>
             </List>
           </Box>
