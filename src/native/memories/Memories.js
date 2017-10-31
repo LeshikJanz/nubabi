@@ -82,6 +82,6 @@ export default compose(
       props: mapEdgesToProp('viewer.baby.memories', 'memories'),
     },
   ),
-  branch(isEmptyProp('memoriesfixme'), renderComponent(SuggestedMemoriesGrid)),
+  branch(isEmptyProp('memories'), renderComponent(SuggestedMemoriesGrid)),
   displayLoadingState,
 )(Memories);
