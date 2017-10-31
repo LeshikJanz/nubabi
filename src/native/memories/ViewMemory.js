@@ -4,6 +4,7 @@ import React from 'react';
 import { assoc, compose, merge, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
+import uuid from 'react-native-uuid';
 import {
   displayLoadingState,
   showNoContentViewIf,
@@ -11,6 +12,7 @@ import {
 } from '../components';
 import {
   addEdgeToFragment,
+  getCurrentUserFromStore,
   isEmptyProp,
 } from '../../common/helpers/graphqlUtils';
 import MemoryDetail from './MemoryDetail';
@@ -106,37 +108,47 @@ export default compose(
             variables: {
               input: merge(input, { id, commentableType: 'memory' }),
             },
-            update: addEdgeToFragment(
-              MemoryComments.fragments.detail,
-              'createComment',
-              ['comments'],
-              id,
-              'head',
-            ),
-            // TODO:
+
+            update: (store, data) => {
+              /*
+              if (!data.data.createComment.edge.node.author) {
+                const author = getCurrentUserFromStore(gql, store);
+
+                if (author) {
+                  data.data.createComment.edge.node.author = author;
+                }
+              }
+              */
+              addEdgeToFragment(
+                MemoryComments.fragments.detail,
+                'createComment',
+                ['comments'],
+                id,
+                'head',
+              )(store, data);
+            },
+
             /*
+            // TODO:
             optimisticResponse: {
               __typename: 'Mutation',
               createComment: {
                 __typename: 'CreateOrUpdateCommentPayload',
                 edge: {
                   __typename: 'CommentEdge',
+                  cursor: uuid.v4(),
                   node: {
                     __typename: 'Comment',
                     id: uuid.v4(),
                     text: input.text,
                     createdAt: new Date(),
+                    commentable: {
+                      __typename: 'Memory',
+                      id,
+                    }
                   },
                 },
               },
-            },
-            update: (store, data) => {
-              addEdgeToFragment(
-                MemoryComments.fragments.detail,
-                'createComment',
-                ['comments'],
-                id,
-              )(store, data);
             },
             */
           });
