@@ -22,10 +22,21 @@ const getCalendarText = memoize((date: Date) => {
 });
 
 export const getLabel = memoize((startDate: Date, endDate: Date) => {
-  const start = moment(startDate).format('D MMMM');
-  const end = moment(endDate).format('D MMMM YYYY');
+  const start = moment(startDate);
+  const end = moment(endDate);
 
-  return `${start} - ${end}`;
+  const now = moment();
+  const diff = now.diff(end, 'week');
+  if (diff <= 1) {
+    return 'Last Week';
+  } else if (diff <= 2) {
+    return '2 Weeks Ago';
+  }
+
+  const startLabel = start.format('D MMMM');
+  const endLabel = end.format('D MMMM YYYY');
+
+  return `${startLabel} - ${endLabel}`;
 });
 
 export const ActivityHistoryItem = ({
