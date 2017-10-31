@@ -24,6 +24,7 @@ import base64 from 'base-64';
 import { ImageCacheProvider } from 'react-native-cached-image';
 import {
   addEdgeToFragment,
+  getCurrentUserFromStore,
   getTypenameForFile,
 } from '../../common/helpers/graphqlUtils';
 import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
@@ -165,17 +166,10 @@ export default compose(
               update: (store, data) => {
                 // Assign author as the current user if not present (optimistic)
                 if (!data.data.createMemory.edge.node.author) {
-                  const userId = base64.encode(`User:${currentUserId}`);
-                  const avatar = store.data[`$${userId}.avatar`];
-
-                  // eslint-disable-next-line no-param-reassign
-                  data.data.createMemory.edge.node.author = {
-                    __typename: 'User',
-                    avatar: {
-                      __typename: 'Avatar',
-                      url: avatar.url,
-                    },
-                  };
+                  const author = getCurrentUserFromStore(gql, store);
+                  if (author) {
+                    data.data.createMemory.edge.node.author = author;
+                  }
                 }
 
                 const fragmentOptions = [

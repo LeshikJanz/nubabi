@@ -337,3 +337,27 @@ export const optimisticResponse = (
     },
   };
 };
+
+export const getCurrentUserFromStore = (gql, store) => {
+  try {
+    return store.readQuery({
+      query: gql`
+        query CurrentUser {
+          viewer {
+            user {
+              id
+              firstName
+              lastName
+              avatar {
+                url
+              }
+            }
+          }
+        }
+      `,
+    });
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
+};
