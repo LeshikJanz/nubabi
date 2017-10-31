@@ -2,11 +2,10 @@
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { ActivityIndicator, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import moment from 'moment';
-import { Box, Card, Pill, Text } from '../components';
+import { Box, Card, Icon, Pill, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
 import MemoryMedia from '../components/MemoryMedia';
