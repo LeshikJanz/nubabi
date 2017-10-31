@@ -11,7 +11,7 @@ import { Box, Icon, Pill, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { formatMemoryDate } from './Memory';
 import MemoryMedia from '../components/MemoryMedia';
-import { findSuggestedMemoryById } from './SuggestedMemories';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
 import LikesSummary from './LikesSummary';
 import MemoryComments from './MemoryComments';

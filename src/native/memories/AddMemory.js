@@ -4,7 +4,7 @@ import type {
   CreateMemoryInput,
   State,
 } from '../../common/types';
-import type { SuggestedMemoryType } from './SuggestedMemories';
+import type { SuggestedMemoryType } from './SuggestedMemoriesList';
 import React from 'react';
 import { InteractionManager } from 'react-native';
 import { gql, graphql } from 'react-apollo';

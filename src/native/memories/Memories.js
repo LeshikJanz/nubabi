@@ -2,11 +2,16 @@
 import React from 'react';
 import { ScrollView } from 'react-native';
 import { compose } from 'ramda';
+import { gql, graphql } from 'react-apollo';
+import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
-import { Box, requireBaby } from '../components';
+import { branch, renderComponent } from 'recompose';
+import { Box, requireBaby, displayLoadingState } from '../components';
 import AddMemoryHeader from './AddMemoryHeader';
-import SuggestedMemories from './SuggestedMemories';
+import SuggestedMemoriesList from './SuggestedMemoriesList';
+import SuggestedMemoriesGrid from './SuggestedMemoriesGrid';
 import ViewMemories from './ViewMemories';
+import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 
 type Props = {
   onViewMemory: (id: string) => void,
@@ -20,9 +25,18 @@ export const Memories = ({
   onAddMemory,
   onEditMemory,
   shouldDisplaySuggestions,
+  data,
+  currentBabyId,
+  memories,
 }: Props) => {
   const viewMemories = (
-    <ViewMemories onViewMemory={onViewMemory} onEditMemory={onEditMemory} />
+    <ViewMemories
+      data={data}
+      memories={memories}
+      currentBabyId={currentBabyId}
+      onViewMemory={onViewMemory}
+      onEditMemory={onEditMemory}
+    />
   );
 
   // TODO: we lost pull to refresh by having a ScrollView here
@@ -32,7 +46,7 @@ export const Memories = ({
 
       {shouldDisplaySuggestions ? (
         <ScrollView>
-          <SuggestedMemories onAddMemory={onAddMemory} />
+          <SuggestedMemoriesList onAddMemory={onAddMemory} />
           {viewMemories}
         </ScrollView>
       ) : (
@@ -48,4 +62,26 @@ export default compose(
     currentBabyId: state.babies.currentBabyId,
   })),
   requireBaby,
+  graphql(
+    gql`
+    query ViewMemories($babyId: ID!) {
+      viewer {
+        baby(id: $babyId) {
+          id
+          ...Memories
+        }
+      }
+    }
+    ${ViewMemories.fragments.list}
+    `,
+    {
+      options: ({ currentBabyId: babyId }) => ({
+        variables: { babyId },
+        fetchPolicy: 'cache-and-network',
+      }),
+      props: mapEdgesToProp('viewer.baby.memories', 'memories'),
+    },
+  ),
+  branch(isEmptyProp('memoriesfixme'), renderComponent(SuggestedMemoriesGrid)),
+  displayLoadingState,
 )(Memories);

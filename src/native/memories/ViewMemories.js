@@ -53,29 +53,4 @@ export class ViewMemories extends PureComponent {
   }
 }
 
-export default compose(
-  withCurrentBaby,
-  graphql(
-    gql`
-      query ViewMemories($babyId: ID) {
-        viewer {
-          baby(id: $babyId) {
-            id
-            ...Memories
-          }
-        }
-      }
-      ${ViewMemories.fragments.list}
-    `,
-    {
-      options: ({ currentBabyId }) => ({
-        variables: { babyId: currentBabyId },
-        fetchPolicy: 'cache-and-network',
-      }),
-      props: mapEdgesToProp('viewer.baby.memories', 'memories'),
-    },
-  ),
-  toggleMemoryLike,
-  showNoContentViewIf(isEmptyProp('memories')),
-  displayLoadingState,
-)(ViewMemories);
+export default compose(toggleMemoryLike)(ViewMemories);

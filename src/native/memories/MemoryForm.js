@@ -33,7 +33,7 @@ import {
 import { isEditable, renderTextInput, required } from '../shared/forms';
 import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
-import { findSuggestedMemoryById } from './SuggestedMemories';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
 
 type Props = {

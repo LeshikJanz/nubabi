@@ -9,7 +9,7 @@ import AddMemory from './AddMemory';
 import {
   type SuggestedMemoryType,
   findSuggestedMemoryById,
-} from './SuggestedMemories';
+} from './SuggestedMemoriesList';
 
 type Props = {
   navigation: NavigationProp,

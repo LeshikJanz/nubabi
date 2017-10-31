@@ -9,7 +9,7 @@ import { Box, Card, Icon, Pill, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
 import MemoryMedia from '../components/MemoryMedia';
-import { findSuggestedMemoryById } from './SuggestedMemories';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import LikeMemoryButton from './LikeMemoryButton';
 import MemoryCommentsSummary from './MemoryCommentsSummary';
 

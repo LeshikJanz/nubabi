@@ -1,7 +1,12 @@
 // @flow
 import { GraphQLDataProp } from '../../common/types';
 import { compose, tap } from 'ramda';
-import { withHandlers, withState, hoistStatics } from 'recompose';
+import {
+  withHandlers,
+  withState,
+  hoistStatics,
+  setDisplayName,
+} from 'recompose';
 import { withNetworkIndicatorActions } from '../../common/helpers/graphqlUtils';
 import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
 
@@ -13,7 +18,7 @@ export type PullToRefreshProps = {
   data: GraphQLDataProp<*>,
 };
 
-export default hoistStatics(
+export const withPullToRefresh = hoistStatics(
   compose(
     withNetworkIndicatorActions,
     withState('refreshing', 'setRefreshing', false),
@@ -47,3 +52,5 @@ export default hoistStatics(
     }),
   ),
 );
+
+export default withPullToRefresh;

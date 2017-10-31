@@ -55,14 +55,16 @@ export const suggestedMemories = [
 export const findSuggestedMemoryById = (id: string) =>
   find(propEq('id', id), suggestedMemories);
 
-const renderHeader = ({ onDismiss }) => (
+export const renderHeader = ({ onDismiss, centered = false }) => (
   <Box contentSpacing flexDirection="row" alignItems="center">
-    <Text flex={1} bold color="secondary">
+    <Text flex={1} bold color="secondary" align={centered ? 'center' : 'left'}>
       SUGGESTED MEMORIES
     </Text>
-    <TouchableOpacity onPress={onDismiss}>
-      <Icon name="ios-close" size={20} color={theme.colors.secondary} />
-    </TouchableOpacity>
+    {onDismiss && (
+      <TouchableOpacity onPress={onDismiss}>
+        <Icon name="ios-close" size={20} color={theme.colors.secondary} />
+      </TouchableOpacity>
+    )}
   </Box>
 );
 
