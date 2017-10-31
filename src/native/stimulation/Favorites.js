@@ -25,6 +25,21 @@ class FavoriteActivities extends PureComponent {
     title: 'Favorites',
   };
 
+  static fragments = {
+    favorites: gql`
+      fragment FavoriteActivities on Baby {
+        favoriteActivities {
+          edges {
+            node {
+              ...ActivityList
+            }
+          }
+        }
+      }
+      ${ActivityList.fragments.activities}
+    `,
+  };
+
   handleNavigate = (id: string, title: string) => {
     this.props.navigation.navigate('viewActivity', {
       id,
@@ -46,40 +61,35 @@ class FavoriteActivities extends PureComponent {
   }
 }
 
+export const query = gql`
+  query FavoriteActivitiesList($babyId: ID!) {
+    viewer {
+      baby(id: $babyId) {
+        id
+        ...FavoriteActivities
+      }
+    }
+  }
+
+  ${FavoriteActivities.fragments.favorites}
+
+`;
+
 export default compose(
   withCurrentBaby,
-  graphql(
-    gql`
-      query FavoriteActivitiesList($babyId: ID!) {
-        viewer {
-          baby(id: $babyId) {
-            id
-            favoriteActivities {
-              edges {
-                node {
-                  ...ActivityList
-                }
-              }
-            }
-          }
-        }
-      }
-      ${ActivityList.fragments.activities}
-    `,
-    {
-      options: ({ currentBabyId }) => ({
-        fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
-        variables: { babyId: currentBabyId },
-      }),
-      props: ({ data }) => {
-        const activities = path(['viewer', 'baby', 'favoriteActivities'], data);
+  graphql(query, {
+    options: ({ currentBabyId }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
+      variables: { babyId: currentBabyId },
+    }),
+    props: ({ data }) => {
+      const activities = path(['viewer', 'baby', 'favoriteActivities'], data);
 
-        return {
-          data,
-          activities: activities ? activities.edges : [],
-        };
-      },
+      return {
+        data,
+        activities: activities ? activities.edges : [],
+      };
     },
-  ),
+  }),
   displayLoadingState,
 )(FavoriteActivities);

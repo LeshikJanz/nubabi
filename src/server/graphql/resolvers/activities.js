@@ -1,21 +1,22 @@
 // @flow
-import S from 'string';
 import type {
-  Context,
   ConnectionArguments,
+  Context,
   RawActivity,
   RawActivityMedia,
 } from './common';
-import * as connector from '../connectors/babiesConnector';
 import {
   connectionFromArray,
-  connectionFromPromisedArray,
   connectionFromBackendMetadata,
-  mutationWithClientMutationId,
+  connectionFromPromisedArray,
   fromGlobalId,
   globalIdField,
+  mutationWithClientMutationId,
   prop,
 } from './common';
+import * as connector from '../connectors/babiesConnector';
+import { assoc } from 'ramda';
+import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
 
 export const resolvers = {
   Viewer: {
@@ -68,17 +69,16 @@ export const resolvers = {
             };
           }),
     ),
-
     toggleActivityFavorite: mutationWithClientMutationId(
-      ({ id, babyId, favorite }, { token }) => {
+      ({ id, babyId: babyGlobalId, favorite }, { token }) => {
+        const activityId = fromGlobalId(id).id;
+        const babyId = fromGlobalId(babyGlobalId).id;
+
         return connector
-          .toggleActivityFavorite(
-            token,
-            fromGlobalId(babyId).id,
-            fromGlobalId(id).id,
-            favorite,
-          )
-          .then(() => ({ wasFavorited: favorite }));
+          .toggleActivityFavorite(token, babyId, activityId, favorite)
+          .then(() => connector.getActivity(token, activityId, babyId))
+          .then(addEdgeToMutationResult)
+          .then(assoc('wasFavorited', favorite));
       },
     ),
   },

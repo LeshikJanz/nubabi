@@ -8,7 +8,9 @@ import React, { PureComponent } from 'react';
 import { compose, find, path, pluck, propEq } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, Screen, withCurrentBaby } from '../components';
+import { toggleFavorite } from './toggleFavorite';
 import Activity from './Activity';
+import Favorites from './Favorites';
 
 type Props = {
   activity: ActivityType,
@@ -72,17 +74,12 @@ export default compose(
               ...Activity
             }
 
-            favoriteActivities {
-              edges {
-                node {
-                  id
-                }
-              }
-            }
+            ...FavoriteActivities
           }
         }
       }
       ${Activity.fragments.activity}
+      ${Favorites.fragments.favorites}
     `,
     // TODO: remove duplication with ViewThisWeeksActivity
     {
@@ -117,18 +114,6 @@ export default compose(
       },
     },
   ),
-  graphql(
-    gql`
-      mutation ToggleFavorite($input: ToggleFavoriteInput!) {
-        toggleActivityFavorite(input: $input) {
-          wasFavorited
-        }
-      }
-    `,
-    {
-      name: 'toggleFavorite',
-      options: { refetchQueries: ['ViewActivity', 'Profile'] },
-    },
-  ),
+  toggleFavorite,
   displayLoadingState,
 )(ViewActivity);

@@ -23,7 +23,9 @@ import {
 } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, Screen, withCurrentBaby } from '../components';
+import toggleFavorite from './toggleFavorite';
 import Activity from './Activity';
+import Favorites from './Favorites';
 
 type Props = {
   activity: ActivityType,
@@ -225,19 +227,14 @@ export default compose(
             previousActivity: activities(first: 1, before: $cursor) {
               ...ActivityNavigation
             }
-
-            favoriteActivities {
-              edges {
-                node {
-                  id
-                }
-              }
-            }
+            
+            ...FavoriteActivities
           }
         }
       }
       ${Activity.fragments.activity}
       ${Activity.fragments.activityNavigation}
+      ${Favorites.fragments.favorites}
     `,
     {
       options: ownProps => ({
@@ -308,18 +305,6 @@ export default compose(
     `,
     { name: 'changeActivityLevel', options: () => ({ updateQueries }) },
   ),
-  graphql(
-    gql`
-      mutation ToggleFavorite($input: ToggleFavoriteInput!) {
-        toggleActivityFavorite(input: $input) {
-          wasFavorited
-        }
-      }
-    `,
-    {
-      name: 'toggleFavorite',
-      options: { refetchQueries: ['ViewThisWeekActivity', 'Profile'] },
-    },
-  ),
+  toggleFavorite,
   displayLoadingState,
 )(ViewThisWeeksActivity);

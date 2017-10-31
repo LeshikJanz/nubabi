@@ -323,20 +323,20 @@ export const getTypenameForFile = (file: { contentType: string }) => {
   )(file);
 };
 
-export const optimisticResponse = (
-  operationName: string,
-  payloadName: string,
-  response,
-  variables,
-) => {
-  return {
-    __typename: 'Mutation',
-    [operationName]: {
-      __typename: payloadName,
-      ...response,
-    },
-  };
-};
+export const optimisticResponse = curry(
+  (operationName: string, payloadName: string, response, variables) => {
+    const result =
+      typeof response === 'function' ? response(variables) : response;
+
+    return {
+      __typename: 'Mutation',
+      [operationName]: {
+        __typename: payloadName,
+        ...result,
+      },
+    };
+  },
+);
 
 export const getCurrentUserFromStore = (gql, store) => {
   try {
