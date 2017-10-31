@@ -13,8 +13,7 @@ import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import theme from '../../common/themes/defaultTheme';
-import displayLoadingState from '../components/displayLoadingState';
-import { Screen } from '../components';
+import { displayLoadingState, RequireBabyView, Screen } from '../components';
 import Header from './Header/Header';
 import RecentMemories from './RecentMemories';
 import ProfileIcon from '../navigation/ProfileIcon';
@@ -57,8 +56,9 @@ class Profile extends PureComponent {
       shadowOpacity: 0,
     },
     tabBarLabel: () => null,
-    tabBarIcon: ({ tintColor, focused }) =>
-      <ProfileIcon active={focused} tintColor={tintColor} />,
+    tabBarIcon: ({ tintColor, focused }) => (
+      <ProfileIcon active={focused} tintColor={tintColor} />
+    ),
   };
 
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
@@ -76,17 +76,13 @@ class Profile extends PureComponent {
 
   render() {
     const { baby } = this.props;
+
+    if (!baby) {
+      return <RequireBabyView />;
+    }
+
     const weightUnit = this.props.unitDisplay.weight;
     const heightUnit = this.props.unitDisplay.height;
-
-    // TODO: empty state
-    if (!baby) {
-      return (
-        <View style={styles.emptyState}>
-          <Text>No baby</Text>
-        </View>
-      );
-    }
 
     return (
       <Screen>
@@ -151,11 +147,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
     marginBottom: 20,
-  },
-  emptyState: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

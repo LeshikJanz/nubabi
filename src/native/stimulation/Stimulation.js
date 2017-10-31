@@ -3,6 +3,8 @@ import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
+import { compose } from 'ramda';
+import { withCurrentBabyRequired } from '../components';
 import { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
@@ -118,4 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Stimulation;
+export default compose(withCurrentBabyRequired)(Stimulation);

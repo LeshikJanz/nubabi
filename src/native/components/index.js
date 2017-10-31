@@ -31,6 +31,8 @@ import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
 import withPullToRefresh from './withPullToRefresh';
 import withCurrentBaby from './withCurrentBaby';
+import withCurrentBabyRequired from './withCurrentBabyRequired';
+import requireBaby, { RequireBabyView } from './requireBaby';
 
 export {
   Box,
@@ -66,4 +68,7 @@ export {
   showNoContentViewIf,
   withPullToRefresh,
   withCurrentBaby,
+  withCurrentBabyRequired,
+  requireBaby,
+  RequireBabyView,
 };

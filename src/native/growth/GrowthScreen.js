@@ -1,10 +1,9 @@
 // @flow
 import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
-
 import React, { PureComponent } from 'react';
-import { Screen } from '../components';
-import BabyNameTitle from '../profile/BabyNameTitle';
+import { compose } from 'ramda';
+import { Screen, withCurrentBabyRequired } from '../components';
 import Growth from './Growth';
 
 type Props = {
@@ -42,4 +41,4 @@ export class GrowthScreen extends PureComponent {
     );
   }
 }
-export default GrowthScreen;
+export default compose(withCurrentBabyRequired)(GrowthScreen);

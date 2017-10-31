@@ -3,7 +3,7 @@ import React from 'react';
 import { ScrollView } from 'react-native';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import { Box } from '../components';
+import { Box, requireBaby } from '../components';
 import AddMemoryHeader from './AddMemoryHeader';
 import SuggestedMemories from './SuggestedMemories';
 import ViewMemories from './ViewMemories';
@@ -45,5 +45,7 @@ export const Memories = ({
 export default compose(
   connect(state => ({
     shouldDisplaySuggestions: state.settings.memories.displaySuggestions,
+    currentBabyId: state.babies.currentBabyId,
   })),
+  requireBaby,
 )(Memories);
