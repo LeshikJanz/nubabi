@@ -48,7 +48,6 @@ export const ViewArticle = ({ article, layout }: Props) => {
   const image = article.image.url;
 
   const shareTitle = 'Share Nubabi Article';
-  const shareMessage = `Read "${article.title}" on Nubabi`;
   const shareUrl = article.blogUrl || `nubabi://articles/${article.id}`;
 
   return (
@@ -64,16 +63,14 @@ export const ViewArticle = ({ article, layout }: Props) => {
             <ArticleInfoText icon="md-person">
               {article.author.name}
             </ArticleInfoText>
-            <ArticleInfoText icon="md-calendar">
-              {publishedAt}
-            </ArticleInfoText>
+            <ArticleInfoText icon="md-calendar">{publishedAt}</ArticleInfoText>
           </Box>
         </HeaderTextSection>
 
         <HeaderShape width={width} fillShape={theme.colors.open.white1} />
 
         <ReadingTime minutes={readingTime} />
-        <ShareButton url={shareUrl} title={shareTitle} message={shareMessage} />
+        <ShareButton url={shareUrl} title={shareTitle} />
         <ArticleTags tags={article.tags} />
       </HeaderContainer>
 
