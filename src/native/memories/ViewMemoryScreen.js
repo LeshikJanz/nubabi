@@ -1,18 +1,37 @@
 // @flow
 import type { NavigationProp } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { Screen, Box } from '../components';
-import AddMemoryHeader from './AddMemoryHeader';
+import { TouchableOpacity } from 'react-native';
+import { Box, Icon, Screen } from '../components';
 import ViewMemory from './ViewMemory';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   navigation: NavigationProp,
 };
+
 export class ViewMemoryScreen extends PureComponent {
   props: Props;
 
-  static navigationOptions = {
-    title: 'Memory Details',
+  static navigationOptions = ({ navigation }) => {
+    const editMemory = () =>
+      navigation.navigate('editMemory', {
+        id: navigation.state.params.id,
+      });
+
+    return {
+      title: 'Memory Details',
+      headerRight: (
+        <TouchableOpacity style={{ paddingRight: 10 }} onPress={editMemory}>
+          <Icon
+            size={20}
+            name="md-brush"
+            color="#454D56"
+            style={{ marginLeft: 10 }}
+          />
+        </TouchableOpacity>
+      ),
+    };
   };
 
   render() {
