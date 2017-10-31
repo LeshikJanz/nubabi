@@ -119,7 +119,7 @@ export const BrowseActivities = ({
           alignItems="flex-start"
           justifyContent="center"
         >
-          {skillAreas.map(skillArea =>
+          {skillAreas.map(skillArea => (
             <Card
               padding={0}
               key={skillArea.id}
@@ -144,7 +144,7 @@ export const BrowseActivities = ({
                   alignItems: 'center',
                   justifyContent: 'center',
                   borderRadius: 45 / 2,
-                  marginVertical: 16,
+                  marginTop: 16,
                 })}
               >
                 <Image
@@ -159,8 +159,8 @@ export const BrowseActivities = ({
               <Text size={4} marginBottom={0.5}>
                 {skillArea.name}
               </Text>
-            </Card>,
-          )}
+            </Card>
+          ))}
         </Box>
       </Box>
     </Box>
