@@ -27,4 +27,15 @@ const resetNavigationEpic = (action$: any, deps: Deps) => {
     );
 };
 
-export const epics = [resetNavigationEpic];
+const goBackAfterSubmitEpic = (action$: any, deps: Deps) => {
+  return action$
+    .filter(
+      action =>
+        action.type === '@@redux-form/SET_SUBMIT_SUCCEEDED' &&
+        action.meta &&
+        action.meta.form === 'user',
+    )
+    .mapTo(NavigationActions.back());
+};
+
+export const epics = [resetNavigationEpic, goBackAfterSubmitEpic];

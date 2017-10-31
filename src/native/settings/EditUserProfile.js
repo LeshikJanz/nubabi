@@ -1,10 +1,13 @@
 // @flow
-import type { User, UpdateUserInput } from '../../common/types';
+import type { UpdateUserInput, User } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { formValues } from '../../common/helpers/graphqlUtils';
+import {
+  formValues,
+  withNetworkIndicatorActions,
+} from '../../common/helpers/graphqlUtils';
 import { displayLoadingState } from '../components';
 import UserForm from './UserForm';
 
@@ -19,22 +22,13 @@ export class EditUserProfile extends PureComponent {
     loading: false,
   };
 
-  handleSubmit = (values: UpdateUserInput) => {
-    this.setState({ loading: true }, () => {
-      this.props.onSubmit(values).then(() => {
-        this.setState({ loading: false });
-      });
-    });
-  };
-
   render() {
     const { user } = this.props;
 
     return (
       <UserForm
         initialValues={formValues(filter(UserForm.fragments.form, user))}
-        onSubmit={this.handleSubmit}
-        loading={this.state.loading}
+        onSubmit={this.props.onSubmit}
       />
     );
   }
@@ -53,15 +47,15 @@ export default compose(
   `),
   graphql(
     gql`
-    query EditUserProfile {
-      viewer {
-        user {
-          ...UserForm
+      query EditUserProfile {
+        viewer {
+          user {
+            ...UserForm
+          }
         }
       }
-    }
-    ${UserForm.fragments.form}
-  `,
+      ${UserForm.fragments.form}
+    `,
     {
       options: {
         fetchPolicy: 'cache-and-network',
@@ -69,8 +63,10 @@ export default compose(
       props: ({ data, ownProps: { mutate } }) => ({
         data,
         user: path(['viewer', 'user'], data),
-        onSubmit: values => {
-          return mutate({ variables: { input: values } });
+        onSubmit: input => {
+          return mutate({
+            variables: { input },
+          });
         },
       }),
     },

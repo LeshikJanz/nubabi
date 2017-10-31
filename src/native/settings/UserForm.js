@@ -32,7 +32,6 @@ type Props = {
   onSubmit: () => void,
   handleSubmit: () => void,
   change: () => void,
-  loading: Boolean,
 };
 
 class UserForm extends Component {
@@ -91,16 +90,12 @@ class UserForm extends Component {
     return (
       <View style={containerStyle}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {label
-            ? <Text style={[...labelStyle, { flex: 1 }]}>
-                {label}
-              </Text>
-            : null}
-          {hasExplicitError
-            ? <Text style={labelStyle}>
-                {error.toUpperCase()}
-              </Text>
-            : null}
+          {label ? (
+            <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
+          ) : null}
+          {hasExplicitError ? (
+            <Text style={labelStyle}>{error.toUpperCase()}</Text>
+          ) : null}
         </View>
         <TextInput {...field.input} style={styles.textInput} />
       </View>
@@ -161,11 +156,6 @@ class UserForm extends Component {
           label="DATE OF BIRTH"
           component={renderDatePicker}
           validate={[formattedDate('YYYY-MM-DD')]}
-        />
-
-        <SubmitButton
-          onPress={handleSubmit(submit)}
-          loading={this.props.loading}
         />
       </KeyboardAwareScrollView>
     );
