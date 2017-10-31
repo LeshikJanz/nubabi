@@ -95,9 +95,10 @@ const resolvers = {
   Video: {
     id: globalIdField('File'),
     // TODO: mocked
-    thumb: () => ({
-      url:
-        'https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/lorem%2Fthumbnail.png?alt=media&token=3318131c-abdb-4d5a-acae-e8eba73aaad8',
+    thumb: ({ thumb }) => ({
+      url: thumb
+        ? thumb.url
+        : 'https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/lorem%2Fthumbnail.png?alt=media&token=3318131c-abdb-4d5a-acae-e8eba73aaad8',
     }),
   },
   Audio: {
