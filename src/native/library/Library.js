@@ -6,6 +6,7 @@ import ArticleList from './ArticleCardList';
 import HealthHelpButton from './HealthHelpButton';
 import ParentingTipsButton from './ParentingTipsButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   navigation: NavigationProp,
@@ -45,7 +46,7 @@ export class Library extends PureComponent {
           <Box flex={1} contentSpacing>
             <ParentingTipsButton onPress={this.handleParentingTips} />
           </Box>
-          <Box flex={1} contentSpacing>
+          <Box flex={1} marginHorizontal={theme.contentSpacing.padding}>
             <HealthHelpButton onPress={this.handleHealthHelp} />
           </Box>
         </KeyboardAwareScrollView>

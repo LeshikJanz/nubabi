@@ -31,7 +31,9 @@ style = Object {
     "fontSize": 19.147659412894374,
     "lineHeight": 32,
     "color": "#454D56",
-    "fontFamily": "SF Pro Display"
+    "fontFamily": "SF Pro Display",
+    "marginLeft": 10,
+    "marginRight": 10
 }
 
 <View
@@ -236,7 +238,6 @@ style = Object {
         </View>
       </View>
       <View
-        contentSpacing={true}
         style={
           Object {
             "borderBottomWidth": 0,
@@ -245,10 +246,8 @@ style = Object {
             "borderRightWidth": 0,
             "borderTopWidth": 0,
             "flex": 1,
-            "paddingBottom": 10,
-            "paddingLeft": 10,
-            "paddingRight": 10,
-            "paddingTop": 10,
+            "marginLeft": 10,
+            "marginRight": 10,
           }
         }
       >
