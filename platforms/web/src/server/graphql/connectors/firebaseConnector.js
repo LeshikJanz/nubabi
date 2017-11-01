@@ -111,11 +111,7 @@ const uploadFile = (firebase, refPath, file) => {
       .ref()
       .child(refPath);
 
-    console.log("HERE!!!");
-    console.log(process.env.IS_BROWSER);
-
     if (process.env.IS_BROWSER) {
-      console.log("HERE 222");
       return reject(new Error("upload for web is not implemented yet"));
       // webpack requires RNFetchBlob if no else despite check above
       // eslint-disable-next-line no-else-return

@@ -40,6 +40,7 @@ const Wrapper = styled.div`
 
 export class App extends Component<Props> {
   render() {
+    console.log(process.env.IS_BROWSER);
     return (
       <Wrapper>
         <Loader active={this.props.isLoading} />
