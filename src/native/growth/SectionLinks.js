@@ -35,8 +35,8 @@ const sectionMappings = {
 };
 
 const iconMappings = {
-  'Parenting Tips': 'md-medkit',
-  'Health Help': 'md-people',
+  'Parenting Tips': 'md-people',
+  'Health Help': 'md-medkit',
 };
 
 const urlPrefix = 'nubabi://content/growth';
