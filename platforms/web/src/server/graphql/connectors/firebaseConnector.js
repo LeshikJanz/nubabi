@@ -23,7 +23,6 @@ import {
   toCentimeters,
   toKilograms
 } from "../../../common/helpers/measurement";
-import isReactNative from "../../../common/app/isReactNative";
 
 const get = (firebase, path: string) =>
   firebase
@@ -112,36 +111,42 @@ const uploadFile = (firebase, refPath, file) => {
       .ref()
       .child(refPath);
 
-    if (!isReactNative) {
+    console.log("HERE!!!");
+    console.log(process.env.IS_BROWSER);
+
+    if (process.env.IS_BROWSER) {
+      console.log("HERE 222");
       return reject(new Error("upload for web is not implemented yet"));
+      // webpack requires RNFetchBlob if no else despite check above
+      // eslint-disable-next-line no-else-return
+    } else {
+      const RNFetchBlob = require("react-native-fetch-blob").default;
+      const uploadUri = file.url;
+      const uri = RNFetchBlob.wrap(uploadUri);
+      const contentType = file.contentType || "application/octet-stream";
+
+      return Blob.build(uri, { type: contentType }).then(blob => {
+        const metadata = { contentType };
+        const uploadTask = ref.put(blob);
+
+        uploadTask.on(
+          firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            /* progress */
+          },
+          error => {
+            reject(error);
+          },
+          () => {
+            blob.close();
+            ref
+              .updateMetadata(metadata)
+              .then(resolve(uploadTask.snapshot.downloadURL))
+              .catch(err => reject(err));
+          }
+        );
+      });
     }
-
-    const RNFetchBlob = require("react-native-fetch-blob").default;
-    const uploadUri = file.url;
-    const uri = RNFetchBlob.wrap(uploadUri);
-    const contentType = file.contentType || "application/octet-stream";
-
-    return Blob.build(uri, { type: contentType }).then(blob => {
-      const metadata = { contentType };
-      const uploadTask = ref.put(blob);
-
-      uploadTask.on(
-        firebase.storage.TaskEvent.STATE_CHANGED,
-        () => {
-          /* progress */
-        },
-        error => {
-          reject(error);
-        },
-        () => {
-          blob.close();
-          ref
-            .updateMetadata(metadata)
-            .then(resolve(uploadTask.snapshot.downloadURL))
-            .catch(err => reject(err));
-        }
-      );
-    });
   });
 };
 
