@@ -1,14 +1,17 @@
 import { GraphQLString } from 'graphql';
-import R, { path, prop, pick, assocPath, map, compose, assoc } from 'ramda';
-import { GraphQLDate, GraphQLTime, GraphQLDateTime } from 'graphql-iso-date';
+import { assoc, assocPath, compose, map, path, pick, prop } from 'ramda';
+import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date';
+// noinspection ES6UnusedImports
 import {
-  nodeFieldResolver,
+  connectionFromPromisedArrayWithCount,
+  fromGlobalId,
   globalIdField,
   mutationWithClientMutationId,
-  transform,
+  nodeFieldResolver,
   toDate,
-  connectionFromPromisedArrayWithCount,
+  transform,
 } from './common';
+import { addEdgeAndCursorToMutationResult } from '../../../common/helpers/graphqlUtils';
 
 const resolvers = {
   DateTime: GraphQLDateTime,
@@ -67,6 +70,10 @@ const resolvers = {
     __resolveType: ({ contentType }) => {
       if (contentType.startsWith('image')) {
         return 'Image';
+      } else if (contentType.startsWith('video')) {
+        return 'Video';
+      } else if (contentType.startsWith('audio')) {
+        return 'Audio';
       }
 
       return 'GenericFile';
@@ -77,19 +84,26 @@ const resolvers = {
   Avatar: {
     contentType: obj => obj.contentType || 'image/jpeg',
     name: obj => obj.name || 'avatar.jpg',
-    size: () => 0, // TODO: fetch size
+    size: () => 0, // TODO: fetch size from firebase
   },
   Image: {
     id: globalIdField(),
     contentType: obj => obj.contentType || 'image/jpeg',
     name: obj => obj.name || 'image.jpg',
-    size: () => 0, // TODO: fetch size
+    size: () => 0, // TODO: fetch size from firebase
   },
-  /*
   Video: {
-    id: globalIdField(),
+    id: globalIdField('File'),
+    // TODO: mocked
+    thumb: ({ thumb }) => ({
+      url: thumb
+        ? thumb.url
+        : 'https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/lorem%2Fthumbnail.png?alt=media&token=3318131c-abdb-4d5a-acae-e8eba73aaad8',
+    }),
   },
-  */
+  Audio: {
+    id: globalIdField('File'),
+  },
   Node: {
     __resolveType(obj) {
       if (obj.email) {
@@ -104,13 +118,45 @@ const resolvers = {
         return 'Activity';
       }
 
+      if (obj.authorId && obj.title) {
+        return 'Memory';
+      }
+
       // TODO: extra models
 
       return null;
     },
     id: globalIdField(),
   },
-
+  Commentable: {
+    __resolveType(obj) {
+      if (obj.title && obj.authorId) {
+        return 'Memory';
+      }
+    },
+  },
+  LikeEdge: {
+    actor: ({ node: { id: userId } }, _, { connectors: { firebase } }) => {
+      return firebase.getUser(userId);
+    },
+  },
+  Comment: {
+    id: globalIdField(),
+    createdAt: transform('createdAt', toDate),
+    updatedAt: transform('updatedAt', toDate),
+    author: ({ authorId }, _, { connectors: { firebase } }) =>
+      firebase.getUser(authorId),
+    commentable: (
+      { commentableType, commentableId },
+      _,
+      { connectors: { firebase } },
+    ) => {
+      return firebase.getCommentable(
+        commentableType.toUpperCase(),
+        commentableId,
+      );
+    },
+  },
   Mutation: {
     updateUser: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) => {
@@ -136,6 +182,20 @@ const resolvers = {
             },
           };
         });
+      },
+    ),
+    createComment: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase
+          .createComment(input)
+          .then(
+            addEdgeAndCursorToMutationResult(() =>
+              firebase.getComments(
+                input.commentableType.toUpperCase(),
+                fromGlobalId(input.id).id,
+              ),
+            ),
+          );
       },
     ),
   },

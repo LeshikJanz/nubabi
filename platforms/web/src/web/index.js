@@ -18,9 +18,9 @@ import { configureApollo } from "common/configureApollo";
 import theme from "common/themes/defaultTheme";
 import config from "common/config";
 import { ThemeProvider } from "styled-components";
-import { containers } from "web/shared";
+import App from "web/app";
 import registerServiceWorker from "./registerServiceWorker";
-import { epics as navigationEpics } from "web/navigation/actions";
+import { epics as appEpics } from "./app/actions";
 
 const routingMiddlware: Middleware = routerMiddleware((history: History));
 
@@ -38,7 +38,7 @@ const store = configureStore({
     navigation: routerReducer
   },
   platformMiddleware: [reportingMiddleware, routingMiddlware],
-  platformEpics: [...navigationEpics]
+  platformEpics: [...appEpics]
 });
 
 persistStore(
@@ -72,13 +72,13 @@ const renderApp = Component => {
   );
 };
 
-renderApp(containers.App);
+renderApp(App);
 
 registerServiceWorker();
 
 if (module.hot) {
-  module.hot.accept("./shared/containers/App", () => {
-    const NextApp = require("./shared/containers/App").default;
+  module.hot.accept("./app", () => {
+    const NextApp = require("./app").default;
     renderApp(NextApp);
   });
 }

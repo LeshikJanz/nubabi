@@ -1,7 +1,6 @@
 {
   "presets": ["react-app"],
   "plugins": [
-    "babel-plugin-dev-expression",
     "babel-plugin-transform-es2015-modules-commonjs",
     ["inline-import", { "extensions": [".graphql", ".graphqls"] }]
   ],

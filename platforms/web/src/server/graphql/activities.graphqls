@@ -12,6 +12,7 @@ extend type Baby {
   favoriteActivities(
     before: String, after: String, first: Int, last: Int
   ): ActivityConnection!
+  activityHistory: ActivityHistoryConnection
 }
 
 extend type Mutation {
@@ -33,11 +34,13 @@ type Activity {
   media(
     before: String, after: String, first: Int, last: Int
   ): ActivityMediaConnection!
+  equipment: String
 }
 
 input ActivityFilterInput {
   skillAreas: [ID!]
   categories: [ID!]
+  periodId: ID
 }
 
 input SwoopActivityInput {
@@ -77,7 +80,7 @@ input ToggleFavoriteInput {
 }
 
 type ToggleFavoritePayload {
-  activity: Activity
+  edge: ActivityEdge
   wasFavorited: Boolean
 
   # An opaque string used by frontend frameworks like relay to track requests and responses
@@ -185,4 +188,27 @@ type ActivityMediaEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+# A connection to a list of items.
+type ActivityHistoryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [ActivityHistoryEdge]
+}
+
+type ActivityHistoryEdge {
+  # The item at the end of the edge.
+  node: ActivityHistory!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type ActivityHistory {
+  id: ID!
+  startDate: DateTime!
+  endDate: DateTime!
 }

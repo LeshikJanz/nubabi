@@ -26,6 +26,7 @@ type Query {
 type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   inviteUser(input: InviteUserInput!): InviteUserPayload
+  createComment(input: CreateCommentInput!): CreateOrUpdateCommentPayload
 }
 
 # Information about pagination in a connection.
@@ -168,7 +169,7 @@ interface File {
   url: String
 }
 
-# TODO: make avatar, image, etc use/implement this
+# TODO: make avatar, image, etc. use/implement this
 type GenericFile implements File {
   id: ID!
   contentType: String!
@@ -222,7 +223,11 @@ interface ResizableImage {
   height: Int
 }
 
-type Image implements File, ResizableImage {
+interface Thumbnailable {
+  thumb: Image
+}
+
+type Image implements File, ResizableImage, Thumbnailable {
   id: ID!
   contentType: String!
   createdAt: DateTime!
@@ -238,7 +243,7 @@ type Image implements File, ResizableImage {
   thumb: Image
 }
 
-type Avatar implements File, ResizableImage {
+type Avatar implements File, ResizableImage, Thumbnailable {
   id: ID!
   url: String!
   contentType: String!
@@ -251,9 +256,109 @@ type Avatar implements File, ResizableImage {
   height: Int
   large: Image
   thumb: Image
+}
+
+type Video implements File, Thumbnailable {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  thumb: Image
+  duration: Int
+}
+
+type Audio implements File {
+  id: ID!
+  url: String!
+  contentType: String!
+  createdAt: DateTime!
+  name: String!
+  size: Int!
+  updatedAt: DateTime
+  duration: Int
 }
 
 input ImageInput {
   # A Base64-encoded data URI representing the image contents
   url: String
+}
+
+interface Likeable {
+  id: ID!
+  likes(
+    before: String, after: String, first: Int, last: Int
+  ): LikeConnection
+}
+
+# A connection to a list of items.
+type LikeConnection {
+  # Count of filtered result set without considering pagination arguments
+  count: Int
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [LikeEdge]
+}
+
+type LikeEdge {
+  # The user that performed the like
+  actor: User!
+
+  # The Likeable item at the end of the edge.
+  node: Likeable!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+interface Commentable {
+  comments(
+    before: String, after: String, first: Int, last: Int
+  ): CommentConnection!
+}
+
+type Comment implements Timestampable {
+  id: ID!
+  text: String!
+  author: User!
+  commentable: Commentable!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+# A connection to a list of items.
+type CommentConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+
+  # A list of edges.
+  edges: [CommentEdge]
+
+  count: Int
+}
+
+type CommentEdge {
+  # The item at the end of the edge.
+  node: Comment!
+
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+input CreateCommentInput {
+  id: ID!
+  commentableType: String!
+  text: String!
+}
+
+type CreateOrUpdateCommentPayload {
+  edge: CommentEdge
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
 }

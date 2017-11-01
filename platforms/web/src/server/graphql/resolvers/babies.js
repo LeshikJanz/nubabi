@@ -1,5 +1,6 @@
-import { pick, assocPath } from 'ramda';
+import { pick, assocPath, last } from 'ramda';
 import * as connector from '../connectors/babiesConnector';
+// noinspection ES6UnusedImports
 import {
   prop,
   transform,
@@ -10,6 +11,7 @@ import {
   fromGlobalId,
   mutationWithClientMutationId,
 } from './common';
+import { getClosestContentForPeriod } from '../../../common/growth/reducer';
 
 const resolvers = {
   Viewer: {
@@ -54,7 +56,10 @@ const resolvers = {
       obj.avatar ? pick(['url', 'thumb', 'large'], obj.avatar) : null,
 
     activities: ({ id }, args, { token }) =>
-      connectionFromPromisedArray(connector.getActivities(token, id), args),
+      connectionFromPromisedArray(
+        connector.getActivities(token, id, args),
+        args,
+      ),
 
     activity: ({ id: babyId }, { id: activityId }, { token }) => {
       return connector.getActivity(token, fromGlobalId(activityId).id, babyId);
@@ -66,13 +71,23 @@ const resolvers = {
         args,
       ),
 
-    growth: async (baby, args, { token, connectors: { firebase } }, info) => {
-      const connection = await connectionFromPromisedArray(
-        connector.getGrowthContent(token, baby),
+    activityHistory: ({ id: babyId }, args, { token }) => {
+      return connectionFromPromisedArrayWithCount(
+        connector.getActivityHistory(token, babyId),
         args,
       );
+    },
+
+    growth: async (baby, args, { token, connectors: { firebase } }, info) => {
+      const content = await connector.getGrowthContent(token, baby);
+
+      const connection = connectionFromArray(content, args);
 
       const viewer = await firebase.getViewer();
+
+      // TODO: PERF don't do this unless we ask for current in the query
+      connection.current =
+        getClosestContentForPeriod(content, baby.dob) || last(content);
 
       if (
         typeof info.variableValues.hasSeenGlobalIntro !== 'undefined' &&

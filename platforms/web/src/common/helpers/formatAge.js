@@ -1,29 +1,26 @@
 // @flow
+import { __, cond, curryN, equals, gte, memoize, T } from 'ramda';
 import moment from 'moment';
 import pluralize from 'pluralize';
 
-const pluralizeAge = (count: number, unit: string) => {
+const pluralizeAge = memoize((count: number, unit: string) => {
   return [count, pluralize(unit, count), 'old'].join(' ');
-};
+});
+
+const shouldDisplayWeeks = equals(0);
+const shouldDisplayYears = gte(__, 12);
 
 export const formatAge = (dobString: string) => {
   const now = moment();
   const dob = moment(dobString);
 
-  const diff = now.diff(dob, 'months');
-  const shouldDisplayWeeks = diff === 0;
+  const pluralized = curryN(2, unit =>
+    pluralizeAge(now.diff(dob, `${unit}s`), unit),
+  );
 
-  if (shouldDisplayWeeks) {
-    const weeks = now.diff(dob, 'week');
-    return pluralizeAge(weeks, 'week');
-  }
-
-  const shouldDisplayYears = diff >= 12;
-
-  if (shouldDisplayYears) {
-    const years = now.diff(dob, 'years');
-    return pluralizeAge(years, 'year');
-  }
-
-  return pluralizeAge(diff, 'month');
+  return cond([
+    [shouldDisplayWeeks, pluralized('week')],
+    [shouldDisplayYears, pluralized('year')],
+    [T, pluralized('month')],
+  ])(now.diff(dob, 'months'));
 };

@@ -1,10 +1,12 @@
+// @flow
 // We will probably store this on a reducer at some point.
 /* global __DEV__: false */
 
 const config = {
-  appName: process.env.NUBABI_APP_NAME,
+  appName: process.env.NUBABI_APP_NAME || 'app',
   appVersion: process.env.NUBABI_APP_VERSION,
   apiUrl: process.env.NUBABI_API_URL,
+  graphqlEndpoint: process.env.NUBABI_GRAPHQL_ENDPOINT,
   firebase: {
     apiKey: process.env.NUBABI_FIREBASE_API_KEY,
     authDomain: process.env.NUBABI_FIREBASE_AUTH_DOMAIN,

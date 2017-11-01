@@ -2,6 +2,9 @@
 
 exports[`handles SETTINGS_SET_VALUE 1`] = `
 Object {
+  "memories": Object {
+    "displaySuggestions": true,
+  },
   "notifications": Object {
     "activities": false,
     "email": true,
@@ -18,6 +21,9 @@ Object {
 
 exports[`has an initial state 1`] = `
 Object {
+  "memories": Object {
+    "displaySuggestions": true,
+  },
   "notifications": Object {
     "activities": false,
     "email": true,

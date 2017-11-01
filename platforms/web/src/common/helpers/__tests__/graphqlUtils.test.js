@@ -1,12 +1,16 @@
 import {
+  addEdgeAndCursorToMutationResult,
+  addEdgeToMutationResult,
   flattenEdges,
+  formValues,
   isEmpty,
   isEmptyPath,
   isEmptyProp,
-  formValues,
+  isUUID,
   mapEdgesToProp,
-  addEdgeToMutationResult,
+  replaceEdge,
 } from '../graphqlUtils';
+import uuid from 'react-native-uuid';
 
 describe('flattenEdges', () => {
   it('returns an Array from a GraphQL connection', () => {
@@ -100,5 +104,52 @@ describe('addEdgeToMutationResult', () => {
         node: obj,
       },
     });
+  });
+});
+
+describe('addEdgeAndCursorToMutationResult', () => {
+  it('adds cursor and object as the edge field on a payload', async () => {
+    const obj = 2;
+    const connectionGetter = () => Promise.resolve([1, 2, 3, 4]);
+    const result = await addEdgeAndCursorToMutationResult(connectionGetter)(2);
+
+    expect(result).toHaveProperty('edge');
+    expect(result.edge.cursor).toBeTruthy();
+    expect(result.edge.node).toEqual(obj);
+  });
+});
+
+describe('isUUID', () => {
+  it('returns true if the given string is a valid UUID', () => {
+    expect(isUUID(uuid.v4())).toBe(true);
+  });
+
+  it('returns false if the given strring is not a valid UUID', () => {
+    expect(isUUID('foo')).toBe(false);
+  });
+});
+
+describe('replaceEdge', () => {
+  const old = {
+    memories: {
+      edges: [
+        { node: { id: 1, title: 'Foo' } },
+        { node: { id: 2, title: 'Bar' } },
+      ],
+    },
+  };
+
+  it('replaces the edge with an updated edge', () => {
+    const newMemoryEdge = { node: { id: 2, title: 'Baz' } };
+
+    const newData = replaceEdge(old, ['memories', 'edges'], newMemoryEdge);
+
+    expect(newData.memories.edges[1].node.title).toEqual('Baz');
+  });
+
+  it('returns null if the edge is not found in the original data', () => {
+    const newMemoryEdge = { node: { id: 4, title: 'Bar' } };
+    const newData = replaceEdge(old, ['memories', 'edges'], newMemoryEdge);
+    expect(newData).toEqual(null);
   });
 });

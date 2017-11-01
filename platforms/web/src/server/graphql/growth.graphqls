@@ -44,6 +44,7 @@ type GrowthArticle implements Content {
   title: String!
   text: String!
   readingTime: ReadingTime!
+  section: GrowthArticleSection!
 }
 
 type GrowthConnection {
@@ -54,6 +55,9 @@ type GrowthConnection {
   pageInfo: PageInfo!
 
   edges: [GrowthEdge]
+
+  # The current growth based on the baby's dob (returns the last content if we can't find a closer one)
+  current: Growth
 }
 
 type GrowthEdge {
@@ -79,6 +83,11 @@ type GrowthArticleEdge {
 
   # A cursor for use in pagination.
   cursor: String!
+}
+
+type GrowthArticleSection {
+  id: ID!
+  name: String!
 }
 
 

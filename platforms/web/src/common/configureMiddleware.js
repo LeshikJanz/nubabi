@@ -38,7 +38,7 @@ const configureMiddleware = (
   const enableLogger = process.env.NODE_ENV !== 'production' && isClient;
 
   // Logger must be the last middleware in chain.
-  if (enableLogger) {
+  if (false) {
     const logger = createLoggerMiddleware({
       collapsed: true,
     });

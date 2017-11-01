@@ -15,7 +15,7 @@ isFriend(userId) {
 }
 
 isAuthor(obj) {
-  obj.authorId == auth.uid
+  prior(obj).authorId == auth.uid
 }
 
 canSeeUser(userId) {
@@ -136,6 +136,18 @@ path /invites {
 path /memories {
   /{id} {
     read() { canSeeMemory(this) }
+    create() { isSignedIn() }
+    update() { isAuthor(this) }
+    delete() { isAuthor(this) }
+  }
+  /{id}/comments/{commentId} {
+    create() { isSignedIn() /* TODO */ }
+  }
+}
+
+path /comments {
+  /{id} {
+    read() { true /* TODO */ }
     create() { isSignedIn() }
     update() { isAuthor(this) }
     delete() { isAuthor(this) }

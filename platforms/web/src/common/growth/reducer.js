@@ -6,6 +6,7 @@ import type {
   SeenGrowthGlobalIntroAction,
 } from '../types';
 import moment from 'moment';
+import { prop, merge } from 'ramda';
 
 type Action = SeenGrowthGlobalIntroAction;
 
@@ -56,10 +57,17 @@ const findContent = (
   collection: Array<Growth>,
 ) => {
   return collection.find((element: Growth) => {
+    const isRaw = typeof element['age_duration'] !== 'undefined';
+    const minimumAge = prop(isRaw ? 'age_min' : 'minimumAge')(element);
+    const maximumAge = prop(isRaw ? 'age_max' : 'maximumAge')(element);
+    const contentAgeDuration = isRaw
+      ? prop('age_duration', element).toUpperCase()
+      : prop('ageDuration', element);
+
     return (
-      element.ageDuration === ageDuration &&
-      element.minimumAge >= currentAge &&
-      element.maximumAge <= currentAge
+      contentAgeDuration === ageDuration &&
+      minimumAge >= currentAge &&
+      maximumAge <= currentAge
     );
   });
 };
@@ -67,10 +75,12 @@ const findContent = (
 function reducer(state: GrowthState = initialState, action: Action) {
   switch (action.type) {
     case 'GROWTH_SEEN_GLOBAL_INTRO': {
-      return {
-        ...state,
+      return merge(state, {
         hasSeenGlobalIntro: action.payload,
-      };
+      });
+    }
+    case 'RESET_TIPS': {
+      return merge(state, { hasSeenGlobalIntro: false });
     }
     default: {
       return state;

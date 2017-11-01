@@ -8,13 +8,15 @@ enum MemoryFilter {
 extend type Mutation {
   createMemory(input: CreateMemoryInput!): CreateOrUpdateMemoryPayload
   updateMemory(input: UpdateMemoryInput!): CreateOrUpdateMemoryPayload
+  deleteMemory(input: DeleteMemoryInput!): DeleteMemoryPayload
+  toggleMemoryLike(input: ToggleMemoryLikeInput!): ToggleMemoryLikePayload
 }
 
 extend type Baby {
   memory(id: ID!): Memory
 }
 
-type Memory implements Node, Timestampable {
+type Memory implements Node, Timestampable, Commentable, Likeable {
   id: ID!
   title: String!
   description: String
@@ -30,6 +32,12 @@ type Memory implements Node, Timestampable {
 
   createdAt: DateTime!
   updatedAt: DateTime
+
+  suggestedMemoryType: String
+  likes(
+    before: String, after: String, first: Int, last: Int
+  ): LikeConnection!
+  isLikedByViewer: Boolean!,
 }
 
 # A connection to a list of items.
@@ -65,33 +73,6 @@ type Badge {
   ): Image
 }
 
-type Comment implements Timestampable {
-  id: ID!
-  text: String!
-  author: User!
-  createdAt: DateTime!
-  updatedAt: DateTime
-}
-
-# A connection to a list of items.
-type CommentConnection {
-  # Information to aid in pagination.
-  pageInfo: PageInfo!
-
-  # A list of edges.
-  edges: [CommentEdge]
-
-  count: Int
-}
-
-type CommentEdge {
-  # The item at the end of the edge.
-  node: Comment!
-
-  # A cursor for use in pagination.
-  cursor: String!
-}
-
 # A connection to a list of items.
 type AchievementConnection {
   # Information to aid in pagination.
@@ -120,12 +101,15 @@ input CreateMemoryInput {
   # The date chose by the user to represent this Memory's date
   createdAt: DateTime!
 
+  # A string identifier of the suggested memory that was selected
+  # when creating this memory
+  suggestedMemoryType: String
+
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
 
 type CreateOrUpdateMemoryPayload {
-  memory: Memory
   edge: MemoryEdge
   clientMutationId: String
 }
@@ -136,4 +120,28 @@ input UpdateMemoryInput {
   createdAt: DateTime
   files: [FileInputBase64]
   removeFiles: [ID],
+  suggestedMemoryType: String,
+}
+
+input DeleteMemoryInput {
+  id: ID!
+}
+
+type DeleteMemoryPayload {
+  memory: Memory
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+input ToggleMemoryLikeInput {
+  id: ID!
+  isLiked: Boolean!
+}
+
+type ToggleMemoryLikePayload {
+  edge: MemoryEdge
+
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
 }

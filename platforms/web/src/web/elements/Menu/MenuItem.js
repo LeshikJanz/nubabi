@@ -9,24 +9,14 @@ export default ({ as, to, active, children, onClick }) => {
   let Element;
   if (as === undefined || to === undefined) {
     Element =
-      to === undefined
-        ? <a onClick={onClick}>
-            {children}
-          </a>
-        : <a href={to}>
-            {children}
-          </a>;
+      to === undefined ? (
+        <a onClick={onClick}>{children}</a>
+      ) : (
+        <a href={to}>{children}</a>
+      );
   } else {
     const ElementAs = as;
-    Element = (
-      <ElementAs to={to}>
-        {children}
-      </ElementAs>
-    );
+    Element = <ElementAs to={to}>{children}</ElementAs>;
   }
-  return (
-    <Wrapper>
-      {Element}
-    </Wrapper>
-  );
+  return <Wrapper>{Element}</Wrapper>;
 };

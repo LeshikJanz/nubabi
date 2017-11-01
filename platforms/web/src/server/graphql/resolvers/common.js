@@ -125,19 +125,19 @@ export const connectionFromBackendMetadataArray = data => {
   const firstEdge = edges[0];
   const lastEdge = edges[edges.length - 1];
 
-  const connection = {
+  const cursorProp = R.propOr(null, 'cursor');
+
+  return {
     edges,
     count: meta.total,
     pageInfo: {
-      startCursor: firstEdge.cursor, // TODO: backend meta should do this
-      endCursor: lastEdge.cursor, // TODO: above
+      startCursor: cursorProp(firstEdge), // TODO: backend meta should do this
+      endCursor: cursorProp(lastEdge), // TODO: see above
       pageSize: meta.pageSize,
       hasNextPage: meta.hasNextPage,
       hasPrevPage: meta.hasPrevPage,
     },
   };
-
-  return connection;
 };
 
 export const connectionFromBackendMetadata = (promise, args) => {
@@ -147,6 +147,11 @@ export const connectionFromBackendMetadata = (promise, args) => {
 export const toDate = R.constructN(1, Date);
 export const toTimestamp = R.invoker(0, 'getTime');
 export const sortByTimestamp = R.sortBy(R.prop('createdAt'));
+
+export const runFirebaseTask = (fn, successHandler) =>
+  new Promise((resolve, reject) => {
+    fn.fork(err => reject(err), (...args) => resolve(successHandler(...args)));
+  });
 
 export {
   fromGlobalId,

@@ -1,22 +1,42 @@
 // @flow
-import type { MeasurementType, MeasurementUnit } from '../../../common/types';
+import type { MeasurementType, MeasurementUnit } from "../../../common/types";
+// noinspection ES6UnusedImports
 import {
-  sortByTimestamp,
-  toTimestamp,
   fromGlobalId,
-} from '../resolvers/common';
-import R, { omit, evolve, map, compose, assoc } from 'ramda';
-import { decode } from 'base-64';
+  sortByTimestamp,
+  toTimestamp
+} from "../resolvers/common";
+import R, {
+  always,
+  assoc,
+  compose,
+  cond,
+  equals,
+  evolve,
+  map,
+  merge,
+  omit
+} from "ramda";
+import { decode } from "base-64";
+import Task from "data.task";
 import {
   toCentimeters,
-  toKilograms,
-} from '../../../common/helpers/measurement';
+  toKilograms
+} from "../../../common/helpers/measurement";
+import isReactNative from "../../../common/app/isReactNative";
 
 const get = (firebase, path: string) =>
-  firebase.database().ref(path).once('value').then(returnVal);
+  firebase
+    .database()
+    .ref(path)
+    .once("value")
+    .then(returnVal);
 
 const set = (firebase, path: string, values: mixed) =>
-  firebase.database().ref(path).set(values);
+  firebase
+    .database()
+    .ref(path)
+    .set(values);
 
 const returnVal = snapshot => snapshot.val();
 const returnValWithKeyAsId = snapshot => {
@@ -26,73 +46,102 @@ const returnValWithKeyAsId = snapshot => {
 
   return {
     id: snapshot.key,
-    ...snapshot.val(),
+    ...snapshot.val()
   };
 };
 
 const isNewImage = image => {
   // Apparently we can't use String.prototype.startsWith on JSC
   // TODO: confirm
-  return image && image.url.indexOf('data:') !== -1;
+  return image && image.url.indexOf("data:") !== -1;
 };
 
 const transforms = {
   dob: date => date.getTime(),
   gender: gender => {
     if (gender) {
-      return gender === 'FEMALE' ? 'f' : 'm';
+      return gender === "FEMALE" ? "f" : "m";
     }
 
     return null;
-  },
+  }
 };
 
 const toFirebaseBaby = values => {
   return evolve(
     transforms,
-    omit(['id', 'relationship', 'avatar', 'coverImage'], values),
+    omit(["id", "relationship", "avatar", "coverImage"], values)
   );
 };
 
-const uploadFile = (firebase, refPath, dataUrl) => {
-  return new Promise((resolve, reject) => {
-    /*
-     * We can't use data_url with putSring since Firebase is unconditionally
+const uploadFileFromDataUri = () => {
+  /*
+     * We can't use data_url with putString since Firebase is unconditionally
      * using `atob` which fails on RN when run on JSC.
      */
-    /* eslint-disable no-useless-escape */
-    const dataUrlRegExp = new RegExp(
-      /data:([\w\/\+]+);(charset=[\w-]+|base64).*,([a-zA-Z0-9+\/]+={0,2})/g,
-    );
-    /* eslint-enable no-useless-escape */
+  /* eslint-disable no-useless-escape */
+  const dataUrlRegExp = new RegExp(
+    /data:([\w\/\+]+);(charset=[\w-]+|base64).*,([a-zA-Z0-9+\/]+={0,2})/g
+  );
+  /* eslint-enable no-useless-escape */
 
-    // data_url is in format data:image/jpeg;base64,<content>
-    const match = dataUrlRegExp.exec(dataUrl);
-    const contentType = match[1];
+  /* eslint-disable no-undef */
+  // data_url is in format data:image/jpeg;base64,<content>
+  const match = dataUrlRegExp.exec(fileUrl);
 
-    const content = new Uint8Array(
-      decode(match[3]).split('').map(c => c.charCodeAt(0)),
-    );
+  const ref = firebase
+    .storage()
+    .ref()
+    .child(refPath);
 
-    const metadata = { contentType };
-    const ref = firebase.storage().ref().child(refPath);
-    const uploadTask = ref.put(content);
+  const isDataUri = !!match;
 
-    uploadTask.on(
-      firebase.storage.TaskEvent.STATE_CHANGED,
-      () => {
-        /* progress */
-      },
-      error => {
-        console.log(error);
-        reject(error);
-      },
-      () => {
-        ref
-          .updateMetadata(metadata)
-          .then(resolve(uploadTask.snapshot.downloadURL));
-      },
-    );
+  const contentType = match[1];
+
+  const content = new Uint8Array(
+    decode(match[3])
+      .split("")
+      .map(c => c.charCodeAt(0))
+  );
+};
+
+const uploadFile = (firebase, refPath, file) => {
+  return new Promise((resolve, reject) => {
+    const ref = firebase
+      .storage()
+      .ref()
+      .child(refPath);
+
+    if (!isReactNative) {
+      return reject(new Error("upload for web is not implemented yet"));
+    }
+
+    const RNFetchBlob = require("react-native-fetch-blob").default;
+    const uploadUri = file.url;
+    const uri = RNFetchBlob.wrap(uploadUri);
+    const contentType = file.contentType || "application/octet-stream";
+
+    return Blob.build(uri, { type: contentType }).then(blob => {
+      const metadata = { contentType };
+      const uploadTask = ref.put(blob);
+
+      uploadTask.on(
+        firebase.storage.TaskEvent.STATE_CHANGED,
+        () => {
+          /* progress */
+        },
+        error => {
+          reject(error);
+        },
+        () => {
+          blob.close();
+          ref
+            .updateMetadata(metadata)
+            .then(resolve(uploadTask.snapshot.downloadURL))
+            .catch(err => reject(err));
+        }
+      );
+    });
   });
 };
 
@@ -103,29 +152,37 @@ const createOrUpdateBaby = async (firebase, values, id) => {
 
   const path = id
     ? `babies/${id}`
-    : `babies/${firebase.database().ref().child('babies').push().key}`;
+    : `babies/${firebase
+        .database()
+        .ref()
+        .child("babies")
+        .push().key}`;
 
   const object = toFirebaseBaby(values);
 
   const { TIMESTAMP } = firebase.database.ServerValue;
 
-  object[creating ? 'createdAt' : 'updatedAt'] = TIMESTAMP;
+  object[creating ? "createdAt" : "updatedAt"] = TIMESTAMP;
 
   const promises = [
-    firebase.database().ref().child(path).update(object),
     firebase
       .database()
       .ref()
       .child(path)
-      .once('value')
-      .then(returnValWithKeyAsId),
+      .update(object),
+    firebase
+      .database()
+      .ref()
+      .child(path)
+      .once("value")
+      .then(returnValWithKeyAsId)
   ];
 
-  const images = ['avatar', 'coverImage'];
+  const images = ["avatar", "coverImage"];
 
   images.forEach(key => {
     if (isNewImage(values[key])) {
-      const content = values[key].url;
+      const content = values[key];
       promises.unshift(
         uploadFile(firebase, `${path}/${key}`, content).then(url => {
           return firebase
@@ -133,7 +190,7 @@ const createOrUpdateBaby = async (firebase, values, id) => {
             .ref()
             .child(path)
             .update({ [key]: { url } });
-        }),
+        })
       );
     }
   });
@@ -155,12 +212,12 @@ const createOrUpdateBaby = async (firebase, values, id) => {
         .database()
         .ref()
         .child(`${currentUserPath}/${path}`)
-        .set(values.relationship),
+        .set(values.relationship)
     );
   }
 
   return Promise.all(promises).then(
-    responses => responses[responses.length - 1],
+    responses => responses[responses.length - 1]
   );
 };
 
@@ -174,13 +231,13 @@ const getViewerWithProfile = async firebase => {
   const profile = await firebase
     .database()
     .ref(`/users/${user.uid}`)
-    .once('value')
+    .once("value")
     .then(returnVal);
 
   return {
     ...profile,
     email: user.email,
-    uid: user.uid,
+    uid: user.uid
   };
 };
 
@@ -193,7 +250,7 @@ const getFriends = async firebase => {
   return firebase
     .database()
     .ref(`/users/${user.uid}/friends`)
-    .once('value')
+    .once("value")
     .then(returnVal)
     .then(async data => {
       if (!data) {
@@ -202,39 +259,39 @@ const getFriends = async firebase => {
 
       // TODO: use getUser
       const getFriend = async (friend, key) => {
-        if (typeof friend !== 'object') {
+        if (typeof friend !== "object") {
           const record = await firebase
             .database()
             .ref(`/users/${key}`)
-            .once('value')
+            .once("value")
             .then(returnVal);
           const relationship = friend; // we store the relationship instead of a boolean
 
           return {
             ...record,
             relationship,
-            isPending: false,
+            isPending: false
           };
         }
 
         return {
           ...friend,
           isPending: true,
-          id: key,
+          id: key
         };
       };
 
       return Promise.all(
         Object.keys(data).map(key => {
           return getFriend(data[key], key);
-        }),
-      ).then(R.sortBy(R.prop('isPending')));
+        })
+      ).then(R.sortBy(R.prop("isPending")));
     });
 };
 
 const updateUser = async (firebase, input) => {
   const currentUser = getViewer(firebase);
-  const user = evolve(transforms, omit(['avatar'], input));
+  const user = evolve(transforms, omit(["avatar"], input));
   const updates = {};
 
   Object.keys(user).forEach(key => {
@@ -245,14 +302,17 @@ const updateUser = async (firebase, input) => {
     const avatarUrl = await uploadFile(
       firebase,
       `users/${currentUser.uid}/avatar`,
-      input.avatar.url,
+      input.avatar
     );
     if (avatarUrl) {
       updates[`users/${currentUser.uid}/avatar/url`] = avatarUrl;
     }
   }
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
 
   return getViewerWithProfile(firebase);
 };
@@ -261,7 +321,7 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
   const { inviteToken } = input;
   const friend = {
     id: inviteToken,
-    ...omit(['id', 'inviteToken'], input),
+    ...omit(["id", "inviteToken"], input)
   };
 
   const currentUserId = getViewer(firebase).uid;
@@ -272,77 +332,42 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
   updates[`invites/${inviteToken}`] = {
     ...friend,
     invitedBy: currentUserId,
-    invitedAt: firebase.database.ServerValue.TIMESTAMP,
+    invitedAt: firebase.database.ServerValue.TIMESTAMP
   };
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
   return friend;
 };
 
-const uploadMemoryFiles = async (
-  firebase,
-  memoryId,
-  babyId,
-  files,
-): Promise<Array<Object>> => {
-  if (files && files.length) {
-    const storagePath = `/babies/${babyId}/memories/${memoryId}`;
-    return await Promise.all(
-      files.map(async file => {
-        const url = await uploadFile(
-          firebase,
-          [storagePath, file.name].join('/'),
-          file.url,
-        );
-        const id = firebase
-          .database()
-          .ref()
-          .child(`/memories/${memoryId}/files`)
-          .push().key;
-
-        return { id, file: assoc('url', url, file) };
-      }),
-    );
-  }
-
-  return [];
-};
-
-const createMemory = async (
-  firebase,
-  babyId: string,
-  input: CreateMemoryInput,
-) => {
-  const updates = {};
+const getBabies = firebase => {
   const currentUserId = getViewer(firebase).uid;
-  const memoryId = firebase.database().ref().child('/memories/').push().key;
 
-  const memory = {
-    ...omit(['babyId', 'files'], input),
-    id: memoryId,
-    babyId,
-    authorId: currentUserId,
-    createdAt: input.createdAt.getTime(),
-    files: {},
-  };
-
-  updates[`/memories/${memoryId}`] = memory;
-  updates[`/babies/${babyId}/memories/${memoryId}`] = true;
-
-  const files = await uploadMemoryFiles(
-    firebase,
-    memoryId,
-    babyId,
-    input.files,
-  );
-
-  files.forEach(file => {
-    memory.files[file.id] = file.file;
-  });
-
-  await firebase.database().ref().update(updates);
-
-  return get(firebase, `/memories/${memoryId}`);
+  return firebase
+    .database()
+    .ref()
+    .child(`/users/${currentUserId}/babies`)
+    .once("value")
+    .then(snap => Object.keys(snap.val()))
+    .then(babyIds =>
+      Promise.all(
+        babyIds.map(babyId => {
+          return firebase
+            .database()
+            .ref()
+            .child(`/babies/${babyId}`)
+            .once("value")
+            .then(returnValWithKeyAsId);
+        })
+      )
+    )
+    .then(([...babies]) => babies)
+    .catch(err => {
+      console.warn(err);
+      return [];
+    });
 };
 
 const upsert = (basePath: string, obj: Object) => {
@@ -355,20 +380,89 @@ const upsert = (basePath: string, obj: Object) => {
   return target;
 };
 
+const uploadMemoryFiles = (
+  firebase,
+  memoryId,
+  babyId,
+  files
+): Promise<Array<Object>> => {
+  if (files && files.length) {
+    const storagePath = `/babies/${babyId}/memories/${memoryId}`;
+
+    return Promise.all(
+      files.map(file => {
+        return uploadFile(
+          firebase,
+          [storagePath, file.name].join("/"),
+          file
+        ).then(url => {
+          const id = firebase
+            .database()
+            .ref()
+            .child(`/memories/${memoryId}/files`)
+            .push().key;
+
+          return { id, file: assoc("url", url, file) };
+        });
+      })
+    );
+  }
+
+  return Promise.resolve([]);
+};
+
+const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
+  const updates = {};
+  const currentUserId = getViewer(firebase).uid;
+  const memoryId = firebase
+    .database()
+    .ref()
+    .child("/memories/")
+    .push().key;
+
+  const memory = {
+    ...omit(["babyId", "files"], input),
+    id: memoryId,
+    babyId,
+    authorId: currentUserId,
+    createdAt: input.createdAt.getTime(),
+    files: {}
+  };
+
+  updates[`/memories/${memoryId}`] = memory;
+  updates[`/babies/${babyId}/memories/${memoryId}`] = true;
+
+  return uploadMemoryFiles(firebase, memoryId, babyId, input.files)
+    .then(files => {
+      files.forEach(file => (memory.files[file.id] = file.file));
+      return files;
+    })
+    .then(() => {
+      firebase
+        .database()
+        .ref()
+        .update(updates);
+    })
+    .then(() => get(firebase, `/memories/${memoryId}`))
+    .then(result => {
+      return result;
+    });
+};
+
 const updateMemory = async (firebase, id: string, input: any) => {
   const toFirebaseMemory = {
-    createdAt: toTimestamp,
+    createdAt: toTimestamp
   };
 
   const path = `/memories/${id}`;
   const memory = compose(
-    assoc('updatedAt', firebase.database.ServerValue.TIMESTAMP),
+    assoc("updatedAt", firebase.database.ServerValue.TIMESTAMP),
     evolve(toFirebaseMemory),
-    omit(['id', 'files', 'removeFiles']),
+    omit(["id", "files", "removeFiles"])
   )(input);
 
   const updates = {
-    ...upsert(path, memory),
+    ...upsert(path, memory)
   };
 
   input.removeFiles.forEach((fileId: string) => {
@@ -384,8 +478,72 @@ const updateMemory = async (firebase, id: string, input: any) => {
     });
   }
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
   return get(firebase, path);
+};
+
+const deleteMemory = (firebase, memoryId: string) => {
+  return new Task((reject, resolve) => {
+    return get(firebase, `/memories/${memoryId}`)
+      .then(resolve)
+      .catch(reject);
+  })
+    .map(memory => {
+      const updates = {};
+      updates[`/memories/${memoryId}`] = null;
+      updates[`/babies/${memory.babyId}/memories/${memoryId}`] = null;
+      return { memory, updates };
+    })
+    .chain(({ memory, updates }) => {
+      return new Task((reject, resolve) => {
+        firebase
+          .database()
+          .ref()
+          .update(updates)
+          .then(() => resolve(memory))
+          .catch(reject);
+      });
+    });
+};
+
+const toggleMemoryLike = (firebase, memoryId: string, isLiked: boolean) => {
+  return new Task(async (reject, resolve) => {
+    const currentUserId = getViewer(firebase).uid;
+    const updates = {};
+    updates[`/memories/${memoryId}/likes/${currentUserId}`] = isLiked
+      ? true
+      : null;
+    updates[`/users/${currentUserId}/likes/memories/${memoryId}`] = isLiked
+      ? true
+      : null;
+
+    try {
+      await firebase
+        .database()
+        .ref()
+        .update(updates);
+      const memory = await get(firebase, `/memories/${memoryId}`);
+      resolve(memory);
+    } catch (err) {
+      reject(err);
+    }
+  });
+};
+
+const isMemoryLikedByViewer = async (firebase, memoryId: string) => {
+  try {
+    const currentUserId = getViewer(firebase).uid;
+    const like = await get(
+      firebase,
+      `/users/${currentUserId}/likes/memories/${memoryId}`
+    );
+    return like !== null;
+  } catch (err) {
+    return null;
+  }
 };
 
 const getBaby = (firebase, id) => {
@@ -393,51 +551,51 @@ const getBaby = (firebase, id) => {
     .database()
     .ref()
     .child(`/babies/${id}`)
-    .once('value')
+    .once("value")
     .then(returnValWithKeyAsId);
 };
 
 const assignIdsToCollection = R.mapObjIndexed((value, key) => {
-  return R.assoc('id', key, value);
+  return R.assoc("id", key, value);
 });
 
 const timestampToDate = val => new Date(val.TIMESTAMP);
 
 const evolveBabyMeasurement = type => {
   return R.compose(
-    R.assoc('unit', type === 'weights' ? 'kg' : 'cm'),
+    R.assoc("unit", type === "weights" ? "kg" : "cm"),
     R.evolve({
-      recordedAt: timestampToDate,
-    }),
+      recordedAt: timestampToDate
+    })
   );
 };
 
 const getBabyMeasurements = (
   firebase,
   id: string,
-  type: 'weights' | 'heights',
+  type: "weights" | "heights"
 ) => {
   return firebase
     .database()
     .ref()
     .child(`/measurements/${id}/${type}`)
-    .once('value')
+    .once("value")
     .then(
       compose(
         map(evolveBabyMeasurement(type)),
         R.values,
         assignIdsToCollection,
-        returnVal,
-      ),
+        returnVal
+      )
     );
 };
 
 const getBabyWeights = (firebase, id: string) => {
-  return getBabyMeasurements(firebase, id, 'weights');
+  return getBabyMeasurements(firebase, id, "weights");
 };
 
 const getBabyHeights = (firebase, id: string) => {
-  return getBabyMeasurements(firebase, id, 'heights');
+  return getBabyMeasurements(firebase, id, "heights");
 };
 
 const recordMeasurement = async (firebase, babyId, type, unit, value) => {
@@ -445,16 +603,19 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
   // good for historical data. We might consider a separate datastore for
   // this, probably BigQuery if we wish to stay in the Google ecosystem
 
-  const suffix = type === 'weight' ? 'weights' : 'heights';
+  const suffix = type === "weight" ? "weights" : "heights";
   const measurementPrefix = `/measurements/${babyId}/${suffix}`;
-  const measurementKey = firebase.database().ref(measurementPrefix).push().key;
-  const measurementPath = [measurementPrefix, measurementKey].join('/');
+  const measurementKey = firebase
+    .database()
+    .ref(measurementPrefix)
+    .push().key;
+  const measurementPath = [measurementPrefix, measurementKey].join("/");
 
   let rawValue = value;
 
-  if (type === 'weight' && unit !== 'kg') {
+  if (type === "weight" && unit !== "kg") {
     rawValue = toKilograms(value);
-  } else if (type === 'height' && unit !== 'cm') {
+  } else if (type === "height" && unit !== "cm") {
     rawValue = toCentimeters(value);
   }
 
@@ -463,10 +624,13 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
 
   updates[measurementPath] = {
     value: rawValue,
-    recordedAt: firebase.database.ServerValue,
+    recordedAt: firebase.database.ServerValue
   };
 
-  await firebase.database().ref().update(updates);
+  await firebase
+    .database()
+    .ref()
+    .update(updates);
   const baby = await getBaby(firebase, babyId);
 
   const measurement = await get(firebase, measurementPath);
@@ -475,9 +639,9 @@ const recordMeasurement = async (firebase, babyId, type, unit, value) => {
     baby,
     recordedMeasurement: {
       value: measurement.value,
-      unit: type === 'weight' ? 'kg' : 'cm',
-      recordedAt: new Date(measurement.recordedAt.TIMESTAMP),
-    },
+      unit: type === "weight" ? "kg" : "cm",
+      recordedAt: new Date(measurement.recordedAt.TIMESTAMP)
+    }
   };
 };
 
@@ -486,7 +650,7 @@ const denormalizeArray = (firebase, denormalizedPath, normalizedPath) => {
     .database()
     .ref()
     .child(denormalizedPath)
-    .once('value')
+    .once("value")
     .then(snap => Object.keys(snap.val()))
     .then(ids =>
       Promise.all(
@@ -495,32 +659,128 @@ const denormalizeArray = (firebase, denormalizedPath, normalizedPath) => {
             .database()
             .ref()
             .child(`${normalizedPath}/${id}`)
-            .once('value')
+            .once("value")
             .then(returnValWithKeyAsId);
-        }),
-      ),
+        })
+      )
     )
     .then(([...objs]) => objs)
     .catch(err => {
-      console.warn(err);
       return [];
     });
 };
 
 export const nestedArrayToArray = (input: Object) => {
-  return Object.keys(input).map(key => assoc('id', key, input[key]));
+  if (!input) {
+    return [];
+  }
+
+  return Object.keys(input).map(key => assoc("id", key, input[key]));
 };
 
 const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
   return denormalizeArray(
     firebase,
     `/babies/${babyId}/memories`,
-    '/memories',
+    "/memories"
   ).then(compose(R.reverse, sortByTimestamp));
 };
 
 const getMemory = (firebase, id: string, args: ConnectionArguments) => {
   return get(firebase, `/memories/${id}`);
+};
+
+const getMemoryLikes = async (
+  firebase,
+  id: string,
+  args: ConnectionArguments
+) => {};
+
+const commentablePathFor = cond([[equals("MEMORY"), always("memories")]]);
+
+const createComment = async (firebase, input) => {
+  const currentUserId = getViewer(firebase).uid;
+  const commentableId = fromGlobalId(input.id).id;
+  const commentableType = input.commentableType.toUpperCase();
+  const commentId = firebase
+    .database()
+    .ref()
+    .child("comments")
+    .push().key;
+
+  const commentablePath = commentablePathFor(commentableType);
+
+  const updates = {};
+  updates[`/comments/${commentId}`] = merge(omit(["id"], input), {
+    commentableId,
+    id: commentId,
+    authorId: currentUserId,
+    createdAt: firebase.database.ServerValue.TIMESTAMP
+  });
+  updates[`/${commentablePath}/${commentableId}/comments/${commentId}`] = true;
+
+  try {
+    await firebase
+      .database()
+      .ref()
+      .update(updates);
+  } catch (err) {
+    return null;
+  }
+
+  return get(firebase, `/comments/${commentId}`);
+};
+
+const getRelationship = (firebase, id) => {
+  return firebase
+    .database()
+    .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
+    .once("value")
+    .then(returnVal)
+    .then(val => {
+      // To ease migration, will be removed
+      const validRelationships = [
+        "Parent",
+        "Grandparent",
+        "Guardian",
+        "Relative",
+        "Nanny",
+        "AuPair",
+        "Other"
+      ];
+
+      if (!validRelationships.includes(val)) {
+        return "Other";
+      }
+
+      return val;
+    });
+};
+
+type CommentableTypes = "MEMORY";
+
+const getComments = (
+  firebase,
+  commentableType: CommentableTypes,
+  commentableId: string
+) => {
+  const prefix = commentablePathFor(commentableType);
+  const commentablePath = `/${prefix}/${commentableId}/comments`;
+
+  return denormalizeArray(firebase, commentablePath, "/comments").then(
+    compose(R.reverse, sortByTimestamp)
+  );
+};
+
+const getCommentable = (
+  firebase,
+  commentableType: CommentableTypes,
+  commentableId: string
+) => {
+  return get(
+    firebase,
+    `${commentablePathFor(commentableType)}/${commentableId}`
+  );
 };
 
 const firebaseConnector = firebase => {
@@ -535,81 +795,35 @@ const firebaseConnector = firebase => {
     getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
     inviteUser: input => inviteUser(firebase, input),
-    getBabies: () => {
-      const currentUserId = getViewer(firebase).uid;
-
-      return firebase
-        .database()
-        .ref()
-        .child(`/users/${currentUserId}/babies`)
-        .once('value')
-        .then(snap => Object.keys(snap.val()))
-        .then(babyIds =>
-          Promise.all(
-            babyIds.map(babyId => {
-              return firebase
-                .database()
-                .ref()
-                .child(`/babies/${babyId}`)
-                .once('value')
-                .then(returnValWithKeyAsId);
-            }),
-          ),
-        )
-        .then(([...babies]) => babies)
-        .catch(err => {
-          console.warn(err);
-          return [];
-        });
-    },
-    getBaby: (id: string) => {
-      return getBaby(firebase, id);
-    },
-    getRelationship: (id: string) => {
-      return firebase
-        .database()
-        .ref(`/users/${getViewer(firebase).uid}/babies/${id}`)
-        .once('value')
-        .then(returnVal)
-        .then(val => {
-          // To ease migration, will be removed
-          const validRelationships = [
-            'Parent',
-            'Grandparent',
-            'Guardian',
-            'Relative',
-            'Nanny',
-            'AuPair',
-            'Other',
-          ];
-
-          if (!validRelationships.includes(val)) {
-            return 'Other';
-          }
-
-          return val;
-        });
-    },
+    getBabies: () => getBabies(firebase),
+    getBaby: (id: string) => getBaby(firebase, id),
+    getRelationship: (id: string) => getRelationship(firebase, id),
     getBabyWeights: (id: string) => getBabyWeights(firebase, id),
     getBabyHeights: (id: string) => getBabyHeights(firebase, id),
     getMemories: (babyId, args) => getMemories(firebase, babyId, args),
     getMemory: id => getMemory(firebase, id),
-    createBaby: (values: mixed) => {
-      return createOrUpdateBaby(firebase, values);
-    },
-    updateBaby: (id: string, values: mixed) => {
-      return createOrUpdateBaby(firebase, values, id);
-    },
+    createBaby: (values: mixed) => createOrUpdateBaby(firebase, values),
+    updateBaby: (id: string, values: mixed) =>
+      createOrUpdateBaby(firebase, values, id),
     recordMeasurement: (
       id: string,
       type: MeasurementType,
       unit: MeasurementUnit,
-      value: number,
-    ) => {
-      return recordMeasurement(firebase, id, type, unit, value);
-    },
+      value: number
+    ) => recordMeasurement(firebase, id, type, unit, value),
     createMemory: (babyId, input) => createMemory(firebase, babyId, input),
     updateMemory: (id, input) => updateMemory(firebase, id, input),
+    deleteMemory: id => deleteMemory(firebase, id),
+    toggleMemoryLike: (memoryId, isLiked) =>
+      toggleMemoryLike(firebase, memoryId, isLiked),
+    isMemoryLikedByViewer: memoryId =>
+      isMemoryLikedByViewer(firebase, memoryId),
+    getMemoryLikes: memoryId => getMemoryLikes(firebase, memoryId),
+    createComment: input => createComment(firebase, input),
+    getComments: (commentableType, commentableId) =>
+      getComments(firebase, commentableType, commentableId),
+    getCommentable: (commentableType, commentableId) =>
+      getCommentable(firebase, commentableType, commentableId)
   };
 };
 

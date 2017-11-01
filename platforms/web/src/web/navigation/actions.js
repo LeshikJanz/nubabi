@@ -1,26 +1,10 @@
 // @flow
-import type { Deps } from "../../common/types";
-import { Observable } from "rxjs";
-import history from "web/navigation/history";
+import { push, replace } from "react-router-redux";
 
 export const resetNavigation = (routeName: string, index?: number = 0) => {
-  return history.push(routeName);
+  return replace(routeName);
 };
 
 export const navigate = (routeName: string, params: Object = {}) => {
-  return history.push(routeName);
+  return push(routeName);
 };
-
-const resetNavigationEpic = (action$: any, deps: Deps) => {
-  console.log(deps);
-  console.log("RESET");
-  return action$
-    .ofType("NAVIGATION_RESET")
-    .mergeMap(action =>
-      Observable.of(
-        resetNavigation(action.payload.routeName, action.payload.index)
-      )
-    );
-};
-
-export const epics = [resetNavigationEpic];

@@ -1,5 +1,8 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const MenuLink = styled.a`margin-left: 10px;`;
 
 const isModifiedEvent = event =>
   !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
@@ -71,7 +74,7 @@ class Link extends PureComponent {
       delete props.active;
     }
     // eslint-disable-next-line
-    return <a {...props} {...linkProps} />;
+    return <MenuLink {...props} {...linkProps} />;
   }
 }
 
