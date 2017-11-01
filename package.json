@@ -43,7 +43,6 @@
     "apollo-test-utils": "^0.3.0",
     "art": "^0.10.1",
     "axios": "^0.16.0",
-    "axios-debug-log": "^0.3.0",
     "babel-plugin-inline-import": "^2.0.4",
     "babel-plugin-transform-define": "https://github.com/blackxored/babel-plugin-transform-define#react-native-packager-fix",
     "base-64": "^0.1.0",

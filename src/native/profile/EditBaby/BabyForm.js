@@ -1,13 +1,7 @@
 // @flow
 import type { Baby } from '../../../common/types';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { compose } from 'ramda';
@@ -31,6 +25,7 @@ import {
   constantValues,
   formattedDate,
   maxLength,
+  renderTextInput,
   required,
 } from '../../shared/forms';
 import { unitDisplaySelector } from '../../../common/settings/reducer';
@@ -102,46 +97,6 @@ class Form extends Component {
     }
   };
 
-  renderTextInput(field) {
-    // we can access errors on field.meta.errors and dirty state and field.meta.touched
-    const { label } = field;
-    const { touched, error } = field.meta;
-
-    const hasError = touched && error;
-    // We don't want to show required as an error since the coloring
-    // should suffice
-    const hasExplicitError = hasError && error !== 'Required';
-
-    const containerStyle = [
-      styles.inputContainer,
-      hasError ? styles.inputContainerError : {},
-    ];
-
-    const labelStyle = [styles.inputLabel, hasError ? styles.hasError : {}];
-
-    return (
-      <View style={containerStyle}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {label
-            ? <Text style={[...labelStyle, { flex: 1 }]}>
-                {label}
-              </Text>
-            : null}
-          {hasExplicitError
-            ? <Text style={labelStyle}>
-                {error.toUpperCase()}
-              </Text>
-            : null}
-        </View>
-        <TextInput
-          {...field.input}
-          placeholder={field.placeholder}
-          style={styles.textInput}
-        />
-      </View>
-    );
-  }
-
   renderAvatar(field) {
     return <IconHeader avatar={field.input.value} />;
   }
@@ -172,9 +127,7 @@ class Form extends Component {
     const { label } = field;
     return (
       <View style={styles.inputContainer}>
-        <Text style={[styles.inputLabel, { flex: 1 }]}>
-          {label}
-        </Text>
+        <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
 
         <DatePicker
           onChange={field.input.onChange}
@@ -217,21 +170,15 @@ class Form extends Component {
     return (
       <View style={containerStyle}>
         <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {label
-            ? <Text style={[...labelStyle, { flex: 1 }]}>
-                {label}
-              </Text>
-            : null}
-          {hasExplicitError
-            ? <Text style={labelStyle}>
-                {error.toUpperCase()}
-              </Text>
-            : null}
+          {label ? (
+            <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
+          ) : null}
+          {hasExplicitError ? (
+            <Text style={labelStyle}>{error.toUpperCase()}</Text>
+          ) : null}
         </View>
         <View style={{ flexDirection: 'row' }}>
-          <Text style={styles.textInput}>
-            {measurementText}
-          </Text>
+          <Text style={styles.textInput}>{measurementText}</Text>
           <TouchableOpacity onPress={update}>
             <Text style={{ color: theme.colors.secondary }}>EDIT</Text>
           </TouchableOpacity>
@@ -242,7 +189,7 @@ class Form extends Component {
 
   renderMeasurementsSection() {
     const { mode, unitDisplay } = this.props;
-    const { renderTextInput, renderMeasurementInput } = this;
+    const { renderMeasurementInput } = this;
 
     if (mode === 'add') {
       return (
@@ -303,6 +250,7 @@ class Form extends Component {
   render() {
     const { onSubmit: submit, handleSubmit } = this.props;
 
+    const isSubmitting = true;
     const {
       renderGenderSelection,
       renderPicker,
@@ -315,11 +263,13 @@ class Form extends Component {
 
     let submitText;
 
-    if (this.props.loading) {
+    if (isSubmitting) {
       submitText = this.props.mode === 'add' ? 'ADDING...' : 'SAVING...';
     } else {
       submitText = this.props.mode === 'add' ? 'ADD BABY' : 'SAVE BABY';
     }
+
+    const editableProps = { editable: !isSubmitting };
 
     return (
       <KeyboardAwareScrollView
@@ -331,34 +281,42 @@ class Form extends Component {
         }}
       >
         <View style={styles.headerContainer}>
-          <Field name="coverImage" component={renderCoverImage} />
-          <Field name="avatar" component={renderAvatar} />
+          <Field
+            name="coverImage"
+            component={renderCoverImage}
+            {...editableProps}
+          />
+          <Field name="avatar" component={renderAvatar} {...editableProps} />
 
-          <View style={styles.changeAvatarContainer}>
-            <View style={styles.changeAvatarView}>
-              <View style={styles.changeAvatarInnerView}>
-                <TouchableOpacity onPress={this.handleAvatar}>
-                  <Icon
-                    name="ios-camera-outline"
-                    style={styles.changeAvatarIcon}
-                  />
-                </TouchableOpacity>
+          {!isSubmitting && (
+            <View style={styles.changeAvatarContainer}>
+              <View style={styles.changeAvatarView}>
+                <View style={styles.changeAvatarInnerView}>
+                  <TouchableOpacity onPress={this.handleAvatar}>
+                    <Icon
+                      name="ios-camera-outline"
+                      style={styles.changeAvatarIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
+          )}
           <View style={styles.changeCoverPhotoView}>
-            <TouchableOpacity
-              style={{ flexDirection: 'row' }}
-              onPress={this.handleCoverImage}
-            >
-              <NubabiIcon
-                style={styles.changeCoverPhotoIcon}
-                name="editProfile"
-              />
-              <Text style={styles.changeCoverPhotoText}>
-                Change Cover Photo
-              </Text>
-            </TouchableOpacity>
+            {!isSubmitting && (
+              <TouchableOpacity
+                style={{ flexDirection: 'row' }}
+                onPress={this.handleCoverImage}
+              >
+                <NubabiIcon
+                  style={styles.changeCoverPhotoIcon}
+                  name="editProfile"
+                />
+                <Text style={styles.changeCoverPhotoText}>
+                  Change Cover Photo
+                </Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
 
@@ -366,6 +324,7 @@ class Form extends Component {
           name="gender"
           component={renderGenderSelection}
           validate={[required, constantValues('MALE', 'FEMALE')]}
+          {...editableProps}
         />
 
         <Field
@@ -373,6 +332,7 @@ class Form extends Component {
           label="NAME"
           component={renderTextInput}
           validate={[required, maxLength(32)]}
+          {...editableProps}
         />
 
         <Field
@@ -380,6 +340,7 @@ class Form extends Component {
           label="BORN ON"
           component={renderDatePicker}
           validate={[required, formattedDate('YYYY-MM-DD')]}
+          {...editableProps}
         />
 
         <Field
@@ -387,6 +348,7 @@ class Form extends Component {
           label="RELATIONSHIP TO BABY"
           component={renderRelationshipDropdown}
           validate={[required]}
+          {...editableProps}
         />
 
         <View>
@@ -397,6 +359,7 @@ class Form extends Component {
             name="weekBorn"
             component={renderPicker}
             validate={[required]}
+            {...editableProps}
           />
         </View>
 
@@ -404,8 +367,8 @@ class Form extends Component {
 
         <SubmitButton
           onPress={handleSubmit(submit)}
-          loading={this.props.loading}
-          disabled={this.props.loading}
+          loading={isSubmitting}
+          disabled={isSubmitting}
           submitText={submitText}
         />
       </KeyboardAwareScrollView>
