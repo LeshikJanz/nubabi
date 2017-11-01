@@ -23,6 +23,7 @@ import {
   toCentimeters,
   toKilograms,
 } from '../../../common/helpers/measurement';
+import isReactNative from '../../../common/app/isReactNative';
 
 const get = (firebase, path: string) =>
   firebase
@@ -110,7 +111,10 @@ const uploadFile = (firebase, refPath, file) => {
       .ref()
       .child(refPath);
 
-    // TODO: RN check
+    if (!isReactNative) {
+      return reject(new Error('upload for web is not implemented yet'));
+    }
+
     const RNFetchBlob = require('react-native-fetch-blob').default;
     const uploadUri = file.url;
     const uri = RNFetchBlob.wrap(uploadUri);
