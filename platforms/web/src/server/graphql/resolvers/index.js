@@ -1,11 +1,11 @@
-import { merge } from 'lodash';
-import rootResolvers from './core';
-import babyResolvers from './babies';
-import activityResolvers from './activities';
-import growthResolvers from './growth';
-import expertResolvers from './experts';
-import contentResolvers from './content';
-import memoryResolvers from './memories';
+import merge from "lodash/merge";
+import rootResolvers from "./core";
+import babyResolvers from "./babies";
+import activityResolvers from "./activities";
+import growthResolvers from "./growth";
+import expertResolvers from "./experts";
+import contentResolvers from "./content";
+import memoryResolvers from "./memories";
 
 const resolvers = merge(
   rootResolvers,
@@ -14,7 +14,7 @@ const resolvers = merge(
   growthResolvers,
   expertResolvers,
   contentResolvers,
-  memoryResolvers,
+  memoryResolvers
 );
 
 export default resolvers;

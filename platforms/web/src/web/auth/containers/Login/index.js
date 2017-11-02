@@ -1,5 +1,5 @@
 import React from "react";
-import { reduxForm } from "redux-form";
+import reduxForm from "redux-form/es/reduxForm";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { Title } from "web/elements";
@@ -44,20 +44,22 @@ export const Login = (props: LoginProps) => {
       redirect = params.redirect;
   }
   const doRedirect = redirect !== undefined && isAuthenticated;
-  return doRedirect
-    ? <Redirect to={redirect} />
-    : <Wrapper>
-        <Helmet>
-          <title>Nubabi | Login</title>
-        </Helmet>
-        <Title>Login</Title>
-        <LoginForm
-          handleSubmit={handleSubmit(handleFormSubmit)}
-          pristine={pristine}
-          submitting={submitting}
-          reset={reset}
-        />
-      </Wrapper>;
+  return doRedirect ? (
+    <Redirect to={redirect} />
+  ) : (
+    <Wrapper>
+      <Helmet>
+        <title>Nubabi | Login</title>
+      </Helmet>
+      <Title>Login</Title>
+      <LoginForm
+        handleSubmit={handleSubmit(handleFormSubmit)}
+        pristine={pristine}
+        submitting={submitting}
+        reset={reset}
+      />
+    </Wrapper>
+  );
 };
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
