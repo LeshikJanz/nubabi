@@ -1,10 +1,10 @@
 // @flow
-import { applyMiddleware, createStore, compose } from 'redux';
-import { autoRehydrate } from 'redux-persist';
-import isReactNative from './app/isReactNative';
-import configureMiddleware from './configureMiddleware';
-import configureReducer from './configureReducer';
-import { configureApolloAuth } from './configureApollo';
+import { applyMiddleware, createStore, compose } from "redux";
+import { autoRehydrate } from "redux-persist";
+import isReactNative from "./app/isReactNative";
+import configureMiddleware from "./configureMiddleware";
+import configureReducer from "./configureReducer";
+import { configureApolloAuth } from "./configureApollo";
 
 type Options = {
   initialState: Object,
@@ -12,7 +12,7 @@ type Options = {
   platformReducers?: Object,
   platformMiddleware?: Array<Function>,
   platformStoreEnhancers?: Array<Function>,
-  platformEpics: Array<Function>,
+  platformEpics: Array<Function>
 };
 
 const configureStore = (options: Options) => {
@@ -22,7 +22,7 @@ const configureStore = (options: Options) => {
     platformMiddleware = [],
     platformReducers = {},
     platformStoreEnhancers = [],
-    platformEpics = [],
+    platformEpics = []
   } = options;
 
   const reducer = configureReducer(platformReducers, initialState);
@@ -31,7 +31,7 @@ const configureStore = (options: Options) => {
     initialState,
     platformDeps,
     platformMiddleware,
-    platformEpics,
+    platformEpics
   );
 
   // Add Redux DevTools support
@@ -39,7 +39,7 @@ const configureStore = (options: Options) => {
   // This is straight from the docs, seriously eslint, is fine
   /* eslint-disable */
   const composeEnhancers =
-    (typeof window !== 'undefined' &&
+    (typeof window !== "undefined" &&
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
     compose;
   /* eslint-enable */
@@ -51,27 +51,27 @@ const configureStore = (options: Options) => {
     composeEnhancers(
       applyMiddleware(...middleware),
       autoRehydrate(),
-      ...platformStoreEnhancers,
-    ),
+      ...platformStoreEnhancers
+    )
   );
 
   configureApolloAuth(store);
 
   // Enable hot reloading for reducers.
   /* eslint-disable */
-  if (module.hot && typeof module.hot.accept === 'function') {
+  if (module.hot && typeof module.hot.accept === "function") {
     if (isReactNative) {
       // React Native for some reason needs accept without the explicit path.
       // facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html
       module.hot.accept(() => {
-        const configureReducer = require('./configureReducer').default;
+        const configureReducer = require("./configureReducer").default;
 
         store.replaceReducer(configureReducer(platformReducers, initialState));
       });
     } else {
       // Webpack for some reason needs accept with the explicit path.
-      module.hot.accept('./configureReducer', () => {
-        const configureReducer = require('./configureReducer').default;
+      module.hot.accept("./configureReducer", () => {
+        const configureReducer = require("./configureReducer").default;
 
         store.replaceReducer(configureReducer(platformReducers, initialState));
       });

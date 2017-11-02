@@ -1,6 +1,6 @@
-import { GraphQLString } from 'graphql';
-import { assoc, assocPath, compose, map, path, pick, prop } from 'ramda';
-import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date';
+import { GraphQLString } from "graphql/type/scalars";
+import path from "ramda/src/path";
+import { GraphQLDate, GraphQLDateTime, GraphQLTime } from "graphql-iso-date";
 // noinspection ES6UnusedImports
 import {
   connectionFromPromisedArrayWithCount,
@@ -9,9 +9,9 @@ import {
   mutationWithClientMutationId,
   nodeFieldResolver,
   toDate,
-  transform,
-} from './common';
-import { addEdgeAndCursorToMutationResult } from '../../../common/helpers/graphqlUtils';
+  transform
+} from "./common";
+import { addEdgeAndCursorToMutationResult } from "../../../common/helpers/graphqlUtils";
 
 const resolvers = {
   DateTime: GraphQLDateTime,
@@ -20,7 +20,7 @@ const resolvers = {
   Secret: GraphQLString, // TODO
   Query: {
     viewer: () => ({}),
-    node: nodeFieldResolver,
+    node: nodeFieldResolver
   },
   Viewer: {
     user(_, args, { connectors: { firebase } }) {
@@ -29,24 +29,24 @@ const resolvers = {
     friends: async (_, args, { connectors: { firebase } }) => {
       const connection = await connectionFromPromisedArrayWithCount(
         firebase.getFriends(),
-        args,
+        args
       );
 
       return {
         ...connection,
         edges: connection.edges.map(edge => {
-          ['relationship', 'isPending'].forEach(key => {
+          ["relationship", "isPending"].forEach(key => {
             // eslint-disable-next-line no-param-reassign
-            edge[key] = path(['node', key], edge);
+            edge[key] = path(["node", key], edge);
           });
           return edge;
-        }),
+        })
       };
-    },
+    }
   },
   User: {
-    id: globalIdField('User', obj => obj.id || obj.uid),
-    dob: transform('dob', toDate),
+    id: globalIdField("User", obj => obj.id || obj.uid),
+    dob: transform("dob", toDate),
     avatar: obj => {
       if (!obj.avatar) {
         return null;
@@ -64,98 +64,98 @@ const resolvers = {
       return avatars;
     },
     totalAchievements: () => 0, // TODO
-    totalMemories: () => 0, // TODO
+    totalMemories: () => 0 // TODO
   },
   File: {
     __resolveType: ({ contentType }) => {
-      if (contentType.startsWith('image')) {
-        return 'Image';
-      } else if (contentType.startsWith('video')) {
-        return 'Video';
-      } else if (contentType.startsWith('audio')) {
-        return 'Audio';
+      if (contentType.startsWith("image")) {
+        return "Image";
+      } else if (contentType.startsWith("video")) {
+        return "Video";
+      } else if (contentType.startsWith("audio")) {
+        return "Audio";
       }
 
-      return 'GenericFile';
+      return "GenericFile";
     },
-    id: globalIdField(),
+    id: globalIdField()
   },
   // Backwards-compatibility for Avatars
   Avatar: {
-    contentType: obj => obj.contentType || 'image/jpeg',
-    name: obj => obj.name || 'avatar.jpg',
-    size: () => 0, // TODO: fetch size from firebase
+    contentType: obj => obj.contentType || "image/jpeg",
+    name: obj => obj.name || "avatar.jpg",
+    size: () => 0 // TODO: fetch size from firebase
   },
   Image: {
     id: globalIdField(),
-    contentType: obj => obj.contentType || 'image/jpeg',
-    name: obj => obj.name || 'image.jpg',
-    size: () => 0, // TODO: fetch size from firebase
+    contentType: obj => obj.contentType || "image/jpeg",
+    name: obj => obj.name || "image.jpg",
+    size: () => 0 // TODO: fetch size from firebase
   },
   Video: {
-    id: globalIdField('File'),
+    id: globalIdField("File"),
     // TODO: mocked
     thumb: ({ thumb }) => ({
       url: thumb
         ? thumb.url
-        : 'https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/lorem%2Fthumbnail.png?alt=media&token=3318131c-abdb-4d5a-acae-e8eba73aaad8',
-    }),
+        : "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/lorem%2Fthumbnail.png?alt=media&token=3318131c-abdb-4d5a-acae-e8eba73aaad8"
+    })
   },
   Audio: {
-    id: globalIdField('File'),
+    id: globalIdField("File")
   },
   Node: {
     __resolveType(obj) {
       if (obj.email) {
-        return 'User';
+        return "User";
       }
 
       if (obj.weekBorn) {
-        return 'Baby';
+        return "Baby";
       }
 
       if (obj.introduction) {
-        return 'Activity';
+        return "Activity";
       }
 
       if (obj.authorId && obj.title) {
-        return 'Memory';
+        return "Memory";
       }
 
       // TODO: extra models
 
       return null;
     },
-    id: globalIdField(),
+    id: globalIdField()
   },
   Commentable: {
     __resolveType(obj) {
       if (obj.title && obj.authorId) {
-        return 'Memory';
+        return "Memory";
       }
-    },
+    }
   },
   LikeEdge: {
     actor: ({ node: { id: userId } }, _, { connectors: { firebase } }) => {
       return firebase.getUser(userId);
-    },
+    }
   },
   Comment: {
     id: globalIdField(),
-    createdAt: transform('createdAt', toDate),
-    updatedAt: transform('updatedAt', toDate),
+    createdAt: transform("createdAt", toDate),
+    updatedAt: transform("updatedAt", toDate),
     author: ({ authorId }, _, { connectors: { firebase } }) =>
       firebase.getUser(authorId),
     commentable: (
       { commentableType, commentableId },
       _,
-      { connectors: { firebase } },
+      { connectors: { firebase } }
     ) => {
       return firebase.getCommentable(
         commentableType.toUpperCase(),
-        commentableId,
+        commentableId
       );
-    },
+    }
   },
   Mutation: {
     updateUser: mutationWithClientMutationId(
@@ -163,7 +163,7 @@ const resolvers = {
         return firebase
           .updateUser(input)
           .then(changedUser => ({ changedUser }));
-      },
+      }
     ),
     inviteUser: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) => {
@@ -178,11 +178,11 @@ const resolvers = {
             changedEdge: {
               relationship,
               isPending: true,
-              node: invitedUser,
-            },
+              node: invitedUser
+            }
           };
         });
-      },
+      }
     ),
     createComment: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) => {
@@ -192,13 +192,13 @@ const resolvers = {
             addEdgeAndCursorToMutationResult(() =>
               firebase.getComments(
                 input.commentableType.toUpperCase(),
-                fromGlobalId(input.id).id,
-              ),
-            ),
+                fromGlobalId(input.id).id
+              )
+            )
           );
-      },
-    ),
-  },
+      }
+    )
+  }
 };
 
 export default resolvers;

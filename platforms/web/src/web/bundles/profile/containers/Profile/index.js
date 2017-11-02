@@ -2,7 +2,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { gql, graphql } from "react-apollo";
-import { compose, path } from "ramda";
+import compose from "ramda/src/compose";
+import path from "ramda/src/path";
 import { Loader } from "web/components";
 
 type Props = {

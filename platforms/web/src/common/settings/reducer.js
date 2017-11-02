@@ -1,62 +1,63 @@
 // @flow
-import type { SettingsSetValueAction, SettingsState, State } from '../types';
-import { assocPath, merge } from 'ramda';
+import type { SettingsSetValueAction, SettingsState, State } from "../types";
+import assocPath from "ramda/src/assocPath";
+import merge from "ramda/src/merge";
 
 type SettingsAction = SettingsSetValueAction;
 
 export const initialState: SettingsState = {
   unitDisplay: {
-    weight: 'kg',
-    height: 'cm',
+    weight: "kg",
+    height: "cm"
   },
   notifications: {
     memories: true,
     stimulation: true,
     growth: true,
     activities: false,
-    email: true,
+    email: true
   },
   memories: {
-    displaySuggestions: true,
-  },
+    displaySuggestions: true
+  }
 };
 
 export function setSettingsValue(path: Array<string>, value: any) {
   return {
-    type: 'SETTINGS_SET_VALUE',
+    type: "SETTINGS_SET_VALUE",
     payload: {
       path,
-      value,
-    },
+      value
+    }
   };
 }
 
 export const resetSettings = () => ({
-  type: 'RESET_SETTINGS',
+  type: "RESET_SETTINGS"
 });
 
 export const resetTips = () => ({
-  type: 'RESET_TIPS',
+  type: "RESET_TIPS"
 });
 
 export const unitDisplaySelector = (state: State) => state.settings.unitDisplay;
 
 export default function reducer(
   state: SettingsState = initialState,
-  action: SettingsAction,
+  action: SettingsAction
 ) {
   switch (action.type) {
-    case 'SETTINGS_SET_VALUE': {
+    case "SETTINGS_SET_VALUE": {
       return assocPath(action.payload.path, action.payload.value, state);
     }
-    case 'RESET_SETTINGS': {
+    case "RESET_SETTINGS": {
       return initialState;
     }
-    case 'RESET_TIPS': {
+    case "RESET_TIPS": {
       return merge(state, {
         memories: {
-          displaySuggestions: true,
-        },
+          displaySuggestions: true
+        }
       });
     }
     default: {

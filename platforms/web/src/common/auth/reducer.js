@@ -1,44 +1,44 @@
 // @flow
-import type { Action, AuthState } from '../types';
-import { merge } from 'ramda';
+import type { Action, AuthState } from "../types";
+import merge from "ramda/src/merge";
 
 export const initialState = {
   isAuthenticated: false,
   isFetching: false,
   token: null,
-  errorMessage: '',
+  errorMessage: ""
 };
 
 const reducer = (
   state: AuthState = initialState,
-  action: Action,
+  action: Action
 ): AuthState => {
   switch (action.type) {
-    case 'LOGIN_REQUEST':
+    case "LOGIN_REQUEST":
       return merge(state, {
         isFetching: true,
-        isAuthenticated: false,
+        isAuthenticated: false
       });
-    case 'LOGIN_SUCCESS':
+    case "LOGIN_SUCCESS":
       return merge(state, {
         isFetching: false,
-        isAuthenticated: true,
+        isAuthenticated: true
       });
-    case 'LOGIN_FAILURE':
+    case "LOGIN_FAILURE":
       return merge(state, {
         isFetching: false,
         isAuthenticated: false,
-        errorMessage: action.payload.message,
+        errorMessage: action.payload.message
       });
-    case 'ON_AUTH': {
+    case "ON_AUTH": {
       return merge(state, {
         isFetching: false,
         isAuthenticated: !!action.payload.user,
         errorMessage: null,
-        token: action.payload.token,
+        token: action.payload.token
       });
     }
-    case 'LOGOUT':
+    case "LOGOUT":
       return initialState;
     default:
       return state;

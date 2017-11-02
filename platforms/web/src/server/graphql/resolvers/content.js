@@ -1,16 +1,17 @@
 // @flow
-import type { Context, ConnectionArguments, GraphQLContext } from './common';
-import { path, curry } from 'ramda';
-import moment from 'moment';
-import readTime from 'reading-time';
+import type { Context, ConnectionArguments, GraphQLContext } from "./common";
+import path from "ramda/src/path";
+import curry from "ramda/src/curry";
+import readTime from "reading-time";
 import {
   prop,
   transform,
   connectionFromPromisedArray,
   globalIdField,
-  fromGlobalId,
-} from './common';
-import * as connector from '../connectors/babiesConnector';
+  fromGlobalId
+} from "./common";
+import parse from "date-fns/parse";
+import * as connector from "../connectors/babiesConnector";
 
 const readingTime = curry((propName, obj) => {
   return readTime(prop(propName)(obj));
@@ -27,7 +28,7 @@ export const resolvers = {
     allArticles: (
       obj: mixed,
       args: ConnectionArguments,
-      { token }: GraphQLContext,
+      { token }: GraphQLContext
     ) => {
       return connectionFromPromisedArray(connector.getArticles(token), args);
     },
@@ -37,57 +38,57 @@ export const resolvers = {
     allLibraryArticles: (
       obj: mixed,
       args: ConnectionArguments,
-      { token }: Context,
+      { token }: Context
     ) => {
       return connectionFromPromisedArray(
         connector.getLibraryArticles(token, args),
-        args,
+        args
       );
-    },
+    }
   },
   Quote: {
-    id: globalIdField(),
+    id: globalIdField()
   },
   Tip: {
-    id: globalIdField(),
+    id: globalIdField()
   },
   Article: {
     id: globalIdField(),
-    text: prop('body'),
-    summary: prop('description'),
-    publishedAt: transform('publish_date', date => moment(date).toDate()),
+    text: prop("body"),
+    summary: prop("description"),
+    publishedAt: transform("publish_date", date => parse(date)),
     image: (obj: *) => {
-      const image = path(['featured_image'], obj);
+      const image = path(["featured_image"], obj);
       if (!image) {
         return null;
       }
 
       return {
-        url: `https:${path(['file', 'url'], image)}`,
-        width: path(['file', 'details', 'image', 'width'], image),
-        height: path(['file', 'details', 'image', 'height'], image),
+        url: `https:${path(["file", "url"], image)}`,
+        width: path(["file", "details", "image", "width"], image),
+        height: path(["file", "details", "image", "height"], image)
       };
     },
-    readingTime: readingTime('body'),
+    readingTime: readingTime("body"),
     blogUrl: ({ slug }) =>
-      `https://blog.mylearningbabyguide.com/articles/${slug}`,
+      `https://blog.mylearningbabyguide.com/articles/${slug}`
   },
   Author: {
     id: globalIdField(),
     avatar: (obj: any) => {
-      const image = path(['image'], obj);
+      const image = path(["image"], obj);
 
       if (!image) {
         return null;
       }
 
       return {
-        url: `https:${path(['file', 'url'], image)}`,
-        width: path(['file', 'details', 'image', 'width'], image),
-        height: path(['file', 'details', 'image', 'height'], image),
+        url: `https:${path(["file", "url"], image)}`,
+        width: path(["file", "details", "image", "width"], image),
+        height: path(["file", "details", "image", "height"], image)
       };
-    },
-  },
+    }
+  }
 };
 
 export default resolvers;

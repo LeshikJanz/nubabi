@@ -1,14 +1,14 @@
 // @flow
-import { createTransform } from 'redux-persist';
-import { pick } from 'ramda';
+import { createTransform } from "redux-persist";
+import pick from "ramda/src/pick";
 
 const paths = [
-  ['auth', ['token']],
-  ['apollo', ['data']],
-  ['babies', ['currentBabyId']],
-  ['growth', ['hasSeenGlobalIntro', 'skippedIntroductions']],
-  ['settings'],
-  ['viewer'],
+  ["auth", ["token"]],
+  ["apollo", ["data"]],
+  ["babies", ["currentBabyId"]],
+  ["growth", ["hasSeenGlobalIntro", "skippedIntroductions"]],
+  ["settings"],
+  ["viewer"]
 ];
 
 const transforms = [];
@@ -27,7 +27,7 @@ const configureStorage = (appName: string) => ({
   debounce: 100,
   keyPrefix: `${appName}:`,
   transforms,
-  whitelist,
+  whitelist
 });
 
 export default configureStorage;

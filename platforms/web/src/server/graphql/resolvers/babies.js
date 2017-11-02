@@ -1,17 +1,17 @@
-import { pick, assocPath, last } from 'ramda';
-import * as connector from '../connectors/babiesConnector';
+import pick from "ramda/src/pick";
+import last from "ramda/src/last";
+import * as connector from "../connectors/babiesConnector";
 // noinspection ES6UnusedImports
 import {
-  prop,
   transform,
   connectionFromArray,
   connectionFromPromisedArray,
   connectionFromPromisedArrayWithCount,
   globalIdField,
   fromGlobalId,
-  mutationWithClientMutationId,
-} from './common';
-import { getClosestContentForPeriod } from '../../../common/growth/reducer';
+  mutationWithClientMutationId
+} from "./common";
+import { getClosestContentForPeriod } from "../../../common/growth/reducer";
 
 const resolvers = {
   Viewer: {
@@ -19,20 +19,20 @@ const resolvers = {
       connectionFromPromisedArrayWithCount(firebase.getBabies(), args),
 
     baby: (_, { id }, { connectors: { firebase } }) =>
-      firebase.getBaby(fromGlobalId(id).id),
+      firebase.getBaby(fromGlobalId(id).id)
   },
 
   Mutation: {
     createBaby: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) =>
-        firebase.createBaby(input).then(createdBaby => ({ createdBaby })),
+        firebase.createBaby(input).then(createdBaby => ({ createdBaby }))
     ),
 
     updateBaby: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) =>
         firebase
           .updateBaby(fromGlobalId(input.id).id, input)
-          .then(baby => ({ changedBaby: baby })),
+          .then(baby => ({ changedBaby: baby }))
     ),
 
     recordBabyMeasurement: mutationWithClientMutationId(
@@ -41,24 +41,24 @@ const resolvers = {
           fromGlobalId(babyId).id,
           type,
           unit,
-          value,
+          value
         );
-      },
-    ),
+      }
+    )
   },
 
   Baby: {
     id: globalIdField(),
-    dob: transform('dob', date => new Date(date)),
-    gender: transform('gender', g => (g === 'm' ? 'MALE' : 'FEMALE')),
+    dob: transform("dob", date => new Date(date)),
+    gender: transform("gender", g => (g === "m" ? "MALE" : "FEMALE")),
 
     avatar: obj =>
-      obj.avatar ? pick(['url', 'thumb', 'large'], obj.avatar) : null,
+      obj.avatar ? pick(["url", "thumb", "large"], obj.avatar) : null,
 
     activities: ({ id }, args, { token }) =>
       connectionFromPromisedArray(
         connector.getActivities(token, id, args),
-        args,
+        args
       ),
 
     activity: ({ id: babyId }, { id: activityId }, { token }) => {
@@ -68,13 +68,13 @@ const resolvers = {
     favoriteActivities: ({ id: babyId }, args, { token }) =>
       connectionFromPromisedArrayWithCount(
         connector.getFavoriteActivities(token, babyId),
-        args,
+        args
       ),
 
     activityHistory: ({ id: babyId }, args, { token }) => {
       return connectionFromPromisedArrayWithCount(
         connector.getActivityHistory(token, babyId),
-        args,
+        args
       );
     },
 
@@ -90,18 +90,18 @@ const resolvers = {
         getClosestContentForPeriod(content, baby.dob) || last(content);
 
       if (
-        typeof info.variableValues.hasSeenGlobalIntro !== 'undefined' &&
+        typeof info.variableValues.hasSeenGlobalIntro !== "undefined" &&
         info.variableValues.hasSeenGlobalIntro === false
       ) {
         const introduction = await connector.getIntroductionFor(
           token,
           baby,
-          viewer.displayName || viewer.email,
+          viewer.displayName || viewer.email
         );
 
         return {
           ...connection,
-          introduction,
+          introduction
         };
       }
 
@@ -112,24 +112,24 @@ const resolvers = {
       firebase.getRelationship(id),
 
     measurements: ({ id }) => ({
-      babyId: id,
-    }),
+      babyId: id
+    })
   },
 
   Measurements: {
     heights: ({ babyId }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
         firebase.getBabyHeights(babyId),
-        args,
+        args
       );
     },
     weights: ({ babyId }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
         firebase.getBabyWeights(babyId),
-        args,
+        args
       );
-    },
-  },
+    }
+  }
 };
 
 export default resolvers;

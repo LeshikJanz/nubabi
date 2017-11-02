@@ -1,6 +1,6 @@
-import { graphql, print } from 'graphql';
-import { schema } from '../schema';
-import firebaseConnector from '../connectors/firebaseConnector';
+import { graphql, print } from "graphql";
+import { schema } from "../schema";
+import firebaseConnector from "../connectors/firebaseConnector";
 
 /* eslint-disable */
 
@@ -40,17 +40,17 @@ class ClientNetworkInterfaceWithMiddleware {
     const options = {};
     return this.applyMiddlewares({
       request,
-      options,
+      options
     }).then(({ request, options }) => {
       const context = {
         connectors: {
           ...this.connectors,
-          firebase: firebaseConnector(this.connectors.firebase),
-        },
+          firebase: firebaseConnector(this.connectors.firebase)
+        }
       };
 
       if (options.headers && options.headers.authorization) {
-        context.token = options.headers.authorization.split(' ')[1];
+        context.token = options.headers.authorization.split(" ")[1];
       }
 
       return graphql(
@@ -59,18 +59,18 @@ class ClientNetworkInterfaceWithMiddleware {
         {}, // root value
         context, // context
         request.variables,
-        request.operationName,
+        request.operationName
       );
     });
   }
 
   use(middlewares) {
     middlewares.forEach(middleware => {
-      if (typeof middleware.applyMiddleware === 'function') {
+      if (typeof middleware.applyMiddleware === "function") {
         this.middlewares.push(middleware);
       } else {
         throw new Error(
-          'Middleware must implement the applyMiddleware function',
+          "Middleware must implement the applyMiddleware function"
         );
       }
     });

@@ -6,18 +6,20 @@ import {
   sortByTimestamp,
   toTimestamp
 } from "../resolvers/common";
-import R, {
-  always,
-  assoc,
-  compose,
-  cond,
-  equals,
-  evolve,
-  map,
-  merge,
-  omit
-} from "ramda";
-import { decode } from "base-64";
+import always from "ramda/src/always";
+import assoc from "ramda/src/assoc";
+import compose from "ramda/src/compose";
+import cond from "ramda/src/cond";
+import equals from "ramda/src/equals";
+import evolve from "ramda/src/evolve";
+import map from "ramda/src/map";
+import merge from "ramda/src/merge";
+import omit from "ramda/src/omit";
+import mapObjIndexed from "ramda/src/mapObjIndexed";
+import sortBy from "ramda/src/sortBy";
+import reverse from "ramda/src/reverse";
+import values from "ramda/src/values";
+import prop from "ramda/src/prop";
 import Task from "data.task";
 import {
   toCentimeters,
@@ -70,37 +72,6 @@ const toFirebaseBaby = values => {
   return evolve(
     transforms,
     omit(["id", "relationship", "avatar", "coverImage"], values)
-  );
-};
-
-const uploadFileFromDataUri = () => {
-  /*
-     * We can't use data_url with putString since Firebase is unconditionally
-     * using `atob` which fails on RN when run on JSC.
-     */
-  /* eslint-disable no-useless-escape */
-  const dataUrlRegExp = new RegExp(
-    /data:([\w\/\+]+);(charset=[\w-]+|base64).*,([a-zA-Z0-9+\/]+={0,2})/g
-  );
-  /* eslint-enable no-useless-escape */
-
-  /* eslint-disable no-undef */
-  // data_url is in format data:image/jpeg;base64,<content>
-  const match = dataUrlRegExp.exec(fileUrl);
-
-  const ref = firebase
-    .storage()
-    .ref()
-    .child(refPath);
-
-  const isDataUri = !!match;
-
-  const contentType = match[1];
-
-  const content = new Uint8Array(
-    decode(match[3])
-      .split("")
-      .map(c => c.charCodeAt(0))
   );
 };
 
@@ -286,7 +257,7 @@ const getFriends = async firebase => {
         Object.keys(data).map(key => {
           return getFriend(data[key], key);
         })
-      ).then(R.sortBy(R.prop("isPending")));
+      ).then(sortBy(prop("isPending")));
     });
 };
 
@@ -556,16 +527,16 @@ const getBaby = (firebase, id) => {
     .then(returnValWithKeyAsId);
 };
 
-const assignIdsToCollection = R.mapObjIndexed((value, key) => {
-  return R.assoc("id", key, value);
+const assignIdsToCollection = mapObjIndexed((value, key) => {
+  return assoc("id", key, value);
 });
 
 const timestampToDate = val => new Date(val.TIMESTAMP);
 
 const evolveBabyMeasurement = type => {
-  return R.compose(
-    R.assoc("unit", type === "weights" ? "kg" : "cm"),
-    R.evolve({
+  return compose(
+    assoc("unit", type === "weights" ? "kg" : "cm"),
+    evolve({
       recordedAt: timestampToDate
     })
   );
@@ -584,7 +555,7 @@ const getBabyMeasurements = (
     .then(
       compose(
         map(evolveBabyMeasurement(type)),
-        R.values,
+        values,
         assignIdsToCollection,
         returnVal
       )
@@ -684,7 +655,7 @@ const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
     firebase,
     `/babies/${babyId}/memories`,
     "/memories"
-  ).then(compose(R.reverse, sortByTimestamp));
+  ).then(compose(reverse, sortByTimestamp));
 };
 
 const getMemory = (firebase, id: string, args: ConnectionArguments) => {
@@ -769,7 +740,7 @@ const getComments = (
   const commentablePath = `/${prefix}/${commentableId}/comments`;
 
   return denormalizeArray(firebase, commentablePath, "/comments").then(
-    compose(R.reverse, sortByTimestamp)
+    compose(reverse, sortByTimestamp)
   );
 };
 

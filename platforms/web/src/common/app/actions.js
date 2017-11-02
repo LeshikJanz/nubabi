@@ -1,6 +1,6 @@
 // @flow
-import axios from 'axios';
-import { Observable } from 'rxjs/Observable';
+import axios from "axios";
+import { Observable } from "rxjs/Observable";
 
 import type {
   Action,
@@ -8,32 +8,32 @@ import type {
   AppErrorAction,
   OnAuthAction,
   Deps,
-  FirebaseUser,
-} from '../types';
+  FirebaseUser
+} from "../types";
 
 export const appError = (error: Object): AppErrorAction => ({
-  type: 'APP_ERROR',
+  type: "APP_ERROR",
   payload: error,
-  error: true,
+  error: true
 });
 
 export const appOnline = (online: boolean): AppOnlineAction => ({
-  type: 'APP_ONLINE',
-  payload: { online },
+  type: "APP_ONLINE",
+  payload: { online }
 });
 
 export const appSuccess = (message: string) => ({
-  type: 'APP_SUCCESS',
-  payload: message,
+  type: "APP_SUCCESS",
+  payload: message
 });
 
 export const alertShown = {
-  type: 'ALERT_SHOWN',
+  type: "ALERT_SHOWN"
 };
 
 export const onAuth = (user: ?FirebaseUser, token?: string): OnAuthAction => ({
-  type: 'ON_AUTH',
-  payload: { user, token },
+  type: "ON_AUTH",
+  payload: { user, token }
 });
 
 const appStartedEpic = (action$: any, deps: Deps) => {
@@ -47,8 +47,8 @@ const appStartedEpic = (action$: any, deps: Deps) => {
           .then(token => {
             if (__DEV__) {
               axios
-                .post('http://localhost:8080/graphql-config', {
-                  token: `Bearer ${token}`,
+                .post("http://localhost:8080/graphql-config", {
+                  token: `Bearer ${token}`
                 })
                 .catch(() => {});
             }
@@ -64,14 +64,14 @@ const appStartedEpic = (action$: any, deps: Deps) => {
   const streams: Array<any> = [onAuth$];
 
   return action$
-    .filter((action: Action) => action.type === 'APP_STARTED')
+    .filter((action: Action) => action.type === "APP_STARTED")
     .mergeMap(() => Observable.merge(...streams));
 };
 
 const resetSettingsEpic = (action$: any) => {
   return action$
-    .filter(action => action.type === 'RESET_SETTINGS')
-    .mapTo(appSuccess('Settings has been reset'));
+    .filter(action => action.type === "RESET_SETTINGS")
+    .mapTo(appSuccess("Settings has been reset"));
 };
 
 export const epics = [appStartedEpic, resetSettingsEpic];
