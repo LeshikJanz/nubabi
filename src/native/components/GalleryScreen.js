@@ -75,7 +75,7 @@ class GalleryScreen extends PureComponent {
 
     const single = this.state.media.length === 1;
 
-    const startOnGrid = grid || (single && selectedIndex);
+    const startOnGrid = grid || !!(single && selectedIndex);
 
     return (
       <PhotoBrowser
