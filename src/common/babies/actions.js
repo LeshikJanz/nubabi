@@ -1,3 +1,4 @@
+// @flow
 import { Observable } from 'rxjs/Observable';
 import { Action, Deps, MutationResultAction } from '../types';
 import api from '../connectors/mlb';

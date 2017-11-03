@@ -8,6 +8,7 @@ type Props = {
   onChange: (date: string) => void,
   date: string | Date,
   mode?: 'date' | 'datetime' | 'time',
+  disabled?: boolean,
   format?: string,
   hideText?: boolean,
   minDate?: string | Date,
@@ -22,6 +23,10 @@ type Props = {
 
 class DatePicker extends PureComponent {
   props: Props;
+
+  static defaultProps = {
+    disabled: false,
+  };
 
   componentDidMount() {
     // Trigger onChange so redux-form gets the field
@@ -49,6 +54,7 @@ class DatePicker extends PureComponent {
     const {
       date,
       onChange,
+      disabled,
       format = 'YYYY-MM-DD',
       mode = 'date',
       hideText = false,
@@ -68,6 +74,7 @@ class DatePicker extends PureComponent {
           this.datePicker = ref;
         }}
         style={{ flex: 1, width: null }}
+        disabled={disabled}
         date={date}
         mode={mode}
         format={format}
@@ -105,6 +112,10 @@ const styles = {
     },
     btnTextConfirm: {
       color: theme.colors.primary,
+    },
+    disabled: {
+      backgroundColor: 'transparent',
+      opacity: 1,
     },
   },
 };

@@ -1,20 +1,12 @@
 import 'react-native';
 import React from 'react';
 import GenderButton from '../GenderButton';
-import renderer from 'react-test-renderer';
+import { expectRender } from '../../../shared/testUtils';
 
 test('it renders correctly when selected', () => {
-  const tree = renderer
-    .create(<GenderButton selected buttonText="GIRL" />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<GenderButton selected buttonText="GIRL" />);
 });
 
 test('it renders correctly when not selected', () => {
-  const tree = renderer
-    .create(<GenderButton selected={false} buttonText="BOY" />)
-    .toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expectRender(<GenderButton selected={false} buttonText="BOY" />);
 });

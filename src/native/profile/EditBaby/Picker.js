@@ -1,15 +1,16 @@
 // @flow
 import React, { Component } from 'react';
 import {
-  View,
+  LayoutAnimation,
   Picker as PickerComponent,
+  StyleSheet,
   Text,
   TouchableOpacity,
-  StyleSheet,
-  LayoutAnimation,
+  View,
 } from 'react-native';
 import { range } from 'ramda';
 import theme from '../../../common/themes/defaultTheme';
+import { isEditable } from '../../shared/forms';
 
 export const weekOptions = range(20, 44).map(val => {
   return (
@@ -57,13 +58,24 @@ class Picker extends Component {
   }
 
   render() {
+    const { field } = this.props;
+    const hasError = field.meta.touched && !!field.meta.error;
+    const editable = isEditable(field);
+
+    const Container = editable ? TouchableOpacity : View;
+
+    const containerProps = editable ? { onPress: this.toggle } : {};
+
+    const borderStyle = hasError ? { borderColor: theme.colors.danger } : {};
+
     return (
       <View style={{ flex: 1 }}>
-        <TouchableOpacity onPress={this.toggle} style={styles.inputContainer}>
-          <Text>
-            {this.props.field.input.value}
-          </Text>
-        </TouchableOpacity>
+        <Container
+          {...containerProps}
+          style={[styles.inputContainer, borderStyle]}
+        >
+          <Text>{this.props.field.input.value}</Text>
+        </Container>
         {this.state.displayed ? this.renderPicker() : null}
       </View>
     );

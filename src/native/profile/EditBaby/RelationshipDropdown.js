@@ -1,15 +1,16 @@
 // @flow
 import React, { Component } from 'react';
-import { TouchableOpacity, LayoutAnimation, StyleSheet } from 'react-native';
+import { LayoutAnimation, StyleSheet, TouchableOpacity } from 'react-native';
 import Menu, {
   MenuContext,
-  MenuOptions,
   MenuOption,
+  MenuOptions,
   MenuTrigger,
 } from 'react-native-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Box, Text } from '../../components';
 import theme from '../../../common/themes/defaultTheme';
+import { isEditable } from '../../shared/forms';
 
 type BabyRelationshipOption = {
   label: string,
@@ -25,8 +26,6 @@ const options: Array<BabyRelationshipOption> = [
   { key: 'Other', label: 'Other' },
 ];
 
-const renderTouchable = props => <TouchableOpacity {...props} />;
-
 type Props = {
   field: any,
 };
@@ -34,6 +33,10 @@ type Props = {
 class RelationshipDropdown extends Component {
   props: Props;
   menu = null;
+
+  renderTouchable = () => {
+    return this.props.field.editable ? <TouchableOpacity /> : <Box />;
+  };
 
   handleSelect = (val: string) => {
     this.props.field.input.onChange(this.findOption(val).key);
@@ -48,17 +51,15 @@ class RelationshipDropdown extends Component {
   }
 
   renderOptions() {
-    return options.map(option =>
+    return options.map(option => (
       <MenuOption
         key={option.key}
         value={option.key}
-        renderTouchable={renderTouchable}
+        renderTouchable={this.renderTouchable}
       >
-        <Text>
-          {option.label}
-        </Text>
-      </MenuOption>,
-    );
+        <Text>{option.label}</Text>
+      </MenuOption>
+    ));
   }
 
   renderLabel() {
@@ -78,6 +79,8 @@ class RelationshipDropdown extends Component {
   render() {
     // Default to "Other", to ease migration
     const current = this.findOption(this.props.field.input.value) || options[5];
+    const { renderTouchable } = this;
+    const editable = isEditable(this.props.field);
 
     return (
       <MenuContext
@@ -89,7 +92,11 @@ class RelationshipDropdown extends Component {
         <Menu onSelect={this.handleSelect} style={styles.dropdown}>
           {this.renderLabel()}
 
-          <MenuTrigger style={styles.trigger} renderTouchable={renderTouchable}>
+          <MenuTrigger
+            disabled={!editable}
+            style={styles.trigger}
+            renderTouchable={renderTouchable}
+          >
             <Box
               flex={1}
               flexDirection="row"

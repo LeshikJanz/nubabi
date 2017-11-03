@@ -2,16 +2,27 @@
 import type { Gender } from '../../../common/types';
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { Box } from '../../components';
 
 type Props = {
+  editable?: boolean,
   buttonText: string,
   selected: boolean,
   onChangeGender: (gender: Gender) => void,
 };
 
-const GenderButton = ({ buttonText, selected, onChangeGender }: Props) => {
+const GenderButton = ({
+  buttonText,
+  selected,
+  onChangeGender,
+  editable,
+}: Props) => {
+  const containerProps = editable
+    ? { as: TouchableOpacity, onPress: onChangeGender }
+    : {};
+
   return (
-    <TouchableOpacity onPress={onChangeGender}>
+    <Box {...containerProps}>
       <View
         style={[
           styles.genderButton,
@@ -23,8 +34,12 @@ const GenderButton = ({ buttonText, selected, onChangeGender }: Props) => {
           {buttonText}
         </Text>
       </View>
-    </TouchableOpacity>
+    </Box>
   );
+};
+
+GenderButton.defaultProps = {
+  editable: true,
 };
 
 const styles = StyleSheet.create({

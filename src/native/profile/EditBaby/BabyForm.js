@@ -1,6 +1,6 @@
 // @flow
 import type { Baby } from '../../../common/types';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
@@ -36,8 +36,8 @@ type Props = {
   initialValues: Baby, // eslint-disable-line react/no-unused-prop-types
   onSubmit: () => void,
   handleSubmit: () => void,
+  submitting: boolean,
   change: (field: string, value: mixed) => void,
-  loading: Boolean,
   mode: 'add' | 'edit',
   unitDisplay: {
     weight: 'kg' | 'lbs',
@@ -49,7 +49,7 @@ type Props = {
  TODO: extract
  */
 
-class Form extends Component {
+class Form extends PureComponent {
   props: Props;
 
   static fragments = {
@@ -108,6 +108,7 @@ class Form extends Component {
   renderGenderSelection(field) {
     return (
       <GenderSelection
+        editable={field.editable}
         selectedGender={field.input.value}
         onChangeGender={field.input.onChange}
         hasError={field.meta.touched && !!field.meta.error}
@@ -116,7 +117,13 @@ class Form extends Component {
   }
 
   renderPicker = field => {
-    return <Picker field={field} onPickerOpen={this.scrollToPicker} />;
+    return (
+      <Picker
+        field={field}
+        onPickerOpen={this.scrollToPicker}
+        hasError={field.meta.touched && !!field.meta.error}
+      />
+    );
   };
 
   renderRelationshipDropdown = field => {
@@ -133,6 +140,7 @@ class Form extends Component {
           onChange={field.input.onChange}
           date={field.input.value}
           format="YYYY-MM-DD"
+          disabled={!field.editable}
         />
       </View>
     );
@@ -190,6 +198,8 @@ class Form extends Component {
   renderMeasurementsSection() {
     const { mode, unitDisplay } = this.props;
     const { renderMeasurementInput } = this;
+    const isSubmitting = this.props.submitting;
+    const editableProps = { editable: !isSubmitting };
 
     if (mode === 'add') {
       return (
@@ -200,12 +210,14 @@ class Form extends Component {
               placeholder={`Weight (${unitDisplay.weight})`}
               component={renderTextInput}
               validate={[required]}
+              {...editableProps}
             />
             <Field
               name="height"
               placeholder={`Height (${unitDisplay.height})`}
               component={renderTextInput}
               validate={[required]}
+              {...editableProps}
             />
           </View>
           <View
@@ -248,13 +260,15 @@ class Form extends Component {
   }
 
   render() {
-    const { onSubmit: submit, handleSubmit } = this.props;
+    const {
+      onSubmit: submit,
+      handleSubmit,
+      submitting: isSubmitting,
+    } = this.props;
 
-    const isSubmitting = true;
     const {
       renderGenderSelection,
       renderPicker,
-      renderTextInput,
       renderCoverImage,
       renderAvatar,
       renderRelationshipDropdown,
@@ -368,7 +382,6 @@ class Form extends Component {
         <SubmitButton
           onPress={handleSubmit(submit)}
           loading={isSubmitting}
-          disabled={isSubmitting}
           submitText={submitText}
         />
       </KeyboardAwareScrollView>

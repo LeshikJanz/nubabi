@@ -241,9 +241,7 @@ const getViewerWithProfile = async firebase => {
   };
 };
 
-const getUser = (firebase, userId: string) => {
-  return get(firebase, `/users/${userId}`);
-};
+const getUser = (firebase, userId: string) => get(firebase, `/users/${userId}`);
 
 const getFriends = async firebase => {
   const user = getViewer(firebase);
