@@ -38,8 +38,8 @@ export class SubmitButton extends PureComponent {
     animation: null,
   };
 
-  componentWillMount() {
-    this.isMounted = true;
+  componentDidMount() {
+    this._isMounted = true;
   }
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.loading !== this.props.loading) {
