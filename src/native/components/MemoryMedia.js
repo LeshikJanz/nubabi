@@ -112,7 +112,7 @@ export const MemoryMediaImage = ({
         source={{ uri: imageSource.url }}
         style={{
           flex: 1,
-          height: small ? 60 : 180,
+          height: small ? 80 : 180,
         }}
         resizeMode="cover"
       >
@@ -134,7 +134,7 @@ export const MemoryMediaAudio = ({
       <Box
         alignItems="center"
         justifyContent="center"
-        style={() => ({ height: small ? 60 : 180 })}
+        style={() => ({ height: small ? 80 : 180 })}
         borderRadius={4}
       >
         <Box
@@ -191,7 +191,7 @@ export const MemoryMediaVideo = ({
       <Box
         alignItems="center"
         justifyContent="center"
-        style={() => ({ height: small ? 60 : 180 })}
+        style={() => ({ height: small ? 80 : 180 })}
         borderRadius={4}
       >
         <Box
@@ -320,7 +320,7 @@ export const MemoryMediaMultiple = ({
           >
             <Image
               source={suggestedMemoryType.image}
-              style={{ flex: 1, height: 60 }}
+              style={{ flex: 1, height: 80 }}
               resizeMode="contain"
             />
           </Box>
