@@ -274,7 +274,8 @@ export const MemoryMediaMultiple = ({
   suggestedMemoryType,
 }: MemoryMediaMultipleProps) => {
   const displayLimit = suggestedMemoryType ? 2 : 3;
-  const shouldDisplayMoreButton = files.edges.length >= displayLimit;
+
+  const shouldDisplayMoreButton = files.count > displayLimit;
 
   const displayMore = (
     <Box
@@ -324,7 +325,10 @@ export const MemoryMediaMultiple = ({
             />
           </Box>
         )}
-        {take(displayLimit - 1, files.edges).map((file, index) => (
+        {take(
+          shouldDisplayMoreButton ? displayLimit - 1 : displayLimit,
+          files.edges,
+        ).map((file, index) => (
           <Box
             flex={1}
             key={`${index}-${file.node.url}`}
@@ -350,7 +354,7 @@ export const MemoryMediaMultiple = ({
             style={() => ({ overflow: 'hidden' })}
           >
             <MemoryMediaSingle
-              media={files.edges[displayLimit - 1].node}
+              media={files.edges[displayLimit].node}
               layout={layout}
               small
               displayMoreIndicator={displayMore}
