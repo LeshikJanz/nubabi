@@ -1,14 +1,12 @@
 // @flow
-import type { Memory as MemoryType } from '../../common/types';
+import type {
+  ApolloQueryResult,
+  GraphQLDataProp,
+  Memory as MemoryType,
+} from '../../common/types';
 import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
-import { gql, graphql } from 'react-apollo';
-import {
-  displayLoadingState,
-  showNoContentViewIf,
-  withCurrentBaby,
-} from '../components';
-import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
+import { gql } from 'react-apollo';
 import MemoryList from './MemoryList';
 import Memory from './Memory';
 import toggleMemoryLike from './toggleMemoryLike';
@@ -18,7 +16,12 @@ type Props = {
   currentBabyId: string,
   onViewMemory: (id: string) => void,
   onEditMemory: (id: string) => void,
-};
+  onToggleLike: (
+    id: string,
+    isLiked: boolean,
+    likeCount: number,
+  ) => Promise<ApolloQueryResult<*>>,
+} & GraphQLDataProp<*>;
 
 export class ViewMemories extends PureComponent {
   props: Props;

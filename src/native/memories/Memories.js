@@ -1,12 +1,17 @@
 // @flow
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { RefreshControl, ScrollView } from 'react-native';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
 import { branch, renderComponent } from 'recompose';
-import { Box, requireBaby, displayLoadingState } from '../components';
+import {
+  Box,
+  displayLoadingState,
+  requireBaby,
+  withPullToRefresh,
+} from '../components';
 import AddMemoryHeader from './AddMemoryHeader';
 import SuggestedMemoriesList from './SuggestedMemoriesList';
 import SuggestedMemoriesGrid from './SuggestedMemoriesGrid';
@@ -45,7 +50,7 @@ export const Memories = ({
       <AddMemoryHeader onAddMemory={onAddMemory} />
 
       {shouldDisplaySuggestions ? (
-        <ScrollView>
+        <ScrollView refreshControl={<Refresher data={data} />}>
           <SuggestedMemoriesList onAddMemory={onAddMemory} />
           {viewMemories}
         </ScrollView>
@@ -56,6 +61,10 @@ export const Memories = ({
   );
 };
 
+const Refresher = withPullToRefresh(({ refreshing, handleRefresh }) => {
+  return <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />;
+});
+
 export default compose(
   connect(state => ({
     shouldDisplaySuggestions: state.settings.memories.displaySuggestions,
@@ -64,15 +73,15 @@ export default compose(
   requireBaby,
   graphql(
     gql`
-    query ViewMemories($babyId: ID!) {
-      viewer {
-        baby(id: $babyId) {
-          id
-          ...Memories
+      query ViewMemories($babyId: ID!) {
+        viewer {
+          baby(id: $babyId) {
+            id
+            ...Memories
+          }
         }
       }
-    }
-    ${ViewMemories.fragments.list}
+      ${ViewMemories.fragments.list}
     `,
     {
       options: ({ currentBabyId: babyId }) => ({
