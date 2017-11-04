@@ -1,3 +1,4 @@
+// @flow
 import { head } from 'ramda';
 import {
   prop,

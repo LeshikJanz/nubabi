@@ -23,7 +23,7 @@ type Props = {
   onAddMemory: (suggestedMemoryId?: string) => void,
   onEditMemory: (id: string) => void,
   shouldDisplaySuggestions: boolean,
-};
+} & GraphQLDataProps<*>;
 
 export const Memories = ({
   onViewMemory,
@@ -44,7 +44,6 @@ export const Memories = ({
     />
   );
 
-  // TODO: we lost pull to refresh by having a ScrollView here
   return (
     <Box flex={1}>
       <AddMemoryHeader onAddMemory={onAddMemory} />

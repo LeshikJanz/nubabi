@@ -1,3 +1,4 @@
+// @flow
 import { pick, assocPath, last } from 'ramda';
 import * as connector from '../connectors/babiesConnector';
 // noinspection ES6UnusedImports

@@ -27,6 +27,10 @@ export type RawActivity = {
 
 export type RawActivityMedia = {};
 
+export const combineResolvers = (...resolvers) => {
+  return R.reduce(R.mergeDeepLeft, {}, resolvers);
+};
+
 export const mutationWithClientMutationId = mutateAndGetPayload => {
   return (_, { input }, ctx, info) => {
     return Promise.resolve(
