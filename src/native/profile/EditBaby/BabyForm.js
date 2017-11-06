@@ -210,6 +210,7 @@ class Form extends PureComponent {
               placeholder={`Weight (${unitDisplay.weight})`}
               component={renderTextInput}
               validate={[required]}
+              floating
               {...editableProps}
             />
             <Field
@@ -217,6 +218,7 @@ class Form extends PureComponent {
               placeholder={`Height (${unitDisplay.height})`}
               component={renderTextInput}
               validate={[required]}
+              floating
               {...editableProps}
             />
           </View>

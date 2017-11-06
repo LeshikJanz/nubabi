@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
+import FloatingLabelTextInput from 'react-native-floating-label-text-input';
 import moment from 'moment';
 import theme, { FONT_COLOR } from '../../common/themes/defaultTheme';
 import { DatePicker } from '../components';
@@ -84,6 +85,18 @@ export const renderTextInput = field => {
   const editable =
     typeof field.editable !== 'undefined' ? field.editable : true;
 
+  const TextInputComponent = field.floating
+    ? FloatingLabelTextInput
+    : TextInput;
+
+  const floatingProps = field.floating
+    ? {
+        noBorder: true,
+        floatingLabelStyle: { top: -8, paddingTop: 0 },
+        textFieldHolderStyle: { marginTop: 0 },
+      }
+    : {};
+
   return (
     <View style={containerStyle}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
@@ -94,9 +107,10 @@ export const renderTextInput = field => {
           <Text style={labelStyle}>{error.toUpperCase()}</Text>
         ) : null}
       </View>
-      <TextInput
+      <TextInputComponent
         {...typeProps}
         {...borderProps}
+        {...floatingProps}
         {...field.input}
         placeholder={placeholder}
         multiline={multiline}
