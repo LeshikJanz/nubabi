@@ -148,7 +148,8 @@ const uploadFile = (firebase, refPath, file) => {
 const createOrUpdateBaby = async (firebase, values, id) => {
   const creating = !id;
 
-  const currentUserPath = `/users/${getViewer(firebase).uid}`;
+  const currentUserId = getViewer(firebase).uid;
+  const currentUserPath = `/users/${currentUserId}`;
 
   const path = id
     ? `babies/${id}`
@@ -164,6 +165,10 @@ const createOrUpdateBaby = async (firebase, values, id) => {
 
   object[creating ? 'createdAt' : 'updatedAt'] = TIMESTAMP;
 
+  if (creating) {
+    object.createdBy = currentUserId;
+  }
+
   const promises = [
     firebase
       .database()
@@ -178,6 +183,7 @@ const createOrUpdateBaby = async (firebase, values, id) => {
       .then(returnValWithKeyAsId),
   ];
 
+  /*
   const images = ['avatar', 'coverImage'];
 
   images.forEach(key => {
@@ -194,6 +200,7 @@ const createOrUpdateBaby = async (firebase, values, id) => {
       );
     }
   });
+  */
 
   // TODO: firebase throws permission denied at / for some reason
   // so we're doing this manually, and not updating relation yet
