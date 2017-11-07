@@ -12,7 +12,7 @@ import mergeDeepRight from "ramda/src/mergeDeepRight";
 import path from "ramda/src/path";
 import prop from "ramda/src/prop";
 import reduce from "ramda/src/reduce";
-import sortBy from "ramda/src/set";
+import sortBy from "ramda/src/sortBy";
 import qs from "qs";
 import axios from "axios";
 import S from "string";
