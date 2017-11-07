@@ -1,4 +1,6 @@
+// @flow
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   TouchableHighlight,
@@ -23,9 +25,7 @@ class NameAgeRow extends Component {
         </View>
         <View style={styles.profileNameView}>
           <View style={styles.backdropView}>
-            <Text style={styles.babyName}>
-              {this.props.babyName}
-            </Text>
+            <Text style={styles.babyName}>{this.props.babyName}</Text>
           </View>
           <View
             style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}
@@ -57,9 +57,9 @@ class NameAgeRow extends Component {
 }
 
 NameAgeRow.propTypes = {
-  babyName: React.PropTypes.string.isRequired,
-  birthDate: React.PropTypes.string.isRequired,
-  onEditBaby: React.PropTypes.func.isRequired,
+  babyName: PropTypes.string.isRequired,
+  birthDate: PropTypes.string.isRequired,
+  onEditBaby: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({

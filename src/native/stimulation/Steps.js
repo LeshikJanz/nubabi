@@ -2,7 +2,7 @@
 import type { ActivityMediaType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation, TouchableOpacity } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { range } from 'ramda';
 import { Box, Card, Text } from '../components';

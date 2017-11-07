@@ -1,11 +1,11 @@
 // @flow
-// Adapted from steida's text props
 import type { BoxProps } from './Box';
-import Box from './Box';
 import type { Color, Theme } from '../../common/themes/types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import colorLib from 'color';
 import isReactNative from '../../common/app/isReactNative';
+import Box from './Box';
 
 // Universal styled Text component. The same API for browsers and React Native.
 // Some props are ommited or limited or set to match React Native behaviour.
@@ -161,14 +161,15 @@ const Text = (
             ...(style && style(theme, { ...boxStyle, ...textStyle })),
           },
           fixWebFontSmoothing,
-        )}
+        )
+      }
     />
   );
 };
 
 Text.contextTypes = {
-  Text: React.PropTypes.func,
-  theme: React.PropTypes.object,
+  Text: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 export default Text;

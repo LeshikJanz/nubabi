@@ -21,7 +21,7 @@ import {
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
 import base64 from 'base-64';
-import { ImageCacheProvider } from 'react-native-cached-image';
+import { ImageCacheManager } from 'react-native-cached-image';
 import {
   addEdgeToFragment,
   getCurrentUserFromStore,
@@ -203,7 +203,11 @@ export default compose(
                     filter(propEq('__typename', 'Image'), files),
                   );
                   if (images.length) {
-                    return ImageCacheProvider.cacheMultipleImages(images);
+                    return Promise.all(
+                      images.map(image =>
+                        ImageCacheManager.downloadAndCacheUrl(image),
+                      ),
+                    );
                   }
                 }
 

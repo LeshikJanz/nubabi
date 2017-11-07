@@ -147,7 +147,6 @@ style = Object {
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           numberOfLines={1}
           style={

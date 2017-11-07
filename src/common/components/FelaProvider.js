@@ -1,26 +1,27 @@
 // @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Provider as Fela } from 'react-fela';
 
 // Enhance Fela provider for universal base components.
 export default class FelaProvider extends React.Component {
   static propTypes = {
-    children: React.PropTypes.any,
-    Button: React.PropTypes.func.isRequired,
-    Image: React.PropTypes.func.isRequired,
-    Text: React.PropTypes.func.isRequired,
-    TextInput: React.PropTypes.func.isRequired,
-    View: React.PropTypes.func.isRequired,
-    mountNode: React.PropTypes.object,
-    renderer: React.PropTypes.object.isRequired,
+    children: PropTypes.any,
+    Button: PropTypes.func.isRequired,
+    Image: PropTypes.func.isRequired,
+    Text: PropTypes.func.isRequired,
+    TextInput: PropTypes.func.isRequired,
+    View: PropTypes.func.isRequired,
+    mountNode: PropTypes.object,
+    renderer: PropTypes.object.isRequired,
   };
 
   static childContextTypes = {
-    Button: React.PropTypes.func,
-    Image: React.PropTypes.func,
-    Text: React.PropTypes.func,
-    TextInput: React.PropTypes.func,
-    View: React.PropTypes.func,
+    Button: PropTypes.func,
+    Image: PropTypes.func,
+    Text: PropTypes.func,
+    TextInput: PropTypes.func,
+    View: PropTypes.func,
   };
 
   getChildContext() {

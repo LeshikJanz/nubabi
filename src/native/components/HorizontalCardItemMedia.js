@@ -1,7 +1,7 @@
 // @flow
 import type { File, Image as ImageType, LayoutProps } from '../../common/types';
 import React from 'react';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { prop, propOr } from 'ramda';
 import Box from './Box';

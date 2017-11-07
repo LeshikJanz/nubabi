@@ -1,7 +1,7 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { Image } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { Box, Card, ListItemArrow, Overlay, Text } from '../components';
 import withLayout from '../components/withLayout';
 
@@ -25,13 +25,13 @@ export const ThisWeekGrowth = withLayout(
           overflow: 'hidden',
         })}
       >
-        <Image
+        <ImageBackground
           source={whatYouNeedToKnowImage}
           style={[{ flex: 1 }, dimensions]}
           resizeMode="cover"
         >
           <Overlay />
-        </Image>
+        </ImageBackground>
         <Box
           flexDirection="row"
           justifyContent="center"

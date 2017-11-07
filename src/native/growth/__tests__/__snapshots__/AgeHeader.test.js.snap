@@ -46,7 +46,6 @@ style = Object {
   <Text
     accessible={true}
     allowFontScaling={false}
-    disabled={false}
     ellipsizeMode="tail"
     style={
       Array [
@@ -68,7 +67,6 @@ style = Object {
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
     spacing={-0.88}
     style={
@@ -141,7 +139,6 @@ style = Object {
   <Text
     accessible={true}
     allowFontScaling={false}
-    disabled={false}
     ellipsizeMode="tail"
     style={
       Array [
@@ -163,7 +160,6 @@ style = Object {
   <Text
     accessible={true}
     allowFontScaling={true}
-    disabled={false}
     ellipsizeMode="tail"
     spacing={-0.88}
     style={

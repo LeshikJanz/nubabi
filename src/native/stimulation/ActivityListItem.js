@@ -2,7 +2,7 @@
 import type { SkillArea, Activity } from '../../common/types';
 import React from 'react';
 import { Dimensions, View, TouchableHighlight, Text } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { path } from 'ramda';
 import { Box } from '../components';
 import iconMappings from './iconMappings';
@@ -36,12 +36,8 @@ export const ActivityListItem = (props: Props) => {
           />
         </Box>
         <View style={styles.textContainer}>
-          <Text style={styles.skillName}>
-            {skillArea.name}
-          </Text>
-          <Text style={styles.activityName}>
-            {activity.name}
-          </Text>
+          <Text style={styles.skillName}>{skillArea.name}</Text>
+          <Text style={styles.activityName}>{activity.name}</Text>
         </View>
         <Image
           style={styles.skillIcon}

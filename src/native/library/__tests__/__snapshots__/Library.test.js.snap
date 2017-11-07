@@ -49,6 +49,7 @@ style = Object {
   }
 >
   <RCTScrollView
+    automaticallyAdjustContentInsets={false}
     contentContainerStyle={
       Object {
         "flex": 1,
@@ -153,9 +154,7 @@ style = Object {
               }
             }
           >
-            <Image
-              resizeMode="cover"
-              source={1}
+            <View
               style={
                 Array [
                   Object {
@@ -168,6 +167,30 @@ style = Object {
                 ]
               }
             >
+              <Image
+                resizeMode="cover"
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/parenting_tips.png",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    Object {
+                      "height": undefined,
+                      "width": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              />
               <View
                 style={
                   Object {
@@ -195,7 +218,7 @@ style = Object {
                   }
                 />
               </View>
-            </Image>
+            </View>
             <View
               contentSpacing={true}
               style={
@@ -215,7 +238,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Object {
@@ -317,9 +339,7 @@ style = Object {
               }
             }
           >
-            <Image
-              resizeMode="cover"
-              source={1}
+            <View
               style={
                 Array [
                   Object {
@@ -332,6 +352,30 @@ style = Object {
                 ]
               }
             >
+              <Image
+                resizeMode="cover"
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/health_help.png",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    Object {
+                      "height": undefined,
+                      "width": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              />
               <View
                 style={
                   Object {
@@ -359,7 +403,7 @@ style = Object {
                   }
                 />
               </View>
-            </Image>
+            </View>
             <View
               contentSpacing={true}
               style={
@@ -379,7 +423,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Object {

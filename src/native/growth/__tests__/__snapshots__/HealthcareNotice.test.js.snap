@@ -51,7 +51,11 @@ exports[`it renders correctly 1`] = `
     }
   >
     <Image
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/common/images/healthcare-notice.png",
+        }
+      }
       style={
         Object {
           "height": 73,
@@ -76,7 +80,6 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -98,7 +101,6 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {

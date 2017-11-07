@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { View, Text } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { createComponent } from 'react-fela';
 import theme from '../../common/themes/defaultTheme';
 

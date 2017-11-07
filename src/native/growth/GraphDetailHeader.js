@@ -1,7 +1,7 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { Image } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { gql } from 'react-apollo';
 import { Box, Text, Overlay, withLayout } from '../components';
 import GraphDetailMeasurementSwitcher from './GraphDetailMeasurementSwitcher';
@@ -24,7 +24,10 @@ export const GraphDetailHeader = ({
 
   return (
     <Box style={() => ({ width: headerWidth, height: headerHeight })}>
-      <Image source={background} style={{ flex: 1, width: headerWidth }}>
+      <ImageBackground
+        source={background}
+        style={{ flex: 1, width: headerWidth }}
+      >
         <Overlay>
           <Box flex={1} alignItems="center" justifyContent="center">
             <Text align="center" color="white" size={7}>
@@ -46,7 +49,7 @@ export const GraphDetailHeader = ({
             />
           </Box>
         </Overlay>
-      </Image>
+      </ImageBackground>
     </Box>
   );
 };

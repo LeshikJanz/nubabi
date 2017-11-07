@@ -1,7 +1,7 @@
 // @flow
 import type { Avatar } from '../../common/types';
 import React from 'react';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { Box, Text } from '../components';
 
@@ -21,14 +21,15 @@ export const ExpertAdvice = ({
   return (
     <Box borderBottomWidth={1} style={() => ({ borderColor: '#E9ECF4' })}>
       <Box padding={1}>
-        {withHeader &&
+        {withHeader && (
           <Text
             bold
             style={theme => ({ color: theme.colors.open.blue0 })}
             marginBottom={1}
           >
             EXPERT ADVICE BY
-          </Text>}
+          </Text>
+        )}
         <Box flex={1} flexDirection="row" justifyContent="center">
           <Image
             source={{ uri: avatar.url }}

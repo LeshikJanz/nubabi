@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { BackHandler, Linking, Platform } from 'react-native';
 import {
   createNavigationContainer,
@@ -132,8 +133,8 @@ class TransitionerSwitcher extends PureComponent {
   // For simplicity, we use context to pass these functions to children
   // We will be moving to having this managed on Redux
   static childContextTypes = {
-    setActiveTransition: React.PropTypes.func,
-    getActiveTransition: React.PropTypes.func,
+    setActiveTransition: PropTypes.func,
+    getActiveTransition: PropTypes.func,
   };
 
   constructor(props) {

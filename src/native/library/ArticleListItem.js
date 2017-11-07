@@ -3,7 +3,7 @@ import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { compose, path } from 'ramda';
 import { Box, Text, Overlay, withLayout } from '../components';

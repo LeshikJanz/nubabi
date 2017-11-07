@@ -1,7 +1,7 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { Image } from 'react-native';
+import { ImageBackground } from 'react-native';
 import moment from 'moment';
 import { Box, Card, Icon, Overlay, Text, withLayout } from '../components';
 import theme from '../../common/themes/defaultTheme';
@@ -25,13 +25,15 @@ export const ThisWeeksActivitiesButton = ({
     height: layout.viewportWidth * 0.6,
   };
 
-  const date = moment().startOf('week').toDate();
+  const date = moment()
+    .startOf('week')
+    .toDate();
 
   return (
     <Box contentSpacing>
       <Card padding={0} onPress={onPress}>
         <Box style={() => ({ borderRadius: 4, overflow: 'hidden' })}>
-          <Image
+          <ImageBackground
             source={background}
             style={[{ flex: 1 }, dimensions]}
             resizeMode="cover"
@@ -60,7 +62,7 @@ export const ThisWeeksActivitiesButton = ({
                 </Text>
               </Box>
             </Overlay>
-          </Image>
+          </ImageBackground>
           <Box contentSpacing flexDirection="row" justifyContent="center">
             <Text flex={1} size={6}>
               This Week's Activities

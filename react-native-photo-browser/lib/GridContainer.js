@@ -1,9 +1,11 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Dimensions,
   ListView,
   TouchableHighlight,
   View,
+  ViewPropTypes,
   StyleSheet,
 } from 'react-native';
 
@@ -15,7 +17,7 @@ const ITEM_MARGIN = 2;
 
 export default class GridContainer extends React.Component {
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     displaySelectionButtons: PropTypes.bool,
     onPhotoTap: PropTypes.func,

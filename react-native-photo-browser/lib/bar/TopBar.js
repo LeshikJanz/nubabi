@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   Image,
   Text,
@@ -34,10 +35,11 @@ export default class TopBar extends React.Component {
       return (
         <TouchableOpacity style={styles.backContainer} onPress={onBack}>
           <Image source={backImage} />
-          {Platform.OS === 'ios' &&
+          {Platform.OS === 'ios' && (
             <Text style={[styles.text, styles.backText]}>
               {this.props.backTitle}
-            </Text>}
+            </Text>
+          )}
         </TouchableOpacity>
       );
     }
@@ -55,9 +57,7 @@ export default class TopBar extends React.Component {
         height={height}
       >
         {this.renderBackButton()}
-        <Text style={styles.text}>
-          {title}
-        </Text>
+        <Text style={styles.text}>{title}</Text>
       </BarContainer>
     );
   }

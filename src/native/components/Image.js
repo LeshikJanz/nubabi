@@ -1,9 +1,10 @@
 // @flow
 import type { BoxProps } from './Box';
 import type { Theme } from '../../common/themes/types';
-import Box from './Box';
 import React from 'react';
+import PropTypes from 'prop-types';
 import isReactNative from '../../common/app/isReactNative';
+import Box from './Box';
 
 // TODO: Implement auto jsx-a11y/img-has-alt.
 
@@ -41,17 +42,18 @@ const verticalRhythmSize = ({ height, width }, lineHeight) => {
 const Image = (
   { size, src, ...props }: ImageProps,
   { Image: PlatformImage, theme }: ImageContext,
-) =>
+) => (
   <Box
     as={PlatformImage}
     {...verticalRhythmSize(size, theme.typography.lineHeight)}
     {...{ [isReactNative ? 'source' : 'src']: src }}
     {...props}
-  />;
+  />
+);
 
 Image.contextTypes = {
-  Image: React.PropTypes.func,
-  theme: React.PropTypes.object,
+  Image: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 export default Image;

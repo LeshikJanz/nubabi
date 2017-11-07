@@ -2,7 +2,7 @@
 // TODO: remove duplication between all these buttons
 import type { LayoutProps } from '../../common/types/index';
 import React from 'react';
-import { Image, Dimensions } from 'react-native';
+import { ImageBackground, Dimensions } from 'react-native';
 import { Box, Card, Text, Overlay } from '../components/index';
 import withLayout from '../components/withLayout';
 
@@ -25,13 +25,13 @@ export const Button = ({ layout }: { layout: LayoutProps }) => {
         overflow: 'hidden',
       })}
     >
-      <Image
+      <ImageBackground
         source={parentingTipsImage}
         style={[{ flex: 1 }, dimensions]}
         resizeMode="cover"
       >
         <Overlay />
-      </Image>
+      </ImageBackground>
       <Box contentSpacing>
         <Text size={6}>Parenting Tips</Text>
       </Box>

@@ -37,7 +37,6 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [
@@ -89,7 +88,6 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [

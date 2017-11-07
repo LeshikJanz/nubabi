@@ -1,1 +1,1 @@
-export { Image as default } from 'react-native';
+export { Image as CachedImage } from 'react-native';

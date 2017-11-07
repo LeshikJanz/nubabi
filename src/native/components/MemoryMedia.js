@@ -6,7 +6,7 @@ import type {
 } from '../../common/types/index';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { compose, head, take } from 'ramda';
@@ -76,6 +76,7 @@ export const RoundedContainer = ({
       style={[
         {
           flex: 1,
+          alignSelf: 'stretch',
           overflow: 'hidden',
           borderTopLeftRadius: 4,
           borderTopRightRadius: 4,
@@ -112,7 +113,7 @@ export const MemoryMediaImage = ({
         source={{ uri: imageSource.url }}
         style={{
           flex: 1,
-          height: small ? 80 : 180,
+          minHeight: small ? 80 : 180,
         }}
         resizeMode="cover"
       >
@@ -132,6 +133,7 @@ export const MemoryMediaAudio = ({
   const content = (
     <Overlay style={style}>
       <Box
+        flex={1}
         alignItems="center"
         justifyContent="center"
         style={() => ({ height: small ? 80 : 180 })}
@@ -189,6 +191,7 @@ export const MemoryMediaVideo = ({
   const content = (
     <Overlay style={style}>
       <Box
+        flex={1}
         alignItems="center"
         justifyContent="center"
         style={() => ({ height: small ? 80 : 180 })}
@@ -287,6 +290,7 @@ export const MemoryMediaMultiple = ({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 5,
       })}
     >
       <Text bold color="white" size={8} align="center">
@@ -300,27 +304,22 @@ export const MemoryMediaMultiple = ({
 
   return (
     <Box flex={1}>
-      <Box
-        flexDirection="row"
-        flex={1}
-        alignItems="flex-start"
-        justifyContent="space-between"
-      >
+      <Box flexDirection="row" flex={1} justifyContent="space-between">
         {suggestedMemoryType && (
           <Box
             flex={1}
-            key="memory-type"
             margin={0.5}
+            key="memory-type"
             borderRadius={4}
             borderColor="separator"
             borderWidth={1}
             alignItems="center"
             justifyContent="center"
-            style={() => ({ overflow: 'hidden', padding: 5 })}
+            style={() => ({ overflow: 'hidden' })}
           >
             <Image
               source={suggestedMemoryType.image}
-              style={{ flex: 1, height: 80 }}
+              style={{ width: 60, height: 60 }}
               resizeMode="contain"
             />
           </Box>

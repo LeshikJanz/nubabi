@@ -5,7 +5,11 @@ style = Object {}
 
 <View>
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/common/images/profileBackground.jpg",
+      }
+    }
     style={
       Object {
         "height": 210,

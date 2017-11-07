@@ -81,7 +81,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={false}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Array [
@@ -103,7 +102,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         spacing={-0.88}
         style={
@@ -216,7 +214,11 @@ style = Object {
               }
             >
               <Image
-                source={1}
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/growth_introduction.png",
+                  }
+                }
                 style={
                   Object {
                     "borderBottomWidth": 0,
@@ -258,7 +260,6 @@ style = Object {
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Object {
@@ -272,7 +273,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -286,7 +286,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -300,7 +299,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -314,7 +312,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -357,7 +354,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={false}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Array [
@@ -446,9 +442,7 @@ style = Object {
             }
           }
         >
-          <Image
-            resizeMode="cover"
-            source={1}
+          <View
             style={
               Array [
                 Object {
@@ -461,6 +455,30 @@ style = Object {
               ]
             }
           >
+            <Image
+              resizeMode="cover"
+              source={
+                Object {
+                  "testUri": "../../../src/common/images/growth-what-you-need-to-know.jpg",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  undefined,
+                ]
+              }
+            />
             <View
               style={
                 Object {
@@ -488,7 +506,7 @@ style = Object {
                 }
               />
             </View>
-          </Image>
+          </View>
           <View
             style={
               Object {
@@ -510,7 +528,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -545,7 +562,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={false}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Array [
@@ -662,7 +678,11 @@ style = Object {
             >
               <Image
                 resizeMode="contain"
-                source={1}
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/growth-chart-button-weight.png",
+                  }
+                }
                 style={
                   Object {
                     "flex": 1,
@@ -698,7 +718,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -721,7 +740,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -758,7 +776,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -794,7 +811,11 @@ style = Object {
             >
               <Image
                 resizeMode="contain"
-                source={1}
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/growth-chart-button-height.png",
+                  }
+                }
                 style={
                   Object {
                     "flex": 1,
@@ -835,7 +856,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -858,7 +878,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -895,7 +914,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -940,7 +958,6 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -976,7 +993,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={false}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [
@@ -1084,7 +1100,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={false}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Array [
@@ -1106,7 +1121,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         spacing={-0.88}
         style={
@@ -1219,7 +1233,11 @@ style = Object {
               }
             >
               <Image
-                source={1}
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/growth_introduction.png",
+                  }
+                }
                 style={
                   Object {
                     "borderBottomWidth": 0,
@@ -1263,7 +1281,6 @@ style = Object {
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Object {
@@ -1277,7 +1294,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -1291,7 +1307,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -1305,7 +1320,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -1319,7 +1333,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Array [
@@ -1362,7 +1375,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={false}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Array [
@@ -1451,9 +1463,7 @@ style = Object {
             }
           }
         >
-          <Image
-            resizeMode="cover"
-            source={1}
+          <View
             style={
               Array [
                 Object {
@@ -1466,6 +1476,30 @@ style = Object {
               ]
             }
           >
+            <Image
+              resizeMode="cover"
+              source={
+                Object {
+                  "testUri": "../../../src/common/images/growth-what-you-need-to-know.jpg",
+                }
+              }
+              style={
+                Array [
+                  Object {
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "right": 0,
+                    "top": 0,
+                  },
+                  Object {
+                    "height": undefined,
+                    "width": undefined,
+                  },
+                  undefined,
+                ]
+              }
+            />
             <View
               style={
                 Object {
@@ -1493,7 +1527,7 @@ style = Object {
                 }
               />
             </View>
-          </Image>
+          </View>
           <View
             style={
               Object {
@@ -1515,7 +1549,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -1550,7 +1583,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={false}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Array [
@@ -1667,7 +1699,11 @@ style = Object {
             >
               <Image
                 resizeMode="contain"
-                source={1}
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/growth-chart-button-weight.png",
+                  }
+                }
                 style={
                   Object {
                     "flex": 1,
@@ -1703,7 +1739,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -1726,7 +1761,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -1763,7 +1797,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -1799,7 +1832,11 @@ style = Object {
             >
               <Image
                 resizeMode="contain"
-                source={1}
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/growth-chart-button-height.png",
+                  }
+                }
                 style={
                   Object {
                     "flex": 1,
@@ -1840,7 +1877,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -1863,7 +1899,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -1900,7 +1935,6 @@ style = Object {
                   <Text
                     accessible={true}
                     allowFontScaling={true}
-                    disabled={false}
                     ellipsizeMode="tail"
                     style={
                       Object {
@@ -1945,7 +1979,6 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -1981,7 +2014,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={false}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [

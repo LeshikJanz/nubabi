@@ -1,5 +1,6 @@
-import React, { PropTypes, Component } from 'react';
-import { Animated, StyleSheet, View } from 'react-native';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Animated, StyleSheet, ViewPropTypes } from 'react-native';
 
 const BAR_POSITIONS = {
   TOP: 'top',
@@ -8,7 +9,7 @@ const BAR_POSITIONS = {
 
 class BarContainer extends Component {
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     position: PropTypes.oneOf([BAR_POSITIONS.TOP, BAR_POSITIONS.BOTTOM]),
     displayed: PropTypes.bool,
     height: PropTypes.number,

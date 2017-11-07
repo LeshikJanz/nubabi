@@ -98,7 +98,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -113,7 +112,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -127,7 +125,11 @@ style = Object {
     </View>
     <Image
       resizeMode="contain"
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/common/images/sensory_icon.png",
+        }
+      }
       style={
         Object {
           "height": 22,

@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { delay } from 'lodash';
 import NubabiIcon from '../../common/icons/nubabi';
@@ -13,8 +14,8 @@ class LeftHeader extends Component {
   props: Props;
 
   static contextTypes = {
-    setActiveTransition: React.PropTypes.func,
-    getActiveTransition: React.PropTypes.func,
+    setActiveTransition: PropTypes.func,
+    getActiveTransition: PropTypes.func,
   };
 
   navigateTo = (routeName: string) => {

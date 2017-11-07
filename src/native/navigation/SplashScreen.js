@@ -1,9 +1,16 @@
 // @flow
 import type { Baby, BabyEdge, State } from '../../common/types';
 import React, { Component } from 'react';
-import { Image, LayoutAnimation, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  LayoutAnimation,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { ImageCacheProvider } from 'react-native-cached-image';
+import { ImageCacheManager } from 'react-native-cached-image';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
@@ -78,9 +85,9 @@ class SplashScreen extends Component {
       }
 
       if (images.length) {
-        ImageCacheProvider.cacheMultipleImages(images).then(() =>
-          this.navigateTo('home'),
-        );
+        Promise.all(
+          images.map(image => ImageCacheManager().downloadAndCacheUrl(image)),
+        ).then(() => this.navigateTo('home'));
       }
     } else {
       this.navigateTo('home');
@@ -130,7 +137,7 @@ class SplashScreen extends Component {
           </Text>
         </Animatable.Text>
 
-        {this.props.author &&
+        {this.props.author && (
           <View
             style={{
               marginVertical: 5,
@@ -148,7 +155,8 @@ class SplashScreen extends Component {
             >
               - {this.props.author}
             </Text>
-          </View>}
+          </View>
+        )}
       </View>
     );
   }
@@ -164,14 +172,14 @@ class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
+        <ImageBackground
           source={loadingImage}
           resizeMode="stretch"
           style={styles.textContainer}
         >
           {this.renderLoadingIndicator()}
           {this.renderLoadingMessage()}
-        </Image>
+        </ImageBackground>
         <Alert />
       </View>
     );

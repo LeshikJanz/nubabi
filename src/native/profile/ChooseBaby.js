@@ -8,6 +8,7 @@ import type {
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   StyleSheet,
@@ -18,7 +19,7 @@ import {
   Easing,
   TouchableOpacity,
 } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import SVGPath from 'art/modes/svg/path';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -61,7 +62,7 @@ class ChooseBaby extends Component {
   };
 
   static contextTypes = {
-    setActiveTransition: React.PropTypes.func,
+    setActiveTransition: PropTypes.func,
   };
 
   componentDidMount() {

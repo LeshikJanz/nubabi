@@ -1,5 +1,13 @@
-import React, { PropTypes } from 'react';
-import { Animated, Dimensions, ListView, View, StyleSheet } from 'react-native';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Animated,
+  Dimensions,
+  ListView,
+  View,
+  StyleSheet,
+  ViewPropTypes,
+} from 'react-native';
 
 import Constants from './constants';
 import { TopBar } from './bar';
@@ -11,7 +19,7 @@ const TOOLBAR_HEIGHT = Constants.TOOLBAR_HEIGHT;
 
 export default class PhotoBrowser extends React.Component {
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
 
     mediaList: PropTypes.array.isRequired,
 

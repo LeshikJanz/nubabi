@@ -22,7 +22,6 @@ export const SuggestedMemory = ({
     <Card
       margin={0}
       padding={1}
-      justifyContent="flex-start"
       onPress={onAddSuggestedMemory}
       style={() => ({
         width: 115,

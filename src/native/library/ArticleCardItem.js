@@ -3,7 +3,7 @@
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { compose } from 'ramda';
 import { Box, Text, Overlay, withLayout } from '../components';
@@ -14,12 +14,16 @@ type Props = {
   layout: LayoutProps,
 };
 
+// TODO: test the overlay is working as expected
 export const ArticleCardItem = ({ title, image, layout }: Props) => {
   return (
     <Box flex={1} borderRadius={4} overflow="hidden">
-      <Image source={{ uri: image.url }} style={{ flex: 1 }} resizeMode="cover">
-        <Overlay />
-      </Image>
+      <Image
+        source={{ uri: image.url }}
+        style={[{ flex: 1 }, StyleSheet.absoluteFill]}
+        resizeMode="cover"
+      />
+      <Overlay />
 
       <Box
         justifyContent="center"

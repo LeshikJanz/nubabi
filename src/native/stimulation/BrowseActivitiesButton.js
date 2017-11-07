@@ -1,7 +1,12 @@
 // @flow
 import type { Image as ImageType, LayoutProps } from '../../common/types/types';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableHighlight } from 'react-native';
+import {
+  ImageBackground,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+} from 'react-native';
 import { Overlay, withLayout } from '../components';
 
 type Props = {
@@ -23,24 +28,24 @@ export const BrowseActivitiesButton = ({
 }: Props) => {
   const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
   let background = image || defaultBackground;
-
+  console.log(background);
   // If we pass a RN image is set as background, otherwise get URL
-  if (background && typeof background !== 'number') {
+  if (background && background.url) {
     background = { uri: image.url };
   }
 
-  const caption = text
-    ? <Text style={styles.title}>
-        {text}
-      </Text>
-    : [
-        <Text key="all" style={styles.title}>
-          Browse
-        </Text>,
-        <Text key="activities" style={styles.title}>
-          Activities
-        </Text>,
-      ];
+  const caption = text ? (
+    <Text style={styles.title}>{text}</Text>
+  ) : (
+    [
+      <Text key="all" style={styles.title}>
+        Browse
+      </Text>,
+      <Text key="activities" style={styles.title}>
+        Activities
+      </Text>,
+    ]
+  );
 
   return (
     <TouchableHighlight
@@ -48,15 +53,13 @@ export const BrowseActivitiesButton = ({
       underlayColor="rgba(0,0,0,0)"
       onPress={onPress}
     >
-      <Image
+      <ImageBackground
         source={background}
         style={[{ flex: 1 }, dimensions]}
         resizeMode="cover"
       >
-        <Overlay>
-          {caption}
-        </Overlay>
-      </Image>
+        <Overlay>{caption}</Overlay>
+      </ImageBackground>
     </TouchableHighlight>
   );
 };

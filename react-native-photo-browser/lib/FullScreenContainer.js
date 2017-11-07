@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import {
   DeviceEventEmitter,
   Dimensions,
@@ -9,6 +10,7 @@ import {
   Platform,
   StatusBar,
   TouchableWithoutFeedback,
+  ViewPropTypes,
 } from 'react-native';
 
 import Constants from './constants';
@@ -21,7 +23,7 @@ import { lens } from '../../src/common/ui/reducer';
 
 export class FullScreenContainer extends React.Component {
   static propTypes = {
-    style: View.propTypes.style,
+    style: ViewPropTypes.style,
     dataSource: PropTypes.instanceOf(ListView.DataSource).isRequired,
     mediaList: PropTypes.array.isRequired,
     /*
