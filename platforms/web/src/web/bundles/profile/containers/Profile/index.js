@@ -35,10 +35,49 @@ class Profile extends PureComponent<Props> {
           count
         }
       }
+    `,
+    growth: gql`
+      fragment ProfileGrowth on Baby {
+        id
+        growth {
+          current {
+            id
+            introduction
+            title
+            maximumAge
+            expert {
+              id
+              name
+              discipline
+              avatar {
+                url
+              }
+            }
+          }
+        }
+      }
+    `,
+    activities: gql`
+      fragment ProfileActivities on Baby {
+        activities(first: 2) {
+          edges {
+            node {
+              id
+              name
+              introduction
+              skillArea {
+                id
+                icon
+              }
+            }
+          }
+        }
+      }
     `
   };
 
   render() {
+    console.log(this.props);
     const { baby } = this.props;
 
     if (!baby) {
@@ -61,16 +100,20 @@ class Profile extends PureComponent<Props> {
   }
 }
 
-export const query = gql`
+const query = gql`
   query getBaby($id: ID!) {
     viewer {
       baby(id: $id) {
         ...Profile
+        ...ProfileGrowth
+        ...ProfileActivities
       }
     }
   }
 
   ${Profile.fragments.baby}
+  ${Profile.fragments.growth}
+  ${Profile.fragments.activities}
 `;
 
 export default compose(
