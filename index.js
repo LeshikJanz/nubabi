@@ -1,4 +1,5 @@
 // @flow
+import initializeCore from 'InitializeCore';
 const RNFetchBlob = require('react-native-fetch-blob').default;
 
 const { Blob, XMLHttpRequest } = RNFetchBlob.polyfill;
