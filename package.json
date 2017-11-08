@@ -159,6 +159,7 @@
     "redux-mock-store": "^1.2.3"
   },
   "resolutions": {
+    "color-convert": "https://github.com/zbarbuto/color-convert/",
     "react-native-fetch-blob": "0.10.8",
     "react-native-floating-label-text-input": "https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles",
     "react-native-progress": "3.4.0",
