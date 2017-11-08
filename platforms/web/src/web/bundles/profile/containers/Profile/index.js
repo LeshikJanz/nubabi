@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { gql, graphql } from "react-apollo";
 import compose from "ramda/src/compose";
 import path from "ramda/src/path";
-import { Loader } from "web/components";
+import { Flex, Box } from 'grid-styled';
+import { Loader, Aside } from "web/components";
 
 type Props = {
   navigation: any,
@@ -122,50 +123,62 @@ class Profile extends PureComponent<Props> {
     console.log(memories);
 
     return (
-      <div>
-        <img src={baby.avatar.url} style={{ width: "50px", height: "50px" }} />
-        <h2>{baby.name}</h2>
-        <img
-          src={baby.coverImage.url}
-          style={{ width: "400px", height: "100px" }}
-        />
-        <p>Date of Birth: {baby.dob}</p>
-        <p>Height: {baby.height}</p>
-        <p>Weight: {baby.weight}</p>
-        <h3>This Week's Growth</h3>
-        <p>{growth.current.introduction}</p>
-        <p>
-          Expert: {growth.current.expert.name} <br />
+      <Flex wrap justify='space-between'>
+        <Box width={1}>
+          <img src={baby.avatar.url} style={{ width: "50px", height: "50px" }} />
+          <h2>{baby.name}</h2>
           <img
-            src={growth.current.expert.avatar.url}
-            style={{ width: "50px", height: "50px" }}
+            src={baby.coverImage.url}
+            style={{ width: "400px", height: "100px" }}
           />
-        </p>
-        <h3>{baby.name}'s week ahead</h3>
-        <ul>
-          {activities.edges.map(edge => {
-            return (
-              <li key={edge.node.id}>
-                <h4>{edge.node.name}</h4>
-                <p>{edge.node.introduction}</p>
-              </li>
-            );
-          })}
-        </ul>
-        <h3>Recent Memories</h3>
-        <ul>
-          {memories.edges.map(edge => {
-            return (
-              <li key={edge.node.id}>
-                <p>{edge.node.title}</p>
-                {edge.node.files.edges && (
-                  <img src={edge.node.files.edges[0].node.thumb.url} />
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+          <p>Date of Birth: {baby.dob}</p>
+          <p>Height: {baby.height}</p>
+          <p>Weight: {baby.weight}</p>
+        </Box>
+
+        <Box width={1/4}>
+          menu here
+        </Box>
+
+        <Box width={4/7}>
+          <h3>This Week's Growth</h3>
+          <p>{growth.current.introduction}</p>
+          <p>
+            Expert: {growth.current.expert.name} <br />
+            <img
+              src={growth.current.expert.avatar.url}
+              style={{ width: "50px", height: "50px" }}
+            />
+          </p>
+          <h3>{baby.name}'s week ahead</h3>
+          <ul>
+            {activities.edges.map(edge => {
+              return (
+                <li key={edge.node.id}>
+                  <h4>{edge.node.name}</h4>
+                  <p>{edge.node.introduction}</p>
+                </li>
+              );
+            })}
+          </ul>
+
+          <h3>Recent Memories</h3>
+          <ul>
+            {memories.edges.map(edge => {
+              return (
+                <li key={edge.node.id}>
+                  <p>{edge.node.title}</p>
+                  {edge.node.files.edges && (
+                    <img src={edge.node.files.edges[0].node.thumb.url} />
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </Box>
+
+        <Box width={1/6} is={Aside}>Aside here</Box>
+      </Flex>
     );
   }
 }
