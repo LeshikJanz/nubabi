@@ -3136,7 +3136,7 @@ fbjs-scripts@^0.8.1:
     semver "^5.1.0"
     through2 "^2.0.0"
 
-fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.9:
+fbjs@^0.8.1, fbjs@^0.8.5, fbjs@^0.8.9:
   version "0.8.12"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.12.tgz#10b5d92f76d45575fd63a217d4ea02bea2f8ed04"
   dependencies:
@@ -4791,10 +4791,6 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash.debounce@4.0.8:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-
 lodash.escape@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/lodash.escape/-/lodash.escape-3.2.0.tgz#995ee0dc18c1b48cc92effae71a10aab5b487698"
@@ -5988,13 +5984,6 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-addons-shallow-compare@15.5.2:
-  version "15.5.2"
-  resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.5.2.tgz#7cb0ee7acc8d7c93fcc202df0bf47ba916a7bdad"
-  dependencies:
-    fbjs "^0.8.4"
-    object-assign "^4.1.0"
-
 react-apollo@^1.4.16:
   version "1.4.16"
   resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-1.4.16.tgz#62a623458b67a174ff8ef25f64e7b42531518e19"
@@ -6097,11 +6086,11 @@ react-native-drawer-layout@1.2.0:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-dropdownalert@^2.7.1:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-2.10.0.tgz#450466c467d376bf091c762e7e414a17700e2221"
+react-native-dropdownalert@2.13.0, "react-native-dropdownalert@https://github.com/testshallpass/react-native-dropdownalert#ebc50be":
+  version "2.13.0"
+  resolved "https://github.com/testshallpass/react-native-dropdownalert#ebc50bec829905328b553249abeb615c9656a653"
   dependencies:
-    prop-types "^15.5.10"
+    prop-types "15.5.10"
 
 react-native-fetch-blob@0.10.8:
   version "0.10.8"
@@ -6164,13 +6153,6 @@ react-native-progress@3.4.0, react-native-progress@^3.2.0:
     lodash "^4.15.0"
     simple-markdown "git://github.com/CharlesMangwa/simple-markdown.git"
 
-react-native-snap-carousel@^2.1.2:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-snap-carousel/-/react-native-snap-carousel-2.3.1.tgz#55649fb3a4e9a7294a8f3a0d09383a7eddd6e495"
-  dependencies:
-    lodash.debounce "4.0.8"
-    react-addons-shallow-compare "15.5.2"
-
 "react-native-sound@https://github.com/blackxored/react-native-sound#feat/preserve-encoding":
   version "0.10.3"
   resolved "https://github.com/blackxored/react-native-sound#a97cdbf01b54394e74f3152f16c2d6a95bcfc0dc"
@@ -6188,17 +6170,18 @@ react-native-svg@^5.4.2:
     color "^0.11.1"
     lodash "^4.16.6"
 
-react-native-tab-navigator@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.3.tgz#b222bad21fbe773c8d28f9a0de30ce62b08724d3"
+react-native-tab-navigator@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-tab-navigator/-/react-native-tab-navigator-0.3.4.tgz#54a18f1ad06a09d4a0de81ff00416bc1b760c960"
   dependencies:
     immutable "^3.8.1"
+    prop-types "^15.5.10"
 
-react-native-tab-view@^0.0.61:
-  version "0.0.61"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.61.tgz#9f5446c9ad33158b87f0bccf5004fbff79ca1f92"
+react-native-tab-view@0.0.70, react-native-tab-view@^0.0.61:
+  version "0.0.70"
+  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"
   dependencies:
-    prop-types "^15.5.8"
+    prop-types "^15.5.10"
 
 react-native-uuid@^1.4.9:
   version "1.4.9"
