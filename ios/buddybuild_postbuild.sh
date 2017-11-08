@@ -11,7 +11,7 @@ for file in main.jsbundle main.jsbundle.map; do
   curl https://sentry.io/api/0/projects/mylearningbaby/nubabi-mobile/releases/$NUBABI_APP_VERSION/files/ \
     -X POST \
     -H "Authorization: Bearer $NUBABI_SENTRY_AUTH_TOKEN" \
-    -F file=@$BUDDYBUILD_BUILD_ID/react_native_source_maps/$file \
+    -F file=@/tmp/sandbox/$BUDDYBUILD_BUILD_ID/react_native_source_maps/$file \
     -F name="/$file" > /dev/null
 done
 
