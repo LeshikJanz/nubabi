@@ -73,16 +73,53 @@ class Profile extends PureComponent<Props> {
           }
         }
       }
+    `,
+    recentMemories: gql`
+      fragment RecentMemories on Baby {
+        memories(first: 5) {
+          edges {
+            node {
+              id
+              title
+              files(first: 1) {
+                edges {
+                  node {
+                    id
+                    contentType
+                    url
+                    ... on Image {
+                      thumb {
+                        url
+                      }
+                      large {
+                        url
+                      }
+                    }
+                    ... on Video {
+                      thumb {
+                        url
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     `
   };
 
   render() {
-    console.log(this.props);
     const { baby } = this.props;
 
     if (!baby) {
       return <Loader active={true} />;
     }
+
+    const { memories, growth, activities } = baby;
+
+    console.log(memories);
 
     return (
       <div>
@@ -95,6 +132,39 @@ class Profile extends PureComponent<Props> {
         <p>Date of Birth: {baby.dob}</p>
         <p>Height: {baby.height}</p>
         <p>Weight: {baby.weight}</p>
+        <h3>This Week's Growth</h3>
+        <p>{growth.current.introduction}</p>
+        <p>
+          Expert: {growth.current.expert.name} <br />
+          <img
+            src={growth.current.expert.avatar.url}
+            style={{ width: "50px", height: "50px" }}
+          />
+        </p>
+        <h3>{baby.name}'s week ahead</h3>
+        <ul>
+          {activities.edges.map(edge => {
+            return (
+              <li key={edge.node.id}>
+                <h4>{edge.node.name}</h4>
+                <p>{edge.node.introduction}</p>
+              </li>
+            );
+          })}
+        </ul>
+        <h3>Recent Memories</h3>
+        <ul>
+          {memories.edges.map(edge => {
+            return (
+              <li key={edge.node.id}>
+                <p>{edge.node.title}</p>
+                {edge.node.files.edges && (
+                  <img src={edge.node.files.edges[0].node.thumb.url} />
+                )}
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
@@ -107,6 +177,7 @@ const query = gql`
         ...Profile
         ...ProfileGrowth
         ...ProfileActivities
+        ...RecentMemories
       }
     }
   }
@@ -114,6 +185,7 @@ const query = gql`
   ${Profile.fragments.baby}
   ${Profile.fragments.growth}
   ${Profile.fragments.activities}
+  ${Profile.fragments.recentMemories}
 `;
 
 export default compose(
