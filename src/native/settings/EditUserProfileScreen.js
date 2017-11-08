@@ -1,13 +1,12 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Screen } from '../components';
+import { Screen, SubmitFormNavButton } from '../components';
 import EditUserProfile from './EditUserProfile';
-import SaveUserProfileButton from './SaveUserProfileButton';
 
 export class EditUserProfileScreen extends PureComponent {
   static navigationOptions = {
     title: 'Edit Your Profile',
-    headerRight: <SaveUserProfileButton />,
+    headerRight: <SubmitFormNavButton form="user" />,
   };
 
   render() {

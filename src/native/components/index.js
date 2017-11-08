@@ -26,6 +26,7 @@ import Overlay from './Overlay';
 import DatePicker from './DatePicker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FormContainer from './FormContainer';
+import SubmitFormNavButton from '../navigation/SubmitFormNavButton';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
@@ -43,6 +44,7 @@ export {
   AddButton,
   FormContainer,
   SubmitButton,
+  SubmitFormNavButton,
   Image,
   Avatar,
   Icon,
