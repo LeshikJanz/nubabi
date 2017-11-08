@@ -80,7 +80,7 @@
     "react": "16.0.0",
     "react-apollo": "^1.4.16",
     "react-fela": "^4.3.5",
-    "react-native": "0.50.1",
+    "react-native": "0.50.3",
     "react-native-animatable": "^1.2.3",
     "react-native-audio": "^3.2.2",
     "react-native-autogrow-textinput": "https://github.com/jackdcrawford/react-native-autogrow-textinput#0fd7e7f2",
