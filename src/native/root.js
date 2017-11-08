@@ -36,9 +36,6 @@ export default compose(
   lifecycle({
     componentDidMount: () => {
       Orientation.lockToPortrait();
-      Orientation.addOrientationListener((...args) => {
-        console.log('orientation changed', args);
-      });
     },
   }),
   // $FlowFixMe$
