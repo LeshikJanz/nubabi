@@ -6177,7 +6177,7 @@ react-native-tab-navigator@^0.3.4:
     immutable "^3.8.1"
     prop-types "^15.5.10"
 
-react-native-tab-view@0.0.70, react-native-tab-view@^0.0.61:
+react-native-tab-view@^0.0.70:
   version "0.0.70"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.70.tgz#1dd2ded32acd0cb6bfef38d26e53675db733b37b"
   dependencies:
@@ -6269,9 +6269,9 @@ react-native@0.50.3:
     xmldoc "^0.4.0"
     yargs "^9.0.0"
 
-"react-navigation@https://github.com/blackxored/react-navigation#feat/allow-hiding-floating-headers":
+"react-navigation@https://github.com/blackxored/react-navigation#feat/backport-tabview-changes":
   version "1.0.0-beta.8"
-  resolved "https://github.com/blackxored/react-navigation#74f63cffb46b57a468ecf28b6a554efb906ce431"
+  resolved "https://github.com/blackxored/react-navigation#e1de9c9bf9d925b5186a6b49f2a5eff712f6d571"
   dependencies:
     clamp "^1.0.1"
     fbjs "^0.8.5"
@@ -6279,7 +6279,7 @@ react-native@0.50.3:
     path-to-regexp "^1.7.0"
     prop-types "^15.5.8"
     react-native-drawer-layout-polyfill "1.2.0"
-    react-native-tab-view "^0.0.61"
+    react-native-tab-view "^0.0.70"
 
 react-proxy@^1.1.7:
   version "1.1.8"
