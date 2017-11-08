@@ -8,10 +8,9 @@ const background = require('../../common/images/next-week-equipment.png');
 
 type Props = {
   onPress: () => void,
-  layout: LayoutProps,
 };
 
-export const NextWeeksEquipmentButton = ({ onPress, layout }: Props) => {
+export const NextWeeksEquipmentButton = ({ onPress }: Props) => {
   return (
     <Card padding={0} onPress={onPress}>
       <Box flex={1} alignItems="center" justifyContent="center">

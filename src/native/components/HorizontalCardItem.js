@@ -12,7 +12,7 @@ import HorizontalCardItemMedia from './HorizontalCardItemMedia';
 
 export type Props = {
   title?: string,
-  files?: Array<File>,
+  files?: Array<File | { contentType?: string, thumb?: any, url: string }>,
   icon?: string,
   layout: LayoutProps,
   containerStyle?: Function,

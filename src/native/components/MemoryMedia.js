@@ -38,7 +38,7 @@ type MemoryMediaSingleProps = {
 type MemoryMediaImageProps = MemoryMediaSingleProps & {
   small?: boolean,
   style?: Object | number,
-  displayMoreIndicator?: boolean,
+  displayMoreIndicator?: React.Element,
 };
 
 type MemoryMediaVideoProps = MemoryMediaSingleProps & {
