@@ -9,7 +9,7 @@ import theme from '../../../common/themes/defaultTheme';
 type Props = {
   selectedGender: Gender,
   onChangeGender: (gender: Gender) => void,
-  hasError: Boolean,
+  hasError: boolean,
 };
 
 const GenderError = () => (
