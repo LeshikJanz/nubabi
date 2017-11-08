@@ -8,7 +8,12 @@ import type {
 import React, { Component } from 'react';
 import { gql, graphql } from 'react-apollo';
 import { compose, omit, path } from 'ramda';
-import { displayLoadingState, Screen, withCurrentBaby } from '../../components';
+import {
+  displayLoadingState,
+  Screen,
+  SubmitFormNavButton,
+  withCurrentBaby,
+} from '../../components';
 import BabyNameTitle from '../BabyNameTitle';
 import BabyForm from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
@@ -28,6 +33,7 @@ class EditBaby extends Component {
       backgroundColor: theme.colors.white,
       shadowOpacity: 0,
     },
+    headerRight: <SubmitFormNavButton form="baby" />,
   };
 
   scroll = null;

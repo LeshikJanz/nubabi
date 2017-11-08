@@ -277,14 +277,6 @@ class Form extends PureComponent {
       renderDatePicker,
     } = this;
 
-    let submitText;
-
-    if (isSubmitting) {
-      submitText = this.props.mode === 'add' ? 'ADDING...' : 'SAVING...';
-    } else {
-      submitText = this.props.mode === 'add' ? 'ADD BABY' : 'SAVE BABY';
-    }
-
     const editableProps = { editable: !isSubmitting };
 
     return (
@@ -380,12 +372,6 @@ class Form extends PureComponent {
         </View>
 
         {this.renderMeasurementsSection()}
-
-        <SubmitButton
-          onPress={handleSubmit(submit)}
-          loading={isSubmitting}
-          submitText={submitText}
-        />
       </KeyboardAwareScrollView>
     );
   }

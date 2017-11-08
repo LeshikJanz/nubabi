@@ -3,7 +3,7 @@ import type { NavigationOptions } from '../../../common/types';
 import React, { Component } from 'react';
 import { assocPath, compose, path, prepend } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { Screen } from '../../components';
+import { Screen, SubmitFormNavButton } from '../../components';
 import BabyForm from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
 
@@ -20,6 +20,7 @@ class AddBaby extends Component {
       backgroundColor: theme.colors.white,
       shadowOpacity: 0,
     },
+    headerRight: <SubmitFormNavButton form="baby" />,
   };
 
   render() {
