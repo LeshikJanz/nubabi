@@ -7,7 +7,7 @@ curl https://sentry.io/api/0/projects/mylearningbaby/nubabi-mobile/releases/ \
   -H "Content-Type: application/json" \
   -d "{\"version\": \"$NUBABI_APP_VERSION\" }" > /dev/null
 
-for file in main.jsbundle main.jsbundle.map; do 
+for file in $BUDDYBUILD_BUILD_ID/react_native_source_maps/*; do
   curl https://sentry.io/api/0/projects/mylearningbaby/nubabi-mobile/releases/$NUBABI_APP_VERSION/files/ \
     -X POST \
     -H "Authorization: Bearer $NUBABI_SENTRY_AUTH_TOKEN" \
