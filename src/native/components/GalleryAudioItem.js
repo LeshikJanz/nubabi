@@ -29,15 +29,11 @@ class GalleryAudioItem extends Component {
   };
 
   load() {
-    this.setState({
-      progress: 100,
-    });
+    this.setState({ progress: 100 });
   }
 
   preventGalleryGestures = () => {
-    this.setState({
-      disableGalleryGestures: true,
-    });
+    this.setState({ disableGalleryGestures: true });
   };
 
   isPlaying = () => {
