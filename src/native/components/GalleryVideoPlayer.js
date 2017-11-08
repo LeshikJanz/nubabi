@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import VideoPlayer from 'react-native-video-player';
+import Orientation from 'react-native-orientation';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { toggleGalleryScroll } from '../../common/ui/reducer';
@@ -18,7 +19,25 @@ export class GalleryVideoPlayer extends PureComponent {
     isPlaying: false,
   };
 
+  componentDidMount() {
+    Orientation.addOrientationListener(this.handleOrientationChange);
+  }
+
+  componentWillUnmount() {
+    Orientation.removeOrientationListener(this.handleOrientationChange);
+  }
+
   player = null;
+
+  handleOrientationChange = orientation => {
+    if (!this.player) {
+      return;
+    }
+
+    if (this.player.state.isPlaying) {
+      this.player.onToggleFullScreen();
+    }
+  };
 
   allowGalleryGestures = () => {
     this.props.toggleGalleryScroll(true);

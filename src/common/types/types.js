@@ -171,6 +171,7 @@ export type MobileDeviceState = {
   +systemVersion: ?string,
   +bundleId: ?string,
   +locale: ?string,
+  +orientation: 'PORTRAIT' | 'LANDSCAPE' | null,
 };
 
 export type DeviceState = GenericDeviceState | MobileDeviceState;

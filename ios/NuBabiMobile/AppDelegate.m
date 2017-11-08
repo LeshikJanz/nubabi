@@ -13,6 +13,8 @@
 #import <React/RCTRootView.h>
 #import <React/RCTLinkingManager.h>
 
+#import "Orientation.h"
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -96,6 +98,11 @@
 {
   return [RCTLinkingManager application:application openURL:url
                       sourceApplication:sourceApplication annotation:annotation];
+}
+
+/* Detect orientation changes with react-native-orientation */
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+  return [Orientation getOrientation];
 }
 
 @end
