@@ -25,6 +25,7 @@ import {
   renderDatePicker,
   required,
 } from '../shared/forms';
+import { fileFromImagePickerResult } from '../shared/fileUtils';
 
 type Props = {
   // redux-form uses initialValues prop
@@ -60,8 +61,8 @@ class UserForm extends Component {
 
   scroll = null;
 
-  updateImageField = name => ({ data }) => {
-    this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
+  updateImageField = name => file => {
+    this.props.change(name, fileFromImagePickerResult(file));
   };
 
   handleAvatar = () => {

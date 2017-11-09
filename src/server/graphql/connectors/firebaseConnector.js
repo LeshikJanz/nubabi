@@ -298,7 +298,7 @@ const updateUser = async (firebase, input) => {
     updates[`users/${currentUser.uid}/${key}`] = user[key];
   });
 
-  if (isNewImage(input.avatar)) {
+  if (input.avatar && isNewFile(input.avatar.url)) {
     const avatarUrl = await uploadFile(
       firebase,
       `users/${currentUser.uid}/avatar`,
@@ -306,6 +306,9 @@ const updateUser = async (firebase, input) => {
     );
     if (avatarUrl) {
       updates[`users/${currentUser.uid}/avatar/url`] = avatarUrl;
+      // We reset these to null until resize function kicks in
+      updates[`users/${currentUser.uid}/avatar/large`] = null;
+      updates[`users/${currentUser.uid}/avatar/thumb`] = null;
     }
   }
 

@@ -122,7 +122,7 @@ input UpdateUserInput {
   firstName: String,
   lastName: String,
   dob: Date,
-  avatar: ImageInput,
+  avatar: FileInputBase64,
 }
 
 type UpdateUserPayload {

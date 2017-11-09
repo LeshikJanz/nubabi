@@ -25,15 +25,13 @@ import {
   constantValues,
   formattedDate,
   maxLength,
-  minValue,
-  numeric,
   renderTextInput,
   required,
 } from '../../shared/forms';
 import { unitDisplaySelector } from '../../../common/settings/reducer';
 import { formatMeasurement } from '../../../common/helpers/measurement';
-import { getContentTypeFromFilename } from '../../../common/helpers/graphqlUtils';
-import { isNewFile } from '../../shared/fileUtils';
+
+import { fileFromImagePickerResult, isNewFile } from '../../shared/fileUtils';
 
 type Props = {
   // redux-form uses initialValues prop
@@ -104,13 +102,7 @@ class Form extends PureComponent {
   scroll = null;
 
   updateImageField = name => file => {
-    const data = {
-      size: file.fileSize,
-      name: file.fileName,
-      url: file.uri,
-      contentType: getContentTypeFromFilename(file.fileName),
-    };
-    this.props.change(name, data);
+    this.props.change(name, fileFromImagePickerResult(file));
   };
 
   handleCoverImage = () => {

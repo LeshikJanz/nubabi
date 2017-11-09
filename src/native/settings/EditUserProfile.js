@@ -1,15 +1,15 @@
 // @flow
 import type { UpdateUserInput, User } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { compose, path } from 'ramda';
+import { compose, path, prop } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import {
-  formValues,
-  withNetworkIndicatorActions,
-} from '../../common/helpers/graphqlUtils';
+import { ImageCacheManager } from 'react-native-cached-image';
+import { formValues } from '../../common/helpers/graphqlUtils';
 import { displayLoadingState } from '../components';
 import UserForm from './UserForm';
+import { normalizeAvatarAndCoverImage } from '../profile/EditBaby/BabyForm';
+import { isNewFile } from '../shared/fileUtils';
 
 type Props = {
   user: User,
@@ -35,22 +35,30 @@ export class EditUserProfile extends PureComponent {
 }
 
 export default compose(
-  graphql(gql`
-    mutation UpdateUserProfile($input: UpdateUserInput!) {
-      updateUser(input: $input) {
-        changedUser {
-          ...UserForm
+  graphql(
+    gql`
+      mutation UpdateUserProfile($input: UpdateUserInput!) {
+        updateUser(input: $input) {
+          changedUser {
+            ...UserForm
+          }
         }
       }
-    }
-    ${UserForm.fragments.form}
-  `),
+      ${UserForm.fragments.form}
+    `,
+  ),
   graphql(
     gql`
       query EditUserProfile {
         viewer {
           user {
             ...UserForm
+            # For settings view
+            avatar {
+              thumb {
+                url
+              }
+            }
           }
         }
       }
@@ -63,7 +71,9 @@ export default compose(
       props: ({ data, ownProps: { mutate } }) => ({
         data,
         user: path(['viewer', 'user'], data),
-        onSubmit: input => {
+        onSubmit: async values => {
+          const input = normalizeAvatarAndCoverImage(values, values);
+
           return mutate({
             variables: { input },
           });
