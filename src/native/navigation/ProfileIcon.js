@@ -16,7 +16,9 @@ type Props = {
   tintColor: string,
 };
 
-const ProfileIcon = ({ avatarSource = babyIcon, active, tintColor }: Props) => {
+const ProfileIcon = ({ avatarSource, active, tintColor }: Props) => {
+  const avatar = avatarSource.uri ? avatarSource : babyIcon;
+
   const activeStyle = active
     ? {
         borderColor: color(tintColor)
@@ -31,7 +33,7 @@ const ProfileIcon = ({ avatarSource = babyIcon, active, tintColor }: Props) => {
       <View style={[styles.tabIconInnerView]}>
         <View style={[styles.tabIconInnerImageHolder, activeStyle]}>
           <Image
-            source={avatarSource}
+            source={avatar}
             style={[styles.tabIconImage]}
             resizeMode="cover"
           />
