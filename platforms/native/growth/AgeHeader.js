@@ -2,8 +2,7 @@
 import React from 'react';
 import { gql } from 'react-apollo';
 import theme from '../../../core/themes/defaultTheme';
-import { Box, Text } from '../components';
-import NubabiIcon from '../../../core/icons/nubabi';
+import { Box, NubabiIcon, Text } from '../components';
 import { formatAge } from '../../../core/helpers/formatAge';
 
 type Props = {

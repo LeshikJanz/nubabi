@@ -5,7 +5,7 @@ import type { TabBarConfig } from 'react-navigation';
 import { TabNavigator } from 'react-navigation';
 import { upperFirst } from 'lodash';
 import theme from '../../../core/themes/defaultTheme';
-import NubabiIcon from '../../../core/icons/nubabi';
+import { NubabiIcon } from '../components';
 import Stimulation from '../stimulation';
 import Growth from '../growth/GrowthScreen';
 import Profile from '../profile/Profile';

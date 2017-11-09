@@ -1,12 +1,12 @@
 // @flow
 import type { MeasurementUnit } from '../../../core/types';
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { gql } from 'react-apollo';
-import NubabiIcon from '../../../core/icons/nubabi';
+import { NubabiIcon } from '../components';
 import theme, {
-  LIGHT_GREY,
   FONT_COLOR,
+  LIGHT_GREY,
   NUBABI_RED,
 } from '../../../core/themes/defaultTheme';
 import { formatMeasurement } from '../../../core/helpers/measurement';

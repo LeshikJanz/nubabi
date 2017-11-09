@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { View, StyleSheet } from 'react-native';
 import { delay } from 'lodash';
-import NubabiIcon from '../../../core/icons/nubabi';
+import { NubabiIcon } from '../components';
 import { HEADER_FONT_COLOR } from '../../../core/themes/defaultTheme';
 
 type Props = {

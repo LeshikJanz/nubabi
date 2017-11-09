@@ -7,10 +7,8 @@ import { gql } from 'react-apollo';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { DatePicker, SubmitButton } from '../../components';
+import { DatePicker, Icon, NubabiIcon, SubmitButton } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
-import Icon from 'react-native-vector-icons/Ionicons';
-import NubabiIcon from '../../../../core/icons/nubabi';
 import theme, {
   FONT_COLOR,
   NUBABI_RED,

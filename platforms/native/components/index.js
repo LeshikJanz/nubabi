@@ -25,6 +25,7 @@ import FloatingRemoveButton from './FloatingRemoveButton';
 import Overlay from './Overlay';
 import DatePicker from './DatePicker';
 import Icon from 'react-native-vector-icons/Ionicons';
+import NubabiIcon from './icons/nubabi';
 import FormContainer from './FormContainer';
 import SubmitFormNavButton from '../navigation/SubmitFormNavButton';
 import RightNavButton from '../navigation/RightNavButton';
@@ -50,6 +51,7 @@ export {
   Image,
   Avatar,
   Icon,
+  NubabiIcon,
   Card,
   HorizontalCardList,
   HorizontalCardItem,

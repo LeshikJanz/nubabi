@@ -8,7 +8,7 @@ import {
   Text,
   StyleSheet,
 } from 'react-native';
-import NubabiIcon from '../../../../core/icons/nubabi';
+import { NubabiIcon } from '../../components';
 import { NUBABI_RED } from '../../../../core/themes/defaultTheme';
 import { formatAge } from '../../../../core/helpers/formatAge';
 
