@@ -52,16 +52,16 @@ buck-out/
 */fastlane/Preview.html
 */fastlane/screenshots
 
-src/common/config/_dev.json
+core/config/_dev.json
 .envrc
 .tmp
-src/server/firebase/functions/node_modules
+platforms/server/firebase/functions/node_modules
 
 
 # a local server I use to test the non-firebase (and Firebase Admin SDK-backed in the future)
 graphql.config.json
-src/server/graphql/schema.json
-src/server/grahpql/printSchema.js
-src/server/graphql/nubabitest1-firebase-adminsdk-*.json
+platforms/server/graphql/schema.json
+platforms/server/grahpql/printSchema.js
+platforms/server/graphql/nubabitest1-firebase-adminsdk-*.json
 
 coverage/

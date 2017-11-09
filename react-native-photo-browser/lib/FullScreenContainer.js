@@ -19,7 +19,7 @@ import { Photo } from './media';
 import { connect } from 'react-redux';
 
 import R from 'ramda';
-import { lens } from '../../src/common/ui/reducer';
+import { lens } from '../../core/ui/reducer';
 
 export class FullScreenContainer extends React.Component {
   static propTypes = {
