@@ -65,7 +65,7 @@ export const renderTextInput = field => {
 
   const labelStyle = [styles.inputLabel, hasError ? styles.hasError : {}];
   let typeProps = {
-    keyboardType: 'default',
+    keyboardType: field.keyboardType || 'default',
   };
 
   if (field.type === 'email') {

@@ -30,6 +30,8 @@ import {
 } from '../../shared/forms';
 import { unitDisplaySelector } from '../../../common/settings/reducer';
 import { formatMeasurement } from '../../../common/helpers/measurement';
+import { getContentTypeFromFilename } from '../../../common/helpers/graphqlUtils';
+import { isNewFile } from '../../shared/fileUtils';
 
 type Props = {
   // redux-form uses initialValues prop
@@ -48,6 +50,30 @@ type Props = {
 /* Validation
  TODO: extract
  */
+
+/**
+ * Normalize avatar and cover image
+ *
+ * If there isn't any new files, don't include the field.
+ * Otherwise, remove the file prefix.
+ */
+export const normalizeAvatarAndCoverImage = (input, values) => {
+  if (isNewFile(values.avatar)) {
+    input.avatar = {
+      ...values.avatar,
+      url: values.avatar.url.replace('file://', ''),
+    };
+  }
+
+  if (isNewFile(values.coverImage)) {
+    input.coverImage = {
+      ...values.coverImage,
+      url: values.coverImage.url.replace('file://', ''),
+    };
+  }
+
+  return input;
+};
 
 class Form extends PureComponent {
   props: Props;
@@ -75,8 +101,14 @@ class Form extends PureComponent {
 
   scroll = null;
 
-  updateImageField = name => ({ data }) => {
-    this.props.change(name, { url: `data:image/jpeg;base64,${data}` });
+  updateImageField = name => file => {
+    const data = {
+      size: file.fileSize,
+      name: file.fileName,
+      url: file.uri,
+      contentType: getContentTypeFromFilename(file.fileName),
+    };
+    this.props.change(name, data);
   };
 
   handleCoverImage = () => {
@@ -210,6 +242,7 @@ class Form extends PureComponent {
               placeholder={`Weight (${unitDisplay.weight})`}
               component={renderTextInput}
               validate={[required]}
+              keyboardType="numeric"
               floating
               {...editableProps}
             />
@@ -218,6 +251,7 @@ class Form extends PureComponent {
               placeholder={`Height (${unitDisplay.height})`}
               component={renderTextInput}
               validate={[required]}
+              keyboardType="numeric"
               floating
               {...editableProps}
             />
