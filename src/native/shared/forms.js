@@ -17,6 +17,15 @@ export const maxLength = (max: number) => (value: ?string) => {
     : undefined;
 };
 
+export const numeric = (value: ?number) => {
+  if (typeof value === 'undefined') {
+    // Required should catch this, we're only interested to validate when we have a value
+    return undefined;
+  }
+
+  return Number.isNaN(value) ? 'Must be a number' : undefined;
+};
+
 export const minValue = (min: number) => (value: ?number) => {
   return value && value < min ? `Must be at least ${min}` : undefined;
 };

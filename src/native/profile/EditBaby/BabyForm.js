@@ -25,6 +25,8 @@ import {
   constantValues,
   formattedDate,
   maxLength,
+  minValue,
+  numeric,
   renderTextInput,
   required,
 } from '../../shared/forms';
@@ -233,6 +235,18 @@ class Form extends PureComponent {
     const isSubmitting = this.props.submitting;
     const editableProps = { editable: !isSubmitting };
 
+    const parse = value => {
+      const parsed = parseFloat(value);
+
+      return Number.isNaN(parsed) ? undefined : parsed;
+    };
+
+    const format = value => {
+      return typeof value === 'undefined' || value === null
+        ? ''
+        : value.toString();
+    };
+
     if (mode === 'add') {
       return (
         <View style={{ marginTop: 15 }}>
@@ -241,8 +255,10 @@ class Form extends PureComponent {
               name="weight"
               placeholder={`Weight (${unitDisplay.weight})`}
               component={renderTextInput}
-              validate={[required]}
               keyboardType="numeric"
+              validate={[required]}
+              parse={parse}
+              format={format}
               floating
               {...editableProps}
             />
@@ -252,6 +268,8 @@ class Form extends PureComponent {
               component={renderTextInput}
               validate={[required]}
               keyboardType="numeric"
+              parse={parse}
+              format={format}
               floating
               {...editableProps}
             />
