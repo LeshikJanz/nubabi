@@ -64,5 +64,8 @@
   "devDependencies": {
     "react-dom": "^16.1.0",
     "react-test-renderer": "^16.1.0"
+  },
+  "resolutions": {
+    "victory-chart": "https://github.com/blackxored/victory-chart#fix/victory-group-dates"
   }
 }
