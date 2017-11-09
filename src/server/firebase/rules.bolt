@@ -46,10 +46,7 @@ type Gender extends String {
 // value, otherwise.
 initial(value, init) { value == (prior(value) == null ? init : prior(value)) }
 
-// Models
-
-type User {
-  name: NameString
+type Date extends Number {
 }
 
 type File {
@@ -60,11 +57,17 @@ type File {
 }
 
 type Image extends File {
-  large: Image | Null
-  thumb: Image | Null
+  large: File | Null
+  thumb: File | Null
 }
 
-type Date extends Number {
+// Models
+type User {
+  firstName: NameString
+  lastName: NameString
+  avatar: File | Null
+  likes: Object // TODO
+  friends: Object // TODO
 }
 
 type Baby {
@@ -74,15 +77,15 @@ type Baby {
   dob: Date
 
   // Weight and height are updated separately to track historical data
-  weight: Number | Null
-  height: Number | Null
+  weight: Number
+  height: Number
 
   gender: Gender
   weekBorn: Number
 
   memories: Map<String, Boolean>
 
-  createdBy: String // TODO: validate IDs?
+  createdBy: String // TODO: validate user ID
   createdAt: InitialTimestamp
   updatedAt: CurrentTimestamp | Null
 }
