@@ -65,3 +65,4 @@ platforms/server/grahpql/printSchema.js
 platforms/server/graphql/nubabitest1-firebase-adminsdk-*.json
 
 coverage/
+lerna-debug.log
