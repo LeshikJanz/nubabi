@@ -155,15 +155,14 @@ const createOrUpdateBaby = async (firebase, values, id) => {
   const currentUserId = getViewer(firebase).uid;
   const currentUserPath = `/users/${currentUserId}`;
 
-  const path = id
-    ? `babies/${id}`
-    : `babies/${
-        firebase
-          .database()
-          .ref()
-          .child('babies')
-          .push().key
-      }`;
+  const babyId =
+    id ||
+    firebase
+      .database()
+      .ref()
+      .child('babies')
+      .push().key;
+  const path = `babies/${babyId}`;
 
   const object = toFirebaseBaby(values);
 
@@ -213,6 +212,11 @@ const createOrUpdateBaby = async (firebase, values, id) => {
       .ref()
       .child(`${currentUserPath}/${path}`)
       .set(values.relationship);
+  }
+
+  if (creating) {
+    await recordMeasurement(firebase, babyId, 'weight', 'kg', values.weight);
+    await recordMeasurement(firebase, babyId, 'height', 'cm', values.height);
   }
 
   return firebase
