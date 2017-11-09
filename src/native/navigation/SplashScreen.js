@@ -86,7 +86,9 @@ class SplashScreen extends Component {
 
       if (images.length) {
         Promise.all(
-          images.map(image => ImageCacheManager().downloadAndCacheUrl(image)),
+          images
+            .filter(image => !!image)
+            .map(image => ImageCacheManager().downloadAndCacheUrl(image)),
         ).then(() => this.navigateTo('home'));
       }
     } else {

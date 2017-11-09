@@ -52,12 +52,14 @@ type User {
   name: NameString
 }
 
-type Image {
+type File {
+  name: String
+  contentType: String
+  size: Number
   url: String
 }
 
-type Avatar {
-  url: String
+type Image extends File {
   large: Image | Null
   thumb: Image | Null
 }
@@ -67,7 +69,7 @@ type Date extends Number {
 
 type Baby {
   name: NameString
-  avatar: Avatar | Null
+  avatar: Image | Null
   coverImage: Image | Null
   dob: Date
 

@@ -31,6 +31,7 @@ import {
   offsetToCursor,
 } from 'graphql-relay';
 import { connect } from 'react-redux';
+import mime from 'mime/lite';
 import { toggleNetworkActivityIndicator } from '../ui/reducer';
 
 export const flattenEdges = memoize(connection => {
@@ -360,4 +361,12 @@ export const getCurrentUserFromStore = (gql, store) => {
     console.log(err);
     return null;
   }
+};
+
+const getContentTypeFromExtension = memoize((extension: string) => {
+  return mime.getType(extension);
+});
+
+export const getContentTypeFromFilename = (filename: string) => {
+  return getContentTypeFromExtension(last(filename.split('.')));
 };

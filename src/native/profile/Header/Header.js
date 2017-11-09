@@ -17,8 +17,8 @@ import Measurements from './Measurements';
 import withLayout from '../../components/withLayout';
 
 type Props = {
-  coverImage: Image,
-  avatar: Avatar,
+  coverImage: ?Image,
+  avatar: ?Avatar,
   name: string,
   dob: string,
   height: number,

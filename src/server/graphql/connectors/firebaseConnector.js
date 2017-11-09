@@ -49,6 +49,10 @@ const returnValWithKeyAsId = snapshot => {
   };
 };
 
+const isNewFile = (url: string) => {
+  return !url.startsWith('https://firebasestorage.googleapis.com');
+};
+
 const isNewImage = image => {
   // Apparently we can't use String.prototype.startsWith on JSC
   // TODO: confirm
@@ -104,7 +108,7 @@ const uploadFileFromDataUri = () => {
 };
 
 const uploadFile = (firebase, refPath, file) => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const ref = firebase
       .storage()
       .ref()
@@ -153,11 +157,13 @@ const createOrUpdateBaby = async (firebase, values, id) => {
 
   const path = id
     ? `babies/${id}`
-    : `babies/${firebase
-        .database()
-        .ref()
-        .child('babies')
-        .push().key}`;
+    : `babies/${
+        firebase
+          .database()
+          .ref()
+          .child('babies')
+          .push().key
+      }`;
 
   const object = toFirebaseBaby(values);
 
@@ -169,63 +175,52 @@ const createOrUpdateBaby = async (firebase, values, id) => {
     object.createdBy = currentUserId;
   }
 
-  const promises = [
-    firebase
-      .database()
-      .ref()
-      .child(path)
-      .update(object),
-    firebase
-      .database()
-      .ref()
-      .child(path)
-      .once('value')
-      .then(returnValWithKeyAsId),
-  ];
+  const updates = {};
 
-  /*
-  const images = ['avatar', 'coverImage'];
-
-  images.forEach(key => {
-    if (isNewImage(values[key])) {
-      const content = values[key];
-      promises.unshift(
-        uploadFile(firebase, `${path}/${key}`, content).then(url => {
-          return firebase
-            .database()
-            .ref()
-            .child(path)
-            .update({ [key]: { url } });
-        }),
-      );
+  // TODO: refactor
+  const { avatar } = values;
+  if (avatar && isNewFile(avatar.url)) {
+    const fileUrl = await uploadFile(firebase, `/${path}/avatar`, avatar);
+    if (fileUrl) {
+      avatar.url = fileUrl;
+      updates[`${path}/avatar`] = avatar;
     }
-  });
-  */
-
-  // TODO: firebase throws permission denied at / for some reason
-  // so we're doing this manually, and not updating relation yet
-
-  // const updates = {};
-  // updates[path] = object;
-  //
-  // if (values.relationship) {
-  //   updates[`users/${firebase.auth().currentUser.uid}/${path}`] = values.relationship;
-  // }
-  //
-  // return firebase.database().ref().update(updates)
-  if (values.relationship) {
-    promises.unshift(
-      firebase
-        .database()
-        .ref()
-        .child(`${currentUserPath}/${path}`)
-        .set(values.relationship),
-    );
   }
 
-  return Promise.all(promises).then(
-    responses => responses[responses.length - 1],
-  );
+  const { coverImage } = values;
+  if (coverImage && isNewFile(coverImage.url)) {
+    const fileUrl = await uploadFile(
+      firebase,
+      `${path}/coverImage`,
+      coverImage,
+    );
+
+    if (fileUrl) {
+      coverImage.url = fileUrl;
+      updates[`${path}/coverImage`] = coverImage;
+    }
+  }
+
+  // prettier-ignore
+  await firebase.database().ref().child(path).update(object);
+
+  // prettier-ignore
+  await firebase.database().ref().update(updates);
+
+  if (values.relationship) {
+    await firebase
+      .database()
+      .ref()
+      .child(`${currentUserPath}/${path}`)
+      .set(values.relationship);
+  }
+
+  return firebase
+    .database()
+    .ref()
+    .child(path)
+    .once('value')
+    .then(returnValWithKeyAsId);
 };
 
 const getViewer = firebase => firebase.auth().currentUser;

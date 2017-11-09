@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { assocPath, compose, path, prepend } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { Screen, SubmitFormNavButton } from '../../components';
-import BabyForm from './BabyForm';
+import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
 
 type Props = {
@@ -52,18 +52,14 @@ export default compose(
     {
       props: ({ mutate }) => ({
         onSubmit: values => {
-          const input = {
-            ...values,
-            avatar: values.avatar ? { url: values.avatar.url } : null,
-            coverImage: values.coverImage
-              ? { url: values.coverImage.url }
-              : null,
-          };
+          const input = normalizeAvatarAndCoverImage(values, values);
 
           return mutate({ variables: { input } });
         },
       }),
       options: {
+        refetchQueries: ['Profile', 'getBabyAvatar'],
+        // TODO: migrate to update
         updateQueries: {
           ChooseBabyList: (previousData, { mutationResult }) => {
             const edges = ['viewer', 'babies', 'edges'];

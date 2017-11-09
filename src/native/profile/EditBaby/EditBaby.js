@@ -7,7 +7,7 @@ import type {
 } from '../../../common/types';
 import React, { Component } from 'react';
 import { gql, graphql } from 'react-apollo';
-import { compose, omit, path } from 'ramda';
+import { assoc, compose, omit, path } from 'ramda';
 import {
   displayLoadingState,
   Screen,
@@ -15,7 +15,7 @@ import {
   withCurrentBaby,
 } from '../../components';
 import BabyNameTitle from '../BabyNameTitle';
-import BabyForm from './BabyForm';
+import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
 
 type Props = {
@@ -73,20 +73,17 @@ export default compose(
     {
       props: ({ mutate, ownProps: { currentBabyId } }) => ({
         onSubmit: values => {
-          const input = {
-            ...values,
-            id: currentBabyId,
-            avatar: values.avatar ? { url: values.avatar.url } : null,
-            coverImage: values.coverImage
-              ? { url: values.coverImage.url }
-              : null,
-          };
+          const input = normalizeAvatarAndCoverImage(
+            assoc('id', currentBabyId, omit(['avatar', 'coverImage'], values)),
+            values,
+          );
 
           return mutate({ variables: { input } });
         },
       }),
-      // Since Firebase returns the same url for files we
-      // workaround this by using refetchQueries
+      // Since Firebase returns the same url for files we workaround this by using refetchQueries
+      // TODO: confirm we need to refetch these. also, we're now able to upload different filenames
+      // so URL would change
       options: {
         refetchQueries: ['Profile', 'getBabyAvatar'],
       },
