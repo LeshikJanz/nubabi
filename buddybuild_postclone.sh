@@ -29,7 +29,7 @@ fi
 # I've tried everything else, BuddyBuild is just weird when it comes to
 # environment variables, they don't get preserved between custom script
 # stages, so I had to resort to just nuking and replacing the file.
-tee $BUDDYBUILD_WORKSPACE/src/common/config/index.js > /dev/null <<EOF
+tee $BUDDYBUILD_WORKSPACE/core/config/index.js > /dev/null <<EOF
 const config = {
   appName: "$NUBABI_APP_NAME",
   appVersion: "$NUBABI_APP_VERSION",
@@ -47,8 +47,8 @@ const config = {
 export default config;
 EOF
 export BABEL_ENV="production"
-echo "Exported config for environment $NUBABI_ENV to src/common/config/index.js"
-cat $BUDDYBUILD_WORKSPACE/src/common/config/index.js
+echo "Exported config for environment $NUBABI_ENV to core/config/index.js"
+cat $BUDDYBUILD_WORKSPACE/core/config/index.js
 # Workaround the fact that buddybuild doesn't seem to handle env vars correctly
 tee $BUDDYBUILD_WORKSPACE/.env > /dev/null <<EOF
   export NUBABI_APP_VERSION=$NUBABI_APP_VERSION
