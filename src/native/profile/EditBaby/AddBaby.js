@@ -24,12 +24,17 @@ class AddBaby extends Component {
   };
 
   render() {
+    const initialValues = {
+      relationship: 'Other',
+      weekBorn: 40,
+    };
+
     return (
       <Screen>
         <BabyForm
           mode="add"
           onSubmit={this.props.onSubmit}
-          initialValues={{ relationship: 'Other' }}
+          initialValues={initialValues}
         />
       </Screen>
     );
