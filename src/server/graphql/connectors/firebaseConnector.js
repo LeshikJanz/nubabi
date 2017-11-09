@@ -107,7 +107,7 @@ const uploadFileFromDataUri = () => {
   );
 };
 
-const uploadFile = (firebase, refPath, file) => {
+const uploadFile = (firebase, refPath, file, fileMetadata = {}) => {
   return new Promise(async (resolve, reject) => {
     const ref = firebase
       .storage()
@@ -125,7 +125,7 @@ const uploadFile = (firebase, refPath, file) => {
       const contentType = file.contentType || 'application/octet-stream';
 
       return Blob.build(uri, { type: contentType }).then(blob => {
-        const metadata = { contentType };
+        const metadata = { contentType, customMetadata: fileMetadata };
         const uploadTask = ref.put(blob);
 
         uploadTask.on(
@@ -179,7 +179,12 @@ const createOrUpdateBaby = async (firebase, values, id) => {
   // TODO: refactor
   const { avatar } = values;
   if (avatar && isNewFile(avatar.url)) {
-    const fileUrl = await uploadFile(firebase, `/${path}/avatar`, avatar);
+    const fileUrl = await uploadFile(
+      firebase,
+      `/${path}/${avatar.name}`,
+      avatar,
+      { role: 'avatar' },
+    );
     if (fileUrl) {
       avatar.url = fileUrl;
       updates[`${path}/avatar`] = avatar;
@@ -190,8 +195,9 @@ const createOrUpdateBaby = async (firebase, values, id) => {
   if (coverImage && isNewFile(coverImage.url)) {
     const fileUrl = await uploadFile(
       firebase,
-      `${path}/coverImage`,
+      `${path}/${coverImage.name}`,
       coverImage,
+      { role: 'coverImage' },
     );
 
     if (fileUrl) {
@@ -305,14 +311,21 @@ const updateUser = async (firebase, input) => {
   if (input.avatar && isNewFile(input.avatar.url)) {
     const avatarUrl = await uploadFile(
       firebase,
-      `users/${currentUser.uid}/avatar`,
+      `users/${currentUser.uid}/${input.avatar.name}`,
       input.avatar,
+      { role: 'avatar' },
     );
+
     if (avatarUrl) {
-      updates[`users/${currentUser.uid}/avatar/url`] = avatarUrl;
-      // We reset these to null until resize function kicks in
-      updates[`users/${currentUser.uid}/avatar/large`] = null;
-      updates[`users/${currentUser.uid}/avatar/thumb`] = null;
+      const avatar = {
+        ...input.avatar,
+        url: avatarUrl,
+        // We reset these to null until resize function kicks in
+        large: null,
+        thumb: null,
+      };
+
+      updates[`users/${currentUser.uid}/avatar`] = avatar;
     }
   }
 
