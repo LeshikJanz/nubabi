@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { Image } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { branch, renderComponent } from 'recompose';
 import Box from './Box';
 import Text from './Text';
@@ -8,7 +8,7 @@ import Overlay from './Overlay';
 
 export const RequireBabyView = () => (
   <Box flex={1} justifyContent="center" alignItems="center">
-    <Image
+    <ImageBackground
       source={require('../../common/images/growth-what-you-need-to-know.jpg')}
       style={{
         width: 128,
@@ -23,7 +23,7 @@ export const RequireBabyView = () => (
           ?
         </Text>
       </Overlay>
-    </Image>
+    </ImageBackground>
     <Text size={4} marginTop={1}>
       You need to create or select a baby first.
     </Text>
