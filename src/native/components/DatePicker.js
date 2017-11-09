@@ -32,7 +32,7 @@ class DatePicker extends PureComponent {
     // Trigger onChange so redux-form gets the field
     // when date is not set (i.e default to current date).
     if (!this.props.date) {
-      this.props.onChange(moment().format());
+      this.props.onChange(moment().format('YYYY-MM-DD'));
     }
   }
 
