@@ -6,7 +6,6 @@ import type {
 } from '../../common/types';
 import type { SuggestedMemoryType } from './SuggestedMemoriesList';
 import React from 'react';
-import { InteractionManager } from 'react-native';
 import { gql, graphql } from 'react-apollo';
 import {
   assoc,
@@ -18,9 +17,9 @@ import {
   propEq,
   propOr,
 } from 'ramda';
+import { withProps } from 'recompose';
 import { connect } from 'react-redux';
 import uuid from 'react-native-uuid';
-import base64 from 'base-64';
 import { ImageCacheManager } from 'react-native-cached-image';
 import {
   addEdgeToFragment,
@@ -33,11 +32,13 @@ import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 
 type Props = {
   currentBabyId: string,
   onSubmit: (input: CreateMemoryInput) => Promise<ApolloQueryResult<*>>,
   onAddVoiceNote: (id?: string) => void,
+  suggestedMemoryId: ?string,
 };
 
 const suggestedMemoryTypeProps = (
@@ -77,6 +78,9 @@ export default compose(
       toggleNetworkActivityIndicator,
     },
   ),
+  withProps((ownerProps: Props) => ({
+    suggestedMemoryType: findSuggestedMemoryById(ownerProps.suggestedMemoryId),
+  })),
   graphql(
     gql`
       mutation AddMemory($input: CreateMemoryInput!) {
@@ -205,7 +209,7 @@ export default compose(
                   if (images.length) {
                     return Promise.all(
                       images.map(image =>
-                        ImageCacheManager.downloadAndCacheUrl(image),
+                        ImageCacheManager().downloadAndCacheUrl(image),
                       ),
                     );
                   }
