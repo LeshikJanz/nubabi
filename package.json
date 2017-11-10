@@ -6,6 +6,7 @@
     "bootstrap": "lerna bootstrap",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "flow": "flow",
+    "flow-typed": "./scripts/flow-typed-all",
     "test": "jest",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",

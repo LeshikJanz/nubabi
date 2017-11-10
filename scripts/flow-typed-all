@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+echo "\nInstalling defs for root...\n"
+flow-typed install
+echo "\nInstalling defs for core...\n"
+cd core && flow-typed -f 0.58.0 -l ../flow-typed install && cd ..
+echo "\nInstalling defs for native...\n"
+cd platforms/native && flow-typed -f 0.58.0 -l ../../flow-typed install && cd ../../
+echo "\nInstalling defs for server...\n"
+cd platforms/server && flow-typed -f 0.58.0 -l ../../flow-typed install && cd ../../
