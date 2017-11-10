@@ -2,7 +2,7 @@
 
 const functions = require("firebase-functions"),
   startCurriculum = require("./curriculum"),
-  imageResize = require("./imaginaryResize");
+  imageResize = require("./imageResize");
 
 exports.startCurriculum = functions.database
   .ref("/babies/{babyId}")
@@ -10,6 +10,14 @@ exports.startCurriculum = functions.database
 
 exports.userAvatarResize = functions.database
   .ref("/users/{userId}/avatar/url")
+  .onWrite(imageResize.handler);
+
+exports.babyAvatarResize = functions.database
+  .ref("/babies/{babyId}/avatar/url")
+  .onWrite(imageResize.handler);
+
+exports.coverImageResize = functions.database
+  .ref("/babies/{babyId}/coverImage/url")
   .onWrite(imageResize.handler);
 
 exports.memoriesResize = functions.database

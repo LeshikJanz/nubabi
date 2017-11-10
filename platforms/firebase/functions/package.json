@@ -7,12 +7,7 @@
     "child-process-promise": "^2.2.1",
     "firebase-admin": "^4.1.2",
     "firebase-functions": "^0.5",
-    "fs": "0.0.1-security",
-    "image-size": "^0.6.0",
-    "imaginary": "^0.1.12",
     "moment": "^2.18.1",
-    "os": "^0.1.1",
-    "path": "^0.12.7",
     "request-promise": "^2.0.0"
   },
   "private": true

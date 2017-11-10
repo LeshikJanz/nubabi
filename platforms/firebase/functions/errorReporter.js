@@ -1,3 +1,5 @@
+const logging = require("@google-cloud/logging")();
+
 exports.log = (err, context = {}) => {
   // This is the name of the StackDriver log stream that will receive the log
   // entry. This name can be any valid log stream name, but must contain "err"
