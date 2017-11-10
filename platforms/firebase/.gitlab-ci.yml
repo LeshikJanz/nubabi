@@ -2,7 +2,6 @@
 image: node:latest
 
 before_script:
-  - npm install -g yarn --unsafe
   - yarn global add firebase-tools firebase-bolt
   - yarn install
   - yarn run package-functions
