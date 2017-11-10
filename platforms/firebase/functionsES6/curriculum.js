@@ -1,21 +1,21 @@
 "use strict";
 
-var request = require("request-promise"),
-    moment = require("moment"),
-    logging = require("@google-cloud/logging")(),
-    functions = require("firebase-functions"),
-    errorReporter = require("./errorReporter");
+const request = require("request-promise"),
+  moment = require("moment"),
+  logging = require("@google-cloud/logging")(),
+  functions = require("firebase-functions"),
+  errorReporter = require("./errorReporter");
 
-exports.handler = function (event) {
+exports.handler = event => {
   if (!event.data.exists()) {
     return;
   }
 
   //firebase functions:config:set nubabi.api_url=https://api-staging.nubabi.com/
-  var NUBABI_API_URL = functions.config().nubabi.api_url;
+  const NUBABI_API_URL = functions.config().nubabi.api_url;
 
   //firebase functions:config:set nubabi.token=12345
-  var NUBABI_TOKEN = functions.config().nubabi.token;
+  const NUBABI_TOKEN = functions.config().nubabi.token;
 
   var birthDate = moment(event.data.dob);
   var weekBorn = 40;
@@ -30,7 +30,7 @@ exports.handler = function (event) {
     }
   }
   return request({
-    uri: NUBABI_API_URL + "babies/" + event.params.babyId + "/activities",
+    uri: `${NUBABI_API_URL}babies/${event.params.babyId}/activities`,
     method: "POST",
     json: true,
     body: {
@@ -38,16 +38,18 @@ exports.handler = function (event) {
       week_born: weekBorn
     },
     headers: {
-      Authorization: "Bearer " + NUBABI_TOKEN
+      Authorization: `Bearer ${NUBABI_TOKEN}`
     },
     resolveWithFullResponse: true
-  }).then(function (response) {
-    if (response.statusCode >= 400) {
-      reportError(new Error("HTTP Error: " + response.statusCode), {
-        user: event.params.babyId
-      });
-    }
-  }).catch(function (error) {
-    errorReporter.log(error, { user: event.params.babyId });
-  });
+  })
+    .then(response => {
+      if (response.statusCode >= 400) {
+        reportError(new Error(`HTTP Error: ${response.statusCode}`), {
+          user: event.params.babyId
+        });
+      }
+    })
+    .catch(error => {
+      errorReporter.log(error, { user: event.params.babyId });
+    });
 };

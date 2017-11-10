@@ -1,0 +1,20 @@
+{
+  "name": "firebase-functions-es6-example",
+  "version": "1.0.0",
+  "description": "Use ES6 to develop Cloud Functions for Firebase today!",
+  "repository":
+    "https://github.com/jthegedus/firebase-functions-es6-example.git",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "rimraf": "^2.6.2"
+  },
+  "scripts": {
+    "deploy": "yarn run package-functions && firebase deploy",
+    "prepackage-functions": "rimraf functions",
+    "package-functions":
+      "babel 'functionsES6' --out-dir 'functions' --presets=es2015 --copy-files --ignore 'node_modules'",
+    "postpackage-functions": "cd functions && yarn"
+  }
+}

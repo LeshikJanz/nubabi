@@ -1,25 +1,25 @@
 "use strict";
 
-const functions = require("firebase-functions"),
-  startCurriculum = require("./curriculum"),
-  imageResize = require("./imageResize");
+var _firebaseFunctions = require("firebase-functions");
 
-exports.startCurriculum = functions.database
-  .ref("/babies/{babyId}")
-  .onWrite(startCurriculum.handler);
+var _firebaseFunctions2 = _interopRequireDefault(_firebaseFunctions);
 
-exports.userAvatarResize = functions.database
-  .ref("/users/{userId}/avatar/url")
-  .onWrite(imageResize.handler);
+var _curriculum = require("./curriculum");
 
-exports.babyAvatarResize = functions.database
-  .ref("/babies/{babyId}/avatar/url")
-  .onWrite(imageResize.handler);
+var _curriculum2 = _interopRequireDefault(_curriculum);
 
-exports.coverImageResize = functions.database
-  .ref("/babies/{babyId}/coverImage/url")
-  .onWrite(imageResize.handler);
+var _imageResize = require("./imageResize");
 
-exports.memoriesResize = functions.database
-  .ref("/memories/{memoryId}/files/{fileId}/url")
-  .onWrite(imageResize.handler);
+var _imageResize2 = _interopRequireDefault(_imageResize);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.startCurriculum = _firebaseFunctions2.default.database.ref("/babies/{babyId}").onWrite(_curriculum2.default.handler);
+
+exports.userAvatarResize = _firebaseFunctions2.default.database.ref("/users/{userId}/avatar/url").onWrite(_imageResize2.default.handler);
+
+exports.babyAvatarResize = _firebaseFunctions2.default.database.ref("/babies/{babyId}/avatar/url").onWrite(_imageResize2.default.handler);
+
+exports.coverImageResize = _firebaseFunctions2.default.database.ref("/babies/{babyId}/coverImage/url").onWrite(_imageResize2.default.handler);
+
+exports.memoriesResize = _firebaseFunctions2.default.database.ref("/memories/{memoryId}/files/{fileId}/url").onWrite(_imageResize2.default.handler);

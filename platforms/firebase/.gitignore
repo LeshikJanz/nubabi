@@ -1,8 +1,10 @@
 .firebaserc
-/functions/node_modules
+/functionsES6/node_modules
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 rules.json
+/functions
+/node_modules
