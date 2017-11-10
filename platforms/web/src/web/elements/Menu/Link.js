@@ -69,7 +69,7 @@ class Link extends PureComponent {
     }
     if (props.hasOwnProperty("active")) {
       if (props.active) {
-        props.className = "active";
+        props.className += " active";
       }
       delete props.active;
     }

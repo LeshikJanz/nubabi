@@ -5,7 +5,11 @@ import { gql, graphql } from "react-apollo";
 import compose from "ramda/src/compose";
 import path from "ramda/src/path";
 import { Flex, Box } from 'grid-styled';
-import { Loader, Aside } from "web/components";
+import styled from "styled-components";
+
+import { Loader } from "web/components";
+import { Main, Aside, Header } from "web/elements";
+import NavBar from './Navbar';
 
 type Props = {
   navigation: any,
@@ -16,6 +20,10 @@ type Props = {
   },
   data: { loading: boolean }
 };
+
+const Wrapper = styled(Flex)`
+
+`;
 
 class Profile extends PureComponent<Props> {
   static fragments = {
@@ -112,7 +120,9 @@ class Profile extends PureComponent<Props> {
   };
 
   render() {
-    const { baby } = this.props;
+    const { baby, location } = this.props;
+
+    console.log('location', location);
 
     if (!baby) {
       return <Loader active={true} />;
@@ -123,24 +133,19 @@ class Profile extends PureComponent<Props> {
     console.log(memories);
 
     return (
-      <Flex wrap justify='space-between'>
-        <Box width={1}>
-          <img src={baby.avatar.url} style={{ width: "50px", height: "50px" }} />
+      <Wrapper wrap justify='space-between'>
+        <Box width={1} is={Header}>
+          <img src={baby.avatar.url} style={{ width: "50px", height: "50px" }} alt=""/>
           <h2>{baby.name}</h2>
-          <img
-            src={baby.coverImage.url}
-            style={{ width: "400px", height: "100px" }}
-          />
+          <img src={baby.coverImage.url} style={{ width: "400px", height: "100px" }} alt=""/>
           <p>Date of Birth: {baby.dob}</p>
           <p>Height: {baby.height}</p>
           <p>Weight: {baby.weight}</p>
         </Box>
 
-        <Box width={1/4}>
-          menu here
-        </Box>
+        <NavBar />
 
-        <Box width={4/7}>
+        <Box width={4/7} is={Main}>
           <h3>This Week's Growth</h3>
           <p>{growth.current.introduction}</p>
           <p>
@@ -178,7 +183,7 @@ class Profile extends PureComponent<Props> {
         </Box>
 
         <Box width={1/6} is={Aside}>Aside here</Box>
-      </Flex>
+      </Wrapper>
     );
   }
 }

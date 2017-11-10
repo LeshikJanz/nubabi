@@ -34,7 +34,6 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  padding: 10px;
   font-family: ${props => props.theme.text.fontFamily};
 `;
 

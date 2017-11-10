@@ -17,15 +17,22 @@ export const PANEL_BUTTON_TEXT = '#454D56';
 const open = {
   white0: '#FFFFFF',
   white1: '#F8F9FC',
+  white2: '#E9ECF4',
   gray0: '#E0E4E7',
   gray1: '#CFD6DF',
   gray2: '#9EABBC',
   gray3: '#748294',
+  gray4: 'rgba(0, 0, 0, .5)',
   blue0: '#33B7EB',
   blue1: '#58A4FF',
   red0: '#EA3154',
   black0: '#454D56',
   black1: '#3D414B',
+};
+
+const shadows = {
+  primary: `0 2px 4px 0 ${open.gray4}`,
+  light: `0 1px 0 0 ${open.white2}`,
 };
 
 const colors = {
@@ -51,6 +58,7 @@ const theme: Theme = {
     lineHeight: 16,
   }),
   colors,
+  shadows,
   contentSpacing: {
     padding: 0.625,
   },
