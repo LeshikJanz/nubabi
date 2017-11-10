@@ -197,8 +197,15 @@ const updateQueries = {
       edges,
     );
 
+    const oldActivity = edges[oldActivityIndex];
+
     if (newActivity && oldActivityId && oldActivityIndex >= 0) {
-      const newEdges = update(oldActivityIndex, { node: newActivity }, edges);
+      // TODO: return cursor from server
+      const newEdges = update(
+        oldActivityIndex,
+        { node: newActivity, cursor: oldActivity.cursor },
+        edges,
+      );
 
       return assocPath(viewerBabyEdges, newEdges, previousData);
     }
@@ -206,6 +213,13 @@ const updateQueries = {
     return previousData;
   },
 };
+
+// TODO: I don't like to refetch queries, but since the logic
+// to figure out whether the changed activity is part of
+// Profile's Week ahead might be to complicated, we're resorting
+// to this for now, until we split the query or return all data
+// we need to selectively update it.
+const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
 
 export default compose(
   withCurrentBaby,
@@ -289,7 +303,7 @@ export default compose(
       }
       ${Activity.fragments.activity}
     `,
-    { name: 'swoopActivity', options: () => ({ updateQueries }) },
+    { name: 'swoopActivity', options: () => ({ refetchQueries }) },
   ),
   graphql(
     gql`
@@ -303,7 +317,7 @@ export default compose(
       }
       ${Activity.fragments.activity}
     `,
-    { name: 'changeActivityLevel', options: () => ({ updateQueries }) },
+    { name: 'changeActivityLevel', options: () => ({ refetchQueries }) },
   ),
   toggleFavorite,
   displayLoadingState,
