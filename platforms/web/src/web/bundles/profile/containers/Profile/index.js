@@ -25,6 +25,15 @@ const Wrapper = styled(Flex)`
 
 `;
 
+const ProfileHeader = styled(Box)`
+  height: 250px;
+  overflow: hidden;
+  background: url(${props => props.image});
+  background-size:cover;
+  background-position:bottom;
+  background-attachment: fixed;
+`;
+
 class Profile extends PureComponent<Props> {
   static fragments = {
     baby: gql`
@@ -134,14 +143,15 @@ class Profile extends PureComponent<Props> {
 
     return (
       <Wrapper wrap justify='space-between'>
-        <Box width={1} is={Header}>
+        <ProfileHeader width={1} is={Header} image={baby.coverImage.url}>
           <img src={baby.avatar.url} style={{ width: "50px", height: "50px" }} alt=""/>
+
           <h2>{baby.name}</h2>
-          <img src={baby.coverImage.url} style={{ width: "400px", height: "100px" }} alt=""/>
+
           <p>Date of Birth: {baby.dob}</p>
           <p>Height: {baby.height}</p>
           <p>Weight: {baby.weight}</p>
-        </Box>
+        </ProfileHeader>
 
         <NavBar />
 

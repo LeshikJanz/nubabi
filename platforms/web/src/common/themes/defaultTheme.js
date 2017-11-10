@@ -35,6 +35,10 @@ const shadows = {
   light: `0 1px 0 0 ${open.white2}`,
 };
 
+const bg = {
+  panel: PANEL_BACKGROUND,
+};
+
 const colors = {
   open, // TODO: consider an OpenColor instance here.
   primary: open.red0,
@@ -59,6 +63,7 @@ const theme: Theme = {
   }),
   colors,
   shadows,
+  bg,
   contentSpacing: {
     padding: 0.625,
   },

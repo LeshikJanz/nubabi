@@ -36,6 +36,7 @@ const MenuLink = styled(Menu.Link)`
   &.active {
     border-left: 2px solid ${props => props.theme.colors.primary};
     color: ${props => props.theme.colors.primary};
+    background: ${props => props.theme.bg.panel};
   }
 `;
 
