@@ -598,7 +598,7 @@ exports[`it renders collapsed 1`] = `
                 }
               }
             >
-              JUST RIGHT FOR NOW
+              MARK AS DONE
             </Text>
           </View>
           <View
@@ -633,7 +633,7 @@ exports[`it renders collapsed 1`] = `
                 }
               }
             >
-              No change
+              Tick if you've completed it
             </Text>
           </View>
         </View>
@@ -1432,7 +1432,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 }
               }
             >
-              JUST RIGHT FOR NOW
+              MARK AS DONE
             </Text>
           </View>
           <View
@@ -1467,7 +1467,7 @@ exports[`it renders expanded for the level action adjust cards 1`] = `
                 }
               }
             >
-              No change
+              Tick if you've completed it
             </Text>
           </View>
         </View>

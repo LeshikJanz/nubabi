@@ -40,6 +40,7 @@ class ActivityList extends PureComponent {
           completedIcon
         }
         equipment
+        isCompleted
       }
     `,
   };
@@ -99,7 +100,8 @@ class ActivityList extends PureComponent {
         activity={activity}
         skillArea={skillArea}
         onPress={() =>
-          this.props.onActivityItemPress(activity.id, activity.name, cursor)}
+          this.props.onActivityItemPress(activity.id, activity.name, cursor)
+        }
       />
     );
   };

@@ -18,6 +18,7 @@ extend type Baby {
 extend type Mutation {
   swoopActivity(input: SwoopActivityInput!): ChangeActivityPayload
   changeActivity(input: AdjustActivityLevelInput!): ChangeActivityPayload
+  completeActivity(input: CompleteActivityInput!): CompleteActivityPayload
   toggleActivityFavorite(input: ToggleFavoriteInput!): ToggleFavoritePayload
 }
 
@@ -30,6 +31,7 @@ type Activity {
   expert: Expert!
   skillArea: SkillArea!
   isFavorite: Boolean
+  isCompleted: Boolean!
   categories: CategoryConnection!
   media(
     before: String, after: String, first: Int, last: Int
@@ -69,6 +71,19 @@ type ChangeActivityPayload {
   # The ID for the Activity that got replaced
   oldActivityId: ID
 
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+input CompleteActivityInput {
+  id: ID!
+  babyId: ID!
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+type CompleteActivityPayload {
+  edge: ActivityEdge
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }

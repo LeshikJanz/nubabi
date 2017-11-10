@@ -40,6 +40,9 @@ type Props = {
   changeActivityLevel: (options: {
     variables: { input: AdjustActivityLevelInput },
   }) => Promise<*>,
+  completeActivity: (options: {
+    variables: { input: CompleteActivityInput },
+  }) => Promise<*>, // TODO
   toggleFavorite: (options: {
     variables: { input: ToggleFavoriteInput },
   }) => Promise<*>,
@@ -170,6 +173,7 @@ class ViewThisWeeksActivity extends PureComponent {
           onPreviousActivity={this.handlePreviousActivity}
           onNextActivity={this.handleNextActivity}
           onSwoop={this.handleSwoop}
+          onComplete={this.props.completeActivity}
           onToggleFavorite={this.handleToggleFavorite}
           onLevelIncrease={this.handleLevelIncrease}
           onLevelDecrease={this.handleLevelDecrease}
@@ -179,40 +183,6 @@ class ViewThisWeeksActivity extends PureComponent {
     );
   }
 }
-
-const updateQueries = {
-  ThisWeeksActivitiesList: (previousData, { mutationResult }) => {
-    const viewerBabyEdges = ['viewer', 'baby', 'activities', 'edges'];
-    const edges = path(viewerBabyEdges, previousData);
-    const newActivity = path(
-      ['data', 'changeActivity', 'newActivity'],
-      mutationResult,
-    );
-    const oldActivityId = path(
-      ['data', 'changeActivity', 'oldActivityId'],
-      mutationResult,
-    );
-    const oldActivityIndex = findIndex(
-      edge => edge.node.id === oldActivityId,
-      edges,
-    );
-
-    const oldActivity = edges[oldActivityIndex];
-
-    if (newActivity && oldActivityId && oldActivityIndex >= 0) {
-      // TODO: return cursor from server
-      const newEdges = update(
-        oldActivityIndex,
-        { node: newActivity, cursor: oldActivity.cursor },
-        edges,
-      );
-
-      return assocPath(viewerBabyEdges, newEdges, previousData);
-    }
-
-    return previousData;
-  },
-};
 
 // TODO: I don't like to refetch queries, but since the logic
 // to figure out whether the changed activity is part of
@@ -241,7 +211,7 @@ export default compose(
             previousActivity: activities(first: 1, before: $cursor) {
               ...ActivityNavigation
             }
-            
+
             ...FavoriteActivities
           }
         }
@@ -319,6 +289,37 @@ export default compose(
     `,
     { name: 'changeActivityLevel', options: () => ({ refetchQueries }) },
   ),
+  graphql(
+    gql`
+      mutation CompleteActivity($input: CompleteActivityInput!) {
+        completeActivity(input: $input) {
+          edge {
+            node {
+              id
+            }
+          }
+        }
+      }
+    `,
+    {
+      options: { refetchQueries: ['ThisWeeksActivitiesList'] },
+      props: ({
+        mutate,
+        ownProps: { currentBabyId: babyId, activity: { id } },
+      }) => ({
+        completeActivity: () =>
+          mutate({
+            variables: {
+              input: {
+                id,
+                babyId,
+              },
+            },
+          }),
+      }),
+    },
+  ),
+
   toggleFavorite,
   displayLoadingState,
 )(ViewThisWeeksActivity);

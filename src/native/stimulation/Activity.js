@@ -41,6 +41,7 @@ type ActivityActionProps = {
   onSwoop?: () => void,
   onLevelIncrease?: () => void,
   onLevelDecrease?: () => void,
+  onComplete?: () => void,
 };
 
 type ActivityNavigationProps = {
@@ -172,9 +173,7 @@ export class Activity extends PureComponent {
           <Icon name="md-arrow-back" style={styles.navigationIcon} />
           <View style={[styles.navigationSkillContainer, { marginLeft: 10 }]}>
             <Text style={styles.previousButtonText}>Back</Text>
-            <Text>
-              {this.props.previousSkillAreaName}
-            </Text>
+            <Text>{this.props.previousSkillAreaName}</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -266,20 +265,24 @@ export class Activity extends PureComponent {
               onActivityMediaPress={this.props.onActivityMediaPress}
             />
 
-            {enableActions &&
+            {enableActions && (
               <ActivityActions
                 babyName={babyName}
                 activityName={activity.name}
+                collapsed={activity.isCompleted}
                 skillIcon={iconMappings(skill.icon)}
                 onSwoop={this.handleSwoop}
                 onIncrease={this.handleLevelIncrease}
                 onDecrease={this.handleLevelDecrease}
-              />}
-            {enableNavigation &&
+                onComplete={this.props.onComplete}
+              />
+            )}
+            {enableNavigation && (
               <View style={styles.nextButtonsContainer}>
                 {this.renderPreviousButton()}
                 {this.renderNextButton()}
-              </View>}
+              </View>
+            )}
           </ScrollView>
         </View>
       </ActivityContainer>

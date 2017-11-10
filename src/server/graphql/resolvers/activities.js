@@ -69,6 +69,13 @@ export const resolvers = {
             };
           }),
     ),
+    completeActivity: mutationWithClientMutationId(
+      ({ id, babyId }, { token }) => {
+        return connector
+          .completeActivity(token, fromGlobalId(babyId).id, fromGlobalId(id).id)
+          .then(addEdgeToMutationResult);
+      },
+    ),
     toggleActivityFavorite: mutationWithClientMutationId(
       ({ id, babyId: babyGlobalId, favorite }, { token }) => {
         const activityId = fromGlobalId(id).id;
@@ -113,6 +120,19 @@ export const resolvers = {
     },
     media: (obj: RawActivity, args: ConnectionArguments) => {
       return connectionFromArray(obj.media, args);
+    },
+
+    isCompleted: ({ isCompleted, id, babyId }, _, { token }) => {
+      if (typeof isCompleted !== 'undefined') {
+        // If this is set it means that we come from connector.getActivities
+        // which already has this mapping
+        return isCompleted;
+      }
+
+      // FIXME: this issues an extra request and then a search
+      // We might need dataloader or a different API endpoint
+      // same problem with favorites
+      return connector.isCompletedActivity(token, id, babyId);
     },
   },
 
