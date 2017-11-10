@@ -73,9 +73,6 @@ const removeMediaAt = curry((index: number, files: Array<File>) => {
 
 class MemoryForm extends PureComponent {
   props: Props;
-  state = {
-    removeFiles: [],
-  };
 
   datePicker = null;
 
@@ -88,10 +85,9 @@ class MemoryForm extends PureComponent {
 
   handleRemoveMedia = (index: number) => {
     const file = this.props.files[index];
+
     if (file && file.id) {
-      this.setState(prevState => ({
-        removeFiles: append(file.id, prevState.removeFiles),
-      }));
+      this.props.change('removeFiles', append(file.id, this.props.removeFiles));
     }
 
     this.updateFiles(removeMediaAt(index, this.props.files));
@@ -115,7 +111,6 @@ class MemoryForm extends PureComponent {
   handleSubmit = this.props.handleSubmit(input => {
     return this.props.onSubmit({
       ...input,
-      removeFiles: this.state.removeFiles,
     });
   });
 
@@ -177,11 +172,11 @@ class MemoryForm extends PureComponent {
     return (
       <SuggestedMemoryCardContainer>
         {this.props.mode === 'edit' &&
-        isEditable(field) && (
-          <FloatingRemoveButton
-            onPress={this.handleRemoveSuggestedMemoryType}
-          />
-        )}
+          isEditable(field) && (
+            <FloatingRemoveButton
+              onPress={this.handleRemoveSuggestedMemoryType}
+            />
+          )}
         <Image
           source={suggestedMemoryType.image}
           style={{ width: 52, height: 52 }}

@@ -61,6 +61,7 @@ export const EditMemory = ({
       initialValues={{
         ...gqlFilter(Memory.fragments.form, memory),
         files,
+        removeFiles: [],
       }}
       mode="edit"
       onSubmit={onSubmit}
