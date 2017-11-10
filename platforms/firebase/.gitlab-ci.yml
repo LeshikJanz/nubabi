@@ -2,25 +2,35 @@
 image: node:latest
 
 before_script:
- — npm prune
- — npm install
- — npm install -g firebase-tools firebase-bolt grunt-cli
+  - npm install -g yarn --unsafe
+  - yarn global add firebase-tools firebase-bolt
+  - yarn install
+  - yarn run package-functions
+  - firebase-bolt rules.bolt
 
 stages:
   - deploy
 
 cache:
   paths:
-    — node_modules/
+    - node_modules/
   key: “$CI_BUILD_REPO”
 
-deploy_to_firebase:
+deploy_to_staging:
   stage: deploy
-  environment: Production
+  environment: staging
+  only:
+    - dev
+  script:
+    - firebase use --token $FIREBASE_DEPLOY_KEY production
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY
+
+deploy_to_prod:
+  stage: deploy
+  environment: production
   only:
     - master
+  when: manual
   script:
-    - grunt all
-    - firebase-bolt rules.bolt
     - firebase use --token $FIREBASE_DEPLOY_KEY production
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY
