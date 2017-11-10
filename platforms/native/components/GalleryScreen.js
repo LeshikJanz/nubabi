@@ -3,7 +3,7 @@ import type { FileConnection, FileEdge } from '../../../core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { path } from 'ramda';
-import PhotoBrowser from '../../../react-native-photo-browser';
+import PhotoBrowser from '../../../libs/react-native-photo-browser';
 import GalleryVideoItem from './GalleryVideoItem';
 import GalleryAudioItem from './GalleryAudioItem';
 
