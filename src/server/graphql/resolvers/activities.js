@@ -129,10 +129,15 @@ export const resolvers = {
         return isCompleted;
       }
 
-      // FIXME: this issues an extra request and then a search
-      // We might need dataloader or a different API endpoint
-      // same problem with favorites
-      return connector.isCompletedActivity(token, id, babyId);
+      // If we'got babyId it means we're viewing baby activities
+      if (babyId) {
+        // FIXME: this issues an extra request and then a search
+        // We might need dataloader or a different API endpoint
+        // same problem with favorites
+        return connector.isCompletedActivity(token, id, babyId);
+      }
+
+      return false;
     },
   },
 
