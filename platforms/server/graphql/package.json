@@ -1,5 +1,5 @@
 {
-  "name": "nubabi-server-graphql",
+  "name": "nubabi-graphql-server",
   "version": "0.0.0",
   "private": true,
   "dependencies": {

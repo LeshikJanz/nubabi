@@ -54,7 +54,8 @@
   "workspaces": [
     "core",
     "platforms/*",
-    "platforms/server/graphql"
+    "platforms/server/graphql",
+    "libs/graphql-utils"
   ],
   "devDependencies": {
     "@commitlint/cli": "^4.2.2",
