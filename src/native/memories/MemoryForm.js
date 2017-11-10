@@ -187,8 +187,13 @@ class MemoryForm extends PureComponent {
 
   render() {
     const { suggestedMemoryType } = this.props.initialValues;
-    const submitText = this.props.mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
-    const isSubmitting = this.props.submitting;
+    const {
+      mode,
+      handleSubmit,
+      onSubmit,
+      submitting: isSubmitting,
+    } = this.props;
+    const submitText = mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
     const editableProps = { editable: !isSubmitting };
 
     return (
@@ -239,13 +244,15 @@ class MemoryForm extends PureComponent {
           </Box>
         </Box>
 
-        <Box flexDirection="row" alignItems="flex-end">
-          <SubmitButton
-            submitText={submitText}
-            onPress={this.handleSubmit}
-            loading={this.props.submitting}
-          />
-        </Box>
+        {mode === 'edit' && (
+          <Box flexDirection="row" alignItems="flex-end">
+            <SubmitButton
+              submitText={submitText}
+              onPress={handleSubmit(onSubmit)}
+              loading={this.props.submitting}
+            />
+          </Box>
+        )}
       </FormContainer>
     );
   }
