@@ -21,7 +21,7 @@ deploy_to_staging:
   only:
     - dev
   script:
-    - firebase use --token $FIREBASE_DEPLOY_KEY production
+    - firebase use --token $FIREBASE_DEPLOY_KEY nubabitest1
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY
 
 deploy_to_prod:
@@ -31,5 +31,5 @@ deploy_to_prod:
     - master
   when: manual
   script:
-    - firebase use --token $FIREBASE_DEPLOY_KEY production
+    - firebase use --token $FIREBASE_DEPLOY_KEY nubabitest1
     - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY
