@@ -3,13 +3,10 @@ import type { NavigationProp } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { InteractionManager } from 'react-native';
 import { compose, path } from 'ramda';
-import { withProps } from 'recompose';
-import { Screen } from '../components';
+import { hoistStatics, withProps } from 'recompose';
+import { Screen, SubmitFormNavButton } from '../components';
 import AddMemory from './AddMemory';
-import {
-  type SuggestedMemoryType,
-  findSuggestedMemoryById,
-} from './SuggestedMemoriesList';
+import { type SuggestedMemoryType } from './SuggestedMemoriesList';
 
 type Props = {
   navigation: NavigationProp,
@@ -21,6 +18,7 @@ export class AddMemoryScreen extends PureComponent {
 
   static navigationOptions = {
     title: 'Add memory',
+    headerRight: <SubmitFormNavButton form="memory" />,
   };
 
   handleAddVoiceNote = () => {
@@ -32,25 +30,21 @@ export class AddMemoryScreen extends PureComponent {
   };
 
   render() {
+    const suggestedMemoryId = path(
+      ['navigation', 'state', 'params', 'suggestedMemoryId'],
+      this.props,
+    );
+
     return (
       <Screen>
         <AddMemory
           onAddVoiceNote={this.handleAddVoiceNote}
           goBack={this.handleGoBack}
-          suggestedMemoryType={this.props.suggestedMemoryType}
+          suggestedMemoryId={suggestedMemoryId}
         />
       </Screen>
     );
   }
 }
 
-// prettier-ignore
-const suggestedMemoryPath = path(['navigation', 'state', 'params', 'suggestedMemoryId']);
-
-export default compose(
-  withProps((ownerProps: Props) => ({
-    suggestedMemoryType: findSuggestedMemoryById(
-      suggestedMemoryPath(ownerProps),
-    ),
-  })),
-)(AddMemoryScreen);
+export default AddMemoryScreen;
