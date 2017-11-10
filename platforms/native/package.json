@@ -66,6 +66,9 @@
     "react-test-renderer": "^16.1.0"
   },
   "resolutions": {
+    "react-native-dropdownalert": "https://github.com/testshallpass/react-native-dropdownalert#ebc50be",
+    "react-native-floating-label-text-input": "https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles",
+    "react-native-progress": "3.4.0",
     "victory-chart": "https://github.com/blackxored/victory-chart#fix/victory-group-dates"
   }
 }

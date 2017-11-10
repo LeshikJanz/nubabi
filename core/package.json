@@ -36,9 +36,6 @@
     "redux-devtools": "^3.3.2"
   },
   "resolutions": {
-    "react-native-dropdownalert": "https://github.com/testshallpass/react-native-dropdownalert#ebc50be",
-    "react-native-fetch-blob": "0.10.8",
-    "react-native-floating-label-text-input": "https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles",
-    "react-native-progress": "3.4.0"
+
   }
 }

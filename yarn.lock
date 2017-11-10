@@ -6522,10 +6522,7 @@ react-native-dropdownalert@2.13.0, "react-native-dropdownalert@https://github.co
 
 react-native-fetch-blob@0.10.8, "react-native-fetch-blob@https://github.com/blackxored/react-native-fetch-blob#fix/json-response-fix-with-net-indicator-fix":
   version "0.10.8"
-  resolved "https://registry.yarnpkg.com/react-native-fetch-blob/-/react-native-fetch-blob-0.10.8.tgz#4fc256abae0cb5f10e7c41f28c11b3ff330d72a9"
-  dependencies:
-    base-64 "0.1.0"
-    glob "7.0.6"
+  resolved "https://github.com/blackxored/react-native-fetch-blob#bf84f809d58564214669e564b713fbf9c7e7833b"
 
 react-native-floating-label-text-input@^0.1.5, "react-native-floating-label-text-input@https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles":
   version "0.1.5"
