@@ -1,10 +1,10 @@
 // @flow
-import type { Gender } from '../../../../core/types';
+import type { Gender } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 
 import GenderButton from './GenderButton';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   selectedGender: Gender,

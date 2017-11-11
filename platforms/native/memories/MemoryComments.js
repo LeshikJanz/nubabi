@@ -1,5 +1,5 @@
 // @flow
-import type { CommentConnection } from '../../../core/types';
+import type { CommentConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { compose, path, pick } from 'ramda';

@@ -1,5 +1,5 @@
 // @flow
-import type { GraphQLDataProp, Query } from '../../../core/types';
+import type { GraphQLDataProp, Query } from 'core/types';
 import React from 'react';
 import hoistStatics from './hoistStatics';
 import Loader from './RocketHorseLoader';

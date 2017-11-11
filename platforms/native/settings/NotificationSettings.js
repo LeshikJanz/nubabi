@@ -1,10 +1,10 @@
 // @flow
-import type { State } from '../../../core/types';
+import type { State } from 'core/types';
 import React, { PureComponent } from 'react';
 import { compose, partial, pick } from 'ramda';
 import { connect } from 'react-redux';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
-import { setSettingsValue } from '../../../core/settings/reducer';
+import { setSettingsValue } from 'core/settings/reducer';
 
 class NotificationSettings extends PureComponent {
   state = {

@@ -1,5 +1,5 @@
 // @flow
-import type { InviteUserInput } from '../../../core/types';
+import type { InviteUserInput } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';

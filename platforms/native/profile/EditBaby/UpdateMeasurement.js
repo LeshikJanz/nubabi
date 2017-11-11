@@ -3,7 +3,7 @@ import type {
   GraphQLDataProp,
   RecordMeasurementInput,
   UnitDisplaySettingsState,
-} from '../../../../core/types';
+} from 'core/types';
 import React, { PureComponent } from 'react';
 import { Image, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -12,9 +12,9 @@ import { connect } from 'react-redux';
 import { compose, pathOr } from 'ramda';
 import { Box, Button, Text } from '../../components';
 import UpdateMeasurementHeader from './UpdateMeasurementHeader';
-import { formatMeasurement } from '../../../../core/helpers/measurement';
+import { formatMeasurement } from 'core/helpers/measurement';
 import displayLoadingState from '../../components/displayLoadingState';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import Measurement from '../Measurement';
 
 type UpdateMeasurementType = 'weight' | 'height';
@@ -69,8 +69,8 @@ export class UpdateMeasurement extends PureComponent {
 
     const image =
       type === 'weight'
-        ? require('../../../../core/images/weight.png')
-        : require('../../../../core/images/height.png');
+        ? require('core/images/weight.png')
+        : require('core/images/height.png');
 
     const buttonText = `SET ${this.props.type.toUpperCase()}`;
 

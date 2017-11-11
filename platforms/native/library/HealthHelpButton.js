@@ -1,6 +1,6 @@
 // @flow
 // TODO: remove duplication between all these buttons
-import type { LayoutProps } from '../../../core/types/index';
+import type { LayoutProps } from 'core/types/index';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { Box, Card, Text, Overlay } from '../components/index';
@@ -10,7 +10,7 @@ type Props = {
   onPress: () => void,
 };
 
-const healthHelpImage = require('../../../core/images/health_help.png');
+const healthHelpImage = require('core/images/health_help.png');
 
 export const Button = ({ layout }: { layout: LayoutProps }) => {
   const dimensions = {

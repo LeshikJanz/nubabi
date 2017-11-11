@@ -1,5 +1,5 @@
 // @flow
-import type { Measurement } from '../../../core/types';
+import type { Measurement } from 'core/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { memoize, curry } from 'ramda';
@@ -12,7 +12,7 @@ import {
   VictoryAxis,
   VictoryGroup,
 } from 'victory-native';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   data: Array<Measurement>,

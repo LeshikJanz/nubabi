@@ -1,5 +1,5 @@
 // @flow
-import type { MeasurementType } from '../../../core/types';
+import type { MeasurementType } from 'core/types';
 import React from 'react';
 // platform extensions
 /* eslint-disable import/no-unresolved */

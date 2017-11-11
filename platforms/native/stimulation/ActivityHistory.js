@@ -1,5 +1,5 @@
 // @flow
-import type { State } from '../../../core/types';
+import type { State } from 'core/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
@@ -8,10 +8,7 @@ import {
   showNoContentViewIf,
   withCurrentBaby,
 } from '../components';
-import {
-  isEmptyProp,
-  mapEdgesToProp,
-} from '../../../core/helpers/graphqlUtils';
+import { isEmptyProp, mapEdgesToProp } from 'core/helpers/graphqlUtils';
 import ActivityHistoryList from './ActivityHistoryList';
 import ActivityHistoryItem from './ActivityHistoryItem';
 

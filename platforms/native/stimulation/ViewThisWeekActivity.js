@@ -7,7 +7,7 @@ import type {
   NavigationOptionsGetter,
   SwoopActivityInput,
   ToggleFavoriteInput,
-} from '../../../core/types/index';
+} from 'core/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { compose, path, pathOr } from 'ramda';

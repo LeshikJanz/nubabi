@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import Sound from 'react-native-sound';
 import Box from './Box';
 import FAB from './FAB';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {};
 

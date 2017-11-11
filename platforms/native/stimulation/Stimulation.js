@@ -1,11 +1,11 @@
 // @flow
-import type { NavigationOptions } from '../../../core/types';
+import type { NavigationOptions } from 'core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
 import { compose } from 'ramda';
 import { withCurrentBabyRequired } from '../components';
-import { PANEL_BACKGROUND } from '../../../core/themes/defaultTheme';
+import { PANEL_BACKGROUND } from 'core/themes/defaultTheme';
 import ThisWeeksActivitiesButton from './ThisWeeksActivitiesButton';
 import NextWeeksEquipmentButton from './NextWeeksEquipmentButton';
 import ActivityHistoryButton from './ActivityHistoryButton';

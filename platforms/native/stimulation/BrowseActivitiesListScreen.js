@@ -1,8 +1,5 @@
 // @flow
-import type {
-  ActivityEdge,
-  NavigationOptionsGetter,
-} from '../../../core/types';
+import type { ActivityEdge, NavigationOptionsGetter } from 'core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { compose, path, pathOr } from 'ramda';
@@ -13,7 +10,7 @@ import ActivityList from './ActivityList';
 import {
   withNetworkIndicator,
   withNetworkIndicatorActions,
-} from '../../../core/helpers/graphqlUtils';
+} from 'core/helpers/graphqlUtils';
 
 type Props = {
   navigation: NavigationProp<*>,

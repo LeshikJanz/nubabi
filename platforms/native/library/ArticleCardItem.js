@@ -1,6 +1,6 @@
 // @flow
 // TODO: reuse HorizontalCardItem
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';

@@ -1,5 +1,5 @@
 // @flow
-import type { Avatar } from '../../../core/types';
+import type { Avatar } from 'core/types';
 import React from 'react';
 import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';

@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Overlay, Box } from '../components';
 import Loader from '../components/RocketHorseLoader';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   isLoading?: boolean,

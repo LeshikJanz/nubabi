@@ -1,5 +1,5 @@
 // @flow
-import type { File, FileInput, State } from '../../../core/types';
+import type { File, FileInput, State } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Image, LayoutAnimation, View } from 'react-native';
 import { Field, formValueSelector, reduxForm } from 'redux-form';

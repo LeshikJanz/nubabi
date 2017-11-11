@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationOptionsGetter } from '../../../core/types';
+import type { NavigationOptionsGetter } from 'core/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
 import { path } from 'ramda';

@@ -3,7 +3,7 @@ import React from 'react';
 import { Share } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { FAB } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   url: string,

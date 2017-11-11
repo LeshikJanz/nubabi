@@ -1,16 +1,16 @@
 // @flow
-import type { State } from '../../common/types';
+import type { State } from '../../../core/types';
 import React, { PureComponent } from 'react';
 import { Alert, TouchableOpacity } from 'react-native';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
-import { removeEdgeFromFragment } from '../../common/helpers/graphqlUtils';
-import { Text } from '../components';
+import { removeEdgeFromFragment } from '../../../core/helpers/graphqlUtils';
+import { Icon } from '../components';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
-import { appError } from '../../common/app/actions';
-import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
+import { appError } from '../../../core/app/actions';
+import { toggleNetworkActivityIndicator } from '../../../core/ui/reducer';
 
 type Props = {
   goBack: () => void,
@@ -18,7 +18,7 @@ type Props = {
   onSubmit: () => Promise<ApolloQueryResult<*>>,
 };
 
-class RemoveMemoryButton extends PureComponent {
+class EditMemoryHeader extends PureComponent {
   props: Props;
 
   promptForDeletion = () => {
@@ -55,17 +55,9 @@ class RemoveMemoryButton extends PureComponent {
     return (
       <TouchableOpacity
         onPress={this.promptForDeletion}
-        style={{
-          flex: 1,
-          marginRight: 10,
-          padding: 16,
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        style={{ marginRight: 10 }}
       >
-        <Text color="primary" bold>
-          delete this memory
-        </Text>
+        <Icon name="ios-trash-outline" size={20} />
       </TouchableOpacity>
     );
   }
@@ -95,20 +87,20 @@ export default compose(
 
           // $FlowFixMe$
           return mutate({
-            variables: { input: { id: ownProps.id } },
+            variables: { input: { id: ownProps.memoryId } },
             optimisticResponse: {
               __typename: 'Mutation',
               deleteMemory: {
                 __typename: 'DeleteMemoryPayload',
                 memory: {
                   __typename: 'Memory',
-                  id: ownProps.id,
+                  id: ownProps.memoryId,
                 },
               },
             },
             update: (store, data) => {
               const options = [
-                ownProps.id,
+                ownProps.memoryId,
                 ownProps.currentBabyId,
                 ['memories'],
               ];
@@ -127,4 +119,4 @@ export default compose(
       }),
     },
   ),
-)(RemoveMemoryButton);
+)(EditMemoryHeader);

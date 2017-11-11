@@ -1,10 +1,10 @@
 // @flow
-import type { MemoryConnection } from '../../../core/types';
+import type { MemoryConnection } from 'core/types';
 import React from 'react';
 import { gql } from 'react-apollo';
 import { AddButton, HorizontalCardList } from '../components';
 import EmptyMemories from './EmptyMemories';
-import { flattenEdges } from '../../../core/helpers/graphqlUtils';
+import { flattenEdges } from 'core/helpers/graphqlUtils';
 
 type Props = {
   memories: MemoryConnection,

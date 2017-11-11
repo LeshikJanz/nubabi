@@ -4,7 +4,7 @@ import type {
   Baby,
   NavigationOptions,
   UpdateBabyInput,
-} from '../../../../core/types';
+} from 'core/types';
 import React, { Component } from 'react';
 import { gql, graphql } from 'react-apollo';
 import { assoc, compose, omit, path } from 'ramda';
@@ -16,7 +16,7 @@ import {
 } from '../../components';
 import BabyNameTitle from '../BabyNameTitle';
 import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   baby: Baby,

@@ -6,8 +6,8 @@ import { compose } from 'ramda';
 import Box from './Box';
 import Overlay from './Overlay';
 import Text from './Text';
-import theme from '../../../core/themes/defaultTheme';
-import { formatDuration } from '../../../core/helpers/formatDuration';
+import theme from 'core/themes/defaultTheme';
+import { formatDuration } from 'core/helpers/formatDuration';
 import GalleryAudioPlayer from './GalleryAudioPlayer';
 
 type Props = {

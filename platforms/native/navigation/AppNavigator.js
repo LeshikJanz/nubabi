@@ -12,7 +12,7 @@ import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitio
 
 import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import { merge } from 'lodash';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
 import crossFade from './transitioners/CrossFadeTransitioner';
 import android from './transitioners/AndroidDefaultTransitioner';

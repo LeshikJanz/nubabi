@@ -1,9 +1,5 @@
 // @flow
-import type {
-  File,
-  FileConnection,
-  LayoutProps,
-} from '../../../core/types/index';
+import type { File, FileConnection, LayoutProps } from 'core/types/index';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
@@ -15,7 +11,7 @@ import Box from './Box';
 import Overlay from './Overlay';
 import Text from './Text';
 import withLayout from './withLayout';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { navigate } from '../navigation/actions';
 
 type Props = {

@@ -1,5 +1,5 @@
 // @flow
-import type { Activity as ActivityType } from '../../../core/types';
+import type { Activity as ActivityType } from 'core/types';
 import React, { PureComponent } from 'react';
 import {
   LayoutAnimation,
@@ -14,7 +14,7 @@ import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActivityContainer from './ActivityContainer';
 import ActivityActions from './ActivityActions';
-import theme, { PANEL_BACKGROUND } from '../../../core/themes/defaultTheme';
+import theme, { PANEL_BACKGROUND } from 'core/themes/defaultTheme';
 import {
   childContextTypes,
   getChildContext,

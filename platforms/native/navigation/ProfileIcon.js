@@ -8,7 +8,7 @@ import { gql, graphql } from 'react-apollo';
 import color from 'color';
 import { withCurrentBaby } from '../components';
 
-const babyIcon = require('../../../core/images/face_icon.jpg');
+const babyIcon = require('core/images/face_icon.jpg');
 
 type Props = {
   avatarSource?: ImageSource,

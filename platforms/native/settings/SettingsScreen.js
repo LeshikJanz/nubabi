@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationProp, NavigationOptions } from '../../../core/types';
+import type { NavigationProp, NavigationOptions } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Screen } from '../components';
 import Settings from './Settings';

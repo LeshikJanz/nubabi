@@ -4,9 +4,9 @@ import { LayoutAnimation, TouchableOpacity } from 'react-native';
 import { Box, HorizontalCardList, Icon, Text } from '../components';
 import { compose, find, propEq } from 'ramda';
 import { connect } from 'react-redux';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import SuggestedMemory from './SuggestedMemory';
-import { setSettingsValue } from '../../../core/settings/reducer';
+import { setSettingsValue } from 'core/settings/reducer';
 import * as stickers from './stickersMap';
 
 type Props = {

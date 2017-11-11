@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CachedImage as Image } from 'react-native-cached-image';

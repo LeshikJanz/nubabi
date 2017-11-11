@@ -1,10 +1,10 @@
 // @flow
-import type { LayoutProps, SkillArea } from '../../../core/types';
+import type { LayoutProps, SkillArea } from 'core/types';
 import React from 'react';
 import { Image, ScrollView } from 'react-native';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { mapEdgesToProp } from '../../../core/helpers/graphqlUtils';
+import { mapEdgesToProp } from 'core/helpers/graphqlUtils';
 import {
   Box,
   Card,
@@ -37,8 +37,8 @@ const outdoorCategoryOptions = {
   filter: { categories: toGlobalId('Category', 2) },
 };
 
-const indoorsCategoryImage = require('../../../core/images/category-indoors.png');
-const outdoorsCategoryImage = require('../../../core/images/category-outdoors.png');
+const indoorsCategoryImage = require('core/images/category-indoors.png');
+const outdoorsCategoryImage = require('core/images/category-outdoors.png');
 
 export const BrowseActivities = ({
   skillAreas,

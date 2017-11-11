@@ -1,5 +1,5 @@
 // @flow
-import type { UserEdge } from '../../../core/types';
+import type { UserEdge } from 'core/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { compose, path } from 'ramda';
@@ -7,7 +7,7 @@ import { gql, graphql } from 'react-apollo';
 import { hoistStatics } from 'recompose';
 import { Avatar, displayLoadingState, ListItem, Text } from '../components';
 import PendingAvatar from './PendingAvatar';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import withPullToRefresh, {
   type PullToRefreshProps,
 } from '../components/withPullToRefresh';

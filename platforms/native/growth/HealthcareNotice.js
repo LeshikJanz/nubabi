@@ -3,7 +3,7 @@ import { Image } from 'react-native';
 import { Box, Card, Text } from '../components';
 
 export const HealthcareNotice = () => {
-  const healthcareNoticeIcon = require('../../../core/images/healthcare-notice.png');
+  const healthcareNoticeIcon = require('core/images/healthcare-notice.png');
 
   return (
     <Card

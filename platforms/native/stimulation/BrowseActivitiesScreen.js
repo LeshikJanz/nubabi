@@ -5,7 +5,7 @@ import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Screen } from '../components';
 import BrowseActivities from './BrowseActivities';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   navigation: NavigationProp<*>,

@@ -1,5 +1,5 @@
 // @flow
-import type { Memory as MemoryType } from '../../../core/types';
+import type { Memory as MemoryType } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Image, LayoutAnimation, TouchableOpacity } from 'react-native';
 import { AutoGrowingTextInput as TextInput } from 'react-native-autogrow-textinput';
@@ -8,7 +8,7 @@ import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { isEmpty } from 'ramda';
 import { Box, Icon, Pill, Text } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { formatMemoryDate } from './Memory';
 import MemoryMedia from '../components/MemoryMedia';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';

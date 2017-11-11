@@ -1,13 +1,13 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import moment from 'moment';
 import { Box, Card, Icon, Overlay, Text, withLayout } from '../components';
-import theme from '../../../core/themes/defaultTheme';
-import formatDate from '../../../core/helpers/formatDate';
+import theme from 'core/themes/defaultTheme';
+import formatDate from 'core/helpers/formatDate';
 
-const background = require('../../../core/images/gross_motor_large.jpg');
+const background = require('core/images/gross_motor_large.jpg');
 
 type Props = {
   onPress: () => void,

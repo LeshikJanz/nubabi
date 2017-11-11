@@ -1,10 +1,10 @@
 // @flow
-import type { LayoutProps } from '../../../core/types/types';
+import type { LayoutProps } from 'core/types/types';
 import React from 'react';
 import { Image } from 'react-native';
 import { Box, Card, Text } from '../components';
 
-const background = require('../../../core/images/activity-history.png');
+const background = require('core/images/activity-history.png');
 
 type Props = {
   onPress: () => void,

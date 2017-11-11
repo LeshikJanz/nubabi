@@ -2,7 +2,7 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { NubabiIcon } from '../components';
-import { HEADER_FONT_COLOR } from '../../../core/themes/defaultTheme';
+import { HEADER_FONT_COLOR } from 'core/themes/defaultTheme';
 
 type Props = {
   navigate: string => void,

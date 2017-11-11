@@ -1,10 +1,10 @@
 // @flow
-import type { FirebaseUser, LayoutProps } from '../../../core/types';
+import type { FirebaseUser, LayoutProps } from 'core/types';
 import React, { PureComponent } from 'react';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import { Avatar, Text, ListItem } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   user: FirebaseUser,

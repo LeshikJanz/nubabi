@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { Image } from 'react-native';
 import { Box, Button, Card, Text } from '../components';
@@ -13,7 +13,7 @@ type Props = {
   layout: LayoutProps,
 };
 
-const emptyMemoriesImage = require('../../../core/images/empty-memories.png');
+const emptyMemoriesImage = require('core/images/empty-memories.png');
 
 export const EmptyMemories = ({
   babyName,

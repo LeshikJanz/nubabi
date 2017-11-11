@@ -1,9 +1,9 @@
 // @flow
-import type { LineArgs } from '../../../core/components/graphUtils';
+import type { LineArgs } from 'core/components/graphUtils';
 import React, { Component } from 'react';
 import { ART, Dimensions, StyleSheet, View, Text } from 'react-native';
-import * as graphUtils from '../../../core/components/graphUtils';
-import theme from '../../../core/themes/defaultTheme';
+import * as graphUtils from 'core/components/graphUtils';
+import theme from 'core/themes/defaultTheme';
 
 const { Group, Shape, Surface, Path } = ART;
 

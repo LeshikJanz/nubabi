@@ -5,7 +5,7 @@ import Box from './Box';
 import Text from './Text';
 import ListItemArrow from './ListItemArrow';
 import Icon from 'react-native-vector-icons/Ionicons';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { isEditable } from '../shared/forms';
 
 type Props = {

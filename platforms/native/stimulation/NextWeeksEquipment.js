@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationOptions } from '../../../core/types';
+import type { NavigationOptions } from 'core/types';
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Screen } from '../components';

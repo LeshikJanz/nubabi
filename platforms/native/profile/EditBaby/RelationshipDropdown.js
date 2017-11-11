@@ -9,7 +9,7 @@ import Menu, {
 } from 'react-native-menu';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Box, Text } from '../../components';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { isEditable } from '../../shared/forms';
 
 type BabyRelationshipOption = {

@@ -1,5 +1,5 @@
 // @flow
-import type { Baby } from '../../../../core/types';
+import type { Baby } from 'core/types';
 import React, { PureComponent } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -9,10 +9,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { DatePicker, Icon, NubabiIcon, SubmitButton } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
-import theme, {
-  FONT_COLOR,
-  NUBABI_RED,
-} from '../../../../core/themes/defaultTheme';
+import theme, { FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
 import imagePicker from '../../components/imagePicker';
 import Picker from './Picker';
 import RelationshipDropdown from './RelationshipDropdown';
@@ -26,8 +23,8 @@ import {
   renderTextInput,
   required,
 } from '../../shared/forms';
-import { unitDisplaySelector } from '../../../../core/settings/reducer';
-import { formatMeasurement } from '../../../../core/helpers/measurement';
+import { unitDisplaySelector } from 'core/settings/reducer';
+import { formatMeasurement } from 'core/helpers/measurement';
 
 import { fileFromImagePickerResult, isNewFile } from '../../shared/fileUtils';
 

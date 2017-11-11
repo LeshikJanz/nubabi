@@ -2,7 +2,7 @@
 import React from 'react';
 import Box from './Box';
 import Icon from 'react-native-vector-icons/Ionicons';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   direction?: 'right' | 'left',

@@ -1,5 +1,5 @@
 // @flow
-import type { Memory as MemoryType } from '../../../core/types';
+import type { Memory as MemoryType } from 'core/types';
 import React from 'react';
 import { assoc, compose, merge, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
@@ -14,7 +14,7 @@ import {
   addEdgeToFragment,
   getCurrentUserFromStore,
   isEmptyProp,
-} from '../../../core/helpers/graphqlUtils';
+} from 'core/helpers/graphqlUtils';
 import MemoryDetail from './MemoryDetail';
 import MemoryComments from './MemoryComments';
 import toggleMemoryLike from './toggleMemoryLike';

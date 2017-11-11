@@ -1,16 +1,16 @@
 // @flow
-import type { Growth, GraphQLDataProp } from '../../../core/types';
+import type { Growth, GraphQLDataProp } from 'core/types';
 import type { GrowthPeriodOption } from './WhatYouNeedToKnowForPeriod';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation } from 'react-native';
 import { gql, graphql } from 'react-apollo';
 import { compose, path } from 'ramda';
 import { withCurrentBaby } from '../components';
-import { getClosestContentForPeriod } from '../../../core/growth/reducer';
+import { getClosestContentForPeriod } from 'core/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
 import displayLoadingState from '../components/displayLoadingState';
-import { mapEdgesToProp } from '../../../core/helpers/graphqlUtils';
+import { mapEdgesToProp } from 'core/helpers/graphqlUtils';
 
 type Props = {
   growth: ?Array<Growth>,

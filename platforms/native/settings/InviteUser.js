@@ -1,5 +1,5 @@
 // @flow
-import type { InviteUserInput } from '../../../core/types';
+import type { InviteUserInput } from 'core/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';

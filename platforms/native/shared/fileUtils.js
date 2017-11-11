@@ -1,5 +1,5 @@
 // @flow
-import { getContentTypeFromFilename } from '../../../core/helpers/graphqlUtils';
+import { getContentTypeFromFilename } from 'core/helpers/graphqlUtils';
 
 export const isNewFile = (file: ?{ url: string }) => {
   if (!file) {

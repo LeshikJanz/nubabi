@@ -1,9 +1,5 @@
 // @flow
-import type {
-  Baby,
-  State,
-  UnitDisplaySettingsState,
-} from '../../../core/types';
+import type { Baby, State, UnitDisplaySettingsState } from 'core/types';
 import type { Event } from 'react-native';
 import { LayoutAnimation, ScrollView } from 'react-native';
 import React, { Component } from 'react';
@@ -11,7 +7,7 @@ import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
-import { skipGrowthGlobalIntro } from '../../../core/growth/reducer';
+import { skipGrowthGlobalIntro } from 'core/growth/reducer';
 import {
   Box,
   Card,
@@ -23,7 +19,7 @@ import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import WhatYouNeedToKnowButton from './WhatYouNeedToKnowButton';
 import GrowthChartButton from './GrowthChartButton';
-import { formatMeasurement } from '../../../core/helpers/measurement';
+import { formatMeasurement } from 'core/helpers/measurement';
 
 type Props = {
   baby: Baby,

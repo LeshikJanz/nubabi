@@ -1,12 +1,12 @@
 // @flow
-import type { NavigationProp, NavigationOptions } from '../../../core/types';
+import type { NavigationProp, NavigationOptions } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Screen, Box } from '../components';
 import ArticleList from './ArticleCardList';
 import HealthHelpButton from './HealthHelpButton';
 import ParentingTipsButton from './ParentingTipsButton';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   navigation: NavigationProp,

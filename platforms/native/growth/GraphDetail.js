@@ -5,7 +5,7 @@ import type {
   MeasurementType,
   State,
   UnitDisplaySettingsState,
-} from '../../../core/types';
+} from 'core/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
@@ -16,8 +16,8 @@ import { connect } from 'react-redux';
 import { Box, displayLoadingState, Text, withLayout } from '../components';
 import GraphDetailChart from './GraphDetailChart';
 import GraphDetailHeader from './GraphDetailHeader';
-import theme from '../../../core/themes/defaultTheme';
-import { convertMeasurements } from '../../../core/helpers/measurement';
+import theme from 'core/themes/defaultTheme';
+import { convertMeasurements } from 'core/helpers/measurement';
 
 type Props = {
   baby: Baby,

@@ -1,5 +1,5 @@
 // @flow
-import type { Measurement } from '../../../core/types';
+import type { Measurement } from 'core/types';
 import React from 'react';
 import {
   VictoryStack,
@@ -8,7 +8,7 @@ import {
   VictoryGroup,
 } from 'victory-native';
 import { scale } from './GraphDetailChart';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import withLayout from '../components/withLayout';
 
 type Props = {

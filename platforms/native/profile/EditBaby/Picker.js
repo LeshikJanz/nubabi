@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import { range } from 'ramda';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { isEditable } from '../../shared/forms';
 
 export const weekOptions = range(20, 44).map(val => {

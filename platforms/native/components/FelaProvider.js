@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput } from 'react-native';
 import { ThemeProvider } from 'react-fela';
-import FelaProvider from '../../../core/components/FelaProvider';
+import FelaProvider from 'core/components/FelaProvider';
 
 type Props = {
   children?: any,

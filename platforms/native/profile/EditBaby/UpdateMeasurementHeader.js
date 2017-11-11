@@ -3,7 +3,7 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import moment from 'moment';
 import { Box, Icon, NubabiIcon, Text } from '../../components';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   onViewGraph: () => void,

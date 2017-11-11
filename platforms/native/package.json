@@ -22,6 +22,7 @@
     "prop-types": "^15.6.0",
     "ramda": "^0.24.1",
     "react": "16.0.0",
+    "react-apollo": "^1.4.16",
     "raven-js": "^3.14.0",
     "react-fela": "^4.3.5",
     "react-native": "0.50.3",
@@ -58,8 +59,7 @@
     "redux-persist": "^4.4.2",
     "rxjs": "^5.2.0",
     "string": "^3.3.3",
-    "victory-chart": "https://github.com/blackxored/victory-chart#fix/victory-group-dates",
-    "victory-native": "https://github.com/FormidableLabs/victory-native"
+    "victory-native": "^0.16.0"
   },
   "devDependencies": {
     "react-dom": "^16.1.0",
@@ -70,6 +70,6 @@
     "react-native-fetch-blob": "https://github.com/blackxored/react-native-fetch-blob#fix/json-response-fix-with-net-indicator-fix",
     "react-native-floating-label-text-input": "https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles",
     "react-native-progress": "3.4.0",
-    "victory-chart": "https://github.com/blackxored/victory-chart#fix/victory-group-dates"
+    "victory-chart": "24.2.0"
   }
 }

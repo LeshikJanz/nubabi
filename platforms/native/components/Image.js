@@ -1,9 +1,9 @@
 // @flow
 import type { BoxProps } from './Box';
-import type { Theme } from '../../../core/themes/types';
+import type { Theme } from 'core/themes/types';
 import React from 'react';
 import PropTypes from 'prop-types';
-import isReactNative from '../../../core/app/isReactNative';
+import isReactNative from 'core/app/isReactNative';
 import Box from './Box';
 
 // TODO: Implement auto jsx-a11y/img-has-alt.

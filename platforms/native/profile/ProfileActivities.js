@@ -1,11 +1,11 @@
 // @flow
-import type { Activity, ActivityConnection } from '../../../core/types';
+import type { Activity, ActivityConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';
 import { Box, Card, Image, Text } from '../components';
-import formatPossessive from '../../../core/helpers/formatPossessive';
-import { flattenEdges } from '../../../core/helpers/graphqlUtils';
+import formatPossessive from 'core/helpers/formatPossessive';
+import { flattenEdges } from 'core/helpers/graphqlUtils';
 import iconMappings from '../stimulation/iconMappings';
 
 type Props = {

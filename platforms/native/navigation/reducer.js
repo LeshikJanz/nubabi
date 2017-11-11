@@ -1,5 +1,5 @@
 // @flow
-import type { State, Action } from '../../../core/types';
+import type { State, Action } from 'core/types';
 import AppNavigator from './AppNavigator';
 
 const reducer = (state: State, action: Action) => {

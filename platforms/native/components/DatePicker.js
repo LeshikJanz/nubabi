@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import DatePickerComponent from 'react-native-datepicker';
 import moment from 'moment';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   onChange: (date: string) => void,

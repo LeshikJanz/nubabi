@@ -5,7 +5,7 @@ import { CachedImage as Image } from 'react-native-cached-image';
 import S from 'string';
 import { merge, map } from 'lodash';
 import SimpleMarkdown from 'react-native-simple-markdown';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   text: string,

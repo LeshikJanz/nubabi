@@ -1,11 +1,11 @@
 // @flow
 const iconMappings = {
-  'icon-thinking': require('../../../core/images/thinking_reasoning.png'),
-  'icon-gross': require('../../../core/images/gross_motor_icon.png'),
-  'icon-fine': require('../../../core/images/fine_motor_icon.png'),
-  'icon-sensory': require('../../../core/images/sensory_icon.png'),
-  'icon-speech': require('../../../core/images/speech_icon.png'),
-  'icon-social': require('../../../core/images/social_emotional_icon.png'),
+  'icon-thinking': require('core/images/thinking_reasoning.png'),
+  'icon-gross': require('core/images/gross_motor_icon.png'),
+  'icon-fine': require('core/images/fine_motor_icon.png'),
+  'icon-sensory': require('core/images/sensory_icon.png'),
+  'icon-speech': require('core/images/speech_icon.png'),
+  'icon-social': require('core/images/social_emotional_icon.png'),
 };
 
 const pinkBg = '#FDE8EC';

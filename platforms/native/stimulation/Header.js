@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps, Image as ImageType } from '../../../core/types';
+import type { LayoutProps, Image as ImageType } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';

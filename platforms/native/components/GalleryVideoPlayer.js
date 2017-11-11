@@ -4,7 +4,7 @@ import VideoPlayer from 'react-native-video-player';
 import Orientation from 'react-native-orientation';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
-import { toggleGalleryScroll } from '../../../core/ui/reducer';
+import { toggleGalleryScroll } from 'core/ui/reducer';
 
 type Props = {
   uri: string,

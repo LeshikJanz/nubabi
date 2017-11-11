@@ -4,10 +4,9 @@ import * as React from 'react';
 import { Image } from 'react-native';
 import moment from 'moment';
 import { Box, Card, ListItemArrow, Text } from '../components';
-import { formatMeasurement } from '../../common/helpers/measurement';
-import theme from '../../../core/themes/defaultTheme';
-import formatPossessive from '../../../core/helpers/formatPossessive';
-import { formatMeasurement } from '../../../core/helpers/measurement';
+import { formatMeasurement } from 'core/helpers/measurement';
+import formatPossessive from 'core/helpers/formatPossessive';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   onPress: () => void,
@@ -20,8 +19,8 @@ type Props = {
   weight: { value: number },
 };
 
-const weightImage = require('../../../core/images/growth-chart-button-weight.png');
-const heightImage = require('../../../core/images/growth-chart-button-height.png');
+const weightImage = require('core/images/growth-chart-button-weight.png');
+const heightImage = require('core/images/growth-chart-button-height.png');
 
 const imageProps = {
   resizeMode: 'contain',

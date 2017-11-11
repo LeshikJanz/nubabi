@@ -1,7 +1,7 @@
 // @flow
-import type { LayoutProps, Measurement } from '../../../core/types';
+import type { LayoutProps, Measurement } from 'core/types';
 import React from 'react';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { LineGraph } from '../components/LineGraph';
 import withLayout from '../components/withLayout';
 

@@ -4,7 +4,7 @@ import { memoize } from 'ramda';
 import { gql } from 'react-apollo';
 import { Box, Card, Icon, Text } from '../components';
 import moment from 'moment';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   label: ?string,

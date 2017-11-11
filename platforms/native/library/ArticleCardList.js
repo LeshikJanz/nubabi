@@ -1,7 +1,7 @@
 // @flow
 // TODO: reuse HorizontalCardList
 import type { DataSource } from 'react-native';
-import type { Article } from '../../../core/types';
+import type { Article } from 'core/types';
 import React, { PureComponent } from 'react';
 import { ListView, TouchableOpacity } from 'react-native';
 import { compose } from 'ramda';
@@ -14,7 +14,7 @@ import {
   displayLoadingState,
   showNoContentViewIf,
 } from '../components';
-import { mapEdgesToProp } from '../../../core/helpers/graphqlUtils';
+import { mapEdgesToProp } from 'core/helpers/graphqlUtils';
 import ArticleCardItem from './ArticleCardItem';
 import ArticleListItem from './ArticleListItem';
 

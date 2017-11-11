@@ -2,14 +2,14 @@
 import type {
   GraphQLDataProp,
   GrowthArticle as GrowthArticleType,
-} from '../../../core/types';
+} from 'core/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, showNoContentViewIf } from '../components';
 import ArticleList from './ArticleList';
 import GrowthArticle from './GrowthArticle';
-import { mapEdgesToProp } from '../../../core/helpers/graphqlUtils';
+import { mapEdgesToProp } from 'core/helpers/graphqlUtils';
 
 type Props = {
   onViewArticle: (id: string, section: string) => void,

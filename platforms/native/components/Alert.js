@@ -1,10 +1,10 @@
 // @flow
-import type { State } from '../../../core/types';
+import type { State } from 'core/types';
 import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { onlyUpdateForKeys } from 'recompose';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import DropdownAlert from 'react-native-dropdownalert';
 
 type AlertProps = {

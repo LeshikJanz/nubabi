@@ -1,5 +1,5 @@
 // @flow
-import type { Gender } from '../../../../core/types';
+import type { Gender } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Box } from '../../components';

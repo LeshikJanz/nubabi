@@ -3,7 +3,7 @@ import type { GraphDetailMeasurementSwitcherControlProps } from './GraphDetailMe
 import React, { PureComponent } from 'react';
 import { SegmentedControlIOS } from 'react-native';
 import { upperFirst } from 'lodash/fp';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = GraphDetailMeasurementSwitcherControlProps;
 

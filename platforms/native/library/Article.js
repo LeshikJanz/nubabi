@@ -3,7 +3,7 @@
 import React from 'react';
 import { gql } from 'react-apollo';
 import { Box, Markdown } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   text: string,

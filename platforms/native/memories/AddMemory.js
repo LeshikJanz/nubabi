@@ -1,9 +1,5 @@
 // @flow
-import type {
-  ApolloQueryResult,
-  CreateMemoryInput,
-  State,
-} from '../../../core/types';
+import type { ApolloQueryResult, CreateMemoryInput, State } from 'core/types';
 import type { SuggestedMemoryType } from './SuggestedMemoriesList';
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
@@ -25,9 +21,9 @@ import {
   addEdgeToFragment,
   getCurrentUserFromStore,
   getTypenameForFile,
-} from '../../../core/helpers/graphqlUtils';
-import { toggleNetworkActivityIndicator } from '../../../core/ui/reducer';
-import { appError } from '../../../core/app/actions';
+} from 'core/helpers/graphqlUtils';
+import { toggleNetworkActivityIndicator } from 'core/ui/reducer';
+import { appError } from 'core/app/actions';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';

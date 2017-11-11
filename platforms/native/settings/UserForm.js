@@ -1,5 +1,5 @@
 // @flow
-import type { User } from '../../../core/types';
+import type { User } from 'core/types';
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -14,10 +14,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Avatar, Box, SubmitButton } from '../components';
 import hoistStatics from '../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
-import theme, {
-  FONT_COLOR,
-  NUBABI_RED,
-} from '../../../core/themes/defaultTheme';
+import theme, { FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
 import imagePicker from '../components/imagePicker';
 import {
   formattedDate,

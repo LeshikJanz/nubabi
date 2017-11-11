@@ -2,11 +2,11 @@ import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { FONT_COLOR, NUBABI_RED } from '../../../core/themes/defaultTheme';
+import { FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
 
-const medal1 = require('../../../core/images/medal1.png');
-const medal2 = require('../../../core/images/medal2.png');
-const medal3 = require('../../../core/images/medal3.png');
+const medal1 = require('core/images/medal1.png');
+const medal2 = require('core/images/medal2.png');
+const medal3 = require('core/images/medal3.png');
 
 const Achievements = () => {
   return (

@@ -5,7 +5,7 @@ import type {
   Avatar,
   Achievement,
   ActivityConnection,
-} from '../../../../core/types';
+} from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { pathOr } from 'ramda';

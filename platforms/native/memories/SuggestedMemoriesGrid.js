@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { FlatList, Image } from 'react-native';
 import { partial } from 'ramda';
 import { Box, Card, Text } from '../components';
-import { keyExtractor } from '../../../core/helpers/graphqlUtils';
+import { keyExtractor } from 'core/helpers/graphqlUtils';
 import {
   renderHeader as Header,
   suggestedMemories,

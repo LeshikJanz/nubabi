@@ -1,12 +1,12 @@
 // @flow
-import type { ActivityEdge } from '../../../core/types';
+import type { ActivityEdge } from 'core/types';
 import type { DataSource } from 'react-native';
 import { ListView, RefreshControl, StyleSheet, Text, View } from 'react-native';
 import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
 import { gql } from 'react-apollo';
 import ActivityListItem from './ActivityListItem';
-import { PANEL_BACKGROUND } from '../../../core/themes/defaultTheme';
+import { PANEL_BACKGROUND } from 'core/themes/defaultTheme';
 import withPullToRefresh from '../components/withPullToRefresh';
 
 type Props = {

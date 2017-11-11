@@ -22,7 +22,7 @@ function dimensionRelativeToIphone(dimension, actualRefVal = window.width) {
   return getSizeRelativeToReference(dimension, 375, actualRefVal);
 }
 
-const developmentRoadmapImage = require('../../../core/images/growth-development-roadmap.png');
+const developmentRoadmapImage = require('core/images/growth-development-roadmap.png');
 
 export const DevelopmentRoadmapButton = ({ onPress }: Props) => {
   const width = dimensionRelativeToIphone(345);

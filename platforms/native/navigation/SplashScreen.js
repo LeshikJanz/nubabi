@@ -1,5 +1,5 @@
 // @flow
-import type { Baby, BabyEdge, State } from '../../../core/types';
+import type { Baby, BabyEdge, State } from 'core/types';
 import React, { Component } from 'react';
 import {
   Image,
@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import { sample } from 'lodash';
 import { NavigationActions } from 'react-navigation';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
 import RocketHorseLoader from '../components/RocketHorseLoader';
@@ -111,12 +111,12 @@ class SplashScreen extends Component {
         <Animatable.Text style={styles.loadingMessage} animation="fadeIn">
           <Text style={{ fontWeight: theme.text.light.toString() }}>
             <Image
-              source={require('../../../core/images/quote-mark-left.png')}
+              source={require('core/images/quote-mark-left.png')}
               style={[styles.quoteDimensions, { marginTop: -5 }]}
             />{' '}
             {loadingMessage}{' '}
             <Image
-              source={require('../../../core/images/quote-mark-right.png')}
+              source={require('core/images/quote-mark-right.png')}
               style={[
                 styles.quoteDimensions,
                 {

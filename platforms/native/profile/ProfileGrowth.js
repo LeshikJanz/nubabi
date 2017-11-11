@@ -1,11 +1,11 @@
 // @flow
-import type { Growth } from '../../../core/types';
+import type { Growth } from 'core/types';
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, Card, Pill, Text } from '../components';
-import { formatAge } from '../../../core/helpers/formatAge';
+import { formatAge } from 'core/helpers/formatAge';
 import ExpertAdvice from '../growth/ExpertAdvice';
 
 type Props = {

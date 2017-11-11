@@ -1,9 +1,5 @@
 // @flow
-import type {
-  MobileDeviceState,
-  DeviceState,
-  Action,
-} from '../../../core/types';
+import type { MobileDeviceState, DeviceState, Action } from 'core/types';
 import { assoc } from 'ramda';
 
 const ORIENTATION_CHANGED = 'device/ORIENTATION_CHANGED';

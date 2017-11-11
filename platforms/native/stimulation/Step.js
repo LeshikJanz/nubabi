@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { Box, Image, Text } from '../components';
 import withLayout from '../components/withLayout';
@@ -43,7 +43,7 @@ export const Step = (props: StepProps) => {
     return (
       <Box>
         <Image
-          src={require('../../../core/images/centered-paragraph.png')}
+          src={require('core/images/centered-paragraph.png')}
           size={{ width, height }}
           opacity={0.2}
         />

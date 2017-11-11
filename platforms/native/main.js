@@ -1,19 +1,19 @@
 // @flow
-import type { AppStartedAction } from '../../core/types';
+import type { AppStartedAction } from 'core/types';
 import React, { PureComponent } from 'react';
 import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { persistStore } from 'redux-persist';
 import Raven from 'raven-js';
 import { createRenderer } from 'fela-native';
-import configureStore from '../../core/configureStore';
-import configureStorage from '../../core/configureStorage';
-import configureReporting from '../../core/configureReporting';
-import { configureApollo } from '../../core/configureApollo';
-import configureFela from '../../core/configureFela';
+import configureStore from 'core/configureStore';
+import configureStorage from 'core/configureStorage';
+import configureReporting from 'core/configureReporting';
+import { configureApollo } from 'core/configureApollo';
+import configureFela from 'core/configureFela';
 import NativeFelaProvider from './components/FelaProvider';
-import theme from '../../core/themes/defaultTheme';
-import config from '../../core/config';
+import theme from 'core/themes/defaultTheme';
+import config from 'core/config';
 import Root from './root';
 import { epics as appEpics } from './app/actions';
 import { epics as navigationEpics } from './navigation/actions';

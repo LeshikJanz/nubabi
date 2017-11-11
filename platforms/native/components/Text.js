@@ -1,10 +1,10 @@
 // @flow
 import type { BoxProps } from './Box';
-import type { Color, Theme } from '../../../core/themes/types';
+import type { Color, Theme } from 'core/themes/types';
 import React from 'react';
 import PropTypes from 'prop-types';
 import colorLib from 'color';
-import isReactNative from '../../../core/app/isReactNative';
+import isReactNative from 'core/app/isReactNative';
 import Box from './Box';
 
 // Universal styled Text component. The same API for browsers and React Native.

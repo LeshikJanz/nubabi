@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { Box, Card, ListItemArrow, Overlay, Text } from '../components';
@@ -9,7 +9,7 @@ type Props = {
   onPress: () => void,
 };
 
-const whatYouNeedToKnowImage = require('../../../core/images/growth-what-you-need-to-know.jpg');
+const whatYouNeedToKnowImage = require('core/images/growth-what-you-need-to-know.jpg');
 
 export const ThisWeekGrowth = withLayout(
   ({ layout }: { layout: LayoutProps }) => {

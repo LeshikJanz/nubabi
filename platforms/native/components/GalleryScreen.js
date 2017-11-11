@@ -1,5 +1,5 @@
 // @flow
-import type { FileConnection, FileEdge } from '../../../core/types';
+import type { FileConnection, FileEdge } from 'core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { path } from 'ramda';

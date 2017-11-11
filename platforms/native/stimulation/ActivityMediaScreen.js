@@ -1,5 +1,5 @@
 // @flow
-import type { ActivityMediaConnection } from '../../../core/types';
+import type { ActivityMediaConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import PhotoBrowser from '../../../libs/react-native-photo-browser';
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import { FONT_COLOR } from '../../../core/themes/defaultTheme';
+import { FONT_COLOR } from 'core/themes/defaultTheme';
 
 const Memory = ({ memory }) => {
   return (

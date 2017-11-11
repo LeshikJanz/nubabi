@@ -2,7 +2,7 @@
 import type {
   GrowthArticle as GrowthArticleType,
   LayoutProps,
-} from '../../../core/types';
+} from 'core/types';
 import React from 'react';
 import { Image, ScrollView, View } from 'react-native';
 import { compose, path, pathOr } from 'ramda';
@@ -31,14 +31,14 @@ type Props = {
 };
 
 const headerImage = {
-  Parenting: require('../../../core/images/section-parenting-header.png'),
-  Health: require('../../../core/images/section-health-header.png'),
-  default: require('../../../core/images/gross_motor_large.jpg'),
+  Parenting: require('core/images/section-parenting-header.png'),
+  Health: require('core/images/section-health-header.png'),
+  default: require('core/images/gross_motor_large.jpg'),
 };
 
 const headerIcon = {
-  Parenting: require('../../../core/images/section-parenting-icon.png'),
-  Health: require('../../../core/images/section-health-icon.png'),
+  Parenting: require('core/images/section-parenting-icon.png'),
+  Health: require('core/images/section-health-icon.png'),
 };
 
 export const ViewGrowthArticle = ({ article, layout }: Props) => {

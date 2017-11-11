@@ -9,8 +9,8 @@ import { change, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose, last } from 'ramda';
 import { Box, FAB, Icon, Loader, SubmitButton, Text } from '../components';
-import theme from '../../../core/themes/defaultTheme';
-import { formatDuration } from '../../../core/helpers/formatDuration';
+import theme from 'core/themes/defaultTheme';
+import { formatDuration } from 'core/helpers/formatDuration';
 
 type Props = {
   goBack: () => void,

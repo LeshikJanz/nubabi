@@ -1,13 +1,13 @@
 // @flow
-import type { File, Memory as MemoryType } from '../../../core/types';
+import type { File, Memory as MemoryType } from 'core/types';
 import React, { PureComponent } from 'react';
 import { ActivityIndicator } from 'react-native';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import moment from 'moment';
 import { Box, Card, Icon, Pill, Text } from '../components';
-import theme from '../../../core/themes/defaultTheme';
-import { isUUID as isOptimistic } from '../../../core/helpers/graphqlUtils';
+import theme from 'core/themes/defaultTheme';
+import { isUUID as isOptimistic } from 'core/helpers/graphqlUtils';
 import MemoryMedia from '../components/MemoryMedia';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import LikeMemoryButton from './LikeMemoryButton';

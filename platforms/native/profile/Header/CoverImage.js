@@ -1,11 +1,11 @@
 // @flow
-import type { LayoutProps, Image as ImageType } from '../../../../core/types';
+import type { LayoutProps, Image as ImageType } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import withLayout from '../../components/withLayout';
 
-const headerBackground = require('../../../../core/images/profileBackground.jpg');
+const headerBackground = require('core/images/profileBackground.jpg');
 
 type Props = {
   coverImage: ?ImageType,

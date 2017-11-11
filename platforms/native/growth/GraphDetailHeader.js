@@ -1,5 +1,5 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { gql } from 'react-apollo';
@@ -12,7 +12,7 @@ type Props = {
   onSwitchMeasurementType: () => void,
 };
 
-const background = require('../../../core/images/graph-detail-header.png');
+const background = require('core/images/graph-detail-header.png');
 
 export const GraphDetailHeader = ({
   name,

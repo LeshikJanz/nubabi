@@ -6,7 +6,7 @@ import {
   addEdgeToFragment,
   optimisticResponse,
   removeEdgeFromFragment,
-} from '../../../core/helpers/graphqlUtils';
+} from 'core/helpers/graphqlUtils';
 import Favorites from './Favorites';
 import ActivityList from './ActivityList';
 

@@ -1,12 +1,12 @@
 // @flow
-import type { ToggleMemoryLikeInput } from '../../../core/types';
+import type { ToggleMemoryLikeInput } from 'core/types';
 import React from 'react';
 import { LayoutAnimation, TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';
 import { compose, propOr } from 'ramda';
 import { hoistStatics, withHandlers } from 'recompose';
 import { Box, Icon, Text } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   id: string,

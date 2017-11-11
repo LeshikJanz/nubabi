@@ -16,10 +16,7 @@ import AddMemoryHeader from './AddMemoryHeader';
 import SuggestedMemoriesList from './SuggestedMemoriesList';
 import SuggestedMemoriesGrid from './SuggestedMemoriesGrid';
 import ViewMemories from './ViewMemories';
-import {
-  isEmptyProp,
-  mapEdgesToProp,
-} from '../../../core/helpers/graphqlUtils';
+import { isEmptyProp, mapEdgesToProp } from 'core/helpers/graphqlUtils';
 
 type Props = {
   onViewMemory: (id: string) => void,

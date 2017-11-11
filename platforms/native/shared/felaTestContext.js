@@ -1,7 +1,7 @@
 import React from 'react';
 import { NativeFelaProvider } from '../components/FelaProvider';
 import { createRenderer } from 'fela-native';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 export const renderer = createRenderer();
 const FelaProvider = NativeFelaProvider(renderer, theme);

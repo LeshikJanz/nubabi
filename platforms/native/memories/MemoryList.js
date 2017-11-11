@@ -1,5 +1,5 @@
 // @flow
-import type { Memory as MemoryType, MemoryEdge } from '../../../core/types';
+import type { Memory as MemoryType, MemoryEdge } from 'core/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { compose } from 'ramda';

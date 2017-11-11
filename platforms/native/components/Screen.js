@@ -9,7 +9,7 @@ import {
   handleLayout,
   getLayoutInitialState,
 } from './withLayout';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   children: any,

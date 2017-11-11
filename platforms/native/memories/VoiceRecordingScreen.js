@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationProp } from '../../../core/types';
+import type { NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
 import { path } from 'ramda';
 import { Screen } from '../components';

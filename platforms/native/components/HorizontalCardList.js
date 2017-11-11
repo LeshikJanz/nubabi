@@ -1,5 +1,5 @@
 // @flow
-import type { File } from '../../../core/types';
+import type { File } from 'core/types';
 import React, { PureComponent } from 'react';
 import { ListView } from 'react-native';
 import { compose } from 'ramda';
@@ -8,10 +8,7 @@ import Card from './Card';
 import Text from './Text';
 import showNoContentViewIf from './showNoContentViewIf';
 import HorizontalCardItem from './HorizontalCardItem';
-import {
-  isEmptyProp,
-  isUUID as isOptimistic,
-} from '../../../core/helpers/graphqlUtils';
+import { isEmptyProp, isUUID as isOptimistic } from 'core/helpers/graphqlUtils';
 
 type HorizontalCardItemType = {
   id: string,

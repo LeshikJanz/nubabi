@@ -1,11 +1,11 @@
 // @flow
-import type { Avatar } from '../../../../core/types';
+import type { Avatar } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import Svg, { Path, Circle } from 'react-native-svg';
 
-const babyIcon = require('../../../../core/images/face_icon.jpg');
+const babyIcon = require('core/images/face_icon.jpg');
 
 const width = Dimensions.get('window').width;
 

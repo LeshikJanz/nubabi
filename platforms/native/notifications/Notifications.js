@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { compose } from 'ramda';
-import { isEmptyProp } from '../../../core/helpers/graphqlUtils';
+import { isEmptyProp } from 'core/helpers/graphqlUtils';
 import showNoContentViewIf from '../components/showNoContentViewIf';
 
 type Props = {

@@ -1,9 +1,5 @@
 // @flow
-import type {
-  ApolloQueryResult,
-  File,
-  Memory as MemoryType,
-} from '../../../core/types';
+import type { ApolloQueryResult, File, Memory as MemoryType } from 'core/types';
 import React from 'react';
 import {
   assoc,
@@ -33,7 +29,7 @@ import {
   isEmptyProp,
   replaceEdgeInFragment,
   withNetworkIndicatorActions,
-} from '../../../core/helpers/graphqlUtils';
+} from 'core/helpers/graphqlUtils';
 
 type Props = {
   memory: MemoryType,

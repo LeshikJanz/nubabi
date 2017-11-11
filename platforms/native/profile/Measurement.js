@@ -1,5 +1,5 @@
 // @flow
-import type { MeasurementUnit } from '../../../core/types';
+import type { MeasurementUnit } from 'core/types';
 import React from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { gql } from 'react-apollo';
@@ -8,8 +8,8 @@ import theme, {
   FONT_COLOR,
   LIGHT_GREY,
   NUBABI_RED,
-} from '../../../core/themes/defaultTheme';
-import { formatMeasurement } from '../../../core/helpers/measurement';
+} from 'core/themes/defaultTheme';
+import { formatMeasurement } from 'core/helpers/measurement';
 
 type Props = {
   header: string,

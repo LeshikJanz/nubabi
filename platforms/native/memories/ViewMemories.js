@@ -3,7 +3,7 @@ import type {
   ApolloQueryResult,
   GraphQLDataProp,
   Memory as MemoryType,
-} from '../../../core/types';
+} from 'core/types';
 import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
 import { gql } from 'react-apollo';

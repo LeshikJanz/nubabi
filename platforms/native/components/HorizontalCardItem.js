@@ -1,10 +1,10 @@
 // @flow
-import type { LayoutProps } from '../../../core/types';
+import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { ActivityIndicator, StyleSheet } from 'react-native';
 // TODO: restore
 import { compose } from 'ramda';
-import { isUUID as isOptimistic } from '../../../core/helpers/graphqlUtils';
+import { isUUID as isOptimistic } from 'core/helpers/graphqlUtils';
 import Box from './Box';
 import Text from './Text';
 import withLayout from './withLayout';

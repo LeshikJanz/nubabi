@@ -5,14 +5,14 @@ import type {
   NavigationOptions,
   State,
   Viewer,
-} from '../../../core/types';
+} from 'core/types';
 import React, { PureComponent } from 'react';
 import { AsyncStorage, ScrollView, StyleSheet, View } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { displayLoadingState, RequireBabyView, Screen } from '../components';
 import Header from './Header/Header';
 import RecentMemories from './RecentMemories';

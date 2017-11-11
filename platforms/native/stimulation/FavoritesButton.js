@@ -1,9 +1,9 @@
 // @flow
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
-const icon = require('../../../core/images/star.png');
+const icon = require('core/images/star.png');
 
 type Props = {
   onPress: () => void,

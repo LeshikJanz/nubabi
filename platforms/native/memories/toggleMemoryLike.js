@@ -1,7 +1,7 @@
 // @flow
 import { gql, graphql } from 'react-apollo';
 import { merge } from 'ramda';
-import { optimisticResponse } from '../../../core/helpers/graphqlUtils';
+import { optimisticResponse } from 'core/helpers/graphqlUtils';
 
 export const toggleMemoryLike = graphql(
   gql`

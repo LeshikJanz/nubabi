@@ -3,9 +3,9 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { Text } from '../components';
 import { gql } from 'react-apollo';
-import { PANEL_BUTTON_TEXT } from '../../../core/themes/defaultTheme';
+import { PANEL_BUTTON_TEXT } from 'core/themes/defaultTheme';
 
-const icon = require('../../../core/images/didYouKnowIcon.png');
+const icon = require('core/images/didYouKnowIcon.png');
 
 const defaultText =
   'At this time your baby will begin to babble routinely, often amusing herself for long persion of time!';

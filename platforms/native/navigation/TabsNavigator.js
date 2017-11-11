@@ -1,10 +1,10 @@
 // @flow
-import type { NavigationOptions } from '../../../core/types';
+import type { NavigationOptions } from 'core/types';
 import React from 'react';
 import type { TabBarConfig } from 'react-navigation';
 import { TabNavigator } from 'react-navigation';
 import { upperFirst } from 'lodash';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { NubabiIcon } from '../components';
 import Stimulation from '../stimulation';
 import Growth from '../growth/GrowthScreen';

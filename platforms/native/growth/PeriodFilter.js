@@ -1,5 +1,5 @@
 // @flow
-import type { Expert } from '../../../core/types';
+import type { Expert } from 'core/types';
 import React, { PureComponent } from 'react';
 import Menu, {
   MenuContext,
@@ -10,7 +10,7 @@ import Menu, {
 import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Box, Text } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 export type GrowthPeriodOption = {
   label: string,

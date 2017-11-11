@@ -2,7 +2,7 @@
 import React from 'react';
 import { Box, Text, FAB } from '../components';
 import Icon from 'react-native-vector-icons/Ionicons';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   onAddPress: () => void,

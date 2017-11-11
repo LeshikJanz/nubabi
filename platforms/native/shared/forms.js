@@ -3,7 +3,7 @@ import React from 'react';
 import { Text, TextInput, View } from 'react-native';
 import FloatingLabelTextInput from 'react-native-floating-label-text-input';
 import moment from 'moment';
-import theme, { FONT_COLOR } from '../../../core/themes/defaultTheme';
+import theme, { FONT_COLOR } from 'core/themes/defaultTheme';
 import { DatePicker } from '../components';
 import RelationshipDropdown from '../profile/EditBaby/RelationshipDropdown';
 

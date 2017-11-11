@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Box, Text } from '../components';
-import formatLikeMessage from '../../../core/helpers/formatLikeMessage';
+import formatLikeMessage from 'core/helpers/formatLikeMessage';
 import LikeMemoryButton from './LikeMemoryButton';
 
 type Props = {

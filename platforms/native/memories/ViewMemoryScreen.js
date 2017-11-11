@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationProp } from '../../../core/types';
+import type { NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Box, Icon, Screen } from '../components';

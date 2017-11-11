@@ -1,11 +1,11 @@
 // @flow
-import type { ColorProps, Theme } from '../../../core/themes/types';
+import type { ColorProps, Theme } from 'core/themes/types';
 import type { TextProps } from './Text';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Box from './Box';
 import Text, { computeTextStyle } from './Text';
-import isReactNative from '../../../core/app/isReactNative';
+import isReactNative from 'core/app/isReactNative';
 
 export type ButtonProps = ColorProps &
   TextProps & {

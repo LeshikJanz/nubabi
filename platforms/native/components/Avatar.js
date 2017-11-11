@@ -3,7 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import { createComponent } from 'react-fela';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   backgroundColor?: string,

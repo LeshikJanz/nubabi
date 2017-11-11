@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { formatMeasurement } from '../../../../core/helpers/measurement';
+import { formatMeasurement } from 'core/helpers/measurement';
 
 type Props = {
   height: number,

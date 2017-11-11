@@ -1,11 +1,11 @@
 // @flow
-import type { UpdateUserInput, User } from '../../../core/types';
+import type { UpdateUserInput, User } from 'core/types';
 import React, { PureComponent } from 'react';
 import { compose, path, omit } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { ImageCacheManager } from 'react-native-cached-image';
-import { formValues } from '../../../core/helpers/graphqlUtils';
+import { formValues } from 'core/helpers/graphqlUtils';
 import { displayLoadingState } from '../components';
 import UserForm from './UserForm';
 import { normalizeAvatarAndCoverImage } from '../profile/EditBaby/BabyForm';

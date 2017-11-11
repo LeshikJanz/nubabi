@@ -1,12 +1,12 @@
 // @flow
-import type { Activity, SkillArea } from '../../../core/types';
+import type { Activity, SkillArea } from 'core/types';
 import React from 'react';
 import { Dimensions, Text, TouchableHighlight, View } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import { path } from 'ramda';
+import theme from 'core/themes/defaultTheme';
 import { Box, Icon } from '../components';
 import iconMappings from './iconMappings';
-import theme from '../../common/themes/defaultTheme';
 
 const width = Dimensions.get('window').width;
 

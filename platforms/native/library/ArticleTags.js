@@ -1,9 +1,9 @@
 // @flow
-import type { Tag } from '../../../core/types';
+import type { Tag } from 'core/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Box, Pill } from '../components';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import withLayout from '../components/withLayout';
 
 type Props = {

@@ -1,5 +1,5 @@
 // @flow
-import type { GrowthArticleEdge } from '../../../core/types';
+import type { GrowthArticleEdge } from 'core/types';
 import React from 'react';
 import { Box, Icon, Link, Text } from '../components';
 import {
@@ -12,7 +12,7 @@ import {
   pluck,
   reject,
 } from 'ramda';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   links: Array<GrowthArticleEdge>,

@@ -3,7 +3,7 @@ import type {
   ActivityEdge,
   GraphQLDataProp,
   NavigationOptions,
-} from '../../../core/types';
+} from 'core/types';
 import type { Event } from 'react-native';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';

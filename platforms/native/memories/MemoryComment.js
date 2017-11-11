@@ -1,5 +1,5 @@
 // @flow
-import type { Comment } from '../../../core/types';
+import type { Comment } from 'core/types';
 import React from 'react';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';

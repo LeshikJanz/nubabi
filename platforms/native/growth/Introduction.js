@@ -20,7 +20,7 @@ export const Introduction = ({ text, onSkip }: Props) => {
         <Box flexDirection="row" justifyContent="space-around">
           <Box margin={1}>
             <Image
-              src={require('../../../core/images/growth_introduction.png')}
+              src={require('core/images/growth_introduction.png')}
               size={{ width: 48, height: 48 }}
             />
           </Box>

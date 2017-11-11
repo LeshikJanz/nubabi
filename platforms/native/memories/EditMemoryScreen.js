@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationProp } from '../../../core/types';
+import type { NavigationProp } from 'core/types';
 import React, { Component } from 'react';
 import { InteractionManager } from 'react-native';
 import { Screen, SubmitFormNavButton } from '../components';

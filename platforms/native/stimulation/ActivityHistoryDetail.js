@@ -1,5 +1,5 @@
 // @flow
-import type { ActivityConnection } from '../../../core/types';
+import type { ActivityConnection } from 'core/types';
 import React from 'react';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
@@ -9,7 +9,7 @@ import {
   showNoContentViewIf,
   withCurrentBaby,
 } from '../components';
-import { isEmptyProp } from '../../../core/helpers/graphqlUtils';
+import { isEmptyProp } from 'core/helpers/graphqlUtils';
 
 type Props = {
   periodId: string,

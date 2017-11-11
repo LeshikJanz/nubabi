@@ -1,5 +1,5 @@
 // @flow
-import type { Expert, LayoutProps } from '../../../core/types/index';
+import type { Expert, LayoutProps } from 'core/types/index';
 import React, { Component } from 'react';
 import {
   View,
@@ -14,7 +14,7 @@ import { gql } from 'react-apollo';
 import { path, head } from 'ramda';
 import FlipCard from '../shared/FlipView';
 import withLayout from '../components/withLayout';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   expert: Expert,

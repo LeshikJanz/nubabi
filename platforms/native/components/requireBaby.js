@@ -9,7 +9,7 @@ import Overlay from './Overlay';
 export const RequireBabyView = () => (
   <Box flex={1} justifyContent="center" alignItems="center">
     <ImageBackground
-      source={require('../../../core/images/growth-what-you-need-to-know.jpg')}
+      source={require('core/images/growth-what-you-need-to-know.jpg')}
       style={{
         width: 128,
         height: 128,

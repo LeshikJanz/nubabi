@@ -3,7 +3,7 @@ import type {
   Activity as ActivityType,
   NavigationOptionsGetter,
   ToggleFavoriteInput,
-} from '../../../core/types';
+} from 'core/types';
 import React, { PureComponent } from 'react';
 import { compose, find, path, pluck, propEq } from 'ramda';
 import { gql, graphql } from 'react-apollo';

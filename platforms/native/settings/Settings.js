@@ -1,5 +1,5 @@
 // @flow
-import type { SettingsState, State, Viewer } from '../../../core/types';
+import type { SettingsState, State, Viewer } from 'core/types';
 import React, { Component } from 'react';
 import {
   ActionSheetIOS,
@@ -16,9 +16,9 @@ import {
   resetSettings,
   resetTips,
   setSettingsValue,
-} from '../../../core/settings/reducer';
-import { logout } from '../../../core/auth/actions';
-import theme, { NUBABI_RED } from '../../../core/themes/defaultTheme';
+} from 'core/settings/reducer';
+import { logout } from 'core/auth/actions';
+import theme, { NUBABI_RED } from 'core/themes/defaultTheme';
 import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {

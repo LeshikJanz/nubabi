@@ -1,5 +1,5 @@
 // @flow
-import type { NavigationProp, State } from '../../core/types';
+import type { NavigationProp, State } from 'core/types';
 import type { Dispatch } from 'redux';
 import React from 'react';
 import { View } from 'react-native';

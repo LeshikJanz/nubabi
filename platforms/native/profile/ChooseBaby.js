@@ -5,7 +5,7 @@ import type {
   State,
   NavigationOptions,
   LayoutProps,
-} from '../../../core/types/index';
+} from 'core/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -27,15 +27,12 @@ import { compose, path } from 'ramda';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Svg, { Path } from 'react-native-svg';
 import { NavigationActions } from 'react-navigation';
-import theme, {
-  HEADER_FONT_COLOR,
-  NUBABI_RED,
-} from '../../../core/themes/defaultTheme';
-import { selectBaby } from '../../../core/babies/actions';
+import theme, { HEADER_FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
+import { selectBaby } from 'core/babies/actions';
 import withLayout from '../components/withLayout';
 
 const Icon = Animated.createAnimatedComponent(IonIcon);
-const babyIcon = require('../../../core/images/face_icon.jpg');
+const babyIcon = require('core/images/face_icon.jpg');
 
 type Props = {
   navigation: NavigationProp<*, *>,

@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import Color from 'color';
 import RocketHorse from './RocketHorse';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   splash?: boolean,

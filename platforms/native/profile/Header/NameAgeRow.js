@@ -9,8 +9,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import { NubabiIcon } from '../../components';
-import { NUBABI_RED } from '../../../../core/themes/defaultTheme';
-import { formatAge } from '../../../../core/helpers/formatAge';
+import { NUBABI_RED } from 'core/themes/defaultTheme';
+import { formatAge } from 'core/helpers/formatAge';
 
 class NameAgeRow extends Component {
   render() {

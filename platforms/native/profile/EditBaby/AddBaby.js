@@ -1,11 +1,11 @@
 // @flow
-import type { NavigationOptions } from '../../../../core/types';
+import type { NavigationOptions } from 'core/types';
 import React, { Component } from 'react';
 import { assocPath, compose, path, prepend } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { Screen, SubmitFormNavButton } from '../../components';
 import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
-import theme from '../../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 
 type Props = {
   onSubmit: (values: CreateBabyInput) => Promise<ApolloQueryResult<*>>,

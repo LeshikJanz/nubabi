@@ -1,7 +1,7 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import * as Animatable from 'react-native-animatable';
 import RocketHorse from './RocketHorse';
 

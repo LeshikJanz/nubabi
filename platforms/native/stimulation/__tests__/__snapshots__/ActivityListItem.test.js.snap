@@ -137,17 +137,7 @@ style = Object {
         </Text>
       </View>
     </View>
-<<<<<<< HEAD:src/native/stimulation/__tests__/__snapshots__/ActivityListItem.test.js.snap
     <View
-=======
-    <Image
-      resizeMode="contain"
-      source={
-        Object {
-          "testUri": "../../../core/images/sensory_icon.png",
-        }
-      }
->>>>>>> refactor: monorepo directory structure:platforms/native/stimulation/__tests__/__snapshots__/ActivityListItem.test.js.snap
       style={
         Object {
           "borderBottomWidth": 0,
@@ -174,7 +164,7 @@ style = Object {
           resizeMode="contain"
           source={
             Object {
-              "testUri": "../../../src/common/images/sensory_icon.png",
+              "testUri": "../../../core/images/sensory_icon.png",
             }
           }
           style={

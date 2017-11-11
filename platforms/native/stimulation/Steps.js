@@ -1,5 +1,5 @@
 // @flow
-import type { ActivityMediaType } from '../../../core/types';
+import type { ActivityMediaType } from 'core/types';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation, TouchableOpacity } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';

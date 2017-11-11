@@ -1,16 +1,12 @@
 // @flow
-import type {
-  File,
-  Image as ImageType,
-  LayoutProps,
-} from '../../../core/types';
+import type { File, Image as ImageType, LayoutProps } from 'core/types';
 import React from 'react';
 import { CachedImage as Image } from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { prop, propOr } from 'ramda';
 import Box from './Box';
 import Overlay from './Overlay';
-import theme from '../../../core/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import { MemoryMediaSingle } from './MemoryMedia';
 
 type Props = {

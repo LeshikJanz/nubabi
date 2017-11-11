@@ -1,8 +1,5 @@
 // @flow
-import type {
-  Image as ImageType,
-  LayoutProps,
-} from '../../../core/types/types';
+import type { Image as ImageType, LayoutProps } from 'core/types/types';
 import React from 'react';
 import {
   Image,
@@ -21,7 +18,7 @@ type Props = {
   style?: Object | number,
 };
 
-const defaultBackground = require('../../../core/images/browseAllActivitiesButton.jpg');
+const defaultBackground = require('core/images/browseAllActivitiesButton.jpg');
 
 export const BrowseActivitiesButton = ({
   onPress,

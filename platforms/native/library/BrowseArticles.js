@@ -1,5 +1,5 @@
 // @flow
-import type { Article, GraphQLDataProp } from '../../../core/types';
+import type { Article, GraphQLDataProp } from 'core/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { displayLoadingState, showNoContentViewIf } from '../components';
 import ArticleList from './ArticleList';
 import ArticleListItem from './ArticleListItem';
-import { mapEdgesToProp } from '../../../core/helpers/graphqlUtils';
+import { mapEdgesToProp } from 'core/helpers/graphqlUtils';
 
 type Props = {
   data: GraphQLDataProp<*>,
