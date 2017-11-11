@@ -2,5 +2,6 @@
 System.config({
   paths: {
     'core/*': './core/*',
+    'native/*': './platforms/native/*',
   },
 });
