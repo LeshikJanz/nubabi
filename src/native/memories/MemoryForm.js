@@ -158,6 +158,7 @@ class MemoryForm extends PureComponent {
 
   renderSuggestedMemoryType = field => {
     const suggestedMemoryId = field.input.value;
+    console.log('SG', field.input.value);
 
     if (!suggestedMemoryId) {
       return null;
@@ -186,9 +187,9 @@ class MemoryForm extends PureComponent {
   };
 
   render() {
-    const { suggestedMemoryType } = this.props.initialValues;
     const {
       mode,
+      suggestedMemoryType,
       handleSubmit,
       onSubmit,
       submitting: isSubmitting,
@@ -235,10 +236,17 @@ class MemoryForm extends PureComponent {
               <ListItem
                 leftIcon="ios-images"
                 onPress={this.handleAddMedia}
-                last
                 {...editableProps}
               >
                 <Text color="secondary">Photo/Video</Text>
+              </ListItem>
+              <ListItem
+                leftIcon="md-aperture"
+                onPress={this.props.onEditSticker}
+                last
+                {...editableProps}
+              >
+                <Text color="secondary">Stickers</Text>
               </ListItem>
             </List>
           </Box>
@@ -265,6 +273,7 @@ export default compose(
   }),
   connect((state: State) => ({
     files: selector(state, 'files'),
+    suggestedMemoryType: selector(state, 'suggestedMemoryType'),
   })),
   withLayout,
 )(MemoryForm);

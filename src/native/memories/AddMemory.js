@@ -57,11 +57,13 @@ const suggestedMemoryTypeProps = (
 export const AddMemory = ({
   onSubmit,
   onAddVoiceNote,
+  onEditSticker,
   suggestedMemoryType,
 }: Props) => (
   <MemoryForm
     onSubmit={onSubmit}
     onAddVoiceNote={onAddVoiceNote}
+    onEditSticker={onEditSticker}
     initialValues={suggestedMemoryTypeProps(suggestedMemoryType)}
     suggestedMemoryType={suggestedMemoryType}
   />

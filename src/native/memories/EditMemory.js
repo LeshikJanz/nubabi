@@ -54,6 +54,7 @@ export const EditMemory = ({
   memory,
   onSubmit,
   onAddVoiceNote,
+  onEditSticker,
   files,
 }: Props) => {
   return (
@@ -66,6 +67,7 @@ export const EditMemory = ({
       mode="edit"
       onSubmit={onSubmit}
       onAddVoiceNote={onAddVoiceNote}
+      onEditSticker={onEditSticker}
     />
   );
 };

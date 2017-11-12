@@ -27,6 +27,7 @@ import DatePicker from './DatePicker';
 import Icon from 'react-native-vector-icons/Ionicons';
 import FormContainer from './FormContainer';
 import SubmitFormNavButton from '../navigation/SubmitFormNavButton';
+import RightNavButton from '../navigation/RightNavButton';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
@@ -45,6 +46,7 @@ export {
   FormContainer,
   SubmitButton,
   SubmitFormNavButton,
+  RightNavButton,
   Image,
   Avatar,
   Icon,

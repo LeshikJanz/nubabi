@@ -51,6 +51,7 @@ import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
 import EditMemoryScreen from '../memories/EditMemoryScreen';
 import VoiceRecordingScreen from '../memories/VoiceRecordingScreen';
+import StickersScreen from '../memories/StickersScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
@@ -125,6 +126,7 @@ const routes = {
   },
   voiceRecording: { screen: VoiceRecordingScreen },
   gallery: { screen: GalleryScreen },
+  stickers: { screen: StickersScreen },
 };
 
 class TransitionerSwitcher extends PureComponent {

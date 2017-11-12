@@ -29,6 +29,10 @@ export class AddMemoryScreen extends PureComponent {
     InteractionManager.runAfterInteractions(this.props.navigation.goBack);
   };
 
+  handleEditSticker = () => {
+    this.props.navigation.navigate('stickers', { mode: 'add' });
+  };
+
   render() {
     const suggestedMemoryId = path(
       ['navigation', 'state', 'params', 'suggestedMemoryId'],
@@ -38,6 +42,7 @@ export class AddMemoryScreen extends PureComponent {
     return (
       <Screen>
         <AddMemory
+          onEditSticker={this.handleEditSticker}
           onAddVoiceNote={this.handleAddVoiceNote}
           goBack={this.handleGoBack}
           suggestedMemoryId={suggestedMemoryId}

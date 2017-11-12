@@ -42,6 +42,9 @@ export class EditMemoryScreen extends Component {
     });
   };
 
+  handleEditSticker = () =>
+    this.props.navigation.navigate('stickers', { mode: 'edit' });
+
   render() {
     const id = this.props.navigation.state.params.id;
 
@@ -50,6 +53,7 @@ export class EditMemoryScreen extends Component {
         <EditMemory
           id={id}
           onAddVoiceNote={this.handleAddVoiceNote}
+          onEditSticker={this.handleEditSticker}
           goBack={this.handleGoBack}
         />
       </Screen>
