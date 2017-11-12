@@ -62,7 +62,7 @@ export const renderHeader = ({ onDismiss, centered = false }) => (
     </Text>
     {onDismiss && (
       <TouchableOpacity onPress={onDismiss}>
-        <Icon name="ios-close" size={20} color={theme.colors.secondary} />
+        <Icon name="ios-close" size={24} color={theme.colors.secondary} />
       </TouchableOpacity>
     )}
   </Box>
