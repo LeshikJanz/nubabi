@@ -241,7 +241,7 @@ class MemoryForm extends PureComponent {
                 <Text color="secondary">Photo/Video</Text>
               </ListItem>
               <ListItem
-                leftIcon="md-aperture"
+                leftIcon="md-flower"
                 onPress={this.props.onEditSticker}
                 last
                 {...editableProps}
