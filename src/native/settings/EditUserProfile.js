@@ -1,7 +1,7 @@
 // @flow
 import type { UpdateUserInput, User } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { compose, path, prop } from 'ramda';
+import { compose, path, omit } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { ImageCacheManager } from 'react-native-cached-image';
@@ -72,7 +72,10 @@ export default compose(
         data,
         user: path(['viewer', 'user'], data),
         onSubmit: async values => {
-          const input = normalizeAvatarAndCoverImage(values, values);
+          const input = normalizeAvatarAndCoverImage(
+            omit(['avatar'], values),
+            values,
+          );
 
           return mutate({
             variables: { input },
