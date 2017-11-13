@@ -9,7 +9,7 @@ type Props = {
 
 };
 
-const ProfileNavBar = styled(Box)`
+const Wrapper = styled(Box)`
   box-shadow: ${props => props.theme.shadows.primary};
 `;
 
@@ -19,7 +19,7 @@ const ProfileMenu = styled.ul`
 `;
 
 const MenuItem = styled.li`
-  margin: 1px;
+  margin: 0;
   box-shadow: ${props => props.theme.shadows.light};
 `;
 
@@ -45,18 +45,17 @@ class NavBar extends PureComponent<Props> {
     const { location } = this.props;
 
     return (
-      <ProfileNavBar width={1/4} is={Nav}>
+      <Wrapper width={1/4} is={Nav}>
         <ProfileMenu>
-          <MenuItem><MenuLink to="/profile" active={location.pathname === "/profile"}>
-
-            Overview
-          </MenuLink></MenuItem>
+          <MenuItem>
+            <MenuLink to="/profile" active={location.pathname === "/profile"}>Overview</MenuLink>
+          </MenuItem>
           <MenuItem><MenuLink to="/profile">Growth</MenuLink></MenuItem>
           <MenuItem><MenuLink to="/profile">Stimulation</MenuLink></MenuItem>
           <MenuItem><MenuLink to="/profile">Library</MenuLink></MenuItem>
           <MenuItem><MenuLink to="/profile">Memories</MenuLink></MenuItem>
         </ProfileMenu>
-      </ProfileNavBar>
+      </Wrapper>
     );
   }
 }

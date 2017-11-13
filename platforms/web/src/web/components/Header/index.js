@@ -1,6 +1,7 @@
 // @flow
 import React, { PureComponent } from "react";
-import { Menu } from "web/elements";
+import { Menu, Header } from "web/elements";
+import styled from 'styled-components';
 
 type Props = {
   pathname: string,
@@ -8,10 +9,18 @@ type Props = {
   logout: () => void
 };
 
-class Header extends PureComponent<Props> {
+const Wrapper = styled(Header)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+`;
+
+class AppHeader extends PureComponent<Props> {
   render() {
     return (
-      <header>
+      <Wrapper>
         <Menu>
           <Menu.Link to="/" active={this.props.pathname === "/"}>
             Home
@@ -41,9 +50,9 @@ class Header extends PureComponent<Props> {
             </Menu.Link>
           )}
         </Menu>
-      </header>
+      </Wrapper>
     );
   }
 }
 
-export default Header;
+export default AppHeader;

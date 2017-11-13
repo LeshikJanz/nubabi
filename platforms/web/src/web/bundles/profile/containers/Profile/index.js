@@ -8,8 +8,9 @@ import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 
 import { Loader } from "web/components";
-import { Main, Aside, Header } from "web/elements";
+import { Main, Aside } from "web/elements";
 import NavBar from './Navbar';
+import Header from './Header';
 
 type Props = {
   navigation: any,
@@ -143,15 +144,7 @@ class Profile extends PureComponent<Props> {
 
     return (
       <Wrapper wrap justify='space-between'>
-        <ProfileHeader width={1} is={Header} image={baby.coverImage.url}>
-          <img src={baby.avatar.url} style={{ width: "50px", height: "50px" }} alt=""/>
-
-          <h2>{baby.name}</h2>
-
-          <p>Date of Birth: {baby.dob}</p>
-          <p>Height: {baby.height}</p>
-          <p>Weight: {baby.weight}</p>
-        </ProfileHeader>
+        <Header baby={baby} />
 
         <NavBar />
 

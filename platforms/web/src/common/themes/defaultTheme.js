@@ -26,6 +26,7 @@ const open = {
   blue0: '#33B7EB',
   blue1: '#58A4FF',
   red0: '#EA3154',
+  red1: '#CB2E4A',
   black0: '#454D56',
   black1: '#3D414B',
 };
@@ -87,7 +88,8 @@ const theme: Theme = {
     maxWidth: 21,
   },
   button: {
-    borderRadius: 15,
+    borderRadius: 20,
+    fontSize: 14,
   },
   heading: {
     fontFamily: 'System',
@@ -105,6 +107,7 @@ const theme: Theme = {
   paragraph: {
     marginBottom: 1,
   },
+  transition: 'all .2s ease',
 };
 
 export default theme;
