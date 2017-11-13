@@ -31,8 +31,9 @@ const open = {
 };
 
 const shadows = {
-  primary: `0 2px 4px 0 'rgba(0, 0, 0, .5)'`,
+  primary: `0 2px 4px 0 rgba(0, 0, 0, .5)`,
   light: `0 1px 0 0 ${open.white2}`,
+  panel: `0 1px 3px 0 rgba(0, 0, 0, .15)`
 };
 
 const bg = {

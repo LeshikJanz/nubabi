@@ -138,7 +138,7 @@ class Profile extends PureComponent<Props> {
 
         <Main {...baby}/>
 
-        <Box width={1/6} is={Aside}>Aside here</Box>
+        <Box width={1/6} is={Aside}> </Box>
       </Wrapper>
     );
   }

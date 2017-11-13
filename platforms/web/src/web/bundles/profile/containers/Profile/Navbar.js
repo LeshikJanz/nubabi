@@ -10,8 +10,8 @@ type Props = {
 };
 
 const Wrapper = styled(Box)`
-  box-shadow: ${props => props.theme.shadows.primary};
   background: ${props => props.theme.colors.white};
+  border-right: 1px solid ${props => props.theme.colors.open.white2};
 `;
 
 const ProfileMenu = styled.ul`
@@ -21,7 +21,7 @@ const ProfileMenu = styled.ul`
 
 const MenuItem = styled.li`
   margin: 0;
-  box-shadow: ${props => props.theme.shadows.light};
+  border-bottom: 1px solid ${props => props.theme.colors.open.white2};
 `;
 
 const MenuLink = styled(Menu.Link)`
