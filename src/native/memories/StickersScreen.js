@@ -11,6 +11,7 @@ export class StickersScreen extends PureComponent {
     };
 
     return {
+      mode: 'modal',
       title: 'Add Sticker',
       headerRight: <RightNavButton onPress={goBack} text="Done" />,
     };

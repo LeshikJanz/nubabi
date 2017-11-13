@@ -7,7 +7,7 @@ import { change, formValueSelector } from 'redux-form';
 import { Box, Icon } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { keyExtractor } from '../../common/helpers/graphqlUtils';
-import { suggestedMemories } from './SuggestedMemoriesList';
+import { stickersList } from './SuggestedMemoriesList';
 
 type Props = {
   selectedSticker: ?string,
@@ -50,7 +50,7 @@ class Stickers extends PureComponent<Props> {
   render() {
     return (
       <FlatList
-        data={suggestedMemories}
+        data={stickersList}
         numColumns={2}
         keyExtractor={keyExtractor}
         renderItem={this.renderItem}

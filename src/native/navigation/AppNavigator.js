@@ -126,7 +126,7 @@ const routes = {
   },
   voiceRecording: { screen: VoiceRecordingScreen },
   gallery: { screen: GalleryScreen },
-  stickers: { screen: StickersScreen },
+  stickers: { screen: StickersScreen, mode: 'modal' },
 };
 
 class TransitionerSwitcher extends PureComponent {

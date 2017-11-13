@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import theme from '../../common/themes/defaultTheme';
 import SuggestedMemory from './SuggestedMemory';
 import { setSettingsValue } from '../../common/settings/reducer';
+import * as stickers from './stickersMap';
 
 type Props = {
   onAddMemory: (title?: string) => void,
@@ -20,40 +21,40 @@ export type SuggestedMemoryType = {
 };
 
 export const suggestedMemories = [
-  {
-    id: 'solid-food',
-    title: 'First Solid Food',
-    image: require('../../common/images/memories/first-solid-food.png'),
-  },
-  {
-    id: 'bath-time',
-    title: 'Bath Time',
-    image: require('../../common/images/memories/bath-time.png'),
-  },
-  {
-    id: 'first-smile',
-    title: 'First Smile',
-    image: require('../../common/images/memories/first-smile.png'),
-  },
-  {
-    id: 'first-birthday',
-    title: 'First Birthday',
-    image: require('../../common/images/memories/first-birthday.png'),
-  },
-  {
-    id: 'first-tooth',
-    title: 'First Tooth',
-    image: require('../../common/images/memories/first-tooth.png'),
-  },
-  {
-    id: 'slept-through',
-    title: 'Slept Through',
-    image: require('../../common/images/memories/slept-through.png'),
-  },
+  stickers.solidFood,
+  stickers.bathTime,
+  stickers.firstSmile,
+  stickers.firstBirthday,
+  stickers.firstTooth,
+  stickers.sleptThrough,
 ];
 
-export const findSuggestedMemoryById = (id: string) =>
-  find(propEq('id', id), suggestedMemories);
+export const stickersList = [
+  stickers.bathTime,
+  stickers.firstSit,
+  stickers.solidFood,
+  stickers.firstCrawl,
+  stickers.firstStand,
+  stickers.firstWalk,
+  stickers.firstMama,
+  stickers.firstDada,
+  stickers.sleptThrough,
+  stickers.firstTooth,
+  stickers.heart,
+  stickers.firstSmile,
+  stickers.cake,
+  stickers.birthday1,
+  stickers.birthday2,
+  stickers.birthday3,
+  stickers.kisses,
+  stickers.park,
+  stickers.swimming,
+  stickers.holiday,
+];
+
+export const findSuggestedMemoryById = (id: string) => {
+  return find(propEq('id', id), stickersList);
+};
 
 export const renderHeader = ({ onDismiss, centered = false }) => (
   <Box contentSpacing flexDirection="row" alignItems="center">

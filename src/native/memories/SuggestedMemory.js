@@ -19,28 +19,30 @@ export const SuggestedMemory = ({
   onAddSuggestedMemory,
 }: Props) => {
   return (
-    <Card
-      margin={0}
-      padding={1}
-      onPress={onAddSuggestedMemory}
-      style={() => ({
-        width: 115,
-        height: 120,
-      })}
-    >
-      <Box alignItems="center" justifyContent="center" paddingBottom={1}>
-        <Image
-          source={image}
-          style={{ width: imageSize, height: imageSize }}
-          resizeMode="cover"
-        />
-      </Box>
-      <Box flex={1} alignItems="center" justifyContent="center">
-        <Text color="secondary" align="center">
-          {title}
-        </Text>
-      </Box>
-    </Card>
+    <Box>
+      <Card
+        margin={0}
+        padding={1}
+        onPress={onAddSuggestedMemory}
+        style={() => ({
+          width: 115,
+          height: 120,
+        })}
+      >
+        <Box alignItems="center" justifyContent="center" paddingBottom={1}>
+          <Image
+            source={image}
+            style={{ width: imageSize, height: imageSize }}
+            resizeMode="cover"
+          />
+        </Box>
+        <Box flex={1} alignItems="center" justifyContent="center">
+          <Text color="secondary" align="center">
+            {title}
+          </Text>
+        </Box>
+      </Card>
+    </Box>
   );
 };
 
