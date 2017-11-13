@@ -16,38 +16,22 @@ const Main = styled(Flex)`
   background-position:bottom;
   background-attachment: fixed;
   position: relative;
-`;
-
-const Footer = styled(Flex)`
-  color: ${props => props.theme.colors.secondary};
-`;
-
-const FooterItem = styled(Box)`
-  padding: 5px 10px;
-  margin-right: 9px;
-`;
-
-const Label = styled.span`
-  font-size: 12px;
-  text-transform: uppercase;
-`;
-
-const Measure = styled.span`
-  font-size: 16px;
-`;
-
-const Count = styled.span`
-  font-size: 22px;
-`;
-
-const Separator = styled.span`
-  height: 27px;
-  width: 1px;
-  border-right: 1px solid ${props => props.theme.colors.open.white2};
-`;
-
-const EditProfileButton = styled(Box)`
   
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: ${props => props.theme.overlay.gray3};
+    z-index: 0;
+  }
+  
+  >* {
+    z-index: 1
+  }
 `;
 
 const EditPhotosButton = styled.button`
@@ -83,7 +67,7 @@ const BabyName = styled.h2`
   text-shadow: 0 1px 4px rgba(0,0,0, .26);
   font-size: 30px;
   font-family: 'Avenir Next';
-  font-weight: 300;
+  font-weight: 200;
   margin: 0 20px 0 0;
 `;
 
@@ -98,28 +82,61 @@ const BabyDoB = styled.p`
   margin: 0;
 `;
 
+const Footer = styled(Flex)`
+  color: ${props => props.theme.colors.secondary};
+  background: ${props => props.theme.colors.white};
+  border-bottom: 1px solid ${props => props.theme.colors.open.white2}
+`;
+
+const FooterItem = styled(Box)`
+  padding: 5px 10px;
+  margin-right: 9px;
+`;
+
+const Label = styled.span`
+  font-size: 12px;
+  text-transform: uppercase;
+`;
+
+const Measure = styled.span`
+  font-size: 16px;
+`;
+
+const Count = styled.span`
+  font-size: 22px;
+`;
+
+const Separator = styled.span`
+  height: 27px;
+  width: 1px;
+  border-right: 1px solid ${props => props.theme.colors.open.white2};
+`;
+
+const EditProfileButton = styled(Box)`
+  
+`;
 
 class ProfileHeader extends PureComponent<Props> {
   render() {
-    const { baby } = this.props;
+    const { coverImage, avatar, dob, name, weight, height } = this.props;
 
     return (
       <Box width={1} is={Header}>
-        <Main image={baby.coverImage.url} align="flex-end">
-          <BabyImage image={baby.avatar.url}/>
+        <Main image={coverImage.url} align="flex-end">
+          <BabyImage image={avatar.url}/>
 
           <BabyInfo>
-            <BabyName>{baby.name}</BabyName>
-            <BabyDoB>{baby.dob} old</BabyDoB>
+            <BabyName>{name}</BabyName>
+            <BabyDoB>{dob} old</BabyDoB>
           </BabyInfo>
 
           <EditPhotosButton>Edit photos</EditPhotosButton>
         </Main>
 
         <Footer justify="flex-start" align="center" p={15}>
-          <FooterItem><Label>Weight:</Label> <Count>{baby.weight}</Count><Measure>kg</Measure></FooterItem>
+          <FooterItem><Label>Weight:</Label> <Count>{weight}</Count><Measure>kg</Measure></FooterItem>
           <Separator/>
-          <FooterItem><Label>Height:</Label> <Count>{baby.height}</Count><Measure>cm</Measure></FooterItem>
+          <FooterItem><Label>Height:</Label> <Count>{height}</Count><Measure>cm</Measure></FooterItem>
 
           <EditProfileButton ml="auto" is={Button}>Edit profile</EditProfileButton>
         </Footer>

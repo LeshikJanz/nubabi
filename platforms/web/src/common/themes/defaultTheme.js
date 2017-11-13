@@ -22,7 +22,6 @@ const open = {
   gray1: '#CFD6DF',
   gray2: '#9EABBC',
   gray3: '#748294',
-  gray4: 'rgba(0, 0, 0, .5)',
   blue0: '#33B7EB',
   blue1: '#58A4FF',
   red0: '#EA3154',
@@ -32,12 +31,17 @@ const open = {
 };
 
 const shadows = {
-  primary: `0 2px 4px 0 ${open.gray4}`,
+  primary: `0 2px 4px 0 'rgba(0, 0, 0, .5)'`,
   light: `0 1px 0 0 ${open.white2}`,
 };
 
 const bg = {
   panel: PANEL_BACKGROUND,
+};
+
+const overlay = {
+  gray3: 'rgba(116, 130, 148, .7)',
+  blue0: 'rgba(51, 183, 235, .07)',
 };
 
 const colors = {
@@ -52,6 +56,7 @@ const colors = {
   secondary: open.gray3,
   panel: open.white1,
   separator: open.gray0,
+  paragraph: PANEL_BUTTON_TEXT,
   // This is Apple's recommended background, we're not using it yet
   background: Color('#F8F8F8').alpha(0.8).toString(),
 };
@@ -62,6 +67,7 @@ const theme: Theme = {
     fontSizeScale: 'step1',
     lineHeight: 16,
   }),
+  overlay,
   colors,
   shadows,
   bg,
@@ -81,7 +87,7 @@ const theme: Theme = {
     bold: 700,
     medium: 500,
     light: 300,
-    fontFamily: 'SF Pro Text',
+    fontFamily: 'Avenir Next',
   },
   block: {
     marginBottom: 1,
@@ -106,6 +112,7 @@ const theme: Theme = {
   },
   paragraph: {
     marginBottom: 1,
+    color: colors.open.gray3,
   },
   transition: 'all .2s ease',
 };

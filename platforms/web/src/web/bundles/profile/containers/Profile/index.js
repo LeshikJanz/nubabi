@@ -8,9 +8,10 @@ import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 
 import { Loader } from "web/components";
-import { Main, Aside } from "web/elements";
+import { Aside } from "web/elements";
 import NavBar from './Navbar';
 import Header from './Header';
+import Main from './Main';
 
 type Props = {
   navigation: any,
@@ -24,15 +25,6 @@ type Props = {
 
 const Wrapper = styled(Flex)`
 
-`;
-
-const ProfileHeader = styled(Box)`
-  height: 250px;
-  overflow: hidden;
-  background: url(${props => props.image});
-  background-size:cover;
-  background-position:bottom;
-  background-attachment: fixed;
 `;
 
 class Profile extends PureComponent<Props> {
@@ -138,52 +130,13 @@ class Profile extends PureComponent<Props> {
       return <Loader active={true} />;
     }
 
-    const { memories, growth, activities } = baby;
-
-    console.log(memories);
-
     return (
       <Wrapper wrap justify='space-between'>
-        <Header baby={baby} />
+        <Header {...baby} />
 
         <NavBar />
 
-        <Box width={4/7} is={Main}>
-          <h3>This Week's Growth</h3>
-          <p>{growth.current.introduction}</p>
-          <p>
-            Expert: {growth.current.expert.name} <br />
-            <img
-              src={growth.current.expert.avatar.url}
-              style={{ width: "50px", height: "50px" }}
-            />
-          </p>
-          <h3>{baby.name}'s week ahead</h3>
-          <ul>
-            {activities.edges.map(edge => {
-              return (
-                <li key={edge.node.id}>
-                  <h4>{edge.node.name}</h4>
-                  <p>{edge.node.introduction}</p>
-                </li>
-              );
-            })}
-          </ul>
-
-          <h3>Recent Memories</h3>
-          <ul>
-            {memories.edges.map(edge => {
-              return (
-                <li key={edge.node.id}>
-                  <p>{edge.node.title}</p>
-                  {edge.node.files.edges && (
-                    <img src={edge.node.files.edges[0].node.thumb.url} />
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </Box>
+        <Main {...baby}/>
 
         <Box width={1/6} is={Aside}>Aside here</Box>
       </Wrapper>

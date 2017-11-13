@@ -15,6 +15,7 @@ const Wrapper = styled(Header)`
   justify-content: space-between;
   align-items: center;
   height: 70px;
+  background: ${props => props.theme.colors.white};
 `;
 
 class AppHeader extends PureComponent<Props> {

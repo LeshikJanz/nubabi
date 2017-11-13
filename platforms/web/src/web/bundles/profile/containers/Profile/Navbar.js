@@ -11,6 +11,7 @@ type Props = {
 
 const Wrapper = styled(Box)`
   box-shadow: ${props => props.theme.shadows.primary};
+  background: ${props => props.theme.colors.white};
 `;
 
 const ProfileMenu = styled.ul`
@@ -28,8 +29,11 @@ const MenuLink = styled(Menu.Link)`
   padding: 15px;
   margin: 0;
   text-decoration: none;
-  color: ${props => props.theme.colors.black};
+  color: ${props => props.theme.colors.paragraph};
   font-family: ${props => props.theme.text.fontFamily};
+  &:visitied {
+    color: ${props => props.theme.colors.paragraph}
+  }
   &:hover {
     color: ${props => props.theme.colors.primary};
   }
