@@ -114,7 +114,7 @@ class ViewThisWeeksActivity extends PureComponent {
     const input: ToggleFavoriteInput = {
       id: this.props.activity.id,
       babyId: this.props.currentBabyId,
-      favorite: !this.props.isFavorite,
+      favorite: !this.props.activity.isFavorite,
     };
 
     this.props.toggleFavorite({ variables: { input } });
@@ -148,13 +148,7 @@ class ViewThisWeeksActivity extends PureComponent {
 
   render() {
     const { isLoading } = this.state;
-    const {
-      activity,
-      nextActivity,
-      previousActivity,
-      babyName,
-      isFavorite,
-    } = this.props;
+    const { activity, nextActivity, previousActivity, babyName } = this.props;
 
     const previousSkillAreaName = this.getSkillAreaName(previousActivity);
     const nextSkillAreaName = this.getSkillAreaName(nextActivity);
@@ -165,7 +159,7 @@ class ViewThisWeeksActivity extends PureComponent {
           enableNavigation
           enableActions
           activity={activity}
-          isFavorite={isFavorite}
+          isFavorite={activity.isFavorite}
           isLoading={isLoading}
           babyName={babyName}
           previousSkillAreaName={previousSkillAreaName}
@@ -211,14 +205,11 @@ export default compose(
             previousActivity: activities(first: 1, before: $cursor) {
               ...ActivityNavigation
             }
-
-            ...FavoriteActivities
           }
         }
       }
       ${Activity.fragments.activity}
       ${Activity.fragments.activityNavigation}
-      ${Favorites.fragments.favorites}
     `,
     {
       options: ownProps => ({
@@ -230,25 +221,10 @@ export default compose(
         },
       }),
       props: ({ data }) => {
-        const favoriteActivities = path(
-          ['viewer', 'baby', 'favoriteActivities'],
-          data,
-        );
-        let isFavorite = false;
-
-        if (favoriteActivities) {
-          // this should be simplified once activities include favorite info
-          const favorites = pluck('node', favoriteActivities.edges);
-          const activityId = path(['viewer', 'baby', 'activity', 'id'], data);
-
-          isFavorite = !!find(propEq('id', activityId), favorites);
-        }
-
         return {
           data,
           activity: path(['viewer', 'baby', 'activity'], data),
           babyName: path(['viewer', 'baby', 'name'], data),
-          isFavorite,
           previousActivity: path(
             ['viewer', 'baby', 'previousActivity', 'edges', '0'],
             data,
@@ -302,24 +278,22 @@ export default compose(
       }
     `,
     {
-      options: { refetchQueries: ['ThisWeeksActivitiesList'] },
-      props: ({
-        mutate,
-        ownProps: { currentBabyId: babyId, activity: { id } },
-      }) => ({
-        completeActivity: () =>
-          mutate({
-            variables: {
-              input: {
-                id,
-                babyId,
+      options: ({ ownProps }) => ({
+        refetchQueries: ['ThisWeeksActivitiesList'],
+        props: ({ mutate }) => ({
+          completeActivity: () =>
+            mutate({
+              variables: {
+                input: {
+                  id: ownProps.activity.id,
+                  babyId: ownProps.currentBabyId,
+                },
               },
-            },
-          }),
+            }),
+        }),
       }),
     },
   ),
-
   toggleFavorite,
   displayLoadingState,
 )(ViewThisWeeksActivity);

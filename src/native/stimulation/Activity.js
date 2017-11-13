@@ -70,6 +70,7 @@ export class Activity extends PureComponent {
     activity: gql`
       fragment Activity on Activity {
         id
+        isFavorite
         ...HeaderActivity
         ...ExpertInfoActivity
         ...ActivityActionsActivity

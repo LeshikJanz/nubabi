@@ -30,8 +30,15 @@ type Activity {
   equipment: String
   expert: Expert!
   skillArea: SkillArea!
-  isFavorite: Boolean
+
+  # Whether an activity is favorite, only valid when it's child of baby
+  # (i.e $babyId passed). Will return false otherwise.
+  isFavorite: Boolean!
+
+  # Whether this activity has been completed, only valid when it's
+  # child of baby (i.e $babyId passed). Will return false otherwise.
   isCompleted: Boolean!
+
   categories: CategoryConnection!
   media(
     before: String, after: String, first: Int, last: Int

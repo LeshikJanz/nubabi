@@ -121,8 +121,30 @@ export const resolvers = {
     media: (obj: RawActivity, args: ConnectionArguments) => {
       return connectionFromArray(obj.media, args);
     },
+    isFavorite: ({ id }, _, { token }, info) => {
+      const babyId = info.variableValues.input
+        ? info.variableValues.input.babyId
+        : info.variableValues.babyId;
 
-    isCompleted: ({ isCompleted, id, babyId }, _, { token }) => {
+      if (babyId) {
+        return connector.isFavoriteActivity(token, id, fromGlobalId(babyId).id);
+      }
+
+      return false;
+    },
+    isCompleted: (
+      { isCompleted, id, babyId: babyIdVar },
+      _,
+      { token },
+      info,
+    ) => {
+      let babyId = babyIdVar;
+      if (!babyId) {
+        // if we don't get babyId try to fetch it from the query
+        if (info.variableValues.babyId) {
+          babyId = fromGlobalId(info.variableValues.babyId).id;
+        }
+      }
       if (typeof isCompleted !== 'undefined') {
         // If this is set it means that we come from connector.getActivities
         // which already has this mapping

@@ -12,12 +12,14 @@ import {
   compose,
   curry,
   either,
+  find,
   identity,
   map,
   merge,
   mergeDeepRight,
   path,
   prop,
+  propEq,
   reduce,
   sortBy,
 } from 'ramda';
@@ -168,6 +170,15 @@ export const isCompletedActivity = async (
 ) => {
   const completedActivities = await getCompletedActivities(token, babyId);
   return !!completedActivities[activityId];
+};
+
+export const isFavoriteActivity = async (
+  token: string,
+  activityId: string,
+  babyId: string,
+) => {
+  const favoriteActivities = await getFavoriteActivities(token, babyId);
+  return !!find(propEq('id', activityId), favoriteActivities);
 };
 
 export const getCompletedActivities = (token: string, babyId: string) => {

@@ -1,6 +1,6 @@
 // @flow
 import { gql, graphql } from 'react-apollo';
-import { path } from 'ramda';
+import { path, assoc } from 'ramda';
 import {
   addEdgeToFragment,
   optimisticResponse,
@@ -17,6 +17,7 @@ export const toggleFavorite = graphql(
           node {
             id
             ...ActivityList
+            isFavorite
           }
         }
         wasFavorited
@@ -33,6 +34,14 @@ export const toggleFavorite = graphql(
         ({ input }) => ({
           wasFavorited: input.favorite,
           __activityId: input.id,
+          edge: {
+            __typename: 'ActivityEdge',
+            node: {
+              __typename: 'Activity',
+              id: input.id,
+              isFavorite: input.favorite,
+            },
+          },
         }),
       ),
       update: (store, data) => {
@@ -50,7 +59,7 @@ export const toggleFavorite = graphql(
         );
 
         if (wasFavorited) {
-          if (!data.data.toggleActivityFavorite.edge) {
+          if (!data.data.toggleActivityFavorite.edge.name) {
             // Optimistic response: add activity from fragment
             const activity = store.readFragment({
               fragment: ActivityList.fragments.activities,

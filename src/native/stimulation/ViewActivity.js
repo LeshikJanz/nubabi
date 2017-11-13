@@ -31,7 +31,7 @@ export class ViewActivity extends PureComponent {
     const input: ToggleFavoriteInput = {
       id: this.props.activity.id,
       babyId: this.props.currentBabyId,
-      favorite: !this.props.isFavorite,
+      favorite: !this.props.activity.isFavorite,
     };
 
     this.props.toggleFavorite({ variables: { input } });
@@ -51,7 +51,7 @@ export class ViewActivity extends PureComponent {
         <Activity
           activity={activity}
           babyName={babyName}
-          isFavorite={isFavorite}
+          isFavorite={activity.isFavorite}
           onToggleFavorite={this.handleToggleFavorite}
           onActivityMediaPress={this.handleActivityMediaPress}
         />
@@ -72,14 +72,12 @@ export default compose(
 
             activity(id: $activityId) {
               ...Activity
+              isFavorite
             }
-
-            ...FavoriteActivities
           }
         }
       }
       ${Activity.fragments.activity}
-      ${Favorites.fragments.favorites}
     `,
     // TODO: remove duplication with ViewThisWeeksActivity
     {
@@ -91,25 +89,10 @@ export default compose(
         },
       }),
       props: ({ data }) => {
-        const favoriteActivities = path(
-          ['viewer', 'baby', 'favoriteActivities'],
-          data,
-        );
-        let isFavorite = false;
-
-        if (favoriteActivities) {
-          // TODO: this could be simplified if activities include favorite info
-          const favorites = pluck('node', favoriteActivities.edges);
-          const activityId = path(['viewer', 'baby', 'activity', 'id'], data);
-
-          isFavorite = !!find(propEq('id', activityId), favorites);
-        }
-
         return {
           data,
           activity: path(['viewer', 'baby', 'activity'], data),
           babyName: path(['viewer', 'baby', 'name'], data),
-          isFavorite,
         };
       },
     },
