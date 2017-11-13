@@ -13,6 +13,7 @@ const Growth = styled.article`
   font-family: ${props => props.theme.text.fontFamily};
   box-shadow:  ${props => props.theme.shadows.panel};
   border-radius: 4px;
+  margin-bottom: 30px;
 `;
 
 const GrowthContent = styled.div`
@@ -34,6 +35,14 @@ const GrowthTitle = styled(Box)`
   font-size: 18px;
   margin: 0;
   color: ${props => props.theme.colors.open.black0};
+`;
+
+const GrowthDoB = styled(Box)`
+  padding: 5px 10px;
+  background: ${props => props.theme.overlay.blue0};
+  font-size: 12px;
+  border-radius: 15px;
+  color: ${props => props.theme.colors.open.blue0};
 `;
 
 const GrowthExpert = styled(Flex)`
@@ -61,14 +70,6 @@ const GrowthExpertName = styled.div`
 
 const GrowthExpertDiscipline = styled.div`
   color: ${props => props.theme.colors.secondary};
-`;
-
-const GrowthDoB = styled(Box)`
-  padding: 5px 10px;
-  background: ${props => props.theme.overlay.blue0};
-  font-size: 12px;
-  border-radius: 15px;
-  color: ${props => props.theme.colors.open.blue0};
 `;
 
 class ProfileMain extends PureComponent<Props> {
