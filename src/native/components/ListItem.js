@@ -11,6 +11,7 @@ import { isEditable } from '../shared/forms';
 type Props = {
   children: any,
   leftIcon?: string,
+  iconColor?: string,
   avatarLeft?: React.Element<*>,
   rightToggle?: boolean,
   onRightTogglePress?: () => void,
@@ -45,7 +46,7 @@ class ListItem extends PureComponent {
     return <ListItemArrow />;
   }
 
-  renderIcon(iconName: string) {
+  renderIcon(iconName: string, color: string = theme.colors.secondary) {
     return (
       <Box
         alignItems="center"
@@ -55,7 +56,7 @@ class ListItem extends PureComponent {
         marginTop={0.1}
         style={() => ({ width: 20 })}
       >
-        <Icon color={theme.colors.secondary} size={20} name={iconName} />
+        <Icon color={color} size={20} name={iconName} />
       </Box>
     );
   }
@@ -122,7 +123,7 @@ class ListItem extends PureComponent {
       <Box {...containerProps}>
         <Box flexDirection="row">
           {avatarLeft && this.renderLeftAvatar(avatarLeft)}
-          {leftIcon && this.renderIcon(leftIcon)}
+          {leftIcon && this.renderIcon(leftIcon, this.props.iconColor)}
 
           <Box flex={1} justifyContent="center">
             {this.renderMainSection()}

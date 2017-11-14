@@ -35,11 +35,13 @@ import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
+import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   mode?: 'add' | 'edit',
   onSubmit: (input: Object) => void,
   onAddVoiceNote: () => void,
+  onEditSticker: () => void,
   handleSubmit: (submit: Function) => void,
   submitting: boolean,
   change: (field: string, value: any) => void,
@@ -130,6 +132,7 @@ class MemoryForm extends PureComponent {
           editable={field.editable}
           onPress={this.openDatePicker}
           leftIcon="md-calendar"
+          iconColor={field.iconColor}
         >
           <Text color="secondary">{formatDate(field.input.value)}</Text>
         </ListItem>
@@ -231,17 +234,20 @@ class MemoryForm extends PureComponent {
               <Field
                 name="createdAt"
                 component={this.renderDatePicker}
+                iconColor={theme.colors.primary}
                 {...editableProps}
               />
               <ListItem
                 leftIcon="ios-images"
                 onPress={this.handleAddMedia}
+                iconColor={theme.colors.primary}
                 {...editableProps}
               >
                 <Text color="secondary">Photo/Video</Text>
               </ListItem>
               <ListItem
                 leftIcon="md-flower"
+                iconColor={theme.colors.primary}
                 onPress={this.props.onEditSticker}
                 last
                 {...editableProps}
