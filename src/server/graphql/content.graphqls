@@ -1,6 +1,7 @@
 extend type Viewer {
   allTips(before: String, after: String, first: Int, last: Int): TipConnection!
   allQuotes(before: String, after: String, first: Int, last: Int): QuoteConnection!
+  randomQuote: Quote
   allArticles(before: String, after: String, first: Int, last: Int): ArticleConnection!
   article(id: ID!): Article
   growthArticle(id: ID!, babyId: ID!): GrowthArticle

@@ -10,6 +10,7 @@ import {
   globalIdField,
   fromGlobalId,
 } from './common';
+import { sample } from 'lodash';
 import * as connector from '../connectors/babiesConnector';
 
 const readingTime = curry((propName, obj) => {
@@ -23,6 +24,9 @@ export const resolvers = {
     },
     allQuotes: (_: mixed, args: ConnectionArguments, { token }: Context) => {
       return connectionFromPromisedArray(connector.getQuotes(token), args);
+    },
+    randomQuote: (_: mixed, __: ConnectionArgs, { token }: Context) => {
+      return connector.getQuotes(token).then(sample);
     },
     allArticles: (
       obj: mixed,

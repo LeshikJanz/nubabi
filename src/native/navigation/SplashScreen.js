@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import {
   Image,
   ImageBackground,
-  LayoutAnimation,
+  InteractionManager,
   StyleSheet,
   Text,
   View,
@@ -19,7 +19,6 @@ import { NavigationActions } from 'react-navigation';
 import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
-import ChooseBaby from '../profile/ChooseBaby';
 import RocketHorseLoader from '../components/RocketHorseLoader';
 
 const loadingImage = { uri: 'LaunchImage' };
@@ -54,11 +53,11 @@ class SplashScreen extends Component {
   }
 
   componentDidUpdate() {
-    setTimeout(this.handleNextScreen, 2000);
+    InteractionManager.runAfterInteractions(this.handleNextScreen);
   }
 
   handleNextScreen = () => {
-    const { appOnline, isAuthenticated, baby, babies } = this.props;
+    const { appOnline, isAuthenticated, baby } = this.props;
 
     if (!appOnline) {
       return;
@@ -74,15 +73,6 @@ class SplashScreen extends Component {
       const coverImage = path(['coverImage', 'url'], baby);
 
       const images = [avatar, coverImage];
-
-      if (babies && babies.length) {
-        babies.forEach(babyEdge => {
-          const image = path(['node', 'avatar', 'url'], babyEdge);
-          if (image) {
-            images.push(image);
-          }
-        });
-      }
 
       if (images.length) {
         Promise.all(
@@ -242,29 +232,15 @@ export default compose(
             coverImage {
               url
             }
-          },
-          # Choose Baby
-          babies {
-            edges {
-              node {
-                id
-                ...ChooseBaby
-              }
-            }
           }
           # Get quotes for splash screen
-          allQuotes {
-            edges {
-              node {
-                id
-                author
-                text
-              }
-            }
+          randomQuote {
+            id
+            author
+            text
           }
         }
       }
-      ${ChooseBaby.fragments.list}
     `,
     {
       options: ownProps => ({
@@ -276,23 +252,21 @@ export default compose(
         },
       }),
       props: ({ data }) => {
-        const edges = path(['viewer', 'allQuotes', 'edges'], data);
+        const quote = path(['viewer', 'randomQuote'], data);
         const baby = path(['viewer', 'baby'], data);
-        const babies = path(['viewer', 'babies', 'edges'], data);
 
-        let loadingMessage;
         let author;
+        let loadingMessage;
 
-        if (edges) {
-          const quote = sample(edges.map(edge => edge.node));
-          loadingMessage = quote.text;
+        if (quote) {
+          // eslint-disable-next-line prefer-destructuring
           author = quote.author;
+          loadingMessage = quote.text;
         }
 
         return {
           data,
           baby,
-          babies,
           loadingMessage,
           author,
         };
