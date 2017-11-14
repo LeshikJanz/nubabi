@@ -70,6 +70,9 @@ const Banner = styled.div`
 
 const BannerImage = styled.div`
   margin-bottom: 15px;
+  > img {
+    max-width: 100%;
+  }
 `;
 
 class Sidebar extends PureComponent<Props> {

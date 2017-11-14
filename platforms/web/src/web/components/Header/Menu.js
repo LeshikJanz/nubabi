@@ -10,23 +10,38 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-
+  position: relative;
 `;
 
 const HeaderMenu = styled(Menu)`
+  width: 200px;
+  background: white;
   position: absolute;
-  top: 0;
-  right: 0;
-  //visibility: hidden;
+  top: 10px;
+  right: 0px;
+  visibility: hidden;
+  border: 1px solid gray;
+  z-index: 99;
+  
+  &:hover {
+    visibility: visible;
+  }
 `;
 
 const HeaderMenuItem = styled(Menu.Link)`
-
+  display: block;
 `;
 
 const MenuAvatar = styled.img`
   width: 50px;
   height: 50px;
+  cursor: pointer;
+  
+  &:hover {
+    + div {
+     visibility: visible;
+    }
+  }
 `;
 
 class MenuComponent extends PureComponent<Props> {
