@@ -14,7 +14,6 @@ const Main = styled(Flex)`
   background: url(${props => props.image});
   background-size:cover;
   background-position:bottom;
-  background-attachment: fixed;
   position: relative;
   
   &:before {
