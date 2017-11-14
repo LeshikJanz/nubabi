@@ -1,7 +1,7 @@
 // @flow
 import type { Memory as MemoryType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ActivityIndicator, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, Image, TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import moment from 'moment';
@@ -206,11 +206,9 @@ class Memory extends PureComponent {
           >
             <Icon size={20} color={theme.colors.gray} name="ios-share-alt" />
             <Box {...containerProps}>
-              <Icon
-                size={20}
-                color={theme.colors.gray}
-                name="md-brush"
-                style={{ marginLeft: 10 }}
+              <Image
+                source={require('../../common/images/edit.png')}
+                style={{ width: 14, height: 14, marginLeft: 10 }}
               />
             </Box>
           </Box>
