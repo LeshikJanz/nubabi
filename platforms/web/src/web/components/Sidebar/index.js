@@ -1,9 +1,13 @@
 // @flow
 import React, { PureComponent } from "react";
-import {  Box } from 'grid-styled';
+import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 
 import { Aside } from "web/elements";
+import IAppStore from '../../../common/images/appstore.png';
+import IPlayMarket from '../../../common/images/googleplay.png';
+import INubabiApp from '../../../common/images/nubabiapp.png';
+import IPersons from '../../../common/icons/persons.svg';
 
 type Props = {
 
@@ -25,10 +29,77 @@ const SideBarFooter = styled.div`
   }
 `;
 
+const Panel = styled.div` 
+  border: 1px solid ${props => props.theme.colors.open.gray1};
+  border-radius: 4px;
+  margin: 0 0 30px;
+  color: ${props => props.theme.colors.open.gray3};
+`;
+
+const PanelHeader = styled(Flex)` 
+  border-bottom: 1px solid ${props => props.theme.colors.open.gray1};
+  padding: 15px;
+  font-size: 14px;
+  text-align: center;
+`;
+
+const PanelHeaderImage = styled.div` 
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  text-align: center;
+  background: white;
+  border: 1px solid gray;
+  border-radius: 100%;
+  margin: 0 15px 0 0;
+`;
+
+const PanelBody = styled.div` 
+  padding: 15px;
+  font-size: 12px;
+  
+  > a {
+    color: ${props => props.theme.colors.open.black0};
+  }
+`;
+
+const Banner = styled.div`
+  text-align: center;
+  padding: 10px;
+`;
+
+const BannerImage = styled.div`
+  margin-bottom: 15px;
+`;
+
 class Sidebar extends PureComponent<Props> {
   render() {
     return (
       <SideBar width={1/6} is={Aside}>
+        <Panel>
+          <PanelHeader align="center">
+            <PanelHeaderImage><IPersons/></PanelHeaderImage>
+            Parenting Tips
+          </PanelHeader>
+          <PanelBody>
+            <a href="/profile">Twins: How do you handle two of everything?</a><br/><br/>
+            Bonding with your baby <br/><br/>
+            The benefits of wearing your baby
+          </PanelBody>
+        </Panel>
+
+        <Panel>
+          <PanelBody>
+            <Banner>
+              <img src={INubabiApp}/>
+              <h4>Have you tried the Nubabi Mobile App?</h4>
+              <p>Enjoy easy access to your baby’s content, on the go!</p><br/>
+              <BannerImage><img src={IAppStore} /></BannerImage>
+              <BannerImage><img src={IPlayMarket} /></BannerImage>
+            </Banner>
+          </PanelBody>
+        </Panel>
+
         <SideBarFooter>
           <small>
             ©2017 Nubabi. About Us  • FAQ & Support • Contact Us • Log Out

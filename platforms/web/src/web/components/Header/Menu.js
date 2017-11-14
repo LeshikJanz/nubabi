@@ -17,7 +17,7 @@ const HeaderMenu = styled(Menu)`
   position: absolute;
   top: 0;
   right: 0;
-  visibility: hidden;
+  //visibility: hidden;
 `;
 
 const HeaderMenuItem = styled(Menu.Link)`
