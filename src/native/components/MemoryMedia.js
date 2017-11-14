@@ -308,14 +308,17 @@ export const MemoryMediaMultiple = ({
         {suggestedMemoryType && (
           <Box
             flex={1}
-            margin={0.5}
             key="memory-type"
             borderRadius={4}
             borderColor="separator"
             borderWidth={1}
             alignItems="center"
             justifyContent="center"
-            style={() => ({ overflow: 'hidden' })}
+            style={() => ({
+              overflow: 'hidden',
+              marginHorizontal: 10,
+              marginVertical: 8,
+            })}
           >
             <Image
               source={suggestedMemoryType.image}
