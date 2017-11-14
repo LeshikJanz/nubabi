@@ -38,6 +38,12 @@ const Wrapper = styled.div`
   background: ${props => props.theme.bg.panel};
 `;
 
+const AppContent = styled(Section)`
+  max-width: 1400px;
+  min-width: 768px;
+  margin: 0 auto;
+`;
+
 export class App extends Component<Props> {
   render() {
     return (
@@ -48,7 +54,7 @@ export class App extends Component<Props> {
           isAuthenticated={this.props.isAuthenticated}
           logout={this.props.logout}
         />
-        <Section>
+        <AppContent>
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
@@ -65,7 +71,7 @@ export class App extends Component<Props> {
             />
             <Route path="*" component={NotFound} />
           </Switch>
-        </Section>
+        </AppContent>
       </Wrapper>
     );
   }

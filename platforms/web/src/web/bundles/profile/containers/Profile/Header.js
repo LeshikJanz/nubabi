@@ -4,6 +4,10 @@ import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 import moment from 'moment';
 
+import IWeight from '../../../../../common/icons/weight.svg';
+import IHeight from '../../../../../common/icons/height.svg';
+import IEdit from '../../../../../common/icons/edit.svg';
+
 import { Header, Button } from "web/elements";
 
 type Props = {
@@ -35,13 +39,17 @@ const Main = styled(Flex)`
   }
 `;
 
-const EditPhotosButton = styled.button`
+const EditPhotosButton = styled(Flex)`
   border: none;
   font-size: 12px;
   color: ${props => props.theme.colors.white};
   margin: 0 0 0 auto;
   align-self: flex-start;
   cursor: pointer;
+  
+  >svg {
+    margin: 0 0 10px;
+  }
 `;
 
 const BabyImage = styled.div`
@@ -63,11 +71,10 @@ const BabyInfo = styled(Flex)`
 `;
 
 const BabyName = styled.h2`
-  margin-right: 10px;
   color: white;
   text-shadow: 0 1px 4px rgba(0,0,0, .26);
   font-size: 30px;
-  font-family: 'Avenir Next';
+  font-family: ${props => props.theme.text.fontFamily};
   font-weight: 200;
   margin: 0 20px 0 0;
 `;
@@ -75,7 +82,7 @@ const BabyName = styled.h2`
 const BabyDoB = styled.p`
   color: white;
   font-size: 14px;
-  font-family: 'Avenir Next';
+  font-family: ${props => props.theme.text.fontFamily};
   font-weight: normal;
   background: ${props => props.theme.colors.primary};
   border-radius: 15px;
@@ -89,9 +96,15 @@ const Footer = styled(Flex)`
   border-bottom: 1px solid ${props => props.theme.colors.open.white2}
 `;
 
-const FooterItem = styled(Box)`
+const FooterItem = styled(Flex)`
   padding: 5px 10px;
-  margin-right: 9px;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  
+  >* {
+    margin-right: 10px;
+  }
 `;
 
 const Label = styled.span`
@@ -131,13 +144,16 @@ class ProfileHeader extends PureComponent<Props> {
             <BabyDoB>{moment(dob).fromNow(true)} old</BabyDoB>
           </BabyInfo>
 
-          <EditPhotosButton>Edit photos</EditPhotosButton>
+          <EditPhotosButton align="center" justify="space-between" direction="column">
+            <IEdit />
+            Edit photos
+          </EditPhotosButton>
         </Main>
 
         <Footer justify="flex-start" align="center" p={15}>
-          <FooterItem><Label>Weight:</Label> <Count>{weight}</Count><Measure>kg</Measure></FooterItem>
+          <FooterItem><IWeight/> <Label>Weight:</Label> <span><Count>{weight}</Count><Measure>kg</Measure></span></FooterItem>
           <Separator/>
-          <FooterItem><Label>Height:</Label> <Count>{height}</Count><Measure>cm</Measure></FooterItem>
+          <FooterItem><IHeight/> <Label>Height:</Label> <span><Count>{height}</Count><Measure>cm</Measure></span></FooterItem>
 
           <EditProfileButton ml="auto" is={Button}>Edit profile</EditProfileButton>
         </Footer>

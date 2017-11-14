@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
 
-export default ({ children }) => {
-  return <section>{children}</section>;
+export default ({ children, ...rest }) => {
+  return <section {...rest}>{children}</section>;
 };

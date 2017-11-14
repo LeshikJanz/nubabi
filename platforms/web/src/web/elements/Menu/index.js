@@ -7,9 +7,9 @@ class Menu extends PureComponent {
   static Item = MenuItem;
   static Link = Link;
   render() {
-    const { children } = this.props;
+    const { children, ...rest } = this.props;
     return (
-      <div>
+      <div {...rest}>
         {children}
       </div>
     );

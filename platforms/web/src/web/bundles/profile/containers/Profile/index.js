@@ -25,7 +25,7 @@ type Props = {
 };
 
 const Wrapper = styled(Flex)`
-
+  
 `;
 
 class Profile extends PureComponent<Props> {
@@ -135,7 +135,7 @@ class Profile extends PureComponent<Props> {
       <Wrapper wrap justify='space-between'>
         <Header {...baby} />
 
-        <NavBar />
+        <NavBar {...baby} />
 
         <Main {...baby}/>
 
