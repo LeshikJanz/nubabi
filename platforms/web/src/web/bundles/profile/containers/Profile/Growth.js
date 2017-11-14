@@ -2,6 +2,7 @@
 import React, { PureComponent } from "react";
 import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
+import moment from 'moment';
 
 type Props = {
 
@@ -81,7 +82,7 @@ class ProfileMain extends PureComponent<Props> {
         <GrowthContent>
           <GrowthHeader justify="space-between" align="center">
             <GrowthTitle is='h3'>This Week's Growth</GrowthTitle>
-            <GrowthDoB is='span'>{dob} old</GrowthDoB>
+            <GrowthDoB is='span'>{moment(dob).fromNow(true)} old</GrowthDoB>
           </GrowthHeader>
 
           <p>{growth.current.introduction}</p>

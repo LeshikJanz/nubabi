@@ -12,6 +12,7 @@ import { Aside } from "web/elements";
 import NavBar from './Navbar';
 import Header from './Header';
 import Main from './Main';
+import SideBar from '../../../../components/Sidebar';
 
 type Props = {
   navigation: any,
@@ -138,7 +139,7 @@ class Profile extends PureComponent<Props> {
 
         <Main {...baby}/>
 
-        <Box width={1/6} is={Aside}> </Box>
+        <SideBar />
       </Wrapper>
     );
   }

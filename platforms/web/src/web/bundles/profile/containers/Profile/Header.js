@@ -2,6 +2,8 @@
 import React, { PureComponent } from "react";
 import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
+import moment from 'moment';
+
 import { Header, Button } from "web/elements";
 
 type Props = {
@@ -126,7 +128,7 @@ class ProfileHeader extends PureComponent<Props> {
 
           <BabyInfo>
             <BabyName>{name}</BabyName>
-            <BabyDoB>{dob} old</BabyDoB>
+            <BabyDoB>{moment(dob).fromNow(true)} old</BabyDoB>
           </BabyInfo>
 
           <EditPhotosButton>Edit photos</EditPhotosButton>
