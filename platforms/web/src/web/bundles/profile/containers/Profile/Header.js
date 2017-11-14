@@ -1,14 +1,17 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 import moment from 'moment';
+import Modal from 'react-modal';
 
 import IWeight from '../../../../../common/icons/weight.svg';
 import IHeight from '../../../../../common/icons/height.svg';
 import IEdit from '../../../../../common/icons/edit.svg';
 
 import { Header, Button } from "web/elements";
+
+//Modal.setAppElement(appElement);
 
 type Props = {
 
@@ -130,13 +133,50 @@ const EditProfileButton = styled(Box)`
   
 `;
 
-class ProfileHeader extends PureComponent<Props> {
+const PhotoActionsList = styled.ul`
+  min-width: 130px;
+  padding: 0;
+  margin: 15px 0 0 0;
+  list-style: none;
+  background: ${props => props.theme.colors.white};
+  border-radius: 4px;
+  overflow: hidden; 
+`;
+
+const PhotoActionsListItem = styled.li`
+  padding: 5px 20px;
+  border-bottom: 1px solid ${props => props.theme.colors.open.gray3};
+  color: ${props => props.theme.colors.open.gray3};
+  cursor: pointer;
+`;
+
+
+class ProfileHeader extends Component<Props> {
+  constructor() {
+    super();
+
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
   render() {
     const { coverImage, avatar, dob, name, weight, height } = this.props;
 
     return (
       <Box width={1} is={Header}>
-        <Main image={coverImage.url} align="flex-end">
+        <Main image={coverImage.url} align="flex-end" className="ProfileHeaderMain">
           <BabyImage image={avatar.url}/>
 
           <BabyInfo>
@@ -144,10 +184,45 @@ class ProfileHeader extends PureComponent<Props> {
             <BabyDoB>{moment(dob).fromNow(true)} old</BabyDoB>
           </BabyInfo>
 
-          <EditPhotosButton align="center" justify="space-between" direction="column">
+          <EditPhotosButton align="center" justify="space-between" direction="column" onClick={this.openModal}>
             <IEdit />
             Edit photos
           </EditPhotosButton>
+
+          <Modal
+            style={{
+              overlay: {
+                position: 'absolute',
+                background: 'rgba(116, 130, 148, .7)',
+              },
+              content: {
+                display: 'flex',
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+                flexDirection: 'column',
+                top: '50%',
+                left: '50%',
+                right: 'auto',
+                bottom: 'auto',
+                transform: 'translate(-50%, -50%)',
+                background: 'none',
+                border: 'none',
+                color: 'white'
+              }
+            }}
+            isOpen={this.state.modalIsOpen}
+            onRequestClose={this.closeModal}
+            contentLabel="Edit Photo Menu"
+            parentSelector={() => document.querySelector('.ProfileHeaderMain')}
+          >
+            <div>Change cover photo</div>
+            <PhotoActionsList>
+              <PhotoActionsListItem>Upload photo</PhotoActionsListItem>
+              <PhotoActionsListItem>Remove</PhotoActionsListItem>
+              <PhotoActionsListItem onClick={this.closeModal}>Cancel</PhotoActionsListItem>
+            </PhotoActionsList>
+          </Modal>
         </Main>
 
         <Footer justify="flex-start" align="center" p={15}>
