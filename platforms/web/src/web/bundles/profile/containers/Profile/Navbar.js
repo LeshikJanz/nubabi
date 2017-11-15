@@ -35,7 +35,7 @@ const MenuLink = styled(Menu.Link)`
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  padding: 15px;
+  padding: 25px 15px;
   margin: 0;
   text-decoration: none;
   color: ${props => props.theme.colors.paragraph};

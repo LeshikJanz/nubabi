@@ -62,6 +62,7 @@ const ActivitiesListItemContent = styled(Box)`
   >p {
     font-size: 12px;
     color: ${props => props.theme.colors.secondary};
+    line-height: 18px;
   }
 `;
 

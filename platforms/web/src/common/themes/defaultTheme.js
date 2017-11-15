@@ -88,7 +88,7 @@ const theme: Theme = {
     bold: 700,
     medium: 500,
     light: 300,
-    fontFamily: 'Avenir Next',
+    fontFamily: 'SF Pro Text',
   },
   block: {
     marginBottom: 1,

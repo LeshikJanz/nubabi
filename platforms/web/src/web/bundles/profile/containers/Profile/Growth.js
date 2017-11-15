@@ -23,7 +23,9 @@ const GrowthContent = styled.div`
   > p {
     color: ${props => props.theme.colors.secondary};
     font-size: 16px;
+    font-weight: normal;
     margin: 0 0 15px;
+    line-height: 24px;
   }
 `;
 
