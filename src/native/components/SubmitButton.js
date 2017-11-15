@@ -99,7 +99,6 @@ export class SubmitButton extends PureComponent {
             }, 1000);
           },
         );
-        return;
       }
     }
   }

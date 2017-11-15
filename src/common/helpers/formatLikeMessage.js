@@ -1,5 +1,6 @@
 // @flow
 import pluralize from 'pluralize';
+
 export default function formatLikeMessage(likeCount, isLikedByViewer, suffix) {
   if (isLikedByViewer && likeCount === 1) {
     return 'You liked this';

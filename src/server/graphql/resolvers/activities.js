@@ -95,7 +95,7 @@ export const resolvers = {
       return connector.getSkillArea(token, obj['skill_area_id']); // eslint-disable-line dot-notation
     },
     expert: (obj: RawActivity, _: mixed, { token }: Context) => {
-      return connector.getExpert(token, obj['expert_id']);
+      return connector.getExpert(token, obj.expert_id);
     }, // eslint-disable-line dot-notation
     steps: (
       { id, babyId, steps }: RawActivity,

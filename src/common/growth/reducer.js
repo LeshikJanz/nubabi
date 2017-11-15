@@ -57,7 +57,7 @@ const findContent = (
   collection: Array<Growth>,
 ) => {
   return collection.find((element: Growth) => {
-    const isRaw = typeof element['age_duration'] !== 'undefined';
+    const isRaw = typeof element.age_duration !== 'undefined';
     const minimumAge = prop(isRaw ? 'age_min' : 'minimumAge')(element);
     const maximumAge = prop(isRaw ? 'age_max' : 'maximumAge')(element);
     const contentAgeDuration = isRaw

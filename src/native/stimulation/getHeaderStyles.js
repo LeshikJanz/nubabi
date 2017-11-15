@@ -18,7 +18,7 @@ export const getHeaderStyles = (width: number) => {
   const overlayStyle = {
     width,
     height: headerShapeStyle.width - headerPath, // 300 portrait 7p
-    //top: -headerMargin, // -50 portrait 7p
+    // top: -headerMargin, // -50 portrait 7p
   };
 
   const headerContainerStyle = {

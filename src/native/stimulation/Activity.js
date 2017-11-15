@@ -298,7 +298,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    //marginBottom: 5,
+    // marginBottom: 5,
   },
   buttonContainer: {
     flexDirection: 'row',

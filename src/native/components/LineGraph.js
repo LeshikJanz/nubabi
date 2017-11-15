@@ -84,21 +84,19 @@ export class LineGraph extends Component {
           );
         })}
       </View>,
-      <View key={'ticksY'} style={styles.ticksYContainer}>
+      <View key="ticksY" style={styles.ticksYContainer}>
         {ticks.map((tick, index) => {
           const value = yAccessor(tick.datum);
 
           const tickStyles = {};
           tickStyles.width = TICK_WIDTH;
-          //tickStyles.left = tick.x - Math.round(TICK_WIDTH * 0.5);
+          // tickStyles.left = tick.x - Math.round(TICK_WIDTH * 0.5);
 
           tickStyles.top = tick.y + 2 - Math.round(TICK_WIDTH * 0.65);
 
           return (
             <View key={index} style={[styles.tickLabelY, tickStyles]}>
-              <Text style={styles.tickLabelYText}>
-                {formatTickY(value)}
-              </Text>
+              <Text style={styles.tickLabelYText}>{formatTickY(value)}</Text>
             </View>
           );
         })}

@@ -29,13 +29,13 @@ const GenderSelection = ({
       <View style={styles.genderContainer}>
         <GenderButton
           editable={editable}
-          buttonText={'GIRL'}
+          buttonText="GIRL"
           selected={selectedGender === 'FEMALE'}
           onChangeGender={() => onChangeGender('FEMALE')}
         />
         <GenderButton
           editable={editable}
-          buttonText={'BOY'}
+          buttonText="BOY"
           selected={selectedGender === 'MALE'}
           onChangeGender={() => onChangeGender('MALE')}
         />

@@ -12,7 +12,8 @@ const {
 } = require('graphql-tools');
 
 const resolvers = require('./resolvers');
-let enableMocks = false;
+
+const enableMocks = false;
 let mocks;
 
 const typeDefs = [Core, Babies, Activities, Experts, Growth, Content, Memories];

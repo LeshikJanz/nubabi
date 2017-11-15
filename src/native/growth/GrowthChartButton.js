@@ -17,11 +17,11 @@ const imageProps = {
   resizeMode: 'contain',
   style: {
     flex: 1,
-    //width: 61,
+    // width: 61,
     height: 69,
-    //width: 61,
-    //height: 69,
-    //marginRight: 10,
+    // width: 61,
+    // height: 69,
+    // marginRight: 10,
   },
 };
 
