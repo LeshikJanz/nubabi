@@ -29,6 +29,9 @@
       "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80",
       "git add",
       "jest --bail --findRelatedTests"
+    ],
+    "*.graphqls": [
+      "prettier --write --parser graphql"
     ]
   },
   "jest": {

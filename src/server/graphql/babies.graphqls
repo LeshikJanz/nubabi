@@ -1,21 +1,27 @@
 extend type Viewer {
   babies: BabyConnection!
   baby(id: ID): Baby
-  allSkillAreas(before: String, after: String, first: Int, last: Int): SkillAreaConnection!
+  allSkillAreas(
+    before: String
+    after: String
+    first: Int
+    last: Int
+  ): SkillAreaConnection!
 }
 
 extend type Mutation {
   createBaby(input: CreateBabyInput!): CreateBabyPayload
   updateBaby(input: UpdateBabyInput!): UpdateBabyPayload
-  recordBabyMeasurement(input: RecordMeasurementInput!): RecordMeasurementPayload
+  recordBabyMeasurement(
+    input: RecordMeasurementInput!
+  ): RecordMeasurementPayload
 }
 
 extend type UserEdge {
   # Relationship to Viewer
   relationship: BabyRelationship
-
   # Whether the user is invited but have not accepted yet
-  isPending: Boolean,
+  isPending: Boolean
 }
 
 type Baby implements Node, Timestampable {
@@ -33,24 +39,29 @@ type Baby implements Node, Timestampable {
   weekBorn: Int!
   createdAt: DateTime!
   updatedAt: DateTime
-
   # Relationship to Viewer
   relationship: BabyRelationship
-
   activities(
-    before: String, after: String, first: Int, last: Int, filter: ActivityFilterInput
+    before: String
+    after: String
+    first: Int
+    last: Int
+    filter: ActivityFilterInput
   ): ActivityConnection
-
   activity(id: ID!): Activity
-
   achievements(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): AchievementConnection
-
   memories(
-    before: String, after: String, first: Int, last: Int, filter: MemoryFilter
+    before: String
+    after: String
+    first: Int
+    last: Int
+    filter: MemoryFilter
   ): MemoryConnection
-
   measurements: Measurements
 }
 
@@ -84,7 +95,6 @@ input CreateBabyInput {
 
 type CreateBabyPayload {
   createdBaby: Baby
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -100,14 +110,12 @@ input UpdateBabyInput {
   gender: Gender
   weekBorn: Int
   relationship: String
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
 
 type UpdateBabyPayload {
   changedBaby: Baby
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -116,10 +124,8 @@ type UpdateBabyPayload {
 type BabyConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [BabyEdge]
-
   # Count of result set without considering pagination arguments
   count: Int!
 }
@@ -127,7 +133,6 @@ type BabyConnection {
 type BabyEdge {
   # The item at the end of the edge.
   node: Baby!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -153,20 +158,23 @@ input RecordMeasurementInput {
 
 type RecordMeasurementPayload {
   changedMeasurement: Measurement
-
   baby: Baby!
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
 
 type Measurements {
   heights(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): MeasurementConnection!
-
   weights(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): MeasurementConnection!
 }
 
@@ -180,7 +188,6 @@ type Measurement {
 type MeasurementConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [MeasurementEdge]
 }
@@ -188,7 +195,6 @@ type MeasurementConnection {
 type MeasurementEdge {
   # The item at the end of the edge.
   node: Measurement!
-
   # A cursor for use in pagination.
   cursor: String!
 }

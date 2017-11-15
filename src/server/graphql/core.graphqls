@@ -1,6 +1,9 @@
 scalar Date
+
 scalar DateTime
+
 scalar Time
+
 scalar Secret
 
 interface Node {
@@ -15,7 +18,6 @@ interface Timestampable {
 
 type Query {
   viewer: Viewer!
-
   # Fetches an object given its ID
   node(
     # The ID of an object
@@ -33,13 +35,10 @@ type Mutation {
 type PageInfo {
   # When paginating forwards, are there more items?
   hasNextPage: Boolean!
-
   # When paginating backwards, are there more items?
   hasPreviousPage: Boolean!
-
   # When paginating backwards, the cursor to continue.
   startCursor: String
-
   # When paginating forwards, the cursor to continue.
   endCursor: String
 }
@@ -48,7 +47,6 @@ type PageInfo {
 type UserConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [UserEdge]
 
@@ -60,7 +58,6 @@ type UserConnection {
 type UserEdge {
   # The item at the end of the edge.
   node: User!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -71,64 +68,55 @@ type User implements Node {
   email: String
   firstName: String
   lastName: String
-
   # Date of Birth
   dob: Date
   avatar: Avatar
-
   totalAchievements: Int
   totalMemories: Int
 }
 
 type Viewer {
   allUsers(
-  before: String, after: String, first: Int, last: Int
-): UserConnection!
-
+    before: String
+    after: String
+    first: Int
+    last: Int
+  ): UserConnection!
   user: User
   getUser(id: ID!): User
-
-  friends(
-    before: String, after: String, first: Int, last: Int
-  ): UserConnection!
+  friends(before: String, after: String, first: Int, last: Int): UserConnection!
 }
 
 input CreateUserInput {
   username: String!
-  password: Secret,
-
+  password: Secret
   # An opaque string used by frontend frameworks like relay to track requests and responses.
-  clientMutationId: String,
+  clientMutationId: String
 }
 
 type CreateUserPayload {
   # The user's authentication token
   token: String
-
   # The mutated User.
   changedUser: User
-
   # An edge containing the mutated User. Use this to update your client side cache.
   changedEdge: UserEdge
-
   # A view port into your application.
   viewer: Viewer
-
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String
 }
 
 input UpdateUserInput {
-  firstName: String,
-  lastName: String,
-  dob: Date,
-  avatar: FileInputBase64,
+  firstName: String
+  lastName: String
+  dob: Date
+  avatar: FileInputBase64
 }
 
 type UpdateUserPayload {
   # The mutated User.
   changedUser: User
-
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String
 }
@@ -154,7 +142,6 @@ type InviteUserPayload {
   inviteToken: String
   invitedUser: User
   changedEdge: UserEdge
-
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String
 }
@@ -184,10 +171,8 @@ type GenericFile implements File {
 type FileConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [FileEdge]
-
   # Count of filtered result set without considering pagination arguments
   count: Int
 }
@@ -195,7 +180,6 @@ type FileConnection {
 type FileEdge {
   # The item at the end of the edge.
   node: File!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -232,11 +216,9 @@ type Image implements File, ResizableImage, Thumbnailable {
   contentType: String!
   createdAt: DateTime!
   name: String!
-
   size: Int!
   updatedAt: DateTime
   url: String!
-
   width: Int
   height: Int
   large: Image
@@ -251,7 +233,6 @@ type Avatar implements File, ResizableImage, Thumbnailable {
   name: String!
   size: Int!
   updatedAt: DateTime
-
   width: Int
   height: Int
   large: Image
@@ -288,19 +269,15 @@ input ImageInput {
 
 interface Likeable {
   id: ID!
-  likes(
-    before: String, after: String, first: Int, last: Int
-  ): LikeConnection
+  likes(before: String, after: String, first: Int, last: Int): LikeConnection
 }
 
 # A connection to a list of items.
 type LikeConnection {
   # Count of filtered result set without considering pagination arguments
   count: Int
-
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [LikeEdge]
 }
@@ -308,17 +285,18 @@ type LikeConnection {
 type LikeEdge {
   # The user that performed the like
   actor: User!
-
   # The Likeable item at the end of the edge.
   node: Likeable!
-
   # A cursor for use in pagination.
   cursor: String!
 }
 
 interface Commentable {
   comments(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): CommentConnection!
 }
 
@@ -335,17 +313,14 @@ type Comment implements Timestampable {
 type CommentConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [CommentEdge]
-
   count: Int
 }
 
 type CommentEdge {
   # The item at the end of the edge.
   node: Comment!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -358,7 +333,6 @@ input CreateCommentInput {
 
 type CreateOrUpdateCommentPayload {
   edge: CommentEdge
-
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String
 }

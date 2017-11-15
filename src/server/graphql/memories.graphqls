@@ -21,30 +21,30 @@ type Memory implements Node, Timestampable, Commentable, Likeable {
   title: String!
   description: String
   author: User!
-
   files(
-    before: String, after: String, first: Int, last: Int, filter: FileFilter
+    before: String
+    after: String
+    first: Int
+    last: Int
+    filter: FileFilter
   ): FileConnection!
-
   comments(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): CommentConnection!
-
   createdAt: DateTime!
   updatedAt: DateTime
-
   suggestedMemoryType: String
-  likes(
-    before: String, after: String, first: Int, last: Int
-  ): LikeConnection!
-  isLikedByViewer: Boolean!,
+  likes(before: String, after: String, first: Int, last: Int): LikeConnection!
+  isLikedByViewer: Boolean!
 }
 
 # A connection to a list of items.
 type MemoryConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [MemoryEdge]
 }
@@ -52,22 +52,19 @@ type MemoryConnection {
 type MemoryEdge {
   # The item at the end of the edge.
   node: Memory!
-
   # A cursor for use in pagination.
   cursor: String!
 }
 
 type Achievement {
   id: ID!
-  badges(
-    upcoming: Boolean
-  ): [Badge]
+  badges(upcoming: Boolean): [Badge]
 }
 
 type Badge {
   image(
     # Width of the image that should be returned
-    width: Int,
+    width: Int
     # Height of the image that should be returned
     height: Int
   ): Image
@@ -77,10 +74,8 @@ type Badge {
 type AchievementConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [AchievementEdge]
-
   # Count of result set without considering pagination arguments
   count: Int!
 }
@@ -88,7 +83,6 @@ type AchievementConnection {
 type AchievementEdge {
   # The item at the end of the edge.
   node: Achievement!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -97,14 +91,11 @@ input CreateMemoryInput {
   babyId: ID!
   title: String!
   files: [FileInputBase64]
-
   # The date chose by the user to represent this Memory's date
   createdAt: DateTime!
-
   # A string identifier of the suggested memory that was selected
   # when creating this memory
   suggestedMemoryType: String
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -119,8 +110,8 @@ input UpdateMemoryInput {
   title: String
   createdAt: DateTime
   files: [FileInputBase64]
-  removeFiles: [ID],
-  suggestedMemoryType: String,
+  removeFiles: [ID]
+  suggestedMemoryType: String
 }
 
 input DeleteMemoryInput {
@@ -129,7 +120,6 @@ input DeleteMemoryInput {
 
 type DeleteMemoryPayload {
   memory: Memory
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -141,7 +131,6 @@ input ToggleMemoryLikeInput {
 
 type ToggleMemoryLikePayload {
   edge: MemoryEdge
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
