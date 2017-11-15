@@ -1,8 +1,8 @@
 // @flow
 import type { NavigationOptions } from '../../common/types';
 import React from 'react';
-import { TabNavigator } from 'react-navigation';
 import type { TabBarConfig } from 'react-navigation';
+import { TabNavigator } from 'react-navigation';
 import { upperFirst } from 'lodash';
 import theme from '../../common/themes/defaultTheme';
 import NubabiIcon from '../../common/icons/nubabi';
@@ -13,24 +13,29 @@ import Library from '../library/Library';
 import MemoriesScreen from '../memories/MemoriesScreen';
 import { getTabHeaders } from './shared';
 
+// $FlowFixMe$
 const navigationOptions: NavigationOptions = ({
   navigation,
   navigationOptions: childOptions,
-}) => ({
-  title: upperFirst(navigation.state.key),
-  headerMode: 'screen',
-  headerVisible: true,
-  headerStyle: {
-    backgroundColor: theme.colors.white,
-    shadowOpacity: 0.1,
-    ...childOptions.headerStyle,
-  },
-  headerLeft: getTabHeaders(navigation.navigate).left,
-  headerRight: getTabHeaders(navigation.navigate).right,
-  tabBarIcon: ({ tintColor }: *) => (
+}) => {
+  const TabBarIcon = ({ tintColor }: { tintColor: string }) => (
     <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />
-  ),
-});
+  );
+
+  return {
+    title: upperFirst(navigation.state.key),
+    headerMode: 'screen',
+    headerVisible: true,
+    headerStyle: {
+      backgroundColor: theme.colors.white,
+      shadowOpacity: 0.1,
+      ...childOptions.headerStyle,
+    },
+    headerLeft: getTabHeaders(navigation.navigate).left,
+    headerRight: getTabHeaders(navigation.navigate).right,
+    tabBarIcon: TabBarIcon,
+  };
+};
 
 const TabsNavigator = TabNavigator(
   {
