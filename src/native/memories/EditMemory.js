@@ -114,7 +114,7 @@ export default compose(
   ),
   graphql(
     gql`
-      mutation EditMemory($input: UpdateMemoryInput!) {
+      mutation UpdateMemory($input: UpdateMemoryInput!) {
         updateMemory(input: $input) {
           edge {
             cursor

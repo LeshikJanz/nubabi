@@ -60,6 +60,7 @@ export const MemoryComment = ({ text, author, createdAt }: Props) => {
 MemoryComment.fragments = {
   comment: gql`
     fragment MemoryComment on Comment {
+      id
       text
       createdAt
       author {

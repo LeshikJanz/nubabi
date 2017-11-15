@@ -26,36 +26,12 @@ export class MemoryComments extends PureComponent {
           count
           edges {
             node {
-              id
-              text
-              createdAt
-              author {
-                id
-                firstName
-                lastName
-                avatar {
-                  url
-                }
-              }
+              ...MemoryComment
             }
           }
         }
       }
-    `,
-    comment: gql`
-      fragment MemoryComment on Comment {
-        id
-        createdAt
-        text
-        author {
-          id
-          firstName
-          lastName
-          avatar {
-            url
-          }
-        }
-      }
+      ${MemoryComment.fragments.comment}
     `,
   };
 

@@ -15,6 +15,7 @@ import UpdateMeasurementHeader from './UpdateMeasurementHeader';
 import { formatMeasurement } from '../../../common/helpers/measurement';
 import displayLoadingState from '../../components/displayLoadingState';
 import theme from '../../../common/themes/defaultTheme';
+import Measurement from '../Measurement';
 
 type UpdateMeasurementType = 'weight' | 'height';
 
@@ -40,15 +41,6 @@ export class UpdateMeasurement extends PureComponent {
       this.props.unitDisplay[this.props.type],
       pathOr(0, ['viewer', 'baby', this.props.type], this.props.data),
     ),
-  };
-
-  static fragments = {
-    currentMeasurements: gql`
-      fragment CurrentMeasurements on Baby {
-        height
-        weight
-      }
-    `,
   };
 
   getCurrentValue = () => {
@@ -196,7 +188,7 @@ export default compose(
         }
       }
 
-      ${UpdateMeasurement.fragments.currentMeasurements}
+      ${Measurement.fragments.current}
     `,
   ),
   displayLoadingState,

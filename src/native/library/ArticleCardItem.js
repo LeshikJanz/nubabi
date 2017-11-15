@@ -52,16 +52,4 @@ export const ArticleCardItem = ({ title, image, layout }: Props) => {
   );
 };
 
-ArticleCardItem.fragments = {
-  item: gql`
-    fragment ArticleListItem on Article {
-      id
-      title
-      image {
-        url
-      }
-    }
-  `,
-};
-
 export default compose(withLayout)(ArticleCardItem);
