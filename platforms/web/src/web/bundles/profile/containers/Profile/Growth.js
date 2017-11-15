@@ -3,6 +3,8 @@ import React, { PureComponent } from "react";
 import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 import moment from 'moment';
+import { Link } from 'react-router-dom';
+import { pathOr } from 'ramda';
 
 type Props = {
 
@@ -75,9 +77,19 @@ const GrowthExpertDiscipline = styled.div`
   color: ${props => props.theme.colors.secondary};
 `;
 
+const ReadMore = styled(Link)`
+  color: ${props => props.theme.colors.primary};
+  text-decoration: none;
+`;
+
+const limitText = (str, limit = 365) => {
+  return str.length > limit ? `${str.substring(0, limit - 1)}...` : str;
+};
+
 class ProfileMain extends PureComponent<Props> {
   render() {
     const { growth, dob } = this.props;
+    const introduction = pathOr('',['current','introduction'], growth);
 
     return (
       <Growth>
@@ -87,7 +99,7 @@ class ProfileMain extends PureComponent<Props> {
             <GrowthDoB is='span'>{moment(dob).fromNow(true)} old</GrowthDoB>
           </GrowthHeader>
 
-          <p>{growth.current.introduction}</p>
+          <p>{limitText(introduction)} <ReadMore to="/profile">Read More</ReadMore></p>
         </GrowthContent>
 
         <GrowthExpert p={15} align="center">
