@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ICross from '../../../common/icons/cross.svg';
 
 type Props = {
   onClick: () => void,
@@ -32,12 +33,30 @@ const ButtonOutline = Common.extend`
   background: ${props => props.theme.colors.white};
 `;
 
-export default ({ onClick, primary, children, disabled, p, ...rest, pink }: Props) =>
-  primary
-    ?
-      <Button onClick={onClick} disabled={disabled} p={p} {...rest}>
-        {children}
-      </Button>
-    : <ButtonOutline onClick={onClick} disabled={disabled} {...rest}>
-        {children}
-      </ButtonOutline>;
+const ButtonPlus = Common.extend`
+  width: 24px;
+  height: 24px;
+  border: 1px solid ${props => props.theme.colors.primary};
+  color: ${props => props.theme.colors.white};
+  background: ${props => props.theme.colors.primary};
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export default ({ onClick, primary, plus, children, disabled, p, ...rest, pink }: Props) =>
+  primary ?
+    <Button onClick={onClick} disabled={disabled} p={p} {...rest}>
+      {children}
+    </Button>
+  : plus ?
+    <ButtonPlus onClick={onClick} disabled={disabled} {...rest}>
+      <ICross />
+    </ButtonPlus>
+  :
+    <ButtonOutline onClick={onClick} disabled={disabled} p={p} {...rest}>
+      {children}
+    </ButtonOutline>
+

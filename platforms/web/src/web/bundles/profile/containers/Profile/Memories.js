@@ -3,18 +3,26 @@ import React, { PureComponent } from "react";
 import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 
+import Button from '../../../../elements/Button';
+
 type Props = {
 
 };
 
 const Memories = styled.div``;
 
-const MemoriesTitle = styled.h3`
+const MemoriesHeader = styled(Flex)`
+  margin: 0 0 15px;
+`;
+
+const MemoriesTitle = styled(Box)`
   font-weight: normal;
   font-size: 18px;
-  margin: 0 0 15px;
+  margin: 0 0 10px;
   color: ${props => props.theme.colors.open.black0};
 `;
+
+const AddButton = styled(Box)``;
 
 const MemoriesList = styled(Flex)`
   margin: 0;
@@ -65,7 +73,10 @@ class ProfileMain extends PureComponent<Props> {
 
     return (
       <Memories>
-        <MemoriesTitle>Recent Memories</MemoriesTitle>
+        <MemoriesHeader justify="space-between" align="center">
+          <MemoriesTitle is="h3">Recent Memories </MemoriesTitle>
+          <AddButton is={Button} plus />
+        </MemoriesHeader>
 
         <MemoriesList justify='space-between' wrap>
           {memories.edges.map(edge => {

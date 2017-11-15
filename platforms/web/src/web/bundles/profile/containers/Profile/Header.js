@@ -268,7 +268,7 @@ class ProfileHeader extends Component<Props> {
             onRequestClose={this.closeModal}
             parentSelector={() => document.querySelector('.ProfileHeaderMain')}
           >
-            <PhotoActionsTitle><ICamera/> Change cover photo</PhotoActionsTitle>
+            <PhotoActionsTitle><ICamera/> Change Cover Photo</PhotoActionsTitle>
             <PhotoActionsList>
               <PhotoActionsListItem>Upload photo</PhotoActionsListItem>
               <PhotoActionsListItem>Remove</PhotoActionsListItem>
