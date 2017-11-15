@@ -11,13 +11,14 @@ import { stickersList } from './SuggestedMemoriesList';
 
 type Props = {
   selectedSticker: ?string,
-  onSelectSticker: (stickerId: string) => void,
+  onSelectSticker: (stickerId: ?string) => void,
 };
 
 class Stickers extends PureComponent<Props> {
   renderItem = ({ item }) => {
-    const selectSticker = () => this.props.onSelectSticker(item.id);
     const isSelected = this.props.selectedSticker === item.id;
+    const selectSticker = () =>
+      this.props.onSelectSticker(isSelected ? null : item.id);
 
     return (
       <Box as={TouchableWithoutFeedback} onPress={selectSticker} flex={1}>
