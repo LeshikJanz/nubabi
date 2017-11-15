@@ -25,7 +25,7 @@ export class ViewMemoryScreen extends PureComponent {
         <TouchableOpacity style={{ paddingRight: 10 }} onPress={editMemory}>
           <Icon
             size={20}
-            name="md-brush"
+            name="md-create"
             color="#454D56"
             style={{ marginLeft: 10 }}
           />
