@@ -11,6 +11,7 @@
   "plugins": [
     "flowtype",
     "fp",
+    "graphql",
     "react",
     "react-native",
     "prettier"
@@ -45,6 +46,12 @@
     "react-native/no-unused-styles": 0,
     "react-native/split-platform-components": 2,
     "fp/no-mutating-assign": 2,
+    "graphql/template-strings": ["error", {
+      // Import default settings for your GraphQL client. Supported values:
+      // 'apollo', 'relay', 'lokka', 'literal'
+      "schemaJsonFilepath": "graphql.schema.json",
+      "env": "apollo"
+    }],
     "react/sort-comp": [
       2,
       {
