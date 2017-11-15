@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable arrow-parens */
 import R from 'ramda';
 import {
@@ -33,31 +34,31 @@ export const combineResolvers = (...resolvers) => {
 
 export const mutationWithClientMutationId = mutateAndGetPayload => {
   return (_, { input }, ctx, info) => {
-    return Promise.resolve(
-      mutateAndGetPayload(input, ctx, info),
-    ).then(payload => {
-      payload.clientMutationId = input.clientMutationId; // eslint-disable-line no-param-reassign
-      return payload;
-    });
+    return Promise.resolve(mutateAndGetPayload(input, ctx, info)).then(
+      payload => {
+        payload.clientMutationId = input.clientMutationId; // eslint-disable-line no-param-reassign
+        return payload;
+      },
+    );
   };
 };
 
-const {
-  nodeField,
-} = nodeDefinitions((globalId, { token, connectors: { firebase } }) => {
-  const { type, id } = fromGlobalId(globalId);
-  switch (type) {
-    case 'Baby': {
-      return firebase.getBaby(id);
+const { nodeField } = nodeDefinitions(
+  (globalId, { token, connectors: { firebase } }) => {
+    const { type, id } = fromGlobalId(globalId);
+    switch (type) {
+      case 'Baby': {
+        return firebase.getBaby(id);
+      }
+      case 'Activity': {
+        return babies.getActivity(token, id);
+      }
+      default: {
+        return null;
+      }
     }
-    case 'Activity': {
-      return babies.getActivity(token, id);
-    }
-    default: {
-      return null;
-    }
-  }
-});
+  },
+);
 
 export const nodeFieldResolver = nodeField.resolve;
 
