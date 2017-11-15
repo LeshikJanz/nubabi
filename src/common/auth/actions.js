@@ -74,7 +74,7 @@ const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
     });
 };
 
-const logoutEpic = (action$: any, { firebaseAuth, apollo }: Deps) => {
+const logoutEpic = (action$: any, { firebaseAuth }: Deps) => {
   return action$
     .filter((action: Action) => action.type === 'LOGOUT')
     .mergeMap(() => Observable.fromPromise(firebaseAuth().signOut()))

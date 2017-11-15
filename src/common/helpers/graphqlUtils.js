@@ -48,7 +48,8 @@ export const flattenEdges = memoize(connection => {
   return pluck('node', edges).map(node => {
     Object.keys(node).forEach(key => {
       if (path([key, 'edges'], node)) {
-        node[key] = flattenEdges(prop(key, node)); // eslint-disable no-param-reassign
+        // eslint-disable-next-line no-param-reassign
+        node[key] = flattenEdges(prop(key, node));
       }
     });
 
@@ -87,15 +88,15 @@ export const mapEdgesToProp = curry(
 
     const edges = path(normalizePath(edgePath), data);
 
-    let prop;
+    let targetProp;
 
     if (edges) {
-      prop = pluck('node', edges);
+      targetProp = pluck('node', edges);
     }
 
     return {
       data,
-      [propName]: prop,
+      [propName]: targetProp,
     };
   },
 );
@@ -218,15 +219,13 @@ const updateFragment = curry(
     fragmentOptions?:
       | DataProxyReadFragmentOptions
       | DataProxyWriteFragmentOptions = {},
-  ) => (store, data) => {
+  ) => store => {
     const oldData = store.readFragment({
       fragment,
       id: rootId,
       ...fragmentOptions,
     });
-    console.log(oldData);
     const newData = updaterFn(oldData);
-    console.log(newData);
     if (newData) {
       store.writeFragment({
         fragment,
@@ -243,6 +242,7 @@ export const replaceEdgeInFragment = (
   fragment: DocumentNode,
   rootId: string,
   edgePath: Array<string>,
+  // eslint-disable-next-line no-unused-vars
   fragmentOptions?:
     | DataProxyReadFragmentOptions
     | DataProxyWriteFragmentOptions = {},
@@ -358,7 +358,6 @@ export const getCurrentUserFromStore = (gql, store) => {
       `,
     });
   } catch (err) {
-    console.log(err);
     return null;
   }
 };

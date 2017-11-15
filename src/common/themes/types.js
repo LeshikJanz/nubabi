@@ -1,3 +1,4 @@
+// @flow
 export type ColorProps = {
   // Don't hesitate to add your own.
   primary?: boolean,

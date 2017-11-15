@@ -44,7 +44,7 @@ export const configureApolloAuth = (store: Store<Action, State>) => {
           req.options.headers = {};
         }
 
-        const token = store.getState().auth.token;
+        const { token } = store.getState().auth;
         req.options.headers.authorization = token ? `Bearer ${token}` : null;
         next();
       },

@@ -36,7 +36,6 @@ export type {
   GrowthArticle,
   Memory,
   Measurement,
-  ToggleMemoryLikeInput,
 } from './modelTypes';
 export * from './queryTypes';
 

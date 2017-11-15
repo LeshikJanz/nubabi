@@ -6,19 +6,6 @@ import { configureApollo } from './configureApollo';
 
 let firebaseDeps = null;
 
-const enableFirebaseLogging = () => {
-  // eslint-disable-line no-unused-vars
-  /* eslint-disable no-console */
-  if (__DEV__) {
-    firebase.database.enableLogging(message => {
-      console.groupCollapsed('FIREBASE');
-      console.log(message);
-      console.groupEnd();
-    });
-  }
-  /* eslint-enable no-console */
-};
-
 const createFirebaseDeps = firebaseConfig => {
   if (!firebaseDeps) {
     firebase.initializeApp(firebaseConfig);

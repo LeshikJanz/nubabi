@@ -19,6 +19,9 @@
   "env": {
     "jest": true
   },
+  "globals": {
+    "__DEV__": false
+  },
   "rules": {
     "arrow-parens": 0,
     "global-require": 0,
