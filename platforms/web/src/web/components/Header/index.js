@@ -6,7 +6,7 @@ import { Flex, Box } from 'grid-styled';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../../../src/common/icons/logo.svg';
-import INotification from '../../../../src/common/icons/notification.svg';
+import Notifications from './Notifications';
 
 import Menu from './Menu';
 
@@ -86,20 +86,6 @@ const BabySelect = styled.span`
   }
 `;
 
-const Notifications = styled.div`
-  position: relative;
-`;
-
-const NotificationIndicator = styled.span`
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 4px;
-  height: 4px;
-  background: ${props => props.theme.colors.primary};
-  border-radius: 5px;
-`;
-
 class AppHeader extends PureComponent<Props> {
   render() {
     return (
@@ -108,15 +94,16 @@ class AppHeader extends PureComponent<Props> {
           <HeaderLeft width={1/3}>
             <Link to="/profile"><AppLogo is={Logo} /></Link>
           </HeaderLeft>
+
           <HeaderCenter width={1/4}>
             <BabySelect>Charlotte</BabySelect>
           </HeaderCenter>
+
           <HeaderRight width={1/3}>
             <HeaderInfoBox>8 days of your trial remaining. <Link to="/"> Subscribe Now</Link> </HeaderInfoBox>
-            <Notifications>
-              <INotification/>
-              <NotificationIndicator />
-            </Notifications>
+
+            <Notifications />
+
             <HeaderMenu is={Menu} {...this.props}/>
           </HeaderRight>
         </HeaderContent>

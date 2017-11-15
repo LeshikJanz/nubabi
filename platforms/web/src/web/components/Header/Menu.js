@@ -1,10 +1,10 @@
 // @flow
 import React, { Component } from "react";
 import styled from 'styled-components';
-import { Menu } from "web/elements";
 import Modal from 'react-modal';
 import onClickOutside from "react-onclickoutside";
 
+import { Menu } from "web/elements";
 import Avatar from '../../../common/images/avatar.png';
 
 type Props = {
