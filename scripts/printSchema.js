@@ -16,7 +16,7 @@ const writeSchemaFile = async () => {
     );
   } else {
     fs.writeFileSync(
-      path.join(__dirname, '../schema.json'),
+      path.join(__dirname, '../graphql.schema.json'),
       JSON.stringify(result, null, 2),
       'utf-8',
       'w+',
