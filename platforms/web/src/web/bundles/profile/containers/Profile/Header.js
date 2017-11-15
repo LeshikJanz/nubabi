@@ -8,10 +8,9 @@ import Modal from 'react-modal';
 import IWeight from '../../../../../common/icons/weight.svg';
 import IHeight from '../../../../../common/icons/height.svg';
 import IEdit from '../../../../../common/icons/edit.svg';
+import ICamera from '../../../../../common/icons/camera.svg';
 
 import { Header, Button } from "web/elements";
-
-//Modal.setAppElement(appElement);
 
 type Props = {
 
@@ -67,6 +66,7 @@ const BabyImage = styled.div`
   background: url(${props => props.image});
   background-size:cover;
   background-position:center;
+  z-index: 3;
 `;
 
 const BabyInfo = styled(Flex)`
@@ -134,22 +134,94 @@ const EditProfileButton = styled(Box)`
 `;
 
 const PhotoActionsList = styled.ul`
-  min-width: 130px;
+  min-width: 210px;
   padding: 0;
   margin: 15px 0 0 0;
   list-style: none;
   background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.open.white2};
   border-radius: 4px;
-  overflow: hidden; 
+  text-align: center;
+  box-shadow: ${props => props.theme.shadows.light};
+  position: relative;
+  
+   &:before {
+    content: '';
+    display: inline-block;
+    width: 0; 
+    height: 0; 
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid ${props => props.theme.colors.white};
+  }
 `;
 
 const PhotoActionsListItem = styled.li`
-  padding: 5px 20px;
-  border-bottom: 1px solid ${props => props.theme.colors.open.gray3};
+  padding: 15px;
+  border-bottom: 1px solid ${props => props.theme.colors.open.white2};
   color: ${props => props.theme.colors.open.gray3};
   cursor: pointer;
+  font-size: 14px;
+  font-family: ${props => props.theme.text.fontFamily};
 `;
 
+const PhotoActionsTitle = styled.h4`
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: normal;
+  color: ${props => props.theme.colors.open.white2};
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
+  
+  >svg {
+    margin-right: 5px;
+  }
+`;
+
+const ModalStyles = {
+  overlay: {
+    position: 'absolute',
+    background: 'rgba(116, 130, 148, .7)',
+  },
+  content: {
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    top: '87%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    transform: 'translate(-50%, -50%)',
+    background: 'none',
+    border: 'none',
+    color: 'white',
+    padding: 0,
+    overflow: 'visible',
+  }
+};
+
+const PhotoChangeIcon = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  border: 2px solid ${props => props.theme.colors.white};
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  background: ${props => props.theme.colors.primary};
+  z-index: 4;
+`;
 
 class ProfileHeader extends Component<Props> {
   constructor() {
@@ -178,6 +250,7 @@ class ProfileHeader extends Component<Props> {
       <Box width={1} is={Header}>
         <Main image={coverImage.url} align="flex-end" className="ProfileHeaderMain">
           <BabyImage image={avatar.url}/>
+          { this.state.modalIsOpen && <PhotoChangeIcon><ICamera/></PhotoChangeIcon> }
 
           <BabyInfo>
             <BabyName>{name}</BabyName>
@@ -185,38 +258,17 @@ class ProfileHeader extends Component<Props> {
           </BabyInfo>
 
           <EditPhotosButton align="center" justify="space-between" direction="column" onClick={this.openModal}>
-            <IEdit />
-            Edit photos
+            <IEdit /> Edit photos
           </EditPhotosButton>
 
           <Modal
-            style={{
-              overlay: {
-                position: 'absolute',
-                background: 'rgba(116, 130, 148, .7)',
-              },
-              content: {
-                display: 'flex',
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-                flexDirection: 'column',
-                top: '50%',
-                left: '50%',
-                right: 'auto',
-                bottom: 'auto',
-                transform: 'translate(-50%, -50%)',
-                background: 'none',
-                border: 'none',
-                color: 'white'
-              }
-            }}
+            style={ModalStyles}
             isOpen={this.state.modalIsOpen}
-            onRequestClose={this.closeModal}
             contentLabel="Edit Photo Menu"
+            onRequestClose={this.closeModal}
             parentSelector={() => document.querySelector('.ProfileHeaderMain')}
           >
-            <div>Change cover photo</div>
+            <PhotoActionsTitle><ICamera/> Change cover photo</PhotoActionsTitle>
             <PhotoActionsList>
               <PhotoActionsListItem>Upload photo</PhotoActionsListItem>
               <PhotoActionsListItem>Remove</PhotoActionsListItem>
