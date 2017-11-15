@@ -3,7 +3,7 @@
 
 declare module 'base-64' {
   declare module.exports: {
-    version: string,
+    version: string;
     /**
      * This function takes a byte string (the input parameter) and encodes it according to base64.
      * The input data must be in the form of a string containing only characters
@@ -12,7 +12,7 @@ declare module 'base-64' {
      * with btoa() as described in the HTML Standard.
      * see: https://html.spec.whatwg.org/multipage/webappapis.html#dom-windowbase64-btoa
      */
-    encode(input: string): string,
+    encode(input: string): string;
     /**
      * This function takes a base64-encoded string (the input parameter) and decodes it.
      * The return value is in the form of a string containing only characters in
@@ -21,6 +21,6 @@ declare module 'base-64' {
      * with atob() as described in the HTML Standard.
      * see: https://html.spec.whatwg.org/multipage/webappapis.html#dom-windowbase64-atob
      */
-    decode(input: string): string,
+    decode(input: string): string;
   };
 }
