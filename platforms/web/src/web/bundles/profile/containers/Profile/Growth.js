@@ -90,7 +90,7 @@ class ProfileMain extends PureComponent<Props> {
 
         <GrowthExpert p={15} align="center">
           <GrowthExpertImage mr={15}>
-            <img src={growth.current.expert.avatar.url} />
+            <img src={growth.current.expert.avatar.url} alt="Expert" />
           </GrowthExpertImage>
 
           <GrowthExpertContent>

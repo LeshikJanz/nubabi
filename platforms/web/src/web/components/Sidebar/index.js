@@ -68,7 +68,8 @@ const Banner = styled.div`
   padding: 10px;
 `;
 
-const BannerImage = styled.div`
+const BannerImage = styled.a`
+  display: inline-block;
   margin-bottom: 15px;
   > img {
     max-width: 100%;
@@ -94,11 +95,11 @@ class Sidebar extends PureComponent<Props> {
         <Panel>
           <PanelBody>
             <Banner>
-              <img src={INubabiApp}/>
+              <img src={INubabiApp} alt="Nubabi App"/>
               <h4>Have you tried the Nubabi Mobile App?</h4>
               <p>Enjoy easy access to your baby’s content, on the go!</p><br/>
-              <BannerImage><img src={IAppStore} /></BannerImage>
-              <BannerImage><img src={IPlayMarket} /></BannerImage>
+              <BannerImage href=""><img src={IAppStore} alt="App Store"/></BannerImage>
+              <BannerImage href=""><img src={IPlayMarket} alt="Google Play"/></BannerImage>
             </Banner>
           </PanelBody>
         </Panel>

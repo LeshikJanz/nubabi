@@ -56,8 +56,8 @@ const EditPhotosButton = styled(Flex)`
 `;
 
 const BabyImage = styled.div`
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   position: absolute;
   left: 50%;
   top: 0;

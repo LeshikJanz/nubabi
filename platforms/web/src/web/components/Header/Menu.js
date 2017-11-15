@@ -32,15 +32,34 @@ const HeaderMenuItem = styled(Menu.Link)`
   display: block;
 `;
 
-const MenuAvatar = styled.img`
-  width: 50px;
-  height: 50px;
+const MenuAvatar = styled.div`
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  position: relative;
+  
+  > img {
+    max-width: 100%;
+  }
   
   &:hover {
     + div {
      visibility: visible;
     }
+  }
+  
+  &:after {
+    content: '';
+    display: inline-block;
+    width: 0; 
+    height: 0; 
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid ${props => props.theme.colors.open.gray2};
   }
 `;
 
@@ -48,7 +67,7 @@ class MenuComponent extends PureComponent<Props> {
   render() {
     return (
       <Wrapper>
-        <MenuAvatar src={Avatar} />
+        <MenuAvatar><img src={Avatar} alt="me"/></MenuAvatar>
 
         <HeaderMenu>
           <HeaderMenuItem to="/" active={this.props.pathname === "/"}>

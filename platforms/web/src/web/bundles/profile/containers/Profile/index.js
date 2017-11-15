@@ -4,11 +4,10 @@ import { connect } from "react-redux";
 import { gql, graphql } from "react-apollo";
 import compose from "ramda/src/compose";
 import path from "ramda/src/path";
-import { Flex, Box } from 'grid-styled';
+import { Flex } from 'grid-styled';
 import styled from "styled-components";
 
 import { Loader } from "web/components";
-import { Aside } from "web/elements";
 import NavBar from './Navbar';
 import Header from './Header';
 import Main from './Main';
