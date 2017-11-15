@@ -1,7 +1,9 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import styled from 'styled-components';
 import { Menu } from "web/elements";
+import Modal from 'react-modal';
+import onClickOutside from "react-onclickoutside";
 
 import Avatar from '../../../common/images/avatar.png';
 
@@ -14,23 +16,52 @@ const Wrapper = styled.div`
 `;
 
 const HeaderMenu = styled(Menu)`
-  width: 200px;
-  background: white;
-  position: absolute;
-  top: 30px;
-  right: 0px;
-  visibility: hidden;
-  border: 1px solid gray;
-  z-index: 99;
-  
-  &:hover {
-    visibility: visible;
-  }
+  min-width: 210px;
+  padding: 0;
+  margin: 15px 0 0 0;
+  list-style: none;
+  background: ${props => props.theme.colors.white};
+  border: 1px solid ${props => props.theme.colors.open.white2};
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: ${props => props.theme.shadows.light};
+  position: relative;
 `;
 
 const HeaderMenuItem = styled(Menu.Link)`
   display: block;
+  padding: 15px;
+  margin: 0;
+  border-bottom: 1px solid ${props => props.theme.colors.open.white2};
+  color: ${props => props.theme.colors.open.gray3};
+  cursor: pointer;
+  font-size: 14px;
+  font-family: ${props => props.theme.text.fontFamily};
+  text-decoration: none;
+  
+  &:last-child {
+    border: none;
+  }
 `;
+
+const modalStyles = {
+  overlay: {
+    zIndex: 5,
+    background: 'none',
+    position: 'absolute',
+  },
+  content: {
+    maxWidth: '250px',
+    position: 'absolute',
+    top: '20px',
+    left: 'auto',
+    right: '-25px',
+    bottom: 'auto',
+    background: 'none',
+    border: 'none',
+    padding: '0'
+  }
+};
 
 const MenuAvatar = styled.div`
   width: 30px;
@@ -63,45 +94,74 @@ const MenuAvatar = styled.div`
   }
 `;
 
-class MenuComponent extends PureComponent<Props> {
+class MenuComponent extends Component<Props> {
+  constructor() {
+    super();
+
+    this.state = {
+      modalIsOpen: false
+    };
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+  }
+
+  handleClickOutside(e) {
+    e.preventDefault();
+    this.closeModal();
+  }
+
+  openModal() {
+    this.setState({modalIsOpen: true});
+  }
+
+  closeModal() {
+    this.setState({modalIsOpen: false});
+  }
+
   render() {
     return (
-      <Wrapper>
-        <MenuAvatar><img src={Avatar} alt="me"/></MenuAvatar>
+      <Wrapper className="AppHeaderMenu">
+        <MenuAvatar onClick={this.openModal}><img src={Avatar} alt="me"/></MenuAvatar>
 
-        <HeaderMenu>
-          <HeaderMenuItem to="/" active={this.props.pathname === "/"}>
-            Home
-          </HeaderMenuItem>
-          <HeaderMenuItem to="/about" active={this.props.pathname === "/about"}>
-            About
-          </HeaderMenuItem>
-          {this.props.isAuthenticated && (
-            <HeaderMenuItem
-              to="/profile"
-              active={this.props.pathname === "/profile"}
-            >
-              Profile
-            </HeaderMenuItem>
-          )}
-          {this.props.isAuthenticated && (
-            <HeaderMenuItem name="logout" onClick={this.props.logout}>
-              LogOut
-            </HeaderMenuItem>
-          )}
-          {!this.props.isAuthenticated && (
-            <HeaderMenuItem
-              to="/login?redirect=/profile"
-              active={this.props.pathname === "/login?redirect=/profile"}
-            >
-              Login
-            </HeaderMenuItem>
-          )}
-        </HeaderMenu>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          contentLabel="Edit Photo Menu"
+          onRequestClose={this.closeModal}
+          style={modalStyles}
+          parentSelector={() => document.querySelector('.AppHeaderMenu')}
+        >
+          <HeaderMenu>
+            {this.props.isAuthenticated && (
+              <HeaderMenuItem to="/profile"
+                active={this.props.pathname === "/profile"}
+              >
+                My Profile &amp; settings
+              </HeaderMenuItem>
+            )}
+            {this.props.isAuthenticated && (
+              <HeaderMenuItem name="/profile" onClick={this.props.logout}>
+                Redeem a Voucher
+              </HeaderMenuItem>
+            )}
+            {this.props.isAuthenticated && (
+              <HeaderMenuItem name="logout" onClick={this.props.logout}>
+                LogOut
+              </HeaderMenuItem>
+            )}
+            {!this.props.isAuthenticated && (
+              <HeaderMenuItem
+                to="/login?redirect=/profile"
+                active={this.props.pathname === "/login?redirect=/profile"}
+              >
+                Login
+              </HeaderMenuItem>
+            )}
+          </HeaderMenu>
+        </Modal>
       </Wrapper>
     );
   }
 }
 
-
-export default MenuComponent;
+export default onClickOutside(MenuComponent);

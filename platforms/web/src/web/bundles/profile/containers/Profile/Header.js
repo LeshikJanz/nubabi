@@ -4,6 +4,7 @@ import { Flex, Box } from 'grid-styled';
 import styled from "styled-components";
 import moment from 'moment';
 import Modal from 'react-modal';
+import onClickOutside from "react-onclickoutside";
 
 import IWeight from '../../../../../common/icons/weight.svg';
 import IHeight from '../../../../../common/icons/height.svg';
@@ -167,6 +168,10 @@ const PhotoActionsListItem = styled.li`
   cursor: pointer;
   font-size: 14px;
   font-family: ${props => props.theme.text.fontFamily};
+  
+  &:last-child {
+    border: none;
+  }
 `;
 
 const PhotoActionsTitle = styled.h4`
@@ -185,7 +190,7 @@ const PhotoActionsTitle = styled.h4`
   }
 `;
 
-const ModalStyles = {
+const modalStyles = {
   overlay: {
     position: 'absolute',
     background: 'rgba(116, 130, 148, .7)',
@@ -235,6 +240,11 @@ class ProfileHeader extends Component<Props> {
     this.closeModal = this.closeModal.bind(this);
   }
 
+  handleClickOutside(e) {
+    e.preventDefault();
+    this.closeModal();
+  }
+
   openModal() {
     this.setState({modalIsOpen: true});
   }
@@ -248,7 +258,7 @@ class ProfileHeader extends Component<Props> {
 
     return (
       <Box width={1} is={Header}>
-        <Main image={coverImage.url} align="flex-end" className="ProfileHeaderMain">
+        <Main image={coverImage.url} align="flex-end" className="ProfileHeaderMain">  {/*Be careful! Modal depend on className*/}
           <BabyImage image={avatar.url}/>
           { this.state.modalIsOpen && <PhotoChangeIcon><ICamera/></PhotoChangeIcon> }
 
@@ -262,11 +272,11 @@ class ProfileHeader extends Component<Props> {
           </EditPhotosButton>
 
           <Modal
-            style={ModalStyles}
+            style={modalStyles}
             isOpen={this.state.modalIsOpen}
             contentLabel="Edit Photo Menu"
             onRequestClose={this.closeModal}
-            parentSelector={() => document.querySelector('.ProfileHeaderMain')}
+            parentSelector={() => document.querySelector('.ProfileHeaderMain')} /* Main component should have such className*/
           >
             <PhotoActionsTitle><ICamera/> Change Cover Photo</PhotoActionsTitle>
             <PhotoActionsList>
@@ -289,4 +299,4 @@ class ProfileHeader extends Component<Props> {
   }
 }
 
-export default ProfileHeader;
+export default onClickOutside(ProfileHeader);
