@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
 export type AgeDuration = 'WEEK' | 'MONTH' | 'YEAR';
@@ -9,6 +10,9 @@ export type CreateMemoryInput = {|
   files?: ?Array<?FileInputBase64>,
   // The date chose by the user to represent this Memory's date
   createdAt: any,
+  // A string identifier of the suggested memory that was selected
+  // when creating this memory
+  suggestedMemoryType?: ?string,
   // An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId?: ?string,
 |};
@@ -26,24 +30,35 @@ export type UpdateMemoryInput = {|
   createdAt?: ?any,
   files?: ?Array<?FileInputBase64>,
   removeFiles?: ?Array<?string>,
+  suggestedMemoryType?: ?string,
+|};
+
+export type DeleteMemoryInput = {|
+  id: string,
+|};
+
+export type CreateCommentInput = {|
+  id: string,
+  commentableType: string,
+  text: string,
+|};
+
+export type ToggleMemoryLikeInput = {|
+  id: string,
+  isLiked: boolean,
 |};
 
 export type CreateBabyInput = {|
   name: string,
   // Date of birth
   dob: any,
-  avatar?: ?ImageInput,
-  coverImage?: ?ImageInput,
+  avatar?: ?FileInputBase64,
+  coverImage?: ?FileInputBase64,
   weight?: ?number,
   height?: ?number,
   gender: Gender,
   weekBorn: number,
   relationship?: ?string,
-|};
-
-export type ImageInput = {|
-  // A Base64-encoded data URI representing the image contents
-  url?: ?string,
 |};
 
 export type Gender = 'MALE' | 'FEMALE';
@@ -61,8 +76,8 @@ export type UpdateBabyInput = {|
   id: string,
   name?: ?string,
   dob?: ?any,
-  avatar?: ?ImageInput,
-  coverImage?: ?ImageInput,
+  avatar?: ?FileInputBase64,
+  coverImage?: ?FileInputBase64,
   weight?: ?number,
   height?: ?number,
   gender?: ?Gender,
@@ -87,7 +102,7 @@ export type UpdateUserInput = {|
   firstName?: ?string,
   lastName?: ?string,
   dob?: ?any,
-  avatar?: ?ImageInput,
+  avatar?: ?FileInputBase64,
 |};
 
 export type InviteUserInput = {|
@@ -101,15 +116,10 @@ export type InviteUserInput = {|
 export type ActivityFilterInput = {|
   skillAreas?: ?Array<string>,
   categories?: ?Array<string>,
+  periodId?: ?string,
 |};
 
 export type ActivityMediaType = 'IMAGE' | 'VIDEO';
-
-export type ToggleFavoriteInput = {|
-  id: string,
-  babyId: string,
-  favorite: boolean,
-|};
 
 export type SwoopActivityInput = {|
   // The ID of the current Activity
@@ -128,22 +138,47 @@ export type AdjustActivityLevelInput = {|
 
 export type ActivityLevelOperation = 'INCREASE' | 'DECREASE';
 
-export type GetBabiesQuery = {|
+export type CompleteActivityInput = {|
+  id: string,
+  babyId: string,
+  // An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId?: ?string,
+|};
+
+export type ToggleFavoriteInput = {|
+  id: string,
+  babyId: string,
+  favorite: boolean,
+|};
+
+export type CurrentUserQuery = {|
   viewer: {|
-    __typename: string,
     user: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
+      firstName: ?string,
+      lastName: ?string,
+      avatar: ?{|
+        url: string,
+      |},
+    |},
+  |},
+|};
+
+export type getBabiesQuery = {|
+  viewer: {|
+    user: ?{|
+      // The ID of an object
+      id: string,
+      avatar: ?{|
+        url: string,
+      |},
     |},
     babies: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
@@ -159,35 +194,26 @@ export type GraphDetailQueryVariables = {|
 
 export type GraphDetailQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
       measurements: ?{|
-        __typename: string,
         heights: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
               recordedAt: any,
               value: number,
             |},
           |}>,
         |},
         weights: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
               recordedAt: any,
               value: number,
             |},
@@ -205,38 +231,25 @@ export type GrowthQueryVariables = {|
 
 export type GrowthQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
-      // The current weight for this Baby
-      weight: ?number,
-      // The current height for this Baby
-      height: ?number,
       measurements: ?{|
-        __typename: string,
         weights: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
               value: number,
               recordedAt: any,
             |},
           |}>,
         |},
         heights: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
               value: number,
               recordedAt: any,
             |},
@@ -244,14 +257,11 @@ export type GrowthQuery = {|
         |},
       |},
       growth: {|
-        __typename: string,
         // Global introduction to the Growth section
         introduction: string,
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // The item at the end of the edge.
           node: {|
-            __typename: string,
             // The ID of an object
             id: string,
             title: string,
@@ -280,15 +290,18 @@ export type ViewGrowthArticleQueryVariables = {|
 
 export type ViewGrowthArticleQuery = {|
   viewer: {|
-    __typename: string,
     growthArticle: ?{|
-      __typename: string,
+      // The ID of an object
       id: string,
       title: string,
       text: string,
       readingTime: {|
-        __typename: string,
         text: string,
+      |},
+      section: {|
+        // The ID of an object
+        id: string,
+        name: string,
       |},
     |},
   |},
@@ -300,20 +313,15 @@ export type WhatYouNeedToKnowQueryVariables = {|
 
 export type WhatYouNeedToKnowQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       // Date of birth
       dob: any,
       growth: {|
-        __typename: string,
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // The item at the end of the edge.
           node: {|
-            __typename: string,
             // The ID of an object
             id: string,
             title: string,
@@ -327,43 +335,47 @@ export type WhatYouNeedToKnowQuery = {|
             content: string,
             // Links to library content (introductory section)
             introductionContentLinks: {|
-              __typename: string,
               // A list of edges.
-              edges: ?Array<{|
-                __typename: string,
+              edges: ?Array<?{|
                 // The item at the end of the edge.
                 node: {|
-                  __typename: string,
+                  // The ID of an object
                   id: string,
                   title: string,
                   text: string,
+                  section: {|
+                    // The ID of an object
+                    id: string,
+                    name: string,
+                  |},
                 |},
               |}>,
             |},
             // Links to library content (Growth & Development)
             growthDevelopmentContentLinks: {|
-              __typename: string,
               // A list of edges.
-              edges: ?Array<{|
-                __typename: string,
+              edges: ?Array<?{|
                 // The item at the end of the edge.
                 node: {|
-                  __typename: string,
+                  // The ID of an object
                   id: string,
                   title: string,
                   text: string,
+                  section: {|
+                    // The ID of an object
+                    id: string,
+                    name: string,
+                  |},
                 |},
               |}>,
             |},
             // Expert who gave this content's advice
             expert: {|
-              __typename: string,
               // The ID of an object
               id: string,
               name: string,
               discipline: ?string,
               avatar: {|
-                __typename: string,
                 url: string,
               |},
             |},
@@ -376,20 +388,15 @@ export type WhatYouNeedToKnowQuery = {|
 
 export type ArticleListQuery = {|
   viewer: {|
-    __typename: string,
     allArticles: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
           // The ID of an object
           id: string,
           title: string,
           image: {|
-            __typename: string,
             url: string,
           |},
         |},
@@ -400,20 +407,15 @@ export type ArticleListQuery = {|
 
 export type BrowseArticlesQuery = {|
   viewer: {|
-    __typename: string,
     allArticles: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
           // The ID of an object
           id: string,
           title: string,
           image: {|
-            __typename: string,
             url: string,
           |},
         |},
@@ -424,18 +426,20 @@ export type BrowseArticlesQuery = {|
 
 export type HealthHelpQuery = {|
   viewer: {|
-    __typename: string,
     // Content articles for library (not blog links)
     allLibraryArticles: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
+          // The ID of an object
           id: string,
           title: string,
+          section: {|
+            // The ID of an object
+            id: string,
+            name: string,
+          |},
         |},
       |}>,
     |},
@@ -444,18 +448,20 @@ export type HealthHelpQuery = {|
 
 export type ParentingTipsQuery = {|
   viewer: {|
-    __typename: string,
     // Content articles for library (not blog links)
     allLibraryArticles: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
+          // The ID of an object
           id: string,
           title: string,
+          section: {|
+            // The ID of an object
+            id: string,
+            name: string,
+          |},
         |},
       |}>,
     |},
@@ -468,31 +474,26 @@ export type ViewArticleQueryVariables = {|
 
 export type ViewArticleQuery = {|
   viewer: {|
-    __typename: string,
     article: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       title: string,
       text: string,
       readingTime: {|
-        __typename: string,
         text: string,
       |},
       author: {|
-        __typename: string,
         name: string,
       |},
       publishedAt: any,
-      tags: ?Array<{|
-        __typename: string,
+      tags: ?Array<?{|
         id: string,
         name: string,
       |}>,
       image: {|
-        __typename: string,
         url: string,
       |},
+      blogUrl: ?string,
     |},
   |},
 |};
@@ -503,42 +504,142 @@ export type AddMemoryMutationVariables = {|
 
 export type AddMemoryMutation = {|
   createMemory: ?{|
-    __typename: string,
     edge: ?{|
-      __typename: string,
+      // A cursor for use in pagination.
+      cursor: string,
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         // The ID of an object
         id: string,
         title: string,
+        createdAt: any,
         files: {|
-          __typename: string,
+          // Count of filtered result set without considering pagination arguments
+          count: ?number,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node:
               | {
-                  __typename: 'Avatar',
                   // The ID of an object
                   id: string,
-                  url: ?string,
                   contentType: string,
+                  url: ?string,
                 }
               | {
-                  __typename: 'Image',
                   // The ID of an object
                   id: string,
-                  url: ?string,
                   contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  large: ?{|
+                    url: string,
+                  |},
                 }
               | {
-                  __typename: 'GenericFile',
                   // The ID of an object
                   id: string,
-                  url: ?string,
                   contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  duration: ?number,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  duration: ?number,
+                },
+          |}>,
+        |},
+        suggestedMemoryType: ?string,
+        comments: {|
+          count: ?number,
+        |},
+        isLikedByViewer: boolean,
+        likes: {|
+          // Count of filtered result set without considering pagination arguments
+          count: ?number,
+          // A list of edges.
+          edges: ?Array<?{|
+            // The user that performed the like
+            actor: {|
+              firstName: ?string,
+            |},
+          |}>,
+        |},
+      |},
+    |},
+  |},
+|};
+
+export type EditMemoryQueryVariables = {|
+  id: string,
+  babyId: string,
+|};
+
+export type EditMemoryQuery = {|
+  viewer: {|
+    baby: ?{|
+      // The ID of an object
+      id: string,
+      memory: ?{|
+        // The ID of an object
+        id: string,
+        title: string,
+        createdAt: any,
+        suggestedMemoryType: ?string,
+        files: {|
+          // A list of edges.
+          edges: ?Array<?{|
+            // The item at the end of the edge.
+            node:
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
                 },
           |}>,
         |},
@@ -547,47 +648,190 @@ export type AddMemoryMutation = {|
   |},
 |};
 
-export type EditMemoryMutationVariables = {|
+export type UpdateMemoryMutationVariables = {|
   input: UpdateMemoryInput,
 |};
 
-export type EditMemoryMutation = {|
+export type UpdateMemoryMutation = {|
   updateMemory: ?{|
-    __typename: string,
+    edge: ?{|
+      // A cursor for use in pagination.
+      cursor: string,
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        title: string,
+        createdAt: any,
+        suggestedMemoryType: ?string,
+        files: {|
+          // A list of edges.
+          edges: ?Array<?{|
+            // The item at the end of the edge.
+            node:
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  large: ?{|
+                    url: string,
+                  |},
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  duration: ?number,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  duration: ?number,
+                },
+          |}>,
+          // Count of filtered result set without considering pagination arguments
+          count: ?number,
+        |},
+        comments: {|
+          count: ?number,
+        |},
+        isLikedByViewer: boolean,
+        likes: {|
+          // Count of filtered result set without considering pagination arguments
+          count: ?number,
+          // A list of edges.
+          edges: ?Array<?{|
+            // The user that performed the like
+            actor: {|
+              firstName: ?string,
+            |},
+          |}>,
+        |},
+      |},
+    |},
+  |},
+|};
+
+export type DeleteMemoryMutationVariables = {|
+  input: DeleteMemoryInput,
+|};
+
+export type DeleteMemoryMutation = {|
+  deleteMemory: ?{|
     memory: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
-      title: string,
-      createdAt: any,
-      files: {|
-        __typename: string,
+    |},
+  |},
+|};
+
+export type ViewMemoriesQueryVariables = {|
+  babyId: string,
+|};
+
+export type ViewMemoriesQuery = {|
+  viewer: {|
+    baby: ?{|
+      // The ID of an object
+      id: string,
+      memories: ?{|
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // The item at the end of the edge.
-          node:
-            | {
-                __typename: 'Avatar',
-                // The ID of an object
-                id: string,
-                contentType: string,
-                url: ?string,
-              }
-            | {
-                __typename: 'Image',
-                // The ID of an object
-                id: string,
-                contentType: string,
-                url: ?string,
-              }
-            | {
-                __typename: 'GenericFile',
-                // The ID of an object
-                id: string,
-                contentType: string,
-                url: ?string,
-              },
+          node: {|
+            // The ID of an object
+            id: string,
+            title: string,
+            createdAt: any,
+            files: {|
+              // Count of filtered result set without considering pagination arguments
+              count: ?number,
+              // A list of edges.
+              edges: ?Array<?{|
+                // The item at the end of the edge.
+                node:
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
+                    }
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
+                      thumb: ?{|
+                        url: string,
+                      |},
+                      large: ?{|
+                        url: string,
+                      |},
+                    }
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
+                    }
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
+                      thumb: ?{|
+                        url: string,
+                      |},
+                      duration: ?number,
+                    }
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
+                      duration: ?number,
+                    },
+              |}>,
+            |},
+            suggestedMemoryType: ?string,
+            comments: {|
+              count: ?number,
+            |},
+            isLikedByViewer: boolean,
+            likes: {|
+              // Count of filtered result set without considering pagination arguments
+              count: ?number,
+              // A list of edges.
+              edges: ?Array<?{|
+                // The user that performed the like
+                actor: {|
+                  firstName: ?string,
+                |},
+              |}>,
+            |},
+          |},
         |}>,
       |},
     |},
@@ -601,126 +845,32 @@ export type MemoryCommentsQueryVariables = {|
 
 export type MemoryCommentsQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       memory: ?{|
-        __typename: string,
         // The ID of an object
         id: string,
         comments: {|
-          __typename: string,
           count: ?number,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
+              // The ID of an object
               id: string,
               text: string,
               createdAt: any,
               author: {|
-                __typename: string,
                 firstName: ?string,
                 lastName: ?string,
+                avatar: ?{|
+                  url: string,
+                |},
               |},
             |},
           |}>,
         |},
-      |},
-    |},
-  |},
-|};
-
-export type ViewMemoriesQueryVariables = {|
-  babyId?: ?string,
-|};
-
-export type ViewMemoriesQuery = {|
-  viewer: {|
-    __typename: string,
-    baby: ?{|
-      __typename: string,
-      // The ID of an object
-      id: string,
-      memories: ?{|
-        __typename: string,
-        // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
-          // The item at the end of the edge.
-          node: {|
-            __typename: string,
-            // The ID of an object
-            id: string,
-            title: string,
-            author: {|
-              __typename: string,
-              avatar: ?{|
-                __typename: string,
-                url: string,
-              |},
-            |},
-            createdAt: any,
-            files: {|
-              __typename: string,
-              // Count of filtered result set without considering pagination arguments
-              count: ?number,
-              // A list of edges.
-              edges: ?Array<{|
-                __typename: string,
-                // The item at the end of the edge.
-                node:
-                  | {
-                      __typename: 'Avatar',
-                      // The ID of an object
-                      id: string,
-                      contentType: string,
-                      url: ?string,
-                    }
-                  | {
-                      __typename: 'Image',
-                      // The ID of an object
-                      id: string,
-                      contentType: string,
-                      url: ?string,
-                    }
-                  | {
-                      __typename: 'GenericFile',
-                      // The ID of an object
-                      id: string,
-                      contentType: string,
-                      url: ?string,
-                    },
-              |}>,
-            |},
-            comments: {|
-              __typename: string,
-              count: ?number,
-              // A list of edges.
-              edges: ?Array<{|
-                __typename: string,
-                // A cursor for use in pagination.
-                cursor: string,
-                // The item at the end of the edge.
-                node: {|
-                  __typename: string,
-                  id: string,
-                  text: string,
-                  createdAt: any,
-                  author: {|
-                    __typename: string,
-                    firstName: ?string,
-                    lastName: ?string,
-                  |},
-                |},
-              |}>,
-            |},
-          |},
-        |}>,
       |},
     |},
   |},
@@ -733,75 +883,94 @@ export type MemoryQueryVariables = {|
 
 export type MemoryQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       memory: ?{|
-        __typename: string,
         // The ID of an object
         id: string,
         title: string,
-        author: {|
-          __typename: string,
-          avatar: ?{|
-            __typename: string,
-            url: string,
-          |},
-        |},
         createdAt: any,
         files: {|
-          __typename: string,
           // Count of filtered result set without considering pagination arguments
           count: ?number,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node:
               | {
-                  __typename: 'Avatar',
                   // The ID of an object
                   id: string,
                   contentType: string,
                   url: ?string,
                 }
               | {
-                  __typename: 'Image',
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  large: ?{|
+                    url: string,
+                  |},
+                }
+              | {
                   // The ID of an object
                   id: string,
                   contentType: string,
                   url: ?string,
                 }
               | {
-                  __typename: 'GenericFile',
                   // The ID of an object
                   id: string,
                   contentType: string,
                   url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  duration: ?number,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  duration: ?number,
                 },
           |}>,
         |},
+        suggestedMemoryType: ?string,
         comments: {|
-          __typename: string,
           count: ?number,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
-            // A cursor for use in pagination.
-            cursor: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
+              // The ID of an object
               id: string,
               text: string,
               createdAt: any,
               author: {|
-                __typename: string,
                 firstName: ?string,
                 lastName: ?string,
+                avatar: ?{|
+                  url: string,
+                |},
               |},
+            |},
+          |}>,
+        |},
+        isLikedByViewer: boolean,
+        likes: {|
+          // Count of filtered result set without considering pagination arguments
+          count: ?number,
+          // A list of edges.
+          edges: ?Array<?{|
+            // The user that performed the like
+            actor: {|
+              firstName: ?string,
             |},
           |}>,
         |},
@@ -810,19 +979,73 @@ export type MemoryQuery = {|
   |},
 |};
 
-export type GetBabyAvatarQueryVariables = {|
+export type AddCommentToMemoryMutationVariables = {|
+  input: CreateCommentInput,
+|};
+
+export type AddCommentToMemoryMutation = {|
+  createComment: ?{|
+    edge: ?{|
+      // A cursor for use in pagination.
+      cursor: string,
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        createdAt: any,
+        text: string,
+        author: {|
+          // The ID of an object
+          id: string,
+          firstName: ?string,
+          lastName: ?string,
+          avatar: ?{|
+            url: string,
+          |},
+        |},
+        commentable: {
+          // The ID of an object
+          id: string,
+          comments: {|
+            count: ?number,
+          |},
+        },
+      |},
+    |},
+  |},
+|};
+
+export type ToggleMemoryLikeMutationVariables = {|
+  input: ToggleMemoryLikeInput,
+|};
+
+export type ToggleMemoryLikeMutation = {|
+  toggleMemoryLike: ?{|
+    edge: ?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        isLikedByViewer: boolean,
+        likes: {|
+          // Count of filtered result set without considering pagination arguments
+          count: ?number,
+        |},
+      |},
+    |},
+  |},
+|};
+
+export type getBabyAvatarQueryVariables = {|
   id?: ?string,
 |};
 
-export type GetBabyAvatarQuery = {|
+export type getBabyAvatarQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
     |},
@@ -836,52 +1059,21 @@ export type SplashScreenQueryVariables = {|
 
 export type SplashScreenQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
       coverImage: ?{|
-        __typename: string,
         url: string,
       |},
     |},
-    babies: {|
-      __typename: string,
-      // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
-        // The item at the end of the edge.
-        node: {|
-          __typename: string,
-          // The ID of an object
-          id: string,
-          name: string,
-          avatar: ?{|
-            __typename: string,
-            url: string,
-          |},
-        |},
-      |}>,
-    |},
-    allQuotes: {|
-      __typename: string,
-      // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
-        // The item at the end of the edge.
-        node: {|
-          __typename: string,
-          // The ID of an object
-          id: string,
-          author: ?string,
-          text: string,
-        |},
-      |}>,
+    randomQuote: ?{|
+      // The ID of an object
+      id: string,
+      author: ?string,
+      text: string,
     |},
   |},
 |};
@@ -892,9 +1084,7 @@ export type BabyNameQueryVariables = {|
 
 export type BabyNameQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
@@ -904,20 +1094,15 @@ export type BabyNameQuery = {|
 
 export type ChooseBabyListQuery = {|
   viewer: {|
-    __typename: string,
     babies: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
           avatar: ?{|
-            __typename: string,
             url: string,
           |},
         |},
@@ -932,9 +1117,7 @@ export type CreateBabyMutationVariables = {|
 
 export type CreateBabyMutation = {|
   createBaby: ?{|
-    __typename: string,
     createdBaby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
@@ -944,12 +1127,14 @@ export type CreateBabyMutation = {|
       weekBorn: number,
       // Relationship to Viewer
       relationship: ?BabyRelationship,
+      // The current weight for this Baby
+      weight: ?number,
+      // The current height for this Baby
+      height: ?number,
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
       coverImage: ?{|
-        __typename: string,
         url: string,
       |},
     |},
@@ -962,9 +1147,7 @@ export type UpdateBabyMutationVariables = {|
 
 export type UpdateBabyMutation = {|
   updateBaby: ?{|
-    __typename: string,
     changedBaby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
@@ -974,12 +1157,14 @@ export type UpdateBabyMutation = {|
       weekBorn: number,
       // Relationship to Viewer
       relationship: ?BabyRelationship,
+      // The current weight for this Baby
+      weight: ?number,
+      // The current height for this Baby
+      height: ?number,
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
       coverImage: ?{|
-        __typename: string,
         url: string,
       |},
     |},
@@ -992,9 +1177,7 @@ export type EditBabyQueryVariables = {|
 
 export type EditBabyQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
@@ -1004,12 +1187,14 @@ export type EditBabyQuery = {|
       weekBorn: number,
       // Relationship to Viewer
       relationship: ?BabyRelationship,
+      // The current weight for this Baby
+      weight: ?number,
+      // The current height for this Baby
+      height: ?number,
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
       coverImage: ?{|
-        __typename: string,
         url: string,
       |},
     |},
@@ -1022,9 +1207,7 @@ export type UpdateMeasurementMutationVariables = {|
 
 export type UpdateMeasurementMutation = {|
   recordBabyMeasurement: ?{|
-    __typename: string,
     baby: {|
-      __typename: string,
       // The ID of an object
       id: string,
       // The current weight for this Baby
@@ -1041,9 +1224,7 @@ export type CurrentMeasurementsQueryVariables = {|
 
 export type CurrentMeasurementsQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       // The current weight for this Baby
@@ -1054,74 +1235,117 @@ export type CurrentMeasurementsQuery = {|
   |},
 |};
 
-export type GetBabyQueryVariables = {|
+export type ProfileQueryVariables = {|
   id: string,
 |};
 
-export type GetBabyQuery = {|
+export type ProfileQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
       coverImage: ?{|
-        __typename: string,
         url: string,
       |},
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
       // Date of birth
       dob: any,
-      achievements: ?{|
-        __typename: string,
-        // Count of result set without considering pagination arguments
-        count: number,
-      |},
-      favoriteActivities: {|
-        __typename: string,
-        // Count of filtered result set without considering pagination arguments
-        count: number,
-      |},
-      // The current weight for this Baby
-      weight: ?number,
       // The current height for this Baby
       height: ?number,
-      memories: ?{|
-        __typename: string,
+      // The current weight for this Baby
+      weight: ?number,
+      growth: {|
+        // The current growth based on the baby's dob (returns the last content if we can't find a closer one)
+        current: ?{|
+          // The ID of an object
+          id: string,
+          introduction: string,
+          title: string,
+          // Maximum baby age in ageDuration units
+          maximumAge: number,
+          // Expert who gave this content's advice
+          expert: {|
+            // The ID of an object
+            id: string,
+            name: string,
+            discipline: ?string,
+            avatar: {|
+              url: string,
+            |},
+          |},
+        |},
+      |},
+      activities: ?{|
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
+          // The item at the end of the edge.
+          node: ?{|
+            // The ID of an object
+            id: string,
+            name: string,
+            introduction: ?string,
+            skillArea: {|
+              // The ID of an object
+              id: string,
+              icon: string,
+            |},
+          |},
+        |}>,
+      |},
+      memories: ?{|
+        // A list of edges.
+        edges: ?Array<?{|
           // The item at the end of the edge.
           node: {|
-            __typename: string,
             // The ID of an object
             id: string,
             title: string,
             files: {|
-              __typename: string,
               // A list of edges.
-              edges: ?Array<{|
-                __typename: string,
+              edges: ?Array<?{|
                 // The item at the end of the edge.
                 node:
                   | {
-                      __typename: 'Avatar',
-                      url: ?string,
+                      // The ID of an object
+                      id: string,
                       contentType: string,
+                      url: ?string,
                     }
                   | {
-                      __typename: 'Image',
-                      url: ?string,
+                      // The ID of an object
+                      id: string,
                       contentType: string,
+                      url: ?string,
+                      thumb: ?{|
+                        url: string,
+                      |},
+                      large: ?{|
+                        url: string,
+                      |},
                     }
                   | {
-                      __typename: 'GenericFile',
-                      url: ?string,
+                      // The ID of an object
+                      id: string,
                       contentType: string,
+                      url: ?string,
+                    }
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
+                      thumb: ?{|
+                        url: string,
+                      |},
+                    }
+                  | {
+                      // The ID of an object
+                      id: string,
+                      contentType: string,
+                      url: ?string,
                     },
               |}>,
             |},
@@ -1138,10 +1362,8 @@ export type UpdateUserProfileMutationVariables = {|
 
 export type UpdateUserProfileMutation = {|
   updateUser: ?{|
-    __typename: string,
     // The mutated User.
     changedUser: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       firstName: ?string,
@@ -1149,7 +1371,6 @@ export type UpdateUserProfileMutation = {|
       // Date of Birth
       dob: ?any,
       avatar: ?{|
-        __typename: string,
         url: string,
       |},
     |},
@@ -1158,9 +1379,7 @@ export type UpdateUserProfileMutation = {|
 
 export type EditUserProfileQuery = {|
   viewer: {|
-    __typename: string,
     user: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       firstName: ?string,
@@ -1168,8 +1387,10 @@ export type EditUserProfileQuery = {|
       // Date of Birth
       dob: ?any,
       avatar: ?{|
-        __typename: string,
         url: string,
+        thumb: ?{|
+          url: string,
+        |},
       |},
     |},
   |},
@@ -1177,27 +1398,21 @@ export type EditUserProfileQuery = {|
 
 export type FriendsListQuery = {|
   viewer: {|
-    __typename: string,
     friends: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // Relationship to Viewer
         relationship: ?BabyRelationship,
         // Whether the user is invited but have not accepted yet
         isPending: ?boolean,
         // The item at the end of the edge.
         node: {|
-          __typename: string,
           // The ID of an object
           id: string,
           firstName: ?string,
           lastName: ?string,
           avatar: ?{|
-            __typename: string,
             thumb: ?{|
-              __typename: string,
               url: string,
             |},
           |},
@@ -1213,24 +1428,19 @@ export type InviteUserMutationVariables = {|
 
 export type InviteUserMutation = {|
   inviteUser: ?{|
-    __typename: string,
     changedEdge: ?{|
-      __typename: string,
       // Relationship to Viewer
       relationship: ?BabyRelationship,
       // Whether the user is invited but have not accepted yet
       isPending: ?boolean,
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         // The ID of an object
         id: string,
         firstName: ?string,
         lastName: ?string,
         avatar: ?{|
-          __typename: string,
           thumb: ?{|
-            __typename: string,
             url: string,
           |},
         |},
@@ -1241,17 +1451,13 @@ export type InviteUserMutation = {|
 
 export type UserProfileQuery = {|
   viewer: {|
-    __typename: string,
     user: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       firstName: ?string,
       lastName: ?string,
       avatar: ?{|
-        __typename: string,
         thumb: ?{|
-          __typename: string,
           url: string,
         |},
       |},
@@ -1259,24 +1465,83 @@ export type UserProfileQuery = {|
   |},
 |};
 
+export type ActivityHistoryQueryVariables = {|
+  babyId: string,
+|};
+
+export type ActivityHistoryQuery = {|
+  viewer: {|
+    baby: ?{|
+      // The ID of an object
+      id: string,
+      activityHistory: ?{|
+        // A list of edges.
+        edges: ?Array<?{|
+          // The item at the end of the edge.
+          node: {|
+            // The ID of an object
+            id: string,
+            startDate: any,
+            endDate: any,
+          |},
+        |}>,
+      |},
+    |},
+  |},
+|};
+
+export type ActivityHistoryDetailQueryVariables = {|
+  periodId: string,
+  babyId: string,
+|};
+
+export type ActivityHistoryDetailQuery = {|
+  viewer: {|
+    baby: ?{|
+      // The ID of an object
+      id: string,
+      activities: ?{|
+        // A list of edges.
+        edges: ?Array<?{|
+          // The item at the end of the edge.
+          node: ?{|
+            // The ID of an object
+            id: string,
+            name: string,
+            skillArea: {|
+              // The ID of an object
+              id: string,
+              name: string,
+              image: {|
+                thumb: {|
+                  url: string,
+                |},
+              |},
+              icon: string,
+              completedIcon: ?string,
+            |},
+            equipment: ?string,
+            // Whether this activity has been completed, only valid when it's
+            // child of baby (i.e $babyId passed). Will return false otherwise.
+            isCompleted: boolean,
+          |},
+        |}>,
+      |},
+    |},
+  |},
+|};
+
 export type BrowseActivitiesQuery = {|
   viewer: {|
-    __typename: string,
     allSkillAreas: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
-          image: {|
-            __typename: string,
-            url: string,
-          |},
+          icon: string,
         |},
       |}>,
     |},
@@ -1290,38 +1555,34 @@ export type BrowseActivitiesListQueryVariables = {|
 
 export type BrowseActivitiesListQuery = {|
   viewer: {|
-    __typename: string,
     allActivities: {|
-      __typename: string,
       // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
+      edges: ?Array<?{|
         // The item at the end of the edge.
         node: ?{|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
           skillArea: {|
-            __typename: string,
             // The ID of an object
             id: string,
             name: string,
             image: {|
-              __typename: string,
               thumb: {|
-                __typename: string,
                 url: string,
               |},
             |},
             icon: string,
             completedIcon: ?string,
           |},
+          equipment: ?string,
+          // Whether this activity has been completed, only valid when it's
+          // child of baby (i.e $babyId passed). Will return false otherwise.
+          isCompleted: boolean,
         |},
       |}>,
       // Information to aid in pagination.
       pageInfo: {|
-        __typename: string,
         // When paginating forwards, the cursor to continue.
         endCursor: ?string,
         // When paginating forwards, are there more items?
@@ -1337,37 +1598,33 @@ export type FavoriteActivitiesListQueryVariables = {|
 
 export type FavoriteActivitiesListQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       favoriteActivities: {|
-        __typename: string,
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // The item at the end of the edge.
           node: ?{|
-            __typename: string,
             // The ID of an object
             id: string,
             name: string,
             skillArea: {|
-              __typename: string,
               // The ID of an object
               id: string,
               name: string,
               image: {|
-                __typename: string,
                 thumb: {|
-                  __typename: string,
                   url: string,
                 |},
               |},
               icon: string,
               completedIcon: ?string,
             |},
+            equipment: ?string,
+            // Whether this activity has been completed, only valid when it's
+            // child of baby (i.e $babyId passed). Will return false otherwise.
+            isCompleted: boolean,
           |},
         |}>,
       |},
@@ -1381,39 +1638,35 @@ export type ThisWeeksActivitiesListQueryVariables = {|
 
 export type ThisWeeksActivitiesListQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       activities: ?{|
-        __typename: string,
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // A cursor for use in pagination.
           cursor: string,
           // The item at the end of the edge.
           node: ?{|
-            __typename: string,
             // The ID of an object
             id: string,
             name: string,
             skillArea: {|
-              __typename: string,
               // The ID of an object
               id: string,
               name: string,
               image: {|
-                __typename: string,
                 thumb: {|
-                  __typename: string,
                   url: string,
                 |},
               |},
               icon: string,
               completedIcon: ?string,
             |},
+            equipment: ?string,
+            // Whether this activity has been completed, only valid when it's
+            // child of baby (i.e $babyId passed). Will return false otherwise.
+            isCompleted: boolean,
           |},
         |}>,
       |},
@@ -1428,39 +1681,37 @@ export type ViewActivityQueryVariables = {|
 
 export type ViewActivityQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
       activity: ?{|
-        __typename: string,
         // The ID of an object
         id: string,
+        // Whether an activity is favorite, only valid when it's child of baby
+        // (i.e $babyId passed). Will return false otherwise.
+        isFavorite: boolean,
         name: string,
         introduction: ?string,
+        // Whether this activity has been completed, only valid when it's
+        // child of baby (i.e $babyId passed). Will return false otherwise.
+        isCompleted: boolean,
         expert: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
           discipline: ?string,
           avatar: {|
-            __typename: string,
             url: string,
           |},
           biography: ?string,
         |},
         skillArea: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
           image: {|
-            __typename: string,
             large: {|
-              __typename: string,
               url: string,
             |},
           |},
@@ -1468,13 +1719,10 @@ export type ViewActivityQuery = {|
         |},
         steps: Array<?string>,
         media: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
               type: ActivityMediaType,
               thumb: ?string,
               url: ?string,
@@ -1482,31 +1730,7 @@ export type ViewActivityQuery = {|
           |}>,
         |},
       |},
-      favoriteActivities: {|
-        __typename: string,
-        // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
-          // The item at the end of the edge.
-          node: ?{|
-            __typename: string,
-            // The ID of an object
-            id: string,
-          |},
-        |}>,
-      |},
     |},
-  |},
-|};
-
-export type ToggleFavoriteMutationVariables = {|
-  input: ToggleFavoriteInput,
-|};
-
-export type ToggleFavoriteMutation = {|
-  toggleActivityFavorite: ?{|
-    __typename: string,
-    wasFavorited: ?boolean,
   |},
 |};
 
@@ -1518,39 +1742,37 @@ export type ViewThisWeekActivityQueryVariables = {|
 
 export type ViewThisWeekActivityQuery = {|
   viewer: {|
-    __typename: string,
     baby: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
       activity: ?{|
-        __typename: string,
         // The ID of an object
         id: string,
+        // Whether an activity is favorite, only valid when it's child of baby
+        // (i.e $babyId passed). Will return false otherwise.
+        isFavorite: boolean,
         name: string,
         introduction: ?string,
+        // Whether this activity has been completed, only valid when it's
+        // child of baby (i.e $babyId passed). Will return false otherwise.
+        isCompleted: boolean,
         expert: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
           discipline: ?string,
           avatar: {|
-            __typename: string,
             url: string,
           |},
           biography: ?string,
         |},
         skillArea: {|
-          __typename: string,
           // The ID of an object
           id: string,
           name: string,
           image: {|
-            __typename: string,
             large: {|
-              __typename: string,
               url: string,
             |},
           |},
@@ -1558,13 +1780,10 @@ export type ViewThisWeekActivityQuery = {|
         |},
         steps: Array<?string>,
         media: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node: {|
-              __typename: string,
               type: ActivityMediaType,
               thumb: ?string,
               url: ?string,
@@ -1573,20 +1792,16 @@ export type ViewThisWeekActivityQuery = {|
         |},
       |},
       nextActivity: ?{|
-        __typename: string,
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // A cursor for use in pagination.
           cursor: string,
           // The item at the end of the edge.
           node: ?{|
-            __typename: string,
             // The ID of an object
             id: string,
             name: string,
             skillArea: {|
-              __typename: string,
               // The ID of an object
               id: string,
               name: string,
@@ -1595,37 +1810,20 @@ export type ViewThisWeekActivityQuery = {|
         |}>,
       |},
       previousActivity: ?{|
-        __typename: string,
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // A cursor for use in pagination.
           cursor: string,
           // The item at the end of the edge.
           node: ?{|
-            __typename: string,
             // The ID of an object
             id: string,
             name: string,
             skillArea: {|
-              __typename: string,
               // The ID of an object
               id: string,
               name: string,
             |},
-          |},
-        |}>,
-      |},
-      favoriteActivities: {|
-        __typename: string,
-        // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
-          // The item at the end of the edge.
-          node: ?{|
-            __typename: string,
-            // The ID of an object
-            id: string,
           |},
         |}>,
       |},
@@ -1639,34 +1837,33 @@ export type SwoopActivityMutationVariables = {|
 
 export type SwoopActivityMutation = {|
   swoopActivity: ?{|
-    __typename: string,
     newActivity: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
+      // Whether an activity is favorite, only valid when it's child of baby
+      // (i.e $babyId passed). Will return false otherwise.
+      isFavorite: boolean,
       name: string,
       introduction: ?string,
+      // Whether this activity has been completed, only valid when it's
+      // child of baby (i.e $babyId passed). Will return false otherwise.
+      isCompleted: boolean,
       expert: {|
-        __typename: string,
         // The ID of an object
         id: string,
         name: string,
         discipline: ?string,
         avatar: {|
-          __typename: string,
           url: string,
         |},
         biography: ?string,
       |},
       skillArea: {|
-        __typename: string,
         // The ID of an object
         id: string,
         name: string,
         image: {|
-          __typename: string,
           large: {|
-            __typename: string,
             url: string,
           |},
         |},
@@ -1674,13 +1871,10 @@ export type SwoopActivityMutation = {|
       |},
       steps: Array<?string>,
       media: {|
-        __typename: string,
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // The item at the end of the edge.
           node: {|
-            __typename: string,
             type: ActivityMediaType,
             thumb: ?string,
             url: ?string,
@@ -1699,34 +1893,33 @@ export type ChangeActivityLevelMutationVariables = {|
 
 export type ChangeActivityLevelMutation = {|
   changeActivity: ?{|
-    __typename: string,
     newActivity: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
+      // Whether an activity is favorite, only valid when it's child of baby
+      // (i.e $babyId passed). Will return false otherwise.
+      isFavorite: boolean,
       name: string,
       introduction: ?string,
+      // Whether this activity has been completed, only valid when it's
+      // child of baby (i.e $babyId passed). Will return false otherwise.
+      isCompleted: boolean,
       expert: {|
-        __typename: string,
         // The ID of an object
         id: string,
         name: string,
         discipline: ?string,
         avatar: {|
-          __typename: string,
           url: string,
         |},
         biography: ?string,
       |},
       skillArea: {|
-        __typename: string,
         // The ID of an object
         id: string,
         name: string,
         image: {|
-          __typename: string,
           large: {|
-            __typename: string,
             url: string,
           |},
         |},
@@ -1734,13 +1927,10 @@ export type ChangeActivityLevelMutation = {|
       |},
       steps: Array<?string>,
       media: {|
-        __typename: string,
         // A list of edges.
-        edges: ?Array<{|
-          __typename: string,
+        edges: ?Array<?{|
           // The item at the end of the edge.
           node: {|
-            __typename: string,
             type: ActivityMediaType,
             thumb: ?string,
             url: ?string,
@@ -1753,62 +1943,120 @@ export type ChangeActivityLevelMutation = {|
   |},
 |};
 
-export type StimulationQuery = {|
-  viewer: {|
-    __typename: string,
-    allTips: {|
-      __typename: string,
-      // A list of edges.
-      edges: ?Array<{|
-        __typename: string,
-        // The item at the end of the edge.
-        node: {|
-          __typename: string,
-          // The ID of an object
-          id: string,
-          text: string,
-        |},
-      |}>,
+export type CompleteActivityMutationVariables = {|
+  input: CompleteActivityInput,
+|};
+
+export type CompleteActivityMutation = {|
+  completeActivity: ?{|
+    edge: ?{|
+      // The item at the end of the edge.
+      node: ?{|
+        // The ID of an object
+        id: string,
+      |},
     |},
   |},
 |};
 
+export type ToggleFavoriteMutationVariables = {|
+  input: ToggleFavoriteInput,
+|};
+
+export type ToggleFavoriteMutation = {|
+  toggleActivityFavorite: ?{|
+    edge: ?{|
+      // The item at the end of the edge.
+      node: ?{|
+        // The ID of an object
+        id: string,
+        name: string,
+        skillArea: {|
+          // The ID of an object
+          id: string,
+          name: string,
+          image: {|
+            thumb: {|
+              url: string,
+            |},
+          |},
+          icon: string,
+          completedIcon: ?string,
+        |},
+        equipment: ?string,
+        // Whether this activity has been completed, only valid when it's
+        // child of baby (i.e $babyId passed). Will return false otherwise.
+        isCompleted: boolean,
+        // Whether an activity is favorite, only valid when it's child of baby
+        // (i.e $babyId passed). Will return false otherwise.
+        isFavorite: boolean,
+      |},
+    |},
+    wasFavorited: ?boolean,
+  |},
+|};
+
+export type MemoryMediaFileFragment =
+  | {
+      // The ID of an object
+      id: string,
+      contentType: string,
+      url: ?string,
+    }
+  | {
+      // The ID of an object
+      id: string,
+      contentType: string,
+      url: ?string,
+    }
+  | {
+      // The ID of an object
+      id: string,
+      contentType: string,
+      url: ?string,
+    }
+  | {
+      // The ID of an object
+      id: string,
+      contentType: string,
+      url: ?string,
+    }
+  | {
+      // The ID of an object
+      id: string,
+      contentType: string,
+      url: ?string,
+    };
+
 export type AgeHeaderFragment = {|
-  __typename: string,
   name: string,
   // Date of birth
   dob: any,
 |};
 
 export type ExpertAdviceFragment = {|
-  __typename: string,
   name: string,
   discipline: ?string,
   avatar: {|
-    __typename: string,
     url: string,
   |},
 |};
 
 export type MeasurementFragment = {|
-  __typename: string,
   recordedAt: any,
   value: number,
 |};
 
 export type GraphDetailHeaderBabyFragment = {|
-  __typename: string,
   name: string,
 |};
 
 export type GrowthIntroductionFragment = {|
-  __typename: string,
   // Global introduction to the Growth section
   introduction: string,
 |};
 
 export type GrowthPeriodFragment = {|
-  __typename: string,
   title: string,
   // Minimum baby age in ageDuration units
   minimumAge: number,
@@ -1819,159 +2067,220 @@ export type GrowthPeriodFragment = {|
 |};
 
 export type CurrentGrowthFragment = {|
-  __typename: string,
   introduction: string,
   content: string,
   // Links to library content (introductory section)
   introductionContentLinks: {|
-    __typename: string,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
+        // The ID of an object
         id: string,
         title: string,
         text: string,
+        section: {|
+          // The ID of an object
+          id: string,
+          name: string,
+        |},
       |},
     |}>,
   |},
   // Links to library content (Growth & Development)
   growthDevelopmentContentLinks: {|
-    __typename: string,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
+        // The ID of an object
         id: string,
         title: string,
         text: string,
+        section: {|
+          // The ID of an object
+          id: string,
+          name: string,
+        |},
       |},
     |}>,
   |},
 |};
 
 export type ArticleFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   title: string,
   text: string,
   readingTime: {|
-    __typename: string,
     text: string,
   |},
   author: {|
-    __typename: string,
     name: string,
   |},
   publishedAt: any,
-  tags: ?Array<{|
-    __typename: string,
+  tags: ?Array<?{|
     id: string,
     name: string,
   |}>,
   image: {|
-    __typename: string,
     url: string,
   |},
+  blogUrl: ?string,
 |};
 
 export type ArticleListItemFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   title: string,
   image: {|
-    __typename: string,
     url: string,
   |},
 |};
 
 export type GrowthArticleFragment = {|
-  __typename: string,
+  // The ID of an object
   id: string,
   title: string,
   text: string,
   readingTime: {|
-    __typename: string,
     text: string,
+  |},
+  section: {|
+    // The ID of an object
+    id: string,
+    name: string,
   |},
 |};
 
 export type GrowthArticleListItemFragment = {|
-  __typename: string,
-  id: string,
-  title: string,
-|};
-
-export type MemoryListItemFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   title: string,
-  files: {|
-    __typename: string,
+  section: {|
+    // The ID of an object
+    id: string,
+    name: string,
+  |},
+|};
+
+export type LikeMemoryButtonFragment = {|
+  // The ID of an object
+  id: string,
+  isLikedByViewer: boolean,
+  likes: {|
+    // Count of filtered result set without considering pagination arguments
+    count: ?number,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
-      // The item at the end of the edge.
-      node:
-        | {
-            __typename: 'Avatar',
-            // The ID of an object
-            id: string,
-            url: ?string,
-            contentType: string,
-          }
-        | {
-            __typename: 'Image',
-            // The ID of an object
-            id: string,
-            url: ?string,
-            contentType: string,
-          }
-        | {
-            __typename: 'GenericFile',
-            // The ID of an object
-            id: string,
-            url: ?string,
-            contentType: string,
-          },
+    edges: ?Array<?{|
+      // The user that performed the like
+      actor: {|
+        firstName: ?string,
+      |},
     |}>,
   |},
 |};
 
-export type MemoryFormFragment = {|
-  __typename: string,
+export type MemoryListItemFragment = {|
+  // The ID of an object
+  id: string,
   title: string,
-  createdAt: any,
   files: {|
-    __typename: string,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node:
         | {
-            __typename: 'Avatar',
+            // The ID of an object
+            id: string,
+            url: ?string,
+            contentType: string,
+            thumb: ?{|
+              url: string,
+            |},
+          }
+        | {
+            // The ID of an object
+            id: string,
+            url: ?string,
+            contentType: string,
+            thumb: ?{|
+              url: string,
+            |},
+          }
+        | {
+            // The ID of an object
+            id: string,
+            url: ?string,
+            contentType: string,
+          }
+        | {
+            // The ID of an object
+            id: string,
+            url: ?string,
+            contentType: string,
+            thumb: ?{|
+              url: string,
+            |},
+            duration: ?number,
+          }
+        | {
+            // The ID of an object
+            id: string,
+            url: ?string,
+            contentType: string,
+            duration: ?number,
+          },
+    |}>,
+  |},
+  suggestedMemoryType: ?string,
+  comments: {|
+    count: ?number,
+  |},
+|};
+
+export type MemoryFormFragment = {|
+  // The ID of an object
+  id: string,
+  title: string,
+  createdAt: any,
+  suggestedMemoryType: ?string,
+  files: {|
+    // A list of edges.
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node:
+        | {
             // The ID of an object
             id: string,
             contentType: string,
             url: ?string,
           }
         | {
-            __typename: 'Image',
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            thumb: ?{|
+              url: string,
+            |},
+          }
+        | {
             // The ID of an object
             id: string,
             contentType: string,
             url: ?string,
           }
         | {
-            __typename: 'GenericFile',
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            thumb: ?{|
+              url: string,
+            |},
+          }
+        | {
             // The ID of an object
             id: string,
             contentType: string,
@@ -1982,157 +2291,284 @@ export type MemoryFormFragment = {|
 |};
 
 export type MemoryItemFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   title: string,
-  author: {|
-    __typename: string,
-    avatar: ?{|
-      __typename: string,
-      url: string,
-    |},
-  |},
   createdAt: any,
   files: {|
-    __typename: string,
     // Count of filtered result set without considering pagination arguments
     count: ?number,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node:
         | {
-            __typename: 'Avatar',
             // The ID of an object
             id: string,
             contentType: string,
             url: ?string,
           }
         | {
-            __typename: 'Image',
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            thumb: ?{|
+              url: string,
+            |},
+            large: ?{|
+              url: string,
+            |},
+          }
+        | {
             // The ID of an object
             id: string,
             contentType: string,
             url: ?string,
           }
         | {
-            __typename: 'GenericFile',
             // The ID of an object
             id: string,
             contentType: string,
             url: ?string,
+            thumb: ?{|
+              url: string,
+            |},
+            duration: ?number,
+          }
+        | {
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            duration: ?number,
           },
     |}>,
   |},
+  suggestedMemoryType: ?string,
   comments: {|
-    __typename: string,
+    count: ?number,
+  |},
+  isLikedByViewer: boolean,
+  likes: {|
+    // Count of filtered result set without considering pagination arguments
     count: ?number,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
-      // A cursor for use in pagination.
-      cursor: string,
-      // The item at the end of the edge.
-      node: {|
-        __typename: string,
-        id: string,
-        text: string,
-        createdAt: any,
-        author: {|
-          __typename: string,
-          firstName: ?string,
-          lastName: ?string,
-        |},
+    edges: ?Array<?{|
+      // The user that performed the like
+      actor: {|
+        firstName: ?string,
       |},
     |}>,
   |},
 |};
 
 export type MemoryCommentFragment = {|
-  __typename: string,
+  // The ID of an object
+  id: string,
   text: string,
   createdAt: any,
   author: {|
-    __typename: string,
     firstName: ?string,
     lastName: ?string,
+    avatar: ?{|
+      url: string,
+    |},
+  |},
+|};
+
+export type MemoryCommentsFragment = {|
+  comments: {|
+    count: ?number,
+    // A list of edges.
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        text: string,
+        createdAt: any,
+        author: {|
+          firstName: ?string,
+          lastName: ?string,
+          avatar: ?{|
+            url: string,
+          |},
+        |},
+      |},
+    |}>,
+  |},
+|};
+
+export type MemoryCommentsSummaryFragment = {|
+  comments: {|
+    count: ?number,
+  |},
+|};
+
+export type MemoryDetailFragment = {|
+  // The ID of an object
+  id: string,
+  title: string,
+  createdAt: any,
+  files: {|
+    // Count of filtered result set without considering pagination arguments
+    count: ?number,
+    // A list of edges.
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node:
+        | {
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+          }
+        | {
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            thumb: ?{|
+              url: string,
+            |},
+            large: ?{|
+              url: string,
+            |},
+          }
+        | {
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+          }
+        | {
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            thumb: ?{|
+              url: string,
+            |},
+            duration: ?number,
+          }
+        | {
+            // The ID of an object
+            id: string,
+            contentType: string,
+            url: ?string,
+            duration: ?number,
+          },
+    |}>,
+  |},
+  suggestedMemoryType: ?string,
+  comments: {|
+    count: ?number,
+    // A list of edges.
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        text: string,
+        createdAt: any,
+        author: {|
+          firstName: ?string,
+          lastName: ?string,
+          avatar: ?{|
+            url: string,
+          |},
+        |},
+      |},
+    |}>,
+  |},
+  isLikedByViewer: boolean,
+  likes: {|
+    // Count of filtered result set without considering pagination arguments
+    count: ?number,
+    // A list of edges.
+    edges: ?Array<?{|
+      // The user that performed the like
+      actor: {|
+        firstName: ?string,
+      |},
+    |}>,
   |},
 |};
 
 export type MemoriesFragment = {|
-  __typename: string,
   memories: ?{|
-    __typename: string,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         // The ID of an object
         id: string,
         title: string,
-        author: {|
-          __typename: string,
-          avatar: ?{|
-            __typename: string,
-            url: string,
-          |},
-        |},
         createdAt: any,
         files: {|
-          __typename: string,
           // Count of filtered result set without considering pagination arguments
           count: ?number,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node:
               | {
-                  __typename: 'Avatar',
                   // The ID of an object
                   id: string,
                   contentType: string,
                   url: ?string,
                 }
               | {
-                  __typename: 'Image',
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  large: ?{|
+                    url: string,
+                  |},
+                }
+              | {
                   // The ID of an object
                   id: string,
                   contentType: string,
                   url: ?string,
                 }
               | {
-                  __typename: 'GenericFile',
                   // The ID of an object
                   id: string,
                   contentType: string,
                   url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  duration: ?number,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  duration: ?number,
                 },
           |}>,
         |},
+        suggestedMemoryType: ?string,
         comments: {|
-          __typename: string,
+          count: ?number,
+        |},
+        isLikedByViewer: boolean,
+        likes: {|
+          // Count of filtered result set without considering pagination arguments
           count: ?number,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
-            // A cursor for use in pagination.
-            cursor: string,
-            // The item at the end of the edge.
-            node: {|
-              __typename: string,
-              id: string,
-              text: string,
-              createdAt: any,
-              author: {|
-                __typename: string,
-                firstName: ?string,
-                lastName: ?string,
-              |},
+          edges: ?Array<?{|
+            // The user that performed the like
+            actor: {|
+              firstName: ?string,
             |},
           |}>,
         |},
@@ -2142,18 +2578,15 @@ export type MemoriesFragment = {|
 |};
 
 export type ChooseBabyFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   name: string,
   avatar: ?{|
-    __typename: string,
     url: string,
   |},
 |};
 
 export type BabyFormFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   name: string,
@@ -2163,110 +2596,146 @@ export type BabyFormFragment = {|
   weekBorn: number,
   // Relationship to Viewer
   relationship: ?BabyRelationship,
+  // The current weight for this Baby
+  weight: ?number,
+  // The current height for this Baby
+  height: ?number,
   avatar: ?{|
-    __typename: string,
     url: string,
   |},
   coverImage: ?{|
-    __typename: string,
     url: string,
   |},
 |};
 
+export type HeaderFragment = {|
+  name: string,
+  coverImage: ?{|
+    url: string,
+  |},
+  avatar: ?{|
+    url: string,
+  |},
+  // Date of birth
+  dob: any,
+  // The current height for this Baby
+  height: ?number,
+  // The current weight for this Baby
+  weight: ?number,
+|};
+
 export type CurrentMeasurementsFragment = {|
-  __typename: string,
   // The current weight for this Baby
   weight: ?number,
   // The current height for this Baby
   height: ?number,
 |};
 
-export type HeaderFragment = {|
-  __typename: string,
-  name: string,
-  coverImage: ?{|
-    __typename: string,
-    url: string,
-  |},
-  avatar: ?{|
-    __typename: string,
-    url: string,
-  |},
-  // Date of birth
-  dob: any,
-  achievements: ?{|
-    __typename: string,
-    // Count of result set without considering pagination arguments
-    count: number,
-  |},
-  favoriteActivities: {|
-    __typename: string,
-    // Count of filtered result set without considering pagination arguments
-    count: number,
-  |},
-|};
-
 export type ProfileFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   name: string,
   coverImage: ?{|
-    __typename: string,
     url: string,
   |},
   avatar: ?{|
-    __typename: string,
     url: string,
   |},
   // Date of birth
   dob: any,
-  achievements: ?{|
-    __typename: string,
-    // Count of result set without considering pagination arguments
-    count: number,
-  |},
-  favoriteActivities: {|
-    __typename: string,
-    // Count of filtered result set without considering pagination arguments
-    count: number,
-  |},
-  // The current weight for this Baby
-  weight: ?number,
   // The current height for this Baby
   height: ?number,
-  memories: ?{|
-    __typename: string,
+  // The current weight for this Baby
+  weight: ?number,
+  growth: {|
+    // The current growth based on the baby's dob (returns the last content if we can't find a closer one)
+    current: ?{|
+      // The ID of an object
+      id: string,
+      introduction: string,
+      title: string,
+      // Maximum baby age in ageDuration units
+      maximumAge: number,
+      // Expert who gave this content's advice
+      expert: {|
+        // The ID of an object
+        id: string,
+        name: string,
+        discipline: ?string,
+        avatar: {|
+          url: string,
+        |},
+      |},
+    |},
+  |},
+  activities: ?{|
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node: ?{|
+        // The ID of an object
+        id: string,
+        name: string,
+        introduction: ?string,
+        skillArea: {|
+          // The ID of an object
+          id: string,
+          icon: string,
+        |},
+      |},
+    |}>,
+  |},
+  memories: ?{|
+    // A list of edges.
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         // The ID of an object
         id: string,
         title: string,
         files: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node:
               | {
-                  __typename: 'Avatar',
-                  url: ?string,
+                  // The ID of an object
+                  id: string,
                   contentType: string,
+                  url: ?string,
                 }
               | {
-                  __typename: 'Image',
-                  url: ?string,
+                  // The ID of an object
+                  id: string,
                   contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  large: ?{|
+                    url: string,
+                  |},
                 }
               | {
-                  __typename: 'GenericFile',
-                  url: ?string,
+                  // The ID of an object
+                  id: string,
                   contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
                 },
           |}>,
         |},
@@ -2275,40 +2744,104 @@ export type ProfileFragment = {|
   |},
 |};
 
-export type RecentMemoriesFragment = {|
-  __typename: string,
-  memories: ?{|
-    __typename: string,
+export type ProfileActivitiesFragment = {|
+  activities: ?{|
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node: ?{|
+        // The ID of an object
+        id: string,
+        name: string,
+        introduction: ?string,
+        skillArea: {|
+          // The ID of an object
+          id: string,
+          icon: string,
+        |},
+      |},
+    |}>,
+  |},
+|};
+
+export type ProfileGrowthFragment = {|
+  // The ID of an object
+  id: string,
+  growth: {|
+    // The current growth based on the baby's dob (returns the last content if we can't find a closer one)
+    current: ?{|
+      // The ID of an object
+      id: string,
+      introduction: string,
+      title: string,
+      // Maximum baby age in ageDuration units
+      maximumAge: number,
+      // Expert who gave this content's advice
+      expert: {|
+        // The ID of an object
+        id: string,
+        name: string,
+        discipline: ?string,
+        avatar: {|
+          url: string,
+        |},
+      |},
+    |},
+  |},
+|};
+
+export type RecentMemoriesFragment = {|
+  memories: ?{|
+    // A list of edges.
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         // The ID of an object
         id: string,
         title: string,
         files: {|
-          __typename: string,
           // A list of edges.
-          edges: ?Array<{|
-            __typename: string,
+          edges: ?Array<?{|
             // The item at the end of the edge.
             node:
               | {
-                  __typename: 'Avatar',
-                  url: ?string,
+                  // The ID of an object
+                  id: string,
                   contentType: string,
+                  url: ?string,
                 }
               | {
-                  __typename: 'Image',
-                  url: ?string,
+                  // The ID of an object
+                  id: string,
                   contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                  large: ?{|
+                    url: string,
+                  |},
                 }
               | {
-                  __typename: 'GenericFile',
-                  url: ?string,
+                  // The ID of an object
+                  id: string,
                   contentType: string,
+                  url: ?string,
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
+                  thumb: ?{|
+                    url: string,
+                  |},
+                }
+              | {
+                  // The ID of an object
+                  id: string,
+                  contentType: string,
+                  url: ?string,
                 },
           |}>,
         |},
@@ -2318,22 +2851,18 @@ export type RecentMemoriesFragment = {|
 |};
 
 export type FriendListUserFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   firstName: ?string,
   lastName: ?string,
   avatar: ?{|
-    __typename: string,
     thumb: ?{|
-      __typename: string,
       url: string,
     |},
   |},
 |};
 
 export type FriendListEdgeFragment = {|
-  __typename: string,
   // Relationship to Viewer
   relationship: ?BabyRelationship,
   // Whether the user is invited but have not accepted yet
@@ -2341,7 +2870,6 @@ export type FriendListEdgeFragment = {|
 |};
 
 export type UserFormFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   firstName: ?string,
@@ -2349,53 +2877,55 @@ export type UserFormFragment = {|
   // Date of Birth
   dob: ?any,
   avatar: ?{|
-    __typename: string,
+    url: string,
+  |},
+|};
+
+export type UserAvatarFragment = {|
+  avatar: ?{|
     url: string,
   |},
 |};
 
 export type UserProfileFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   firstName: ?string,
   lastName: ?string,
   avatar: ?{|
-    __typename: string,
     thumb: ?{|
-      __typename: string,
       url: string,
     |},
   |},
 |};
 
 export type ActivityFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
+  // Whether an activity is favorite, only valid when it's child of baby
+  // (i.e $babyId passed). Will return false otherwise.
+  isFavorite: boolean,
   name: string,
   introduction: ?string,
+  // Whether this activity has been completed, only valid when it's
+  // child of baby (i.e $babyId passed). Will return false otherwise.
+  isCompleted: boolean,
   expert: {|
-    __typename: string,
     // The ID of an object
     id: string,
     name: string,
     discipline: ?string,
     avatar: {|
-      __typename: string,
       url: string,
     |},
     biography: ?string,
   |},
   skillArea: {|
-    __typename: string,
     // The ID of an object
     id: string,
     name: string,
     image: {|
-      __typename: string,
       large: {|
-        __typename: string,
         url: string,
       |},
     |},
@@ -2403,13 +2933,10 @@ export type ActivityFragment = {|
   |},
   steps: Array<?string>,
   media: {|
-    __typename: string,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         type: ActivityMediaType,
         thumb: ?string,
         url: ?string,
@@ -2419,20 +2946,16 @@ export type ActivityFragment = {|
 |};
 
 export type ActivityNavigationFragment = {|
-  __typename: string,
   // A list of edges.
-  edges: ?Array<{|
-    __typename: string,
+  edges: ?Array<?{|
     // A cursor for use in pagination.
     cursor: string,
     // The item at the end of the edge.
     node: ?{|
-      __typename: string,
       // The ID of an object
       id: string,
       name: string,
       skillArea: {|
-        __typename: string,
         // The ID of an object
         id: string,
         name: string,
@@ -2442,91 +2965,117 @@ export type ActivityNavigationFragment = {|
 |};
 
 export type ActivityActionsActivityFragment = {|
-  __typename: string,
   name: string,
+  // Whether this activity has been completed, only valid when it's
+  // child of baby (i.e $babyId passed). Will return false otherwise.
+  isCompleted: boolean,
 |};
 
 export type ActivityActionsSkillFragment = {|
-  __typename: string,
   icon: string,
 |};
 
+export type ActivityHistoryItemFragment = {|
+  // The ID of an object
+  id: string,
+  startDate: any,
+  endDate: any,
+|};
+
 export type ActivityListFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   name: string,
   skillArea: {|
-    __typename: string,
     // The ID of an object
     id: string,
     name: string,
     image: {|
-      __typename: string,
       thumb: {|
-        __typename: string,
         url: string,
       |},
     |},
     icon: string,
     completedIcon: ?string,
   |},
+  equipment: ?string,
+  // Whether this activity has been completed, only valid when it's
+  // child of baby (i.e $babyId passed). Will return false otherwise.
+  isCompleted: boolean,
 |};
 
 export type DidYouKnowFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   text: string,
 |};
 
 export type ExpertInfoFragment = {|
-  __typename: string,
   // The ID of an object
   id: string,
   name: string,
   discipline: ?string,
   avatar: {|
-    __typename: string,
     url: string,
   |},
   biography: ?string,
 |};
 
 export type ExpertInfoActivityFragment = {|
-  __typename: string,
   introduction: ?string,
 |};
 
+export type FavoriteActivitiesFragment = {|
+  favoriteActivities: {|
+    // A list of edges.
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node: ?{|
+        // The ID of an object
+        id: string,
+        name: string,
+        skillArea: {|
+          // The ID of an object
+          id: string,
+          name: string,
+          image: {|
+            thumb: {|
+              url: string,
+            |},
+          |},
+          icon: string,
+          completedIcon: ?string,
+        |},
+        equipment: ?string,
+        // Whether this activity has been completed, only valid when it's
+        // child of baby (i.e $babyId passed). Will return false otherwise.
+        isCompleted: boolean,
+      |},
+    |}>,
+  |},
+|};
+
 export type HeaderSkillFragment = {|
-  __typename: string,
   name: string,
   image: {|
-    __typename: string,
     large: {|
-      __typename: string,
       url: string,
     |},
   |},
 |};
 
 export type HeaderActivityFragment = {|
-  __typename: string,
   name: string,
 |};
 
 export type StepsFragment = {|
-  __typename: string,
   name: string,
   steps: Array<?string>,
   media: {|
-    __typename: string,
     // A list of edges.
-    edges: ?Array<{|
-      __typename: string,
+    edges: ?Array<?{|
       // The item at the end of the edge.
       node: {|
-        __typename: string,
         type: ActivityMediaType,
         thumb: ?string,
         url: ?string,
