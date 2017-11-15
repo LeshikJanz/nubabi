@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 import { graphql } from 'graphql';
 import { introspectionQuery } from 'graphql/utilities';
-import { schema } from '../src/server/graphql/schema';
+import { schema } from '../platforms/server/graphql/schema';
 
 const writeSchemaFile = async () => {
   const result = await graphql(schema, introspectionQuery);
