@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 import Logo from '../../../../src/common/icons/logo.svg';
 import Notifications from './Notifications';
+import BabySelect from './BabySelect';
 
 import Menu from './Menu';
 
@@ -64,28 +65,6 @@ const HeaderMenu = styled(Box)`
   
 `;
 
-const BabySelect = styled.span`
-  margin: -10px 0 0 0;
-  color: ${props => props.theme.colors.open.black1};
-  font-family: ${props => props.theme.text.fontFamily};
-  font-size: 16px;
-  position: relative;
-  
-  &:after {
-    content: '';
-    display: inline-block;
-    width: 0; 
-    height: 0; 
-    position: absolute;
-    right: -15px;
-    top: 50%;
-    transform: translateY(-50%);
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid ${props => props.theme.colors.open.gray2};
-  }
-`;
-
 class AppHeader extends PureComponent<Props> {
   render() {
     return (
@@ -96,7 +75,7 @@ class AppHeader extends PureComponent<Props> {
           </HeaderLeft>
 
           <HeaderCenter width={1/4}>
-            <BabySelect>Charlotte</BabySelect>
+            <BabySelect />
           </HeaderCenter>
 
           <HeaderRight width={1/3}>

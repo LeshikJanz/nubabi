@@ -134,7 +134,6 @@ class AppNotifications extends Component<Props> {
   }
 
   handleClickOutside(e) {
-    e.preventDefault();
     this.closeModal();
   }
 

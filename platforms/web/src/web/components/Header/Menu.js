@@ -107,7 +107,6 @@ class MenuComponent extends Component<Props> {
   }
 
   handleClickOutside(e) {
-    e.preventDefault();
     this.closeModal();
   }
 
