@@ -1,7 +1,6 @@
 // @flow
 import { Observable } from 'rxjs/Observable';
-import { Action, Deps, MutationResultAction } from '../types';
-import api from '../connectors/mlb';
+import { Action, MutationResultAction } from '../types';
 import { resetNavigation } from '../navigation/actions';
 
 export function selectBaby(id): Action {
@@ -32,21 +31,6 @@ export function getBabiesFailure(err): Action {
   };
 }
 
-export function getThisWeeksActivitiesSuccess(babies): Action {
-  return {
-    type: 'GET_THIS_WEEKS_ACTIVITIES_SUCCESS',
-    payload: babies,
-  };
-}
-
-export function getThisWeeksActivitiesFailure(err): Action {
-  return {
-    type: 'GET_THIS_WEEKS_ACTIVITIES_FAILURE',
-    payload: err,
-    error: true,
-  };
-}
-
 const createBabyEpic = (action$: any) => {
   return action$
     .filter((action: MutationResultAction) => {
@@ -57,26 +41,14 @@ const createBabyEpic = (action$: any) => {
     })
     .mergeMap(({ result: { data } }) => {
       if (data.createBaby) {
-        const id = data.createBaby.createdBaby.id;
-        //
-        return [selectBaby(id), resetNavigation('home')];
+        return [
+          selectBaby(data.createBaby.createdBaby.id),
+          resetNavigation('home'),
+        ];
       }
 
       return Observable.of(null);
     });
 };
 
-const fetchThisWeekActivitiesEpic = (action$: any, { getState }: Deps) =>
-  action$
-    .filter(
-      (action: Action) => action.type === 'GET_THIS_WEEKS_ACTIVITIES_REQUEST',
-    )
-    .mergeMap(() =>
-      Observable.fromPromise(
-        api.getThisWeeksActivities(api.getBabies(getState().auth.token)),
-      )
-        .map(response => getThisWeeksActivitiesSuccess(response))
-        .catch(err => Observable.of(getThisWeeksActivitiesFailure(err))),
-    );
-
-export const epics = [fetchThisWeekActivitiesEpic, createBabyEpic];
+export const epics = [createBabyEpic];
