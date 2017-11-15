@@ -5,6 +5,7 @@ import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
 import { Screen, withCurrentBabyRequired } from '../components';
 import Growth from './Growth';
+import hoistStatics from '../components/hoistStatics';
 
 type Props = {
   navigation: NavigationProp,
@@ -14,7 +15,7 @@ export class GrowthScreen extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {
-    title: 'Growth',
+    title: 'Track',
   };
 
   handleWhatYouNeedToKnow = () => {
@@ -41,4 +42,4 @@ export class GrowthScreen extends PureComponent {
     );
   }
 }
-export default compose(withCurrentBabyRequired)(GrowthScreen);
+export default hoistStatics(withCurrentBabyRequired)(GrowthScreen);

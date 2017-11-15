@@ -16,7 +16,7 @@ export class Library extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {
-    title: 'Library',
+    title: 'Explore',
   };
 
   handleBrowseArticles = () => {

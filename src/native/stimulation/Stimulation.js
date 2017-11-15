@@ -17,6 +17,7 @@ import {
   getLayoutInitialState,
   handleLayout,
 } from '../components/withLayout';
+import hoistStatics from '../components/hoistStatics';
 
 type Props = {
   navigation: NavigationProp<*, *>,
@@ -29,7 +30,7 @@ class Stimulation extends Component {
   };
 
   static navigationOptions: NavigationOptions = {
-    title: 'Stimulation',
+    title: 'Boost',
   };
 
   static childContextTypes = childContextTypes;
@@ -120,4 +121,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default compose(withCurrentBabyRequired)(Stimulation);
+export default hoistStatics(withCurrentBabyRequired)(Stimulation);

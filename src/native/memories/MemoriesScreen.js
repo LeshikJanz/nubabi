@@ -12,7 +12,7 @@ export class MemoriesScreen extends PureComponent {
   props: Props;
 
   static navigationOptions = {
-    title: 'Memories',
+    title: 'Capture',
   };
 
   handleNavigateToMemory = (id: string) => {

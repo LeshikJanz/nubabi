@@ -27,9 +27,9 @@ const navigationOptions: NavigationOptions = ({
   },
   headerLeft: getTabHeaders(navigation.navigate).left,
   headerRight: getTabHeaders(navigation.navigate).right,
-  tabBarIcon: ({ tintColor }: *) =>
-    <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />,
-  tabBarLabel: upperFirst(navigation.state.routeName),
+  tabBarIcon: ({ tintColor }: *) => (
+    <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />
+  ),
 });
 
 const TabsNavigator = TabNavigator(
