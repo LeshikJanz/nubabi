@@ -115,7 +115,7 @@ const theme: Theme = {
     marginBottom: 1,
     color: colors.open.gray3,
   },
-  transition: 'all .2s ease',
+  transition: (prop) => `${prop || 'all'} .2s ease`,
 };
 
 export default theme;

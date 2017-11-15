@@ -17,7 +17,7 @@ const HeaderMenu = styled(Menu)`
   width: 200px;
   background: white;
   position: absolute;
-  top: 10px;
+  top: 30px;
   right: 0px;
   visibility: hidden;
   border: 1px solid gray;

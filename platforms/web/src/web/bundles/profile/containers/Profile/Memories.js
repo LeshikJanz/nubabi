@@ -33,6 +33,12 @@ const MemoriesListItem = styled(Box)`
   border-radius: 4px;
   margin-bottom: 15px;
   overflow: hidden;
+  cursor: pointer;
+  transition: ${props => props.theme.transition('opacity')};
+  
+  &:hover {
+    opacity: .8;
+  }
   
   >h4 {
     font-size: 12px;

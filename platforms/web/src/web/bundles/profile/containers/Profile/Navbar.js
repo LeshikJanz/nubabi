@@ -40,6 +40,7 @@ const MenuLink = styled(Menu.Link)`
   text-decoration: none;
   color: ${props => props.theme.colors.paragraph};
   font-family: ${props => props.theme.text.fontFamily};
+  transition: ${props => props.theme.transition('color')};
   
   &:visitied {
     color: ${props => props.theme.colors.paragraph}
@@ -64,6 +65,10 @@ const MenuLink = styled(Menu.Link)`
   
   >svg {
     margin-right: 10px;
+    
+    &>g >g {
+      transition: ${props => props.theme.transition('fill')};
+    }
   }
 `;
 

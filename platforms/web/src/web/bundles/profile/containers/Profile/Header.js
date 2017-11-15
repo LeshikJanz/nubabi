@@ -225,7 +225,7 @@ class ProfileHeader extends Component<Props> {
           </Modal>
         </Main>
 
-        <Footer justify="flex-start" align="center" p={15}>
+        <Footer justify="flex-start" align="center" py={7} px={15}>
           <FooterItem><IWeight/> <Label>Weight:</Label> <span><Count>{weight}</Count><Measure>kg</Measure></span></FooterItem>
           <Separator/>
           <FooterItem><IHeight/> <Label>Height:</Label> <span><Count>{height}</Count><Measure>cm</Measure></span></FooterItem>
