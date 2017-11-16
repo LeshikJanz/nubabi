@@ -55,8 +55,7 @@ class ViewThisWeeksActivity extends PureComponent {
   refreshActivity = ({ data }) => {
     const newActivity =
       path(['swoopActivity', 'newActivity'], data) ||
-      path(['changeActivity', 'newActivity'], data) ||
-      path(['completeActivity', 'edge', 'node'], data);
+      path(['changeActivity', 'newActivity'], data);
 
     if (newActivity) {
       this.props.navigation.setParams({
