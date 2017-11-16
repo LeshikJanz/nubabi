@@ -10,22 +10,11 @@ import type {
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import {
-  assocPath,
-  compose,
-  find,
-  findIndex,
-  path,
-  pathOr,
-  pluck,
-  propEq,
-  update,
-} from 'ramda';
+import { compose, path, pathOr } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import toggleFavorite from './toggleFavorite';
 import Activity from './Activity';
-import Favorites from './Favorites';
 
 type Props = {
   activity: ActivityType,
@@ -64,11 +53,10 @@ class ViewThisWeeksActivity extends PureComponent {
   }
 
   refreshActivity = ({ data }) => {
-    const newActivity = pathOr(
-      path(['swoopActivity', 'newActivity'], data),
-      ['changeActivity', 'newActivity'],
-      data,
-    );
+    const newActivity =
+      path(['swoopActivity', 'newActivity'], data) ||
+      path(['changeActivity', 'newActivity'], data) ||
+      path(['completeActivity', 'edge', 'node'], data);
 
     if (newActivity) {
       this.props.navigation.setParams({
@@ -120,6 +108,17 @@ class ViewThisWeeksActivity extends PureComponent {
     this.props.toggleFavorite({ variables: { input } });
   };
 
+  handleCompleteActivity = () => {
+    this.props.completeActivity({
+      variables: {
+        input: {
+          id: this.props.activity.id,
+          babyId: this.props.currentBabyId,
+        },
+      },
+    });
+  };
+
   handleNavigateToActivity = (edge: ?ActivityEdge) => {
     if (edge && edge.node) {
       this.props.navigation.setParams({
@@ -167,7 +166,7 @@ class ViewThisWeeksActivity extends PureComponent {
           onPreviousActivity={this.handlePreviousActivity}
           onNextActivity={this.handleNextActivity}
           onSwoop={this.handleSwoop}
-          onComplete={this.props.completeActivity}
+          onComplete={this.handleCompleteActivity}
           onToggleFavorite={this.handleToggleFavorite}
           onLevelIncrease={this.handleLevelIncrease}
           onLevelDecrease={this.handleLevelDecrease}
@@ -278,20 +277,10 @@ export default compose(
       }
     `,
     {
-      options: ({ ownProps }) => ({
+      name: 'completeActivity',
+      options: {
         refetchQueries: ['ThisWeeksActivitiesList'],
-        props: ({ mutate }) => ({
-          completeActivity: () =>
-            mutate({
-              variables: {
-                input: {
-                  id: ownProps.activity.id,
-                  babyId: ownProps.currentBabyId,
-                },
-              },
-            }),
-        }),
-      }),
+      },
     },
   ),
   toggleFavorite,
