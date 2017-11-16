@@ -1,6 +1,7 @@
 // @flow
+/* eslint-disable no-underscore-dangle */
 import { gql, graphql } from 'react-apollo';
-import { path, assoc } from 'ramda';
+import { path } from 'ramda';
 import {
   addEdgeToFragment,
   optimisticResponse,
@@ -67,22 +68,26 @@ export const toggleFavorite = graphql(
               id: data.data.toggleActivityFavorite.__activityId,
             });
 
+            // eslint-disable-next-line no-param-reassign
             data.data.toggleActivityFavorite.edge = {
               __typename: 'ActivityEdge',
               node: activity,
             };
           }
-
-          addEdgeToFragment(
-            Favorites.fragments.favorites,
-            'toggleActivityFavorite',
-            ['favoriteActivities'],
-            babyId,
-            'head',
-            {
-              fragmentName: 'FavoriteActivities',
-            },
-          )(store, data);
+          try {
+            addEdgeToFragment(
+              Favorites.fragments.favorites,
+              'toggleActivityFavorite',
+              ['favoriteActivities'],
+              babyId,
+              'head',
+              {
+                fragmentName: 'FavoriteActivities',
+              },
+            )(store, data);
+          } catch (err) {
+            //
+          }
         } else {
           removeEdgeFromFragment(
             Favorites.fragments.favorites,
