@@ -109,14 +109,16 @@ class ViewThisWeeksActivity extends PureComponent {
   };
 
   handleCompleteActivity = () => {
-    this.props.completeActivity({
-      variables: {
-        input: {
-          id: this.props.activity.id,
-          babyId: this.props.currentBabyId,
+    this.props
+      .completeActivity({
+        variables: {
+          input: {
+            id: this.props.activity.id,
+            babyId: this.props.currentBabyId,
+          },
         },
-      },
-    });
+      })
+      .then(this.refreshActivity);
   };
 
   handleNavigateToActivity = (edge: ?ActivityEdge) => {

@@ -43,6 +43,11 @@ class ActivityActions extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.collapsed !== this.props.collapsed) {
+      this.setState({ collapsed: nextProps.collapsed });
+    }
+  }
   handleComplete = () => {
     this.toggleCollapsed();
     const isCompleted = this.props.collapsed;
