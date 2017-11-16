@@ -202,7 +202,7 @@ export default compose(
               ...ActivityNavigation
             }
 
-            previousActivity: activities(first: 1, before: $cursor) {
+            previousActivity: activities(last: 1, before: $cursor) {
               ...ActivityNavigation
             }
           }
