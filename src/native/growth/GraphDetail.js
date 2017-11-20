@@ -8,8 +8,7 @@ import type {
 } from '../../common/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Image, TouchableOpacity } from 'react-native';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { compose, path, pick, pluck } from 'ramda';
@@ -32,7 +31,6 @@ export class GraphDetail extends PureComponent {
 
   state = {
     currentMeasurementType: 'weight',
-    displayPeriodAs: 'Months',
   };
 
   static fragments = {
@@ -58,10 +56,6 @@ export class GraphDetail extends PureComponent {
         ? 'updateWeight'
         : 'updateHeight',
     );
-  };
-
-  handleDisplayPeriodAsChange = (value: 'Months' | 'Weeks') => {
-    this.setState({ displayPeriodAs: value });
   };
 
   renderGraph() {
@@ -108,7 +102,10 @@ export class GraphDetail extends PureComponent {
                 borderColor: theme.colors.open.gray1,
               })}
             >
-              <Icon name="md-brush" color={theme.colors.gray} />
+              <Image
+                source={require('../../common/images/edit.png')}
+                style={{ width: 14, height: 14 }}
+              />
             </Box>
           </Box>
         </Box>
@@ -129,9 +126,7 @@ export class GraphDetail extends PureComponent {
                 ],
               })}
             >
-              <Text bold>
-                {this.getCurrentUnit()}
-              </Text>
+              <Text bold>{this.getCurrentUnit()}</Text>
             </Box>
             {this.renderGraph()}
           </Box>
