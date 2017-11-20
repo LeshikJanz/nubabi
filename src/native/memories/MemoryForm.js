@@ -270,6 +270,7 @@ export default compose(
   }),
   connect((state: State) => ({
     files: selector(state, 'files'),
+    removeFiles: selector(state, 'removeFiles'),
     suggestedMemoryType: selector(state, 'suggestedMemoryType'),
   })),
   withLayout,
