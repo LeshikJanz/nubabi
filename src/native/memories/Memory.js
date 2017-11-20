@@ -1,7 +1,7 @@
 // @flow
-import type { Memory as MemoryType } from '../../common/types';
+import type { Memory as MemoryType, File } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ActivityIndicator, Image, TouchableOpacity } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import moment from 'moment';
@@ -14,9 +14,13 @@ import LikeMemoryButton from './LikeMemoryButton';
 import MemoryCommentsSummary from './MemoryCommentsSummary';
 
 type Props = MemoryType & {
-  babyId: String,
+  id: String,
   onLoadMoreComments: () => Promise<*>,
+  onViewMemory: (id: string) => void,
   onEditMemory: (id: string) => void,
+  onToggleLike: () => void,
+  suggestedMemoryType: string,
+  files: Array<File>,
 };
 
 export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
@@ -27,9 +31,7 @@ export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
   return dateStr.format('D MMMM • H:mm').toUpperCase();
 };
 
-class Memory extends PureComponent {
-  prop: Props;
-
+class Memory extends PureComponent<Props> {
   static fragments = {
     item: gql`
       fragment MemoryListItem on Memory {
@@ -148,7 +150,6 @@ class Memory extends PureComponent {
   render() {
     const {
       id,
-      babyId,
       title,
       comments: commentsConnection,
       files: filesConnection,
@@ -162,10 +163,6 @@ class Memory extends PureComponent {
     const mainContainerStyle = isOptimistic(id)
       ? { opacity: theme.states.disabled.opacity }
       : {};
-
-    const containerProps = isOptimistic(id)
-      ? {}
-      : { onPress: this.handleEditMemory, as: TouchableOpacity };
 
     const cardProps = isOptimistic(id)
       ? {}
@@ -205,12 +202,6 @@ class Memory extends PureComponent {
             justifyContent="flex-end"
           >
             <Icon size={20} color={theme.colors.gray} name="ios-share-alt" />
-            <Box {...containerProps}>
-              <Image
-                source={require('../../common/images/edit.png')}
-                style={{ width: 14, height: 14, marginLeft: 10 }}
-              />
-            </Box>
           </Box>
         </Box>
         <Box
