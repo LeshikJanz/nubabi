@@ -197,7 +197,9 @@ style = Object {
                 Object {
                   "height": 28,
                 },
-                undefined,
+                Object {
+                  "height": 35,
+                },
               ]
             }
             tintColor="#FFFFFF"
