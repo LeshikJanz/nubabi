@@ -67,7 +67,7 @@ export const GraphDetailChart = ({ data }: Props) => {
   return (
     <VictoryChart scale={scale}>
       <VictoryGroup data={chartData}>
-        <VictoryArea style={style} />
+        <VictoryArea style={style} interpolation="catmullRom" />
         <VictoryBar style={barStyle} />
         <VictoryScatter style={pointStyle} />
 
