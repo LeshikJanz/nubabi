@@ -6,22 +6,15 @@ import type {
 } from '../../common/types';
 import React from 'react';
 import {
-  ap,
   assoc,
   compose,
   evolve,
   filter,
-  findIndex,
-  lensIndex,
-  lensPath,
   map,
   merge,
   omit,
   path,
-  pathEq,
-  set,
   uniq,
-  view,
 } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter as gqlFilter } from 'graphql-anywhere';
@@ -33,7 +26,6 @@ import {
 } from '../components';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
-import { ViewMemories } from './ViewMemories';
 import RecentMemories from '../profile/RecentMemories';
 import {
   flattenEdges,
@@ -47,6 +39,9 @@ type Props = {
   memory: MemoryType,
   onSubmit: (input: any) => Promise<ApolloQueryResult<*>>,
   onAddVoiceNote: (id?: string) => void,
+  onEditSticker: () => void,
+  onMemoryRemoved: () => void,
+  goBack: () => void,
   files: Array<File>,
 };
 
@@ -55,6 +50,8 @@ export const EditMemory = ({
   onSubmit,
   onAddVoiceNote,
   onEditSticker,
+  goBack,
+  onMemoryRemoved,
   files,
 }: Props) => {
   return (
@@ -68,6 +65,8 @@ export const EditMemory = ({
       onSubmit={onSubmit}
       onAddVoiceNote={onAddVoiceNote}
       onEditSticker={onEditSticker}
+      goBack={goBack}
+      onMemoryRemoved={onMemoryRemoved}
     />
   );
 };

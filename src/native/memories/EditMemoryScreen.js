@@ -2,11 +2,9 @@
 import type { NavigationProp } from '../../common/types';
 import React, { Component } from 'react';
 import { InteractionManager } from 'react-native';
-import { NavigationActions } from 'react-navigation';
-import { path } from 'ramda';
-import { Screen } from '../components';
+import { Screen, SubmitFormNavButton } from '../components';
 import EditMemory from './EditMemory';
-import EditMemoryHeader from './EditMemoryHeader';
+import { NavigationActions } from 'react-navigation';
 
 type Props = {
   navigation: NavigationProp,
@@ -15,26 +13,35 @@ type Props = {
 export class EditMemoryScreen extends Component {
   props: Props;
 
-  static navigationOptions = ({ navigation }) => {
-    return {
-      title: 'Edit Memory',
-      headerRight: (
-        <EditMemoryHeader
-          memoryId={navigation.state.params.id}
-          goBack={() => navigation.goBack(navigation.state.params.parentKey)}
-        />
-      ),
-    };
+  static navigationOptions = {
+    title: 'Edit Memory',
+    headerRight: <SubmitFormNavButton form="memory" />,
   };
 
   handleAddVoiceNote = () => {
-    const id = this.props.navigation.state.params.id;
+    const { id } = this.props.navigation.state.params;
     this.props.navigation.navigate('voiceRecording', { id });
   };
 
-  handleGoBack = () => {
+  handleGoBack = (wasRemoved = false) => {
     InteractionManager.runAfterInteractions(() => {
-      if (this.props.navigation.state.routeName === 'editMemory') {
+      if (wasRemoved && this.props.navigation.state.params.returnKey) {
+        // TODO: this (and complementary code on epic) workarounds the fact
+        // that you can't currently reset to a specific tab with RN.
+        this.props.navigation.dispatch(
+          NavigationActions.reset({
+            index: 0,
+            actions: [
+              NavigationActions.navigate({
+                routeName: 'home',
+                action: NavigationActions.navigate({
+                  routeName: this.props.navigation.state.params.returnKey,
+                }),
+              }),
+            ],
+          }),
+        );
+      } else if (this.props.navigation.state.routeName === 'editMemory') {
         this.props.navigation.goBack(
           this.props.navigation.state.params.parentKey,
         );
@@ -42,11 +49,15 @@ export class EditMemoryScreen extends Component {
     });
   };
 
+  handleGoBackAfterDeletion = () => {
+    this.handleGoBack(true);
+  };
+
   handleEditSticker = () =>
     this.props.navigation.navigate('stickers', { mode: 'edit' });
 
   render() {
-    const id = this.props.navigation.state.params.id;
+    const { id } = this.props.navigation.state.params;
 
     return (
       <Screen>
@@ -55,6 +66,7 @@ export class EditMemoryScreen extends Component {
           onAddVoiceNote={this.handleAddVoiceNote}
           onEditSticker={this.handleEditSticker}
           goBack={this.handleGoBack}
+          onMemoryRemoved={this.handleGoBackAfterDeletion}
         />
       </Screen>
     );

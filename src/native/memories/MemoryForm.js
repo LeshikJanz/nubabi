@@ -11,8 +11,6 @@ import {
   last,
   map,
   memoize,
-  path,
-  pathOr,
   reject,
   union,
   update,
@@ -26,7 +24,6 @@ import {
   FormContainer,
   List,
   ListItem,
-  SubmitButton,
   Text,
   withLayout,
 } from '../components';
@@ -36,17 +33,20 @@ import MemoryFormFileList from './MemoryFormFileList';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
 import theme from '../../common/themes/defaultTheme';
+import RemoveMemoryButton from './RemoveMemoryButton';
 
 type Props = {
   mode?: 'add' | 'edit',
-  onSubmit: (input: Object) => void,
   onAddVoiceNote: () => void,
   onEditSticker: () => void,
-  handleSubmit: (submit: Function) => void,
+  onRemoveMemory?: () => void,
   submitting: boolean,
   change: (field: string, value: any) => void,
   files: ?Array<File>,
   initialValues: Object,
+  suggestedMemoryType: ?string,
+  removeFiles: Array<string>,
+  onMemoryRemoved?: () => void,
 };
 
 const dateDisplayFormat = 'D MMMM • H:mm';
@@ -110,12 +110,6 @@ class MemoryForm extends PureComponent {
     }
   };
 
-  handleSubmit = this.props.handleSubmit(input => {
-    return this.props.onSubmit({
-      ...input,
-    });
-  });
-
   handleRemoveSuggestedMemoryType = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     this.props.change('suggestedMemoryType', null);
@@ -161,7 +155,6 @@ class MemoryForm extends PureComponent {
 
   renderSuggestedMemoryType = field => {
     const suggestedMemoryId = field.input.value;
-    console.log('SG', field.input.value);
 
     if (!suggestedMemoryId) {
       return null;
@@ -193,11 +186,10 @@ class MemoryForm extends PureComponent {
     const {
       mode,
       suggestedMemoryType,
-      handleSubmit,
-      onSubmit,
+      onMemoryRemoved,
       submitting: isSubmitting,
     } = this.props;
-    const submitText = mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
+
     const editableProps = { editable: !isSubmitting };
 
     return (
@@ -260,10 +252,9 @@ class MemoryForm extends PureComponent {
 
         {mode === 'edit' && (
           <Box flexDirection="row" alignItems="flex-end">
-            <SubmitButton
-              submitText={submitText}
-              onPress={handleSubmit(onSubmit)}
-              loading={this.props.submitting}
+            <RemoveMemoryButton
+              id={this.props.initialValues.id}
+              goBack={onMemoryRemoved}
             />
           </Box>
         )}

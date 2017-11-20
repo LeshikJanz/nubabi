@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Box, Icon, Screen } from '../components';
 import ViewMemory from './ViewMemory';
-import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   navigation: NavigationProp,
@@ -17,6 +16,7 @@ export class ViewMemoryScreen extends PureComponent {
     const editMemory = () =>
       navigation.navigate('editMemory', {
         id: navigation.state.params.id,
+        returnKey: navigation.state.params.returnKey,
       });
 
     return {

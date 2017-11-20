@@ -6,7 +6,7 @@ import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { removeEdgeFromFragment } from '../../common/helpers/graphqlUtils';
-import { Icon } from '../components';
+import { Text } from '../components';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
 import { appError } from '../../common/app/actions';
@@ -18,7 +18,7 @@ type Props = {
   onSubmit: () => Promise<ApolloQueryResult<*>>,
 };
 
-class EditMemoryHeader extends PureComponent {
+class RemoveMemoryButton extends PureComponent {
   props: Props;
 
   promptForDeletion = () => {
@@ -55,9 +55,17 @@ class EditMemoryHeader extends PureComponent {
     return (
       <TouchableOpacity
         onPress={this.promptForDeletion}
-        style={{ marginRight: 10 }}
+        style={{
+          flex: 1,
+          marginRight: 10,
+          padding: 16,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
-        <Icon name="ios-trash-outline" size={20} />
+        <Text color="primary" bold>
+          delete this memory
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -87,20 +95,20 @@ export default compose(
 
           // $FlowFixMe$
           return mutate({
-            variables: { input: { id: ownProps.memoryId } },
+            variables: { input: { id: ownProps.id } },
             optimisticResponse: {
               __typename: 'Mutation',
               deleteMemory: {
                 __typename: 'DeleteMemoryPayload',
                 memory: {
                   __typename: 'Memory',
-                  id: ownProps.memoryId,
+                  id: ownProps.id,
                 },
               },
             },
             update: (store, data) => {
               const options = [
-                ownProps.memoryId,
+                ownProps.id,
                 ownProps.currentBabyId,
                 ['memories'],
               ];
@@ -119,4 +127,4 @@ export default compose(
       }),
     },
   ),
-)(EditMemoryHeader);
+)(RemoveMemoryButton);

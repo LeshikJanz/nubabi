@@ -7,7 +7,7 @@ import type {
   Viewer,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { AsyncStorage, ScrollView, StyleSheet, View } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
@@ -61,6 +61,15 @@ class Profile extends PureComponent {
     ),
   };
 
+  componentWillMount() {
+    AsyncStorage.getItem('returnKey').then(routeName => {
+      AsyncStorage.removeItem('returnKey').then(() => {
+        if (routeName) {
+          this.props.navigation.navigate(routeName);
+        }
+      });
+    });
+  }
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
   handleAddMemory = () => this.props.navigation.navigate('addMemory');
   handleViewActivities = () =>
@@ -69,7 +78,11 @@ class Profile extends PureComponent {
     this.props.navigation.navigate('viewActivity', { id, title });
   };
   handleViewMemory = (id: string, title: string) => {
-    this.props.navigation.navigate('viewMemory', { id, title });
+    this.props.navigation.navigate('viewMemory', {
+      id,
+      title,
+      returnKey: this.props.navigation.state.key,
+    });
   };
   handleNavigateToMemories = () => this.props.navigation.navigate('memories');
   handleViewGrowth = () => this.props.navigation.navigate('whatYouNeedToKnow');
