@@ -116,14 +116,14 @@ export class GraphDetail extends PureComponent {
         </Box>
         <Box
           flex={1}
-          paddingVertical={2}
+          paddingVertical={1}
           alignItems="center"
           justifyContent="center"
         >
           <Box flex={1} flexDirection="row" alignItems="center">
             <Box
               style={() => ({
-                marginLeft: 25,
+                left: 25,
                 transform: [
                   {
                     rotateZ: '-90deg',
