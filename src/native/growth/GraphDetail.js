@@ -95,6 +95,7 @@ export class GraphDetail extends PureComponent {
             flexDirection="row"
             alignItems="center"
             justifyContent="center"
+            marginRight={1}
             onPress={this.handleUpdateMeasurement}
           >
             <Text bold color="primary" marginRight={1}>
