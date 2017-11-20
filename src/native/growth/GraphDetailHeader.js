@@ -20,7 +20,7 @@ export const GraphDetailHeader = ({
   onSwitchMeasurementType,
 }: Props) => {
   const headerWidth = layout.viewportWidth;
-  const headerHeight = layout.viewportWidth * 0.45;
+  const headerHeight = layout.viewportWidth * 0.5;
 
   return (
     <Box style={() => ({ width: headerWidth, height: headerHeight })}>
@@ -30,10 +30,10 @@ export const GraphDetailHeader = ({
       >
         <Overlay overlayStyle={{ opacity: 0.7 }}>
           <Box flex={1} alignItems="center" justifyContent="center">
-            <Text align="center" color="white" size={7}>
+            <Text align="center" color="white" size={10}>
               Look how {name}
             </Text>
-            <Text align="center" color="white" size={7}>
+            <Text align="center" color="white" size={10}>
               is growing
             </Text>
           </Box>
