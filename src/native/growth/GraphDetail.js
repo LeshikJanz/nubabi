@@ -83,7 +83,12 @@ export class GraphDetail extends PureComponent {
           onSwitchMeasurementType={this.handleSwitchMeasurement}
           {...filter(GraphDetailHeader.fragments.baby, this.props.baby)}
         />
-        <Box contentSpacing flexDirection="row" justifyContent="space-around">
+        <Box
+          contentSpacing
+          paddingTop={2}
+          flexDirection="row"
+          justifyContent="space-around"
+        >
           <Box flex={1} />
           <Box
             as={TouchableOpacity}
