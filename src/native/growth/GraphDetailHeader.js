@@ -3,7 +3,7 @@ import type { LayoutProps } from '../../common/types';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import { gql } from 'react-apollo';
-import { Box, Text, Overlay, withLayout } from '../components';
+import { Box, Overlay, Text, withLayout } from '../components';
 import GraphDetailMeasurementSwitcher from './GraphDetailMeasurementSwitcher';
 
 type Props = {
@@ -28,7 +28,7 @@ export const GraphDetailHeader = ({
         source={background}
         style={{ flex: 1, width: headerWidth }}
       >
-        <Overlay>
+        <Overlay overlayStyle={{ opacity: 0.7 }}>
           <Box flex={1} alignItems="center" justifyContent="center">
             <Text align="center" color="white" size={7}>
               Look how {name}
