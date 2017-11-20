@@ -3,6 +3,7 @@ import type { Measurement } from '../../common/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { memoize, curry } from 'ramda';
+import moment from 'moment';
 import {
   VictoryChart,
   VictoryBar,
@@ -15,8 +16,6 @@ import theme from '../../common/themes/defaultTheme';
 
 type Props = {
   data: Array<Measurement>,
-  width: number,
-  height: number,
 };
 
 export const measurementToPoint = curry(measurement => ({
@@ -58,7 +57,11 @@ const axisStyle = {
   },
 };
 
-export const GraphDetailChart = ({ data, width, height }: Props) => {
+const tickFormat = date => {
+  return moment(date).format('MMM');
+};
+
+export const GraphDetailChart = ({ data }: Props) => {
   const chartData = transformData(data);
 
   return (
@@ -69,7 +72,11 @@ export const GraphDetailChart = ({ data, width, height }: Props) => {
         <VictoryScatter style={pointStyle} />
 
         <VictoryAxis dependentAxis style={axisStyle} />
-        <VictoryAxis dependentAxis={false} style={axisStyle} />
+        <VictoryAxis
+          dependentAxis={false}
+          style={axisStyle}
+          tickFormat={tickFormat}
+        />
       </VictoryGroup>
     </VictoryChart>
   );
