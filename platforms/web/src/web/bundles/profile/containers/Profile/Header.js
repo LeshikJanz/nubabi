@@ -6,10 +6,10 @@ import moment from 'moment';
 import Modal from 'react-modal';
 import onClickOutside from 'react-onclickoutside';
 
-import IWeight from '../../../../../common/icons/weight.svg';
-import IHeight from '../../../../../common/icons/height.svg';
-import IEdit from '../../../../../common/icons/edit.svg';
-import ICamera from '../../../../../common/icons/camera.svg';
+import IWeight from '../../../../../images/icons/weight.svg';
+import IHeight from '../../../../../images/icons/height.svg';
+import IEdit from '../../../../../images/icons/edit.svg';
+import ICamera from '../../../../../images/icons/camera.svg';
 
 import { Header, Button } from 'web/elements';
 

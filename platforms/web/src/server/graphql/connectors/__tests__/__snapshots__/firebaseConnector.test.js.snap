@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`firebaseConnector deleteMemory deletes a memory and removes it from the baby 1`] = `undefined`;
-
-exports[`firebaseConnector deleteMemory deletes a memory and removes it from the baby 2`] = `undefined`;

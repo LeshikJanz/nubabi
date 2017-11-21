@@ -4,10 +4,10 @@ import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
 import { Aside } from 'web/elements';
-import IAppStore from '../../../common/images/appstore.png';
-import IPlayMarket from '../../../common/images/googleplay.png';
-import INubabiApp from '../../../common/images/nubabiapp.png';
-import IPersons from '../../../common/icons/persons.svg';
+import IAppStore from '../../../images/appstore.png';
+import IPlayMarket from '../../../images/googleplay.png';
+import INubabiApp from '../../../images/nubabiapp.png';
+import IPersons from '../../../images/icons/persons.svg';
 
 type Props = {};
 

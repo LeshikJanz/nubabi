@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Flex, Box } from 'grid-styled';
 import { Link } from 'react-router-dom';
 
-import Logo from '../../../../src/common/icons/logo.svg';
+import Logo from '../../../images/icons/logo.svg';
 import Notifications from './Notifications';
 import BabySelect from './BabySelect';
 

@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { Nav, Menu } from 'web/elements';
 
-import IChart from '../../../../../../src/common/icons/chart.svg';
-import IPerson from '../../../../../../src/common/icons/person.svg';
-import ILibrary from '../../../../../../src/common/icons/library.svg';
-import IPhotos from '../../../../../../src/common/icons/photos.svg';
-import IPuzzle from '../../../../../../src/common/icons/puzzle.svg';
+import IChart from '../../../../../images/icons/chart.svg';
+import IPerson from '../../../../../images/icons/person.svg';
+import ILibrary from '../../../../../images/icons/library.svg';
+import IPhotos from '../../../../../images/icons/photos.svg';
+import IPuzzle from '../../../../../images/icons/puzzle.svg';
 
 type Props = {};
 

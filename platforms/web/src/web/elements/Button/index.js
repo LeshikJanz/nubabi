@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import ICross from '../../../common/icons/cross.svg';
+import ICross from '../../../images/icons/cross.svg';
 
 type Props = {
   onClick: () => void,
