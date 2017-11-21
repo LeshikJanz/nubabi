@@ -15,7 +15,7 @@ import configureStore from 'core/configureStore';
 import configureStorage from 'core/configureStorage';
 import configureReporting from 'core/configureReporting';
 import { configureApollo } from 'core/configureApollo';
-import theme from 'core/themes/defaultTheme';
+import theme from './themes/web';
 import config from 'core/config';
 import { ThemeProvider } from 'styled-components';
 import App from 'web/app';
