@@ -1,24 +1,32 @@
 {
-  "patterns": [
-    "auth",
-    "babies",
-    "build",
-    "deps",
-    "file-upload",
-    "firebase",
-    "forms",
-    "gallery",
-    "growth",
-    "library",
-    "memories",
-    "native",
-    "navigation",
-    "networking",
-    "notifications",
-    "profile",
-    "release",
-    "schema",
-    "settings",
-    "stimulation"
-  ]
+  "patterns": {
+    "system": [
+      "build",
+      "deps",
+      "packaging",
+      "release"
+    ],
+    "packages": [
+      "core",
+      "native",
+      "web",
+      "graphql-utils",
+      "firebase"
+    ],
+    "components": {
+      "auth": "Authentication, login, user profile, etc.",
+      "babies": "Everything baby-related except for profile, measurements, etc.",
+      "forms": "General User input, forms, etc.",
+      "gallery": "Image, audio and video gallery for displaying media.",
+      "growth": "Track, growth, charts, etc.",
+      "library": "Explore, library, articles, etc.",
+      "memories": "Capture, memories, etc.",
+      "navigation": "Navigation and routing.",
+      "networking": "Network-related code, connectivity checks, offline persistence, etc.",
+      "notifications": "Notification code, in-app notifications, push notifications, etc",
+      "profile": "Baby profile, etc.",
+      "settings": "Settings, Friends & Family, etc.",
+      "stimulation": "Stimulation, activities, etc."
+    }
+  }
 }
