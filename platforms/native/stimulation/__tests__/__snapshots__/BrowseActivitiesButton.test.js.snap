@@ -69,7 +69,6 @@ style = Object {}
           "position": "absolute",
           "right": 0,
           "top": 0,
-          "testUri": "../../../core/images/browseAllActivitiesButton.jpg",
         }
       }
     >
@@ -77,7 +76,7 @@ style = Object {}
         resizeMode="contain"
         source={
           Object {
-            "testUri": "../../../src/common/images/browseAllActivitiesButton.jpg",
+            "testUri": "../../../core/images/browseAllActivitiesButton.jpg",
           }
         }
         style={
