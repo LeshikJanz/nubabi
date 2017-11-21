@@ -2,7 +2,7 @@
 // TODO: remove duplication between all these buttons
 import type { LayoutProps } from '../../common/types/index';
 import React from 'react';
-import { ImageBackground, Dimensions } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { Box, Card, Text, Overlay } from '../components/index';
 import withLayout from '../components/withLayout';
 
@@ -33,7 +33,7 @@ export const Button = ({ layout }: { layout: LayoutProps }) => {
         <Overlay />
       </ImageBackground>
       <Box contentSpacing>
-        <Text size={6}>Health Help</Text>
+        <Text size={6}>Health Matters</Text>
       </Box>
     </Box>
   );

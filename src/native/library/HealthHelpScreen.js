@@ -6,7 +6,7 @@ import { viewGrowthArticle } from './GrowthArticle';
 
 export class HealthHelpScreen extends PureComponent {
   static navigationOptions = {
-    title: 'Health Help',
+    title: 'Health Matters',
   };
 
   handleViewArticle = viewGrowthArticle.bind(this);

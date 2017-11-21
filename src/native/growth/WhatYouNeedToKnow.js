@@ -1,5 +1,5 @@
 // @flow
-import type { State, Growth, GraphQLDataProp } from '../../common/types';
+import type { Growth, GraphQLDataProp } from '../../common/types';
 import type { GrowthPeriodOption } from './WhatYouNeedToKnowForPeriod';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation } from 'react-native';
@@ -15,6 +15,7 @@ import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 type Props = {
   growth: ?Array<Growth>,
   data: GraphQLDataProp<*>,
+  babyName: string,
 };
 
 type ComponentState = {
@@ -107,6 +108,7 @@ export class WhatYouNeedToKnow extends PureComponent {
   };
 
   render() {
+    const { babyName } = this.props;
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
 
@@ -115,6 +117,7 @@ export class WhatYouNeedToKnow extends PureComponent {
         current={current}
         onPeriodSelect={this.handlePeriodSelect}
         periods={options}
+        babyName={babyName}
       />
     );
   }
@@ -129,6 +132,7 @@ export default compose(
           baby(id: $babyId) {
             id
             dob
+            name
             growth {
               edges {
                 node {
@@ -154,7 +158,10 @@ export default compose(
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: ownProps.currentBabyId },
       }),
-      props: mapEdgesToProp('viewer.baby.growth.edges', 'growth'),
+      props: data => ({
+        ...mapEdgesToProp('viewer.baby.growth.edges', 'growth', data),
+        babyName: path(['data', 'viewer', 'baby', 'name'], data),
+      }),
     },
   ),
   displayLoadingState,

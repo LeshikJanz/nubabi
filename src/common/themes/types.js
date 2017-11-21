@@ -50,6 +50,8 @@ export type Theme = {|
       | 800
       | 900,
     fontFamily: string,
+    medium: number,
+    light: number,
   |},
   block: {|
     marginBottom: number,

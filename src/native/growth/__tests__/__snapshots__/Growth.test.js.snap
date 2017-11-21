@@ -544,7 +544,7 @@ style = Object {
                 }
               }
             >
-              What you need to know
+              What to expect
             </Text>
             <View
               style={
@@ -974,8 +974,9 @@ style = Object {
               }
             }
           >
+            Track 
             TestBaby's
-             Growth Chart
+             height & weight
           </Text>
           <View
             style={
@@ -1565,7 +1566,7 @@ style = Object {
                 }
               }
             >
-              What you need to know
+              What to expect
             </Text>
             <View
               style={
@@ -1995,8 +1996,9 @@ style = Object {
               }
             }
           >
+            Track 
             TestBaby's
-             Growth Chart
+             height & weight
           </Text>
           <View
             style={

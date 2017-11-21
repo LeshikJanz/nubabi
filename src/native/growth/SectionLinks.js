@@ -7,7 +7,6 @@ import {
   groupBy,
   isNil,
   keys,
-  mapObjIndexed,
   memoize,
   path,
   pluck,
@@ -31,12 +30,12 @@ type SectionProps = {
 
 const sectionMappings = {
   Parenting: 'Parenting Tips',
-  Health: 'Health Help',
+  Health: 'Health Matters',
 };
 
 const iconMappings = {
   'Parenting Tips': 'md-people',
-  'Health Help': 'md-medkit',
+  'Health Matters': 'md-medkit',
 };
 
 const urlPrefix = 'nubabi://content/growth';
@@ -45,6 +44,7 @@ export const SectionLinkItem = ({ title, id }: SectionLinkItemProps) => {
   const url = [urlPrefix, id].join('/');
 
   return (
+    // eslint-disable-next-line jsx-a11y/anchor-is-valid
     <Link containerStyle={{ marginVertical: 5 }} title={title} url={url} />
   );
 };

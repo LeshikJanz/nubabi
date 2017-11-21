@@ -6,7 +6,7 @@ import WhatYouNeedToKnow from './WhatYouNeedToKnow';
 
 export class WhatYouNeedToKnowScreen extends PureComponent {
   static navigationOptions: NavigationOptions = {
-    title: "This Week's Growth",
+    title: 'What to expect',
   };
 
   render() {

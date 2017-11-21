@@ -283,7 +283,7 @@ style = Object {
             }
           }
         >
-          This Week's Activities
+          This Week's Stimulation Guide
         </Text>
         <View
           style={

@@ -31,10 +31,7 @@ export const GraphDetailHeader = ({
         <Overlay overlayStyle={{ opacity: 0.7 }}>
           <Box flex={1} alignItems="center" justifyContent="center">
             <Text align="center" color="white" size={10}>
-              Look how {name}
-            </Text>
-            <Text align="center" color="white" size={10}>
-              is growing
+              Watch {name} grow
             </Text>
           </Box>
 

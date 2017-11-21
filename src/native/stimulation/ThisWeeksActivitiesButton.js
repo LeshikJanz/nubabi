@@ -11,15 +11,12 @@ const background = require('../../common/images/gross_motor_large.jpg');
 
 type Props = {
   onPress: () => void,
-  style?: number,
   layout: LayoutProps,
 };
 
-export const ThisWeeksActivitiesButton = ({
-  onPress,
-  style,
-  layout,
-}: Props) => {
+export const ThisWeeksActivitiesButton = ({ onPress, layout }: Props) => {
+  const title = "This Week's Stimulation Guide";
+
   const dimensions = {
     width: layout.viewportWidth - 20,
     height: layout.viewportWidth * 0.6,
@@ -65,7 +62,7 @@ export const ThisWeeksActivitiesButton = ({
           </ImageBackground>
           <Box contentSpacing flexDirection="row" justifyContent="center">
             <Text flex={1} size={6}>
-              This Week's Activities
+              {title}
             </Text>
             <Box alignItems="center" justifyContent="center">
               <Icon

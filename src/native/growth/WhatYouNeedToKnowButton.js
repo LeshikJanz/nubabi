@@ -40,7 +40,7 @@ export const ThisWeekGrowth = withLayout(
           paddingVertical={0.5}
         >
           <Text flex={1} size={4}>
-            What you need to know
+            What to expect
           </Text>
           <ListItemArrow />
         </Box>

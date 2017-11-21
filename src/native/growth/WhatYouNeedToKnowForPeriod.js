@@ -9,15 +9,17 @@ import PeriodFilter from './PeriodFilter';
 import HealthcareNotice from './HealthcareNotice';
 import ExpertAdvice from './ExpertAdvice';
 import SectionLinks from './SectionLinks';
+import formatPossessive from '../../common/helpers/formatPossessive';
 
 type Props = {
   current: GrowthPeriodOption,
   periods: Array<GrowthPeriodOption>,
   onPeriodSelect: (id: string) => void,
+  babyName: string,
 };
 
 export const WhatYouNeedToKnowForPeriod = (props: Props) => {
-  const { current, periods, onPeriodSelect } = props;
+  const { current, periods, onPeriodSelect, babyName } = props;
 
   const textStyle = {
     paragraph: {
@@ -53,7 +55,7 @@ export const WhatYouNeedToKnowForPeriod = (props: Props) => {
           </Box>
           <Box paddingHorizontal={1}>
             <Text marginVertical={1} size={3} bold>
-              Growth & Development
+              {formatPossessive(babyName)} Development
             </Text>
             <Markdown text={current.content} style={textStyle} />
             <SectionLinks links={growthDevelopmentContentLinks} />

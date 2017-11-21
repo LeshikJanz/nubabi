@@ -144,29 +144,9 @@ style = Object {
               }
             }
           >
-            Look how 
+            Watch 
             Baby
-          </Text>
-          <Text
-            accessible={true}
-            allowFontScaling={true}
-            ellipsizeMode="tail"
-            style={
-              Object {
-                "borderBottomWidth": 0,
-                "borderColor": "#9EABBC",
-                "borderLeftWidth": 0,
-                "borderRightWidth": 0,
-                "borderTopWidth": 0,
-                "color": "#FFFFFF",
-                "fontFamily": "SF Pro Display",
-                "fontSize": 24.78737792164831,
-                "lineHeight": 32,
-                "textAlign": "center",
-              }
-            }
-          >
-            is growing
+             grow
           </Text>
         </View>
         <View

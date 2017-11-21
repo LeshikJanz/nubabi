@@ -1,13 +1,22 @@
 // @flow
-import React from 'react';
+import type { Measurement } from '../../common/types';
+import * as React from 'react';
 import { Image } from 'react-native';
 import moment from 'moment';
 import { Box, Card, ListItemArrow, Text } from '../components';
 import { formatMeasurement } from '../../common/helpers/measurement';
 import theme from '../../common/themes/defaultTheme';
+import formatPossessive from '../../common/helpers/formatPossessive';
 
 type Props = {
   onPress: () => void,
+  unitDisplay: {
+    weight: 'kg' | 'lbs',
+    height: 'cm' | 'in',
+  },
+  babyName: string,
+  height: { value: number },
+  weight: { value: number },
 };
 
 const weightImage = require('../../common/images/growth-chart-button-weight.png');
@@ -25,11 +34,7 @@ const imageProps = {
   },
 };
 
-const formatName = (name: string) => {
-  return name.endsWith('s') ? `${name}'` : `${name}'s`;
-};
-
-const MeasurementText = ({ children }) => (
+const MeasurementText = ({ children }: { children: React.Element<*> }) => (
   <Text
     size={14}
     style={() => ({
@@ -41,7 +46,7 @@ const MeasurementText = ({ children }) => (
   </Text>
 );
 
-const UnitDisplayText = ({ children }) => (
+const UnitDisplayText = ({ children }: { children: React.Element<*> }) => (
   <Text
     size={6}
     style={() => ({
@@ -54,7 +59,11 @@ const UnitDisplayText = ({ children }) => (
   </Text>
 );
 
-const LastMeasurementTimestamp = ({ measurement }) => {
+const LastMeasurementTimestamp = ({
+  measurement,
+}: {
+  measurement: Measurement,
+}) => {
   let content = 'N/A';
   if (measurement) {
     const date = moment(measurement.recordedAt);
@@ -137,7 +146,7 @@ export const GrowthChartButton = ({
         })}
       >
         <Text flex={1} size={4}>
-          {formatName(babyName)} Growth Chart
+          Track {formatPossessive(babyName)} height & weight
         </Text>
         <ListItemArrow />
       </Box>
