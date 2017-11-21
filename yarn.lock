@@ -2582,7 +2582,7 @@ eslint-config-prettier@^2.5.0:
 
 "eslint-import-resolver-babel-module@https://github.com/blackxored/eslint-import-resolver-babel-module#feat/custom-project-root":
   version "4.0.0-beta.3"
-  resolved "https://github.com/blackxored/eslint-import-resolver-babel-module#48096f90f55a1ca93e9728ef95befe087b63ab2e"
+  resolved "https://github.com/blackxored/eslint-import-resolver-babel-module#7b08a9d31f6ab2057ad7641be19a252886828a95"
   dependencies:
     babel-jest "^20.0.3"
     jest "^20.0.3"

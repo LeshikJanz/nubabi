@@ -92,6 +92,7 @@
   },
   "resolutions": {
     "color-convert": "https://github.com/blackxored/color-convert",
-    "react-native-fetch-blob": "https://github.com/blackxored/react-native-fetch-blob#fix/json-response-fix-with-net-indicator-fix"
+    "react-native-fetch-blob": "https://github.com/blackxored/react-native-fetch-blob#fix/json-response-fix-with-net-indicator-fix",
+    "eslint-import-resolver-babel-module": "https://github.com/blackxored/eslint-import-resolver-babel-module#feat/custom-project-root"
   }
 }
