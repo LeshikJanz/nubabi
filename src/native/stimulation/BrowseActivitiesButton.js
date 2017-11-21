@@ -2,10 +2,11 @@
 import type { Image as ImageType, LayoutProps } from '../../common/types/types';
 import React from 'react';
 import {
-  ImageBackground,
+  Image,
   StyleSheet,
   Text,
   TouchableHighlight,
+  View,
 } from 'react-native';
 import { Overlay, withLayout } from '../components';
 
@@ -52,13 +53,16 @@ export const BrowseActivitiesButton = ({
       underlayColor="rgba(0,0,0,0)"
       onPress={onPress}
     >
-      <ImageBackground
-        source={background}
-        style={[{ flex: 1 }, dimensions]}
-        resizeMode="cover"
-      >
+      <View style={[{ flex: 1 }, dimensions]}>
+        <View style={StyleSheet.absoluteFill}>
+          <Image
+            source={background}
+            style={{ height: 120, width: 200, alignSelf: 'center' }}
+            resizeMode="contain"
+          />
+        </View>
         <Overlay>{caption}</Overlay>
-      </ImageBackground>
+      </View>
     </TouchableHighlight>
   );
 };
@@ -98,6 +102,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: '500',
     backgroundColor: 'transparent',
+    shadowColor: 'rgba(0,0,0,.5)',
+    shadowOpacity: 1,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 1,
+      width: 1,
+    },
   },
   textContainer: {
     alignItems: 'center',

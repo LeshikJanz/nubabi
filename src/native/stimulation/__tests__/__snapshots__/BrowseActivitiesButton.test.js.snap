@@ -61,30 +61,33 @@ style = Object {}
       ]
     }
   >
-    <Image
-      resizeMode="cover"
-      source={
+    <View
+      style={
         Object {
-          "testUri": "../../../src/common/images/browseAllActivitiesButton.jpg",
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         }
       }
-      style={
-        Array [
+    >
+      <Image
+        resizeMode="contain"
+        source={
           Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
+            "testUri": "../../../src/common/images/browseAllActivitiesButton.jpg",
+          }
+        }
+        style={
           Object {
-            "height": undefined,
-            "width": undefined,
-          },
-          undefined,
-        ]
-      }
-    />
+            "alignSelf": "center",
+            "height": 120,
+            "width": 200,
+          }
+        }
+      />
+    </View>
     <View
       style={
         Object {
@@ -138,6 +141,13 @@ style = Object {}
               "fontSize": 16,
               "fontWeight": "500",
               "justifyContent": "center",
+              "shadowColor": "rgba(0,0,0,.5)",
+              "shadowOffset": Object {
+                "height": 1,
+                "width": 1,
+              },
+              "shadowOpacity": 1,
+              "shadowRadius": 2,
             }
           }
         >
@@ -155,6 +165,13 @@ style = Object {}
               "fontSize": 16,
               "fontWeight": "500",
               "justifyContent": "center",
+              "shadowColor": "rgba(0,0,0,.5)",
+              "shadowOffset": Object {
+                "height": 1,
+                "width": 1,
+              },
+              "shadowOpacity": 1,
+              "shadowRadius": 2,
             }
           }
         >
@@ -227,30 +244,33 @@ style = Object {}
       ]
     }
   >
-    <Image
-      resizeMode="cover"
-      source={
+    <View
+      style={
         Object {
-          "uri": "http://example.com",
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
         }
       }
-      style={
-        Array [
+    >
+      <Image
+        resizeMode="contain"
+        source={
           Object {
-            "bottom": 0,
-            "left": 0,
-            "position": "absolute",
-            "right": 0,
-            "top": 0,
-          },
+            "uri": "http://example.com",
+          }
+        }
+        style={
           Object {
-            "height": undefined,
-            "width": undefined,
-          },
-          undefined,
-        ]
-      }
-    />
+            "alignSelf": "center",
+            "height": 120,
+            "width": 200,
+          }
+        }
+      />
+    </View>
     <View
       style={
         Object {
@@ -304,6 +324,13 @@ style = Object {}
               "fontSize": 16,
               "fontWeight": "500",
               "justifyContent": "center",
+              "shadowColor": "rgba(0,0,0,.5)",
+              "shadowOffset": Object {
+                "height": 1,
+                "width": 1,
+              },
+              "shadowOpacity": 1,
+              "shadowRadius": 2,
             }
           }
         >
@@ -321,6 +348,13 @@ style = Object {}
               "fontSize": 16,
               "fontWeight": "500",
               "justifyContent": "center",
+              "shadowColor": "rgba(0,0,0,.5)",
+              "shadowOffset": Object {
+                "height": 1,
+                "width": 1,
+              },
+              "shadowOpacity": 1,
+              "shadowRadius": 2,
             }
           }
         >
