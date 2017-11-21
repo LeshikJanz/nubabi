@@ -110,3 +110,6 @@ platforms/server/graphql/nubabitest1-firebase-adminsdk-*.json
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
+
+# Webpack
+**/*.hot-update.*

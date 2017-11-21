@@ -1,62 +1,62 @@
 // @flow
-import type { AppStartedAction } from "common/types";
-import { render } from "react-dom";
-import React from "react";
-import { ApolloProvider } from "react-apollo";
-import { persistStore } from "redux-persist";
-import Raven from "raven-js";
+import type { AppStartedAction } from 'common/types';
+import { render } from 'react-dom';
+import React from 'react';
+import { ApolloProvider } from 'react-apollo';
+import { persistStore } from 'redux-persist';
+import Raven from 'raven-js';
 import {
   ConnectedRouter,
   routerReducer,
-  routerMiddleware
-} from "react-router-redux";
-import history from "web/navigation/history";
-import configureStore from "common/configureStore";
-import configureStorage from "common/configureStorage";
-import configureReporting from "common/configureReporting";
-import { configureApollo } from "common/configureApollo";
-import theme from "common/themes/defaultTheme";
-import config from "common/config";
-import { ThemeProvider } from "styled-components";
-import App from "web/app";
-import registerServiceWorker from "./registerServiceWorker";
-import { epics as appEpics } from "./app/actions";
+  routerMiddleware,
+} from 'react-router-redux';
+import history from 'web/navigation/history';
+import configureStore from 'core/configureStore';
+import configureStorage from 'core/configureStorage';
+import configureReporting from 'core/configureReporting';
+import { configureApollo } from 'core/configureApollo';
+import theme from 'core/themes/defaultTheme';
+import config from 'core/config';
+import { ThemeProvider } from 'styled-components';
+import App from 'web/app';
+import registerServiceWorker from './registerServiceWorker';
+import { epics as appEpics } from './app/actions';
 
 const routingMiddlware: Middleware = routerMiddleware((history: History));
 
 const reportingMiddleware = configureReporting({
   sentryUrl: config.sentryUrl,
   appVersion: config.appVersion,
-  Raven
+  Raven,
 });
 
 const store = configureStore({
   initialState: {
-    config
+    config,
   },
   platformReducers: {
-    navigation: routerReducer
+    navigation: routerReducer,
   },
   platformMiddleware: [reportingMiddleware, routingMiddlware],
-  platformEpics: [...appEpics]
+  platformEpics: [...appEpics],
 });
 
 persistStore(
   store,
   {
-    ...configureStorage(config.appName)
+    ...configureStorage(config.appName),
   },
   () => {
-    store.dispatch(({ type: "APP_STARTED" }: AppStartedAction));
-  }
+    store.dispatch(({ type: 'APP_STARTED' }: AppStartedAction));
+  },
 );
 
 const apollo = configureApollo();
 
 // TODO: remove after deps update
 console.ignoredYellowBox = [
-  "Warning: checkPropTypes",
-  "Using <Image> with children"
+  'Warning: checkPropTypes',
+  'Using <Image> with children',
 ];
 
 const renderApp = Component => {
@@ -68,7 +68,7 @@ const renderApp = Component => {
         </ConnectedRouter>
       </ThemeProvider>
     </ApolloProvider>,
-    document.getElementById("root")
+    document.getElementById('root'),
   );
 };
 
@@ -77,8 +77,8 @@ renderApp(App);
 registerServiceWorker();
 
 if (module.hot) {
-  module.hot.accept("./app", () => {
-    const NextApp = require("./app").default;
+  module.hot.accept('./app', () => {
+    const NextApp = require('./app').default;
     renderApp(NextApp);
   });
 }

@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   extends: [
     'airbnb',
@@ -49,12 +51,15 @@ module.exports = {
     'react-native/no-unused-styles': 0,
     'react-native/split-platform-components': 2,
     'fp/no-mutating-assign': 2,
-    "graphql/template-strings": ["error", {
-      // Import default settings for your GraphQL client. Supported values:
-      // 'apollo', 'relay', 'lokka', 'literal'
-      "schemaJsonFilepath": "graphql.schema.json",
-      "env": "apollo"
-    }],
+    'graphql/template-strings': [
+      'error',
+      {
+        // Import default settings for your GraphQL client. Supported values:
+        // 'apollo', 'relay', 'lokka', 'literal'
+        schemaJsonFilepath: path.resolve(__dirname, 'graphql.schema.json'),
+        env: 'apollo',
+      },
+    ],
     'react/sort-comp': [
       2,
       {
