@@ -1,8 +1,10 @@
-import React, { PureComponent } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-const MenuLink = styled.a`margin-left: 10px;`;
+const MenuLink = styled.a`
+  margin-left: 10px;
+`;
 
 const isModifiedEvent = event =>
   !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
@@ -15,11 +17,11 @@ class Link extends PureComponent {
     onClick: PropTypes.func,
     target: PropTypes.string,
     replace: PropTypes.bool,
-    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+    to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   };
 
   static defaultProps = {
-    replace: false
+    replace: false,
   };
 
   static contextTypes = {
@@ -27,9 +29,9 @@ class Link extends PureComponent {
       history: PropTypes.shape({
         push: PropTypes.func.isRequired,
         replace: PropTypes.func.isRequired,
-        createHref: PropTypes.func.isRequired
-      }).isRequired
-    }).isRequired
+        createHref: PropTypes.func.isRequired,
+      }).isRequired,
+    }).isRequired,
   };
 
   handleClick = event => {
@@ -59,17 +61,17 @@ class Link extends PureComponent {
 
     const linkProps = {
       onClick: this.handleClick,
-      ref: innerRef
+      ref: innerRef,
     };
 
     if (to !== undefined) {
       props.href = this.context.router.history.createHref(
-        typeof to === "string" ? { pathname: to } : to
+        typeof to === 'string' ? { pathname: to } : to,
       );
     }
-    if (props.hasOwnProperty("active")) {
+    if (props.hasOwnProperty('active')) {
       if (props.active) {
-        props.className += " active";
+        props.className += ' active';
       }
       delete props.active;
     }

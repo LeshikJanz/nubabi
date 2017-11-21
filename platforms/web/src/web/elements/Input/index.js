@@ -1,6 +1,6 @@
-import React from "react";
-import Field from "redux-form/es/Field";
-import InputWithError from "../InputWithError";
+import React from 'react';
+import Field from 'redux-form/es/Field';
+import InputWithError from '../InputWithError';
 
 const InputField = ({ name, type, placeholder, value, input }) => (
   <input {...input} type={type} placeholder={placeholder} />

@@ -1,13 +1,11 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
-import styled from "styled-components";
+import styled from 'styled-components';
 
 import Button from '../../../../elements/Button';
 
-type Props = {
-
-};
+type Props = {};
 
 const Memories = styled.div``;
 
@@ -27,28 +25,28 @@ const AddButton = styled(Box)``;
 const MemoriesList = styled(Flex)`
   margin: 0;
   padding: 0;
-  
+
   &:after {
-    content: "";
-    width: 32%
+    content: '';
+    width: 32%;
   }
 `;
 
 const MemoriesListItem = styled(Box)`
   padding: 0;
-  box-shadow:  ${props => props.theme.shadows.panel};
-  background:  ${props => props.theme.colors.white};
+  box-shadow: ${props => props.theme.shadows.panel};
+  background: ${props => props.theme.colors.white};
   border-radius: 4px;
   margin-bottom: 15px;
   overflow: hidden;
   cursor: pointer;
   transition: ${props => props.theme.transition('opacity')};
-  
+
   &:hover {
-    opacity: .8;
+    opacity: 0.8;
   }
-  
-  >h4 {
+
+  > h4 {
     font-size: 12px;
     font-weight: normal;
     color: ${props => props.theme.colors.open.gray3};
@@ -62,7 +60,7 @@ const MemoriesListImage = styled.div`
   padding: 0;
   height: 108px;
   background: url(${props => props.image});
-  background-size:cover;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 `;
@@ -78,13 +76,14 @@ class ProfileMain extends PureComponent<Props> {
           <AddButton is={Button} plus />
         </MemoriesHeader>
 
-        <MemoriesList justify='space-between' wrap>
+        <MemoriesList justify="space-between" wrap>
           {memories.edges.map(edge => {
             return (
-              <MemoriesListItem width='32%' key={edge.node.id}>
-
+              <MemoriesListItem width="32%" key={edge.node.id}>
                 {edge.node.files.edges && (
-                  <MemoriesListImage image={edge.node.files.edges[0].node.thumb.url} />
+                  <MemoriesListImage
+                    image={edge.node.files.edges[0].node.thumb.url}
+                  />
                 )}
 
                 <h4>{edge.node.title}</h4>

@@ -1,15 +1,13 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
-import onClickOutside from "react-onclickoutside";
+import onClickOutside from 'react-onclickoutside';
 
-import { Menu } from "web/elements";
+import { Menu } from 'web/elements';
 import Avatar from '../../../common/images/avatar.png';
 
-type Props = {
-
-};
+type Props = {};
 
 const Wrapper = styled.div`
   position: relative;
@@ -38,7 +36,7 @@ const HeaderMenuItem = styled(Menu.Link)`
   font-size: 14px;
   font-family: ${props => props.theme.text.fontFamily};
   text-decoration: none;
-  
+
   &:last-child {
     border: none;
   }
@@ -59,8 +57,8 @@ const modalStyles = {
     bottom: 'auto',
     background: 'none',
     border: 'none',
-    padding: '0'
-  }
+    padding: '0',
+  },
 };
 
 const MenuAvatar = styled.div`
@@ -68,22 +66,22 @@ const MenuAvatar = styled.div`
   height: 30px;
   cursor: pointer;
   position: relative;
-  
+
   > img {
     max-width: 100%;
   }
-  
+
   &:hover {
     + div {
-     visibility: visible;
+      visibility: visible;
     }
   }
-  
+
   &:after {
     content: '';
     display: inline-block;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     position: absolute;
     right: -15px;
     top: 50%;
@@ -99,7 +97,7 @@ class MenuComponent extends Component<Props> {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -111,17 +109,19 @@ class MenuComponent extends Component<Props> {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
 
   render() {
     return (
       <Wrapper className="AppHeaderMenu">
-        <MenuAvatar onClick={this.openModal}><img src={Avatar} alt="me"/></MenuAvatar>
+        <MenuAvatar onClick={this.openModal}>
+          <img src={Avatar} alt="me" />
+        </MenuAvatar>
 
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -132,8 +132,9 @@ class MenuComponent extends Component<Props> {
         >
           <HeaderMenu>
             {this.props.isAuthenticated && (
-              <HeaderMenuItem to="/profile"
-                active={this.props.pathname === "/profile"}
+              <HeaderMenuItem
+                to="/profile"
+                active={this.props.pathname === '/profile'}
               >
                 My Profile &amp; settings
               </HeaderMenuItem>
@@ -151,7 +152,7 @@ class MenuComponent extends Component<Props> {
             {!this.props.isAuthenticated && (
               <HeaderMenuItem
                 to="/login?redirect=/profile"
-                active={this.props.pathname === "/login?redirect=/profile"}
+                active={this.props.pathname === '/login?redirect=/profile'}
               >
                 Login
               </HeaderMenuItem>

@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import styled from "styled-components";
-import Input from "../Input";
-import Label from "./Label";
-import Field from "./Field";
-import PasswordInput from "./PasswordInput";
-import TextInput from "./TextInput";
-import SubmitButton from "./SubmitButton";
-import ClearButton from "./ClearButton";
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import Input from '../Input';
+import Label from './Label';
+import Field from './Field';
+import PasswordInput from './PasswordInput';
+import TextInput from './TextInput';
+import SubmitButton from './SubmitButton';
+import ClearButton from './ClearButton';
 
 const StyledForm = styled.form``;
 

@@ -1,16 +1,14 @@
 // @flow
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import { Box } from 'grid-styled';
-import onClickOutside from "react-onclickoutside";
+import onClickOutside from 'react-onclickoutside';
 
-import { Menu, Button } from "../../../../src/web/elements";
+import { Menu, Button } from '../../../../src/web/elements';
 import IPerson from '../../../../src/common/icons/person.svg';
 
-type Props = {
-
-};
+type Props = {};
 
 const BabySelect = styled.div`
   margin: -10px 0 0 0;
@@ -18,12 +16,12 @@ const BabySelect = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
   font-size: 16px;
   position: relative;
-  
+
   &:after {
     content: '';
     display: inline-block;
-    width: 0; 
-    height: 0; 
+    width: 0;
+    height: 0;
     position: absolute;
     right: -15px;
     top: 50%;
@@ -67,16 +65,16 @@ const BabiesListItem = styled(Menu.Link)`
   font-size: 14px;
   font-family: ${props => props.theme.text.fontFamily};
   text-decoration: none;
-  
+
   &:hover {
-    color:  ${props => props.theme.colors.primary};
+    color: ${props => props.theme.colors.primary};
   }
-  
+
   &:last-child {
     border: none;
   }
-  
-  >button {
+
+  > button {
     margin-right: 10px;
   }
 `;
@@ -90,8 +88,7 @@ const BabyImage = styled(Box)`
   margin: 0 25px 0 0;
   border: 1px solid ${props => props.theme.colors.white2};
   border-radius: 100%;
-  
-  
+
   > img {
     max-width: 100%;
   }
@@ -119,8 +116,8 @@ const modalStyles = {
     border: 'none',
     borderRadius: '0',
     padding: '0',
-    transform: 'translateX(-50%)'
-  }
+    transform: 'translateX(-50%)',
+  },
 };
 
 class Select extends Component<Props> {
@@ -128,7 +125,7 @@ class Select extends Component<Props> {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
     };
 
     this.openModal = this.openModal.bind(this);
@@ -140,11 +137,11 @@ class Select extends Component<Props> {
   }
 
   openModal() {
-    this.setState({modalIsOpen: true});
+    this.setState({ modalIsOpen: true });
   }
 
   closeModal() {
-    this.setState({modalIsOpen: false});
+    this.setState({ modalIsOpen: false });
   }
 
   render() {
@@ -162,16 +159,20 @@ class Select extends Component<Props> {
           <BabiesListWrapper>
             <BabiesList>
               <BabiesListItem>
-                <BabyImage><IPerson/></BabyImage>
+                <BabyImage>
+                  <IPerson />
+                </BabyImage>
                 <BabyName>Charlotte</BabyName>
               </BabiesListItem>
 
               <BabiesListItem>
-                <BabyImage><IPerson/></BabyImage>
+                <BabyImage>
+                  <IPerson />
+                </BabyImage>
                 <BabyName>Harry</BabyName>
               </BabiesListItem>
 
-              <BabiesListItem justify='center'>
+              <BabiesListItem justify="center">
                 <Button plus /> Add Baby
               </BabiesListItem>
             </BabiesList>

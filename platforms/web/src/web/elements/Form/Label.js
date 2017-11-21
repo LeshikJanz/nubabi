@@ -1,7 +1,8 @@
-import React from "react";
+import React from 'react';
 
-export default ({ children }) =>
+export default ({ children }) => (
   <label>
     {children}
     <br />
-  </label>;
+  </label>
+);

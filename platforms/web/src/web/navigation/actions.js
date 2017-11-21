@@ -1,5 +1,5 @@
 // @flow
-import { push, replace } from "react-router-redux";
+import { push, replace } from 'react-router-redux';
 
 export const resetNavigation = (routeName: string, index?: number = 0) => {
   return replace(routeName);

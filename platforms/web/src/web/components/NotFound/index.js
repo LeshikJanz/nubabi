@@ -1,9 +1,11 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import styled from "styled-components";
-import { Title } from "web/elements";
+import React from 'react';
+import { Helmet } from 'react-helmet';
+import styled from 'styled-components';
+import { Title } from 'web/elements';
 
-const Wrapper = styled.div`padding: 10px;`;
+const Wrapper = styled.div`
+  padding: 10px;
+`;
 
 const NotFound = () => (
   <Wrapper>

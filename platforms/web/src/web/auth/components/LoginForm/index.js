@@ -1,6 +1,6 @@
-import React from "react";
-import { Form } from "web/elements";
-import { required } from "web/utils/validation";
+import React from 'react';
+import { Form } from 'web/elements';
+import { required } from 'web/utils/validation';
 
 export default ({ handleSubmit, pristine, submitting, reset }) => {
   return (

@@ -1,6 +1,6 @@
 // @flow
-import Login from "./containers/Login";
+import Login from './containers/Login';
 
-export { default as containers } from "./containers";
+export { default as containers } from './containers';
 
 export default Login;

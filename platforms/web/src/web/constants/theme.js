@@ -1,7 +1,7 @@
 // @flow
-import palx from "palx";
+import palx from 'palx';
 
-const palette = palx("#07c");
+const palette = palx('#07c');
 
 const flattened = Object.keys(palette).reduce((a, key) => {
   const value = palette[key];
@@ -17,8 +17,8 @@ const flattened = Object.keys(palette).reduce((a, key) => {
 }, {});
 
 const colors = Object.assign({}, flattened, {
-  black: "#000",
-  white: "#fff"
+  black: '#000',
+  white: '#fff',
 });
 
 const theme = {
@@ -33,7 +33,7 @@ const theme = {
     sans-serif,
     'Apple Color Emoji',
     'Segoe UI Emoji',
-    'Segoe UI Symbol'`
+    'Segoe UI Symbol'`,
 };
 
 export default theme;

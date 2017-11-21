@@ -1,11 +1,11 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 import ICross from '../../../common/icons/cross.svg';
 
 type Props = {
   onClick: () => void,
   primary: boolean,
-  children: Object
+  children: Object,
 };
 
 const Common = styled.button`
@@ -24,7 +24,7 @@ const Button = Common.extend`
   color: ${props => props.theme.colors.white};
   &:hover {
     background: ${props => props.theme.colors.open.red1};
-  };
+  }
 `;
 
 const ButtonOutline = Common.extend`
@@ -46,17 +46,26 @@ const ButtonPlus = Common.extend`
   align-items: center;
 `;
 
-export default ({ onClick, primary, plus, children, disabled, p, ...rest, pink }: Props) =>
-  primary ?
+export default ({
+  onClick,
+  primary,
+  plus,
+  children,
+  disabled,
+  p,
+  ...rest,
+  pink,
+}: Props) =>
+  primary ? (
     <Button onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
     </Button>
-  : plus ?
+  ) : plus ? (
     <ButtonPlus onClick={onClick} disabled={disabled} {...rest}>
       <ICross />
     </ButtonPlus>
-  :
+  ) : (
     <ButtonOutline onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
     </ButtonOutline>
-
+  );

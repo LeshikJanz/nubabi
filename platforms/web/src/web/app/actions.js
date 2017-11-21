@@ -1,16 +1,16 @@
 // @flow
-import type { Deps } from "../../common/types";
-import { Observable } from "rxjs/Observable";
+import type { Deps } from '../../common/types';
+import { Observable } from 'rxjs/Observable';
 import {
   getBabiesRequest,
-  getBabiesSuccess
-} from "../../common/babies/actions";
-import { gql } from "react-apollo";
-import { appOnline, appError } from "../../common/app/actions";
+  getBabiesSuccess,
+} from '../../common/babies/actions';
+import { gql } from 'react-apollo';
+import { appOnline, appError } from '../../common/app/actions';
 
 // We will get rid of this once we standarize data fetching
 const appOnlineEpic = (action$: any, deps: Deps) => {
-  return action$.ofType("ON_AUTH").switchMap(() => {
+  return action$.ofType('ON_AUTH').switchMap(() => {
     const { getState, apollo } = deps;
     const state = getState();
 
@@ -39,13 +39,13 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
         Observable.of(getBabiesRequest()),
         // $FlowFixMe
         Observable.zip(
-          Observable.fromPromise(apollo.query({ query: fetchBabiesQuery }))
+          Observable.fromPromise(apollo.query({ query: fetchBabiesQuery })),
         ).mergeMap(([fetchBabiesResult]) => [
           getBabiesSuccess(
-            fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node)
+            fetchBabiesResult.data.viewer.babies.edges.map(edge => edge.node),
           ),
-          appOnline(true)
-        ])
+          appOnline(true),
+        ]),
       ).catch(err => Observable.of(appError(err)));
     }
 

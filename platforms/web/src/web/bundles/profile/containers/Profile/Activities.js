@@ -1,11 +1,9 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-type Props = {
-
-};
+type Props = {};
 
 const ActivitiesListWrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
@@ -37,29 +35,27 @@ const ActivitiesListItem = styled.li`
   margin: 0;
   padding: 0;
   list-style: none;
-  box-shadow:  ${props => props.theme.shadows.panel};
-  background:  ${props => props.theme.colors.white};
+  box-shadow: ${props => props.theme.shadows.panel};
+  background: ${props => props.theme.colors.white};
   border-radius: 4px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
 `;
 
-const ActivitiesListItemImage = styled(Box)`
- 
-`;
+const ActivitiesListItemImage = styled(Box)``;
 
 const ActivitiesListItemContent = styled(Box)`
   padding: 15px;
-  
-  >h4 {
+
+  > h4 {
     font-size: 16px;
     font-weight: normal;
     color: ${props => props.theme.colors.open.black0};
     margin: 0 0 10px;
   }
-  
-  >p {
+
+  > p {
     font-size: 12px;
     color: ${props => props.theme.colors.secondary};
     line-height: 18px;
@@ -75,15 +71,17 @@ class Activities extends PureComponent<Props> {
     return (
       <ActivitiesListWrapper>
         <ActivitiesListHeader justify="space-between" align="center">
-          <ActivitiesListTitle is='h3'>{name}'s week ahead</ActivitiesListTitle>
-          <MoreLink is='a' href="/profile">See all activities</MoreLink>
+          <ActivitiesListTitle is="h3">{name}'s week ahead</ActivitiesListTitle>
+          <MoreLink is="a" href="/profile">
+            See all activities
+          </MoreLink>
         </ActivitiesListHeader>
 
         <ActivitiesList>
           {activities.edges.map(edge => {
             return (
               <ActivitiesListItem key={edge.node.id}>
-                <ActivitiesListItemImage width={1/5} />
+                <ActivitiesListItemImage width={1 / 5} />
                 <ActivitiesListItemContent width={1}>
                   <h4>{edge.node.name}</h4>
                   <p>{edge.node.introduction}</p>

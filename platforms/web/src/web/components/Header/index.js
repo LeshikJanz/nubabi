@@ -1,6 +1,6 @@
 // @flow
-import React, { PureComponent } from "react";
-import { Header } from "web/elements";
+import React, { PureComponent } from 'react';
+import { Header } from 'web/elements';
 import styled from 'styled-components';
 import { Flex, Box } from 'grid-styled';
 import { Link } from 'react-router-dom';
@@ -14,7 +14,7 @@ import Menu from './Menu';
 type Props = {
   pathname: string,
   isLoggedIn: boolean,
-  logout: () => void
+  logout: () => void,
 };
 
 const Wrapper = styled(Header)`
@@ -46,7 +46,7 @@ const HeaderCenter = styled(Flex)`
 const HeaderRight = styled(Flex)`
   align-items: center;
   justify-content: flex-end;
-  >* {
+  > * {
     margin-right: 15px;
   }
 `;
@@ -54,36 +54,38 @@ const HeaderRight = styled(Flex)`
 const HeaderInfoBox = styled(Box)`
   font-family: ${props => props.theme.text.fontFamily};
   font-size: 12px;
-  color:  ${props => props.theme.overlay.gray3};
-  
+  color: ${props => props.theme.overlay.gray3};
+
   > a {
     color: ${props => props.theme.colors.primary};
   }
 `;
 
-const HeaderMenu = styled(Box)`
-  
-`;
+const HeaderMenu = styled(Box)``;
 
 class AppHeader extends PureComponent<Props> {
   render() {
     return (
       <Wrapper>
-        <HeaderContent align='center' justify="space-between" flex="1 1 auto">
-          <HeaderLeft width={1/3}>
-            <Link to="/profile"><AppLogo is={Logo} /></Link>
+        <HeaderContent align="center" justify="space-between" flex="1 1 auto">
+          <HeaderLeft width={1 / 3}>
+            <Link to="/profile">
+              <AppLogo is={Logo} />
+            </Link>
           </HeaderLeft>
 
-          <HeaderCenter width={1/4}>
+          <HeaderCenter width={1 / 4}>
             <BabySelect />
           </HeaderCenter>
 
-          <HeaderRight width={1/3}>
-            <HeaderInfoBox>8 days of your trial remaining. <Link to="/"> Subscribe Now</Link> </HeaderInfoBox>
+          <HeaderRight width={1 / 3}>
+            <HeaderInfoBox>
+              8 days of your trial remaining. <Link to="/"> Subscribe Now</Link>{' '}
+            </HeaderInfoBox>
 
             <Notifications />
 
-            <HeaderMenu is={Menu} {...this.props}/>
+            <HeaderMenu is={Menu} {...this.props} />
           </HeaderRight>
         </HeaderContent>
       </Wrapper>

@@ -1,13 +1,13 @@
 // @flow
-import React, { PureComponent } from "react";
-import { connect } from "react-redux";
-import { gql, graphql } from "react-apollo";
-import compose from "ramda/src/compose";
-import path from "ramda/src/path";
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import { gql, graphql } from 'react-apollo';
+import compose from 'ramda/src/compose';
+import path from 'ramda/src/path';
 import { Flex } from 'grid-styled';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { Loader } from "web/components";
+import { Loader } from 'web/components';
 import NavBar from './Navbar';
 import Header from './Header';
 import Main from './Main';
@@ -17,15 +17,13 @@ type Props = {
   navigation: any,
   baby: ?Baby,
   unitDisplay: {
-    weight: "kg" | "lbs",
-    height: "cm" | "in"
+    weight: 'kg' | 'lbs',
+    height: 'cm' | 'in',
   },
-  data: { loading: boolean }
+  data: { loading: boolean },
 };
 
-const Wrapper = styled(Flex)`
-  
-`;
+const Wrapper = styled(Flex)``;
 
 class Profile extends PureComponent<Props> {
   static fragments = {
@@ -118,7 +116,7 @@ class Profile extends PureComponent<Props> {
           }
         }
       }
-    `
+    `,
   };
 
   render() {
@@ -131,12 +129,12 @@ class Profile extends PureComponent<Props> {
     }
 
     return (
-      <Wrapper wrap justify='space-between'>
+      <Wrapper wrap justify="space-between">
         <Header {...baby} />
 
         <NavBar {...baby} />
 
-        <Main {...baby}/>
+        <Main {...baby} />
 
         <SideBar />
       </Wrapper>
@@ -165,17 +163,17 @@ const query = gql`
 export default compose(
   connect(({ babies, settings }) => ({
     currentBabyId: babies.currentBabyId,
-    unitDisplay: settings.unitDisplay
+    unitDisplay: settings.unitDisplay,
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({
-      fetchPolicy: "cache-and-network", // TODO: remove when there's a way to set a default
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
       variables: { id: currentBabyId },
-      skip: !currentBabyId
+      skip: !currentBabyId,
     }),
     props: ({ data }) => ({
       data,
-      baby: path(["viewer", "baby"], data)
-    })
-  })
+      baby: path(['viewer', 'baby'], data),
+    }),
+  }),
 )(Profile);

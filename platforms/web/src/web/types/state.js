@@ -1,9 +1,9 @@
 // @flow
-import type { Action } from "./actions";
+import type { Action } from './actions';
 
 export type AppState = {
   isFetching: boolean,
-  failure: boolean
+  failure: boolean,
 };
 
 export type AuthState = {
@@ -11,17 +11,17 @@ export type AuthState = {
   user: {
     id: ?number,
     firstName: ?string,
-    lastName: ?string
+    lastName: ?string,
   },
   isFetching: boolean,
   error: ?string,
-  jwt: ?string
+  jwt: ?string,
 };
 
 export type State = {
   +app: AppState,
   +router: Object,
-  +auth: AuthState
+  +auth: AuthState,
 };
 
 export type Options = {
@@ -29,7 +29,7 @@ export type Options = {
   platformDeps?: Object,
   platformReducers?: Object,
   platformMiddleware?: Array<Function>,
-  platformStoreEnhancers?: Array<Function>
+  platformStoreEnhancers?: Array<Function>,
 };
 
 export type Dispatch = (action: Action) => void;

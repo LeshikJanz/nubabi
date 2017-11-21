@@ -2,69 +2,69 @@
 export type GlobalLoaderAction = {
   type: String,
   payload: {
-    useGlobalLoader?: ?Object
-  }
+    useGlobalLoader?: ?Object,
+  },
 };
 
 export type LoginRequestAction = {
-  type: "auth/login/REQUEST",
+  type: 'auth/login/REQUEST',
   username: string,
-  password: string
+  password: string,
 };
 
 export type LoginSuccessAction = {
-  type: "auth/login/SUCCESS",
+  type: 'auth/login/SUCCESS',
   payload: {
     jwt: string,
     firstName: string,
     lastName: string,
-    id: number
-  }
+    id: number,
+  },
 };
 
 export type LogoutAction = {
-  type: "auth/logout"
+  type: 'auth/logout',
 };
 
 export type LoadJobRequestAction = {
-  type: "estimation/loadJob/REQUEST",
-  jobNumber: number
+  type: 'estimation/loadJob/REQUEST',
+  jobNumber: number,
 };
 
 export type LoadJobSuccessAction = {
-  type: "estimation/loadJob/SUCCESS",
+  type: 'estimation/loadJob/SUCCESS',
   payload: {
     id: number,
     name: string,
     description: string,
-    date: string
-  }
+    date: string,
+  },
 };
 
 export type LoadJobGridRequestAction = {
-  type: "estimation/loadJobGrid/REQUEST",
+  type: 'estimation/loadJobGrid/REQUEST',
   payload: {
     jobNumber: number,
-    useGlobalLoader?: boolean
-  }
+    useGlobalLoader?: boolean,
+  },
 };
 
 export type LoadJobGridSuccessAction = {
-  type: "estimation/loadJobGrid/SUCCESS",
-  payload: Array<Object>
+  type: 'estimation/loadJobGrid/SUCCESS',
+  payload: Array<Object>,
 };
 
 export type LoadPricingRequestAction = {
-  type: "estimation/loadPricing/REQUEST",
+  type: 'estimation/loadPricing/REQUEST',
   payload: {
     jobNumber: number,
-    useGlobalLoader?: boolean
-  }
+    useGlobalLoader?: boolean,
+  },
 };
 
 export type LoadPricingSuccessAction = {
-  type: "estimation/loadPricing/SUCCESS",
-  payload: Array<Object>
+  type: 'estimation/loadPricing/SUCCESS',
+  payload: Array<Object>,
 };
 
 export type Action =

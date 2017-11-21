@@ -1,27 +1,25 @@
 // @flow
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
-import styled from "styled-components";
+import styled from 'styled-components';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { pathOr } from 'ramda';
 
-type Props = {
-
-};
+type Props = {};
 
 const Growth = styled.article`
   background: ${props => props.theme.colors.white};
   overflow: hidden;
   font-family: ${props => props.theme.text.fontFamily};
-  box-shadow:  ${props => props.theme.shadows.panel};
+  box-shadow: ${props => props.theme.shadows.panel};
   border-radius: 4px;
   margin-bottom: 30px;
 `;
 
 const GrowthContent = styled.div`
   padding: 15px;
-  
+
   > p {
     color: ${props => props.theme.colors.secondary};
     font-size: 16px;
@@ -59,7 +57,7 @@ const GrowthExpertImage = styled(Box)`
   height: 50px;
   border-radius: 100%;
   overflow: hidden;
-  
+
   > img {
     max-width: 100%;
   }
@@ -89,17 +87,20 @@ const limitText = (str, limit = 365) => {
 class ProfileMain extends PureComponent<Props> {
   render() {
     const { growth, dob } = this.props;
-    const introduction = pathOr('',['current','introduction'], growth);
+    const introduction = pathOr('', ['current', 'introduction'], growth);
 
     return (
       <Growth>
         <GrowthContent>
           <GrowthHeader justify="space-between" align="center">
-            <GrowthTitle is='h3'>This Week's Growth</GrowthTitle>
-            <GrowthDoB is='span'>{moment(dob).fromNow(true)} old</GrowthDoB>
+            <GrowthTitle is="h3">This Week's Growth</GrowthTitle>
+            <GrowthDoB is="span">{moment(dob).fromNow(true)} old</GrowthDoB>
           </GrowthHeader>
 
-          <p>{limitText(introduction)} <ReadMore to="/profile">Read More</ReadMore></p>
+          <p>
+            {limitText(introduction)}{' '}
+            <ReadMore to="/profile">Read More</ReadMore>
+          </p>
         </GrowthContent>
 
         <GrowthExpert p={15} align="center">
@@ -109,7 +110,9 @@ class ProfileMain extends PureComponent<Props> {
 
           <GrowthExpertContent>
             <GrowthExpertName>{growth.current.expert.name}</GrowthExpertName>
-            <GrowthExpertDiscipline>{growth.current.expert.discipline}</GrowthExpertDiscipline>
+            <GrowthExpertDiscipline>
+              {growth.current.expert.discipline}
+            </GrowthExpertDiscipline>
           </GrowthExpertContent>
         </GrowthExpert>
       </Growth>
