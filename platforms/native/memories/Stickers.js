@@ -5,8 +5,8 @@ import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import { Box, Icon } from '../components';
-import theme from '../../common/themes/defaultTheme';
-import { keyExtractor } from '../../common/helpers/graphqlUtils';
+import theme from 'core/themes/defaultTheme';
+import { keyExtractor } from 'core/helpers/graphqlUtils';
 import { stickersList } from './SuggestedMemoriesList';
 
 type Props = {

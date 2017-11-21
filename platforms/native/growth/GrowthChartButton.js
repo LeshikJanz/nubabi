@@ -1,5 +1,5 @@
 // @flow
-import type { Measurement } from '../../common/types';
+import type { Measurement } from 'core/types';
 import * as React from 'react';
 import { Image } from 'react-native';
 import moment from 'moment';

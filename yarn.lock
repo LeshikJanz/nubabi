@@ -6169,9 +6169,9 @@ react-native-drawer-layout@1.2.0:
   dependencies:
     react-native-dismiss-keyboard "1.0.0"
 
-react-native-dropdownalert@2.13.0:
-  version "2.13.0"
-  resolved "https://github.com/testshallpass/react-native-dropdownalert#ebc50bec829905328b553249abeb615c9656a653"
+react-native-dropdownalert@^3.0.0:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-dropdownalert/-/react-native-dropdownalert-3.1.2.tgz#784b573a335987d66908bd66075b5d48ef7b5d70"
   dependencies:
     prop-types "15.5.10"
 
@@ -6182,7 +6182,7 @@ react-native-fetch-blob@0.10.8, "react-native-fetch-blob@https://github.com/blac
     base-64 "0.1.0"
     glob "7.0.6"
 
-react-native-floating-label-text-input@^0.1.5:
+"react-native-floating-label-text-input@https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles":
   version "0.1.5"
   resolved "https://github.com/blackxored/react-native-floating-label-text-input#b205b9b95ed5340a2ce76a5b1313d8f58bb96d98"
 

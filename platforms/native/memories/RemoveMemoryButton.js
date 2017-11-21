@@ -5,21 +5,12 @@ import { Alert, TouchableOpacity } from 'react-native';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
-<<<<<<< HEAD:src/native/memories/RemoveMemoryButton.js
-import { removeEdgeFromFragment } from '../../common/helpers/graphqlUtils';
-import { Text } from '../components';
-import RecentMemories from '../profile/RecentMemories';
-import { ViewMemories } from './ViewMemories';
-import { appError } from '../../common/app/actions';
-import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
-=======
 import { removeEdgeFromFragment } from 'core/helpers/graphqlUtils';
-import { Icon } from '../components';
+import { Text } from '../components';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
 import { appError } from 'core/app/actions';
 import { toggleNetworkActivityIndicator } from 'core/ui/reducer';
->>>>>>> refactor: module aliases:platforms/native/memories/EditMemoryHeader.js
 
 type Props = {
   goBack: () => void,

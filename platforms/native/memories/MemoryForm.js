@@ -32,7 +32,7 @@ import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
-import theme from '../../common/themes/defaultTheme';
+import theme from 'core/themes/defaultTheme';
 import RemoveMemoryButton from './RemoveMemoryButton';
 
 type Props = {

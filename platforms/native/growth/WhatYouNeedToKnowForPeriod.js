@@ -9,7 +9,7 @@ import PeriodFilter from './PeriodFilter';
 import HealthcareNotice from './HealthcareNotice';
 import ExpertAdvice from './ExpertAdvice';
 import SectionLinks from './SectionLinks';
-import formatPossessive from '../../common/helpers/formatPossessive';
+import formatPossessive from 'core/helpers/formatPossessive';
 
 type Props = {
   current: GrowthPeriodOption,

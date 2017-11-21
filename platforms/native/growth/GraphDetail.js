@@ -109,7 +109,7 @@ export class GraphDetail extends PureComponent {
               })}
             >
               <Image
-                source={require('../../common/images/edit.png')}
+                source={require('core/images/edit.png')}
                 style={{ width: 14, height: 14 }}
               />
             </Box>
