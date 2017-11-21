@@ -1,10 +1,10 @@
 {
-  "name": "firebase-functions-es6-example",
-  "version": "1.0.0",
-  "description": "Use ES6 to develop Cloud Functions for Firebase today!",
+  "name": "nubabi-firebase",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Firebase functions and security rules for Nubabi app",
   "repository":
-    "https://github.com/jthegedus/firebase-functions-es6-example.git",
-  "license": "MIT",
+    "https://gitlab.com/nubabi/mobile/tree/master/platforms/firebase",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",

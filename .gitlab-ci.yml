@@ -1,0 +1,53 @@
+image: node:latest
+stages:
+  - test
+  - deploy
+
+before_script:
+  - npm install -g yarn # install latest yarn version
+  - yarn
+
+cache:
+  key: "$CI_BUILD_REPO"
+  paths:
+    - node_modules/
+    - core/node_modules/
+    - platforms/native/node_modules
+    - platforms/server/graphql/node_modules
+
+test:
+  image: node:latest
+  stage: test
+  script: yarn test
+
+# We're using branch-based triggers until Gitlab CI https://gitlab.com/gitlab-org/gitlab-ce/merge_requests/14882
+firebase_staging:
+  image: node:latest
+  stage: deploy
+  environment: staging
+
+  before_script:
+    - yarn global add firebase-tools firebase-bolt
+    - yarn workspace nubabi-firebase run package-functions
+
+  only:
+    - firebase-dev # FIXME: same scripts only branch and env differ?
+  script:
+    - firebase use --token $FIREBASE_DEPLOY_KEY nubabitest1
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY
+
+firebase_prod:
+  image: node:latest
+  stage: deploy
+  environment: production
+
+  before_script:
+    - yarn global add firebase-tools firebase-bolt
+    - yarn workspace nubabi-firebase run package-functions
+
+  only:
+    - firebase
+  when: manual
+  script:
+    - firebase use --token $FIREBASE_DEPLOY_KEY nubabitest1
+    - firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY

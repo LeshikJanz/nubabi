@@ -1,8 +1,8 @@
 {
   "database": {
-    "rules": "platforms/server/firebase/rules.bolt"
+    "rules": "platforms/firebase/rules.bolt"
   },
   "functions": {
-    "source": "platforms/server/firebase/functions"
+    "source": "platforms/firebase/functions"
   }
 }

@@ -87,6 +87,7 @@ buck-out/
 ### Firebase ###
 **/node_modules/
 **/.firebaserc
+platforms/firebase/functions/ # this is compiled
 
 # Environment config
 core/config/_dev.json
