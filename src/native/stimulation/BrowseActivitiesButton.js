@@ -13,7 +13,7 @@ type Props = {
   onPress: () => void,
   layout: LayoutProps,
   image?: ImageType | number,
-  text?: String,
+  text?: string,
   style?: Object | number,
 };
 
@@ -28,7 +28,6 @@ export const BrowseActivitiesButton = ({
 }: Props) => {
   const dimensions = { width: layout.parentWidth, height: layout.parentHeight };
   let background = image || defaultBackground;
-  console.log(background);
   // If we pass a RN image is set as background, otherwise get URL
   if (background && background.url) {
     background = { uri: image.url };
