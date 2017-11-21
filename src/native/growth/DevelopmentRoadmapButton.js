@@ -6,7 +6,7 @@ import { Box, Card, Text } from '../components';
 type Props = {
   onPress: () => void,
 };
-// TODO: duplication from ThisWeekGrowthButton
+// TODO: duplication from WhatYouNeedToKnowButton
 const window = Dimensions.get('window');
 
 export function getSizeRelativeToReference(

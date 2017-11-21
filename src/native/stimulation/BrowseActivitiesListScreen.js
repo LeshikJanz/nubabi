@@ -7,6 +7,10 @@ import { gql, graphql } from 'react-apollo';
 import displayLoadingState from '../components/displayLoadingState';
 import { Screen } from '../components';
 import ActivityList from './ActivityList';
+import {
+  withNetworkIndicator,
+  withNetworkIndicatorActions,
+} from '../../common/helpers/graphqlUtils';
 
 type Props = {
   navigation: NavigationProp<*>,
@@ -32,6 +36,7 @@ export class BrowseActivities extends PureComponent {
           activities={this.props.activities}
           onActivityItemPress={this.handleNavigate}
           onLoadMore={this.props.loadMoreEntries}
+          onRefresh={this.props.data.refetch}
         />
       </Screen>
     );
@@ -58,6 +63,7 @@ const query = gql`
 `;
 
 export default compose(
+  withNetworkIndicatorActions,
   graphql(query, {
     options: ownProps => ({
       variables: {
@@ -65,37 +71,42 @@ export default compose(
       },
       fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
     }),
-    props: ({ data }) => {
+    props: ({ data, ownProps: { toggleNetworkActivityIndicator } }) => {
       const { fetchMore } = data;
       const activities = path(['viewer', 'allActivities', 'edges'], data);
 
       return {
         data,
         activities: activities || [],
-        loadMoreEntries: () => {
-          return fetchMore({
-            query,
-            variables: {
-              cursor: data.viewer.allActivities.pageInfo.endCursor,
-            },
-            updateQuery: (previousResult, { fetchMoreResult }) => {
-              const newEdges = fetchMoreResult.viewer.allActivities.edges;
-              const pageInfo = fetchMoreResult.viewer.allActivities.pageInfo;
+        loadMoreEntries: withNetworkIndicator(
+          toggleNetworkActivityIndicator,
+          () => {
+            return fetchMore({
+              query,
+              variables: {
+                cursor: data.viewer.allActivities.pageInfo.endCursor,
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) => {
+                const newEdges = fetchMoreResult.viewer.allActivities.edges;
+                const pageInfo = fetchMoreResult.viewer.allActivities.pageInfo;
 
-              return {
-                viewer: {
-                  allActivities: {
-                    edges: [
-                      ...previousResult.viewer.allActivities.edges,
-                      ...newEdges,
-                    ],
-                    pageInfo,
+                return {
+                  viewer: {
+                    __typename: 'Viewer',
+                    allActivities: {
+                      __typename: 'ActivityConnection',
+                      edges: [
+                        ...previousResult.viewer.allActivities.edges,
+                        ...newEdges,
+                      ],
+                      pageInfo,
+                    },
                   },
-                },
-              };
-            },
-          });
-        },
+                };
+              },
+            });
+          },
+        ),
       };
     },
   }),

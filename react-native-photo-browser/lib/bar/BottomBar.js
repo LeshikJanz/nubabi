@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { Image, Text, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { BarContainer, BAR_POSITIONS } from './BarContainer';

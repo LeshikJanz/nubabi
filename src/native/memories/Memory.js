@@ -1,24 +1,26 @@
 // @flow
-import type { Memory as MemoryType } from '../../common/types';
+import type { Memory as MemoryType, File } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, TouchableOpacity } from 'react-native';
-import Image from 'react-native-cached-image';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { ActivityIndicator } from 'react-native';
 import { gql } from 'react-apollo';
+import { filter } from 'graphql-anywhere';
 import moment from 'moment';
-import { Box, Card, Text } from '../components';
+import { Box, Card, Icon, Pill, Text } from '../components';
 import theme from '../../common/themes/defaultTheme';
 import { isUUID as isOptimistic } from '../../common/helpers/graphqlUtils';
-import MemoryMedia, {
-  fragments as MemoryMediaFragments,
-} from '../components/MemoryMedia';
-import MemoryComments from './MemoryComments';
-import MemoryComment from './MemoryComment';
+import MemoryMedia from '../components/MemoryMedia';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
+import LikeMemoryButton from './LikeMemoryButton';
+import MemoryCommentsSummary from './MemoryCommentsSummary';
 
 type Props = MemoryType & {
-  babyId: String,
+  id: String,
   onLoadMoreComments: () => Promise<*>,
+  onViewMemory: (id: string) => void,
   onEditMemory: (id: string) => void,
+  onToggleLike: () => void,
+  suggestedMemoryType: string,
+  files: Array<File>,
 };
 
 export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
@@ -29,13 +31,7 @@ export const formatMemoryDate = (date: Date, inputDateFormat?: string) => {
   return dateStr.format('D MMMM • H:mm').toUpperCase();
 };
 
-class Memory extends PureComponent {
-  prop: Props;
-
-  state = {
-    displayAllComments: false,
-  };
-
+class Memory extends PureComponent<Props> {
   static fragments = {
     item: gql`
       fragment MemoryListItem on Memory {
@@ -63,12 +59,18 @@ class Memory extends PureComponent {
             }
           }
         }
+        suggestedMemoryType
+        comments {
+          count
+        }
       }
     `,
     form: gql`
       fragment MemoryForm on Memory {
+        id
         title
         createdAt
+        suggestedMemoryType
         files {
           edges {
             node {
@@ -94,11 +96,6 @@ class Memory extends PureComponent {
       fragment MemoryItem on Memory {
         id
         title
-        author {
-          avatar {
-            url
-          }
-        }
         createdAt
         # TODO: how to combine pagination with GalleryScreen
         files {
@@ -108,7 +105,7 @@ class Memory extends PureComponent {
               id
               contentType
               url
-              
+
               ... on Image {
                 thumb {
                   url
@@ -131,55 +128,49 @@ class Memory extends PureComponent {
             }
           }
         }
-        # comments are reversed (most-recent first)
-        comments(first: 2) {
-          count
-          edges {
-            cursor
-            node {
-              id
-              ...MemoryComment
-            }
-          }
-        }
+
+        suggestedMemoryType
+
+        ...MemoryCommentsSummary
+        ...LikeMemoryButton
       }
-      ${MemoryComment.fragments.comment}
+      ${MemoryCommentsSummary.fragments.summary}
+      ${LikeMemoryButton.fragments.item}
     `,
+  };
+
+  handleViewMemory = () => {
+    this.props.onViewMemory(this.props.id);
   };
 
   handleEditMemory = () => {
     this.props.onEditMemory(this.props.id);
   };
 
-  toggleAllComments = () => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-
-    this.setState(({ displayAllComments }) => ({
-      displayAllComments: !displayAllComments,
-    }));
-  };
-
   render() {
     const {
       id,
-      babyId,
-      author,
       title,
       comments: commentsConnection,
       files: filesConnection,
+      suggestedMemoryType,
       createdAt,
+      onToggleLike,
     } = this.props;
 
     const date = formatMemoryDate(createdAt);
-    const avatar = author.avatar.url;
 
     const mainContainerStyle = isOptimistic(id)
       ? { opacity: theme.states.disabled.opacity }
       : {};
 
-    const containerProps = isOptimistic(id)
+    const cardProps = isOptimistic(id)
       ? {}
-      : { onPress: this.handleEditMemory, as: TouchableOpacity };
+      : { onPress: this.handleViewMemory };
+
+    const suggestedMemory = suggestedMemoryType
+      ? findSuggestedMemoryById(suggestedMemoryType)
+      : null;
 
     return (
       <Box
@@ -187,37 +178,30 @@ class Memory extends PureComponent {
         contentSpacing
         paddingVertical={0}
         justifyContent="flex-start"
-        style={() => ({ marginTop: -9, ...mainContainerStyle })}
+        style={() => mainContainerStyle}
       >
         <Box flexDirection="row" alignItems="center">
-          <Image
+          <Pill
             style={{
-              width: 30,
-              height: 30,
-              overflow: 'hidden',
-              borderRadius: 15,
-              borderColor: '#CFD6DF',
-              borderWidth: 2,
+              backgroundColor: 'white',
+              paddingVertical: 5,
+              paddingHorizontal: 7,
+              borderColor: '#E9ECF4',
+              zIndex: 999,
             }}
-            source={{ uri: avatar }}
-          />
-
-          <Box flex={1} padding={1}>
-            <Text medium color="secondary">
+          >
+            <Text medium style={() => ({ color: theme.colors.open.gray3 })}>
               {date}
             </Text>
-          </Box>
+          </Pill>
 
-          <Box flexDirection="row" alignItems="center">
+          <Box
+            flex={1}
+            flexDirection="row"
+            alignItems="center"
+            justifyContent="flex-end"
+          >
             <Icon size={20} color={theme.colors.gray} name="ios-share-alt" />
-            <Box {...containerProps}>
-              <Icon
-                size={20}
-                color={theme.colors.gray}
-                name="md-brush"
-                style={{ marginLeft: 10 }}
-              />
-            </Box>
           </Box>
         </Box>
         <Box
@@ -226,25 +210,39 @@ class Memory extends PureComponent {
             borderColor: '#E9ECF4',
             borderLeftWidth: 2,
             marginLeft: 15,
-            marginTop: -9,
             paddingLeft: 15,
             paddingTop: 9,
           })}
         >
-          <Card padding={0}>
-            <MemoryMedia files={filesConnection} />
-            <Box contentSpacing>
-              <Text medium marginVertical={1} size={2}>
-                {title}
-              </Text>
+          <Card padding={0} {...cardProps}>
+            <Box flexDirection="row" flex={1}>
+              <MemoryMedia
+                files={filesConnection}
+                suggestedMemoryType={suggestedMemory}
+              />
             </Box>
-            <MemoryComments
-              comments={commentsConnection}
-              memoryId={id}
-              babyId={babyId}
-              onLoadMore={this.toggleAllComments}
-              expanded={this.state.displayAllComments}
-            />
+            <Box
+              flex={1}
+              contentSpacing
+              borderTopWidth={1}
+              style={() => ({ borderColor: '#E9ECF4' })}
+            >
+              <Box flexDirection="row" paddingVertical={0.3}>
+                <Text medium size={2} flex={1}>
+                  {title}
+                </Text>
+                {isOptimistic(id) ? (
+                  <ActivityIndicator />
+                ) : (
+                  <LikeMemoryButton
+                    withCount
+                    onToggleLike={onToggleLike}
+                    {...filter(LikeMemoryButton.fragments.item, this.props)}
+                  />
+                )}
+              </Box>
+              <MemoryCommentsSummary connection={commentsConnection} />
+            </Box>
           </Card>
         </Box>
       </Box>

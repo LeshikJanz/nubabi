@@ -57,7 +57,6 @@ style = Object {}
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -92,7 +91,6 @@ style = Object {}
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -117,7 +115,6 @@ style = Object {}
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -132,7 +129,6 @@ style = Object {}
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -178,7 +174,6 @@ style = Object {}
             <Text
               accessible={true}
               allowFontScaling={false}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [

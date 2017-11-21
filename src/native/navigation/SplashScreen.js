@@ -1,9 +1,16 @@
 // @flow
 import type { Baby, BabyEdge, State } from '../../common/types';
 import React, { Component } from 'react';
-import { Image, LayoutAnimation, StyleSheet, Text, View } from 'react-native';
+import {
+  Image,
+  ImageBackground,
+  InteractionManager,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
-import { ImageCacheProvider } from 'react-native-cached-image';
+import { ImageCacheManager } from 'react-native-cached-image';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
@@ -12,7 +19,6 @@ import { NavigationActions } from 'react-navigation';
 import theme from '../../common/themes/defaultTheme';
 import Alert from '../components/Alert';
 import loadingMessages from './loadingMessages';
-import ChooseBaby from '../profile/ChooseBaby';
 import RocketHorseLoader from '../components/RocketHorseLoader';
 
 const loadingImage = { uri: 'LaunchImage' };
@@ -47,11 +53,11 @@ class SplashScreen extends Component {
   }
 
   componentDidUpdate() {
-    setTimeout(this.handleNextScreen, 2000);
+    InteractionManager.runAfterInteractions(this.handleNextScreen);
   }
 
   handleNextScreen = () => {
-    const { appOnline, isAuthenticated, baby, babies } = this.props;
+    const { appOnline, isAuthenticated, baby } = this.props;
 
     if (!appOnline) {
       return;
@@ -68,19 +74,12 @@ class SplashScreen extends Component {
 
       const images = [avatar, coverImage];
 
-      if (babies && babies.length) {
-        babies.forEach(babyEdge => {
-          const image = path(['node', 'avatar', 'url'], babyEdge);
-          if (image) {
-            images.push(image);
-          }
-        });
-      }
-
       if (images.length) {
-        ImageCacheProvider.cacheMultipleImages(images).then(() =>
-          this.navigateTo('home'),
-        );
+        Promise.all(
+          images
+            .filter(image => !!image)
+            .map(image => ImageCacheManager().downloadAndCacheUrl(image)),
+        ).then(() => this.navigateTo('home'));
       }
     } else {
       this.navigateTo('home');
@@ -130,7 +129,7 @@ class SplashScreen extends Component {
           </Text>
         </Animatable.Text>
 
-        {this.props.author &&
+        {this.props.author && (
           <View
             style={{
               marginVertical: 5,
@@ -148,7 +147,8 @@ class SplashScreen extends Component {
             >
               - {this.props.author}
             </Text>
-          </View>}
+          </View>
+        )}
       </View>
     );
   }
@@ -164,14 +164,14 @@ class SplashScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Image
+        <ImageBackground
           source={loadingImage}
           resizeMode="stretch"
           style={styles.textContainer}
         >
           {this.renderLoadingIndicator()}
           {this.renderLoadingMessage()}
-        </Image>
+        </ImageBackground>
         <Alert />
       </View>
     );
@@ -232,29 +232,15 @@ export default compose(
             coverImage {
               url
             }
-          },
-          # Choose Baby
-          babies {
-            edges {
-              node {
-                id
-                ...ChooseBaby
-              }
-            }
           }
           # Get quotes for splash screen
-          allQuotes {
-            edges {
-              node {
-                id
-                author
-                text
-              }
-            }
+          randomQuote {
+            id
+            author
+            text
           }
         }
       }
-      ${ChooseBaby.fragments.list}
     `,
     {
       options: ownProps => ({
@@ -266,23 +252,21 @@ export default compose(
         },
       }),
       props: ({ data }) => {
-        const edges = path(['viewer', 'allQuotes', 'edges'], data);
+        const quote = path(['viewer', 'randomQuote'], data);
         const baby = path(['viewer', 'baby'], data);
-        const babies = path(['viewer', 'babies', 'edges'], data);
 
-        let loadingMessage;
         let author;
+        let loadingMessage;
 
-        if (edges) {
-          const quote = sample(edges.map(edge => edge.node));
-          loadingMessage = quote.text;
+        if (quote) {
+          // eslint-disable-next-line prefer-destructuring
           author = quote.author;
+          loadingMessage = quote.text;
         }
 
         return {
           data,
           baby,
-          babies,
           loadingMessage,
           author,
         };

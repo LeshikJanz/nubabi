@@ -1,11 +1,11 @@
 // @flow
 import type { NavigationOptions } from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
-
 import React, { PureComponent } from 'react';
-import { Screen } from '../components';
-import BabyNameTitle from '../profile/BabyNameTitle';
+import { compose } from 'ramda';
+import { Screen, withCurrentBabyRequired } from '../components';
 import Growth from './Growth';
+import hoistStatics from '../components/hoistStatics';
 
 type Props = {
   navigation: NavigationProp,
@@ -15,7 +15,7 @@ export class GrowthScreen extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {
-    title: 'Growth',
+    title: 'Track',
   };
 
   handleWhatYouNeedToKnow = () => {
@@ -42,4 +42,4 @@ export class GrowthScreen extends PureComponent {
     );
   }
 }
-export default GrowthScreen;
+export default hoistStatics(withCurrentBabyRequired)(GrowthScreen);

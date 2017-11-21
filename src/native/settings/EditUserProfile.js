@@ -1,12 +1,15 @@
 // @flow
-import type { User, UpdateUserInput } from '../../common/types';
+import type { UpdateUserInput, User } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { compose, path } from 'ramda';
+import { compose, path, omit } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
+import { ImageCacheManager } from 'react-native-cached-image';
 import { formValues } from '../../common/helpers/graphqlUtils';
 import { displayLoadingState } from '../components';
 import UserForm from './UserForm';
+import { normalizeAvatarAndCoverImage } from '../profile/EditBaby/BabyForm';
+import { isNewFile } from '../shared/fileUtils';
 
 type Props = {
   user: User,
@@ -19,49 +22,48 @@ export class EditUserProfile extends PureComponent {
     loading: false,
   };
 
-  handleSubmit = (values: UpdateUserInput) => {
-    this.setState({ loading: true }, () => {
-      this.props.onSubmit(values).then(() => {
-        this.setState({ loading: false });
-      });
-    });
-  };
-
   render() {
     const { user } = this.props;
 
     return (
       <UserForm
         initialValues={formValues(filter(UserForm.fragments.form, user))}
-        onSubmit={this.handleSubmit}
-        loading={this.state.loading}
+        onSubmit={this.props.onSubmit}
       />
     );
   }
 }
 
 export default compose(
-  graphql(gql`
-    mutation UpdateUserProfile($input: UpdateUserInput!) {
-      updateUser(input: $input) {
-        changedUser {
-          ...UserForm
-        }
-      }
-    }
-    ${UserForm.fragments.form}
-  `),
   graphql(
     gql`
-    query EditUserProfile {
-      viewer {
-        user {
-          ...UserForm
+      mutation UpdateUserProfile($input: UpdateUserInput!) {
+        updateUser(input: $input) {
+          changedUser {
+            ...UserForm
+          }
         }
       }
-    }
-    ${UserForm.fragments.form}
-  `,
+      ${UserForm.fragments.form}
+    `,
+  ),
+  graphql(
+    gql`
+      query EditUserProfile {
+        viewer {
+          user {
+            ...UserForm
+            # For settings view
+            avatar {
+              thumb {
+                url
+              }
+            }
+          }
+        }
+      }
+      ${UserForm.fragments.form}
+    `,
     {
       options: {
         fetchPolicy: 'cache-and-network',
@@ -69,8 +71,15 @@ export default compose(
       props: ({ data, ownProps: { mutate } }) => ({
         data,
         user: path(['viewer', 'user'], data),
-        onSubmit: values => {
-          return mutate({ variables: { input: values } });
+        onSubmit: async values => {
+          const input = normalizeAvatarAndCoverImage(
+            omit(['avatar'], values),
+            values,
+          );
+
+          return mutate({
+            variables: { input },
+          });
         },
       }),
     },

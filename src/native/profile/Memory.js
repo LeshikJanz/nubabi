@@ -1,6 +1,7 @@
+// @flow
 import React from 'react';
+import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, Image } from 'react-native';
-
 import { FONT_COLOR } from '../../common/themes/defaultTheme';
 
 const Memory = ({ memory }) => {
@@ -13,15 +14,13 @@ const Memory = ({ memory }) => {
           resizeMode="stretch"
         />
       </View>
-      <Text style={styles.memoryText}>
-        {memory.caption}
-      </Text>
+      <Text style={styles.memoryText}>{memory.caption}</Text>
     </View>
   );
 };
 
 Memory.propTypes = {
-  memory: React.PropTypes.object.isRequired,
+  memory: PropTypes.object.isRequired,
 };
 
 const styles = StyleSheet.create({

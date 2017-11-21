@@ -2,45 +2,35 @@
 // TODO: maybe we can get rid of this component and pass
 // mode="cards" and mode="list" to ArticleList instead
 // if the differences aren't too many
-import type {
-  Article as ArticleType,
-  GraphQLDataProp,
-} from '../../common/types';
+import type { Article as ArticleType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
-import { compose } from 'ramda';
+import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { Box, Card } from '../components';
+import { Card, ListSeparator } from '../components';
 import ArticleListItem from './ArticleListItem';
 import theme from '../../common/themes/defaultTheme';
+import { toggleNetworkActivityIndicator } from '../../common/ui/reducer';
+import withPullToRefresh from '../components/withPullToRefresh';
 
 type Props = {
   articles: Array<ArticleType>,
   onRefresh: () => Promise<*>,
-  onViewArticle: (id: string) => void,
+  refreshing: boolean,
+  handleRefresh: () => void,
+  onViewArticle: (id: string, section: string) => void,
+  toggleNetworkActivityIndicator: typeof toggleNetworkActivityIndicator,
 };
 
-const Separator = () => <Box contentSpacing />;
 const keyExtractor = item => item.id;
 
 export class ArticleList extends PureComponent {
   props: Props;
-  state = {
-    refreshing: false,
-  };
-
-  handleRefresh = () => {
-    this.setState({ refreshing: true }, () => {
-      this.props.onRefresh().then(() => {
-        this.setState({ refreshing: false });
-      });
-    });
-  };
 
   renderItem = ({ item: article }: { item: ArticleType }) => {
     const viewArticle = () => {
-      this.props.onViewArticle(article.id);
+      this.props.onViewArticle(article.id, path(['section', 'name'], article));
     };
 
     return (
@@ -59,18 +49,19 @@ export class ArticleList extends PureComponent {
   };
 
   render() {
-    const { articles } = this.props;
+    const { articles, refreshing, handleRefresh } = this.props;
+
     return (
       <FlatList
         data={articles}
         keyExtractor={keyExtractor}
         renderItem={this.renderItem}
-        ListFooterComponent={Separator}
-        refreshing={this.state.refreshing}
-        onRefresh={this.handleRefresh}
+        ListFooterComponent={ListSeparator}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
     );
   }
 }
 
-export default ArticleList;
+export default compose(withPullToRefresh)(ArticleList);

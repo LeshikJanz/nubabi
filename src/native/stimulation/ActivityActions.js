@@ -10,22 +10,21 @@ type Props = {
   babyName: string,
   activityName: string,
   skillIcon: number, // RN require
+  collapsed?: boolean,
   onSwoop: () => void,
   onIncrease: () => void,
   onDecrease: () => void,
+  onComplete: () => void,
 };
 
 class ActivityActions extends Component {
   props: Props;
 
-  state = {
-    collapsed: true,
-  };
-
   static fragments = {
     activity: gql`
       fragment ActivityActionsActivity on Activity {
         name
+        isCompleted
       }
     `,
     skill: gql`
@@ -33,6 +32,28 @@ class ActivityActions extends Component {
         icon
       }
     `,
+  };
+
+  constructor(props: Props) {
+    super(props);
+
+    this.state = {
+      collapsed:
+        typeof props.collapsed !== 'undefined' ? props.collapsed : false,
+    };
+  }
+
+  componentWillReceiveProps(nextProps: Props) {
+    if (nextProps.collapsed !== this.props.collapsed) {
+      this.setState({ collapsed: nextProps.collapsed });
+    }
+  }
+  handleComplete = () => {
+    this.toggleCollapsed();
+    const isCompleted = this.props.collapsed;
+    if (!isCompleted) {
+      this.props.onComplete();
+    }
   };
 
   toggleCollapsed = () => {
@@ -43,6 +64,8 @@ class ActivityActions extends Component {
   };
 
   renderTrigger() {
+    const { babyName } = this.props;
+
     return (
       <Card
         padding={0.5}
@@ -53,7 +76,12 @@ class ActivityActions extends Component {
         alignItems="center"
         justifyContent="flex-start"
       >
-        <Box flexDirection="row" alignItems="flex-start" flex={1}>
+        <Box
+          flexDirection="row"
+          justifyContent="center"
+          alignItems="flex-start"
+          flex={1}
+        >
           <Icon
             size={30}
             color="primary"
@@ -66,19 +94,21 @@ class ActivityActions extends Component {
             justifyContent="space-between"
             alignSelf="flex-start"
           >
-            <Text bold flex={1}>
-              JUST RIGHT FOR NOW
+            <Text bold>ACTIVITY COMPLETED</Text>
+            <Text color="secondary" marginTop={1}>
+              Great job {babyName}
             </Text>
-            <Text color="secondary">No change</Text>
           </Box>
         </Box>
-        <Box flex={1} alignItems="flex-end">
+        <Box alignItems="flex-end">
           <Button
-            size={2}
             primary
             borderWidth={0}
             onPress={this.toggleCollapsed}
             alignSelf="flex-end"
+            style={() => ({
+              paddingVertical: 5,
+            })}
           >
             CHANGE
           </Button>
@@ -88,6 +118,14 @@ class ActivityActions extends Component {
   }
 
   renderLevelCards() {
+    const { collapsed: isCompleted, babyName } = this.props;
+
+    const completeText = isCompleted ? 'ACTIVITY COMPLETED' : 'MARK AS DONE';
+
+    const completeHint = isCompleted
+      ? `Great job ${babyName}`
+      : "Tick if you've completed it";
+
     return (
       <Box
         flexDirection="row"
@@ -103,10 +141,10 @@ class ActivityActions extends Component {
         />
         <ActionCard
           icon="md-checkmark"
-          text="JUST RIGHT FOR NOW"
-          hint="No change"
+          text={completeText}
+          hint={completeHint}
           marginHorizontal={0.5}
-          onPress={this.toggleCollapsed}
+          onPress={this.handleComplete}
         />
         <ActionCard
           icon="md-arrow-up"
@@ -121,14 +159,7 @@ class ActivityActions extends Component {
   render() {
     const { babyName, activityName, skillIcon, onSwoop } = this.props;
 
-    let collapsed = this.state.collapsed;
-
-    // For easier testing, I know it hurts
-    /* eslint-disable react/prop-types */
-    if (typeof this.props.collapsed !== 'undefined') {
-      collapsed = this.props.collapsed;
-    }
-    /* eslint-enable react/prop-types */
+    const { collapsed } = this.state;
 
     return (
       <Box flex={1}>

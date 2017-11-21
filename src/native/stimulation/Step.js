@@ -1,20 +1,13 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { Box, Text, Image } from '../components';
+import { Box, Image, Text } from '../components';
 import withLayout from '../components/withLayout';
-
-type StepTitleProps = {
-  index: number,
-  length: number,
-  activityName: string,
-};
+import { ListItemNumber } from '../components/Markdown';
 
 type StepProps = {
-  activityName: string,
   step: ?string,
-  currentStepIndex: number,
-  length: number,
+  index: number,
   layout: LayoutProps,
 };
 
@@ -42,7 +35,7 @@ const StepTitle = (props: StepTitleProps) => {
 };
 
 export const Step = (props: StepProps) => {
-  const { currentStepIndex, activityName, layout, length, step } = props;
+  const { index, layout, step } = props;
   const width = Math.round(layout.viewportWidth * 0.8);
   const height = Math.round(layout.viewportWidth * 0.35);
 
@@ -59,21 +52,20 @@ export const Step = (props: StepProps) => {
   }
 
   return (
-    <Box>
-      <StepTitle
-        activityName={activityName}
-        index={currentStepIndex}
-        step={step}
-        length={length}
-      />
-      <Text
-        marginBottom={1}
-        size={4}
-        lineHeight={26}
-        style={() => ({ color: '#6A7683' })}
-      >
-        {step}
-      </Text>
+    <Box contentSpacing>
+      <Box flexDirection="row" alignItems="flex-start" justifyContent="center">
+        <Box>
+          <ListItemNumber
+            number={index + 1}
+            style={{ marginLeft: 0, marginRight: 0 }}
+          />
+        </Box>
+        <Box flex={1} marginLeft={0.5}>
+          <Text size={4} lineHeight={26} style={() => ({ color: '#6A7683' })}>
+            {step}
+          </Text>
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -8,6 +8,7 @@ describe('formatAge', () => {
     expect(formatAge('2017-4-12')).toEqual('2 weeks old');
     expect(formatAge('2017-3-20')).toEqual('1 month old');
     expect(formatAge('2017-3-30')).toEqual('1 month old');
+    expect(formatAge('2017-3-31')).toEqual('1 month old');
     expect(formatAge('2017-2-29')).toEqual('2 months old');
     expect(formatAge('2017-2-31')).toEqual('1 month old');
     expect(formatAge('2016-4-20')).toEqual('1 year old');

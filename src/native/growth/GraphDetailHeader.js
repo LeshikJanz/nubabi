@@ -1,9 +1,9 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { Image } from 'react-native';
+import { ImageBackground } from 'react-native';
 import { gql } from 'react-apollo';
-import { Box, Text, Overlay, withLayout } from '../components';
+import { Box, Overlay, Text, withLayout } from '../components';
 import GraphDetailMeasurementSwitcher from './GraphDetailMeasurementSwitcher';
 
 type Props = {
@@ -20,18 +20,18 @@ export const GraphDetailHeader = ({
   onSwitchMeasurementType,
 }: Props) => {
   const headerWidth = layout.viewportWidth;
-  const headerHeight = layout.viewportWidth * 0.45;
+  const headerHeight = layout.viewportWidth * 0.5;
 
   return (
     <Box style={() => ({ width: headerWidth, height: headerHeight })}>
-      <Image source={background} style={{ flex: 1, width: headerWidth }}>
-        <Overlay>
+      <ImageBackground
+        source={background}
+        style={{ flex: 1, width: headerWidth }}
+      >
+        <Overlay overlayStyle={{ opacity: 0.7 }}>
           <Box flex={1} alignItems="center" justifyContent="center">
-            <Text align="center" color="white" size={7}>
-              Look how {name}
-            </Text>
-            <Text align="center" color="white" size={7}>
-              is growing
+            <Text align="center" color="white" size={10}>
+              Watch {name} grow
             </Text>
           </Box>
 
@@ -46,7 +46,7 @@ export const GraphDetailHeader = ({
             />
           </Box>
         </Overlay>
-      </Image>
+      </ImageBackground>
     </Box>
   );
 };

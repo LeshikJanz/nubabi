@@ -1,15 +1,13 @@
 // @flow
 import React, { Component } from 'react';
-import { Dimensions, Image, View, PanResponder } from 'react-native';
+import { Dimensions, ImageBackground, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { compose } from 'ramda';
-import { connect } from 'react-redux';
 import Box from './Box';
 import Overlay from './Overlay';
 import Text from './Text';
 import theme from '../../common/themes/defaultTheme';
 import { formatDuration } from '../../common/helpers/formatDuration';
-import GalleryVideoPlayer from './GalleryVideoPlayer';
 import GalleryAudioPlayer from './GalleryAudioPlayer';
 
 type Props = {
@@ -31,17 +29,23 @@ class GalleryAudioItem extends Component {
   };
 
   load() {
-    this.setState({
-      progress: 100,
-    });
+    this.setState({ progress: 100 });
   }
+
+  preventGalleryGestures = () => {
+    this.setState({ disableGalleryGestures: true });
+  };
+
+  isPlaying = () => {
+    return this.state.isPlaying;
+  };
 
   renderThumbnail() {
     const { width, height, uri, duration } = this.props;
 
     return (
       <View style={{ width, height }}>
-        <Image
+        <ImageBackground
           source={{ uri }}
           style={{ flex: 1, width, height, resizeMode: 'cover' }}
         >
@@ -62,26 +66,14 @@ class GalleryAudioItem extends Component {
             </Box>
             <View style={{ position: 'absolute', bottom: 0, right: 5 }}>
               <Overlay>
-                <Text color="white">
-                  {formatDuration(duration)}
-                </Text>
+                <Text color="white">{formatDuration(duration)}</Text>
               </Overlay>
             </View>
           </Overlay>
-        </Image>
+        </ImageBackground>
       </View>
     );
   }
-
-  preventGalleryGestures = () => {
-    this.setState({
-      disableGalleryGestures: true,
-    });
-  };
-
-  isPlaying = () => {
-    return this.state.isPlaying;
-  };
 
   render() {
     const {

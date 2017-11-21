@@ -1,19 +1,12 @@
 // @flow
 import type { ActivityMediaType } from '../../common/types';
 import React, { PureComponent } from 'react';
-import {
-  View,
-  TouchableOpacity,
-  LayoutAnimation,
-  StyleSheet,
-} from 'react-native';
-import Image from 'react-native-cached-image';
+import { LayoutAnimation, TouchableOpacity } from 'react-native';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { range } from 'ramda';
-import { Card, Text, Box } from '../components';
+import { Box, Card, Text } from '../components';
 import Step from './Step';
-import theme from '../../common/themes/defaultTheme';
-import Icon from 'react-native-vector-icons/Ionicons';
 import withLayout from '../components/withLayout';
 
 type StepType = string;
@@ -51,81 +44,10 @@ class Steps extends PureComponent {
     `,
   };
 
-  goToStep = (index: number) => {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    this.setState({ currentStep: index < 0 ? 0 : index });
-  };
-
-  renderStep() {
-    const step = this.props.steps[this.state.currentStep];
-
-    return (
-      <Step
-        step={step}
-        activityName={this.props.activityName}
-        currentStepIndex={this.state.currentStep}
-        length={this.props.steps.length}
-      />
-    );
-  }
-
-  renderIndicators() {
-    const numberOfSteps = this.props.steps.length;
-
-    const indicators = range(0, numberOfSteps).map(index => {
-      const isActive = this.state.currentStep === index;
-      if (isActive) {
-        return (
-          <View
-            key={`indicator-${index}`}
-            style={{
-              width: 20,
-              height: 20,
-              borderRadius: 20 / 2,
-              backgroundColor: theme.colors.primary,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginHorizontal: 5,
-            }}
-          >
-            <Text bold color="white" spacing={-0.3}>
-              {index + 1}
-            </Text>
-          </View>
-        );
-      }
-      return (
-        <TouchableOpacity
-          key={`indicator-${index}`}
-          onPress={() => this.goToStep(index)}
-          style={{
-            width: 20,
-            height: 20,
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginHorizontal: 5,
-          }}
-        >
-          <Icon name="md-disc" size={15} color={theme.colors.open.gray1} />
-        </TouchableOpacity>
-      );
+  renderSteps() {
+    return this.props.steps.map((step, index) => {
+      return <Step key={index} step={step} index={index} />;
     });
-
-    return (
-      <Box
-        flexDirection="row"
-        alignItems="center"
-        justifyContent="center"
-        padding={1}
-        margin={0}
-        style={theme => ({
-          borderColor: theme.colors.open.gray0,
-          borderTopWidth: StyleSheet.hairlineWidth,
-        })}
-      >
-        {indicators}
-      </Box>
-    );
   }
 
   renderMedia() {
@@ -159,10 +81,15 @@ class Steps extends PureComponent {
     return (
       <Card marginHorizontal={1.2} marginVertical={1} padding={0}>
         {this.renderMedia()}
-        <Box padding={1} margin={0}>
-          {this.renderStep()}
+
+        <Box contentSpacing>
+          <Text color="black" spacing={-0.43} size={6} lineHeight={21}>
+            Let's begin {this.props.activityName}
+          </Text>
         </Box>
-        {this.renderIndicators()}
+        <Box flex={1} contentSpacing>
+          {this.renderSteps()}
+        </Box>
       </Card>
     );
   }

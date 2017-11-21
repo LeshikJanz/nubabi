@@ -8,8 +8,7 @@ import type {
 } from '../../common/types';
 import type { NavigationProp } from 'react-navigation/src/TypeDefinition';
 import React, { PureComponent } from 'react';
-import { TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { Image, TouchableOpacity } from 'react-native';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { compose, path, pick, pluck } from 'ramda';
@@ -32,7 +31,6 @@ export class GraphDetail extends PureComponent {
 
   state = {
     currentMeasurementType: 'weight',
-    displayPeriodAs: 'Months',
   };
 
   static fragments = {
@@ -60,10 +58,6 @@ export class GraphDetail extends PureComponent {
     );
   };
 
-  handleDisplayPeriodAsChange = (value: 'Months' | 'Weeks') => {
-    this.setState({ displayPeriodAs: value });
-  };
-
   renderGraph() {
     const type = this.state.currentMeasurementType;
 
@@ -89,13 +83,19 @@ export class GraphDetail extends PureComponent {
           onSwitchMeasurementType={this.handleSwitchMeasurement}
           {...filter(GraphDetailHeader.fragments.baby, this.props.baby)}
         />
-        <Box contentSpacing flexDirection="row" justifyContent="space-around">
+        <Box
+          contentSpacing
+          paddingTop={2}
+          flexDirection="row"
+          justifyContent="space-around"
+        >
           <Box flex={1} />
           <Box
             as={TouchableOpacity}
             flexDirection="row"
             alignItems="center"
             justifyContent="center"
+            marginRight={1}
             onPress={this.handleUpdateMeasurement}
           >
             <Text bold color="primary" marginRight={1}>
@@ -108,20 +108,23 @@ export class GraphDetail extends PureComponent {
                 borderColor: theme.colors.open.gray1,
               })}
             >
-              <Icon name="md-brush" color={theme.colors.gray} />
+              <Image
+                source={require('../../common/images/edit.png')}
+                style={{ width: 14, height: 14 }}
+              />
             </Box>
           </Box>
         </Box>
         <Box
           flex={1}
-          paddingVertical={2}
+          paddingVertical={1}
           alignItems="center"
           justifyContent="center"
         >
           <Box flex={1} flexDirection="row" alignItems="center">
             <Box
               style={() => ({
-                marginLeft: 25,
+                left: 25,
                 transform: [
                   {
                     rotateZ: '-90deg',
@@ -129,9 +132,7 @@ export class GraphDetail extends PureComponent {
                 ],
               })}
             >
-              <Text bold>
-                {this.getCurrentUnit()}
-              </Text>
+              <Text bold>{this.getCurrentUnit()}</Text>
             </Box>
             {this.renderGraph()}
           </Box>

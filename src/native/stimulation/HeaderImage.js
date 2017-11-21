@@ -2,7 +2,7 @@
 import React from 'react';
 import merge from 'lodash';
 import { StyleSheet } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 
 type Props = {
   style?: Object | number,

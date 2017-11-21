@@ -1,22 +1,19 @@
 // @flow
 import type {
-  State,
   GrowthArticle as GrowthArticleType,
   LayoutProps,
 } from '../../common/types';
 import React from 'react';
-import { ScrollView, View } from 'react-native';
-import { compose, path } from 'ramda';
-import { connect } from 'react-redux';
-import { graphql, gql } from 'react-apollo';
+import { Image, ScrollView, View } from 'react-native';
+import { compose, path, pathOr } from 'ramda';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import {
   Box,
-  FAB,
-  Text,
-  withLayout,
   displayLoadingState,
   showNoContentViewIf,
+  withCurrentBaby,
+  withLayout,
 } from '../components';
 import GrowthArticle from '../library/GrowthArticle';
 import HeaderContainer from '../stimulation/HeaderContainer';
@@ -26,10 +23,22 @@ import HeaderTitle from '../stimulation/HeaderTitle';
 import getHeaderStyles from '../stimulation/getHeaderStyles';
 import HeaderTextSection from '../stimulation/HeaderTextSection';
 import HeaderShape from '../stimulation/HeaderShape';
+import HealthcareNotice from './HealthcareNotice';
 
 type Props = {
   article: GrowthArticleType,
   layout: LayoutProps,
+};
+
+const headerImage = {
+  Parenting: require('../../common/images/section-parenting-header.png'),
+  Health: require('../../common/images/section-health-header.png'),
+  default: require('../../common/images/gross_motor_large.jpg'),
+};
+
+const headerIcon = {
+  Parenting: require('../../common/images/section-parenting-icon.png'),
+  Health: require('../../common/images/section-health-icon.png'),
 };
 
 export const ViewGrowthArticle = ({ article, layout }: Props) => {
@@ -42,47 +51,66 @@ export const ViewGrowthArticle = ({ article, layout }: Props) => {
     overlayStyle,
   } = getHeaderStyles(width);
 
-  const image = require('../../common/images/gross_motor_large.jpg');
+  const section = path(['section', 'name'], article);
+  const image = headerImage[section || 'default'];
+
+  if (section) {
+    overlayStyle.backgroundColor = 'transparent';
+  }
 
   return (
-    <Box flex={1} as={ScrollView} backgroundColor="white">
-      <HeaderContainer style={headerContainerStyle}>
-        <HeaderImage source={image} style={headerImageStyle} />
+    <Box flex={1} as={ScrollView}>
+      <Box backgroundColor="white">
+        <HeaderContainer style={headerContainerStyle}>
+          <HeaderImage source={image} style={headerImageStyle} />
 
-        <HeaderOverlay overlayStyle={overlayStyle} />
+          <HeaderOverlay overlayStyle={overlayStyle} />
 
-        <HeaderTextSection width={width}>
-          <HeaderTitle text={title} />
-        </HeaderTextSection>
+          <HeaderTextSection width={width}>
+            {section && (
+              <Image
+                source={headerIcon[section]}
+                style={{
+                  width: 36,
+                  height: 24,
+                  marginBottom: 16,
+                  marginTop: -16,
+                }}
+                resizeMode="contain"
+              />
+            )}
+            <HeaderTitle text={title} />
+          </HeaderTextSection>
 
-        <HeaderShape width={width} />
+          <HeaderShape width={width} />
 
-        <View style={{ flex: 1, marginTop: -8 }} />
-      </HeaderContainer>
+          <View style={{ flex: 1, marginTop: -8 }} />
+        </HeaderContainer>
 
-      <Box padding={1} backgroundColor="white">
-        <GrowthArticle {...filter(GrowthArticle.fragments.growth, article)} />
+        <Box padding={1} backgroundColor="white">
+          <GrowthArticle {...filter(GrowthArticle.fragments.growth, article)} />
+        </Box>
       </Box>
+
+      {section === 'Health' && <HealthcareNotice />}
     </Box>
   );
 };
 
 export default compose(
   withLayout,
-  connect((state: State) => ({
-    currentBabyId: state.babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
-    query ViewGrowthArticle($id: ID!, $babyId: ID!) {
-      viewer {
-        growthArticle(id: $id, babyId: $babyId) {
-          ...GrowthArticle
+      query ViewGrowthArticle($id: ID!, $babyId: ID!) {
+        viewer {
+          growthArticle(id: $id, babyId: $babyId) {
+            ...GrowthArticle
+          }
         }
       }
-    }
-    ${GrowthArticle.fragments.growth}
-  `,
+      ${GrowthArticle.fragments.growth}
+    `,
     {
       options: ownProps => ({
         fetchPolicy: 'cache-and-network',

@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { Text, TextInput, View } from 'react-native';
+import FloatingLabelTextInput from 'react-native-floating-label-text-input';
 import moment from 'moment';
 import theme, { FONT_COLOR } from '../../common/themes/defaultTheme';
 import { DatePicker } from '../components';
@@ -14,6 +15,15 @@ export const maxLength = (max: number) => (value: ?string) => {
   return value && value.length > max
     ? `Must be ${max} characters or less`
     : undefined;
+};
+
+export const numeric = (value: ?number) => {
+  if (typeof value === 'undefined') {
+    // Required should catch this, we're only interested to validate when we have a value
+    return undefined;
+  }
+
+  return Number.isNaN(value) ? 'Must be a number' : undefined;
 };
 
 export const minValue = (min: number) => (value: ?number) => {
@@ -43,6 +53,10 @@ export const constantValues = (...constants: Array<string>) => (
     : undefined;
 };
 
+export const isEditable = field => {
+  return typeof field.editable !== 'undefined' ? field.editable : true;
+};
+
 export const renderTextInput = field => {
   // we can access errors on field.meta.errors and dirty state and field.meta.touched
   const { label, placeholder } = field;
@@ -60,7 +74,7 @@ export const renderTextInput = field => {
 
   const labelStyle = [styles.inputLabel, hasError ? styles.hasError : {}];
   let typeProps = {
-    keyboardType: 'default',
+    keyboardType: field.keyboardType || 'default',
   };
 
   if (field.type === 'email') {
@@ -77,28 +91,40 @@ export const renderTextInput = field => {
   }
 
   const multiline = field.multiline || false;
+  const editable =
+    typeof field.editable !== 'undefined' ? field.editable : true;
+
+  const TextInputComponent = field.floating
+    ? FloatingLabelTextInput
+    : TextInput;
+
+  const floatingProps = field.floating
+    ? {
+        noBorder: true,
+        floatingLabelStyle: { top: -8, paddingTop: 0 },
+        textFieldHolderStyle: { marginTop: 0 },
+      }
+    : {};
 
   return (
     <View style={containerStyle}>
       <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-        {label
-          ? <Text style={[...labelStyle, { flex: 1 }]}>
-              {label}
-            </Text>
-          : null}
-        {hasExplicitError
-          ? <Text style={labelStyle}>
-              {error.toUpperCase()}
-            </Text>
-          : null}
+        {label ? (
+          <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
+        ) : null}
+        {hasExplicitError ? (
+          <Text style={labelStyle}>{error.toUpperCase()}</Text>
+        ) : null}
       </View>
-      <TextInput
+      <TextInputComponent
         {...typeProps}
         {...borderProps}
+        {...floatingProps}
         {...field.input}
         placeholder={placeholder}
         multiline={multiline}
         style={styles.textInput}
+        editable={editable}
       />
     </View>
   );
@@ -113,9 +139,7 @@ export const renderDatePicker = field => {
 
   return (
     <View style={styles.inputContainer}>
-      <Text style={[styles.inputLabel, { flex: 1 }]}>
-        {label}
-      </Text>
+      <Text style={[styles.inputLabel, { flex: 1 }]}>{label}</Text>
 
       <DatePicker
         onChange={field.input.onChange}

@@ -1,5 +1,6 @@
 // @flow
 import type { Action, AuthState } from '../types';
+import { merge } from 'ramda';
 
 export const initialState = {
   isAuthenticated: false,
@@ -14,30 +15,25 @@ const reducer = (
 ): AuthState => {
   switch (action.type) {
     case 'LOGIN_REQUEST':
-      return Object.assign({}, state, {
+      return merge(state, {
         isFetching: true,
         isAuthenticated: false,
       });
     case 'LOGIN_SUCCESS':
-      return Object.assign({}, state, {
+      return merge(state, {
         isFetching: false,
         isAuthenticated: true,
-        failure: false,
       });
     case 'LOGIN_FAILURE':
-      return Object.assign({}, state, {
+      return merge(state, {
         isFetching: false,
         isAuthenticated: false,
-        failure: true,
         errorMessage: action.payload.message,
       });
     case 'ON_AUTH': {
-      // TODO: we need object-spread
-      return Object.assign({}, state, {
-        ...state,
+      return merge(state, {
         isFetching: false,
         isAuthenticated: !!action.payload.user,
-        failure: false,
         errorMessage: null,
         token: action.payload.token,
       });

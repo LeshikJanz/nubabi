@@ -9,29 +9,33 @@ import theme from '../../../common/themes/defaultTheme';
 type Props = {
   selectedGender: Gender,
   onChangeGender: (gender: Gender) => void,
-  hasError: Boolean,
+  hasError: boolean,
 };
 
-const GenderError = () =>
+const GenderError = () => (
   <View style={{ alignItems: 'center', justifyContent: 'center' }}>
     <Text style={styles.errorLabel}>YOU MUST SELECT A GENDER</Text>
-  </View>;
+  </View>
+);
 
 const GenderSelection = ({
   selectedGender,
   onChangeGender,
   hasError,
+  editable,
 }: Props) => {
   return (
     <View style={{ flex: 1, marginBottom: 20 }}>
       <View style={styles.genderContainer}>
         <GenderButton
-          buttonText={'GIRL'}
+          editable={editable}
+          buttonText="GIRL"
           selected={selectedGender === 'FEMALE'}
           onChangeGender={() => onChangeGender('FEMALE')}
         />
         <GenderButton
-          buttonText={'BOY'}
+          editable={editable}
+          buttonText="BOY"
           selected={selectedGender === 'MALE'}
           onChangeGender={() => onChangeGender('MALE')}
         />

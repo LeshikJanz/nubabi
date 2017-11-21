@@ -1,11 +1,12 @@
 // @flow
-import type { SkillArea, Activity } from '../../common/types';
+import type { Activity, SkillArea } from '../../common/types';
 import React from 'react';
-import { Dimensions, View, TouchableHighlight, Text } from 'react-native';
-import Image from 'react-native-cached-image';
+import { Dimensions, Text, TouchableHighlight, View } from 'react-native';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { path } from 'ramda';
-import { Box } from '../components';
+import { Box, Icon } from '../components';
 import iconMappings from './iconMappings';
+import theme from '../../common/themes/defaultTheme';
 
 const width = Dimensions.get('window').width;
 
@@ -35,19 +36,29 @@ export const ActivityListItem = (props: Props) => {
             source={{ uri: path(['image', 'thumb', 'url'], skillArea) }}
           />
         </Box>
-        <View style={styles.textContainer}>
-          <Text style={styles.skillName}>
-            {skillArea.name}
-          </Text>
-          <Text style={styles.activityName}>
-            {activity.name}
-          </Text>
-        </View>
-        <Image
-          style={styles.skillIcon}
-          source={iconMappings(skillArea.icon)}
-          resizeMode="contain"
-        />
+        <Box flex={1}>
+          <View style={styles.textContainer}>
+            <Text style={styles.skillName}>{skillArea.name}</Text>
+            <Text style={styles.activityName}>{activity.name}</Text>
+          </View>
+        </Box>
+        <Box>
+          <Box flex={1}>
+            <Image
+              style={styles.skillIcon}
+              source={iconMappings(skillArea.icon)}
+              resizeMode="contain"
+            />
+          </Box>
+          {activity.isCompleted && (
+            <Icon
+              name="md-checkmark-circle-outline"
+              color={theme.colors.primary}
+              size={24}
+              style={{ marginBottom: 5, marginRight: 12 }}
+            />
+          )}
+        </Box>
       </View>
     </TouchableHighlight>
   );

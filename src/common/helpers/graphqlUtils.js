@@ -1,12 +1,17 @@
 // @flow
 import {
+  always,
+  compose,
+  cond,
   curry,
   curryN,
   either,
   find,
+  findIndex,
   isEmpty as isEmptyOrig,
   isNil,
   last,
+  lensIndex,
   lensPath,
   memoize,
   omit,
@@ -16,6 +21,8 @@ import {
   prop,
   propEq,
   set,
+  startsWith,
+  T,
   view,
   without,
 } from 'ramda';
@@ -23,8 +30,15 @@ import {
   cursorForObjectInConnection as cursorForObjectInConnectionOrig,
   offsetToCursor,
 } from 'graphql-relay';
+import { connect } from 'react-redux';
+import mime from 'mime/lite';
+import { toggleNetworkActivityIndicator } from '../ui/reducer';
 
 export const flattenEdges = memoize(connection => {
+  if (!connection) {
+    return [];
+  }
+
   const edges = prop('edges', connection);
 
   if (!edges || !edges.length) {
@@ -34,7 +48,8 @@ export const flattenEdges = memoize(connection => {
   return pluck('node', edges).map(node => {
     Object.keys(node).forEach(key => {
       if (path([key, 'edges'], node)) {
-        node[key] = flattenEdges(prop(key, node)); // eslint-disable no-param-reassign
+        // eslint-disable-next-line no-param-reassign
+        node[key] = flattenEdges(prop(key, node));
       }
     });
 
@@ -73,15 +88,15 @@ export const mapEdgesToProp = curry(
 
     const edges = path(normalizePath(edgePath), data);
 
-    let prop;
+    let targetProp;
 
     if (edges) {
-      prop = pluck('node', edges);
+      targetProp = pluck('node', edges);
     }
 
     return {
       data,
-      [propName]: prop,
+      [propName]: targetProp,
     };
   },
 );
@@ -174,6 +189,69 @@ export const removeEdgeFromFragment = (
   });
 };
 
+const findEdgeIndex = (id, edges) => {
+  return findIndex(pathEq(['node', 'id'], id), edges);
+};
+
+export const replaceEdge = (
+  data: any,
+  edgePath: Array<string>,
+  edge: Object,
+) => {
+  const edgesPath = lensPath(edgePath);
+  const oldEdges = view(edgesPath, data);
+  const edgeIndex = findEdgeIndex(edge.node.id, oldEdges);
+  const indexLens = lensIndex(edgeIndex);
+
+  if (edgeIndex !== -1) {
+    const newEdges = set(indexLens, edge, oldEdges);
+    return set(edgesPath, newEdges, data);
+  }
+
+  return null;
+};
+
+const updateFragment = curry(
+  (
+    updaterFn: Function,
+    fragment: DocumentNode,
+    rootId: string,
+    fragmentOptions?:
+      | DataProxyReadFragmentOptions
+      | DataProxyWriteFragmentOptions = {},
+  ) => store => {
+    const oldData = store.readFragment({
+      fragment,
+      id: rootId,
+      ...fragmentOptions,
+    });
+    const newData = updaterFn(oldData);
+    if (newData) {
+      store.writeFragment({
+        fragment,
+        id: rootId,
+        ...fragmentOptions,
+        data: newData,
+      });
+    }
+  },
+);
+
+export const replaceEdgeInFragment = (
+  edge: mixed,
+  fragment: DocumentNode,
+  rootId: string,
+  edgePath: Array<string>,
+  // eslint-disable-next-line no-unused-vars
+  fragmentOptions?:
+    | DataProxyReadFragmentOptions
+    | DataProxyWriteFragmentOptions = {},
+) => {
+  return updateFragment(fragmentData =>
+    replaceEdge(fragmentData, edgePath, edge),
+  );
+};
+
 export const addEdgeToMutationResult = (response: any) => {
   // TODO: cursors?
   return {
@@ -219,3 +297,75 @@ export const isUUID = (str: string) =>
   /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(
     str,
   );
+
+export const withNetworkIndicator = curry(
+  (
+    networkIndicatorToggler: typeof toggleNetworkActivityIndicator,
+    operation: () => Promise<*>,
+  ) => () => {
+    networkIndicatorToggler(true);
+    return operation().finally(() => networkIndicatorToggler(false));
+  },
+);
+
+export const withNetworkIndicatorActions = connect(null, {
+  toggleNetworkActivityIndicator,
+});
+
+export const getTypenameForFile = (file: { contentType: string }) => {
+  return compose(
+    cond([
+      [startsWith('image'), always('Image')],
+      [startsWith('video'), always('Video')],
+      [startsWith('audio'), always('Audio')],
+      [T, always('GenericFile')],
+    ]),
+    prop('contentType'),
+  )(file);
+};
+
+export const optimisticResponse = curry(
+  (operationName: string, payloadName: string, response, variables) => {
+    const result =
+      typeof response === 'function' ? response(variables) : response;
+
+    return {
+      __typename: 'Mutation',
+      [operationName]: {
+        __typename: payloadName,
+        ...result,
+      },
+    };
+  },
+);
+
+export const getCurrentUserFromStore = (gql, store) => {
+  try {
+    return store.readQuery({
+      query: gql`
+        query CurrentUser {
+          viewer {
+            user {
+              id
+              firstName
+              lastName
+              avatar {
+                url
+              }
+            }
+          }
+        }
+      `,
+    });
+  } catch (err) {
+    return null;
+  }
+};
+
+const getContentTypeFromExtension = memoize((extension: string) => {
+  return mime.getType(extension);
+});
+
+export const getContentTypeFromFilename = (filename: string) => {
+  return getContentTypeFromExtension(last(filename.split('.')));
+};

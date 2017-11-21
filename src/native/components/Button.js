@@ -1,8 +1,9 @@
 // @flow
 import type { ColorProps, Theme } from '../../common/themes/types';
 import type { TextProps } from './Text';
-import Box from './Box';
 import React from 'react';
+import PropTypes from 'prop-types';
+import Box from './Box';
 import Text, { computeTextStyle } from './Text';
 import isReactNative from '../../common/app/isReactNative';
 
@@ -129,25 +130,27 @@ const Button = (
       {...boxProps}
       style={boxStyle}
     >
-      {childrenIsText
-        ? <Text
-            // Pass backgroundColor to Text for maybeFixFontSmoothing function.
-            backgroundColor={props.backgroundColor}
-            style={theme => ({
-              ...computedTextStyle,
-              ...(textStyle && textStyle(theme, computedTextStyle)),
-            })}
-          >
-            {children}
-          </Text>
-        : children}
+      {childrenIsText ? (
+        <Text
+          // Pass backgroundColor to Text for maybeFixFontSmoothing function.
+          backgroundColor={props.backgroundColor}
+          style={theme => ({
+            ...computedTextStyle,
+            ...(textStyle && textStyle(theme, computedTextStyle)),
+          })}
+        >
+          {children}
+        </Text>
+      ) : (
+        children
+      )}
     </Box>
   );
 };
 
 Button.contextTypes = {
-  Button: React.PropTypes.func,
-  theme: React.PropTypes.object,
+  Button: PropTypes.func,
+  theme: PropTypes.object,
 };
 
 export default Button;

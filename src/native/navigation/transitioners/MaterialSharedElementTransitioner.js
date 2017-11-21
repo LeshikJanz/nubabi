@@ -4,6 +4,7 @@
  * in the future.
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   View,
   StyleSheet,
@@ -26,8 +27,8 @@ type State = {
 class MaterialSharedElementTransitioner extends Component {
   state: State;
   static childContextTypes = {
-    registerSharedView: React.PropTypes.func,
-    unregisterSharedView: React.PropTypes.func,
+    registerSharedView: PropTypes.func,
+    unregisterSharedView: PropTypes.func,
   };
 
   constructor(props) {
@@ -479,12 +480,12 @@ class MaterialSharedElementTransitioner extends Component {
     if (!this._childNavigationProps) this._childNavigationProps = {};
     let navigation = this._childNavigationProps[scene.key];
     if (!navigation || navigation.state !== scene.route) {
-      navigation = this._childNavigationProps[
-        scene.key
-      ] = addNavigationHelpers({
-        ...this.props.navigation,
-        state: scene.route,
-      });
+      navigation = this._childNavigationProps[scene.key] = addNavigationHelpers(
+        {
+          ...this.props.navigation,
+          state: scene.route,
+        },
+      );
     }
     return navigation;
   };

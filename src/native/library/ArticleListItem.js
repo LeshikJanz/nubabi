@@ -1,12 +1,11 @@
 // @flow
 import type { LayoutProps } from '../../common/types';
 import React from 'react';
-import { StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
 import { compose, path } from 'ramda';
-import { Box, Text, Overlay, withLayout } from '../components';
+import { Box, Overlay, Text, withLayout } from '../components';
 
 type Props = {
   title: string,
@@ -24,14 +23,15 @@ export const ArticleListItem = ({ title, image, layout }: Props) => {
       borderBottomLeftRadius={4}
       overflow="hidden"
     >
-      {imageSource &&
+      {imageSource && (
         <Image
           source={{ uri: imageSource }}
           style={{ flex: 1 }}
           resizeMode="cover"
         >
           <Overlay />
-        </Image>}
+        </Image>
+      )}
 
       <Box
         flex={2}

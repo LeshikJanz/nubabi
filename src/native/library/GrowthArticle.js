@@ -14,8 +14,8 @@ const textStyle = {
   },
 };
 
-export function viewGrowthArticle(id: string) {
-  this.props.navigation.navigate('viewGrowthContent', { id });
+export function viewGrowthArticle(id: string, section: string) {
+  this.props.navigation.navigate('viewGrowthContent', { id, section });
 }
 
 export const GrowthArticle = ({ text }: Props) => {
@@ -35,12 +35,20 @@ GrowthArticle.fragments = {
       readingTime {
         text
       }
+      section {
+        id
+        name
+      }
     }
   `,
   item: gql`
     fragment GrowthArticleListItem on GrowthArticle {
       id
       title
+      section {
+        id
+        name
+      }
     }
   `,
 };

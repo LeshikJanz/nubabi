@@ -1,5 +1,5 @@
-// flow-typed signature: 48c1670230f36a59da42bbf40fe490c6
-// flow-typed version: 9b385b14fd/base-64_v0.1.x/flow_>=v0.30.x
+// flow-typed signature: 99981df5e2f24724e1bfd8292d17dfe8
+// flow-typed version: b43dff3e0e/base-64_v0.1.x/flow_>=v0.25.x
 
 declare module 'base-64' {
   declare module.exports: {

@@ -7,15 +7,31 @@ import Memories from './Memories';
 type Props = {
   navigation: NavigationProp,
 };
+
 export class MemoriesScreen extends PureComponent {
   props: Props;
 
   static navigationOptions = {
-    title: 'Memories',
+    title: 'Capture',
   };
 
-  handleNavigateToAddMemory = () => {
-    this.props.navigation.navigate('addMemory');
+  handleNavigateToMemory = (id: string) => {
+    this.props.navigation.navigate('viewMemory', {
+      id,
+      returnKey: this.props.navigation.state.key,
+    });
+  };
+
+  handleNavigateToAddMemory = (suggestedMemoryId?: string) => {
+    this.props.navigation.navigate('addMemory', {
+      /*
+       For some reason we're passed down an event here sometimes
+       That ends up blocking the interaction with the Add Memory button
+       in header
+       */
+      suggestedMemoryId:
+        typeof suggestedMemoryId === 'string' ? suggestedMemoryId : null,
+    });
   };
 
   handleNavigateToEditMemory = (id: string) => {
@@ -26,6 +42,7 @@ export class MemoriesScreen extends PureComponent {
     return (
       <Screen>
         <Memories
+          onViewMemory={this.handleNavigateToMemory}
           onAddMemory={this.handleNavigateToAddMemory}
           onEditMemory={this.handleNavigateToEditMemory}
         />

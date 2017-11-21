@@ -16,15 +16,17 @@ import {
 type HorizontalCardItemType = {
   id: string,
   title: string,
-  files: Array<File>,
+  files?: Array<File>,
 };
 
 type Props = {
   items: Array<HorizontalCardItemType>,
-  onItemPress: (id: string) => void,
+  onItemPress?: (id: string, title: string) => void,
   headerTitle?: string,
   headerTitleSize?: number,
   headerRight?: React.Element<*>,
+  renderHeader?: () => React.Element<*>,
+  renderRow?: ({ item: any }) => React.Element<*>,
 };
 
 type State = {
@@ -91,14 +93,17 @@ export class HorizontalCardList extends PureComponent {
   };
 
   render() {
+    const renderRow = this.props.renderRow || this.renderRow;
+    const renderHeader = this.props.renderHeader || this.renderHeader;
+
     return (
       <Box flex={1}>
-        {this.props.headerTitle && this.renderHeader()}
+        {this.props.headerTitle && renderHeader()}
 
         <ListView
           contentContainerStyle={{ paddingHorizontal: 10 }}
           dataSource={this.state.ds}
-          renderRow={this.renderRow}
+          renderRow={renderRow}
           renderSeparator={this.renderSeparator}
           horizontal
           initialListSize={5}

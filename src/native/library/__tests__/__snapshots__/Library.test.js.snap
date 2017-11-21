@@ -31,7 +31,9 @@ style = Object {
     "fontSize": 19.147659412894374,
     "lineHeight": 32,
     "color": "#454D56",
-    "fontFamily": "SF Pro Display"
+    "fontFamily": "SF Pro Display",
+    "marginLeft": 10,
+    "marginRight": 10
 }
 
 <View
@@ -47,6 +49,7 @@ style = Object {
   }
 >
   <RCTScrollView
+    automaticallyAdjustContentInsets={false}
     contentContainerStyle={
       Object {
         "flex": 1,
@@ -151,9 +154,7 @@ style = Object {
               }
             }
           >
-            <Image
-              resizeMode="cover"
-              source={1}
+            <View
               style={
                 Array [
                   Object {
@@ -166,6 +167,30 @@ style = Object {
                 ]
               }
             >
+              <Image
+                resizeMode="cover"
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/parenting_tips.png",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    Object {
+                      "height": undefined,
+                      "width": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              />
               <View
                 style={
                   Object {
@@ -175,22 +200,25 @@ style = Object {
               >
                 <View
                   style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "rgb(116, 130, 148)",
-                      "bottom": 0,
-                      "flex": 1,
-                      "justifyContent": "center",
-                      "left": 0,
-                      "opacity": 0.4,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "rgb(116, 130, 148)",
+                        "bottom": 0,
+                        "flex": 1,
+                        "justifyContent": "center",
+                        "left": 0,
+                        "opacity": 0.4,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      Object {},
+                    ]
                   }
                 />
               </View>
-            </Image>
+            </View>
             <View
               contentSpacing={true}
               style={
@@ -210,7 +238,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Object {
@@ -233,7 +260,6 @@ style = Object {
         </View>
       </View>
       <View
-        contentSpacing={true}
         style={
           Object {
             "borderBottomWidth": 0,
@@ -242,10 +268,8 @@ style = Object {
             "borderRightWidth": 0,
             "borderTopWidth": 0,
             "flex": 1,
-            "paddingBottom": 10,
-            "paddingLeft": 10,
-            "paddingRight": 10,
-            "paddingTop": 10,
+            "marginLeft": 10,
+            "marginRight": 10,
           }
         }
       >
@@ -315,9 +339,7 @@ style = Object {
               }
             }
           >
-            <Image
-              resizeMode="cover"
-              source={1}
+            <View
               style={
                 Array [
                   Object {
@@ -330,6 +352,30 @@ style = Object {
                 ]
               }
             >
+              <Image
+                resizeMode="cover"
+                source={
+                  Object {
+                    "testUri": "../../../src/common/images/health_help.png",
+                  }
+                }
+                style={
+                  Array [
+                    Object {
+                      "bottom": 0,
+                      "left": 0,
+                      "position": "absolute",
+                      "right": 0,
+                      "top": 0,
+                    },
+                    Object {
+                      "height": undefined,
+                      "width": undefined,
+                    },
+                    undefined,
+                  ]
+                }
+              />
               <View
                 style={
                   Object {
@@ -339,22 +385,25 @@ style = Object {
               >
                 <View
                   style={
-                    Object {
-                      "alignItems": "center",
-                      "backgroundColor": "rgb(116, 130, 148)",
-                      "bottom": 0,
-                      "flex": 1,
-                      "justifyContent": "center",
-                      "left": 0,
-                      "opacity": 0.4,
-                      "position": "absolute",
-                      "right": 0,
-                      "top": 0,
-                    }
+                    Array [
+                      Object {
+                        "alignItems": "center",
+                        "backgroundColor": "rgb(116, 130, 148)",
+                        "bottom": 0,
+                        "flex": 1,
+                        "justifyContent": "center",
+                        "left": 0,
+                        "opacity": 0.4,
+                        "position": "absolute",
+                        "right": 0,
+                        "top": 0,
+                      },
+                      Object {},
+                    ]
                   }
                 />
               </View>
-            </Image>
+            </View>
             <View
               contentSpacing={true}
               style={
@@ -374,7 +423,6 @@ style = Object {
               <Text
                 accessible={true}
                 allowFontScaling={true}
-                disabled={false}
                 ellipsizeMode="tail"
                 style={
                   Object {
@@ -390,7 +438,7 @@ style = Object {
                   }
                 }
               >
-                Health Help
+                Health Matters
               </Text>
             </View>
           </View>

@@ -33,7 +33,6 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Object {
@@ -47,7 +46,6 @@ exports[`it renders correctly 1`] = `
     <Text
       accessible={true}
       allowFontScaling={false}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [
@@ -79,7 +77,11 @@ exports[`it renders correctly 1`] = `
     }
   >
     <Image
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/common/images/medal1.png",
+        }
+      }
       style={
         Object {
           "height": 40,
@@ -90,7 +92,11 @@ exports[`it renders correctly 1`] = `
       }
     />
     <Image
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/common/images/medal2.png",
+        }
+      }
       style={
         Object {
           "height": 40,
@@ -101,7 +107,11 @@ exports[`it renders correctly 1`] = `
       }
     />
     <Image
-      source={1}
+      source={
+        Object {
+          "testUri": "../../../src/common/images/medal3.png",
+        }
+      }
       style={
         Object {
           "height": 40,

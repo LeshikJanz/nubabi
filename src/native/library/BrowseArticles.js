@@ -1,17 +1,18 @@
 // @flow
-import type { GraphQLDataProp, Article } from '../../common/types';
+import type { Article, GraphQLDataProp } from '../../common/types';
 import React from 'react';
 import { compose } from 'ramda';
-import { graphql, gql } from 'react-apollo';
-import { showNoContentViewIf, displayLoadingState } from '../components';
+import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
+import { displayLoadingState, showNoContentViewIf } from '../components';
 import ArticleList from './ArticleList';
 import ArticleListItem from './ArticleListItem';
 import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 
 type Props = {
-  onViewArticle: () => void,
   data: GraphQLDataProp<*>,
   articles: Array<Article>,
+  onViewArticle: () => void,
 };
 
 export const BrowseArticles = ({

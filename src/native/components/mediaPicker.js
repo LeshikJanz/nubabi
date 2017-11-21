@@ -42,8 +42,9 @@ export type MediaPickerResponse = Array<MediaPickerItem>;
 const defaultOptions = {
   mediaType: 'any',
   multiple: true,
-  waitAnimationEnd: false,
+  waitAnimationEnd: true,
   loadingLabelText: 'Processing...',
+  includeBase64: false,
 };
 
 export function showMediaPicker(

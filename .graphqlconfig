@@ -1,0 +1,9 @@
+{
+  "schemaPath": "graphql.schema.json",
+  "endpoints": {
+    "dev": "http://localhost:8080/graphql",
+    "headers": {
+      "Authorization": "Bearer ${env:AUTH_TOKEN}"
+    }
+  }
+}

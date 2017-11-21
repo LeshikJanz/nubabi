@@ -1,4 +1,5 @@
-import { merge } from 'lodash';
+// @flow
+import { combineResolvers } from './common';
 import rootResolvers from './core';
 import babyResolvers from './babies';
 import activityResolvers from './activities';
@@ -7,7 +8,7 @@ import expertResolvers from './experts';
 import contentResolvers from './content';
 import memoryResolvers from './memories';
 
-const resolvers = merge(
+const resolvers = combineResolvers(
   rootResolvers,
   babyResolvers,
   activityResolvers,

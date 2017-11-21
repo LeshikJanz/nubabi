@@ -1,42 +1,44 @@
 // @flow
 import type { NavigationProp } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { Screen, Box } from '../components';
-import AddMemoryHeader from './AddMemoryHeader';
+import { TouchableOpacity } from 'react-native';
+import { Box, Icon, Screen } from '../components';
 import ViewMemory from './ViewMemory';
 
 type Props = {
   navigation: NavigationProp,
 };
+
 export class ViewMemoryScreen extends PureComponent {
   props: Props;
 
-  static navigationOptions = {
-    title: 'Memory',
-  };
+  static navigationOptions = ({ navigation }) => {
+    const editMemory = () =>
+      navigation.navigate('editMemory', {
+        id: navigation.state.params.id,
+        returnKey: navigation.state.params.returnKey,
+      });
 
-  // TODO: remove duplication
-  handleNavigateToAddMemory = () => {
-    this.props.navigation.navigate('addMemory');
-  };
-
-  handleNavigateToEditMemory = (id: string) => {
-    this.props.navigation.navigate('editMemory', {
-      id,
-      parentKey: this.props.navigation.state.key,
-    });
+    return {
+      title: 'Memory Details',
+      headerRight: (
+        <TouchableOpacity style={{ paddingRight: 10 }} onPress={editMemory}>
+          <Icon
+            size={20}
+            name="md-create"
+            color="#454D56"
+            style={{ marginLeft: 10 }}
+          />
+        </TouchableOpacity>
+      ),
+    };
   };
 
   render() {
     return (
       <Screen>
-        <AddMemoryHeader onAddMemory={this.handleNavigateToAddMemory} />
-
         <Box flex={1} style={() => ({ marginTop: 9 })}>
-          <ViewMemory
-            id={this.props.navigation.state.params.id}
-            onEditMemory={this.handleNavigateToEditMemory}
-          />
+          <ViewMemory id={this.props.navigation.state.params.id} />
         </Box>
       </Screen>
     );

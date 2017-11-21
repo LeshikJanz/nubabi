@@ -1,0 +1,78 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `null`;
+
+exports[`it renders correctly 2`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "flexDirection": "row",
+    "marginLeft": 8,
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#9EABBC",
+    "fontFamily": "SF Pro Text"
+}
+
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flexDirection": "row",
+    }
+  }
+>
+  <Text
+    accessible={true}
+    allowFontScaling={false}
+    ellipsizeMode="tail"
+    style={
+      Array [
+        Object {
+          "color": "#9EABBC",
+          "fontSize": 14,
+        },
+        undefined,
+        Object {
+          "fontFamily": "Ionicons",
+          "fontStyle": "normal",
+          "fontWeight": "normal",
+        },
+      ]
+    }
+  >
+    
+  </Text>
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail"
+    letterSpacing={-0.14}
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "color": "#9EABBC",
+        "fontFamily": "SF Pro Text",
+        "fontSize": 13,
+        "lineHeight": 16,
+        "marginLeft": 8,
+      }
+    }
+  >
+    4 comments
+  </Text>
+</View>
+`;

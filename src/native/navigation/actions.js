@@ -1,7 +1,7 @@
 // @flow
-import type { Deps } from '../../common/types';
 import { Observable } from 'rxjs';
 import { NavigationActions } from 'react-navigation';
+import { path } from 'ramda';
 
 export const resetNavigation = (routeName: string, index?: number = 0) =>
   NavigationActions.reset({
@@ -17,7 +17,7 @@ export const navigate = (routeName: string, params: Object = {}) => {
   });
 };
 
-const resetNavigationEpic = (action$: any, deps: Deps) => {
+const resetNavigationEpic = (action$: any) => {
   return action$
     .ofType('NAVIGATION_RESET')
     .mergeMap(action =>
@@ -27,4 +27,33 @@ const resetNavigationEpic = (action$: any, deps: Deps) => {
     );
 };
 
-export const epics = [resetNavigationEpic];
+const returnKeyPath = path(['actions', '0', 'action']);
+
+// Resets a tab navigation to a specific tab
+// TODO: this is a workaround until we have time to patch TabsNavigator
+const resetTabNavigatorEpic = (action$: any) => {
+  return action$
+    .filter(action => {
+      return action.type === 'Navigation/RESET' && !!returnKeyPath(action);
+    })
+    .switchMap(action => {
+      return Observable.of(returnKeyPath(action));
+    });
+};
+
+const goBackAfterSubmitEpic = (action$: any) => {
+  return action$
+    .filter(
+      action =>
+        action.type === '@@redux-form/SET_SUBMIT_SUCCEEDED' &&
+        action.meta &&
+        action.meta.form === 'user',
+    )
+    .mapTo(NavigationActions.back());
+};
+
+export const epics = [
+  resetNavigationEpic,
+  goBackAfterSubmitEpic,
+  resetTabNavigatorEpic,
+];

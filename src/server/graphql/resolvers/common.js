@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable arrow-parens */
 import R from 'ramda';
 import {
@@ -27,33 +28,37 @@ export type RawActivity = {
 
 export type RawActivityMedia = {};
 
+export const combineResolvers = (...resolvers) => {
+  return R.reduce(R.mergeDeepLeft, {}, resolvers);
+};
+
 export const mutationWithClientMutationId = mutateAndGetPayload => {
   return (_, { input }, ctx, info) => {
-    return Promise.resolve(
-      mutateAndGetPayload(input, ctx, info),
-    ).then(payload => {
-      payload.clientMutationId = input.clientMutationId; // eslint-disable-line no-param-reassign
-      return payload;
-    });
+    return Promise.resolve(mutateAndGetPayload(input, ctx, info)).then(
+      payload => {
+        payload.clientMutationId = input.clientMutationId; // eslint-disable-line no-param-reassign
+        return payload;
+      },
+    );
   };
 };
 
-const {
-  nodeField,
-} = nodeDefinitions((globalId, { token, connectors: { firebase } }) => {
-  const { type, id } = fromGlobalId(globalId);
-  switch (type) {
-    case 'Baby': {
-      return firebase.getBaby(id);
+const { nodeField } = nodeDefinitions(
+  (globalId, { token, connectors: { firebase } }) => {
+    const { type, id } = fromGlobalId(globalId);
+    switch (type) {
+      case 'Baby': {
+        return firebase.getBaby(id);
+      }
+      case 'Activity': {
+        return babies.getActivity(token, id);
+      }
+      default: {
+        return null;
+      }
     }
-    case 'Activity': {
-      return babies.getActivity(token, id);
-    }
-    default: {
-      return null;
-    }
-  }
-});
+  },
+);
 
 export const nodeFieldResolver = nodeField.resolve;
 
@@ -125,19 +130,19 @@ export const connectionFromBackendMetadataArray = data => {
   const firstEdge = edges[0];
   const lastEdge = edges[edges.length - 1];
 
-  const connection = {
+  const cursorProp = R.propOr(null, 'cursor');
+
+  return {
     edges,
     count: meta.total,
     pageInfo: {
-      startCursor: firstEdge.cursor, // TODO: backend meta should do this
-      endCursor: lastEdge.cursor, // TODO: above
+      startCursor: cursorProp(firstEdge), // TODO: backend meta should do this
+      endCursor: cursorProp(lastEdge), // TODO: see above
       pageSize: meta.pageSize,
       hasNextPage: meta.hasNextPage,
       hasPrevPage: meta.hasPrevPage,
     },
   };
-
-  return connection;
 };
 
 export const connectionFromBackendMetadata = (promise, args) => {

@@ -19,9 +19,11 @@ type Props = {
 
 Animatable.initializeRegistryWithDefinitions({
   rotatingHorse360: {
+    // $FlowFixMe$
     0: {
       transform: [{ rotate: '0deg' }],
     },
+    // $FlowFixMe$
     1: {
       transform: [{ rotate: '360deg' }],
     },
@@ -36,40 +38,68 @@ export class SubmitButton extends PureComponent {
     animation: null,
   };
 
+  componentDidMount() {
+    this._isMounted = true;
+  }
   componentWillReceiveProps(nextProps: Props) {
-    if (
-      nextProps.loading === false &&
-      this.props.loading === true &&
-      this.state.isAnimating
-    ) {
+    if (nextProps.loading !== this.props.loading) {
       const width = StyleSheet.flatten([
         styles.submitButton,
         nextProps.buttonStyle,
       ]).width;
-      this.setState(
-        {
+
+      if (nextProps.loading === true) {
+        this.setState({
+          isAnimating: true,
           animation: {
+            // $FlowFixMe$
             0: {
-              width: this.props.animatedWidth || 30,
-              opacity: 1,
-            },
-            0.5: {
-              opacity: 0.5,
-            },
-            1: {
               width,
               opacity: 1,
             },
+            // $FlowFixMe$
+            0.5: {
+              opacity: 0.5,
+            },
+            // $FlowFixMe$
+            1: {
+              width: nextProps.animatedWidth || 30,
+              opacity: 1,
+            },
           },
-        },
-        () => {
-          this.timeout = setTimeout(() => {
-            this.setState({ isAnimating: false }, () => {
-              this.submitTextView && this.submitTextView.fadeIn();
-            });
-          }, 1000);
-        },
-      );
+        });
+
+        return;
+      }
+
+      if (nextProps.loading === false && this.state.isAnimating) {
+        this.setState(
+          {
+            animation: {
+              0: {
+                width: nextProps.animatedWidth || 30,
+                opacity: 1,
+              },
+              0.5: {
+                opacity: 0.5,
+              },
+              1: {
+                width,
+                opacity: 1,
+              },
+            },
+          },
+          () => {
+            this.timeout = setTimeout(() => {
+              if (this._isMounted) {
+                this.setState({ isAnimating: false }, () => {
+                  this.submitTextView && this.submitTextView.fadeIn();
+                });
+              }
+            }, 1000);
+          },
+        );
+      }
     }
   }
 
@@ -77,38 +107,11 @@ export class SubmitButton extends PureComponent {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+    this._isMounted = false;
   }
 
-  onAnimationBegin = () => {
-    this.setState({ isAnimating: true });
-  };
-
   handleOnPress = () => {
-    const width = StyleSheet.flatten([
-      styles.submitButton,
-      this.props.buttonStyle,
-    ]).width;
-
-    this.setState(
-      {
-        animation: {
-          0: {
-            width,
-            opacity: 1,
-          },
-          0.5: {
-            opacity: 0.5,
-          },
-          1: {
-            width: this.props.animatedWidth || 30,
-            opacity: 1,
-          },
-        },
-      },
-      () => {
-        this.props.onPress();
-      },
-    );
+    this.props.onPress();
   };
 
   render() {
@@ -142,12 +145,14 @@ export class SubmitButton extends PureComponent {
 
     if (!loading && !isAnimating) {
       const TextContainer = props => {
-        return typeof jest === 'undefined'
-          ? <Animatable.Text
-              {...props}
-              ref={ref => (this.submitTextView = ref)}
-            />
-          : <Text {...props} />;
+        return typeof jest === 'undefined' ? (
+          <Animatable.Text
+            {...props}
+            ref={ref => (this.submitTextView = ref)}
+          />
+        ) : (
+          <Text {...props} />
+        );
       };
 
       buttonContent = (

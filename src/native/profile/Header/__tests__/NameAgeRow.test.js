@@ -10,7 +10,7 @@ test('it renders correctly', () => {
     .create(
       <NameAgeRow
         babyName="Ruby"
-        birthDate={'2017-04-02'}
+        birthDate="2017-04-02"
         onEditBaby={() => {}}
       />,
     )

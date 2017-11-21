@@ -32,7 +32,10 @@ export type {
   File,
   FileConnection,
   FileEdge,
+  Image,
   GrowthArticle,
+  Memory,
+  Measurement,
 } from './modelTypes';
 export * from './queryTypes';
 
@@ -143,6 +146,7 @@ export type AppState = {
   +error: ?Error,
   +online: boolean,
   +started: boolean,
+  +success: ?string,
 };
 
 export type ConfigState = {
@@ -166,6 +170,7 @@ export type MobileDeviceState = {
   +systemVersion: ?string,
   +bundleId: ?string,
   +locale: ?string,
+  +orientation: 'PORTRAIT' | 'LANDSCAPE' | null,
 };
 
 export type DeviceState = GenericDeviceState | MobileDeviceState;

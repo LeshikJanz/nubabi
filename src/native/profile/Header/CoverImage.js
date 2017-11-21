@@ -2,7 +2,7 @@
 import type { LayoutProps, Image as ImageType } from '../../../common/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import withLayout from '../../components/withLayout';
 
 const headerBackground = require('../../../common/images/profileBackground.jpg');

@@ -59,6 +59,22 @@ style = Object {
       }
     }
     style={
+      Array [
+        Object {
+          "flex": 1,
+        },
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+      ]
+    }
+  />
+  <View
+    style={
       Object {
         "flex": 1,
       }
@@ -66,13 +82,7 @@ style = Object {
   >
     <View
       style={
-        Object {
-          "flex": 1,
-        }
-      }
-    >
-      <View
-        style={
+        Array [
           Object {
             "alignItems": "center",
             "backgroundColor": "rgb(116, 130, 148)",
@@ -84,11 +94,12 @@ style = Object {
             "position": "absolute",
             "right": 0,
             "top": 0,
-          }
-        }
-      />
-    </View>
-  </Image>
+          },
+          Object {},
+        ]
+      }
+    />
+  </View>
   <View
     style={
       Object {
@@ -128,7 +139,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         numberOfLines={2}
         style={

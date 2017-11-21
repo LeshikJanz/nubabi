@@ -9,7 +9,8 @@ style = Object {
     "borderTopWidth": 0,
     "borderBottomLeftRadius": 4,
     "borderTopLeftRadius": 4,
-    "overflow": "hidden"
+    "overflow": "hidden",
+    "flex": 1
 }
 
 <View
@@ -91,53 +92,93 @@ style = Object {
     <View
       style={
         Object {
-          "padding": 10,
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "flex": 1,
         }
       }
     >
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
+      <View
         style={
           Object {
-            "color": "#454D56",
-            "fontSize": 16,
-            "marginBottom": 5,
+            "padding": 10,
           }
         }
       >
-        Sensory
-      </Text>
-      <Text
-        accessible={true}
-        allowFontScaling={true}
-        disabled={false}
-        ellipsizeMode="tail"
-        style={
-          Object {
-            "color": "#748294",
-            "fontSize": 14,
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#454D56",
+              "fontSize": 16,
+              "marginBottom": 5,
+            }
           }
-        }
-      >
-        Sensory Activity 1
-      </Text>
+        >
+          Sensory
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#748294",
+              "fontSize": 14,
+            }
+          }
+        >
+          Sensory Activity 1
+        </Text>
+      </View>
     </View>
-    <Image
-      resizeMode="contain"
-      source={1}
+    <View
       style={
         Object {
-          "height": 22,
-          "position": "absolute",
-          "right": 10,
-          "top": 10,
-          "width": 22,
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
         }
       }
-    />
+    >
+      <View
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "flex": 1,
+          }
+        }
+      >
+        <Image
+          resizeMode="contain"
+          source={
+            Object {
+              "testUri": "../../../src/common/images/sensory_icon.png",
+            }
+          }
+          style={
+            Object {
+              "height": 22,
+              "position": "absolute",
+              "right": 10,
+              "top": 10,
+              "width": 22,
+            }
+          }
+        />
+      </View>
+    </View>
   </View>
 </View>
 `;

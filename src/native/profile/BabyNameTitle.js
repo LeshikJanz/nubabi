@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { compose, path } from 'ramda';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
+import { withCurrentBaby } from '../components';
 
 type Props = {
   babyName: ?string,
@@ -13,17 +13,11 @@ export const BabyNameTitle = ({ babyName }: Props) => {
     return <Text>Nubabi</Text>;
   }
 
-  return (
-    <Text>
-      {babyName}
-    </Text>
-  );
+  return <Text>{babyName}</Text>;
 };
 
 export default compose(
-  connect(({ babies }: State) => ({
-    currentBabyId: babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
       query BabyName($id: ID) {

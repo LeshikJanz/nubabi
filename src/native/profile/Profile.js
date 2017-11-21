@@ -7,14 +7,13 @@ import type {
   Viewer,
 } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { AsyncStorage, ScrollView, StyleSheet, View } from 'react-native';
 import { compose, path } from 'ramda';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import theme from '../../common/themes/defaultTheme';
-import displayLoadingState from '../components/displayLoadingState';
-import { Screen } from '../components';
+import { displayLoadingState, RequireBabyView, Screen } from '../components';
 import Header from './Header/Header';
 import RecentMemories from './RecentMemories';
 import ProfileIcon from '../navigation/ProfileIcon';
@@ -57,10 +56,20 @@ class Profile extends PureComponent {
       shadowOpacity: 0,
     },
     tabBarLabel: () => null,
-    tabBarIcon: ({ tintColor, focused }) =>
-      <ProfileIcon active={focused} tintColor={tintColor} />,
+    tabBarIcon: ({ tintColor, focused }) => (
+      <ProfileIcon active={focused} tintColor={tintColor} />
+    ),
   };
 
+  componentWillMount() {
+    AsyncStorage.getItem('returnKey').then(routeName => {
+      AsyncStorage.removeItem('returnKey').then(() => {
+        if (routeName) {
+          this.props.navigation.navigate(routeName);
+        }
+      });
+    });
+  }
   handleEditBaby = () => this.props.navigation.navigate('editBaby');
   handleAddMemory = () => this.props.navigation.navigate('addMemory');
   handleViewActivities = () =>
@@ -69,24 +78,24 @@ class Profile extends PureComponent {
     this.props.navigation.navigate('viewActivity', { id, title });
   };
   handleViewMemory = (id: string, title: string) => {
-    this.props.navigation.navigate('viewMemory', { id, title });
+    this.props.navigation.navigate('viewMemory', {
+      id,
+      title,
+      returnKey: this.props.navigation.state.key,
+    });
   };
   handleNavigateToMemories = () => this.props.navigation.navigate('memories');
   handleViewGrowth = () => this.props.navigation.navigate('whatYouNeedToKnow');
 
   render() {
     const { baby } = this.props;
+
+    if (!baby) {
+      return <RequireBabyView />;
+    }
+
     const weightUnit = this.props.unitDisplay.weight;
     const heightUnit = this.props.unitDisplay.height;
-
-    // TODO: empty state
-    if (!baby) {
-      return (
-        <View style={styles.emptyState}>
-          <Text>No baby</Text>
-        </View>
-      );
-    }
 
     return (
       <Screen>
@@ -151,11 +160,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: 10,
     marginBottom: 20,
-  },
-  emptyState: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
 

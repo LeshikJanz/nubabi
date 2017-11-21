@@ -1,19 +1,27 @@
 // @flow
-import type { State, Memory as MemoryType } from '../../common/types';
+import type {
+  ApolloQueryResult,
+  GraphQLDataProp,
+  Memory as MemoryType,
+} from '../../common/types';
 import React, { PureComponent } from 'react';
 import { compose } from 'ramda';
-import { graphql, gql } from 'react-apollo';
-import { connect } from 'react-redux';
-import { displayLoadingState, showNoContentViewIf } from '../components';
-import { isEmptyProp, mapEdgesToProp } from '../../common/helpers/graphqlUtils';
+import { gql } from 'react-apollo';
 import MemoryList from './MemoryList';
 import Memory from './Memory';
+import toggleMemoryLike from './toggleMemoryLike';
 
 type Props = {
   memories: Array<MemoryType>,
   currentBabyId: string,
+  onViewMemory: (id: string) => void,
   onEditMemory: (id: string) => void,
-};
+  onToggleLike: (
+    id: string,
+    isLiked: boolean,
+    likeCount: number,
+  ) => Promise<ApolloQueryResult<*>>,
+} & GraphQLDataProp<*>;
 
 export class ViewMemories extends PureComponent {
   props: Props;
@@ -39,37 +47,13 @@ export class ViewMemories extends PureComponent {
       <MemoryList
         babyId={this.props.currentBabyId}
         memories={this.props.memories}
+        onViewMemory={this.props.onViewMemory}
+        onToggleLikeMemory={this.props.onToggleLike}
         onEditMemory={this.props.onEditMemory}
+        onRefresh={this.props.data.refetch}
       />
     );
   }
 }
 
-export default compose(
-  connect(({ babies }: State) => ({
-    currentBabyId: babies.currentBabyId,
-  })),
-  graphql(
-    gql`
-    query ViewMemories($babyId: ID) {
-      viewer {
-        baby(id: $babyId) {
-          id
-          ...Memories
-        }
-      }
-    }
-    ${ViewMemories.fragments.list}
-
-  `,
-    {
-      options: ({ currentBabyId }) => ({
-        variables: { babyId: currentBabyId },
-        fetchPolicy: 'cache-and-network',
-      }),
-      props: mapEdgesToProp('viewer.baby.memories', 'memories'),
-    },
-  ),
-  showNoContentViewIf(isEmptyProp('memories')),
-  displayLoadingState,
-)(ViewMemories);
+export default compose(toggleMemoryLike)(ViewMemories);

@@ -8,10 +8,9 @@ const background = require('../../common/images/activity-history.png');
 
 type Props = {
   onPress: () => void,
-  layout: LayoutProps,
 };
 
-export const ActivityHistoryButton = ({ onPress, layout }: Props) => {
+export const ActivityHistoryButton = ({ onPress }: Props) => {
   return (
     <Card padding={0} onPress={onPress} style={() => ({ marginLeft: 16 })}>
       <Box flex={1} alignItems="center" justifyContent="center">

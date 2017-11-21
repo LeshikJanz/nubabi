@@ -3,6 +3,8 @@ package com.nubabimobile;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.yamill.orientation.OrientationPackage;
+import com.horcrux.svg.SvgPackage;
 import com.rnim.rn.audio.ReactNativeAudioPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.brentvatne.react.ReactVideoPackage;
@@ -16,7 +18,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.horcrux.svg.SvgPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new OrientationPackage(),
+            new SvgPackage(),
             new ReactNativeAudioPackage(),
             new RNSoundPackage(),
             new ReactVideoPackage(),
@@ -41,9 +44,13 @@ public class MainApplication extends Application implements ReactApplication {
             new RNFetchBlobPackage(),
             new ImagePickerPackage(),
             new RNSpinkitPackage(),
-            new VectorIconsPackage(),
-            new SvgPackage()
+            new VectorIconsPackage()
       );
+    }
+
+    @Override
+    protected String getJSMainModuleName() {
+      return "index";
     }
   };
 

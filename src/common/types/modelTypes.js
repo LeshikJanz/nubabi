@@ -559,10 +559,18 @@ export type GrowthArticleEdge = {
 };
 
 export type GrowthArticle = {
+  /** The ID of an object */
   id: string,
   title: string,
   text: string,
   readingTime: ReadingTime,
+  section: GrowthArticleSection,
+};
+
+export type GrowthArticleSection = {
+  /** The ID of an object */
+  id: string,
+  name: string,
 };
 
 /**

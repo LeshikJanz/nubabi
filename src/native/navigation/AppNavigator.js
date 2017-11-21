@@ -1,5 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 import { BackHandler, Linking, Platform } from 'react-native';
 import {
   createNavigationContainer,
@@ -29,6 +30,8 @@ import NextWeeksEquipment from '../stimulation/NextWeeksEquipment';
 import BrowseActivitiesScreen from '../stimulation/BrowseActivitiesScreen';
 import BrowseActivitiesListScreen from '../stimulation/BrowseActivitiesListScreen';
 import ViewThisWeeksActivity from '../stimulation/ViewThisWeekActivity';
+import ActivityHistoryScreen from '../stimulation/ActivityHistoryScreen';
+import ActivityHistoryDetailScreen from '../stimulation/ActivityHistoryDetailScreen';
 import BrowseArticlesScreen from '../library/BrowseArticlesScreen';
 import UpdateWeightScreen from '../profile/EditBaby/UpdateWeightScreen';
 import UpdateHeightScreen from '../profile/EditBaby/UpdateHeightScreen';
@@ -48,11 +51,13 @@ import ViewMemoryScreen from '../memories/ViewMemoryScreen';
 import AddMemoryScreen from '../memories/AddMemoryScreen';
 import EditMemoryScreen from '../memories/EditMemoryScreen';
 import VoiceRecordingScreen from '../memories/VoiceRecordingScreen';
+import StickersScreen from '../memories/StickersScreen';
 import NotificationSettingsScreen from '../settings/NotificationSettingsScreen';
 import EditUserProfileScreen from '../settings/EditUserProfileScreen';
 import FriendsScreen from '../settings/FriendsScreen';
 import InviteUserScreen from '../settings/InviteUserScreen';
 import GalleryScreen from '../components/GalleryScreen';
+import NotificationsScreen from '../notifications/NotificationsScreen';
 
 export type TransitionName =
   | 'cardStack'
@@ -70,17 +75,21 @@ type State = {
 const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
 const routes = {
+  // Settings
   settings: { screen: SettingsScreen },
+  notifications: { screen: NotificationsScreen },
   notificationSettings: { screen: NotificationSettingsScreen },
   friends: { screen: FriendsScreen },
   inviteUser: { screen: InviteUserScreen },
   chooseBaby: { screen: ChooseBabyScreen, mode: 'modal' },
   editUser: { screen: EditUserProfileScreen },
+  // Profile
   addBaby: { screen: AddBaby },
   editBaby: { screen: EditBaby },
   updateHeight: { screen: UpdateHeightScreen },
   updateWeight: { screen: UpdateWeightScreen },
   graphDetail: { screen: GraphDetailScreen },
+  // Stimulation
   thisWeekActivities: { screen: ThisWeeksActivities },
   favoriteActivities: { screen: FavoriteActivities },
   nextWeeksEquipment: { screen: NextWeeksEquipment },
@@ -88,6 +97,10 @@ const routes = {
   browseActivitiesList: { screen: BrowseActivitiesListScreen },
   viewActivity: { screen: ViewActivity },
   viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
+  viewActivityMedia: { screen: ActivityMediaScreen },
+  activityHistory: { screen: ActivityHistoryScreen },
+  activityHistoryDetail: { screen: ActivityHistoryDetailScreen },
+  // Growth
   whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
   developmentRoadmap: { screen: DevelopmentRoadmapScreen },
   viewGrowthContent: {
@@ -99,9 +112,9 @@ const routes = {
     screen: ViewArticleScreen,
     path: 'articles/:id',
   },
-  viewActivityMedia: { screen: ActivityMediaScreen },
   parentingTips: { screen: ParentingTipsScreen },
   healthHelp: { screen: HealthHelpScreen },
+  // Memories
   addMemory: { screen: AddMemoryScreen },
   viewMemory: {
     screen: ViewMemoryScreen,
@@ -113,6 +126,7 @@ const routes = {
   },
   voiceRecording: { screen: VoiceRecordingScreen },
   gallery: { screen: GalleryScreen },
+  stickers: { screen: StickersScreen, mode: 'modal' },
 };
 
 class TransitionerSwitcher extends PureComponent {
@@ -121,8 +135,8 @@ class TransitionerSwitcher extends PureComponent {
   // For simplicity, we use context to pass these functions to children
   // We will be moving to having this managed on Redux
   static childContextTypes = {
-    setActiveTransition: React.PropTypes.func,
-    getActiveTransition: React.PropTypes.func,
+    setActiveTransition: PropTypes.func,
+    getActiveTransition: PropTypes.func,
   };
 
   constructor(props) {

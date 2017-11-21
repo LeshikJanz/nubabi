@@ -1,22 +1,27 @@
 extend type Viewer {
   allActivities(
-    before: String,
-    after: String,
-    first: Int,
-    last: Int,
+    before: String
+    after: String
+    first: Int
+    last: Int
     filter: ActivityFilterInput
   ): ActivityConnection!
 }
 
 extend type Baby {
   favoriteActivities(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): ActivityConnection!
+  activityHistory: ActivityHistoryConnection
 }
 
 extend type Mutation {
   swoopActivity(input: SwoopActivityInput!): ChangeActivityPayload
   changeActivity(input: AdjustActivityLevelInput!): ChangeActivityPayload
+  completeActivity(input: CompleteActivityInput!): CompleteActivityPayload
   toggleActivityFavorite(input: ToggleFavoriteInput!): ToggleFavoritePayload
 }
 
@@ -28,16 +33,26 @@ type Activity {
   equipment: String
   expert: Expert!
   skillArea: SkillArea!
-  isFavorite: Boolean
+  # Whether an activity is favorite, only valid when it's child of baby
+  # (i.e $babyId passed). Will return false otherwise.
+  isFavorite: Boolean!
+  # Whether this activity has been completed, only valid when it's
+  # child of baby (i.e $babyId passed). Will return false otherwise.
+  isCompleted: Boolean!
   categories: CategoryConnection!
   media(
-    before: String, after: String, first: Int, last: Int
+    before: String
+    after: String
+    first: Int
+    last: Int
   ): ActivityMediaConnection!
+  equipment: String
 }
 
 input ActivityFilterInput {
   skillAreas: [ID!]
   categories: [ID!]
+  periodId: ID
 }
 
 input SwoopActivityInput {
@@ -62,10 +77,21 @@ input AdjustActivityLevelInput {
 
 type ChangeActivityPayload {
   newActivity: Activity
-
   # The ID for the Activity that got replaced
   oldActivityId: ID
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
 
+input CompleteActivityInput {
+  id: ID!
+  babyId: ID!
+  # An opaque string used by frontend frameworks like relay to track requests and responses
+  clientMutationId: String
+}
+
+type CompleteActivityPayload {
+  edge: ActivityEdge
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -77,9 +103,8 @@ input ToggleFavoriteInput {
 }
 
 type ToggleFavoritePayload {
-  activity: Activity
+  edge: ActivityEdge
   wasFavorited: Boolean
-
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -88,10 +113,8 @@ type ToggleFavoritePayload {
 type ActivityConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [ActivityEdge]
-
   # Count of filtered result set without considering pagination arguments
   count: Int!
 }
@@ -99,7 +122,6 @@ type ActivityConnection {
 type ActivityEdge {
   # The item at the end of the edge.
   node: Activity
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -124,7 +146,6 @@ type SkillAreaImage implements ResizableImage {
 type SkillAreaConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [SkillAreaEdge]
 }
@@ -132,7 +153,6 @@ type SkillAreaConnection {
 type SkillAreaEdge {
   # The item at the end of the edge.
   node: SkillArea!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -146,7 +166,6 @@ type Category implements Node {
 type CategoryConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [CategoryEdge]
 }
@@ -154,7 +173,6 @@ type CategoryConnection {
 type CategoryEdge {
   # The item at the end of the edge.
   node: Category!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -174,7 +192,6 @@ type ActivityMedia {
 type ActivityMediaConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [ActivityMediaEdge]
 }
@@ -182,7 +199,27 @@ type ActivityMediaConnection {
 type ActivityMediaEdge {
   # The item at the end of the edge.
   node: ActivityMedia!
-
   # A cursor for use in pagination.
   cursor: String!
+}
+
+# A connection to a list of items.
+type ActivityHistoryConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [ActivityHistoryEdge]
+}
+
+type ActivityHistoryEdge {
+  # The item at the end of the edge.
+  node: ActivityHistory!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type ActivityHistory {
+  id: ID!
+  startDate: DateTime!
+  endDate: DateTime!
 }

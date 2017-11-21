@@ -15,13 +15,11 @@ const mocks = {
     }
     const card = faker.helpers.userCard();
 
-    const expert = {
+    return {
       name: card.name,
       discipline: faker.commerce.department(),
       avatar_url: faker.image.avatar(),
     };
-
-    return expert;
   },
   AchievementConnection: () => ({
     count: faker.random.number(20),

@@ -1,6 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`it renders correctly when not selected 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0
+}
+
 <View
   accessibilityComponentType={undefined}
   accessibilityLabel={undefined}
@@ -19,6 +27,11 @@ exports[`it renders correctly when not selected 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
       "opacity": 1,
     }
   }
@@ -48,7 +61,6 @@ exports[`it renders correctly when not selected 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [
@@ -69,6 +81,14 @@ exports[`it renders correctly when not selected 1`] = `
 `;
 
 exports[`it renders correctly when selected 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0
+}
+
 <View
   accessibilityComponentType={undefined}
   accessibilityLabel={undefined}
@@ -87,6 +107,11 @@ exports[`it renders correctly when selected 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
       "opacity": 1,
     }
   }
@@ -118,7 +143,6 @@ exports[`it renders correctly when selected 1`] = `
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
       style={
         Array [

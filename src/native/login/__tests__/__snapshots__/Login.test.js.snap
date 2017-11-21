@@ -25,7 +25,11 @@ style = Object {
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/common/images/loginBackground.jpg",
+      }
+    }
     style={
       Object {
         "flex": 1,
@@ -49,6 +53,7 @@ style = Object {
     }
   />
   <RCTScrollView
+    automaticallyAdjustContentInsets={false}
     contentContainerStyle={
       Object {
         "backgroundColor": "transparent",
@@ -88,7 +93,11 @@ style = Object {
       >
         <Image
           resizeMode="stretch"
-          source={1}
+          source={
+            Object {
+              "testUri": "../../../src/common/images/logo.png",
+            }
+          }
           style={
             Object {
               "alignItems": "center",
@@ -121,6 +130,7 @@ style = Object {
             }
           >
             <TextInput
+              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               blurOnSubmit={false}
@@ -158,6 +168,7 @@ style = Object {
             }
           >
             <TextInput
+              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               onChangeText={[Function]}
@@ -235,7 +246,6 @@ style = Object {
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Array [
@@ -270,7 +280,6 @@ style = Object {
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -299,7 +308,6 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -344,7 +352,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -397,7 +404,11 @@ style = Object {
   }
 >
   <Image
-    source={1}
+    source={
+      Object {
+        "testUri": "../../../src/common/images/loginBackground.jpg",
+      }
+    }
     style={
       Object {
         "flex": 1,
@@ -421,6 +432,7 @@ style = Object {
     }
   />
   <RCTScrollView
+    automaticallyAdjustContentInsets={false}
     contentContainerStyle={
       Object {
         "backgroundColor": "transparent",
@@ -460,7 +472,11 @@ style = Object {
       >
         <Image
           resizeMode="stretch"
-          source={1}
+          source={
+            Object {
+              "testUri": "../../../src/common/images/logo.png",
+            }
+          }
           style={
             Object {
               "alignItems": "center",
@@ -493,6 +509,7 @@ style = Object {
             }
           >
             <TextInput
+              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               blurOnSubmit={false}
@@ -530,6 +547,7 @@ style = Object {
             }
           >
             <TextInput
+              allowFontScaling={true}
               autoCapitalize="none"
               autoCorrect={false}
               onChangeText={[Function]}
@@ -619,7 +637,6 @@ style = Object {
         <Text
           accessible={true}
           allowFontScaling={true}
-          disabled={false}
           ellipsizeMode="tail"
           style={
             Object {
@@ -648,7 +665,6 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -693,7 +709,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {

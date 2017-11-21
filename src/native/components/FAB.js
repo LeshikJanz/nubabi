@@ -5,7 +5,7 @@ import Box from './Box';
 import Text from './Text';
 
 type Props = {
-  onPress?: () => void,
+  onPress?: () => any,
   style?: Object,
   children: any,
   size?: number,

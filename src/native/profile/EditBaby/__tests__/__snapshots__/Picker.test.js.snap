@@ -41,7 +41,6 @@ style = Object {}
     <Text
       accessible={true}
       allowFontScaling={true}
-      disabled={false}
       ellipsizeMode="tail"
     >
       30

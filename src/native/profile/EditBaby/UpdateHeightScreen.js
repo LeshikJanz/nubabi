@@ -1,15 +1,21 @@
 // @flow
+import type { NavigationProp } from '../../../common/types';
 import React, { PureComponent } from 'react';
 import { Screen } from '../../components';
 import UpdateMeasurement from './UpdateMeasurement';
 
+type Props = {
+  navigation: NavigationProp,
+};
+
 class UpdateHeightScreen extends PureComponent {
+  props: Props;
   static navigationOptions = {
     title: 'Update Height',
   };
 
   handleViewGraph = () => {
-    console.log('navigating to height graph');
+    this.props.navigation.navigate('graphDetail');
   };
 
   render() {

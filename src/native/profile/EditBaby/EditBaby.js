@@ -1,20 +1,31 @@
 // @flow
-import type { Baby, State, NavigationOptions } from '../../../common/types';
+import type {
+  ApolloQueryResult,
+  Baby,
+  NavigationOptions,
+  UpdateBabyInput,
+} from '../../../common/types';
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
-import { compose, path, omit } from 'ramda';
-import displayLoadingState from '../../components/displayLoadingState';
-import { Screen } from '../../components/';
+import { assoc, compose, omit, path } from 'ramda';
+import {
+  displayLoadingState,
+  Screen,
+  SubmitFormNavButton,
+  withCurrentBaby,
+} from '../../components';
 import BabyNameTitle from '../BabyNameTitle';
-import BabyForm from './BabyForm';
+import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
 
+type Props = {
+  baby: Baby,
+  onSubmit: (input: UpdateBabyInput) => Promise<ApolloQueryResult<*>>,
+  navigation: NavigationProp,
+};
+
 class EditBaby extends Component {
-  props: {
-    baby: Baby,
-    mutate: () => Promise<*>,
-  };
+  props: Props;
 
   static navigationOptions: NavigationOptions = {
     title: <BabyNameTitle />,
@@ -22,30 +33,13 @@ class EditBaby extends Component {
       backgroundColor: theme.colors.white,
       shadowOpacity: 0,
     },
-  };
-
-  state = {
-    submitting: false,
+    headerRight: <SubmitFormNavButton form="baby" />,
   };
 
   scroll = null;
-  resetSubmit = () => this.setState({ submitting: false });
 
-  handleSubmit = values => {
-    const input = {
-      ...values,
-      id: this.props.baby.id,
-      avatar: values.avatar ? { url: values.avatar.url } : null,
-      coverImage: values.coverImage ? { url: values.coverImage.url } : null,
-    };
-
-    this.setState({ submitting: true }, () => {
-      this.props
-        .mutate({ variables: { input } })
-        .then(this.resetSubmit)
-        .catch(this.resetSubmit);
-    });
-  };
+  handleUpdateWeight = () => this.props.navigation.navigate('updateWeight');
+  handleUpdateHeight = () => this.props.navigation.navigate('updateHeight');
 
   render() {
     return (
@@ -53,8 +47,9 @@ class EditBaby extends Component {
         <BabyForm
           mode="edit"
           initialValues={omit(['id', '__typename'], this.props.baby)}
-          onSubmit={this.handleSubmit}
-          loading={this.state.submitting}
+          onSubmit={this.props.onSubmit}
+          onUpdateWeight={this.handleUpdateWeight}
+          onUpdateHeight={this.handleUpdateHeight}
         />
       </Screen>
     );
@@ -62,22 +57,33 @@ class EditBaby extends Component {
 }
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
-    mutation UpdateBaby($input: UpdateBabyInput!) {
-      updateBaby(input: $input) {
-        changedBaby {
-          ...BabyForm
+      mutation UpdateBaby($input: UpdateBabyInput!) {
+        updateBaby(input: $input) {
+          changedBaby {
+            ...BabyForm
+          }
         }
       }
-    }
-    
-    ${BabyForm.fragments.form}
-  `,
+
+      ${BabyForm.fragments.form}
+    `,
     {
-      // Since Firebase returns the same url for files we
-      // workaround this by using refetchQueries
+      props: ({ mutate, ownProps: { currentBabyId } }) => ({
+        onSubmit: values => {
+          const input = normalizeAvatarAndCoverImage(
+            assoc('id', currentBabyId, omit(['avatar', 'coverImage'], values)),
+            values,
+          );
+
+          return mutate({ variables: { input } });
+        },
+      }),
+      // Since Firebase returns the same url for files we workaround this by using refetchQueries
+      // TODO: confirm we need to refetch these. also, we're now able to upload different filenames
+      // so URL would change
       options: {
         refetchQueries: ['Profile', 'getBabyAvatar'],
       },
@@ -85,16 +91,16 @@ export default compose(
   ),
   graphql(
     gql`
-    query EditBaby($id: ID!) {
-      viewer {
-        baby(id: $id) {
-          ...BabyForm
+      query EditBaby($id: ID!) {
+        viewer {
+          baby(id: $id) {
+            ...BabyForm
+          }
         }
       }
-    }
-    
-    ${BabyForm.fragments.form}
-  `,
+
+      ${BabyForm.fragments.form}
+    `,
     {
       options: ({ currentBabyId }) => {
         return {

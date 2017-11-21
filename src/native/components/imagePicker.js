@@ -4,10 +4,7 @@ import { merge } from 'lodash';
 const defaultOptions = {
   title: 'Select Image',
   mediaType: 'photo',
-  skipBackup: true,
-  storageOptions: {
-    skipBackup: true,
-  },
+  noData: true, // Excludes Base64 generation
 };
 
 export default function show(options = {}) {

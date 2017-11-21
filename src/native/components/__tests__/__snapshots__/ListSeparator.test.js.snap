@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10,
+    "paddingTop": 10,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0
+}
+
+<View
+  contentSpacing={true}
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+    }
+  }
+/>
+`;

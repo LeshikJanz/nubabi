@@ -1,6 +1,7 @@
 // @flow
 import type { Color, Theme } from '../../common/themes/types';
 import React from 'react';
+import PropTypes from 'prop-types';
 import isReactNative from '../../common/app/isReactNative';
 
 // Universal styled Box component. The same API for browsers and React Native.
@@ -316,9 +317,9 @@ const Box = (
 };
 
 Box.contextTypes = {
-  View: React.PropTypes.func,
-  renderer: React.PropTypes.object,
-  theme: React.PropTypes.object,
+  View: PropTypes.func,
+  renderer: PropTypes.object,
+  theme: PropTypes.object,
 };
 
 Box.contentSpacing = 0.625;

@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { gql } from 'react-apollo';
-import moment from 'moment';
 import theme from '../../common/themes/defaultTheme';
 import { Box, Text } from '../components';
 import NubabiIcon from '../../common/icons/nubabi';

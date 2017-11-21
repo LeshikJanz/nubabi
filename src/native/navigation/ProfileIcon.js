@@ -1,12 +1,12 @@
 // @flow
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
 import { compose, path, prop } from 'ramda';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import color from 'color';
+import { withCurrentBaby } from '../components';
 
 const babyIcon = require('../../common/images/face_icon.jpg');
 
@@ -16,10 +16,14 @@ type Props = {
   tintColor: string,
 };
 
-const ProfileIcon = ({ avatarSource = babyIcon, active, tintColor }: Props) => {
+const ProfileIcon = ({ avatarSource, active, tintColor }: Props) => {
+  const avatar = avatarSource.uri ? avatarSource : babyIcon;
+
   const activeStyle = active
     ? {
-        borderColor: color(tintColor).alpha(0.6).string(),
+        borderColor: color(tintColor)
+          .alpha(0.6)
+          .string(),
         borderWidth: 2,
       }
     : {};
@@ -29,7 +33,7 @@ const ProfileIcon = ({ avatarSource = babyIcon, active, tintColor }: Props) => {
       <View style={[styles.tabIconInnerView]}>
         <View style={[styles.tabIconInnerImageHolder, activeStyle]}>
           <Image
-            source={avatarSource}
+            source={avatar}
             style={[styles.tabIconImage]}
             resizeMode="cover"
           />
@@ -90,7 +94,7 @@ const styles = StyleSheet.create({
 });
 
 export default compose(
-  connect(({ babies: { currentBabyId } }) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
       query getBabyAvatar($id: ID) {

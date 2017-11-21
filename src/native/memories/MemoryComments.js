@@ -1,58 +1,63 @@
 // @flow
 import type { CommentConnection } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { compose, pick, pathOr } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { FlatList, TouchableOpacity } from 'react-native';
+import { compose, path, pick } from 'ramda';
+import { gql, graphql } from 'react-apollo';
 import pluralize from 'pluralize';
 import { filter } from 'graphql-anywhere';
 import { Box, Text } from '../components';
 import MemoryComment from './MemoryComment';
 
 type Props = {
-  comments: CommentConnection,
-  expanded: boolean,
-  onLoadMore: () => void,
+  memoryId: string,
+  babyId: string,
 };
+
+const keyExtractor = path(['node', 'id']);
 
 export class MemoryComments extends PureComponent {
   props: Props;
 
-  render() {
-    const { comments, expanded, onLoadMore } = this.props;
+  static fragments = {
+    detail: gql`
+      fragment MemoryComments on Memory {
+        comments {
+          count
+          edges {
+            node {
+              ...MemoryComment
+            }
+          }
+        }
+      }
+      ${MemoryComment.fragments.comment}
+    `,
+  };
 
-    const shouldDisplayIndicator =
-      comments.count > comments.edges.length && !expanded;
-    const commentDiff = comments.count - comments.edges.length;
-
+  renderItem = ({ item }) => {
     return (
-      <Box
-        borderTopWidth={1}
-        padding={0}
-        style={() => ({ borderColor: '#E9ECF4' })}
-      >
-        {comments.edges.map(edge =>
-          <MemoryComment
-            key={edge.node.id}
-            {...filter(MemoryComment.fragments.comment, edge.node)}
-          />,
-        )}
+      <MemoryComment
+        key={item.node.id}
+        {...filter(MemoryComment.fragments.comment, item.node)}
+      />
+    );
+  };
 
-        {shouldDisplayIndicator &&
-          <Box as={TouchableOpacity} onPress={onLoadMore} contentSpacing>
-            <Text>
-              +{commentDiff} more {pluralize('comment', commentDiff)}
-            </Text>
-          </Box>}
+  render() {
+    const { comments, loading } = this.props;
 
-        <Box
-          contentSpacing
-          borderTopWidth={1}
-          style={() => ({ borderColor: '#E9ECF4' })}
-        >
-          <Text color="secondary">Add Comment</Text>
-        </Box>
-      </Box>
+    if (loading || !comments) {
+      return null;
+    }
+
+    // TODO: FlatList
+    return (
+      <FlatList
+        data={comments}
+        renderItem={this.renderItem}
+        keyExtractor={keyExtractor}
+      />
     );
   }
 }
@@ -60,38 +65,28 @@ export class MemoryComments extends PureComponent {
 export default compose(
   graphql(
     gql`
-    query MemoryComments($babyId: ID, $memoryId: ID!) {
-      viewer {
-        baby(id: $babyId) {
-          id
-          memory(id: $memoryId) {
+      query MemoryComments($babyId: ID, $memoryId: ID!) {
+        viewer {
+          baby(id: $babyId) {
             id
-            comments {
-              count
-              edges {
-                node {
-                  id
-                  ...MemoryComment
-                }
-              }
+            memory(id: $memoryId) {
+              id
+              ...MemoryComments
             }
           }
         }
       }
-    }
-    ${MemoryComment.fragments.comment}
-  `,
+      ${MemoryComments.fragments.detail}
+    `,
     {
       options: (ownProps: Props) => ({
-        skip: !ownProps.expanded,
         variables: pick(['babyId', 'memoryId'], ownProps),
       }),
-      props: ({ data, ownProps: { comments: previousComments } }) => {
+      props: ({ data }) => {
         return {
           ...data,
-          comments: pathOr(
-            previousComments,
-            ['viewer', 'baby', 'memory', 'comments'],
+          comments: path(
+            ['viewer', 'baby', 'memory', 'comments', 'edges'],
             data,
           ),
         };

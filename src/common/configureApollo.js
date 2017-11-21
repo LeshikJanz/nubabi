@@ -20,7 +20,7 @@ if (config.graphqlEndpoint && config.graphqlEndpoint !== 'memory://') {
   networkInterface = new MemoryNetworkInterface({ firebase });
 }
 
-export const configureApollo = () => {
+export const configureApollo = (): ApolloClient => {
   if (!client) {
     client = new ApolloClient({
       networkInterface,
@@ -44,7 +44,7 @@ export const configureApolloAuth = (store: Store<Action, State>) => {
           req.options.headers = {};
         }
 
-        const token = store.getState().auth.token;
+        const { token } = store.getState().auth;
         req.options.headers.authorization = token ? `Bearer ${token}` : null;
         next();
       },

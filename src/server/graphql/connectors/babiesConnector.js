@@ -1,34 +1,35 @@
 // @flow
 import formatPossessive from '../../../common/helpers/formatPossessive';
-
-require('axios-debug-log');
-
 import type { ConnectionArguments } from '../resolvers/common';
+import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import type {
+  ActivityFilterInput,
   ActivityLevelOperation,
   Baby,
-  ActivityFilterInput,
 } from '../../../common/types';
 import {
+  assoc,
+  compose,
+  curry,
+  either,
+  find,
+  identity,
+  map,
+  merge,
+  mergeDeepRight,
   path,
   prop,
-  map,
-  sortBy,
-  compose,
+  propEq,
   reduce,
-  either,
-  identity,
-  mergeDeepRight,
-  curry,
-  assoc,
+  sortBy,
 } from 'ramda';
-import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
 import config from '../../../common/config/index';
 
 type SwapActivityAction = 'swop' | 'increase' | 'decrease';
+type CompleteActivityAction = 'completed';
 
 const instance = axios.create({
   baseURL: config.apiUrl,
@@ -83,6 +84,21 @@ const withActivityFilters = ({
   };
 };
 
+// TODO: API should be consistent with the other Activity filters
+// ex: filter: { run_id: ID }
+const withPeriodFilter = ({ filter }) => {
+  if (!filter) {
+    return {};
+  }
+
+  const { periodId } = filter;
+  return {
+    params: {
+      filter: fromGlobalId(periodId).id,
+    },
+  };
+};
+
 const sortBySkillArea = sortBy(prop('skill_area_id'));
 
 export const getSkillArea = (token: string, id: string) => {
@@ -115,22 +131,73 @@ export const getSkillAreaImage = (obj: mixed) => {
   return null;
 };
 
-export const getActivities = (token: string, babyId: string) =>
-  instance
-    .get(`/babies/${babyId}/activities`, withToken(token))
-    .then(data => {
-      return path(['data'], data).map(activity => {
+export const getActivities = (token: string, babyId: string, args = {}) => {
+  return instance
+    .get(
+      `/babies/${babyId}/activities`,
+      withConfigs(withToken(token), withPeriodFilter(args)),
+    )
+    .then(path(['data']))
+    .then(activities => {
+      // TODO: extra request since activities don't include `isCompleted`
+      return getCompletedActivities(token, babyId).then(
+        completedActivities => ({ activities, completedActivities }),
+      );
+    })
+    .then(({ activities, completedActivities }) => {
+      return activities.map(activity => {
         // Assign babyId so it can be used by activity introduction
-        return assoc('babyId', babyId, activity);
+        // Assign isCompleted
+        return merge(activity, {
+          babyId,
+          isCompleted: !!completedActivities[activity.id],
+        });
       });
     })
     .then(sortBySkillArea);
+};
 
 export const getFavoriteActivities = (token: string, babyId: string) =>
   instance
     .get(`/babies/${babyId}/activities/favourites`, withToken(token))
     .then(path(['data']))
     .then(sortBySkillArea);
+
+export const isCompletedActivity = async (
+  token: string,
+  activityId: string,
+  babyId: string,
+) => {
+  const completedActivities = await getCompletedActivities(token, babyId);
+  return !!completedActivities[activityId];
+};
+
+export const isFavoriteActivity = async (
+  token: string,
+  activityId: string,
+  babyId: string,
+) => {
+  const favoriteActivities = await getFavoriteActivities(token, babyId);
+  return !!find(propEq('id', activityId), favoriteActivities);
+};
+
+export const getCompletedActivities = (token: string, babyId: string) => {
+  return instance
+    .get(`/babies/${babyId}/activities/completed`, withToken(token))
+    .then(path(['data']))
+    .then(completedActivities => {
+      return completedActivities.reduce((acc, activity) => {
+        acc[activity.activity_id] = true;
+        return acc;
+      }, {});
+    });
+};
+
+export const getActivityHistory = (token: string, babyId: string) => {
+  return instance
+    .get(`/babies/${babyId}/history`, withToken(token))
+    .then(path(['data']));
+};
 
 export const getActivity = (token: string, id: string, babyId: string) => {
   return instance
@@ -173,11 +240,19 @@ export const swoopActivity = (
   return swapActivity(token, babyId, activityId, 'swop');
 };
 
+export const completeActivity = (
+  token: string,
+  babyId: string,
+  activityId: string,
+) => {
+  return swapActivity(token, babyId, activityId, 'completed');
+};
+
 export const swapActivity = (
   token: string,
   babyId: string,
   activityId: string,
-  action: SwapActivityAction,
+  action: SwapActivityAction | CompleteActivityAction,
 ) => {
   return instance
     .put(
@@ -295,12 +370,14 @@ export const getGrowthContentById = async (
       const contentId = path(['id'], data);
       const title = path(['title'], data);
       const text = makeStringFromTemplate(path(['content'], data), variables);
+      const section = prop('section', data);
 
       return {
         id: contentId,
         baby,
         title,
         text,
+        section,
       };
     });
 };

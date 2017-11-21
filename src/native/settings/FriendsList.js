@@ -4,13 +4,17 @@ import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
+import { hoistStatics } from 'recompose';
 import { Avatar, displayLoadingState, ListItem, Text } from '../components';
 import PendingAvatar from './PendingAvatar';
 import theme from '../../common/themes/defaultTheme';
+import withPullToRefresh, {
+  type PullToRefreshProps,
+} from '../components/withPullToRefresh';
 
 type Props = {
   friends: Array<UserEdge>,
-};
+} & PullToRefreshProps;
 
 const keyExtractor = path(['node', 'id']);
 
@@ -73,11 +77,14 @@ export class FriendsList extends PureComponent {
   };
 
   render() {
+    const { friends, refreshing, handleRefresh } = this.props;
     return (
       <FlatList
         renderItem={this.renderItem}
-        data={this.props.friends}
+        data={friends}
         keyExtractor={keyExtractor}
+        refreshing={refreshing}
+        onRefresh={handleRefresh}
       />
     );
   }
@@ -97,7 +104,7 @@ export const query = gql`
       }
     }
   }
-  
+
   ${FriendsList.fragments.item}
   ${FriendsList.fragments.edge}
 `;
@@ -112,5 +119,6 @@ export default compose(
       friends: path(['viewer', 'friends', 'edges'], data),
     }),
   }),
+  withPullToRefresh,
   displayLoadingState,
 )(FriendsList);

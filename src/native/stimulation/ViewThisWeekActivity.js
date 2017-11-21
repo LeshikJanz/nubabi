@@ -5,27 +5,15 @@ import type {
   ActivityLevelOperation,
   AdjustActivityLevelInput,
   NavigationOptionsGetter,
-  State,
   SwoopActivityInput,
   ToggleFavoriteInput,
 } from '../../common/types/index';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import {
-  assocPath,
-  compose,
-  find,
-  findIndex,
-  path,
-  pathOr,
-  pluck,
-  propEq,
-  update,
-} from 'ramda';
+import { compose, path, pathOr } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { Screen } from '../components/index';
-import displayLoadingState from '../components/displayLoadingState';
+import { displayLoadingState, Screen, withCurrentBaby } from '../components';
+import toggleFavorite from './toggleFavorite';
 import Activity from './Activity';
 
 type Props = {
@@ -41,6 +29,9 @@ type Props = {
   changeActivityLevel: (options: {
     variables: { input: AdjustActivityLevelInput },
   }) => Promise<*>,
+  completeActivity: (options: {
+    variables: { input: CompleteActivityInput },
+  }) => Promise<*>, // TODO
   toggleFavorite: (options: {
     variables: { input: ToggleFavoriteInput },
   }) => Promise<*>,
@@ -49,6 +40,9 @@ type Props = {
 
 class ViewThisWeeksActivity extends PureComponent {
   props: Props;
+  state = {
+    isLoading: false,
+  };
 
   static navigationOptions: NavigationOptionsGetter = ({ navigation }) => ({
     title: navigation.state.params.title,
@@ -59,11 +53,9 @@ class ViewThisWeeksActivity extends PureComponent {
   }
 
   refreshActivity = ({ data }) => {
-    const newActivity = pathOr(
-      path(['swoopActivity', 'newActivity'], data),
-      ['changeActivity', 'newActivity'],
-      data,
-    );
+    const newActivity =
+      path(['swoopActivity', 'newActivity'], data) ||
+      path(['changeActivity', 'newActivity'], data);
 
     if (newActivity) {
       this.props.navigation.setParams({
@@ -71,6 +63,8 @@ class ViewThisWeeksActivity extends PureComponent {
         title: newActivity.name,
       });
     }
+
+    this.setState({ isLoading: false });
   };
 
   handleSwoop = () => {
@@ -79,9 +73,11 @@ class ViewThisWeeksActivity extends PureComponent {
       babyId: this.props.currentBabyId,
     };
 
-    this.props
-      .swoopActivity({ variables: { input } })
-      .then(this.refreshActivity);
+    this.setState({ isLoading: true }, () => {
+      this.props
+        .swoopActivity({ variables: { input } })
+        .then(this.refreshActivity);
+    });
   };
 
   handleLevel = (type: ActivityLevelOperation) => {
@@ -91,9 +87,11 @@ class ViewThisWeeksActivity extends PureComponent {
       level: type,
     };
 
-    this.props
-      .changeActivityLevel({ variables: { input } })
-      .then(this.refreshActivity);
+    this.setState({ isLoading: true }, () => {
+      this.props
+        .changeActivityLevel({ variables: { input } })
+        .then(this.refreshActivity);
+    });
   };
 
   handleLevelIncrease = () => this.handleLevel('INCREASE');
@@ -103,10 +101,23 @@ class ViewThisWeeksActivity extends PureComponent {
     const input: ToggleFavoriteInput = {
       id: this.props.activity.id,
       babyId: this.props.currentBabyId,
-      favorite: !this.props.isFavorite,
+      favorite: !this.props.activity.isFavorite,
     };
 
     this.props.toggleFavorite({ variables: { input } });
+  };
+
+  handleCompleteActivity = () => {
+    this.props
+      .completeActivity({
+        variables: {
+          input: {
+            id: this.props.activity.id,
+            babyId: this.props.currentBabyId,
+          },
+        },
+      })
+      .then(this.refreshActivity);
   };
 
   handleNavigateToActivity = (edge: ?ActivityEdge) => {
@@ -136,13 +147,8 @@ class ViewThisWeeksActivity extends PureComponent {
   };
 
   render() {
-    const {
-      activity,
-      nextActivity,
-      previousActivity,
-      babyName,
-      isFavorite,
-    } = this.props;
+    const { isLoading } = this.state;
+    const { activity, nextActivity, previousActivity, babyName } = this.props;
 
     const previousSkillAreaName = this.getSkillAreaName(previousActivity);
     const nextSkillAreaName = this.getSkillAreaName(nextActivity);
@@ -153,13 +159,15 @@ class ViewThisWeeksActivity extends PureComponent {
           enableNavigation
           enableActions
           activity={activity}
-          isFavorite={isFavorite}
+          isFavorite={activity.isFavorite}
+          isLoading={isLoading}
           babyName={babyName}
           previousSkillAreaName={previousSkillAreaName}
           nextSkillAreaName={nextSkillAreaName}
           onPreviousActivity={this.handlePreviousActivity}
           onNextActivity={this.handleNextActivity}
           onSwoop={this.handleSwoop}
+          onComplete={this.handleCompleteActivity}
           onToggleFavorite={this.handleToggleFavorite}
           onLevelIncrease={this.handleLevelIncrease}
           onLevelDecrease={this.handleLevelDecrease}
@@ -170,35 +178,15 @@ class ViewThisWeeksActivity extends PureComponent {
   }
 }
 
-const updateQueries = {
-  ThisWeeksActivitiesList: (previousData, { mutationResult }) => {
-    const viewerBabyEdges = ['viewer', 'baby', 'activities', 'edges'];
-    const edges = path(viewerBabyEdges, previousData);
-    const newActivity = path(
-      ['data', 'changeActivity', 'newActivity'],
-      mutationResult,
-    );
-    const oldActivityId = path(
-      ['data', 'changeActivity', 'oldActivityId'],
-      mutationResult,
-    );
-    const oldActivityIndex = findIndex(
-      edge => edge.node.id === oldActivityId,
-      edges,
-    );
-
-    if (newActivity && oldActivityId && oldActivityIndex >= 0) {
-      const newEdges = update(oldActivityIndex, { node: newActivity }, edges);
-
-      return assocPath(viewerBabyEdges, newEdges, previousData);
-    }
-
-    return previousData;
-  },
-};
+// TODO: I don't like to refetch queries, but since the logic
+// to figure out whether the changed activity is part of
+// Profile's Week ahead might be to complicated, we're resorting
+// to this for now, until we split the query or return all data
+// we need to selectively update it.
+const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
 
 export default compose(
-  connect(({ babies: { currentBabyId } }: State) => ({ currentBabyId })),
+  withCurrentBaby,
   graphql(
     gql`
       query ViewThisWeekActivity($babyId: ID!, $activityId: ID!, $cursor: String!) {
@@ -214,16 +202,8 @@ export default compose(
               ...ActivityNavigation
             }
 
-            previousActivity: activities(first: 1, before: $cursor) {
+            previousActivity: activities(last: 1, before: $cursor) {
               ...ActivityNavigation
-            }
-
-            favoriteActivities {
-              edges {
-                node {
-                  id
-                }
-              }
             }
           }
         }
@@ -241,25 +221,10 @@ export default compose(
         },
       }),
       props: ({ data }) => {
-        const favoriteActivities = path(
-          ['viewer', 'baby', 'favoriteActivities'],
-          data,
-        );
-        let isFavorite = false;
-
-        if (favoriteActivities) {
-          // this should be simplified once activities include favorite info
-          const favorites = pluck('node', favoriteActivities.edges);
-          const activityId = path(['viewer', 'baby', 'activity', 'id'], data);
-
-          isFavorite = !!find(propEq('id', activityId), favorites);
-        }
-
         return {
           data,
           activity: path(['viewer', 'baby', 'activity'], data),
           babyName: path(['viewer', 'baby', 'name'], data),
-          isFavorite,
           previousActivity: path(
             ['viewer', 'baby', 'previousActivity', 'edges', '0'],
             data,
@@ -284,7 +249,7 @@ export default compose(
       }
       ${Activity.fragments.activity}
     `,
-    { name: 'swoopActivity', options: () => ({ updateQueries }) },
+    { name: 'swoopActivity', options: () => ({ refetchQueries }) },
   ),
   graphql(
     gql`
@@ -298,20 +263,27 @@ export default compose(
       }
       ${Activity.fragments.activity}
     `,
-    { name: 'changeActivityLevel', options: () => ({ updateQueries }) },
+    { name: 'changeActivityLevel', options: () => ({ refetchQueries }) },
   ),
   graphql(
     gql`
-      mutation ToggleFavorite($input: ToggleFavoriteInput!) {
-        toggleActivityFavorite(input: $input) {
-          wasFavorited
+      mutation CompleteActivity($input: CompleteActivityInput!) {
+        completeActivity(input: $input) {
+          edge {
+            node {
+              id
+            }
+          }
         }
       }
     `,
     {
-      name: 'toggleFavorite',
-      options: { refetchQueries: ['ViewThisWeekActivity', 'Profile'] },
+      name: 'completeActivity',
+      options: {
+        refetchQueries: ['ThisWeeksActivitiesList'],
+      },
     },
   ),
+  toggleFavorite,
   displayLoadingState,
 )(ViewThisWeeksActivity);

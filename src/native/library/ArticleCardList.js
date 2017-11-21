@@ -16,6 +16,7 @@ import {
 } from '../components';
 import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 import ArticleCardItem from './ArticleCardItem';
+import ArticleListItem from './ArticleListItem';
 
 type Props = {
   articles: Array<Article>,
@@ -68,7 +69,7 @@ export class ArticleList extends PureComponent {
       >
         <ArticleCardItem
           key={article.id}
-          {...filter(ArticleCardItem.fragments.item, article)}
+          {...filter(ArticleListItem.fragments.item, article)}
         />
       </Card>
     );
@@ -130,7 +131,7 @@ export default compose(
         }
       }
     }
-    ${ArticleCardItem.fragments.item}
+    ${ArticleListItem.fragments.item}
   `,
     {
       options: {

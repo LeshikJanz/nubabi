@@ -2,22 +2,24 @@
 import type { Activity as ActivityType } from '../../common/types';
 import React, { PureComponent } from 'react';
 import {
-  View,
+  LayoutAnimation,
+  ScrollView,
+  StyleSheet,
   Text,
   TouchableHighlight,
-  StyleSheet,
-  ScrollView,
+  View,
 } from 'react-native';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
+import ActivityContainer from './ActivityContainer';
 import ActivityActions from './ActivityActions';
 import theme, { PANEL_BACKGROUND } from '../../common/themes/defaultTheme';
 import {
   childContextTypes,
-  handleLayout,
-  getLayoutInitialState,
   getChildContext,
+  getLayoutInitialState,
+  handleLayout,
 } from '../components/withLayout';
 import iconMappings from './iconMappings';
 import Header from './Header';
@@ -32,12 +34,14 @@ type ActivityProps = {
   enableActions: boolean,
   enableNavigation: boolean,
   onActivityMediaPress?: () => void,
+  isLoading?: boolean,
 };
 
 type ActivityActionProps = {
   onSwoop?: () => void,
   onLevelIncrease?: () => void,
   onLevelDecrease?: () => void,
+  onComplete?: () => void,
 };
 
 type ActivityNavigationProps = {
@@ -66,6 +70,7 @@ export class Activity extends PureComponent {
     activity: gql`
       fragment Activity on Activity {
         id
+        isFavorite
         ...HeaderActivity
         ...ExpertInfoActivity
         ...ActivityActionsActivity
@@ -122,39 +127,38 @@ export class Activity extends PureComponent {
 
   scrollToTop = () => {
     if (this.scrollView) {
-      this.scrollView.scrollTo({ x: 0, y: 0 });
+      this.scrollView.scrollTo({ x: 0, y: 0, animated: false });
     }
   };
 
+  componentWillUpdate(nextProps: Props) {
+    if (nextProps.activity.id !== this.props.activity.id) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      this.scrollToTop();
+    }
+  }
+
   handlePreviousActivity = () => {
-    this.scrollToTop();
     /* $FlowFixMe */
     this.props.onPreviousActivity();
   };
 
   handleNextActivity = () => {
-    this.scrollToTop();
     /* $FlowFixMe */
     this.props.onNextActivity();
   };
 
   handleLevelIncrease = () => {
-    this.scrollToTop();
-
     /* $FlowFixMe */
     this.props.onLevelIncrease();
   };
 
   handleLevelDecrease = () => {
-    this.scrollToTop();
-
     /* $FlowFixMe */
     this.props.onLevelDecrease();
   };
 
   handleSwoop = () => {
-    this.scrollToTop();
-
     /* $FlowFixMe */
     this.props.onSwoop();
   };
@@ -170,9 +174,7 @@ export class Activity extends PureComponent {
           <Icon name="md-arrow-back" style={styles.navigationIcon} />
           <View style={[styles.navigationSkillContainer, { marginLeft: 10 }]}>
             <Text style={styles.previousButtonText}>Back</Text>
-            <Text>
-              {this.props.previousSkillAreaName}
-            </Text>
+            <Text>{this.props.previousSkillAreaName}</Text>
           </View>
         </View>
       </TouchableHighlight>
@@ -206,6 +208,7 @@ export class Activity extends PureComponent {
       isFavorite,
       enableNavigation,
       enableActions,
+      isLoading,
     } = this.props;
 
     const skill = activity.skillArea;
@@ -227,56 +230,63 @@ export class Activity extends PureComponent {
     );
 
     return (
-      <View style={styles.container} onLayout={this.handleLayout}>
-        <ScrollView
-          style={styles.scrollContainer}
-          contentContainerStyle={{
-            alignItems: 'stretch',
-            justifyContent: 'flex-start',
-          }}
-          keyboardShouldPersistTaps="handled"
-          pagingEnabled={false}
-          ref={ref => {
-            this.scrollView = ref;
-          }}
-        >
-          <Header
-            skillName={skill.name}
-            skillImage={skill.image.large}
-            activityName={activity.name}
-            isFavoriteActivity={isFavorite}
-            onToggleFavorite={this.props.onToggleFavorite}
-          />
-          <ExpertInfo
-            expert={expert}
-            activityDescription={activity.introduction}
-          />
-
-          <Steps
-            steps={activity.steps}
-            activityName={activity.name}
-            activityMedia={activityMedia}
-            activityMediaThumbnail={activityThumb}
-            activityMediaType={activityMediaType}
-            onActivityMediaPress={this.props.onActivityMediaPress}
-          />
-
-          {enableActions &&
-            <ActivityActions
-              babyName={babyName}
+      <ActivityContainer isLoading={isLoading}>
+        <View style={styles.container} onLayout={this.handleLayout}>
+          <ScrollView
+            style={styles.scrollContainer}
+            contentContainerStyle={{
+              alignItems: 'stretch',
+              justifyContent: 'flex-start',
+            }}
+            keyboardShouldPersistTaps="handled"
+            pagingEnabled={false}
+            ref={ref => {
+              this.scrollView = ref;
+            }}
+          >
+            <Header
+              skillName={skill.name}
+              skillImage={skill.image.large}
               activityName={activity.name}
-              skillIcon={iconMappings(skill.icon)}
-              onSwoop={this.handleSwoop}
-              onIncrease={this.handleLevelIncrease}
-              onDecrease={this.handleLevelDecrease}
-            />}
-          {enableNavigation &&
-            <View style={styles.nextButtonsContainer}>
-              {this.renderPreviousButton()}
-              {this.renderNextButton()}
-            </View>}
-        </ScrollView>
-      </View>
+              isFavoriteActivity={isFavorite}
+              onToggleFavorite={this.props.onToggleFavorite}
+            />
+
+            <ExpertInfo
+              expert={expert}
+              activityDescription={activity.introduction}
+            />
+
+            <Steps
+              steps={activity.steps}
+              activityName={activity.name}
+              activityMedia={activityMedia}
+              activityMediaThumbnail={activityThumb}
+              activityMediaType={activityMediaType}
+              onActivityMediaPress={this.props.onActivityMediaPress}
+            />
+
+            {enableActions && (
+              <ActivityActions
+                babyName={babyName}
+                activityName={activity.name}
+                collapsed={activity.isCompleted}
+                skillIcon={iconMappings(skill.icon)}
+                onSwoop={this.handleSwoop}
+                onIncrease={this.handleLevelIncrease}
+                onDecrease={this.handleLevelDecrease}
+                onComplete={this.props.onComplete}
+              />
+            )}
+            {enableNavigation && (
+              <View style={styles.nextButtonsContainer}>
+                {this.renderPreviousButton()}
+                {this.renderNextButton()}
+              </View>
+            )}
+          </ScrollView>
+        </View>
+      </ActivityContainer>
     );
   }
 }
@@ -288,7 +298,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
-    //marginBottom: 5,
+    // marginBottom: 5,
   },
   buttonContainer: {
     flexDirection: 'row',

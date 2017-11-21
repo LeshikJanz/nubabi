@@ -76,7 +76,6 @@ style = Object {}
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Array [
@@ -234,7 +233,6 @@ style = Object {}
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Array [
@@ -296,7 +294,6 @@ style = Object {}
                 <Text
                   accessible={true}
                   allowFontScaling={true}
-                  disabled={false}
                   ellipsizeMode="tail"
                   style={
                     Array [

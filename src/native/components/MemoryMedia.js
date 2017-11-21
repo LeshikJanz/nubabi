@@ -6,7 +6,7 @@ import type {
 } from '../../common/types/index';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { gql } from 'react-apollo';
 import { compose, head, take } from 'ramda';
@@ -38,7 +38,7 @@ type MemoryMediaSingleProps = {
 type MemoryMediaImageProps = MemoryMediaSingleProps & {
   small?: boolean,
   style?: Object | number,
-  displayMoreIndicator?: boolean,
+  displayMoreIndicator?: React.Element,
 };
 
 type MemoryMediaVideoProps = MemoryMediaSingleProps & {
@@ -52,12 +52,14 @@ type MemoryMediaMultipleProps = {
   files: FileConnection,
   layout: LayoutProps,
   onMediaPress: (params: ?Object) => void,
+  isMemoryTypeDisplayed?: boolean,
 };
 
-const RoundedContainer = ({
+export const RoundedContainer = ({
   children,
   style,
   onPress,
+  isDetailed,
 }: RoundedContainerProps) => {
   let Container;
   const containerProps = {};
@@ -74,9 +76,12 @@ const RoundedContainer = ({
       style={[
         {
           flex: 1,
+          alignSelf: 'stretch',
           overflow: 'hidden',
           borderTopLeftRadius: 4,
           borderTopRightRadius: 4,
+          borderBottomLeftRadius: isDetailed ? 4 : 0,
+          borderBottomRightRadius: isDetailed ? 4 : 0,
         },
         style,
       ]}
@@ -94,23 +99,25 @@ export const MemoryMediaImage = ({
   style,
   displayMoreIndicator,
   onMediaPress,
+  isDetailed,
 }: MemoryMediaImageProps) => {
   const imageSource = media.thumb || media;
 
   return (
-    <RoundedContainer style={style} onPress={onMediaPress}>
+    <RoundedContainer
+      style={style}
+      onPress={onMediaPress}
+      isDetailed={isDetailed}
+    >
       <Image
         source={{ uri: imageSource.url }}
         style={{
           flex: 1,
-          height: small ? 60 : 180,
+          minHeight: small ? 80 : 180,
         }}
         resizeMode="cover"
       >
-        {displayMoreIndicator &&
-          <Overlay>
-            {displayMoreIndicator}
-          </Overlay>}
+        {displayMoreIndicator && <Overlay>{displayMoreIndicator}</Overlay>}
       </Image>
     </RoundedContainer>
   );
@@ -126,9 +133,10 @@ export const MemoryMediaAudio = ({
   const content = (
     <Overlay style={style}>
       <Box
+        flex={1}
         alignItems="center"
         justifyContent="center"
-        style={() => ({ height: small ? 60 : 180 })}
+        style={() => ({ height: small ? 80 : 180 })}
         borderRadius={4}
       >
         <Box
@@ -158,15 +166,17 @@ export const MemoryMediaAudio = ({
 
   return (
     <Box {...containerProps}>
-      {media.thumb
-        ? <Image
-            source={{ uri: media.thumb.url }}
-            resizeMode="cover"
-            style={{ flex: 1 }}
-          >
-            {content}
-          </Image>
-        : content}
+      {media.thumb ? (
+        <Image
+          source={{ uri: media.thumb.url }}
+          resizeMode="cover"
+          style={{ flex: 1 }}
+        >
+          {content}
+        </Image>
+      ) : (
+        content
+      )}
     </Box>
   );
 };
@@ -181,9 +191,10 @@ export const MemoryMediaVideo = ({
   const content = (
     <Overlay style={style}>
       <Box
+        flex={1}
         alignItems="center"
         justifyContent="center"
-        style={() => ({ height: small ? 60 : 180 })}
+        style={() => ({ height: small ? 80 : 180 })}
         borderRadius={4}
       >
         <Box
@@ -213,15 +224,17 @@ export const MemoryMediaVideo = ({
 
   return (
     <Box {...containerProps}>
-      {media.thumb
-        ? <Image
-            source={{ uri: media.thumb.url }}
-            resizeMode="cover"
-            style={{ flex: 1 }}
-          >
-            {content}
-          </Image>
-        : content}
+      {media.thumb ? (
+        <Image
+          source={{ uri: media.thumb.url }}
+          resizeMode="cover"
+          style={{ flex: 1 }}
+        >
+          {content}
+        </Image>
+      ) : (
+        content
+      )}
     </Box>
   );
 };
@@ -261,8 +274,11 @@ export const MemoryMediaMultiple = ({
   files,
   layout,
   onMediaPress,
+  suggestedMemoryType,
 }: MemoryMediaMultipleProps) => {
-  const shouldDisplayMoreButton = files.edges.length >= 3;
+  const displayLimit = suggestedMemoryType ? 2 : 3;
+
+  const shouldDisplayMoreButton = files.count > displayLimit;
 
   const displayMore = (
     <Box
@@ -274,10 +290,11 @@ export const MemoryMediaMultiple = ({
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 5,
       })}
     >
       <Text bold color="white" size={8} align="center">
-        + {files.count - 2}
+        + {files.count - displayLimit + 1}
       </Text>
       <Text bold color="white" size={2} align="center">
         more
@@ -287,13 +304,33 @@ export const MemoryMediaMultiple = ({
 
   return (
     <Box flex={1}>
-      <Box
-        flexDirection="row"
-        flex={1}
-        alignItems="flex-start"
-        justifyContent="space-between"
-      >
-        {take(2, files.edges).map((file, index) =>
+      <Box flexDirection="row" flex={1} justifyContent="space-between">
+        {suggestedMemoryType && (
+          <Box
+            flex={1}
+            key="memory-type"
+            borderRadius={4}
+            borderColor="separator"
+            borderWidth={1}
+            alignItems="center"
+            justifyContent="center"
+            style={() => ({
+              overflow: 'hidden',
+              marginHorizontal: 10,
+              marginVertical: 8,
+            })}
+          >
+            <Image
+              source={suggestedMemoryType.image}
+              style={{ width: 60, height: 60 }}
+              resizeMode="contain"
+            />
+          </Box>
+        )}
+        {take(
+          shouldDisplayMoreButton ? displayLimit - 1 : displayLimit,
+          files.edges,
+        ).map((file, index) => (
           <Box
             flex={1}
             key={`${index}-${file.node.url}`}
@@ -307,10 +344,10 @@ export const MemoryMediaMultiple = ({
               small
               onMediaPress={() => onMediaPress({ selectedIndex: index })}
             />
-          </Box>,
-        )}
+          </Box>
+        ))}
 
-        {shouldDisplayMoreButton &&
+        {shouldDisplayMoreButton && (
           <Box
             flex={1}
             key="more"
@@ -319,36 +356,45 @@ export const MemoryMediaMultiple = ({
             style={() => ({ overflow: 'hidden' })}
           >
             <MemoryMediaSingle
-              media={files.edges[2].node}
+              media={files.edges[displayLimit].node}
               layout={layout}
               small
               displayMoreIndicator={displayMore}
               onMediaPress={() => onMediaPress({ grid: true })}
             />
-          </Box>}
+          </Box>
+        )}
       </Box>
     </Box>
   );
 };
 
-export const MemoryMedia = ({ files, layout, openGallery }: Props) => {
-  if (files.edges.length > 1) {
+export const MemoryMedia = ({
+  files,
+  layout,
+  openGallery,
+  suggestedMemoryType,
+  isDetailed = false,
+}: Props) => {
+  if (files.edges.length > 1 || suggestedMemoryType) {
     return (
       <MemoryMediaMultiple
         files={files}
         layout={layout}
         onMediaPress={openGallery}
-      />
-    );
-  } else {
-    return (
-      <MemoryMediaSingle
-        media={head(files.edges).node}
-        layout={layout}
-        onMediaPress={() => openGallery({})}
+        suggestedMemoryType={suggestedMemoryType}
       />
     );
   }
+
+  return (
+    <MemoryMediaSingle
+      media={head(files.edges).node}
+      layout={layout}
+      onMediaPress={() => openGallery({})}
+      isDetailed={isDetailed}
+    />
+  );
 };
 
 export const fragments = {

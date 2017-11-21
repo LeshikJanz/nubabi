@@ -7,7 +7,8 @@ import RocketHorse from './RocketHorse';
 import theme from '../../common/themes/defaultTheme';
 
 type Props = {
-  splash: boolean,
+  splash?: boolean,
+  style?: Object,
 };
 
 Animatable.initializeRegistryWithDefinitions({
@@ -38,6 +39,7 @@ export class RocketHorseLoader extends PureComponent {
   };
 
   renderLoader() {
+    const { style = {} } = this.props;
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Animatable.View
@@ -53,6 +55,7 @@ export class RocketHorseLoader extends PureComponent {
             height: 50,
             backgroundColor: Color(theme.colors.primary).alpha(0.5),
             borderRadius: 50 * 2,
+            ...style,
           }}
         >
           <RocketHorse width={30} height={30} />

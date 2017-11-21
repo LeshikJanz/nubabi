@@ -58,7 +58,6 @@ style = Object {
       <Text
         accessible={true}
         allowFontScaling={true}
-        disabled={false}
         ellipsizeMode="tail"
         style={
           Object {
@@ -76,28 +75,16 @@ style = Object {
         }
       />
       <View
-        accessibilityComponentType={undefined}
-        accessibilityLabel={undefined}
-        accessibilityTraits={undefined}
-        accessible={true}
-        collapsable={undefined}
-        hitSlop={undefined}
-        isTVSelectable={true}
-        nativeID={undefined}
-        onLayout={undefined}
-        onResponderGrant={[Function]}
-        onResponderMove={[Function]}
-        onResponderRelease={[Function]}
-        onResponderTerminate={[Function]}
-        onResponderTerminationRequest={[Function]}
-        onStartShouldSetResponder={[Function]}
+        onPress={[Function]}
         style={
           Object {
-            "opacity": 1,
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
           }
         }
-        testID={undefined}
-        tvParallaxProperties={undefined}
       >
         <View
           style={
@@ -136,7 +123,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Object {
@@ -159,7 +145,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={false}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [

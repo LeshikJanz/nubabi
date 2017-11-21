@@ -1,7 +1,6 @@
 // @flow
-import type { Event } from 'react-native';
 import React, { PureComponent } from 'react';
-import { View, Dimensions } from 'react-native';
+import { View } from 'react-native';
 import Alert from './Alert';
 import NetworkIndicator from './NetworkIndicator';
 import {
@@ -37,8 +36,6 @@ export class Screen extends PureComponent {
         onLayout={this.handleLayout}
       >
         {children}
-        <Alert />
-        <NetworkIndicator />
       </View>
     );
   }

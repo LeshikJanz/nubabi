@@ -1,14 +1,17 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { TouchableOpacity, Switch } from 'react-native';
 import Box from './Box';
 import Text from './Text';
+import ListItemArrow from './ListItemArrow';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme from '../../common/themes/defaultTheme';
+import { isEditable } from '../shared/forms';
 
 type Props = {
   children: any,
   leftIcon?: string,
+  iconColor?: string,
   avatarLeft?: React.Element<*>,
   rightToggle?: boolean,
   onRightTogglePress?: () => void,
@@ -21,10 +24,15 @@ type Props = {
   rightText?: string,
   onPress?: Function,
   padding?: number,
+  editable: boolean,
 };
 
-class ListItem extends Component {
+class ListItem extends PureComponent {
   props: Props;
+
+  static defaultProps = {
+    editable: true,
+  };
 
   renderLeftAvatar(leftAvatar: React.Element<*>) {
     return (
@@ -35,18 +43,10 @@ class ListItem extends Component {
   }
 
   renderRightArrow() {
-    return (
-      <Box alignItems="center" justifyContent="center">
-        <Icon
-          color={theme.colors.secondary}
-          name="ios-arrow-forward"
-          size={20}
-        />
-      </Box>
-    );
+    return <ListItemArrow />;
   }
 
-  renderIcon(iconName: string) {
+  renderIcon(iconName: string, color: string = theme.colors.secondary) {
     return (
       <Box
         alignItems="center"
@@ -56,7 +56,7 @@ class ListItem extends Component {
         marginTop={0.1}
         style={() => ({ width: 20 })}
       >
-        <Icon color={theme.colors.secondary} size={20} name={iconName} />
+        <Icon color={color} size={20} name={iconName} />
       </Box>
     );
   }
@@ -79,13 +79,9 @@ class ListItem extends Component {
 
     return (
       <Box flexDirection="row" flex={1} justifyContent="center">
-        <Box flex={1}>
-          {children}
-        </Box>
+        <Box flex={1}>{children}</Box>
         <Box marginRight={0.5} marginTop={0.1}>
-          <Text color="secondary">
-            {rightText}
-          </Text>
+          <Text color="secondary">{rightText}</Text>
         </Box>
       </Box>
     );
@@ -118,7 +114,7 @@ class ListItem extends Component {
       padding,
     };
 
-    if (onPress) {
+    if (isEditable(this.props) && onPress) {
       containerProps.as = TouchableOpacity;
       containerProps.onPress = onPress;
     }
@@ -127,7 +123,7 @@ class ListItem extends Component {
       <Box {...containerProps}>
         <Box flexDirection="row">
           {avatarLeft && this.renderLeftAvatar(avatarLeft)}
-          {leftIcon && this.renderIcon(leftIcon)}
+          {leftIcon && this.renderIcon(leftIcon, this.props.iconColor)}
 
           <Box flex={1} justifyContent="center">
             {this.renderMainSection()}
@@ -137,9 +133,7 @@ class ListItem extends Component {
             {typeof rightToggle !== 'undefined' && this.renderRightToggle()}
           </Box>
 
-          <Box alignSelf="center">
-            {rightArrow && this.renderRightArrow()}
-          </Box>
+          <Box alignSelf="center">{rightArrow && this.renderRightArrow()}</Box>
         </Box>
       </Box>
     );

@@ -24,6 +24,7 @@ class GraphDetailHeaderSwitcher extends PureComponent {
         selectedIndex={currentIndex}
         tintColor={theme.colors.white}
         onValueChange={this.handleSwitch}
+        style={{ height: 35 }}
       />
     );
   }

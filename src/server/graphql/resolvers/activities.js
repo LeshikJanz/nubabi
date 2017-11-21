@@ -1,21 +1,22 @@
 // @flow
-import S from 'string';
 import type {
-  Context,
   ConnectionArguments,
+  Context,
   RawActivity,
   RawActivityMedia,
 } from './common';
-import * as connector from '../connectors/babiesConnector';
 import {
   connectionFromArray,
-  connectionFromPromisedArray,
   connectionFromBackendMetadata,
-  mutationWithClientMutationId,
+  connectionFromPromisedArray,
   fromGlobalId,
   globalIdField,
+  mutationWithClientMutationId,
   prop,
 } from './common';
+import * as connector from '../connectors/babiesConnector';
+import { assoc } from 'ramda';
+import { addEdgeToMutationResult } from '../../../common/helpers/graphqlUtils';
 
 export const resolvers = {
   Viewer: {
@@ -68,17 +69,23 @@ export const resolvers = {
             };
           }),
     ),
-
-    toggleActivityFavorite: mutationWithClientMutationId(
-      ({ id, babyId, favorite }, { token }) => {
+    completeActivity: mutationWithClientMutationId(
+      ({ id, babyId }, { token }) => {
         return connector
-          .toggleActivityFavorite(
-            token,
-            fromGlobalId(babyId).id,
-            fromGlobalId(id).id,
-            favorite,
-          )
-          .then(() => ({ wasFavorited: favorite }));
+          .completeActivity(token, fromGlobalId(babyId).id, fromGlobalId(id).id)
+          .then(addEdgeToMutationResult);
+      },
+    ),
+    toggleActivityFavorite: mutationWithClientMutationId(
+      ({ id, babyId: babyGlobalId, favorite }, { token }) => {
+        const activityId = fromGlobalId(id).id;
+        const babyId = fromGlobalId(babyGlobalId).id;
+
+        return connector
+          .toggleActivityFavorite(token, babyId, activityId, favorite)
+          .then(() => connector.getActivity(token, activityId, babyId))
+          .then(addEdgeToMutationResult)
+          .then(assoc('wasFavorited', favorite));
       },
     ),
   },
@@ -88,7 +95,7 @@ export const resolvers = {
       return connector.getSkillArea(token, obj['skill_area_id']); // eslint-disable-line dot-notation
     },
     expert: (obj: RawActivity, _: mixed, { token }: Context) => {
-      return connector.getExpert(token, obj['expert_id']);
+      return connector.getExpert(token, obj.expert_id);
     }, // eslint-disable-line dot-notation
     steps: (
       { id, babyId, steps }: RawActivity,
@@ -114,6 +121,46 @@ export const resolvers = {
     media: (obj: RawActivity, args: ConnectionArguments) => {
       return connectionFromArray(obj.media, args);
     },
+    isFavorite: ({ id }, _, { token }, info) => {
+      const babyId = info.variableValues.input
+        ? info.variableValues.input.babyId
+        : info.variableValues.babyId;
+
+      if (babyId) {
+        return connector.isFavoriteActivity(token, id, fromGlobalId(babyId).id);
+      }
+
+      return false;
+    },
+    isCompleted: (
+      { isCompleted, id, babyId: babyIdVar },
+      _,
+      { token },
+      info,
+    ) => {
+      let babyId = babyIdVar;
+      if (!babyId) {
+        // if we don't get babyId try to fetch it from the query
+        if (info.variableValues.babyId) {
+          babyId = fromGlobalId(info.variableValues.babyId).id;
+        }
+      }
+      if (typeof isCompleted !== 'undefined') {
+        // If this is set it means that we come from connector.getActivities
+        // which already has this mapping
+        return isCompleted;
+      }
+
+      // If we'got babyId it means we're viewing baby activities
+      if (babyId) {
+        // FIXME: this issues an extra request and then a search
+        // We might need dataloader or a different API endpoint
+        // same problem with favorites
+        return connector.isCompletedActivity(token, id, babyId);
+      }
+
+      return false;
+    },
   },
 
   ActivityMedia: {
@@ -122,6 +169,12 @@ export const resolvers = {
     },
     url: prop('large_url'),
     thumb: prop('thumb_url'),
+  },
+
+  ActivityHistory: {
+    id: globalIdField('ActivityHistory', obj => obj.run_id),
+    startDate: prop('start_date'),
+    endDate: prop('end_date'),
   },
 
   SkillArea: {

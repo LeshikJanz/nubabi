@@ -2,12 +2,20 @@
 
 exports[`it renders correctly 1`] = `
 style = Object {
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10,
+    "paddingTop": 10,
     "borderColor": "#9EABBC",
     "borderBottomWidth": 0,
     "borderLeftWidth": 0,
     "borderRightWidth": 0,
     "borderTopWidth": 0,
-    "marginBottom": 16,
+    "alignItems": "flex-start",
+    "flexDirection": "row",
+    "justifyContent": "center",
+    "marginLeft": 8,
+    "flex": 1,
     "fontSize": 16.828997530864196,
     "lineHeight": 26,
     "color": "#6A7683",
@@ -15,6 +23,7 @@ style = Object {
 }
 
 <View
+  contentSpacing={true}
   style={
     Object {
       "borderBottomWidth": 0,
@@ -22,27 +31,28 @@ style = Object {
       "borderLeftWidth": 0,
       "borderRightWidth": 0,
       "borderTopWidth": 0,
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
     }
   }
 >
   <View
     style={
       Object {
+        "alignItems": "flex-start",
         "borderBottomWidth": 0,
         "borderColor": "#9EABBC",
         "borderLeftWidth": 0,
         "borderRightWidth": 0,
         "borderTopWidth": 0,
-        "marginBottom": 16,
+        "flexDirection": "row",
+        "justifyContent": "center",
       }
     }
   >
-    <Text
-      accessible={true}
-      allowFontScaling={true}
-      disabled={false}
-      ellipsizeMode="tail"
-      spacing={-0.43}
+    <View
       style={
         Object {
           "borderBottomWidth": 0,
@@ -50,37 +60,78 @@ style = Object {
           "borderLeftWidth": 0,
           "borderRightWidth": 0,
           "borderTopWidth": 0,
-          "color": "#454D56",
-          "fontFamily": "SF Pro Display",
-          "fontSize": 16.828997530864196,
-          "lineHeight": 21,
         }
       }
     >
-      Let's continue Some Activity
-    </Text>
-  </View>
-  <Text
-    accessible={true}
-    allowFontScaling={true}
-    disabled={false}
-    ellipsizeMode="tail"
-    style={
-      Object {
-        "borderBottomWidth": 0,
-        "borderColor": "#9EABBC",
-        "borderLeftWidth": 0,
-        "borderRightWidth": 0,
-        "borderTopWidth": 0,
-        "color": "#6A7683",
-        "fontFamily": "SF Pro Display",
-        "fontSize": 16.828997530864196,
-        "lineHeight": 26,
-        "marginBottom": 16,
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "#E9ECF4",
+              "borderRadius": 15,
+              "height": 30,
+              "justifyContent": "center",
+              "marginLeft": -10,
+              "marginRight": 10,
+              "width": 30,
+            },
+            Object {
+              "marginLeft": 0,
+              "marginRight": 0,
+            },
+          ]
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#748294",
+              "fontSize": 14,
+            }
+          }
+        >
+          NaN
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "flex": 1,
+          "marginLeft": 8,
+        }
       }
-    }
-  >
-    Do something
-  </Text>
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "color": "#6A7683",
+            "fontFamily": "SF Pro Display",
+            "fontSize": 16.828997530864196,
+            "lineHeight": 26,
+          }
+        }
+      >
+        Do something
+      </Text>
+    </View>
+  </View>
 </View>
 `;

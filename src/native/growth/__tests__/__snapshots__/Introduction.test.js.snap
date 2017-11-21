@@ -107,7 +107,11 @@ style = Object {
         }
       >
         <Image
-          source={1}
+          source={
+            Object {
+              "testUri": "../../../src/common/images/growth_introduction.png",
+            }
+          }
           style={
             Object {
               "borderBottomWidth": 0,
@@ -149,7 +153,6 @@ style = Object {
           <Text
             accessible={true}
             allowFontScaling={true}
-            disabled={false}
             ellipsizeMode="tail"
             style={
               Object {
@@ -163,7 +166,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [
@@ -177,7 +179,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [
@@ -191,7 +192,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [
@@ -205,7 +205,6 @@ style = Object {
             <Text
               accessible={true}
               allowFontScaling={true}
-              disabled={false}
               ellipsizeMode="tail"
               style={
                 Array [
@@ -248,7 +247,6 @@ style = Object {
         <Text
           accessible={true}
           allowFontScaling={false}
-          disabled={false}
           ellipsizeMode="tail"
           style={
             Array [

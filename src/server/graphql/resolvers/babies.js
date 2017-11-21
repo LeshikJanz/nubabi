@@ -1,5 +1,7 @@
+// @flow
 import { pick, assocPath, last } from 'ramda';
 import * as connector from '../connectors/babiesConnector';
+// noinspection ES6UnusedImports
 import {
   prop,
   transform,
@@ -55,7 +57,10 @@ const resolvers = {
       obj.avatar ? pick(['url', 'thumb', 'large'], obj.avatar) : null,
 
     activities: ({ id }, args, { token }) =>
-      connectionFromPromisedArray(connector.getActivities(token, id), args),
+      connectionFromPromisedArray(
+        connector.getActivities(token, id, args),
+        args,
+      ),
 
     activity: ({ id: babyId }, { id: activityId }, { token }) => {
       return connector.getActivity(token, fromGlobalId(activityId).id, babyId);
@@ -66,6 +71,13 @@ const resolvers = {
         connector.getFavoriteActivities(token, babyId),
         args,
       ),
+
+    activityHistory: ({ id: babyId }, args, { token }) => {
+      return connectionFromPromisedArrayWithCount(
+        connector.getActivityHistory(token, babyId),
+        args,
+      );
+    },
 
     growth: async (baby, args, { token, connectors: { firebase } }, info) => {
       const content = await connector.getGrowthContent(token, baby);

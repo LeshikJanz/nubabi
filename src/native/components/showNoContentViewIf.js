@@ -1,7 +1,6 @@
 // @flow
 import React from 'react';
 import { branch, renderComponent } from 'recompose';
-import { pathOr } from 'ramda';
 import NoContentView from './NoContentView';
 
 type TesterFn = (props: any) => boolean;

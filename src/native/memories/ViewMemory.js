@@ -1,31 +1,48 @@
 // @flow
-import type { State, Memory as MemoryType } from '../../common/types';
-import React, { PureComponent } from 'react';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import type { Memory as MemoryType } from '../../common/types';
+import React from 'react';
+import { assoc, compose, merge, path } from 'ramda';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { connect } from 'react-redux';
-import { displayLoadingState, showNoContentViewIf } from '../components';
-import { isEmptyProp } from '../../common/helpers/graphqlUtils';
-import Memory from './Memory';
+import uuid from 'react-native-uuid';
+import {
+  displayLoadingState,
+  showNoContentViewIf,
+  withCurrentBaby,
+} from '../components';
+import {
+  addEdgeToFragment,
+  getCurrentUserFromStore,
+  isEmptyProp,
+} from '../../common/helpers/graphqlUtils';
+import MemoryDetail from './MemoryDetail';
+import MemoryComments from './MemoryComments';
+import toggleMemoryLike from './toggleMemoryLike';
 
 type Props = {
   id: string,
   memory: MemoryType,
   currentBabyId: string,
-  onEditMemory: (id: string) => void,
+  onToggleLike: Function, // TODO
+  onAddComment: Function, // TODO
 };
 
-export const ViewMemory = ({ memory, currentBabyId, onEditMemory }: Props) =>
-  <KeyboardAwareScrollView>
-    <Memory babyId={currentBabyId} onEditMemory={onEditMemory} {...memory} />
-  </KeyboardAwareScrollView>;
+export const ViewMemory = ({
+  memory,
+  currentBabyId,
+  onToggleLike,
+  onAddComment,
+}: Props) => (
+  <MemoryDetail
+    babyId={currentBabyId}
+    onToggleMemoryLike={onToggleLike}
+    onAddComment={onAddComment}
+    {...memory}
+  />
+);
 
 export default compose(
-  connect(({ babies }: State) => ({
-    currentBabyId: babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
       query Memory($id: ID!, $babyId: ID) {
@@ -33,12 +50,12 @@ export default compose(
           baby(id: $babyId) {
             id
             memory(id: $id) {
-              ...MemoryItem
+              ...MemoryDetail
             }
           }
         }
       }
-      ${Memory.fragments.detail}
+      ${MemoryDetail.fragments.detail}
     `,
     {
       options: ({ id, currentBabyId }) => ({
@@ -48,6 +65,94 @@ export default compose(
       props: ({ data }) => ({
         data,
         memory: path(['viewer', 'baby', 'memory'], data),
+      }),
+    },
+  ),
+  toggleMemoryLike,
+  graphql(
+    gql`
+      mutation AddCommentToMemory($input: CreateCommentInput!) {
+        createComment(input: $input) {
+          edge {
+            cursor
+            node {
+              id
+              createdAt
+              text
+              author {
+                id
+                firstName
+                lastName
+                avatar {
+                  url
+                }
+              }
+              commentable {
+                ... on Node {
+                  id
+                }
+                comments {
+                  count
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    {
+      props: ({ mutate, ownProps: { id } }) => ({
+        onAddComment: input => {
+          // $FlowFixMe
+          return mutate({
+            variables: {
+              input: merge(input, { id, commentableType: 'memory' }),
+            },
+
+            update: (store, data) => {
+              /*
+              if (!data.data.createComment.edge.node.author) {
+                const author = getCurrentUserFromStore(gql, store);
+
+                if (author) {
+                  data.data.createComment.edge.node.author = author;
+                }
+              }
+              */
+              addEdgeToFragment(
+                MemoryComments.fragments.detail,
+                'createComment',
+                ['comments'],
+                id,
+                'head',
+              )(store, data);
+            },
+
+            /*
+            // TODO:
+            optimisticResponse: {
+              __typename: 'Mutation',
+              createComment: {
+                __typename: 'CreateOrUpdateCommentPayload',
+                edge: {
+                  __typename: 'CommentEdge',
+                  cursor: uuid.v4(),
+                  node: {
+                    __typename: 'Comment',
+                    id: uuid.v4(),
+                    text: input.text,
+                    createdAt: new Date(),
+                    commentable: {
+                      __typename: 'Memory',
+                      id,
+                    }
+                  },
+                },
+              },
+            },
+            */
+          });
+        },
       }),
     },
   ),

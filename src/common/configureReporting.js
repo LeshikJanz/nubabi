@@ -1,3 +1,4 @@
+// @flow
 /* global __DEV__: false */
 const captureException = (error, Raven) => {
   // TODO:

@@ -1,14 +1,14 @@
 // @flow
 import type { NavigationOptions } from '../../../common/types';
 import React, { Component } from 'react';
-import { compose, path, assocPath, prepend } from 'ramda';
-import { graphql, gql } from 'react-apollo';
-import { Screen } from '../../components';
-import BabyForm from './BabyForm';
+import { assocPath, compose, path, prepend } from 'ramda';
+import { gql, graphql } from 'react-apollo';
+import { Screen, SubmitFormNavButton } from '../../components';
+import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
 import theme from '../../../common/themes/defaultTheme';
 
 type Props = {
-  mutate: (options: Object) => Promise<*>,
+  onSubmit: (values: CreateBabyInput) => Promise<ApolloQueryResult<*>>,
 };
 
 class AddBaby extends Component {
@@ -20,36 +20,21 @@ class AddBaby extends Component {
       backgroundColor: theme.colors.white,
       shadowOpacity: 0,
     },
-  };
-
-  state = {
-    submitting: false,
-  };
-
-  resetSubmit = () => this.setState({ submitting: false });
-
-  handleSubmit = values => {
-    const input = {
-      ...values,
-      avatar: values.avatar ? { url: values.avatar.url } : null,
-      coverImage: values.coverImage ? { url: values.coverImage.url } : null,
-    };
-
-    this.setState({ submitting: true }, () => {
-      this.props
-        .mutate({ variables: { input } })
-        .then(this.resetSubmit)
-        .catch(this.resetSubmit);
-    });
+    headerRight: <SubmitFormNavButton form="baby" />,
   };
 
   render() {
+    const initialValues = {
+      relationship: 'Other',
+      weekBorn: 40,
+    };
+
     return (
       <Screen>
         <BabyForm
           mode="add"
-          onSubmit={this.handleSubmit}
-          loading={this.state.submitting}
+          onSubmit={this.props.onSubmit}
+          initialValues={initialValues}
         />
       </Screen>
     );
@@ -70,7 +55,16 @@ export default compose(
       ${BabyForm.fragments.form}
     `,
     {
+      props: ({ mutate }) => ({
+        onSubmit: values => {
+          const input = normalizeAvatarAndCoverImage(values, values);
+
+          return mutate({ variables: { input } });
+        },
+      }),
       options: {
+        refetchQueries: ['Profile', 'getBabyAvatar'],
+        // TODO: migrate to update
         updateQueries: {
           ChooseBabyList: (previousData, { mutationResult }) => {
             const edges = ['viewer', 'babies', 'edges'];

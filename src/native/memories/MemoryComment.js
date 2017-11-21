@@ -1,9 +1,10 @@
 // @flow
 import type { Comment } from '../../common/types';
 import React from 'react';
+import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import moment from 'moment';
-import { Box, Text } from '../components';
+import { Avatar, Box, Text } from '../components';
 
 type Props = Comment & {};
 
@@ -23,17 +24,34 @@ export const MemoryComment = ({ text, author, createdAt }: Props) => {
     timestamp.format(format),
   ].join(' ');
 
+  const avatar = path(['avatar', 'url'], author);
+
   return (
-    <Box contentSpacing>
-      <Box>
-        <Text style={() => ({ letterSpacing: 0.17, lineHeight: 20 })}>
-          {text}
-        </Text>
+    <Box contentSpacing flexDirection="row">
+      <Box
+        style={() => ({ marginRight: 10 })}
+        alignItems="center"
+        marginTop={0.5}
+        justifyContent="flex-start"
+      >
+        <Avatar src={avatar} size={30} />
       </Box>
-      <Box marginTop={0.5}>
-        <Text color="secondary">
-          {metadataText}
-        </Text>
+      <Box flex={1}>
+        <Box>
+          <Text
+            style={() => ({
+              letterSpacing: 0.17,
+              lineHeight: 20,
+              fontSize: 14,
+              marginRight: 16,
+            })}
+          >
+            {text}
+          </Text>
+        </Box>
+        <Box marginTop={0.5}>
+          <Text color="secondary">{metadataText}</Text>
+        </Box>
       </Box>
     </Box>
   );
@@ -42,11 +60,15 @@ export const MemoryComment = ({ text, author, createdAt }: Props) => {
 MemoryComment.fragments = {
   comment: gql`
     fragment MemoryComment on Comment {
+      id
       text
       createdAt
       author {
         firstName
         lastName
+        avatar {
+          url
+        }
       }
     }
   `,

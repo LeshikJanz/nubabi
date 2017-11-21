@@ -1,11 +1,11 @@
 // @flow
-import type { State, Growth, GraphQLDataProp } from '../../common/types';
+import type { Growth, GraphQLDataProp } from '../../common/types';
 import type { GrowthPeriodOption } from './WhatYouNeedToKnowForPeriod';
 import React, { PureComponent } from 'react';
 import { LayoutAnimation } from 'react-native';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose, path } from 'ramda';
+import { withCurrentBaby } from '../components';
 import { getClosestContentForPeriod } from '../../common/growth/reducer';
 import ExpertAdvice from './ExpertAdvice';
 import WhatYouNeedToKnowForPeriod from './WhatYouNeedToKnowForPeriod';
@@ -15,6 +15,7 @@ import { mapEdgesToProp } from '../../common/helpers/graphqlUtils';
 type Props = {
   growth: ?Array<Growth>,
   data: GraphQLDataProp<*>,
+  babyName: string,
 };
 
 type ComponentState = {
@@ -44,6 +45,10 @@ export class WhatYouNeedToKnow extends PureComponent {
               id
               title
               text # for preloading
+              section {
+                id
+                name
+              }
             }
           }
         }
@@ -53,6 +58,10 @@ export class WhatYouNeedToKnow extends PureComponent {
               id
               title
               text # for preloading
+              section {
+                id
+                name
+              }
             }
           }
         }
@@ -99,6 +108,7 @@ export class WhatYouNeedToKnow extends PureComponent {
   };
 
   render() {
+    const { babyName } = this.props;
     const options = this.getPeriodOptions();
     const current = this.getGrowthForCurrentPeriod(options);
 
@@ -107,15 +117,14 @@ export class WhatYouNeedToKnow extends PureComponent {
         current={current}
         onPeriodSelect={this.handlePeriodSelect}
         periods={options}
+        babyName={babyName}
       />
     );
   }
 }
 
 export default compose(
-  connect((state: State) => ({
-    currentBabyId: state.babies.currentBabyId,
-  })),
+  withCurrentBaby,
   graphql(
     gql`
       query WhatYouNeedToKnow($babyId: ID!) {
@@ -123,6 +132,7 @@ export default compose(
           baby(id: $babyId) {
             id
             dob
+            name
             growth {
               edges {
                 node {
@@ -148,7 +158,10 @@ export default compose(
         fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
         variables: { babyId: ownProps.currentBabyId },
       }),
-      props: mapEdgesToProp('viewer.baby.growth.edges', 'growth'),
+      props: data => ({
+        ...mapEdgesToProp('viewer.baby.growth.edges', 'growth', data),
+        babyName: path(['data', 'viewer', 'baby', 'name'], data),
+      }),
     },
   ),
   displayLoadingState,

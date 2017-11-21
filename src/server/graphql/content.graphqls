@@ -1,16 +1,26 @@
 extend type Viewer {
   allTips(before: String, after: String, first: Int, last: Int): TipConnection!
-  allQuotes(before: String, after: String, first: Int, last: Int): QuoteConnection!
-  allArticles(before: String, after: String, first: Int, last: Int): ArticleConnection!
+  allQuotes(
+    before: String
+    after: String
+    first: Int
+    last: Int
+  ): QuoteConnection!
+  randomQuote: Quote
+  allArticles(
+    before: String
+    after: String
+    first: Int
+    last: Int
+  ): ArticleConnection!
   article(id: ID!): Article
   growthArticle(id: ID!, babyId: ID!): GrowthArticle
-
   # Content articles for library (not blog links)
   allLibraryArticles(
-    before: String,
-    after: String,
-    first: Int,
-    last: Int,
+    before: String
+    after: String
+    first: Int
+    last: Int
     filter: LibraryArticlesFilterInput
   ): GrowthArticleConnection!
 }
@@ -30,7 +40,6 @@ type Tip implements Content {
 type TipConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [TipEdge]
 }
@@ -38,7 +47,6 @@ type TipConnection {
 type TipEdge {
   # The item at the end of the edge.
   node: Tip!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -54,7 +62,6 @@ type Quote implements Content {
 type QuoteConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [QuoteEdge]
 }
@@ -62,7 +69,6 @@ type QuoteConnection {
 type QuoteEdge {
   # The item at the end of the edge.
   node: Quote!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -85,7 +91,6 @@ type Article implements Node, Content {
 type ArticleConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [ArticleEdge]
 }
@@ -93,7 +98,6 @@ type ArticleConnection {
 type ArticleEdge {
   # The item at the end of the edge.
   node: Article!
-
   # A cursor for use in pagination.
   cursor: String!
 }

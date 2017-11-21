@@ -8,13 +8,11 @@ import theme from '../../common/themes/defaultTheme';
 type Props = {
   url: string,
   title: string,
-  message: string,
 };
 
-const handleShare = (url: string, title: string, message: string) => {
+const handleShare = (url: string, title: string) => {
   Share.share(
     {
-      message,
       url,
       title,
     },
@@ -24,8 +22,8 @@ const handleShare = (url: string, title: string, message: string) => {
   );
 };
 
-export const ShareButton = ({ url, title, message }: Props) => {
-  const onPress = () => handleShare(url, title, message);
+export const ShareButton = ({ url, title }: Props) => {
+  const onPress = () => handleShare(url, title);
   return (
     <FAB
       onPress={onPress}

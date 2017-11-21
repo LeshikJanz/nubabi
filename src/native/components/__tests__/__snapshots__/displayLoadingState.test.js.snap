@@ -8,7 +8,6 @@ style = Object {}
 <Text
   accessible={true}
   allowFontScaling={true}
-  disabled={false}
   ellipsizeMode="tail"
 >
   The component
@@ -21,7 +20,6 @@ style = Object {}
 <Text
   accessible={true}
   allowFontScaling={true}
-  disabled={false}
   ellipsizeMode="tail"
 >
   The component

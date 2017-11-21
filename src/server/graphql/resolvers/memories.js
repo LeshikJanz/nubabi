@@ -46,6 +46,14 @@ export const resolvers = {
         );
       },
     ),
+    toggleMemoryLike: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return runFirebaseTask(
+          firebase.toggleMemoryLike(fromGlobalId(input.id).id, input.isLiked),
+          memory => ({ edge: { node: memory } }),
+        );
+      },
+    ),
   },
   Baby: {
     memories: ({ id }, args, { connectors: { firebase } }) => {
@@ -66,15 +74,24 @@ export const resolvers = {
         args,
       );
     },
-    comments: ({ comments = [] }, args) => {
+    comments: ({ id }, args, { connectors: { firebase } }) => {
       return connectionFromPromisedArrayWithCount(
-        Promise.resolve(comments),
+        firebase.getComments('MEMORY', id),
         args,
       );
     },
     createdAt: transform('createdAt', toDate),
     author: ({ authorId }, _, { connectors: { firebase } }) => {
       return firebase.getUser(authorId);
+    },
+    isLikedByViewer: ({ id }, _, { connectors: { firebase } }) => {
+      return firebase.isMemoryLikedByViewer(id);
+    },
+    likes: async ({ likes }, args, { connectors: { firebase } }) => {
+      return connectionFromPromisedArrayWithCount(
+        Promise.resolve(firebase.nestedArrayToArray(likes)),
+        args,
+      );
     },
   },
 };

@@ -1,6 +1,7 @@
 /* eslint-disable */
-// See commnets on MaterialSharedElementTransitioner.js
+// See comments on MaterialSharedElementTransitioner.js
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, UIManager, findNodeHandle } from 'react-native';
 
 import { SharedItem } from './transitioners/SharedItems';
@@ -8,8 +9,8 @@ import { SharedItem } from './transitioners/SharedItems';
 class SharedView extends Component {
   _view: any;
   static contextTypes = {
-    registerSharedView: React.PropTypes.func,
-    unregisterSharedView: React.PropTypes.func,
+    registerSharedView: PropTypes.func,
+    unregisterSharedView: PropTypes.func,
   };
 
   render() {

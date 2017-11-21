@@ -1,7 +1,7 @@
 // @flow
 import React, { createElement } from 'react';
 import { View, Text, Dimensions } from 'react-native';
-import Image from 'react-native-cached-image';
+import { CachedImage as Image } from 'react-native-cached-image';
 import S from 'string';
 import { merge, map } from 'lodash';
 import SimpleMarkdown from 'react-native-simple-markdown';
@@ -12,12 +12,15 @@ type Props = {
   style?: Object,
 };
 
-export const ListItemNumber = ({ number }: { number: number }) =>
-  <View style={styles.listItemRounded}>
-    <Text style={styles.listItemRoundedNumber}>
-      {number}
-    </Text>
-  </View>;
+type ListItemNumberProps = {
+  number: number,
+  style?: Object,
+};
+export const ListItemNumber = ({ number, style }: ListItemNumberProps) => (
+  <View style={[styles.listItemRounded, style]}>
+    <Text style={styles.listItemRoundedNumber}>{number}</Text>
+  </View>
+);
 
 export const ListItemBullet = () => <View style={styles.listItemBullet} />;
 
@@ -73,7 +76,9 @@ export const ruleOverrides = {
 
 export const Markdown = ({ style: stylesProp, text }: Props) => {
   const style = merge({}, styles, stylesProp);
-  const markdown = S(text.replace(/&nbsp;/g, ' ')).stripTags().unescapeHTML();
+  const markdown = S(text.replace(/&nbsp;/g, ' '))
+    .stripTags()
+    .unescapeHTML();
 
   return (
     <SimpleMarkdown styles={style} rules={ruleOverrides}>
@@ -96,8 +101,8 @@ const styles = {
   paragraph: {
     lineHeight: 17,
     fontSize: 12,
-    marginBottom: 10,
     color: theme.colors.open.gray3,
+    marginBottom: 10,
   },
   listItemText: {
     lineHeight: 17,

@@ -1,3 +1,4 @@
+// @flow
 export type ColorProps = {
   // Don't hesitate to add your own.
   primary?: boolean,
@@ -49,6 +50,8 @@ export type Theme = {|
       | 800
       | 900,
     fontFamily: string,
+    medium: number,
+    light: number,
   |},
   block: {|
     marginBottom: number,

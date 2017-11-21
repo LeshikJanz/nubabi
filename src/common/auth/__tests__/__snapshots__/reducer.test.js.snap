@@ -3,7 +3,6 @@
 exports[`handles LOGIN_FAILURE 1`] = `
 Object {
   "errorMessage": "some error",
-  "failure": true,
   "isAuthenticated": false,
   "isFetching": false,
   "token": null,
@@ -22,7 +21,6 @@ Object {
 exports[`handles LOGIN_SUCCESS 1`] = `
 Object {
   "errorMessage": "",
-  "failure": false,
   "isAuthenticated": true,
   "isFetching": false,
   "token": null,
@@ -41,7 +39,6 @@ Object {
 exports[`handles ON_AUTH when logged in 1`] = `
 Object {
   "errorMessage": null,
-  "failure": false,
   "isAuthenticated": true,
   "isFetching": false,
   "token": "FIREBASE_TOKEN",
@@ -51,7 +48,6 @@ Object {
 exports[`handles ON_AUTH when logged out 1`] = `
 Object {
   "errorMessage": null,
-  "failure": false,
   "isAuthenticated": false,
   "isFetching": false,
   "token": undefined,

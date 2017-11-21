@@ -1,3 +1,5 @@
+// @flow
+import { head } from 'ramda';
 import {
   prop,
   transform,
@@ -28,7 +30,8 @@ export const resolvers = {
       { token, connectors: { firebase } },
     ) => {
       const baby = await firebase.getBaby(fromGlobalId(babyId).id);
-      return connector.getGrowthContentById(token, id, baby, firebase);
+      const articleId = fromGlobalId(id).id;
+      return connector.getGrowthContentById(token, articleId, baby, firebase);
     },
   },
   Growth: {
@@ -84,9 +87,14 @@ export const resolvers = {
     },
   },
   GrowthArticle: {
+    id: globalIdField(),
     readingTime: obj => {
       return readingTime(obj.text);
     },
+    section: ({ section }) => head(section),
+  },
+  GrowthArticleSection: {
+    id: globalIdField(),
   },
 };
 

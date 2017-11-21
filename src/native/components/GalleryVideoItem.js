@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { Dimensions, Image, View, PanResponder } from 'react-native';
+import { Dimensions, ImageBackground, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { compose } from 'ramda';
-import { connect } from 'react-redux';
 import Box from './Box';
 import Overlay from './Overlay';
 import Text from './Text';
@@ -39,7 +38,7 @@ class GalleryVideoItem extends Component {
 
     return (
       <View style={{ width, height }}>
-        <Image
+        <ImageBackground
           source={{ uri }}
           style={{ flex: 1, width, height, resizeMode: 'cover' }}
         >
@@ -60,19 +59,16 @@ class GalleryVideoItem extends Component {
             </Box>
             <View style={{ position: 'absolute', bottom: 0, right: 5 }}>
               <Overlay>
-                <Text color="white">
-                  {formatDuration(duration)}
-                </Text>
+                <Text color="white">{formatDuration(duration)}</Text>
               </Overlay>
             </View>
           </Overlay>
-        </Image>
+        </ImageBackground>
       </View>
     );
   }
 
   preventGalleryGestures = () => {
-    console.log('on prevent gallery gestures');
     this.setState({
       disableGalleryGestures: true,
     });
@@ -81,7 +77,6 @@ class GalleryVideoItem extends Component {
   player = null;
 
   isPlaying = () => {
-    console.log(this.player && this.player.state.isPlaying);
     return this.player && this.player.state.isPlaying;
   };
 

@@ -1,7 +1,7 @@
 // @flow
 import type { File, FileInput, State } from '../../common/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, View } from 'react-native';
+import { Image, LayoutAnimation, View } from 'react-native';
 import { Field, formValueSelector, reduxForm } from 'redux-form';
 import {
   append,
@@ -20,30 +20,40 @@ import moment from 'moment';
 import {
   Box,
   DatePicker,
+  FloatingRemoveButton,
   FormContainer,
   List,
   ListItem,
-  SubmitButton,
   Text,
   withLayout,
 } from '../components';
-import { renderTextInput, required } from '../shared/forms';
+import { isEditable, renderTextInput, required } from '../shared/forms';
 import mediaPicker, { type MediaPickerItem } from '../components/mediaPicker';
 import MemoryFormFileList from './MemoryFormFileList';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
+import SuggestedMemoryCardContainer from './SuggestedMemoryCardContainer';
+import theme from '../../common/themes/defaultTheme';
+import RemoveMemoryButton from './RemoveMemoryButton';
 
 type Props = {
   mode?: 'add' | 'edit',
-  onSubmit: () => void,
   onAddVoiceNote: () => void,
-  handleSubmit: (submit: Function) => void,
+  onEditSticker: () => void,
+  onRemoveMemory?: () => void,
   submitting: boolean,
   change: (field: string, value: any) => void,
   files: ?Array<File>,
+  initialValues: Object,
+  suggestedMemoryType: ?string,
+  removeFiles: Array<string>,
+  onMemoryRemoved?: () => void,
 };
 
 const dateDisplayFormat = 'D MMMM • H:mm';
 const formatDate = memoize(dateStr => {
-  return moment(dateStr).format(dateDisplayFormat).toUpperCase();
+  return moment(dateStr)
+    .format(dateDisplayFormat)
+    .toUpperCase();
 });
 
 const parseImageOrVideo = (file: MediaPickerItem): FileInput => {
@@ -65,9 +75,8 @@ const removeMediaAt = curry((index: number, files: Array<File>) => {
 
 class MemoryForm extends PureComponent {
   props: Props;
-  state = {
-    removeFiles: [],
-  };
+
+  datePicker = null;
 
   handleAddMedia = () => {
     mediaPicker().then(assets => {
@@ -78,10 +87,9 @@ class MemoryForm extends PureComponent {
 
   handleRemoveMedia = (index: number) => {
     const file = this.props.files[index];
+
     if (file && file.id) {
-      this.setState(prevState => ({
-        removeFiles: append(file.id, prevState.removeFiles),
-      }));
+      this.props.change('removeFiles', append(file.id, this.props.removeFiles));
     }
 
     this.updateFiles(removeMediaAt(index, this.props.files));
@@ -96,12 +104,15 @@ class MemoryForm extends PureComponent {
     this.props.change('files', reject(isNil, files));
   };
 
-  datePicker = null;
-
   openDatePicker = () => {
     if (this.datePicker) {
       this.datePicker.open();
     }
+  };
+
+  handleRemoveSuggestedMemoryType = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    this.props.change('suggestedMemoryType', null);
   };
 
   renderDatePicker = field => {
@@ -111,10 +122,13 @@ class MemoryForm extends PureComponent {
     // allowed for a custom label component or `children` to be passed
     return (
       <View style={{ flex: 1 }}>
-        <ListItem onPress={this.openDatePicker} leftIcon="md-calendar">
-          <Text color="secondary">
-            {formatDate(field.input.value)}
-          </Text>
+        <ListItem
+          editable={field.editable}
+          onPress={this.openDatePicker}
+          leftIcon="md-calendar"
+          iconColor={field.iconColor}
+        >
+          <Text color="secondary">{formatDate(field.input.value)}</Text>
         </ListItem>
         <View
           style={{
@@ -139,30 +153,69 @@ class MemoryForm extends PureComponent {
     );
   };
 
-  handleSubmit = this.props.handleSubmit(input => {
-    return this.props.onSubmit({
-      ...input,
-      removeFiles: this.state.removeFiles,
-    });
-  });
+  renderSuggestedMemoryType = field => {
+    const suggestedMemoryId = field.input.value;
+
+    if (!suggestedMemoryId) {
+      return null;
+    }
+
+    const suggestedMemoryType = findSuggestedMemoryById(suggestedMemoryId);
+
+    if (!suggestedMemoryType) {
+      return null;
+    }
+
+    return (
+      <SuggestedMemoryCardContainer>
+        {this.props.mode === 'edit' &&
+          isEditable(field) && (
+            <FloatingRemoveButton
+              onPress={this.handleRemoveSuggestedMemoryType}
+            />
+          )}
+        <Image
+          source={suggestedMemoryType.image}
+          style={{ width: 52, height: 52 }}
+        />
+      </SuggestedMemoryCardContainer>
+    );
+  };
 
   render() {
-    const { layout } = this.props;
-    const submitText = this.props.mode === 'edit' ? 'SAVE' : 'ADD MEMORY';
+    const {
+      mode,
+      suggestedMemoryType,
+      onMemoryRemoved,
+      submitting: isSubmitting,
+    } = this.props;
+
+    const editableProps = { editable: !isSubmitting };
 
     return (
       <FormContainer>
         <Box flex={1}>
-          <Field
-            name="title"
-            multiline
-            placeholder="Add a title or comment..."
-            underlineColorAndroid="transparent"
-            component={renderTextInput}
-            validate={[required]}
-          />
+          <Box flex={1} flexDirection="row" alignItems="center">
+            {suggestedMemoryType && (
+              <Field
+                {...editableProps}
+                name="suggestedMemoryType"
+                component={this.renderSuggestedMemoryType}
+              />
+            )}
+            <Field
+              {...editableProps}
+              name="title"
+              multiline
+              placeholder="Add a title or comment..."
+              underlineColorAndroid="transparent"
+              component={renderTextInput}
+              validate={[required]}
+            />
+          </Box>
           <Box flex={1}>
             <Field
+              {...editableProps}
               name="files"
               component={MemoryFormFileList}
               onRemoveMedia={this.handleRemoveMedia}
@@ -170,31 +223,41 @@ class MemoryForm extends PureComponent {
           </Box>
           <Box>
             <List>
-              <Field name="createdAt" component={this.renderDatePicker} />
-              <ListItem leftIcon="ios-images" onPress={this.handleAddMedia}>
+              <Field
+                name="createdAt"
+                component={this.renderDatePicker}
+                iconColor={theme.colors.primary}
+                {...editableProps}
+              />
+              <ListItem
+                leftIcon="ios-images"
+                onPress={this.handleAddMedia}
+                iconColor={theme.colors.primary}
+                {...editableProps}
+              >
                 <Text color="secondary">Photo/Video</Text>
               </ListItem>
-              <ListItem leftIcon="ios-medal">
-                <Text color="secondary">Event</Text>
-              </ListItem>
               <ListItem
-                leftIcon="ios-mic"
-                onPress={this.handleAddVoiceNote}
+                leftIcon="md-flower"
+                iconColor={theme.colors.primary}
+                onPress={this.props.onEditSticker}
                 last
+                {...editableProps}
               >
-                <Text color="secondary">Voice note</Text>
+                <Text color="secondary">Stickers</Text>
               </ListItem>
             </List>
           </Box>
         </Box>
 
-        <Box flexDirection="row" alignItems="flex-end">
-          <SubmitButton
-            submitText={submitText}
-            onPress={this.handleSubmit}
-            loading={this.props.submitting}
-          />
-        </Box>
+        {mode === 'edit' && (
+          <Box flexDirection="row" alignItems="flex-end">
+            <RemoveMemoryButton
+              id={this.props.initialValues.id}
+              goBack={onMemoryRemoved}
+            />
+          </Box>
+        )}
       </FormContainer>
     );
   }
@@ -207,6 +270,8 @@ export default compose(
   }),
   connect((state: State) => ({
     files: selector(state, 'files'),
+    removeFiles: selector(state, 'removeFiles'),
+    suggestedMemoryType: selector(state, 'suggestedMemoryType'),
   })),
   withLayout,
 )(MemoryForm);

@@ -5,21 +5,20 @@ query ViewThisWeekActivity($babyId: ID!, $activityId: ID!, $cursor: String!) {
       name
       activity(id: $activityId) {
         ...Activity
+        __typename
       }
       nextActivity: activities(first: 1, after: $cursor) {
         ...ActivityNavigation
+        __typename
       }
       previousActivity: activities(first: 1, before: $cursor) {
         ...ActivityNavigation
+        __typename
       }
-      favoriteActivities {
-        edges {
-          node {
-            id
-          }
-        }
-      }
+      ...FavoriteActivities
+      __typename
     }
+    __typename
   }
 }
 
@@ -30,6 +29,7 @@ fragment Activity on Activity {
   ...ActivityActionsActivity
   expert {
     ...ExpertInfo
+    __typename
   }
   skillArea {
     id
@@ -37,38 +37,50 @@ fragment Activity on Activity {
     image {
       large {
         url
+        __typename
       }
+      __typename
     }
     ...HeaderSkill
     ...ActivityActionsSkill
+    __typename
   }
   ...Steps
+  __typename
 }
 
-fragment ActivityNavigation on ActivityConnection {
-  edges {
-    cursor
-    node {
-      id
-      name
-      skillArea {
-        id
-        name
-      }
+fragment HeaderSkill on SkillArea {
+  name
+  image {
+    large {
+      url
+      __typename
     }
+    __typename
   }
+  __typename
 }
 
 fragment HeaderActivity on Activity {
   name
+  __typename
+}
+
+fragment ExpertInfo on Expert {
+  id
+  name
+  discipline
+  avatar {
+    url
+    __typename
+  }
+  biography
+  __typename
 }
 
 fragment ExpertInfoActivity on Activity {
   introduction
-}
-
-fragment ActivityActionsActivity on Activity {
-  name
+  __typename
 }
 
 fragment Steps on Activity {
@@ -80,8 +92,76 @@ fragment Steps on Activity {
         type
         thumb
         url
+        __typename
       }
+      __typename
     }
+    __typename
   }
+  __typename
 }
 
+fragment ActivityActionsActivity on Activity {
+  name
+  isCompleted
+  __typename
+}
+
+fragment ActivityActionsSkill on SkillArea {
+  icon
+  __typename
+}
+
+fragment ActivityNavigation on ActivityConnection {
+  edges {
+    cursor
+    node {
+      id
+      name
+      skillArea {
+        id
+        name
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment FavoriteActivities on Baby {
+  favoriteActivities {
+    edges {
+      node {
+        ...ActivityList
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment ActivityList on Activity {
+  id
+  name
+  skillArea {
+    id
+    name
+    image {
+      thumb {
+        url
+        __typename
+      }
+      __typename
+    }
+    icon
+    completedIcon
+    __typename
+  }
+  equipment
+  isCompleted
+  __typename
+}

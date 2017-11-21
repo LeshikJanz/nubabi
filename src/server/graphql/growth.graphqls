@@ -13,28 +13,20 @@ type Growth implements Node {
   title: String!
   introduction: String!
   content: String!
-
   # Minimum baby age in ageDuration units
   minimumAge: Int!
-
   # Maximum baby age in ageDuration units
   maximumAge: Int!
-
   # Age duration
   ageDuration: AgeDuration!
-
   # Expert who gave this content's advice
   expert: Expert!
-
   # Links to articles (blog posts)
   growthDevelopmentArticleLinks: ArticleConnection!
-
   # Links to library content (Growth & Development)
   growthDevelopmentContentLinks: GrowthArticleConnection!
-
   # Links to articles (blog posts)
   introductionArticleLinks: ArticleConnection!
-
   # Links to library content (introductory section)
   introductionContentLinks: GrowthArticleConnection!
 }
@@ -44,17 +36,15 @@ type GrowthArticle implements Content {
   title: String!
   text: String!
   readingTime: ReadingTime!
+  section: GrowthArticleSection!
 }
 
 type GrowthConnection {
   # Global introduction to the Growth section
   introduction: String!
-
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   edges: [GrowthEdge]
-
   # The current growth based on the baby's dob (returns the last content if we can't find a closer one)
   current: Growth
 }
@@ -62,7 +52,6 @@ type GrowthConnection {
 type GrowthEdge {
   # The item at the end of the edge.
   node: Growth!
-
   # A cursor for use in pagination.
   cursor: String!
 }
@@ -71,7 +60,6 @@ type GrowthEdge {
 type GrowthArticleConnection {
   # Information to aid in pagination.
   pageInfo: PageInfo!
-
   # A list of edges.
   edges: [GrowthArticleEdge]
 }
@@ -79,9 +67,11 @@ type GrowthArticleConnection {
 type GrowthArticleEdge {
   # The item at the end of the edge.
   node: GrowthArticle!
-
   # A cursor for use in pagination.
   cursor: String!
 }
 
-
+type GrowthArticleSection {
+  id: ID!
+  name: String!
+}

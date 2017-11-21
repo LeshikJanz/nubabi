@@ -1,63 +1,22 @@
 // @flow
-import { assoc, pick } from 'ramda';
-import Platform from 'react-native';
-import RNFetchBlob from 'react-native-fetch-blob';
+import { getContentTypeFromFilename } from '../../common/helpers/graphqlUtils';
 
-export const fileToBase64 = (path: string) => {
-  return new Promise((resolve, reject) => {
-    RNFetchBlob.fs
-      .readStream(
-        // file path
-        path,
-        // encoding, should be one of `base64`, `utf8`, `ascii`
-        'base64',
-        // (optional) buffer size, default to 4096 (4095 for BASE64 encoded data)
-        // when reading file in BASE64 encoding, buffer size must be multiples of 3.
-        4095,
-      )
-      .then(ifstream => {
-        let data = '';
-        ifstream.open();
-        ifstream.onData(chunk => {
-          // when encoding is `ascii`, chunk will be an array contains numbers
-          // otherwise it will be a string
-          data += chunk;
-        });
-        ifstream.onError(err => {
-          reject(err);
-        });
+export const isNewFile = (file: ?{ url: string }) => {
+  if (!file) {
+    return false;
+  }
 
-        ifstream.onEnd(() => {
-          resolve(data);
-        });
-      });
-  });
+  return !file.url.startsWith('https://firebasestorage.googleapis.com');
 };
 
-// We removed the file:/// prefix earlier
-const isLocalFile = (file: string) => file.startsWith('/');
-
-export const processFiles = async files => {
-  return Promise.all(
-    files.map(async file => {
-      const url =
-        Platform.OS === 'ios' ? file.url.replace('file:///', '') : file.url;
-
-      if (isLocalFile(url)) {
-        const input = assoc(
-          'url',
-          `data:${file.contentType};base64,${await fileToBase64(url)}`,
-          file,
-        );
-
-        if (!file.size) {
-          input.size = (await RNFetchBlob.fs.stat(url)).size;
-        }
-
-        return input;
-      }
-
-      return file;
-    }),
-  );
+// Parse results from react-native-image-picker into File interface inout
+// (do not confuse with react-native-image-crop-picker which already gives
+// us the expected result
+export const fileFromImagePickerResult = file => {
+  return {
+    size: file.fileSize,
+    name: file.fileName,
+    url: file.uri,
+    contentType: getContentTypeFromFilename(file.fileName),
+  };
 };
