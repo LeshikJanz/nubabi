@@ -73,7 +73,7 @@
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.5.0",
-    "eslint-import-resolver-babel-module": "^4.0.0-beta.3",
+    "eslint-import-resolver-babel-module": "https://github.com/blackxored/eslint-import-resolver-babel-module#feat/custom-project-root",
     "eslint-plugin-flowtype": "^2.39.1",
     "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-graphql": "^1.4.1",
