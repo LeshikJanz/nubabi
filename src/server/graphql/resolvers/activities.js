@@ -101,7 +101,6 @@ export const resolvers = {
       { id, babyId, steps }: RawActivity,
       _: mixed,
       { connectors: { firebase } }: Context,
-      info,
     ) => {
       return connector.getSteps(firebase, babyId, id, steps);
     },
@@ -119,7 +118,7 @@ export const resolvers = {
       return connector.getActivityIntroduction(firebase, babyId, introduction);
     },
     media: (obj: RawActivity, args: ConnectionArguments) => {
-      return connectionFromArray(obj.media, args);
+      return connectionFromArray(obj.media || [], args);
     },
     isFavorite: ({ id }, _, { token }, info) => {
       const babyId = info.variableValues.input

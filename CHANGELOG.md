@@ -1,3 +1,18 @@
+<a name="1.0.0-beta.6"></a>
+# 1.0.0-beta.6 (2017-11-22)
+
+* refactor(growth): remove unused vars ([2c9490d](https://gitlab.com/nubabi/mobile/commit/2c9490d))
+* fix(profile): null-check avatarSource ([fa490bc](https://gitlab.com/nubabi/mobile/commit/fa490bc))
+* fix(schema): fetch full user profile for template in growth ([e6cd8ca](https://gitlab.com/nubabi/mobile/commit/e6cd8ca))
+* fix(schema): user name in first introduction ([5a7f6e3](https://gitlab.com/nubabi/mobile/commit/5a7f6e3))
+* feat(auth): update login background ([b3ba2e5](https://gitlab.com/nubabi/mobile/commit/b3ba2e5))
+* feat(growth): titleize buttons text ([2194683](https://gitlab.com/nubabi/mobile/commit/2194683))
+* feat(growth): titleize navigation header ([d232e23](https://gitlab.com/nubabi/mobile/commit/d232e23))
+* feat(profile): rename growth summary title ([4748c45](https://gitlab.com/nubabi/mobile/commit/4748c45))
+* feat(stimulation): rename nav header ([27995e1](https://gitlab.com/nubabi/mobile/commit/27995e1))
+
+
+
 <a name="1.0.0-beta.5"></a>
 # 1.0.0-beta.5 (2017-11-21)
 
