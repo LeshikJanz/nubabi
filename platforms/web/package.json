@@ -22,7 +22,7 @@
     "qhistory": "^1.0.0",
     "ramda": "^0.24.1",
     "raven-js": "^3.17.0",
-    "react": "^16.0.0",
+    "react": "16.0.0",
     "react-apollo": "^1.4.4",
     "react-dom": "^16.0.0",
     "react-fela": "^5.1.0",
