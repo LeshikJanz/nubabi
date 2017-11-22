@@ -5,7 +5,6 @@ import { TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, Card, Pill, Text } from '../components';
-import { formatAge } from '../../common/helpers/formatAge';
 import ExpertAdvice from '../growth/ExpertAdvice';
 
 type Props = {
@@ -25,7 +24,7 @@ export const ProfileGrowth = ({ growth, onViewGrowth }: Props) => {
       <Card padding={0}>
         <Box contentSpacing flexDirection="row">
           <Box flex={1}>
-            <Text size={6}>This Week's Growth</Text>
+            <Text size={6}>What to Expect</Text>
           </Box>
           <Pill
             backgroundColor="rgba(51, 183, 235, .1)"
