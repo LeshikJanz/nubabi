@@ -8,18 +8,11 @@ import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
 import { skipGrowthGlobalIntro } from '../../common/growth/reducer';
-import {
-  Box,
-  Card,
-  displayLoadingState,
-  showNoContentViewIf,
-  Text,
-} from '../components';
+import { Box, displayLoadingState, showNoContentViewIf } from '../components';
 import Introduction from './Introduction';
 import AgeHeader from './AgeHeader';
 import WhatYouNeedToKnowButton from './WhatYouNeedToKnowButton';
 import GrowthChartButton from './GrowthChartButton';
-import { formatMeasurement } from '../../common/helpers/measurement';
 
 type Props = {
   baby: Baby,
@@ -28,18 +21,6 @@ type Props = {
   onNavigateToGraphDetail: () => void,
   unitDisplay: UnitDisplaySettingsState,
 };
-
-const DAY_MS = 86400000;
-
-const defaultData = [
-  { recordedAt: new Date(2007, 1, 1), value: 83.24 },
-  { recordedAt: new Date(2007, 1, 2), value: 85.35 },
-  { recordedAt: new Date(2007, 1, 3), value: 98.84 },
-  { recordedAt: new Date(2007, 1, 4), value: 79.92 },
-  { recordedAt: new Date(2007, 1, 5), value: 83.8 },
-  { recordedAt: new Date(2007, 1, 6), value: 88.47 },
-  { recordedAt: new Date(2007, 1, 7), value: 94.47 },
-];
 
 export class Growth extends Component {
   props: Props;
@@ -63,8 +44,8 @@ export class Growth extends Component {
   };
 
   render() {
-    const { baby, unitDisplay } = this.props;
-    const introduction = baby.growth.introduction;
+    const { baby } = this.props;
+    const { introduction } = baby.growth;
 
     const lastMeasurement = (type: 'weights' | 'heights', data) =>
       path(['measurements', type, 'edges', '0', 'node'], data);
