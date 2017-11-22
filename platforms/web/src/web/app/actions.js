@@ -1,12 +1,9 @@
 // @flow
-import type { Deps } from '../../common/types';
+import type { Deps } from 'core/types';
 import { Observable } from 'rxjs/Observable';
-import {
-  getBabiesRequest,
-  getBabiesSuccess,
-} from '../../common/babies/actions';
+import { getBabiesRequest, getBabiesSuccess } from 'core/babies/actions';
 import { gql } from 'react-apollo';
-import { appOnline, appError } from '../../common/app/actions';
+import { appOnline, appError } from 'core/app/actions';
 
 // We will get rid of this once we standarize data fetching
 const appOnlineEpic = (action$: any, deps: Deps) => {

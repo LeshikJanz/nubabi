@@ -8,8 +8,8 @@ import { Menu } from '../../../../src/web/elements';
 import INotification from '../../../images/icons/notification.svg';
 import IPerson from '../../../images/icons/person.svg';
 import IPhotos from '../../../images/icons/photos.svg';
-import IFirstBirth from '../../../../src/common/images/memories/first-birthday.png';
-import IFirstTooth from '../../../../src/common/images/memories/first-tooth.png';
+import IFirstBirth from 'core/images/memories/first-birthday.png';
+import IFirstTooth from 'core/images/memories/first-tooth.png';
 
 type Props = {};
 
