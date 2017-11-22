@@ -1,9 +1,8 @@
 // @flow
-import { pick, assocPath, last } from 'ramda';
+import { pick, last } from 'ramda';
 import * as connector from '../connectors/babiesConnector';
 // noinspection ES6UnusedImports
 import {
-  prop,
   transform,
   connectionFromArray,
   connectionFromPromisedArray,
@@ -84,7 +83,7 @@ const resolvers = {
 
       const connection = connectionFromArray(content, args);
 
-      const viewer = await firebase.getViewer();
+      const viewer = await firebase.getViewerWithProfile();
 
       // TODO: PERF don't do this unless we ask for current in the query
       connection.current =
@@ -97,7 +96,7 @@ const resolvers = {
         const introduction = await connector.getIntroductionFor(
           token,
           baby,
-          viewer.displayName || viewer.email,
+          viewer.firstName || viewer.email,
         );
 
         return {

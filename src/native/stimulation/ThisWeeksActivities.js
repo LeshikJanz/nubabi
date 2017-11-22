@@ -1,5 +1,9 @@
 // @flow
-import type { ActivityEdge, NavigationOptions } from '../../common/types';
+import type {
+  ActivityEdge,
+  GraphQLDataProp,
+  NavigationOptions,
+} from '../../common/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { compose, path } from 'ramda';
@@ -10,13 +14,13 @@ import ActivityList from './ActivityList';
 type Props = {
   activities: Array<ActivityEdge>,
   navigation: NavigationProp<*, *>,
-};
+} & GraphQLDataProp<*>;
 
 class ThisWeeksActivities extends PureComponent {
   props: Props;
 
   static navigationOptions: NavigationOptions = {
-    title: "This Week's Activities",
+    title: "This Week's Stimulation Guide",
     headerBackTitle: 'Activities',
   };
 

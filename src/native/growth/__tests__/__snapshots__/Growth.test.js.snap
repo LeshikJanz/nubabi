@@ -544,7 +544,7 @@ style = Object {
                 }
               }
             >
-              What to expect
+              What to Expect
             </Text>
             <View
               style={
@@ -976,7 +976,7 @@ style = Object {
           >
             Track 
             TestBaby's
-             height & weight
+             Height & Weight
           </Text>
           <View
             style={
@@ -1566,7 +1566,7 @@ style = Object {
                 }
               }
             >
-              What to expect
+              What to Expect
             </Text>
             <View
               style={
@@ -1998,7 +1998,7 @@ style = Object {
           >
             Track 
             TestBaby's
-             height & weight
+             Height & Weight
           </Text>
           <View
             style={
