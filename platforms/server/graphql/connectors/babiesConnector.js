@@ -8,13 +8,7 @@ import type {
   Baby,
 } from '../../../../core/types';
 import {
-  assoc,
-  compose,
-  curry,
-  either,
   find,
-  identity,
-  map,
   merge,
   mergeDeepRight,
   path,
@@ -54,7 +48,7 @@ const toParam = array => array && array.join(',');
 
 const toIdsFilter = ids => {
   if (!ids) {
-    return;
+    return null;
   }
   return ids.map(id => fromGlobalId(id).id).join(',');
 };
@@ -214,7 +208,7 @@ export const getSteps = async (
   const baby = await firebase.getBaby(babyId);
   const variables = await getTemplateVariables(firebase, baby);
 
-  return steps.map((step, index) => {
+  return steps.map(step => {
     return makeStringFromTemplate(step, variables);
   });
 };
@@ -332,7 +326,7 @@ export const makeStringFromTemplate = (template: string, variables: *) => {
 };
 
 export const getTemplateVariables = async (firebase, baby) => {
-  const viewer = await firebase.getViewer();
+  const viewer = await firebase.getViewerWithProfile();
   const viewerName = viewer.firstName || viewer.email;
 
   return {
@@ -350,7 +344,8 @@ export const getGrowthContent = (token: string, baby: Baby) => {
     .then(data => {
       return data.map(content => {
         // HACK
-        content.baby = baby; // eslint-disable-line: no-param-reassign
+        // eslint-disable-next-line no-param-reassign
+        content.baby = baby;
         return content;
       });
     });

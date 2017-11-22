@@ -146,7 +146,7 @@ export const GrowthChartButton = ({
         })}
       >
         <Text flex={1} size={4}>
-          Track {formatPossessive(babyName)} height & weight
+          Track {formatPossessive(babyName)} Height & Weight
         </Text>
         <ListItemArrow />
       </Box>

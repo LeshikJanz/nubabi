@@ -3,7 +3,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
-import { compose, path, prop } from 'ramda';
+import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import color from 'color';
 import { withCurrentBaby } from '../components';
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ProfileIcon = ({ avatarSource, active, tintColor }: Props) => {
-  const avatar = avatarSource.uri ? avatarSource : babyIcon;
+  const avatar = avatarSource && avatarSource.uri ? avatarSource : babyIcon;
 
   const activeStyle = active
     ? {
