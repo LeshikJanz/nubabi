@@ -1,24 +1,19 @@
 // @flow
 import type { SettingsState, State, Viewer } from 'core/types';
 import React, { Component } from 'react';
-import {
-  ActionSheetIOS,
-  ScrollView,
-  TouchableHighlight,
-  View,
-} from 'react-native';
+import { ScrollView, TouchableHighlight, View } from 'react-native';
 import { connect } from 'react-redux';
-import { compose, invertObj, path } from 'ramda';
+import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
 import {
   resetSettings,
-  resetTips,
   setSettingsValue,
 } from 'core/settings/reducer';
 import { logout } from 'core/auth/actions';
 import theme, { NUBABI_RED } from 'core/themes/defaultTheme';
+import * as ActionSheet from './ActionSheet';
 import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {
@@ -28,7 +23,6 @@ type Props = {
   appVersion: string,
   logout: typeof logout,
   setSettingsValue: typeof setSettingsValue,
-  resetTips: typeof resetTips,
   resetSettings: typeof resetSettings,
   onNavigateToNotificationSettings: () => void,
   onNavigateToEditProfile: () => void,
@@ -67,29 +61,12 @@ export class Settings extends Component {
   }
 
   handleActionSheet = (options: Array<string>, type: string) => {
-    // TODO: this is iOS only
-    const sheetOptions = [...options, 'Cancel'];
-    const cancelIndex = sheetOptions.length - 1;
-
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: sheetOptions,
-        cancelButtonIndex: cancelIndex,
-        title: 'Choose a Unit',
-        message: 'Set this unit to be displayed in measurements across the app',
-      },
-      selectedIndex => {
-        if (selectedIndex === cancelIndex) {
-          return;
-        }
-
-        const selectedUnit = invertObj(unitDisplayMapping)[
-          sheetOptions[selectedIndex]
-        ];
-
-        if (selectedUnit) {
-          this.props.setSettingsValue(['unitDisplay', type], selectedUnit);
-        }
+    ActionSheet.handleActionSheet(
+      options,
+      type,
+      unitDisplayMapping,
+      selectedUnit => {
+        this.props.setSettingsValue(['unitDisplay', type], selectedUnit);
       },
     );
   };
@@ -240,7 +217,7 @@ export default compose(
       appVersion: state.config.appVersion,
       settings: state.settings,
     }),
-    { setSettingsValue, resetSettings, resetTips, logout },
+    { setSettingsValue, resetSettings, logout },
   ),
   graphql(
     gql`

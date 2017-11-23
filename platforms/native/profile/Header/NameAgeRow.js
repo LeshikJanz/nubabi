@@ -1,66 +1,55 @@
 // @flow
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import {
-  View,
-  TouchableHighlight,
-  TouchableOpacity,
-  Text,
-  StyleSheet,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, } from 'react-native';
 import { NubabiIcon } from '../../components';
 import { NUBABI_RED } from 'core/themes/defaultTheme';
 import { formatAge } from 'core/helpers/formatAge';
 
-class NameAgeRow extends Component {
-  render() {
-    return (
-      <View style={styles.profileBackground}>
-        <View style={styles.profileHeaderButtonView}>
-          <View style={styles.profileHeaderButton}>
-            <TouchableHighlight style={styles.profileHeaderTouch}>
-              <Text style={styles.profileHeaderButtonText}>?</Text>
-            </TouchableHighlight>
-          </View>
-        </View>
-        <View style={styles.profileNameView}>
-          <View style={styles.backdropView}>
-            <Text style={styles.babyName}>{this.props.babyName}</Text>
-          </View>
-          <View
-            style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}
-          >
-            <View style={styles.babyAgeBackground}>
-              <Text style={styles.babyAge}>
-                {formatAge(this.props.birthDate)}
-              </Text>
-            </View>
-          </View>
-        </View>
-        <View style={styles.profileHeaderButtonView}>
-          <TouchableOpacity
-            onPress={this.props.onEditBaby}
-            style={styles.profileHeaderButton}
-          >
-            <NubabiIcon
-              style={[
-                styles.profileHeaderButtonText,
-                { marginLeft: 7, fontSize: 16, marginTop: -1 },
-              ]}
-              name="editProfile"
-            />
-          </TouchableOpacity>
+type Props = {
+  babyName: string,
+  birthDate: string,
+  onEditBaby: () => void,
+};
+
+export const NameAgeRow = ({ babyName, birthDate, onEditBaby }: Props) => (
+  <View style={styles.profileBackground}>
+    <View style={styles.profileHeaderButtonView}>
+      <View style={styles.profileHeaderButton}>
+        <TouchableHighlight style={styles.profileHeaderTouch}>
+          <Text style={styles.profileHeaderButtonText}>?</Text>
+        </TouchableHighlight>
+      </View>
+    </View>
+    <View style={styles.profileNameView}>
+      <View style={styles.backdropView}>
+        <Text style={styles.babyName}>{babyName}</Text>
+      </View>
+      <View
+        style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}
+      >
+        <View style={styles.babyAgeBackground}>
+          <Text style={styles.babyAge}>
+            {formatAge(birthDate)}
+          </Text>
         </View>
       </View>
-    );
-  }
-}
-
-NameAgeRow.propTypes = {
-  babyName: PropTypes.string.isRequired,
-  birthDate: PropTypes.string.isRequired,
-  onEditBaby: PropTypes.func.isRequired,
-};
+    </View>
+    <View style={styles.profileHeaderButtonView}>
+      <TouchableOpacity
+        onPress={onEditBaby}
+        style={styles.profileHeaderButton}
+      >
+        <NubabiIcon
+          style={[
+            styles.profileHeaderButtonText,
+            { marginLeft: 7, fontSize: 16, marginTop: -1 },
+          ]}
+          name="editProfile"
+        />
+      </TouchableOpacity>
+    </View>
+  </View>
+);
 
 const styles = StyleSheet.create({
   profileBackground: {

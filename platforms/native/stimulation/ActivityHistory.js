@@ -1,5 +1,4 @@
 // @flow
-import type { State } from 'core/types';
 import React from 'react';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';

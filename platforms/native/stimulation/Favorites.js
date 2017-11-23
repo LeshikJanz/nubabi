@@ -4,7 +4,6 @@ import type {
   GraphQLDataProp,
   NavigationOptions,
 } from 'core/types';
-import type { Event } from 'react-native';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { gql, graphql } from 'react-apollo';

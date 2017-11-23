@@ -6,7 +6,6 @@ import type { Article as ArticleType } from 'core/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { compose, path } from 'ramda';
-import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Card, ListSeparator } from '../components';
 import ArticleListItem from './ArticleListItem';

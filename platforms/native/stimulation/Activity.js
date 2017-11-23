@@ -117,11 +117,18 @@ export class Activity extends PureComponent {
     `,
   };
 
+  static childContextTypes = childContextTypes;
+  getChildContext = getChildContext.bind(this);
+
+  componentWillUpdate(nextProps: Props) {
+    if (nextProps.activity.id !== this.props.activity.id) {
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      this.scrollToTop();
+    }
+  }
+
   scrollView = null;
 
-  static childContextTypes = childContextTypes;
-
-  getChildContext = getChildContext.bind(this);
 
   handleLayout = handleLayout.bind(this);
 
@@ -130,13 +137,6 @@ export class Activity extends PureComponent {
       this.scrollView.scrollTo({ x: 0, y: 0, animated: false });
     }
   };
-
-  componentWillUpdate(nextProps: Props) {
-    if (nextProps.activity.id !== this.props.activity.id) {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      this.scrollToTop();
-    }
-  }
 
   handlePreviousActivity = () => {
     /* $FlowFixMe */

@@ -1,5 +1,5 @@
 // @flow
-import type { Baby, BabyEdge, State } from 'core/types';
+import type { Baby, State } from 'core/types';
 import React, { Component } from 'react';
 import {
   Image,
@@ -31,7 +31,6 @@ type Props = {
   loadingMessage: ?string,
   author: ?string,
   baby: ?Baby,
-  babies: ?Array<BabyEdge>,
 };
 
 class SplashScreen extends Component {

@@ -14,6 +14,11 @@ type Props = {
   onDismiss: () => void,
 };
 
+type HeaderProps = {
+  onDismiss: () => void,
+  centered: boolean,
+}
+
 export type SuggestedMemoryType = {
   id: string,
   title: string,
@@ -56,7 +61,7 @@ export const findSuggestedMemoryById = (id: string) => {
   return find(propEq('id', id), stickersList);
 };
 
-export const renderHeader = ({ onDismiss, centered = false }) => (
+export const renderHeader = ({ onDismiss, centered = false }: HeaderProps) => (
   <Box contentSpacing flexDirection="row" alignItems="center">
     <Text flex={1} bold color="secondary" align={centered ? 'center' : 'left'}>
       SUGGESTED MEMORIES

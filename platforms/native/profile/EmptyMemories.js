@@ -5,7 +5,6 @@ import { Image } from 'react-native';
 import { Box, Button, Card, Text } from '../components';
 import HeaderShape from '../stimulation/HeaderShape';
 import withLayout from '../components/withLayout';
-import getHeaderStyles from '../stimulation/getHeaderStyles';
 
 type Props = {
   babyName: string,
@@ -21,11 +20,6 @@ export const EmptyMemories = ({
   layout,
 }: Props) => {
   const width = layout.viewportWidth;
-  const {
-    headerContainerStyle,
-    headerImageStyle,
-    overlayStyle,
-  } = getHeaderStyles(width);
 
   return (
     <Box contentSpacing>

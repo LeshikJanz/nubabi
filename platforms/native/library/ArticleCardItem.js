@@ -1,21 +1,18 @@
 // @flow
 // TODO: reuse HorizontalCardItem
-import type { LayoutProps } from 'core/types';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
-import { gql } from 'react-apollo';
 import { compose } from 'ramda';
 import { Box, Text, Overlay, withLayout } from '../components';
 
 type Props = {
   title: string,
   image: { url: string },
-  layout: LayoutProps,
 };
 
 // TODO: test the overlay is working as expected
-export const ArticleCardItem = ({ title, image, layout }: Props) => {
+export const ArticleCardItem = ({ title, image }: Props) => {
   return (
     <Box flex={1} borderRadius={4} overflow="hidden">
       <Image

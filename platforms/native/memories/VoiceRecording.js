@@ -1,4 +1,5 @@
 // @flow
+import type { File } from 'core/types';
 import React, { PureComponent } from 'react';
 // eslint-disable-next-line react-native/split-platform-components
 import { LayoutAnimation, PermissionsAndroid, Platform } from 'react-native';
@@ -8,12 +9,16 @@ import uuid from 'react-native-uuid';
 import { change, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { compose, last } from 'ramda';
+import { appError } from 'core/app/actions';
 import { Box, FAB, Icon, Loader, SubmitButton, Text } from '../components';
 import theme from 'core/themes/defaultTheme';
 import { formatDuration } from 'core/helpers/formatDuration';
 
 type Props = {
+  appError: typeof appError,
+  change: typeof change,
   goBack: () => void,
+  files: Array<File>,
 };
 
 export class VoiceRecording extends PureComponent {
@@ -22,7 +27,6 @@ export class VoiceRecording extends PureComponent {
     isSubmitting: false,
     isPlaying: false,
     isRecording: false,
-    finished: false,
     stoppedRecording: undefined,
     audioPath: this.getAudioPath(),
     sound: null,
@@ -48,6 +52,10 @@ export class VoiceRecording extends PureComponent {
     return `${AudioUtils.DocumentDirectoryPath}/${uuid.v4()}.aac`;
   }
 
+  showError = (error = "There was a problem with this recording") => {
+    this.props.appError(new Error(error));
+  };
+
   prepareRecordingPath(audioPath) {
     AudioRecorder.prepareRecordingAtPath(audioPath, {
       SampleRate: 22050,
@@ -63,6 +71,7 @@ export class VoiceRecording extends PureComponent {
       this.setState({ hasPermission });
 
       if (!hasPermission) {
+        this.showError("We don't have permissions to use your microphone");
         return;
       }
 
@@ -103,13 +112,13 @@ export class VoiceRecording extends PureComponent {
         this.finishRecording(true, filePath);
       }
     } catch (error) {
-      console.log(error);
+      this.showError();
     }
   };
 
   stopRecording = async () => {
     if (!this.state.isRecording) {
-      return;
+      return null;
     }
 
     this.setState({ stoppedRecording: true, isRecording: false });
@@ -123,7 +132,7 @@ export class VoiceRecording extends PureComponent {
 
       return filePath;
     } catch (error) {
-      console.log(error);
+      this.showError();
     }
   };
 
@@ -139,19 +148,13 @@ export class VoiceRecording extends PureComponent {
           isPlaying: true,
           sound: new Sound(this.state.audioPath, '', error => {
             if (error) {
-              console.log('failed to load the source', error);
+              this.showError();
             }
           }),
         },
         () => {
           setTimeout(() => {
-            this.state.sound.play(success => {
-              if (success) {
-                console.log('successfully finished playing');
-              } else {
-                console.log('playback failed due to audio decoder errors');
-              }
-
+            this.state.sound.play((/* success */) => {
               this.setState({ isPlaying: false });
             }, 100);
           }, 100);
@@ -166,7 +169,7 @@ export class VoiceRecording extends PureComponent {
     }
 
     if (!this.state.hasPermission) {
-      console.warn('Cant record, no permissions');
+      this.showError("We don't have permission to use your microphone");
       return;
     }
 
@@ -179,18 +182,12 @@ export class VoiceRecording extends PureComponent {
     try {
       await AudioRecorder.startRecording();
     } catch (error) {
-      console.error(error);
+      this.showError();
     }
   };
 
   finishRecording(didSucceed: boolean, filePath: string) {
     this.setState({ finished: didSucceed });
-    console.log(
-      'finished recording of duration',
-      this.state.duration,
-      'at path',
-      filePath,
-    );
   }
 
   reset = async () => {
@@ -354,6 +351,7 @@ export default compose(
     }),
     {
       change,
+      appError,
     },
   ),
 )(VoiceRecording);

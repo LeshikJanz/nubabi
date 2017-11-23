@@ -4,7 +4,11 @@ import React, { PureComponent } from 'react';
 import { Screen } from '../components';
 import ViewArticle from './ViewArticle';
 
-export class ViewArticleScreen extends PureComponent {
+type Props = {
+  navigation: NavigationProp,
+};
+
+export class ViewArticleScreen extends PureComponent<Props> {
   static navigationOptions: NavigationOptions = {
     title: 'Articles',
   };

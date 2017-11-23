@@ -8,7 +8,7 @@ import theme from 'core/themes/defaultTheme';
 import { Box, Icon } from '../components';
 import iconMappings from './iconMappings';
 
-const width = Dimensions.get('window').width;
+const { width } = Dimensions.get('window');
 
 type Props = {
   skillArea: SkillArea,

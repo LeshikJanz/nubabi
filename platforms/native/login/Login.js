@@ -100,7 +100,9 @@ export class Login extends Component {
                 />
               </View>
               <SubmitButton
-                innerRef={ref => (this.submitButton = ref)}
+                innerRef={ref => {
+                  this.submitButton = ref;
+                }}
                 animatedWidth={40}
                 onPress={this.login}
                 loading={isFetching}

@@ -5,7 +5,6 @@ import {
   withHandlers,
   withState,
   hoistStatics,
-  setDisplayName,
 } from 'recompose';
 import { withNetworkIndicatorActions } from 'core/helpers/graphqlUtils';
 import { toggleNetworkActivityIndicator } from 'core/ui/reducer';
@@ -27,6 +26,7 @@ export const withPullToRefresh = hoistStatics(
         data,
         onRefresh,
         setRefreshing,
+        // eslint-disable-next-line no-shadow
         toggleNetworkActivityIndicator,
       }) => () => {
         const toggle = compose(

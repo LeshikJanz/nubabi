@@ -11,7 +11,6 @@ import {
 import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitioner';
 
 import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
-import { merge } from 'lodash';
 import theme from 'core/themes/defaultTheme';
 import sharedElements from './transitioners/MaterialSharedElementTransitioner';
 import crossFade from './transitioners/CrossFadeTransitioner';
@@ -40,7 +39,6 @@ import FavoriteActivities from '../stimulation/Favorites';
 import ViewActivity from '../stimulation/ViewActivity';
 import NavigatorTypes from 'react-navigation/src/navigators/NavigatorTypes';
 import { WhatYouNeedToKnowScreen } from '../growth/WhatYouNeedToKnowScreen';
-import DevelopmentRoadmapScreen from '../growth/DevelopmentRoadmapScreen';
 import ViewGrowthContentScreen from '../growth/ViewGrowthArticleScreen';
 import ViewArticleScreen from '../library/ViewArticleScreen';
 import ActivityMediaScreen from '../stimulation/ActivityMediaScreen';
@@ -68,7 +66,6 @@ export type TransitionName =
 
 type State = {
   transition: TransitionName,
-  duration: number,
 };
 
 // on Android, the URI prefix typically contains a host in addition to scheme
@@ -102,7 +99,6 @@ const routes = {
   activityHistoryDetail: { screen: ActivityHistoryDetailScreen },
   // Growth
   whatYouNeedToKnow: { screen: WhatYouNeedToKnowScreen },
-  developmentRoadmap: { screen: DevelopmentRoadmapScreen },
   viewGrowthContent: {
     screen: ViewGrowthContentScreen,
     path: 'content/growth/:id',
@@ -144,7 +140,6 @@ class TransitionerSwitcher extends PureComponent {
 
     this.state = {
       transition: 'cardStack',
-      duration: 300,
     };
   }
 
@@ -293,7 +288,8 @@ class AppNavigatorWithLinking extends AppNavigator {
         path,
         params,
       );
-      const state = AppNavigator.router.getStateForAction(action);
+      // const state = AppNavigator.router.getStateForAction(action);
+
       // TODO: handle case when opened URI is the current URI
       if (action) {
         // Use navigation from props

@@ -1,5 +1,6 @@
+// @flow
 import React from 'react';
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { withCurrentBaby } from '../components';

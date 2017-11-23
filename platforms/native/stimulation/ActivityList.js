@@ -7,14 +7,14 @@ import { compose } from 'ramda';
 import { gql } from 'react-apollo';
 import ActivityListItem from './ActivityListItem';
 import { PANEL_BACKGROUND } from 'core/themes/defaultTheme';
-import withPullToRefresh from '../components/withPullToRefresh';
+import withPullToRefresh, { PullToRefreshProps } from '../components/withPullToRefresh';
 
 type Props = {
   activities: Array<ActivityEdge>,
   onActivityItemPress: (id: string, title: string, cursor: string) => void,
   emptyMessage?: string,
   onLoadMore?: () => void,
-};
+} & PullToRefreshProps;
 
 class ActivityList extends PureComponent {
   props: Props;
@@ -91,7 +91,7 @@ class ActivityList extends PureComponent {
       return null;
     }
 
-    const cursor = edge.cursor;
+    const { cursor } = edge;
     const { skillArea } = activity;
 
     return (

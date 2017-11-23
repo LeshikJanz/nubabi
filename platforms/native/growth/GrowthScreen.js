@@ -2,7 +2,6 @@
 import type { NavigationOptions } from 'core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
-import { compose } from 'ramda';
 import { Screen, withCurrentBabyRequired } from '../components';
 import Growth from './Growth';
 import hoistStatics from '../components/hoistStatics';

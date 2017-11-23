@@ -30,6 +30,7 @@ const reducer = (
       if (state.orientation !== action.payload) {
         return assoc('orientation', action.payload, state);
       }
+      break;
     }
     default: {
       return state;

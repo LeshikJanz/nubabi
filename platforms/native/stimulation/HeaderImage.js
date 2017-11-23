@@ -1,7 +1,5 @@
 // @flow
 import React from 'react';
-import merge from 'lodash';
-import { StyleSheet } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 
 type Props = {

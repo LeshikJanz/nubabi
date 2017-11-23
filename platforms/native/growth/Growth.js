@@ -1,6 +1,5 @@
 // @flow
 import type { Baby, State, UnitDisplaySettingsState } from 'core/types';
-import type { Event } from 'react-native';
 import { LayoutAnimation, ScrollView } from 'react-native';
 import React, { Component } from 'react';
 import { compose, path } from 'ramda';
@@ -22,13 +21,7 @@ type Props = {
   unitDisplay: UnitDisplaySettingsState,
 };
 
-export class Growth extends Component {
-  props: Props;
-  state = {
-    width: null,
-    height: null,
-  };
-
+export class Growth extends Component<Props> {
   static fragments = {
     introduction: gql`
       fragment GrowthIntroduction on GrowthConnection {

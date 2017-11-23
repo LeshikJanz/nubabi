@@ -1,20 +1,14 @@
 // @flow
 import type { Memory as MemoryType } from 'core/types';
 import React from 'react';
-import { assoc, compose, merge, path } from 'ramda';
+import { compose, merge, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { filter } from 'graphql-anywhere';
-import uuid from 'react-native-uuid';
 import {
   displayLoadingState,
   showNoContentViewIf,
   withCurrentBaby,
 } from '../components';
-import {
-  addEdgeToFragment,
-  getCurrentUserFromStore,
-  isEmptyProp,
-} from 'core/helpers/graphqlUtils';
+import { addEdgeToFragment, isEmptyProp } from 'core/helpers/graphqlUtils';
 import MemoryDetail from './MemoryDetail';
 import MemoryComments from './MemoryComments';
 import toggleMemoryLike from './toggleMemoryLike';

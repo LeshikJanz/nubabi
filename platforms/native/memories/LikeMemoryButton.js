@@ -1,7 +1,7 @@
 // @flow
 import type { ToggleMemoryLikeInput } from 'core/types';
 import React from 'react';
-import { LayoutAnimation, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { gql } from 'react-apollo';
 import { compose, propOr } from 'ramda';
 import { hoistStatics, withHandlers } from 'recompose';
@@ -9,12 +9,16 @@ import { Box, Icon, Text } from '../components';
 import theme from 'core/themes/defaultTheme';
 
 type Props = {
-  id: string,
   isLikedByViewer: boolean,
   onToggleLike: (input: ToggleMemoryLikeInput) => Promise<ApolloQueryResult<*>>,
   onToggle: (isLiked: boolean) => void,
   likes?: { count: number },
+  withCount?: boolean,
 };
+
+type InputProps = Props & {
+  id: string,
+}
 
 export const LikeMemoryButton = ({
   onToggle,
@@ -61,7 +65,7 @@ LikeMemoryButton.fragments = {
 export default hoistStatics(
   compose(
     withHandlers({
-      onToggle: ({ id, onToggleLike, isLikedByViewer, likes }) => () =>
+      onToggle: ({ id, onToggleLike, isLikedByViewer, likes }: InputProps) => () =>
         onToggleLike(id, !isLikedByViewer, likes.count),
     }),
   ),

@@ -5,6 +5,7 @@ import formatLikeMessage from 'core/helpers/formatLikeMessage';
 import LikeMemoryButton from './LikeMemoryButton';
 
 type Props = {
+  id: string,
   isLikedByViewer: boolean,
   likes: { count: number },
   onToggleLike: Function, // TODO

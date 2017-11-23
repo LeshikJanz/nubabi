@@ -11,7 +11,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { Field, reduxForm } from 'redux-form';
-import { Avatar, Box, SubmitButton } from '../components';
+import { Avatar, Box } from '../components';
 import hoistStatics from '../components/hoistStatics';
 import Icon from 'react-native-vector-icons/Ionicons';
 import theme, { FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
@@ -109,8 +109,6 @@ class UserForm extends Component {
   }
 
   render() {
-    const { onSubmit: submit, handleSubmit } = this.props;
-
     const { renderTextInput, renderAvatar } = this;
 
     return (

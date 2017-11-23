@@ -1,15 +1,14 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { TouchableOpacity, View } from 'react-native';
 import { Box, FloatingRemoveButton } from '../components';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { type MediaPickerItem } from '../components/mediaPicker';
 import { MemoryMediaSingle } from '../components/MemoryMedia';
 import { isEditable } from '../shared/forms';
 
 type Props = {
   input: any,
   onRemoveMedia: (index: number) => void,
+  // used by isEditable
+  // eslint-disable-next-line react/no-unused-prop-types
   editable: boolean,
 };
 

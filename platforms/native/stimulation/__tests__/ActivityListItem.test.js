@@ -20,7 +20,5 @@ test('it renders correctly', () => {
     icon: 'icon-sensory',
   };
 
-  const onPress = jest.fn();
-
   expectRender(<ActivityListItem activity={activity} skillArea={skillArea} />);
 });

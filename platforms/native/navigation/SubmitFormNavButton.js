@@ -10,7 +10,6 @@ import RightNavButton from './RightNavButton';
 type Props = {
   onSubmit: () => void,
   text?: string,
-  isSubmitting: boolean,
 };
 
 const Submitting = () => (
@@ -19,7 +18,6 @@ const Submitting = () => (
 
 export const SubmitFormNavButton = ({
   onSubmit,
-  isSubmitting,
   text = 'Save',
 }: Props) => {
   return <RightNavButton onPress={onSubmit} text={text} />;

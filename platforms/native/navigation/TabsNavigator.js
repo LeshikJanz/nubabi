@@ -22,19 +22,21 @@ const navigationOptions: NavigationOptions = ({
     <NubabiIcon name={navigation.state.key} size={18} color={tintColor} />
   );
 
-  return {
-    title: upperFirst(navigation.state.key),
-    headerMode: 'screen',
-    headerVisible: true,
-    headerStyle: {
-      backgroundColor: theme.colors.white,
-      shadowOpacity: 0.1,
-      ...childOptions.headerStyle,
-    },
-    headerLeft: getTabHeaders(navigation.navigate).left,
-    headerRight: getTabHeaders(navigation.navigate).right,
-    tabBarIcon: TabBarIcon,
+  const config: TabBarConfig = {
+      title: upperFirst(navigation.state.key),
+      headerMode: 'screen',
+      headerVisible: true,
+      headerStyle: {
+        backgroundColor: theme.colors.white,
+        shadowOpacity: 0.1,
+        ...childOptions.headerStyle,
+      },
+      headerLeft: getTabHeaders(navigation.navigate).left,
+      headerRight: getTabHeaders(navigation.navigate).right,
+      tabBarIcon: TabBarIcon,
   };
+
+  return config;
 };
 
 const TabsNavigator = TabNavigator(

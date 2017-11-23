@@ -6,7 +6,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import Icon from 'react-native-vector-icons/Ionicons';
 import { forEachObjIndexed } from 'ramda';
 import ContactsWrapper from 'react-native-contacts-wrapper';
-import uuid from 'react-native-uuid';
 import hoistStatics from '../components/hoistStatics';
 import {
   renderTextInput,

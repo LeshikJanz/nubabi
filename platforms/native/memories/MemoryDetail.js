@@ -1,11 +1,10 @@
 // @flow
-import type { Memory as MemoryType } from 'core/types';
+import type { MemoryDetailFragment } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Image, LayoutAnimation, TouchableOpacity } from 'react-native';
 import { AutoGrowingTextInput as TextInput } from 'react-native-autogrow-textinput';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
-import { filter } from 'graphql-anywhere';
 import { isEmpty } from 'ramda';
 import { Box, Icon, Pill, Text } from '../components';
 import theme from 'core/themes/defaultTheme';
@@ -17,15 +16,13 @@ import LikesSummary from './LikesSummary';
 import MemoryComments from './MemoryComments';
 import LikeMemoryButton from './LikeMemoryButton';
 
-type Props = MemoryType & {
+type Props = MemoryDetailFragment & {
   babyId: String,
   onToggleMemoryLike: Function, // TODO
   onAddComment: Function, // TODO
 };
 
-class MemoryDetail extends PureComponent {
-  prop: Props;
-
+class MemoryDetail extends PureComponent<Props> {
   static fragments = {
     detail: gql`
       fragment MemoryDetail on Memory {
@@ -99,14 +96,12 @@ class MemoryDetail extends PureComponent {
       id,
       babyId,
       title,
-      comments: commentsConnection,
       files: filesConnection,
       likes: likesConnection,
       isLikedByViewer,
       suggestedMemoryType,
       createdAt,
       onToggleMemoryLike,
-      onAddComment,
     } = this.props;
 
     const date = formatMemoryDate(createdAt);
@@ -215,7 +210,9 @@ class MemoryDetail extends PureComponent {
                 borderRadius: 4,
               }}
               value={this.state.comment}
-              ref={ref => (this.commentInput = ref)}
+              ref={ref => {
+                this.commentInput = ref;
+              }}
               placeholder="Write a comment"
               placeholderTextColor={theme.colors.secondary}
               onChangeText={text => this.setState({ comment: text })}

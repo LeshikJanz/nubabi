@@ -1,10 +1,14 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Screen, Box } from '../components';
+import { Screen } from '../components';
 import FriendsHeader from './FriendsHeader';
 import FriendsList from './FriendsList';
 
-export class FriendsScreen extends PureComponent {
+type Props = {
+  navigation: NavigationProp<*>,
+};
+
+export class FriendsScreen extends PureComponent<Props> {
   static navigationOptions = {
     title: 'Family & Friends',
   };

@@ -3,7 +3,6 @@ import React from 'react';
 import { RefreshControl, ScrollView } from 'react-native';
 import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { filter } from 'graphql-anywhere';
 import { connect } from 'react-redux';
 import { branch, renderComponent } from 'recompose';
 import {

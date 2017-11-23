@@ -1,5 +1,5 @@
 // @flow
-import type { ActivityEdge, NavigationOptionsGetter } from 'core/types';
+import type { ActivityEdge, GraphQLDataProp, NavigationOptionsGetter } from 'core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { compose, path, pathOr } from 'ramda';
@@ -16,7 +16,7 @@ type Props = {
   navigation: NavigationProp<*>,
   activities: Array<ActivityEdge>,
   loadMoreEntries: () => void,
-};
+} & GraphQLDataProp<*>;
 
 export class BrowseActivities extends PureComponent {
   props: Props;
@@ -87,8 +87,7 @@ export default compose(
                 cursor: data.viewer.allActivities.pageInfo.endCursor,
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {
-                const newEdges = fetchMoreResult.viewer.allActivities.edges;
-                const pageInfo = fetchMoreResult.viewer.allActivities.pageInfo;
+                const { edges: newEdges, pageInfo } = fetchMoreResult.viewer.allActivities;
 
                 return {
                   viewer: {

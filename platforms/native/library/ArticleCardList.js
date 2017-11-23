@@ -39,7 +39,6 @@ export class ArticleList extends PureComponent {
 
     this.state = {
       ds: ds.cloneWithRows(props.articles),
-      shouldScrollToBottom: false,
     };
   }
 

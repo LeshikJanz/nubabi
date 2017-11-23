@@ -1,5 +1,5 @@
 // @flow
-import type { ActivityConnection } from 'core/types';
+import type { ActivityConnection, GraphQLDataProp } from 'core/types';
 import React from 'react';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
@@ -16,7 +16,7 @@ type Props = {
   currentBabyId: string,
   onNavigateToActivity: (id: string, title: string) => void,
   activities: ActivityConnection,
-};
+} & GraphQLDataProp<*>;
 
 export const ActivityHistoryDetail = ({
   data,

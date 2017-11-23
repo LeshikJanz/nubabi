@@ -1,5 +1,4 @@
 // @flow
-import type { LayoutProps } from 'core/types';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { CachedImage as Image } from 'react-native-cached-image';
@@ -10,10 +9,9 @@ import { Box, Overlay, Text, withLayout } from '../components';
 type Props = {
   title: string,
   image?: { url: string },
-  layout: LayoutProps,
 };
 
-export const ArticleListItem = ({ title, image, layout }: Props) => {
+export const ArticleListItem = ({ title, image }: Props) => {
   const imageSource = path(['url'], image);
   return (
     <Box

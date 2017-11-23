@@ -7,7 +7,7 @@ import Svg, { Path, Circle } from 'react-native-svg';
 
 const babyIcon = require('core/images/face_icon.jpg');
 
-const width = Dimensions.get('window').width;
+const { width } = Dimensions.get('window');
 
 type Props = {
   avatar: ?Avatar,

@@ -11,29 +11,6 @@ type StepProps = {
   layout: LayoutProps,
 };
 
-const StepTitle = (props: StepTitleProps) => {
-  const { activityName, index, length } = props;
-  let actionCall;
-
-  if (index === 0) {
-    actionCall = 'begin';
-  } else if (index === length - 1) {
-    actionCall = 'finish';
-  } else {
-    actionCall = 'continue';
-  }
-
-  const title = `Let's ${actionCall} ${activityName}`;
-
-  return (
-    <Box marginBottom={1}>
-      <Text color="black" spacing={-0.43} size={4} lineHeight={21}>
-        {title}
-      </Text>
-    </Box>
-  );
-};
-
 export const Step = (props: StepProps) => {
   const { index, layout, step } = props;
   const width = Math.round(layout.viewportWidth * 0.8);

@@ -1,4 +1,5 @@
 // @flow
+// eslint-disable
 import React from 'react';
 import { compose } from 'ramda';
 import { isEmptyProp } from 'core/helpers/graphqlUtils';

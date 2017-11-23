@@ -1,14 +1,9 @@
 // @flow
 import type {
   LayoutProps,
-  Image,
-  Avatar,
-  Achievement,
-  ActivityConnection,
 } from 'core/types';
 import React from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-import { pathOr } from 'ramda';
+import { StyleSheet, View } from 'react-native';
 import { gql } from 'react-apollo';
 import CoverImage from './CoverImage';
 import IconHeader from './IconHeader';
@@ -16,13 +11,7 @@ import NameAgeRow from './NameAgeRow';
 import Measurements from './Measurements';
 import withLayout from '../../components/withLayout';
 
-type Props = {
-  coverImage: ?Image,
-  avatar: ?Avatar,
-  name: string,
-  dob: string,
-  height: number,
-  weight: number,
+type Props = HeaderFragment & {
   weightUnit: 'kg' | 'lbs',
   heightUnit: 'cm' | 'in',
   onEditBaby: () => void,

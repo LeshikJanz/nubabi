@@ -1,8 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
-import Alert from './Alert';
-import NetworkIndicator from './NetworkIndicator';
 import {
   childContextTypes,
   getChildContext,

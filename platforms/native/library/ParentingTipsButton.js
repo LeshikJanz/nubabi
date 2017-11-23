@@ -2,8 +2,8 @@
 // TODO: remove duplication between all these buttons
 import type { LayoutProps } from 'core/types/index';
 import React from 'react';
-import { ImageBackground, Dimensions } from 'react-native';
-import { Box, Card, Text, Overlay } from '../components/index';
+import { ImageBackground } from 'react-native';
+import { Box, Card, Overlay, Text } from '../components/index';
 import withLayout from '../components/withLayout';
 
 type Props = {

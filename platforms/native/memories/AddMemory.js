@@ -31,11 +31,17 @@ import { ViewMemories } from './ViewMemories';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 
 type Props = {
-  currentBabyId: string,
   onSubmit: (input: CreateMemoryInput) => Promise<ApolloQueryResult<*>>,
   onAddVoiceNote: (id?: string) => void,
-  suggestedMemoryId: ?string,
+  onEditSticker: () => void,
+  suggestedMemoryType: mixed,
 };
+
+type InputProps = Props & {
+  currentBabyId: string,
+  goBack: () => void,
+  mutate: (input: object) => Promise<ApolloQueryResult<*>>,
+}
 
 const suggestedMemoryTypeProps = (
   suggestedMemoryType: ?SuggestedMemoryType,
@@ -102,9 +108,10 @@ export default compose(
           toggleNetworkActivityIndicator,
           currentUserId,
           suggestedMemoryType,
+          // eslint-disable-next-line no-shadow
           appError,
         },
-      }) => ({
+      }: InputProps) => ({
         onSubmit: async (values: CreateMemoryInput) => {
           toggleNetworkActivityIndicator(true);
 
@@ -216,7 +223,6 @@ export default compose(
                 return Promise.resolve();
               })
               .catch(err => {
-                console.log(err);
                 appError(
                   'There was an error creating this memory. Please try again later.',
                 );

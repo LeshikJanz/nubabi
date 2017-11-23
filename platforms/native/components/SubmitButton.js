@@ -15,6 +15,7 @@ type Props = {
   textStyle?: Object,
   buttonStyle?: Object,
   animatedWidth?: number,
+  innerRef?: (any) => void,
 };
 
 Animatable.initializeRegistryWithDefinitions({
@@ -41,12 +42,13 @@ export class SubmitButton extends PureComponent {
   componentDidMount() {
     this._isMounted = true;
   }
+
   componentWillReceiveProps(nextProps: Props) {
     if (nextProps.loading !== this.props.loading) {
-      const width = StyleSheet.flatten([
+      const { width } = StyleSheet.flatten([
         styles.submitButton,
         nextProps.buttonStyle,
-      ]).width;
+      ]);
 
       if (nextProps.loading === true) {
         this.setState({
@@ -93,7 +95,9 @@ export class SubmitButton extends PureComponent {
             this.timeout = setTimeout(() => {
               if (this._isMounted) {
                 this.setState({ isAnimating: false }, () => {
-                  this.submitTextView && this.submitTextView.fadeIn();
+                  if (this.submitTextView) {
+                    this.submitTextView.fadeIn();
+                  }
                 });
               }
             }, 1000);
@@ -136,7 +140,7 @@ export class SubmitButton extends PureComponent {
           delay={500}
           iterationCount="infinite"
           duration={1500}
-          ref={ref => (this.horseView = ref)}
+          ref={ref => { this.horseView = ref }}
         >
           <RocketHorse width={20} height={20} />
         </Animatable.View>
@@ -148,7 +152,7 @@ export class SubmitButton extends PureComponent {
         return typeof jest === 'undefined' ? (
           <Animatable.Text
             {...props}
-            ref={ref => (this.submitTextView = ref)}
+            ref={ref => { this.submitTextView = ref }}
           />
         ) : (
           <Text {...props} />
@@ -169,7 +173,7 @@ export class SubmitButton extends PureComponent {
         <Animatable.View
           animation={this.state.animation}
           onAnimationBegin={this.onAnimationBegin}
-          ref={ref => (this.buttonView = ref)}
+          ref={ref => { this.buttonView = ref }}
           style={[styles.submitButton, buttonStyle]}
         >
           <TouchableOpacity

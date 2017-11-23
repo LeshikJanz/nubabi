@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import { hoistStatics } from 'recompose';
 import { Avatar, displayLoadingState, ListItem, Text } from '../components';
 import PendingAvatar from './PendingAvatar';
 import theme from 'core/themes/defaultTheme';
@@ -18,9 +17,7 @@ type Props = {
 
 const keyExtractor = path(['node', 'id']);
 
-export class FriendsList extends PureComponent {
-  props: Props;
-
+export class FriendsList extends PureComponent<Props> {
   static fragments = {
     item: gql`
       fragment FriendListUser on User {
@@ -47,9 +44,8 @@ export class FriendsList extends PureComponent {
 
     const name = [user.firstName, user.lastName].join(' ');
     const nameText = isPending ? `${name} (Pending)` : name;
-    const nameStyle = theme => {
-      return isPending ? { color: theme.colors.secondary } : {};
-    };
+
+    const nameStyle = t => isPending ? { color: t.colors.secondary } : {};
 
     const initials = [user.firstName[0], user.lastName[0]].join('');
     const avatar = isPending ? (

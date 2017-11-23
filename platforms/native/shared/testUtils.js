@@ -1,4 +1,5 @@
 // @flow
+// eslint-disable-next-line import/no-extraneous-dependencies
 import testRenderer from 'react-test-renderer';
 import felaTestContext, { renderer as felaRenderer } from './felaTestContext';
 

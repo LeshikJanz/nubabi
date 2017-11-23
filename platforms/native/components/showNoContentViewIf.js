@@ -1,5 +1,4 @@
 // @flow
-import React from 'react';
 import { branch, renderComponent } from 'recompose';
 import NoContentView from './NoContentView';
 

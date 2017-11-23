@@ -2,15 +2,15 @@
 import type {
   Activity as ActivityType,
   NavigationOptionsGetter,
+  NavigationProp,
   ToggleFavoriteInput,
 } from 'core/types';
 import React, { PureComponent } from 'react';
-import { compose, find, path, pluck, propEq } from 'ramda';
+import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import { toggleFavorite } from './toggleFavorite';
 import Activity from './Activity';
-import Favorites from './Favorites';
 
 type Props = {
   activity: ActivityType,
@@ -18,6 +18,7 @@ type Props = {
   currentBabyId: string,
   isFavorite: boolean,
   toggleFavorite: () => void,
+  navigation: NavigationProp,
 };
 
 export class ViewActivity extends PureComponent {
@@ -44,7 +45,7 @@ export class ViewActivity extends PureComponent {
   };
 
   render() {
-    const { activity, babyName, isFavorite } = this.props;
+    const { activity, babyName } = this.props;
 
     return (
       <Screen>

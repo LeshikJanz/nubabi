@@ -3,14 +3,14 @@ import type { Article as ArticleType, LayoutProps } from 'core/types';
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 import { compose, path } from 'ramda';
-import { graphql, gql } from 'react-apollo';
+import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import moment from 'moment';
 import {
   Box,
-  withLayout,
   displayLoadingState,
   showNoContentViewIf,
+  withLayout,
 } from '../components';
 import theme from 'core/themes/defaultTheme';
 import Article from '../library/Article';

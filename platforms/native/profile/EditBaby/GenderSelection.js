@@ -10,6 +10,7 @@ type Props = {
   selectedGender: Gender,
   onChangeGender: (gender: Gender) => void,
   hasError: boolean,
+  editable?: boolean,
 };
 
 const GenderError = () => (

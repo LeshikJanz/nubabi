@@ -2,7 +2,6 @@
 import type { CommentConnection } from 'core/types';
 import React from 'react';
 import { gql } from 'react-apollo';
-import pluralize from 'pluralize';
 import { Box, Text, Icon } from '../components';
 import theme from 'core/themes/defaultTheme';
 import pluralizeWithSubject from 'core/helpers/pluralizeWithSubject';

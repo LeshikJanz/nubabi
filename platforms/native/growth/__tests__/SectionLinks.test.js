@@ -10,7 +10,8 @@ test('it renders correctly', () => {
         id: 1,
         title: 'Growth Content #1',
       },
-      undefined,
+    },
+    {
       node: {
         id: 2,
         title: 'Growth Content #2',

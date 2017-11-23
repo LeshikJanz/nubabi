@@ -1,23 +1,24 @@
+/* eslint-disable no-unused-vars */
 // @flow
 import type {
   Baby,
   GraphQLDataProp,
-  State,
-  NavigationOptions,
   LayoutProps,
+  State,
 } from 'core/types/index';
 import type { NavigationProp } from 'react-navigation';
+import { NavigationActions } from 'react-navigation';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-  View,
+  Animated,
+  Dimensions,
+  Easing,
+  ScrollView,
   StyleSheet,
   Text,
-  Dimensions,
-  ScrollView,
-  Animated,
-  Easing,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import SVGPath from 'art/modes/svg/path';
@@ -26,7 +27,6 @@ import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import Svg, { Path } from 'react-native-svg';
-import { NavigationActions } from 'react-navigation';
 import theme, { HEADER_FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
 import { selectBaby } from 'core/babies/actions';
 import withLayout from '../components/withLayout';
@@ -225,14 +225,10 @@ class ChooseBaby extends Component {
       );
     }
 
-    console.log(this.props);
-
     const headerShapeWidth = Math.round(
       this.props.layout.viewportWidth / 0.672,
     );
 
-    console.log(this.props.layout.viewportHeight);
-    console.log(headerShapeWidth);
     const shape = new SVGPath()
       .moveTo(242.0284455, 326.522878)
       .curveTo(242.828957, 347.908578, 260.418521, 365, 282, 365)

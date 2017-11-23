@@ -32,23 +32,24 @@ type Props = {
 
 class RelationshipDropdown extends Component {
   props: Props;
+
+  componentWillUpdate() {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  }
+
   menu = null;
-
-  renderTouchable = () => {
-    return this.props.field.editable ? <TouchableOpacity /> : <Box />;
-  };
-
-  handleSelect = (val: string) => {
-    this.props.field.input.onChange(this.findOption(val).key);
-  };
 
   findOption(val: string) {
     return options.find(option => option.key === val);
   }
 
-  componentWillUpdate() {
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-  }
+  handleSelect = (val: string) => {
+    this.props.field.input.onChange(this.findOption(val).key);
+  };
+
+  renderTouchable = () => {
+    return this.props.field.editable ? <TouchableOpacity /> : <Box />;
+  };
 
   renderOptions() {
     return options.map(option => (

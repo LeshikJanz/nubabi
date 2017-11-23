@@ -1,20 +1,17 @@
 // @flow
-import type { State } from 'core/types';
+import type { State, NotificationSettingsState } from 'core/types';
 import React, { PureComponent } from 'react';
 import { compose, partial, pick } from 'ramda';
 import { connect } from 'react-redux';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
 import { setSettingsValue } from 'core/settings/reducer';
 
-class NotificationSettings extends PureComponent {
-  state = {
-    memoriesEnabled: true,
-    stimulationEnabled: true,
-    growthEnabled: true,
-    activityRemindersEnabled: false,
-    emailEnabled: true,
-  };
+type Props = {
+  setSettingsValue: typeof setSettingsValue,
+  notifications: NotificationSettingsState,
+};
 
+class NotificationSettings extends PureComponent<Props> {
   toggle = (setting: string, value: boolean) => {
     this.props.setSettingsValue(['notifications', setting], value);
   };
@@ -86,7 +83,7 @@ class NotificationSettings extends PureComponent {
 }
 
 export default compose(
-  connect(({ settings }) => pick(['notifications'], settings), {
+  connect(({ settings }: State) => pick(['notifications'], settings), {
     setSettingsValue,
   }),
 )(NotificationSettings);

@@ -2,7 +2,7 @@
 import type { LayoutProps, SkillArea } from 'core/types';
 import React from 'react';
 import { Image, ScrollView } from 'react-native';
-import { compose, path } from 'ramda';
+import { compose } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { mapEdgesToProp } from 'core/helpers/graphqlUtils';
 import {

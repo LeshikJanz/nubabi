@@ -1,9 +1,14 @@
 // @flow
+import type { NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Screen } from '../components/Screen';
 import ActivityHistory from './ActivityHistory';
 
-export class ActivityHistoryScreen extends PureComponent {
+type Props = {
+  navigation: NavigationProp;
+}
+
+export class ActivityHistoryScreen extends PureComponent<Props> {
   static navigationOptions = {
     title: 'Activity History',
     headerBackTitle: 'History',

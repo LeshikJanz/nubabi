@@ -1,10 +1,11 @@
 // @flow
-import type { ActivityMediaConnection } from 'core/types';
+import type { ActivityMediaConnection, NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
 import PhotoBrowser from '../../../libs/react-native-photo-browser';
 
 type Props = {
   media: ActivityMediaConnection,
+  navigation: NavigationProp,
 };
 
 class ActivityMediaScreen extends PureComponent {

@@ -2,15 +2,12 @@
 import type { NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
 import { InteractionManager } from 'react-native';
-import { compose, path } from 'ramda';
-import { hoistStatics, withProps } from 'recompose';
+import { path } from 'ramda';
 import { Screen, SubmitFormNavButton } from '../components';
 import AddMemory from './AddMemory';
-import { type SuggestedMemoryType } from './SuggestedMemoriesList';
 
 type Props = {
   navigation: NavigationProp,
-  suggestedMemoryType: ?SuggestedMemoryType,
 };
 
 export class AddMemoryScreen extends PureComponent {

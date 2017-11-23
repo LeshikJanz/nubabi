@@ -5,7 +5,7 @@ import type {
 } from 'core/types';
 import React from 'react';
 import { Image, ScrollView, View } from 'react-native';
-import { compose, path, pathOr } from 'ramda';
+import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import {

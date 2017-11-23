@@ -1,11 +1,10 @@
 // @flow
-import type { Expert, LayoutProps } from 'core/types/index';
+import type { Expert } from 'core/types';
 import React, { Component } from 'react';
 import {
   View,
   Text,
   StyleSheet,
-  Dimensions,
   TouchableOpacity,
 } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
@@ -19,15 +18,10 @@ import theme from 'core/themes/defaultTheme';
 type Props = {
   expert: Expert,
   activityDescription: string,
-  layout: LayoutProps,
 };
 
 export class ExpertInfo extends Component {
   props: Props;
-
-  state = {
-    isFlipped: false,
-  };
 
   static fragments = {
     expert: gql`
@@ -104,9 +98,6 @@ export class ExpertInfo extends Component {
   };
 
   render() {
-    const width =
-      this.props.layout.viewportWidth || Dimensions.get('window').width;
-
     return (
       <View
         style={{

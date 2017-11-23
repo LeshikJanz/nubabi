@@ -1,24 +1,22 @@
 // @flow
-import type { CommentConnection } from 'core/types';
+import type { MemoryCommentsFragment } from 'core/types';
 import React, { PureComponent } from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 import { compose, path, pick } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import pluralize from 'pluralize';
 import { filter } from 'graphql-anywhere';
-import { Box, Text } from '../components';
 import MemoryComment from './MemoryComment';
 
 type Props = {
   memoryId: string,
   babyId: string,
-};
+  loading: boolean,
+} & MemoryCommentsFragment;
 
 const keyExtractor = path(['node', 'id']);
 
-export class MemoryComments extends PureComponent {
-  props: Props;
-
+export class MemoryComments extends PureComponent<Props> {
   static fragments = {
     detail: gql`
       fragment MemoryComments on Memory {

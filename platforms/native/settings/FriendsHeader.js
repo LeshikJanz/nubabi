@@ -29,7 +29,6 @@ export const FriendsHeader = ({ onAddPress }: Props) => {
       </FAB>
     </Box>
   );
-  return null;
 };
 
 export default FriendsHeader;

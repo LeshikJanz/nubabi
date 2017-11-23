@@ -7,7 +7,7 @@ import { gql } from 'react-apollo';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { DatePicker, Icon, NubabiIcon, SubmitButton } from '../../components';
+import { DatePicker, Icon, NubabiIcon } from '../../components';
 import hoistStatics from '../../components/hoistStatics';
 import theme, { FONT_COLOR, NUBABI_RED } from 'core/themes/defaultTheme';
 import imagePicker from '../../components/imagePicker';
@@ -31,8 +31,6 @@ import { fileFromImagePickerResult, isNewFile } from '../../shared/fileUtils';
 type Props = {
   // redux-form uses initialValues prop
   initialValues: Baby, // eslint-disable-line react/no-unused-prop-types
-  onSubmit: () => void,
-  handleSubmit: () => void,
   submitting: boolean,
   change: (field: string, value: mixed) => void,
   mode: 'add' | 'edit',
@@ -301,11 +299,7 @@ class Form extends PureComponent {
   }
 
   render() {
-    const {
-      onSubmit: submit,
-      handleSubmit,
-      submitting: isSubmitting,
-    } = this.props;
+    const { submitting: isSubmitting } = this.props;
 
     const {
       renderGenderSelection,

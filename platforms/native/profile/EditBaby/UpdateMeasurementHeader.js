@@ -17,7 +17,7 @@ export const UpdateMeasurementHeader = ({ onViewGraph }: Props) => {
       flexDirection="row"
       padding={1}
       justifyContent="space-around"
-      style={theme => ({
+      style={() => ({
         backgroundColor: theme.colors.open.white1,
         shadowColor: '#EBEDF5',
         shadowOffset: {
@@ -31,7 +31,7 @@ export const UpdateMeasurementHeader = ({ onViewGraph }: Props) => {
         flexDirection="row"
         justifyContent="center"
         alignItems="center"
-        style={theme => ({
+        style={() => ({
           borderRightWidth: 0.5,
           borderRightColor: theme.colors.open.gray1,
         })}

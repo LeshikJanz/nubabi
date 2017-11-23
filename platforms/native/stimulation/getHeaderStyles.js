@@ -1,3 +1,4 @@
+// @flow
 export const getHeaderStyles = (width: number) => {
   const headerMargin = Math.round(width / 7.5); // 50 portrait 7p
   const headerTopMargin = Math.round(width / 9.3); // 40 portrait 7p

@@ -1,5 +1,5 @@
 // @flow
-import type { FirebaseUser, LayoutProps } from 'core/types';
+import type { FirebaseUser } from 'core/types';
 import React, { PureComponent } from 'react';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';

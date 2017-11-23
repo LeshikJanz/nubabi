@@ -1,10 +1,9 @@
 // @flow
-import type { ActivityMediaType } from 'core/types';
+import type { ActivityMediaType, LayoutProps } from 'core/types';
 import React, { PureComponent } from 'react';
-import { LayoutAnimation, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import { gql } from 'react-apollo';
-import { range } from 'ramda';
 import { Box, Card, Text } from '../components';
 import Step from './Step';
 import withLayout from '../components/withLayout';
@@ -16,15 +15,12 @@ type Props = {
   activityName: string,
   activityMedia: ?string,
   activityMediaType: ?ActivityMediaType,
-  activityMediaThumbnail: ?string,
   onActivityMediaPress: () => void,
+  layout: LayoutProps,
 };
 
 class Steps extends PureComponent {
   props: Props;
-  state = {
-    currentStep: 0,
-  };
 
   static fragments = {
     steps: gql`
@@ -78,13 +74,15 @@ class Steps extends PureComponent {
   }
 
   render() {
+    const title = `Let's begin ${this.props.activityName}`;
+
     return (
       <Card marginHorizontal={1.2} marginVertical={1} padding={0}>
         {this.renderMedia()}
 
         <Box contentSpacing>
           <Text color="black" spacing={-0.43} size={6} lineHeight={21}>
-            Let's begin {this.props.activityName}
+            {title}
           </Text>
         </Box>
         <Box flex={1} contentSpacing>

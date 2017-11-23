@@ -4,12 +4,10 @@ import React, { PureComponent } from 'react';
 import { compose, path, omit } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { ImageCacheManager } from 'react-native-cached-image';
 import { formValues } from 'core/helpers/graphqlUtils';
 import { displayLoadingState } from '../components';
 import UserForm from './UserForm';
 import { normalizeAvatarAndCoverImage } from '../profile/EditBaby/BabyForm';
-import { isNewFile } from '../shared/fileUtils';
 
 type Props = {
   user: User,
@@ -18,9 +16,6 @@ type Props = {
 
 export class EditUserProfile extends PureComponent {
   props: Props;
-  state = {
-    loading: false,
-  };
 
   render() {
     const { user } = this.props;

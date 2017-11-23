@@ -1,7 +1,7 @@
 // @flow
-import type { LayoutProps, Image as ImageType } from 'core/types';
+import type { Image as ImageType, LayoutProps } from 'core/types';
 import React from 'react';
-import { View, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { Dimensions, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import { gql } from 'react-apollo';
 import { Pill, withLayout } from '../components';
@@ -12,8 +12,6 @@ import HeaderShape from './HeaderShape';
 import HeaderTitle from './HeaderTitle';
 import HeaderTextSection from './HeaderTextSection';
 import getHeaderStyles from './getHeaderStyles';
-
-const width = Dimensions.get('window').width;
 
 const favouritePath =
   'M17.7607179,14.1526832 L18.814,20.3690984 C18.8894872,20.8166659 18.7066667,21.2696043 18.3439744,21.5369514 C18.1387436,21.6879308 17.8945897,21.7649124 17.6504359,21.7649124 C17.4628974,21.7649124 17.2741795,21.7195589 17.1013846,21.6276584 L11.5843333,18.6928086 L6.06728205,21.6276584 C5.66979487,21.839507 5.1885641,21.8037016 4.82469231,21.5381449 C4.462,21.2707978 4.27976923,20.8184562 4.35584615,20.3702919 L5.40971795,14.1538768 L0.945948718,9.75100541 C0.623358974,9.43412757 0.508948718,8.95970595 0.646358974,8.52765405 C0.785538462,8.09560216 1.15412821,7.78111135 1.59879487,7.71546811 L7.76692308,6.80780108 L10.5269231,1.15174054 C10.7244872,0.743558919 11.1349487,0.48576 11.5837436,0.48576 C12.0337179,0.48576 12.4424103,0.743558919 12.6411538,1.15114378 L15.4011538,6.80720432 L21.5704615,7.71487135 C22.0139487,7.77991784 22.3837179,8.09500541 22.5205385,8.5270573 C22.6608974,8.95910919 22.5435385,9.43353081 22.2233077,9.75040865 L17.7607179,14.1526832 Z';
@@ -44,13 +42,8 @@ const Header = ({
   const width = layout.viewportWidth || Dimensions.get('window').width;
 
   const {
-    headerMargin,
-    headerTopMargin,
-    headerPath,
-    headerShapeStyle,
     headerImageStyle,
     overlayStyle,
-    containerStyle,
     headerContainerStyle,
     headerButtonsStyle,
   } = getHeaderStyles(width);
