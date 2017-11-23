@@ -2,8 +2,9 @@
 ios/**
 flow-typed/**
 /node_modules/eslint-config-airbnb/rules/react-a11y.js
+
 # used by transform on development
-platforms/common/config/getConfig.js
+core/config/getConfig.js
 platforms/server/firebase/functions
 
 # a local server I use to test the non-firebase (and Firebase Admin SDK-backed in the future)
