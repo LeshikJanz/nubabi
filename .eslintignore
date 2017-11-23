@@ -10,4 +10,5 @@ platforms/server/firebase/functions
 platforms/server/graphql/server.js
 platforms/server/graphql/helpers/printSchema.js
 
+platforms/web/scripts/
 __mocks__/**/*.js
