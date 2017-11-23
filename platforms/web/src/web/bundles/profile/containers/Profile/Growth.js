@@ -1,4 +1,5 @@
 // @flow
+import type { ProfileGrowthFragment } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
@@ -6,7 +7,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { pathOr } from 'ramda';
 
-type Props = {};
+type Props = ProfileGrowthFragment;
 
 const Growth = styled.article`
   background: ${props => props.theme.colors.white};

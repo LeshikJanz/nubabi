@@ -1,9 +1,14 @@
 // @flow
+import type { Element } from 'react';
 import React, { PureComponent } from 'react';
 import MenuItem from './MenuItem';
 import Link from './Link';
 
-class Menu extends PureComponent {
+type Props = {
+  children: Element<*>,
+};
+
+class Menu extends PureComponent<Props> {
   static Item = MenuItem;
   static Link = Link;
   render() {

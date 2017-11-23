@@ -1,4 +1,5 @@
 // @flow
+import type { Baby } from 'core/types';
 import React, { Component } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
@@ -13,7 +14,7 @@ import ICamera from '../../../../../images/icons/camera.svg';
 
 import { Header, Button } from 'web/elements';
 
-type Props = {};
+type Props = Baby;
 
 const Main = styled(Flex)`
   height: 250px;
@@ -260,7 +261,7 @@ class ProfileHeader extends Component<Props> {
           className="ProfileHeaderMain"
         >
           {' '}
-          {/*Be careful! Modal depend on className*/}
+          {/* Be careful! Modal depend on className */}
           <BabyImage image={avatar.url} />
           {this.state.modalIsOpen && (
             <PhotoChangeIcon>
@@ -286,7 +287,7 @@ class ProfileHeader extends Component<Props> {
             onRequestClose={this.closeModal}
             parentSelector={() =>
               document.querySelector('.ProfileHeaderMain')
-            } /* Main component should have such className*/
+            } /* Main component should have such className */
           >
             <PhotoActionsTitle>
               <ICamera /> Change Cover Photo

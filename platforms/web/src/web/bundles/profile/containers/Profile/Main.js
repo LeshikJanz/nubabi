@@ -1,4 +1,5 @@
 // @flow
+import type { MemoryConnection, ActivityConnection, ProfileGrowthFragment } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Box } from 'grid-styled';
 import { Main } from '../../../../../web/elements';
@@ -6,7 +7,13 @@ import Growth from './Growth';
 import Activities from './Activities';
 import Memories from './Memories';
 
-type Props = {};
+type Props = {
+  memories: MemoryConnection,
+  activities: ActivityConnection,
+  growth: ProfileGrowthFragment,
+  dob: Date,
+  name: string,
+};
 
 class ProfileMain extends PureComponent<Props> {
   render() {

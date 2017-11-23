@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 import ICross from '../../../images/icons/cross.svg';
@@ -6,6 +7,10 @@ type Props = {
   onClick: () => void,
   primary: boolean,
   children: Object,
+  disabled?: boolean,
+  p: mixed,
+  pink: mixed,
+  plus: mixed,
 };
 
 const Common = styled.button`
@@ -18,7 +23,7 @@ const Common = styled.button`
   font-size: ${props => props.theme.button.fontSize}px;
 `;
 
-const Button = Common.extend`
+const ButtonElement = Common.extend`
   border: 1px solid ${props => props.theme.colors.primary};
   background: ${props => props.theme.colors.primary};
   color: ${props => props.theme.colors.white};
@@ -46,7 +51,7 @@ const ButtonPlus = Common.extend`
   align-items: center;
 `;
 
-export default ({
+export const Button = ({
   onClick,
   primary,
   plus,
@@ -57,9 +62,9 @@ export default ({
   pink,
 }: Props) =>
   primary ? (
-    <Button onClick={onClick} disabled={disabled} p={p} {...rest}>
+    <ButtonElement onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
-    </Button>
+    </ButtonElement>
   ) : plus ? (
     <ButtonPlus onClick={onClick} disabled={disabled} {...rest}>
       <ICross />
@@ -69,3 +74,5 @@ export default ({
       {children}
     </ButtonOutline>
   );
+
+export default Button;

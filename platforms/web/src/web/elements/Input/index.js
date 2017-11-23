@@ -1,12 +1,25 @@
+// @flow
 import React from 'react';
 import Field from 'redux-form/es/Field';
 import InputWithError from '../InputWithError';
 
-const InputField = ({ name, type, placeholder, value, input }) => (
+type InputFieldProps = {
+  name: string,
+  type: string,
+  placeholder: string,
+  value: mixed,
+  input: mixed,
+};
+
+type Props = InputFieldProps & {
+  validate: mixed,
+}
+
+const InputField = ({ name, type, placeholder, value, input }: InputFieldProps) => (
   <input {...input} type={type} placeholder={placeholder} />
 );
 
-export default ({ name, type, placeholder, validate, value, input }) => {
+export const Input = ({ name, type, placeholder, validate, value, input }: Props) => {
   let component = InputField;
   if (validate != null) {
     component = InputWithError;
@@ -22,3 +35,5 @@ export default ({ name, type, placeholder, validate, value, input }) => {
     />
   );
 };
+
+export default Input;

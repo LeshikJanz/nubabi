@@ -11,6 +11,11 @@ platforms/server/graphql/server.js
 platforms/server/graphql/helpers/printSchema.js
 
 **/node_modules/
+
+# CRA
 platforms/web/scripts/
-platforms/web/src/registerServiceWorker.js
+platforms/web/src/web/registerServiceWorker.js
+platforms/web/config/
+
+# mocks
 __mocks__/**/*.js

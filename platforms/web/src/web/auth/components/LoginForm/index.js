@@ -1,8 +1,16 @@
+// @flow
 import React from 'react';
 import { Form } from 'web/elements';
 import { required } from 'web/utils/validation';
 
-export default ({ handleSubmit, pristine, submitting, reset }) => {
+type Props = {
+  handleSubmit: Function,
+  pristine: boolean,
+  submitting: boolean,
+  reset: Function,
+};
+
+export const LoginForm = ({ handleSubmit, pristine, submitting, reset }: Props) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Field>
@@ -30,3 +38,5 @@ export default ({ handleSubmit, pristine, submitting, reset }) => {
     </Form>
   );
 };
+
+export default LoginForm;

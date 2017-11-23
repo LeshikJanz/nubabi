@@ -1,3 +1,10 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 
-export default ({ children }) => <div>{children}</div>;
+type Props = {
+  children: React.Element<*>,
+};
+
+export const Field = ({ children }: Props) => <div>{children}</div>;
+
+export default Field;

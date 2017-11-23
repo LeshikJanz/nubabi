@@ -1,6 +1,9 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import Input from '../Input';
 
-export default ({ name, placeholder }) => (
+export const PasswordInput = ({ name, placeholder }: Props) => (
   <Input name={name} type="password" placeholder={placeholder} />
 );
+
+export default PasswordInput;

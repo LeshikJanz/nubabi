@@ -1,11 +1,14 @@
 // @flow
+import type { MemoryConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
 import Button from '../../../../elements/Button';
 
-type Props = {};
+type Props = {
+  memories: MemoryConnection,
+};
 
 const Memories = styled.div``;
 

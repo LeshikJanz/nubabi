@@ -7,7 +7,11 @@ import onClickOutside from 'react-onclickoutside';
 import { Menu } from 'web/elements';
 import Avatar from 'core/images/avatar.png';
 
-type Props = {};
+type Props = {
+  isAuthenticated: boolean,
+  pathname: string,
+  logout: () => void,
+};
 
 const Wrapper = styled.div`
   position: relative;

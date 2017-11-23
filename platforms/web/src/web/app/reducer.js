@@ -1,5 +1,5 @@
 // @flow
-import type { AppState, GlobalLoaderAction } from 'types';
+import type { AppState, GlobalLoaderAction } from 'web/types';
 
 export const initialState: AppState = {
   isFetching: false,

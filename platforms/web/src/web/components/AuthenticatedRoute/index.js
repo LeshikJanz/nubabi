@@ -1,7 +1,19 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-export default ({ component: C, props: cProps, ...rest }) => (
+type Props = {
+  component: React.Element<*>,
+  props: {
+    isAuthenticated: boolean,
+  },
+  location: {
+    pathname: string,
+    search: string,
+  }
+};
+
+export const AuthenticatedRoute = ({ component: C, props: cProps, ...rest }: Props) => (
   <Route
     {...rest}
     render={props =>
@@ -17,3 +29,5 @@ export default ({ component: C, props: cProps, ...rest }) => (
     }
   />
 );
+
+export default AuthenticatedRoute;

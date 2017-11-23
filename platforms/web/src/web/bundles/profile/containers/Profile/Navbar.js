@@ -11,7 +11,12 @@ import ILibrary from '../../../../../images/icons/library.svg';
 import IPhotos from '../../../../../images/icons/photos.svg';
 import IPuzzle from '../../../../../images/icons/puzzle.svg';
 
-type Props = {};
+type Props = {
+  location: {
+    pathname: string,
+  },
+  name: string,
+};
 
 const Wrapper = styled(Box)`
   background: ${props => props.theme.colors.white};

@@ -1,3 +1,5 @@
+// @flow
+import type { Element } from 'react';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Input from '../Input';
@@ -10,7 +12,12 @@ import ClearButton from './ClearButton';
 
 const StyledForm = styled.form``;
 
-class Form extends Component {
+type Props = {
+  onSubmit: Function,
+  children: Element<*>,
+}
+
+class Form extends Component<Props> {
   static Field = Field;
   static Input = Input;
   static Label = Label;

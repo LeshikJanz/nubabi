@@ -1,9 +1,13 @@
 // @flow
+import type { ActivityConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
-type Props = {};
+type Props = {
+  activities: ActivityConnection,
+  name: string,
+};
 
 const ActivitiesListWrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};

@@ -1,7 +1,14 @@
+// @flow
 import React from 'react';
 import Input from '../Input';
 
-export default ({ name, placeholder, validate }) => (
+type Props = {
+  name: string,
+  placeholder: string,
+  validate: mixed,
+};
+
+export const TextInput = ({ name, placeholder, validate }: Props) => (
   <Input
     name={name}
     type="text"
@@ -9,3 +16,5 @@ export default ({ name, placeholder, validate }) => (
     validate={validate}
   />
 );
+
+export default TextInput;

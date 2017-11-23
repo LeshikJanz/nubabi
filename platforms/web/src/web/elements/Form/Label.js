@@ -1,8 +1,15 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 
-export default ({ children }) => (
+type Props = {
+  children: React.Element<*>,
+};
+
+export const Label = ({ children }: Props) => (
   <label>
     {children}
     <br />
   </label>
 );
+
+export default Label;

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Title } from 'web/elements';
 import { Helmet } from 'react-helmet';
@@ -7,7 +8,7 @@ const Wrapper = styled.div`
   padding: 10px;
 `;
 
-export default () => {
+export const About = () => {
   return (
     <Wrapper>
       <Helmet>
@@ -17,3 +18,5 @@ export default () => {
     </Wrapper>
   );
 };
+
+export default About;

@@ -21,6 +21,7 @@ type Props = {
     height: 'cm' | 'in',
   },
   data: { loading: boolean },
+  location: mixed,
 };
 
 const Wrapper = styled(Flex)``;
@@ -125,7 +126,7 @@ class Profile extends PureComponent<Props> {
     console.log('location', location);
 
     if (!baby) {
-      return <Loader active={true} />;
+      return <Loader active />;
     }
 
     return (

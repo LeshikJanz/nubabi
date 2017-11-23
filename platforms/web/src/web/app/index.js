@@ -23,7 +23,7 @@ import 'sanitize.css/sanitize.css';
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
   loading() {
-    return <Loader active={true} />;
+    return <Loader active />;
   },
 });
 
@@ -31,6 +31,8 @@ type Props = {
   isLoading: boolean,
   pathname: string,
   authToken: string,
+  logout: Function,
+  isAuthenticated: boolean,
 };
 
 const Wrapper = styled.div`

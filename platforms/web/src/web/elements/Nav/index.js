@@ -1,6 +1,12 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 
-export default ({ children, ...rest }) => {
+type Props = {
+  children: React.Element<*>,
+};
+
+export const Nav = ({ children, ...rest }: Props) => {
   return <nav {...rest}>{children}</nav>;
 };
+
+export default Nav;

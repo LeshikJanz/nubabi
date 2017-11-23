@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   padding: 10px;
 `;
 
-export default () => {
+export const Test = () => {
   return (
     <Wrapper>
       <Helmet>
@@ -17,3 +17,5 @@ export default () => {
     </Wrapper>
   );
 };
+
+export default Test;

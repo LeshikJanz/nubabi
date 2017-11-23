@@ -18,6 +18,7 @@ class Link extends PureComponent {
     target: PropTypes.string,
     replace: PropTypes.bool,
     to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    innerRef: PropTypes.func,
   };
 
   static defaultProps = {

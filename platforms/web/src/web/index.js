@@ -1,5 +1,5 @@
 // @flow
-import type { AppStartedAction } from 'common/types';
+import type { AppStartedAction } from 'core/types';
 import { render } from 'react-dom';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
