@@ -9,6 +9,7 @@
     "flow": "flow",
     "flow-typed": "./scripts/flow-typed-all",
     "test": "jest",
+    "test:web": "jest --projects platforms/web",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",
     "changelog": "conventional-changelog -i CHANGELOG.md -s",
@@ -46,6 +47,12 @@
     ],
     "snapshotSerializers": [
       "<rootDir>/platforms/native/shared/felaSnapshotSerializer"
+    ],
+    "testMatch": [
+      "<rootDir>/core/**/__tests__/*.js",
+      "<rootDir>/platforms/native/**/__tests__/*.js",
+      "<rootDir>/libs/graphql-utils/**/__tests__/*.js",
+      "<rootDir>/platfoms/server/graphql/**/__tests__/*.js"
     ]
   },
   "quokka": {
