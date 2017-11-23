@@ -1,4 +1,4 @@
-// flow-typed signature: e11a7adee7d5d6f880c7c687b330c721
+// flow-typed signature: 9748a3b7ae24d3889ebfa15df25d7468
 // flow-typed version: <<STUB>>/raven-js_v^3.14.0/flow_v0.56.0
 
 /**
@@ -98,6 +98,22 @@ declare module 'raven-js/Gruntfile' {
   declare module.exports: any;
 }
 
+declare module 'raven-js/karma.config' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/karma.integration.config' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/karma.sauce.config' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/karma.unit.config' {
+  declare module.exports: any;
+}
+
 declare module 'raven-js/plugins/angular' {
   declare module.exports: any;
 }
@@ -122,6 +138,10 @@ declare module 'raven-js/plugins/vue' {
   declare module.exports: any;
 }
 
+declare module 'raven-js/scripts/deploy' {
+  declare module.exports: any;
+}
+
 declare module 'raven-js/src/configError' {
   declare module.exports: any;
 }
@@ -143,6 +163,10 @@ declare module 'raven-js/src/utils' {
 }
 
 declare module 'raven-js/template/_copyright' {
+  declare module.exports: any;
+}
+
+declare module 'raven-js/test/globals' {
   declare module.exports: any;
 }
 
@@ -268,6 +292,18 @@ declare module 'raven-js/example/stack.js' {
 declare module 'raven-js/Gruntfile.js' {
   declare module.exports: $Exports<'raven-js/Gruntfile'>;
 }
+declare module 'raven-js/karma.config.js' {
+  declare module.exports: $Exports<'raven-js/karma.config'>;
+}
+declare module 'raven-js/karma.integration.config.js' {
+  declare module.exports: $Exports<'raven-js/karma.integration.config'>;
+}
+declare module 'raven-js/karma.sauce.config.js' {
+  declare module.exports: $Exports<'raven-js/karma.sauce.config'>;
+}
+declare module 'raven-js/karma.unit.config.js' {
+  declare module.exports: $Exports<'raven-js/karma.unit.config'>;
+}
 declare module 'raven-js/plugins/angular.js' {
   declare module.exports: $Exports<'raven-js/plugins/angular'>;
 }
@@ -286,6 +322,9 @@ declare module 'raven-js/plugins/require.js' {
 declare module 'raven-js/plugins/vue.js' {
   declare module.exports: $Exports<'raven-js/plugins/vue'>;
 }
+declare module 'raven-js/scripts/deploy.js' {
+  declare module.exports: $Exports<'raven-js/scripts/deploy'>;
+}
 declare module 'raven-js/src/configError.js' {
   declare module.exports: $Exports<'raven-js/src/configError'>;
 }
@@ -303,6 +342,9 @@ declare module 'raven-js/src/utils.js' {
 }
 declare module 'raven-js/template/_copyright.js' {
   declare module.exports: $Exports<'raven-js/template/_copyright'>;
+}
+declare module 'raven-js/test/globals.js' {
+  declare module.exports: $Exports<'raven-js/test/globals'>;
 }
 declare module 'raven-js/test/integration/test.js' {
   declare module.exports: $Exports<'raven-js/test/integration/test'>;
@@ -335,10 +377,14 @@ declare module 'raven-js/test/utils.test.js' {
   declare module.exports: $Exports<'raven-js/test/utils.test'>;
 }
 declare module 'raven-js/test/vendor/fixtures/captured-errors.js' {
-  declare module.exports: $Exports<'raven-js/test/vendor/fixtures/captured-errors'>;
+  declare module.exports: $Exports<
+    'raven-js/test/vendor/fixtures/captured-errors',
+  >;
 }
 declare module 'raven-js/test/vendor/json-stringify-safe.test.js' {
-  declare module.exports: $Exports<'raven-js/test/vendor/json-stringify-safe.test'>;
+  declare module.exports: $Exports<
+    'raven-js/test/vendor/json-stringify-safe.test',
+  >;
 }
 declare module 'raven-js/test/vendor/tracekit-parser.test.js' {
   declare module.exports: $Exports<'raven-js/test/vendor/tracekit-parser.test'>;
@@ -347,7 +393,9 @@ declare module 'raven-js/test/vendor/tracekit.test.js' {
   declare module.exports: $Exports<'raven-js/test/vendor/tracekit.test'>;
 }
 declare module 'raven-js/vendor/json-stringify-safe/stringify.js' {
-  declare module.exports: $Exports<'raven-js/vendor/json-stringify-safe/stringify'>;
+  declare module.exports: $Exports<
+    'raven-js/vendor/json-stringify-safe/stringify',
+  >;
 }
 declare module 'raven-js/vendor/TraceKit/tracekit.js' {
   declare module.exports: $Exports<'raven-js/vendor/TraceKit/tracekit'>;

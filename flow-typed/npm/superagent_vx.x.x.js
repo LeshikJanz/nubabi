@@ -1,4 +1,4 @@
-// flow-typed signature: 0c99e6c5296b627cfeacddc3f88a3404
+// flow-typed signature: 21474a498bcfd0884598e30721a0849d
 // flow-typed version: <<STUB>>/superagent_v^3.4.3/flow_v0.56.0
 
 /**
@@ -22,11 +22,11 @@ declare module 'superagent' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'superagent/lib/client' {
+declare module 'superagent/lib/agent-base' {
   declare module.exports: any;
 }
 
-declare module 'superagent/lib/is-function' {
+declare module 'superagent/lib/client' {
   declare module.exports: any;
 }
 
@@ -78,10 +78,6 @@ declare module 'superagent/lib/response-base' {
   declare module.exports: any;
 }
 
-declare module 'superagent/lib/should-retry' {
-  declare module.exports: any;
-}
-
 declare module 'superagent/lib/utils' {
   declare module.exports: any;
 }
@@ -91,11 +87,11 @@ declare module 'superagent/superagent' {
 }
 
 // Filename aliases
+declare module 'superagent/lib/agent-base.js' {
+  declare module.exports: $Exports<'superagent/lib/agent-base'>;
+}
 declare module 'superagent/lib/client.js' {
   declare module.exports: $Exports<'superagent/lib/client'>;
-}
-declare module 'superagent/lib/is-function.js' {
-  declare module.exports: $Exports<'superagent/lib/is-function'>;
 }
 declare module 'superagent/lib/is-object.js' {
   declare module.exports: $Exports<'superagent/lib/is-object'>;
@@ -132,9 +128,6 @@ declare module 'superagent/lib/request-base.js' {
 }
 declare module 'superagent/lib/response-base.js' {
   declare module.exports: $Exports<'superagent/lib/response-base'>;
-}
-declare module 'superagent/lib/should-retry.js' {
-  declare module.exports: $Exports<'superagent/lib/should-retry'>;
 }
 declare module 'superagent/lib/utils.js' {
   declare module.exports: $Exports<'superagent/lib/utils'>;

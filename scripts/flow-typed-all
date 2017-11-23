@@ -1,9 +1,20 @@
 #!/usr/bin/env sh
+FLOW_VERSION=0.58.0
+
 echo "\nInstalling defs for root...\n"
 flow-typed install
+
 echo "\nInstalling defs for core...\n"
-cd core && flow-typed -f 0.58.0 -l ../flow-typed install && cd ..
+cd core && flow-typed -f $FLOW_VERSION install && cd ..
+
 echo "\nInstalling defs for native...\n"
-cd platforms/native && flow-typed -f 0.58.0 -l ../../flow-typed install && cd ../../
+cd platforms/native && flow-typed -f $FLOW_VERSION install && cd ../../
+
+echo "\nInstalling defs for graphql-utils...\n"
+cd libs/graphql-utils && flow-typed -f $FLOW_VERSION install && cd ../../
+
 echo "\nInstalling defs for server...\n"
-cd platforms/server && flow-typed -f 0.58.0 -l ../../flow-typed install && cd ../../
+cd platforms/server/graphql && flow-typed -f $FLOW_VERSION install && cd ../../../
+
+echo "\nInstalling defs for web...\n"
+cd platforms/web && flow-typed -f $FLOW_VERSION install && cd ../../
