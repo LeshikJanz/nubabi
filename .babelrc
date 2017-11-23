@@ -8,7 +8,8 @@
       "extensions": [".js", ".ios.js", ".android.js"],
       "alias": {
         "core": "./core",
-        "native": "./platforms/native"
+        "native": "./platforms/native",
+        "web": "./platforms/web/src/web"
       }
     }]
 

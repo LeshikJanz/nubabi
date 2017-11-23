@@ -1,9 +1,5 @@
 {
-  "extends": ["react-app", "prettier", "prettier/flowtype", "prettier/react"],
   "env": {
     "browser": true
-  },
-  "globals": {
-    "__DEV__": true
   }
 }

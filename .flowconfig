@@ -49,6 +49,7 @@ module.name_mapper='^core\/\(.*\)$' -> '<PROJECT_ROOT>/core/\1'
 module.name_mapper='^native\/\(.*\)$' -> '<PROJECT_ROOT>/platforms/native/\1'
 module.name_mapper='^server\/\(.*\)$' -> '<PROJECT_ROOT>/platforms/server/\1'
 module.name_mapper='^graphql-utils\/\(.*\)$' -> '<PROJECT_ROOT>/libs/graphql-utils/\1'
+module.name_mapper='^web\/\(.*\)$' -> '<PROJECT_ROOT>/platforms/web/src/web/\1'
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
