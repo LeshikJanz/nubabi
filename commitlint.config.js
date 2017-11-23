@@ -10,7 +10,7 @@ module.exports = {
         val => ({
           description: val,
         }),
-        patterns.components,
+        patterns.components
       ),
     },
   },
