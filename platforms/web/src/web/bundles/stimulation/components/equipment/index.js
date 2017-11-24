@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import EquipmentIcon from 'web/assets/images/icons/equipment.svg';
 import CalendarIcon from 'web/assets/images/icons/calendar.svg';
 import { Flex } from 'grid-styled';
-// import moment from 'moment';
+import moment from 'moment';
 
 const IconWrapper = styled.div`
   width: 100%;
@@ -35,21 +35,15 @@ const EquipmentText = styled.div`
 `;
 
 class Equipment extends PureComponent<Props> {
-  // Try without
-  // getNextWeekStart() {
-  //   const today = moment();
-  //   const daystoMonday = 0 - (today.isoWeekday() - 1) + 7;
-  //   const nextMonday = today.subtract('days', daystoMonday);
-  //
-  //   return nextMonday;
-  // };
-  //
-  // getNextWeekEnd() {
-  //   const nextMonday = this.getNextWeekStart();
-  //   const nextSunday = nextMonday.add('days', 6);
-  //
-  //   return nextSunday;
-  // };
+  getNextWeekStart = () =>
+    moment()
+      .add(1, 'weeks')
+      .startOf('isoWeek');
+
+  getNextWeekEnd = () =>
+    moment()
+      .add(1, 'weeks')
+      .endOf('isoWeek');
 
   render() {
     return (
@@ -60,6 +54,9 @@ class Equipment extends PureComponent<Props> {
         <EquipmentContent>
           <EquipmentText>Equipment for next week</EquipmentText>
           <CalendarIcon />
+          {`${this.getNextWeekStart().format(
+            'DD MMMM',
+          )} - ${this.getNextWeekEnd().format('DD MMMM YYYY')}`}
         </EquipmentContent>
       </Wrapper>
     );

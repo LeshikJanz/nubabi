@@ -3,12 +3,13 @@ import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
-import Button from '../../../../elements/Button';
+import Button from 'web/elements/Button';
 import EmptyGalleryIcon from 'web/assets/images/icons/moment.svg';
 import LibBackground from 'web/assets/images/lib-background.png';
+import { MemoryConnection } from 'core/types/modelTypes';
 
 type Props = {
-  memories: any,
+  memories: MemoryConnection,
 };
 
 const Memories = styled.div``;

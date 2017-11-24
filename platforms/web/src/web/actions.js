@@ -2,10 +2,10 @@
 import { Action } from 'core/types/types';
 import { Baby } from 'core/types/modelTypes';
 
-export function getBabySuccess(babies: Baby): Action {
+export function getBabySuccess(baby: Baby): Action {
   return {
     type: 'GET_BABY_SUCCESS',
-    payload: babies,
+    payload: baby,
   };
 }
 
