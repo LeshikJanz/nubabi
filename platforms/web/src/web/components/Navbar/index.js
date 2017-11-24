@@ -24,7 +24,6 @@ type Props = {
 };
 
 const Wrapper = styled(Box)`
-  background: ${props => props.theme.colors.white};
   width: 100%;
   border-right: 1px solid ${props => props.theme.colors.open.white2};
 `;
@@ -40,6 +39,7 @@ const MainMenu = styled.ul`
   margin: 0;
   padding: 0;
   min-width: 290px;
+  background: ${props => props.theme.colors.white};
 `;
 
 const ContentWrapper = styled.div`

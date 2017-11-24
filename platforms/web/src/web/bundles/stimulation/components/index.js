@@ -2,20 +2,24 @@
 import React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-import NavBar from 'web/components/Navbar';
+import { Activities } from './Activities';
+import { Baby } from 'core/types/modelTypes';
 
 type Props = {
-  baby: any,
+  baby: Baby,
+  activities: Baby.activities,
 };
 
-const Stimulation = ({ baby }: Props) => {
-  const Wrapper = styled(Flex)``;
+const Wrapper = styled(Flex)`
+  margin-top: 30px;
+  background: ${props => props.theme.bg.panel};
+  padding: 15px;
+`;
 
-  return (
-    <Wrapper>
-      <h1>Stimulation</h1>
-    </Wrapper>
-  );
-};
+const Stimulation = ({ baby }: Props) => (
+  <Wrapper>
+    <Activities activities={baby && baby.activities} />
+  </Wrapper>
+);
 
 export default Stimulation;

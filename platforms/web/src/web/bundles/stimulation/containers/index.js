@@ -5,11 +5,27 @@ import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 
 const query = gql`
-  query getBaby($id: ID!) {
+  query getBabyActivity($id: ID!) {
     viewer {
       baby(id: $id) {
-        id
-        name
+        activities(first: 2) {
+          edges {
+            node {
+              id
+              name
+              introduction
+              skillArea {
+                id
+                icon
+                image {
+                  thumb {
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -22,7 +38,6 @@ export default compose(
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({
-      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
       variables: { id: currentBabyId },
       skip: !currentBabyId,
     }),
