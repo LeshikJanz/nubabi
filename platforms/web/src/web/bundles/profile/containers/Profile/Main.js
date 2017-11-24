@@ -6,7 +6,7 @@ import type {
 } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Box } from 'grid-styled';
-import { Main } from '../../../../../web/elements';
+import { Main } from 'web/elements';
 import Growth from './Growth';
 import Activities from './Activities';
 import Memories from './Memories';

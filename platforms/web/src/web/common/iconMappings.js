@@ -6,6 +6,9 @@ const iconMappings = {
   'icon-sensory': require('web/assets/images/sensory_icon.png'),
   'icon-speech': require('web/assets/images/speech_icon.png'),
   'icon-social': require('web/assets/images/social_emotional_icon.png'),
+  'icon-favorite': require('web/assets/images/icons/favourite.svg'),
+  'icon-activity': require('web/assets/images/icons/activity.svg'),
+  'icon-history': require('web/assets/images/icons/history.svg'),
 };
 
 const pinkBg = '#FDE8EC';

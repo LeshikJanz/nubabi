@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import iconMappings from 'web/common/iconMappings';
@@ -54,24 +54,30 @@ const ActivitiesListItemContent = styled(Box)`
   }
 `;
 
-export const ActivityItem = ({ activity }: any) => (
-  <ActivitiesListItem key={activity.node.id}>
-    <ActivitiesListItemImage
-      src={
-        activity.node.skillArea.image && activity.node.skillArea.image.thumb.url
-      }
-    />
-    <ActivitiesListItemContent>
-      <ActivitiesHeader>
-        <h4>{activity.node.name}</h4>
-        <div>
-          <img
-            src={iconMappings(activity.node.skillArea.icon)}
-            alt="skill area"
-          />
-        </div>
-      </ActivitiesHeader>
-      <p>{activity.node.introduction}</p>
-    </ActivitiesListItemContent>
-  </ActivitiesListItem>
-);
+class ActivityItem extends PureComponent<Props> {
+  render() {
+    const { activity } = this.props;
+
+    return (
+      <ActivitiesListItem key={activity.id}>
+        <ActivitiesListItemImage
+          src={activity.skillArea.image && activity.skillArea.image.thumb.url}
+        />
+        <ActivitiesListItemContent>
+          <ActivitiesHeader>
+            <h4>{activity.name}</h4>
+            <div>
+              <img
+                src={iconMappings(activity.skillArea.icon)}
+                alt="skill area"
+              />
+            </div>
+          </ActivitiesHeader>
+          <p>{activity.introduction}</p>
+        </ActivitiesListItemContent>
+      </ActivitiesListItem>
+    );
+  }
+}
+
+export default ActivityItem;

@@ -1,8 +1,8 @@
 // @flow
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-import { Activities } from './Activities';
+import Activities from './Activities';
 import { Baby } from 'core/types/modelTypes';
 import { Loader } from 'web/components';
 
@@ -11,21 +11,26 @@ type Props = {
 };
 
 const Wrapper = styled(Flex)`
-  margin-top: 30px;
+  margin-top: 45px;
   background: ${props => props.theme.bg.panel};
   padding: 15px;
+  max-height: 68px;
 `;
 
-const Stimulation = ({ baby }: Props) => {
-  if (!baby) {
-    return <Loader active />;
-  }
+class Stimulation extends PureComponent<Props> {
+  render() {
+    const { baby } = this.props;
 
-  return (
-    <Wrapper>
-      <Activities activities={baby && baby.activities} />
-    </Wrapper>
-  );
-};
+    if (!baby) {
+      return <Loader active />;
+    }
+
+    return (
+      <Wrapper>
+        <Activities activities={baby && baby.activities} />
+      </Wrapper>
+    );
+  }
+}
 
 export default Stimulation;

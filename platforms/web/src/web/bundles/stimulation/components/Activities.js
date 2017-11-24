@@ -1,9 +1,11 @@
 // @flow
-import React from 'react';
+import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import { Baby } from 'core/types/modelTypes';
-import { ActivityItem } from 'web/elements/ActivityItem/index';
+import ActivityItem from 'web/elements/ActivityItem';
+import { STIMULATION_BUTTONS } from '../constants';
+import StimulationButton from './StimulationButton';
 
 type Props = Baby;
 
@@ -11,8 +13,14 @@ const ActivitiesListWrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
 `;
 
+const ActivityButtons = styled(Flex)`
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+`;
+
 const ActivitiesListHeader = styled(Flex)`
-  margin: 0 0 15px;
+  margin: 34px 0 15px;
 `;
 
 const ActivitiesListTitle = styled(Box)`
@@ -27,17 +35,32 @@ const ActivitiesList = styled.ul`
   padding: 0;
 `;
 
-export const Activities = ({ activities }: Props) => (
-  <ActivitiesListWrapper>
-    <ActivitiesListHeader justify="space-between" align="center">
-      <ActivitiesListTitle is="h3">The Week's activities</ActivitiesListTitle>
-    </ActivitiesListHeader>
+class Activities extends PureComponent<Props> {
+  render() {
+    const { activities } = this.props;
 
-    <ActivitiesList>
-      {activities &&
-        activities.edges.map(edge => (
-          <ActivityItem key={edge.id} activity={edge} />
-        ))}
-    </ActivitiesList>
-  </ActivitiesListWrapper>
-);
+    return (
+      <ActivitiesListWrapper>
+        <ActivityButtons>
+          {STIMULATION_BUTTONS.map(b => (
+            <StimulationButton key={b.id} button={b} />
+          ))}
+        </ActivityButtons>
+        <ActivitiesListHeader justify="space-between" align="center">
+          <ActivitiesListTitle is="h3">
+            The Week's activities
+          </ActivitiesListTitle>
+        </ActivitiesListHeader>
+
+        <ActivitiesList>
+          {activities &&
+            activities.edges.map(({ node }) => (
+              <ActivityItem key={node.id} activity={node} />
+            ))}
+        </ActivitiesList>
+      </ActivitiesListWrapper>
+    );
+  }
+}
+
+export default Activities;
