@@ -1,5 +1,4 @@
 // @flow
-import type { ProfileGrowthFragment } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
@@ -7,7 +6,10 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { pathOr } from 'ramda';
 
-type Props = ProfileGrowthFragment;
+type Props = {
+  growth: any,
+  dob: any,
+};
 
 const Growth = styled.article`
   background: ${props => props.theme.colors.white};
@@ -86,6 +88,20 @@ const limitText = (str, limit = 365) => {
 };
 
 class ProfileMain extends PureComponent<Props> {
+  constructor() {
+    super();
+
+    this.state = {
+      isIntroductionCollapsed: true,
+    };
+  }
+
+  handleIntroduction = () => {
+    this.setState({
+      isIntroductionCollapsed: !this.state.isIntroductionCollapsed,
+    });
+  };
+
   render() {
     const { growth, dob } = this.props;
     const introduction = pathOr('', ['current', 'introduction'], growth);
@@ -97,11 +113,16 @@ class ProfileMain extends PureComponent<Props> {
             <GrowthTitle is="h3">This Week's Growth</GrowthTitle>
             <GrowthDoB is="span">{moment(dob).fromNow(true)} old</GrowthDoB>
           </GrowthHeader>
-
-          <p>
-            {limitText(introduction)}{' '}
-            <ReadMore to="/profile">Read More</ReadMore>
-          </p>
+          {this.state.isIntroductionCollapsed ? (
+            <p>
+              {limitText(introduction)}
+              <ReadMore to="/profile" onClick={this.handleIntroduction}>
+                Read More
+              </ReadMore>
+            </p>
+          ) : (
+            <p>{introduction}</p>
+          )}
         </GrowthContent>
 
         <GrowthExpert p={15} align="center">

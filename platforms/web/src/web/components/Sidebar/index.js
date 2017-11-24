@@ -4,10 +4,10 @@ import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
 import { Aside } from 'web/elements';
-import IAppStore from '../../../images/appstore.png';
-import IPlayMarket from '../../../images/googleplay.png';
-import INubabiApp from '../../../images/nubabiapp.png';
-import IPersons from '../../../images/icons/persons.svg';
+import IAppStore from 'web/assets/images/appstore.png';
+import IPlayMarket from 'web/assets/images/googleplay.png';
+import INubabiApp from 'web/assets/images/nubabiapp.png';
+import IPersons from 'web/assets/images/icons/persons.svg';
 
 type Props = {};
 
@@ -114,7 +114,7 @@ class Sidebar extends PureComponent<Props> {
 
         <SideBarFooter>
           <small>
-            ©2017 Nubabi. About Us  • FAQ & Support • Contact Us • Log Out
+            ©2017 Nubabi. About Us • FAQ & Support • Contact Us • Log Out
           </small>
           <hr />
           <small>

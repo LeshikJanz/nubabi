@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import ICross from '../../../images/icons/cross.svg';
+import ICross from 'web/assets/images/icons/cross.svg';
 
 type Props = {
   onClick: () => void,

@@ -21,7 +21,6 @@ type Props = {
     height: 'cm' | 'in',
   },
   data: { loading: boolean },
-  location: mixed,
 };
 
 const Wrapper = styled(Flex)``;
@@ -78,6 +77,11 @@ class Profile extends PureComponent<Props> {
               skillArea {
                 id
                 icon
+                image {
+                  thumb {
+                    url
+                  }
+                }
               }
             }
           }
@@ -121,9 +125,7 @@ class Profile extends PureComponent<Props> {
   };
 
   render() {
-    const { baby, location } = this.props;
-
-    console.log('location', location);
+    const { baby } = this.props;
 
     if (!baby) {
       return <Loader active />;

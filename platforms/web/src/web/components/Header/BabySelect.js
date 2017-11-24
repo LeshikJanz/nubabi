@@ -6,7 +6,7 @@ import { Box } from 'grid-styled';
 import onClickOutside from 'react-onclickoutside';
 
 import { Menu, Button } from '../../../../src/web/elements';
-import IPerson from '../../../images/icons/person.svg';
+import IPerson from 'web/assets/images/icons/person.svg';
 
 type Props = {};
 

@@ -5,9 +5,9 @@ import Modal from 'react-modal';
 import onClickOutside from 'react-onclickoutside';
 
 import { Menu } from '../../../../src/web/elements';
-import INotification from '../../../images/icons/notification.svg';
-import IPerson from '../../../images/icons/person.svg';
-import IPhotos from '../../../images/icons/photos.svg';
+import INotification from 'web/assets/images/icons/notification.svg';
+import IPerson from 'web/assets/images/icons/person.svg';
+import IPhotos from 'web/assets/images/icons/photos.svg';
 import IFirstBirth from 'core/images/memories/first-birthday.png';
 import IFirstTooth from 'core/images/memories/first-tooth.png';
 

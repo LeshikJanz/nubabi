@@ -1,11 +1,11 @@
 // @flow
-import type { ActivityConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
+import iconMappings from 'web/common/iconMappings';
 
 type Props = {
-  activities: ActivityConnection,
+  activities: any,
   name: string,
 };
 
@@ -45,9 +45,32 @@ const ActivitiesListItem = styled.li`
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
+  max-height: 119px;
 `;
 
-const ActivitiesListItemImage = styled(Box)``;
+const ActivitiesListItemImage = styled.img`
+  max-width: 113px;
+  max-height: 119px;
+`;
+
+const ArrowRight = styled.img`
+  max-width: 7px;
+`;
+
+const ActivitiesHeader = styled(Flex)`
+  justify-content: space-between;
+
+  h4 {
+    margin: 0;
+  }
+
+  > div {
+    > img {
+      max-width: 38px;
+      max-height: 38px;
+    }
+  }
+`;
 
 const ActivitiesListItemContent = styled(Box)`
   padding: 15px;
@@ -63,14 +86,16 @@ const ActivitiesListItemContent = styled(Box)`
     font-size: 12px;
     color: ${props => props.theme.colors.secondary};
     line-height: 18px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 `;
 
 class Activities extends PureComponent<Props> {
   render() {
     const { activities, name } = this.props;
-
-    console.log(activities);
 
     return (
       <ActivitiesListWrapper>
@@ -85,9 +110,22 @@ class Activities extends PureComponent<Props> {
           {activities.edges.map(edge => {
             return (
               <ActivitiesListItem key={edge.node.id}>
-                <ActivitiesListItemImage width={1 / 5} />
-                <ActivitiesListItemContent width={1}>
-                  <h4>{edge.node.name}</h4>
+                <ActivitiesListItemImage
+                  src={
+                    edge.node.skillArea.image &&
+                    edge.node.skillArea.image.thumb.url
+                  }
+                />
+                <ActivitiesListItemContent>
+                  <ActivitiesHeader>
+                    <h4>{edge.node.name}</h4>
+                    <div>
+                      <img
+                        src={iconMappings(edge.node.skillArea.icon)}
+                        alt="skill area"
+                      />
+                    </div>
+                  </ActivitiesHeader>
                   <p>{edge.node.introduction}</p>
                 </ActivitiesListItemContent>
               </ActivitiesListItem>
