@@ -6,6 +6,7 @@
     "bootstrap": "lerna bootstrap",
     "native": "node node_modules/react-native/local-cli/cli.js start",
     "web": "yarn workspace nubabi-web run start",
+    "web-no-dashboard": "yarn workspace nubabi-web run start-no-dashboard",
     "flow": "flow",
     "flow-typed": "./scripts/flow-typed-all",
     "test": "jest",
