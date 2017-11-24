@@ -22,6 +22,7 @@ type Props = {
 
 const Wrapper = styled(Flex)`
   width: 100%;
+  background: ${props => props.theme.bg.panel};
 `;
 
 class Profile extends PureComponent<Props> {

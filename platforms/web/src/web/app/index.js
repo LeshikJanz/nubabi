@@ -57,7 +57,7 @@ const AppContent = styled(Section)`
 `;
 
 export class App extends Component<Props> {
-  componentDidMount() {
+  componentWillReceiveProps() {
     if (this.props.baby) {
       this.props.setBabyToStore(this.props.baby);
     }

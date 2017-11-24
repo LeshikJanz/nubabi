@@ -6,9 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { Nav, Menu } from 'web/elements';
 
 import { connect } from 'react-redux';
-import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
-import path from 'ramda/src/path';
 import IChart from 'web/assets/images/icons/chart.svg';
 import IPerson from 'web/assets/images/icons/person.svg';
 import ILibrary from 'web/assets/images/icons/library.svg';
@@ -143,40 +141,9 @@ class NavBar extends PureComponent<Props> {
   }
 }
 
-const query = gql`
-  query getBaby($id: ID!) {
-    viewer {
-      baby(id: $id) {
-        id
-        name
-        avatar {
-          url
-        }
-        coverImage {
-          url
-        }
-        name
-        weight
-        height
-      }
-    }
-  }
-`;
-
 export default compose(
-  connect(({ babies, settings }) => ({
-    currentBabyId: babies.currentBabyId,
+  connect(({ baby, settings }) => ({
+    baby,
     unitDisplay: settings.unitDisplay,
   })),
-  graphql(query, {
-    options: ({ currentBabyId }) => ({
-      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
-      variables: { id: currentBabyId },
-      skip: !currentBabyId,
-    }),
-    props: ({ data }) => ({
-      data,
-      baby: path(['viewer', 'baby'], data),
-    }),
-  }),
 )(NavBar);

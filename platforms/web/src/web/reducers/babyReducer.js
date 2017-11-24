@@ -15,6 +15,9 @@ export const initialState = {
 const reducer = (state: initialState = initialState, action: Action) => {
   switch (action.type) {
     case getBabySuccess().type:
+      console.log('action.payload');
+      console.log(action.payload);
+
       return {
         ...state,
         ...action.payload,
