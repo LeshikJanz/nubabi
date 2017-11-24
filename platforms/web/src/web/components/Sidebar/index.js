@@ -13,6 +13,7 @@ type Props = {};
 
 const SideBar = styled(Box)`
   padding: 25px 0 0;
+  min-width: 235px;
 `;
 
 const SideBarFooter = styled.div`

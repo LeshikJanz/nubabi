@@ -8,9 +8,7 @@ import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 
 import { Loader } from 'web/components';
-import NavBar from '../../../../components/Navbar/index';
 import Main from './Main';
-import SideBar from '../../../../components/Sidebar';
 
 type Props = {
   navigation: any,
@@ -22,7 +20,9 @@ type Props = {
   data: { loading: boolean },
 };
 
-const Wrapper = styled(Flex)``;
+const Wrapper = styled(Flex)`
+  width: 100%;
+`;
 
 class Profile extends PureComponent<Props> {
   static fragments = {
@@ -131,10 +131,8 @@ class Profile extends PureComponent<Props> {
     }
 
     return (
-      <Wrapper wrap justify="space-between">
+      <Wrapper>
         <Main {...baby} />
-
-        <SideBar />
       </Wrapper>
     );
   }

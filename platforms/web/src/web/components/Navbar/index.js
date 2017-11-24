@@ -1,6 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import { Box } from 'grid-styled';
+import { Box, Flex } from 'grid-styled';
 import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { Nav, Menu } from 'web/elements';
@@ -15,13 +15,14 @@ import ILibrary from 'web/assets/images/icons/library.svg';
 import IPhotos from 'web/assets/images/icons/photos.svg';
 import IPuzzle from 'web/assets/images/icons/puzzle.svg';
 import ProfileHeader from './ProfileHeader';
+import SideBar from 'web/components/Sidebar';
 
 type Props = {
   location: {
     pathname: string,
   },
   baby: any,
-  WrappedComponent: any,
+  children: any,
 };
 
 const Wrapper = styled(Box)`
@@ -30,10 +31,21 @@ const Wrapper = styled(Box)`
   border-right: 1px solid ${props => props.theme.colors.open.white2};
 `;
 
-const ProfileMenu = styled.ul`
+const MenuWrapper = styled(Flex)`
   margin: 0;
   padding: 0;
+  width: 100%;
+`;
+
+const MainMenu = styled.ul`
   width: 25%;
+  margin: 0;
+  padding: 0;
+  min-width: 290px;
+`;
+
+const ContentWrapper = styled.div`
+  width: 100%;
 `;
 
 const MenuItem = styled.li`
@@ -85,45 +97,47 @@ const MenuLink = styled(Menu.Link)`
 
 class NavBar extends PureComponent<Props> {
   render() {
-    console.log('this.props');
-    console.log(this.props);
-
-    const { location, baby } = this.props;
+    const { location, baby, children } = this.props;
 
     return (
       <Wrapper width={1 / 4} is={Nav}>
         {baby &&
           location.pathname === '/profile' && <ProfileHeader {...baby} />}
-        <ProfileMenu>
-          <MenuItem>
-            <MenuLink to="/profile" active={location.pathname === '/profile'}>
-              <IPerson /> {baby && baby.name}'s overview
-            </MenuLink>
-          </MenuItem>
-          <MenuItem>
-            <MenuLink to="/profile">
-              <IChart /> Growth
-            </MenuLink>
-          </MenuItem>
-          <MenuItem>
-            <MenuLink
-              to="/stimulation"
-              active={location.pathname === '/stimulation'}
-            >
-              <IPuzzle /> Stimulation
-            </MenuLink>
-          </MenuItem>
-          <MenuItem>
-            <MenuLink to="/profile">
-              <ILibrary /> Library
-            </MenuLink>
-          </MenuItem>
-          <MenuItem>
-            <MenuLink to="/profile">
-              <IPhotos /> Memories
-            </MenuLink>
-          </MenuItem>
-        </ProfileMenu>
+
+        <MenuWrapper>
+          <MainMenu>
+            <MenuItem>
+              <MenuLink to="/profile" active={location.pathname === '/profile'}>
+                <IPerson /> {baby && baby.name}'s overview
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink to="/profile">
+                <IChart /> Growth
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink
+                to="/stimulation"
+                active={location.pathname === '/stimulation'}
+              >
+                <IPuzzle /> Stimulation
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink to="/profile">
+                <ILibrary /> Library
+              </MenuLink>
+            </MenuItem>
+            <MenuItem>
+              <MenuLink to="/profile">
+                <IPhotos /> Memories
+              </MenuLink>
+            </MenuItem>
+          </MainMenu>
+          <ContentWrapper>{children}</ContentWrapper>
+          <SideBar />
+        </MenuWrapper>
       </Wrapper>
     );
   }
