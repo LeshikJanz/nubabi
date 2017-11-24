@@ -93,7 +93,10 @@ class NavBar extends PureComponent<Props> {
             </MenuLink>
           </MenuItem>
           <MenuItem>
-            <MenuLink to="/profile">
+            <MenuLink
+              to="/stimulation"
+              active={location.pathname === '/stimulation'}
+            >
               <IPuzzle /> Stimulation
             </MenuLink>
           </MenuItem>

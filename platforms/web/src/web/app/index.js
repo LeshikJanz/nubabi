@@ -27,6 +27,8 @@ const Profile = Loadable({
   },
 });
 
+import Stimulation from 'web/bundles/stimulation/containers';
+
 type Props = {
   isLoading: boolean,
   pathname: string,
@@ -69,6 +71,11 @@ export class App extends Component<Props> {
             <AuthenticatedRoute
               path="/profile"
               component={Profile}
+              props={this.props}
+            />
+            <Route
+              path="/stimulation"
+              component={Stimulation}
               props={this.props}
             />
             <Route path="*" component={NotFound} />

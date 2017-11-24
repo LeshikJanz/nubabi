@@ -8,7 +8,7 @@ import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 
 import { Loader } from 'web/components';
-import NavBar from './Navbar';
+import NavBar from '../../../../components/Navbar/index';
 import Header from './Header';
 import Main from './Main';
 import SideBar from '../../../../components/Sidebar';
