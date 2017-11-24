@@ -18,6 +18,9 @@ import {
 import Login from 'web/auth';
 import { logout } from 'core/auth/actions';
 import NavBar from '../components/Navbar';
+import { gql, graphql } from 'react-apollo';
+import compose from 'ramda/src/compose';
+import path from 'ramda/src/path';
 
 import 'sanitize.css/sanitize.css';
 
@@ -29,6 +32,8 @@ const Profile = Loadable({
 });
 
 import Stimulation from 'web/bundles/stimulation/containers';
+import { getBabySuccess } from '../actions';
+import { Baby } from 'core/types/modelTypes';
 
 type Props = {
   isLoading: boolean,
@@ -36,6 +41,8 @@ type Props = {
   authToken: string,
   logout: Function,
   isAuthenticated: boolean,
+  baby: Baby,
+  setBabyToStore: Function,
 };
 
 const Wrapper = styled.div`
@@ -50,6 +57,12 @@ const AppContent = styled(Section)`
 `;
 
 export class App extends Component<Props> {
+  componentDidMount() {
+    if (this.props.baby) {
+      this.props.setBabyToStore(this.props.baby);
+    }
+  }
+
   render() {
     return (
       <Wrapper>
@@ -93,14 +106,56 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   logout: () => {
     dispatch(logout());
   },
+  setBabyToStore: (baby: Baby) => {
+    dispatch(getBabySuccess(baby));
+  },
 });
 
-const mapStateToProps = ({ app, auth, navigation }: State) => {
-  return {
-    isLoading: app.isFetching,
-    pathname: navigation.location.pathname,
-    isAuthenticated: auth.isAuthenticated,
-  };
-};
+const mapStateToProps = ({
+  app,
+  auth,
+  navigation,
+  babies,
+  settings,
+}: State) => ({
+  isLoading: app.isFetching,
+  pathname: navigation.location.pathname,
+  isAuthenticated: auth.isAuthenticated,
+  currentBabyId: babies.currentBabyId,
+  unitDisplay: settings.unitDisplay,
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+const query = gql`
+  query getBaby($id: ID!) {
+    viewer {
+      baby(id: $id) {
+        id
+        name
+        avatar {
+          url
+        }
+        coverImage {
+          url
+        }
+        name
+        weight
+        height
+      }
+    }
+  }
+`;
+
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  graphql(query, {
+    options: ({ currentBabyId }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
+      variables: { id: currentBabyId },
+      skip: !currentBabyId,
+    }),
+    props: ({ data }) => ({
+      data,
+      baby: path(['viewer', 'baby'], data),
+    }),
+  }),
+)(App);

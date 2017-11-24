@@ -54,21 +54,6 @@ const EditPhotosButton = styled(Flex)`
   }
 `;
 
-const BabyImage = styled.div`
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%, -50%);
-  border: 8px solid ${props => props.theme.colors.white};
-  border-radius: 100%;
-  background: url(${props => props.image});
-  background-size: cover;
-  background-position: center;
-  z-index: 3;
-`;
-
 const BabyInfo = styled(Flex)`
   align-items: center;
 `;
@@ -262,7 +247,6 @@ class ProfileHeader extends Component<Props> {
         >
           {' '}
           {/* Be careful! Modal depend on className */}
-          <BabyImage image={avatar.url} />
           {this.state.modalIsOpen && (
             <PhotoChangeIcon>
               <ICamera />

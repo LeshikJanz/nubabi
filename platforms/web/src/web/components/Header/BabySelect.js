@@ -5,10 +5,11 @@ import Modal from 'react-modal';
 import { Box } from 'grid-styled';
 import onClickOutside from 'react-onclickoutside';
 
-import { Menu, Button } from '../../../../src/web/elements';
+import { Menu, Button } from 'web/elements';
 import IPerson from 'web/assets/images/icons/person.svg';
+import { Baby } from 'core/types/modelTypes';
 
-type Props = {};
+type Props = Baby;
 
 const BabySelect = styled.div`
   margin: -10px 0 0 0;
@@ -148,6 +149,7 @@ class Select extends Component<Props> {
     return (
       <BabySelect className="BabySelect">
         <BabySelected onClick={this.openModal}>Charlotte</BabySelected>
+        {/* <BabyImage image={this.props.baby.avatar.url}/> */}
 
         <Modal
           isOpen={this.state.modalIsOpen}

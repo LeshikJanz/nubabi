@@ -1,4 +1,6 @@
 // @flow
+import { Baby } from 'core/types/modelTypes';
+
 export type GlobalLoaderAction = {
   type: String,
   payload: {
@@ -24,6 +26,16 @@ export type LoginSuccessAction = {
 
 export type LogoutAction = {
   type: 'auth/logout',
+};
+
+export type FetchBabySuccessAction = {
+  type: 'profile/FETCH_BABY_SUCCESS',
+  payload: Baby,
+};
+
+export type FetchBabyFailureAction = {
+  type: 'profile/FETCH_BABY_FAILURE',
+  payload: Baby,
 };
 
 export type LoadJobRequestAction = {

@@ -8,6 +8,7 @@ import auth from './auth/reducer';
 import device from './device/reducer';
 import viewer from './viewer/reducer';
 import babies from './babies/reducer';
+import baby from '../platforms/web/src/web/reducers/babyReducer';
 import growth from './growth/reducer';
 import settings from './settings/reducer';
 import ui from './ui/reducer';
@@ -51,6 +52,7 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
     auth,
     config,
     babies,
+    baby,
     growth,
     device,
     form,
