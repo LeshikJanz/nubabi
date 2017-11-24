@@ -14,11 +14,19 @@ export const overlay = {
   blue0: 'rgba(51, 183, 235, .07)',
 };
 
+export const screens = {
+  laptop: '1366px',
+  tablet: '1024px',
+  tabletMini: '768px',
+  mobile: '600px',
+};
+
 export const theme = mergeDeepRight(defaultTheme, {
   overlay,
   bg,
   shadows,
   activityItem,
+  screens,
   colors: {
     open: {
       white2: '#E9ECF4',

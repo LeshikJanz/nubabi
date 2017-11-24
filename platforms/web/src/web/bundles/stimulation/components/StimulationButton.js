@@ -7,10 +7,14 @@ import iconMappings from 'web/common/iconMappings';
 
 const ButtonWrapper = styled(Flex)`
   border-radius: 4px;
+  cursor: pointer;
   justify-content: space-around;
   align-items: center;
   height: 68px;
   width: 30%;
+  min-width: 190px;
+  margin-top: 15px;
+  margin: 15px 5px 0;
   background-color: #ffffff;
   box-shadow: ${props => props.theme.shadows.panel};
 

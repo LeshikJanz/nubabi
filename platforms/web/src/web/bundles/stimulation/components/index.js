@@ -5,16 +5,18 @@ import styled from 'styled-components';
 import Activities from './Activities';
 import { Baby } from 'core/types/modelTypes';
 import { Loader } from 'web/components';
+import Equipment from './equipment/index';
 
 type Props = {
   baby: Baby,
 };
 
 const Wrapper = styled(Flex)`
-  margin-top: 45px;
+  margin-top: 30px;
   background: ${props => props.theme.bg.panel};
   padding: 15px;
   max-height: 68px;
+  flex-direction: column;
 `;
 
 class Stimulation extends PureComponent<Props> {
@@ -28,6 +30,7 @@ class Stimulation extends PureComponent<Props> {
     return (
       <Wrapper>
         <Activities activities={baby && baby.activities} />
+        <Equipment />
       </Wrapper>
     );
   }

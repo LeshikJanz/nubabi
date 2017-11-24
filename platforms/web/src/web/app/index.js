@@ -34,6 +34,9 @@ const Profile = Loadable({
 import Stimulation from 'web/bundles/stimulation/containers';
 import { getBabySuccess } from '../actions';
 import { Baby } from 'core/types/modelTypes';
+import Growth from 'web/bundles/growth';
+import Library from 'web/bundles/library';
+import Memories from 'web/bundles/memories';
 
 type Props = {
   isLoading: boolean,
@@ -48,6 +51,7 @@ type Props = {
 const Wrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
   background: ${props => props.theme.bg.panel};
+  padding-bottom: 50px;
 `;
 
 const AppContent = styled(Section)`
@@ -89,9 +93,24 @@ export class App extends Component<Props> {
                 component={Profile}
                 props={this.props}
               />
-              <Route
+              <AuthenticatedRoute
+                path="/growth"
+                component={Growth}
+                props={this.props}
+              />
+              <AuthenticatedRoute
                 path="/stimulation"
                 component={Stimulation}
+                props={this.props}
+              />
+              <AuthenticatedRoute
+                path="/library"
+                component={Library}
+                props={this.props}
+              />
+              <AuthenticatedRoute
+                path="/memories"
+                component={Memories}
                 props={this.props}
               />
             </NavBar>

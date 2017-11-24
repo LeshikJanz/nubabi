@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
-import { ActivityItem } from 'web/elements/ActivityItem/index';
+import ActivityItem from 'web/elements/ActivityItem/index';
 
 type Props = {
   activities: any,
@@ -50,8 +50,8 @@ class Activities extends PureComponent<Props> {
 
         <ActivitiesList>
           {activities &&
-            activities.edges.map(edge => (
-              <ActivityItem key={edge.id} activity={edge} />
+            activities.edges.map(({ node }) => (
+              <ActivityItem key={node.id} activity={node} />
             ))}
         </ActivitiesList>
       </ActivitiesListWrapper>

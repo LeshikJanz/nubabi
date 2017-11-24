@@ -110,7 +110,7 @@ class NavBar extends PureComponent<Props> {
               </MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink to="/profile">
+              <MenuLink to="/growth" active={location.pathname === '/growth'}>
                 <IChart /> Growth
               </MenuLink>
             </MenuItem>
@@ -123,12 +123,15 @@ class NavBar extends PureComponent<Props> {
               </MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink to="/profile">
+              <MenuLink to="/library" active={location.pathname === '/library'}>
                 <ILibrary /> Library
               </MenuLink>
             </MenuItem>
             <MenuItem>
-              <MenuLink to="/profile">
+              <MenuLink
+                to="/memories"
+                active={location.pathname === '/memories'}
+              >
                 <IPhotos /> Memories
               </MenuLink>
             </MenuItem>

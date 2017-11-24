@@ -8,6 +8,7 @@ const query = gql`
   query getBabyActivity($id: ID!) {
     viewer {
       baby(id: $id) {
+        id
         activities(first: 2) {
           edges {
             node {

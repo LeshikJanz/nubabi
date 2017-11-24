@@ -1,13 +1,21 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Baby } from 'core/types/modelTypes';
 import ActivityItem from 'web/elements/ActivityItem';
 import { STIMULATION_BUTTONS } from '../constants';
 import StimulationButton from './StimulationButton';
 
 type Props = Baby;
+
+export const media = {
+  handheld: (...args) => css`
+    @media (max-width: 1180px) {
+      ${css(...args)};
+    }
+  `,
+};
 
 const ActivitiesListWrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
@@ -17,6 +25,10 @@ const ActivityButtons = styled(Flex)`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  flex-wrap: wrap;
+  ${media.handheld`
+    justify-content: center;
+  `};
 `;
 
 const ActivitiesListHeader = styled(Flex)`
@@ -48,7 +60,7 @@ class Activities extends PureComponent<Props> {
         </ActivityButtons>
         <ActivitiesListHeader justify="space-between" align="center">
           <ActivitiesListTitle is="h3">
-            The Week's activities
+            This Week's activities
           </ActivitiesListTitle>
         </ActivitiesListHeader>
 
