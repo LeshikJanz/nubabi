@@ -4,10 +4,10 @@ import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import { Activities } from './Activities';
 import { Baby } from 'core/types/modelTypes';
+import { Loader } from 'web/components';
 
 type Props = {
   baby: Baby,
-  activities: Baby.activities,
 };
 
 const Wrapper = styled(Flex)`
@@ -16,10 +16,16 @@ const Wrapper = styled(Flex)`
   padding: 15px;
 `;
 
-const Stimulation = ({ baby }: Props) => (
-  <Wrapper>
-    <Activities activities={baby && baby.activities} />
-  </Wrapper>
-);
+const Stimulation = ({ baby }: Props) => {
+  if (!baby) {
+    return <Loader active />;
+  }
+
+  return (
+    <Wrapper>
+      <Activities activities={baby && baby.activities} />
+    </Wrapper>
+  );
+};
 
 export default Stimulation;

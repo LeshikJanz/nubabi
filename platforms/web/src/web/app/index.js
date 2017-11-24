@@ -54,6 +54,7 @@ const AppContent = styled(Section)`
   max-width: 1400px;
   min-width: 768px;
   margin: 0 auto;
+  margin-top: 2px;
 `;
 
 export class App extends Component<Props> {

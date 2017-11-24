@@ -28,6 +28,7 @@ const Wrapper = styled(Header)`
   justify-content: center;
   height: 70px;
   padding: 0 20px;
+  box-shadow: ${props => props.theme.shadows.panel};
   background: ${props => props.theme.colors.white};
 `;
 

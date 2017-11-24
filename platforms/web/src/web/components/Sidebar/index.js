@@ -12,7 +12,7 @@ import IPersons from 'web/assets/images/icons/persons.svg';
 type Props = {};
 
 const SideBar = styled(Box)`
-  padding: 25px 0 0;
+  margin: 25px 0 0;
   min-width: 235px;
   background: ${props => props.theme.bg.panel};
 `;
