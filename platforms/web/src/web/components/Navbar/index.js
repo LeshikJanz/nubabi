@@ -5,27 +5,35 @@ import styled from 'styled-components';
 import { withRouter } from 'react-router-dom';
 import { Nav, Menu } from 'web/elements';
 
+import { connect } from 'react-redux';
+import { gql, graphql } from 'react-apollo';
+import compose from 'ramda/src/compose';
+import path from 'ramda/src/path';
 import IChart from 'web/assets/images/icons/chart.svg';
 import IPerson from 'web/assets/images/icons/person.svg';
 import ILibrary from 'web/assets/images/icons/library.svg';
 import IPhotos from 'web/assets/images/icons/photos.svg';
 import IPuzzle from 'web/assets/images/icons/puzzle.svg';
+import ProfileHeader from './ProfileHeader';
 
 type Props = {
   location: {
     pathname: string,
   },
-  name: string,
+  baby: any,
+  WrappedComponent: any,
 };
 
 const Wrapper = styled(Box)`
   background: ${props => props.theme.colors.white};
+  width: 100%;
   border-right: 1px solid ${props => props.theme.colors.open.white2};
 `;
 
 const ProfileMenu = styled.ul`
   margin: 0;
   padding: 0;
+  width: 25%;
 `;
 
 const MenuItem = styled.li`
@@ -77,14 +85,19 @@ const MenuLink = styled(Menu.Link)`
 
 class NavBar extends PureComponent<Props> {
   render() {
-    const { location, name } = this.props;
+    console.log('this.props');
+    console.log(this.props);
+
+    const { location, baby } = this.props;
 
     return (
       <Wrapper width={1 / 4} is={Nav}>
+        {baby &&
+          location.pathname === '/profile' && <ProfileHeader {...baby} />}
         <ProfileMenu>
           <MenuItem>
             <MenuLink to="/profile" active={location.pathname === '/profile'}>
-              <IPerson /> {name}'s overview
+              <IPerson /> {baby && baby.name}'s overview
             </MenuLink>
           </MenuItem>
           <MenuItem>
@@ -116,4 +129,40 @@ class NavBar extends PureComponent<Props> {
   }
 }
 
-export default withRouter(NavBar);
+const query = gql`
+  query getBaby($id: ID!) {
+    viewer {
+      baby(id: $id) {
+        id
+        name
+        avatar {
+          url
+        }
+        coverImage {
+          url
+        }
+        name
+        weight
+        height
+      }
+    }
+  }
+`;
+
+export default compose(
+  connect(({ babies, settings }) => ({
+    currentBabyId: babies.currentBabyId,
+    unitDisplay: settings.unitDisplay,
+  })),
+  graphql(query, {
+    options: ({ currentBabyId }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
+      variables: { id: currentBabyId },
+      skip: !currentBabyId,
+    }),
+    props: ({ data }) => ({
+      data,
+      baby: path(['viewer', 'baby'], data),
+    }),
+  }),
+)(NavBar);

@@ -1,4 +1,4 @@
-import { Stimulation } from '../components/index';
+import Stimulation from '../components/index';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';

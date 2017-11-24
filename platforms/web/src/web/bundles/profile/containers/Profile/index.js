@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 import { Loader } from 'web/components';
 import NavBar from '../../../../components/Navbar/index';
-import Header from './Header';
 import Main from './Main';
 import SideBar from '../../../../components/Sidebar';
 
@@ -133,10 +132,6 @@ class Profile extends PureComponent<Props> {
 
     return (
       <Wrapper wrap justify="space-between">
-        <Header {...baby} />
-
-        <NavBar {...baby} />
-
         <Main {...baby} />
 
         <SideBar />
@@ -146,21 +141,21 @@ class Profile extends PureComponent<Props> {
 }
 
 const query = gql`
-  query getBaby($id: ID!) {
-    viewer {
-      baby(id: $id) {
-        ...Profile
-        ...ProfileGrowth
-        ...ProfileActivities
-        ...RecentMemories
-      }
+    query getBaby($id: ID!) {
+        viewer {
+            baby(id: $id) {
+                ...Profile
+                ...ProfileGrowth
+                ...ProfileActivities
+                ...RecentMemories
+            }
+        }
     }
-  }
 
-  ${Profile.fragments.baby}
-  ${Profile.fragments.growth}
-  ${Profile.fragments.activities}
-  ${Profile.fragments.recentMemories}
+    ${Profile.fragments.baby}
+    ${Profile.fragments.growth}
+    ${Profile.fragments.activities}
+    ${Profile.fragments.recentMemories}
 `;
 
 export default compose(

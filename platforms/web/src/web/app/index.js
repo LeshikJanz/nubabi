@@ -17,6 +17,7 @@ import {
 } from 'web/components';
 import Login from 'web/auth';
 import { logout } from 'core/auth/actions';
+import NavBar from '../components/Navbar';
 
 import 'sanitize.css/sanitize.css';
 
@@ -63,21 +64,23 @@ export class App extends Component<Props> {
             <Route path="/" exact component={Home} />
             <Route path="/about" component={About} />
             <Route path="/login" component={Login} />
-            <AuthenticatedRoute
-              path="/test"
-              component={Test}
-              props={this.props}
-            />
-            <AuthenticatedRoute
-              path="/profile"
-              component={Profile}
-              props={this.props}
-            />
-            <Route
-              path="/stimulation"
-              component={Stimulation}
-              props={this.props}
-            />
+            <NavBar>
+              <AuthenticatedRoute
+                path="/test"
+                component={Test}
+                props={this.props}
+              />
+              <AuthenticatedRoute
+                path="/profile"
+                component={Profile}
+                props={this.props}
+              />
+              <Route
+                path="/stimulation"
+                component={Stimulation}
+                props={this.props}
+              />
+            </NavBar>
             <Route path="*" component={NotFound} />
           </Switch>
         </AppContent>
