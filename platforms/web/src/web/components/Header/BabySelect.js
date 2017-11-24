@@ -80,6 +80,21 @@ const BabiesListItem = styled(Menu.Link)`
   }
 `;
 
+const BabyProfileImage = styled.div`
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: translate(-50%, -50%);
+  border: 8px solid ${props => props.theme.colors.white};
+  border-radius: 100%;
+  background: url(${props => props.image});
+  background-size: cover;
+  background-position: center;
+  z-index: 3;
+`;
+
 const BabyImage = styled(Box)`
   width: 40px;
   height: 40px;
@@ -148,8 +163,8 @@ class Select extends Component<Props> {
   render() {
     return (
       <BabySelect className="BabySelect">
+        <BabyProfileImage image={this.props.avatar.url} />
         <BabySelected onClick={this.openModal}>Charlotte</BabySelected>
-        {/* <BabyImage image={this.props.baby.avatar.url}/> */}
 
         <Modal
           isOpen={this.state.modalIsOpen}

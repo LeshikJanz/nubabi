@@ -5,16 +5,20 @@ import styled from 'styled-components';
 import { Flex, Box } from 'grid-styled';
 import { Link } from 'react-router-dom';
 
+import { connect } from 'react-redux';
+import compose from 'ramda/src/compose';
 import Logo from 'web/assets/images/icons/logo.svg';
 import Notifications from './Notifications';
 import BabySelect from './BabySelect';
 
 import Menu from './Menu';
+import { Baby } from 'core/types/modelTypes';
 
 type Props = {
   pathname: string,
   isLoggedIn: boolean,
   logout: () => void,
+  baby: Baby,
 };
 
 const Wrapper = styled(Header)`
@@ -75,7 +79,7 @@ class AppHeader extends PureComponent<Props> {
           </HeaderLeft>
 
           <HeaderCenter width={1 / 4}>
-            <BabySelect />
+            <BabySelect {...this.props.baby} />
           </HeaderCenter>
 
           <HeaderRight width={1 / 3}>
@@ -93,4 +97,9 @@ class AppHeader extends PureComponent<Props> {
   }
 }
 
-export default AppHeader;
+export default compose(
+  connect(({ baby, settings }) => ({
+    baby,
+    unitDisplay: settings.unitDisplay,
+  })),
+)(AppHeader);
