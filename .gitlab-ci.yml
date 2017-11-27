@@ -8,7 +8,7 @@ stages:
 cache:
   paths:
     - node_modules/
-  key: “$CI_BUILD_REPO”
+  key: “$CI_BUILD_REPO-$CI_COMMIT_REF_SLUG”
 
 before_script:
   - >
