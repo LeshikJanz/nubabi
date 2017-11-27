@@ -26,6 +26,10 @@ const ActivitiesHeader = styled(Flex)`
   }
 
   > div {
+    background-color: #fde4e9;
+    padding: 5px;
+    border-radius: 50%;
+
     > img {
       max-width: 38px;
       max-height: 38px;

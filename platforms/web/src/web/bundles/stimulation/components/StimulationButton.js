@@ -17,10 +17,12 @@ const ButtonWrapper = styled(Flex)`
   margin: 15px 5px 0;
   background-color: #ffffff;
   box-shadow: ${props => props.theme.shadows.panel};
+  justify-content: center;
 
   > svg {
     max-height: 25px;
     max-width: 25px;
+    margin-right: 10px;
   }
 `;
 
