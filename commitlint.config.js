@@ -3,7 +3,7 @@ const { flatten, keys, mapObjIndexed } = require('ramda');
 const { patterns } = require('./.commitlint-patterns.json');
 
 module.exports = {
-  extends: ['@commitlint/config-angular'],
+  extends: ['@commitlint/config-conventional'],
   settings: {
     scope: {
       enumerables: mapObjIndexed(
