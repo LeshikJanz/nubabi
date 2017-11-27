@@ -6,15 +6,29 @@ extend type Viewer {
     last: Int
     filter: ActivityFilterInput
   ): ActivityConnection!
+  allSkillAreas(
+    before: String
+    after: String
+    first: Int
+    last: Int
+  ): SkillAreaConnection!
 }
 
 extend type Baby {
+  activities(
+    before: String
+    after: String
+    first: Int
+    last: Int
+    filter: ActivityFilterInput
+  ): ActivityConnection
   favoriteActivities(
     before: String
     after: String
     first: Int
     last: Int
   ): ActivityConnection!
+  activity(id: ID!): Activity
   activityHistory: ActivityHistoryConnection
 }
 
