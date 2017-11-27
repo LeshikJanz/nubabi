@@ -4,6 +4,7 @@ import defaultTheme, {
 } from 'core/themes/defaultTheme';
 import { mergeDeepRight } from 'ramda';
 import { activityItem, shadows } from './elements';
+import './common';
 
 export const bg = {
   panel: PANEL_BACKGROUND,
@@ -37,6 +38,9 @@ export const theme = mergeDeepRight(defaultTheme, {
   button: {
     borderRadius: 20,
     fontSize: 14,
+  },
+  a: {
+    color: 'red !important',
   },
   paragraph: {
     color: defaultTheme.colors.open.gray3,

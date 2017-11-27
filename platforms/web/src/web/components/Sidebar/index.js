@@ -91,9 +91,10 @@ class Sidebar extends PureComponent<Props> {
             <a href="/profile">Twins: How do you handle two of everything?</a>
             <br />
             <br />
-            Bonding with your baby <br />
+            <a href="#">Bonding with your baby </a>
             <br />
-            The benefits of wearing your baby
+            <br />
+            <a href="#">The benefits of wearing your baby </a>
           </PanelBody>
         </Panel>
 
