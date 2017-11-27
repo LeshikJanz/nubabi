@@ -1,6 +1,6 @@
 {
-  "name": "NuBabiMobile",
-  "version": "1.0.0-beta.6",
+  "name": "nubabbi",
+  "version": "0.0.0-development",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
@@ -14,7 +14,7 @@
     "test": "jest",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",
-    "changelog": "conventional-changelog -i CHANGELOG.md -s",
+    "release": "lerna --skip-npm --conventional-commits publish",
     "firebase:deploy": "firebase deploy",
     "firebase:deploy:functions": "firebase deploy --only functions",
     "firebase:deploy:rules": "firebase deploy --only database",
