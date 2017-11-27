@@ -78,6 +78,7 @@
     "babel-plugin-module-resolver": "^3.0.0",
     "babel-plugin-transform-define": "https://github.com/blackxored/babel-plugin-transform-define#react-native-packager-fix",
     "buffer": "^5.0.6",
+    "danger": "^2.0.3",
     "enzyme": "^3.0.0",
     "eslint": "^4.10.0",
     "eslint-config-airbnb": "^16.1.0",
