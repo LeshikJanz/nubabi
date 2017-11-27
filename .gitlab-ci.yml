@@ -12,7 +12,7 @@ cache:
 
 before_script:
   - >
-    if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/'; then
+    if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
       yarn install
     fi
 
@@ -20,7 +20,7 @@ run_tests:
   stage: test
   script:
     - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/'; then
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
         yarn web:test
       fi
 
@@ -28,7 +28,7 @@ build:
   stage: build
   script:
     - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/'; then
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
         yarn web:build
       fi
   artifacts:
@@ -39,7 +39,7 @@ deploy_staging:
   stage: deploy
   script:
     - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/'; then
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
         yarn global add firebase-tools
         firebase use --token $FIREBASE_DEPLOY_KEY nubabitest1
         firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY --only hosting
