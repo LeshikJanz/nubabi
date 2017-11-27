@@ -3,9 +3,10 @@ import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import ActivityItem from 'web/elements/ActivityItem/index';
+import { ActivityConnection } from 'core/types/modelTypes';
 
 type Props = {
-  activities: any,
+  activities: ActivityConnection,
   name: string,
 };
 
