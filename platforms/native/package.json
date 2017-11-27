@@ -1,12 +1,11 @@
 {
   "name": "nubabi-native",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "postinstall": "mv ../../node_modules/victory-* node_modules/"
   },
   "dependencies": {
-    "nubabi-core": "*",
     "art": "^0.10.1",
     "base-64": "^0.1.0",
     "color": "^1.0.3",
@@ -18,12 +17,13 @@
     "lodash": "^4.17.4",
     "mime": "^2.0.3",
     "moment": "^2.17.1",
+    "nubabi-core": "^1.0.0",
     "pluralize": "^4.0.0",
     "prop-types": "^15.6.0",
     "ramda": "^0.24.1",
+    "raven-js": "^3.14.0",
     "react": "16.0.0",
     "react-apollo": "^1.4.16",
-    "raven-js": "^3.14.0",
     "react-fela": "^4.3.5",
     "react-native": "0.50.3",
     "react-native-animatable": "^1.2.3",

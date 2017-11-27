@@ -1,9 +1,8 @@
 {
   "name": "nubabi-web",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "nubabi-core": "0.0.0",
     "axios": "^0.16.2",
     "data.task": "^3.1.1",
     "date-fns": "^1.29.0",
@@ -18,6 +17,7 @@
     "grid-styled": "^2.0.0-11",
     "history": "^4.6.3",
     "moment": "^2.19.2",
+    "nubabi-core": "^1.0.0",
     "palx": "^1.0.2",
     "prop-types": "^15.6.0",
     "qhistory": "^1.0.0",
