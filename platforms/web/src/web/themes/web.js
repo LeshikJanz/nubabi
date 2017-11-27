@@ -3,7 +3,7 @@ import defaultTheme, {
   PANEL_BUTTON_TEXT,
 } from 'core/themes/defaultTheme';
 import { mergeDeepRight } from 'ramda';
-import { activityItem, shadows } from './elements';
+import { activityItem, checkbox, shadows } from './elements';
 import './common';
 
 export const bg = {
@@ -28,6 +28,7 @@ export const theme = mergeDeepRight(defaultTheme, {
   shadows,
   activityItem,
   screens,
+  checkbox,
   colors: {
     open: {
       white2: '#E9ECF4',

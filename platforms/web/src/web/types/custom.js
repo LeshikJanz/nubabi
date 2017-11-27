@@ -4,3 +4,9 @@ export type IStimulationButton = {
   icon: string,
   text: string,
 };
+
+export type Equipment = {
+  id: number,
+  heading: string,
+  text: string,
+};

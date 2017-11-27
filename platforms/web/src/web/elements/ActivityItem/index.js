@@ -33,12 +33,14 @@ const ActivitiesHeader = styled(Flex)`
     > img {
       max-width: 38px;
       max-height: 38px;
+      padding: 3px;
     }
   }
 `;
 
 const ActivitiesListItemContent = styled(Box)`
   padding: 15px;
+  width: 100%;
 
   > h4 {
     font-size: 16px;

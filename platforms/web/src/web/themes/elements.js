@@ -18,3 +18,8 @@ export const activityItem = {
   flexDirection: 'row',
   maxHeight: '119px',
 };
+
+export const checkbox = {
+  rounded: {},
+  squared: {},
+};

@@ -9,7 +9,7 @@ const query = gql`
     viewer {
       baby(id: $id) {
         id
-        activities(first: 2) {
+        activities(first: 15) {
           edges {
             node {
               id
