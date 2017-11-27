@@ -93,6 +93,10 @@ module.exports = {
       'react-native': 'react-native-web',
       core: 'nubabi-core',
       web: path.resolve(__dirname, '../src/web'),
+      'react-native-fetch-blob': path.resolve(
+        __dirname,
+        '../config/react-native-fetch-blob',
+      ),
     },
     plugins: [
       // Prevents users from importing files from outside of src/ (or node_modules/).
@@ -100,7 +104,7 @@ module.exports = {
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson, paths.core]),
     ],
   },
   module: {
@@ -149,10 +153,34 @@ module.exports = {
           // Process JS with Babel.
           {
             test: /\.(js|jsx|mjs)$/,
-            include: paths.appSrc,
+            include: [
+              paths.appSrc,
+              paths.core,
+              paths.server,
+              paths.graphqlUtils,
+            ],
+            exclude: [
+              path.resolve(
+                __dirname,
+                '../../node_modules/react-native-fetch-blob',
+              ),
+            ],
             loader: require.resolve('babel-loader'),
             options: {
-              compact: true,
+              babelrc: false,
+              presets: [require('babel-preset-react-app')],
+              plugins: [
+                'babel-plugin-transform-es2015-modules-commonjs',
+                ['inline-import', { extensions: ['.graphql', '.graphqls'] }],
+              ],
+              env: {
+                development: {
+                  plugins: [
+                    ['transform-define', '../../core/config/getConfig.js'],
+                  ],
+                },
+              },
+              cacheDirectory: true,
             },
           },
           // The notation here is somewhat confusing.
