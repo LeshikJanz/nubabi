@@ -4,5 +4,9 @@
   },
   "functions": {
     "source": "platforms/firebase/functions"
+  },
+  "hosting": {
+    "public": "platforms/web/build",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   }
 }
