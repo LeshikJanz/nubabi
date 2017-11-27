@@ -22,6 +22,8 @@ injectGlobal([
     & + label {
       position: relative;
       height: 21px;
+      width: 21px;
+      cursor: pointer;
     }
   
     & + label:before {
@@ -29,13 +31,14 @@ injectGlobal([
       display: inline-block;
       width: 17px;
       height: 17px;
-      background: white;
+      background: transparent;
     }
   
     & {      
       &:checked {
         & + label {
           border: solid 2px #ec4469;
+          background: #ec4469;
         }
       
         & + label:before {
@@ -74,7 +77,7 @@ injectGlobal([
     }
     
     &.squared {
-      &:not(:checked) + label, &:checked + label {
+      &:not(:checked) + label, &:checked + label, &:checked + label:before {
         border-radius: 50%;
       }
     }

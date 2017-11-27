@@ -3,6 +3,7 @@ import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import iconMappings from 'web/common/iconMappings';
+import ArrowRight from 'web/assets/images/icons/arrowRight.svg';
 
 const ActivitiesListItem = styled.li`
   ${props => props.theme.activityItem};
@@ -12,10 +13,6 @@ const ActivitiesListItemImage = styled.img`
   max-width: 113px;
   max-height: 119px;
   border-radius: 4px 0 0 4px;
-`;
-
-const ArrowRight = styled.img`
-  max-width: 7px;
 `;
 
 const ActivitiesHeader = styled(Flex)`
@@ -31,15 +28,15 @@ const ActivitiesHeader = styled(Flex)`
     border-radius: 50%;
 
     > img {
-      max-width: 38px;
-      max-height: 38px;
+      max-width: 30px;
+      max-height: 30px;
       padding: 3px;
     }
   }
 `;
 
 const ActivitiesListItemContent = styled(Box)`
-  padding: 15px;
+  padding: 15px 0 15px 15px;
   width: 100%;
 
   > h4 {
@@ -57,6 +54,25 @@ const ActivitiesListItemContent = styled(Box)`
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
+    padding-right: 10px;
+  }
+`;
+
+const ActionArea = styled(Flex)`
+  flex-direction: column;
+  padding: 25px 10px;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  > svg {
+    max-width: 8px;
+  }
+`;
+
+const SquaredCheckbox = styled.input`
+  & + label:hover {
+    border: 2px solid #c5cdd7;
+    border-radius: 50%;
   }
 `;
 
@@ -81,6 +97,15 @@ class ActivityItem extends PureComponent<Props> {
           </ActivitiesHeader>
           <p>{activity.introduction}</p>
         </ActivitiesListItemContent>
+        <ActionArea>
+          <ArrowRight />
+          <SquaredCheckbox
+            type="checkbox"
+            id={activity.id}
+            className="squared"
+          />
+          <label htmlFor={activity.id} />
+        </ActionArea>
       </ActivitiesListItem>
     );
   }
