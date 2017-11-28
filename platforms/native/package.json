@@ -1,6 +1,6 @@
 {
   "name": "nubabi-native",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "postinstall": "mv ../../node_modules/victory-* node_modules/"
