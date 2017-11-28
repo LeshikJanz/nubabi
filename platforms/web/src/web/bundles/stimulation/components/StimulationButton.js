@@ -2,7 +2,6 @@
 import React, { PureComponent } from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-import { IStimulationButton } from 'web/types/custom';
 import iconMappings from 'web/common/iconMappings';
 
 const ButtonWrapper = styled(Flex)`

@@ -58,8 +58,7 @@ export const Button = ({
   children,
   disabled,
   p,
-  ...rest,
-  pink,
+  ...rest
 }: Props) =>
   primary ? (
     <ButtonElement onClick={onClick} disabled={disabled} p={p} {...rest}>

@@ -60,7 +60,7 @@ class Activities extends PureComponent<Props> {
         </ActivityButtons>
         <ActivitiesListHeader justify="space-between" align="center">
           <ActivitiesListTitle is="h3">
-            This Week's activities
+            This Week`s activities
           </ActivitiesListTitle>
         </ActivitiesListHeader>
 

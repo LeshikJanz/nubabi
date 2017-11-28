@@ -1,10 +1,6 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 
-class Memories extends PureComponent<Props> {
-  render() {
-    return <h1>Memories</h1>;
-  }
-}
+const Memories = () => <h1>Memories</h1>;
 
 export default Memories;

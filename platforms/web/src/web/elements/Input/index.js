@@ -13,13 +13,13 @@ type InputFieldProps = {
 
 type Props = InputFieldProps & {
   validate: mixed,
-}
+};
 
-const InputField = ({ name, type, placeholder, value, input }: InputFieldProps) => (
+const InputField = ({ input, type, placeholder }: InputFieldProps) => (
   <input {...input} type={type} placeholder={placeholder} />
 );
 
-export const Input = ({ name, type, placeholder, validate, value, input }: Props) => {
+export const Input = ({ name, type, placeholder, validate, value }: Props) => {
   let component = InputField;
   if (validate != null) {
     component = InputWithError;

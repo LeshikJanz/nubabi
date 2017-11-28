@@ -43,7 +43,7 @@ class Activities extends PureComponent<Props> {
     return (
       <ActivitiesListWrapper>
         <ActivitiesListHeader justify="space-between" align="center">
-          <ActivitiesListTitle is="h3">{name}'s week ahead</ActivitiesListTitle>
+          <ActivitiesListTitle is="h3">{name}`s week ahead</ActivitiesListTitle>
           <MoreLink is="a" href="/profile">
             See all activities
           </MoreLink>

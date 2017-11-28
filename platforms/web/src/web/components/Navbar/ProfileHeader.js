@@ -236,7 +236,7 @@ class ProfileHeader extends Component<Props> {
   }
 
   render() {
-    const { coverImage, avatar, dob, name, weight, height } = this.props;
+    const { coverImage, dob, name, weight, height } = this.props;
 
     return (
       <Box width={1} is={Header}>

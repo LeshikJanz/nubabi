@@ -41,7 +41,6 @@ import Memories from 'web/bundles/memories';
 type Props = {
   isLoading: boolean,
   pathname: string,
-  authToken: string,
   logout: Function,
   isAuthenticated: boolean,
   baby: Baby,

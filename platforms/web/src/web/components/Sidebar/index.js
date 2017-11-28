@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
@@ -8,6 +8,7 @@ import IAppStore from 'web/assets/images/appstore.png';
 import IPlayMarket from 'web/assets/images/googleplay.png';
 import INubabiApp from 'web/assets/images/nubabiapp.png';
 import IPersons from 'web/assets/images/icons/persons.svg';
+import { Link } from 'react-router-dom';
 
 type Props = {};
 
@@ -76,7 +77,7 @@ const BannerImage = styled.a`
   }
 `;
 
-const Sidebar = () => (
+const Sidebar = (): Props => (
   <SideBar width={1 / 6} is={Aside}>
     <Panel>
       <PanelHeader align="center">
@@ -86,13 +87,13 @@ const Sidebar = () => (
         Parenting Tips
       </PanelHeader>
       <PanelBody>
-        <a href="/profile">Twins: How do you handle two of everything?</a>
+        <Link to="/profile">Twins: How do you handle two of everything?</Link>
         <br />
         <br />
-        <a href="#">Bonding with your baby </a>
+        <Link to="/profile">Bonding with your baby </Link>
         <br />
         <br />
-        <a href="#">The benefits of wearing your baby </a>
+        <Link to="/profile">The benefits of wearing your baby </Link>
       </PanelBody>
     </Panel>
 

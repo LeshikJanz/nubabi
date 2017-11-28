@@ -69,13 +69,6 @@ const ActionArea = styled(Flex)`
   }
 `;
 
-const SquaredCheckbox = styled.input`
-  & + label:hover {
-    border: 2px solid #c5cdd7;
-    border-radius: 50%;
-  }
-`;
-
 class ActivityItem extends PureComponent<Props> {
   render() {
     const { activity } = this.props;

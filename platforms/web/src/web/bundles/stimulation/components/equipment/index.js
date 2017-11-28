@@ -69,10 +69,7 @@ class Equipment extends PureComponent<Props> {
       .add(1, 'weeks')
       .endOf('isoWeek');
 
-  handleCheckbox = ({ target }) => {
-    console.log('handleCheckbox');
-    console.log(target);
-  };
+  handleCheckbox = ({ target }) => target;
 
   render() {
     const { equipments } = this.props;

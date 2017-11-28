@@ -148,7 +148,7 @@ class Select extends Component<Props> {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  handleClickOutside(e) {
+  handleClickOutside() {
     this.closeModal();
   }
 
