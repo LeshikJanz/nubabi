@@ -21,7 +21,7 @@ export const MenuItem = ({ as, to, active, children, onClick }: Props) => {
   if (as === undefined || to === undefined) {
     Element =
       to === undefined ? (
-        <a onClick={onClick}>{children}</a>
+        <button onClick={onClick}>{children}</button>
       ) : (
         <a href={to}>{children}</a>
       );

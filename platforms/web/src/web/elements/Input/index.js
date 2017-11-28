@@ -8,15 +8,15 @@ type InputFieldProps = {
   type: string,
   placeholder: string,
   value: mixed,
-  input: mixed,
+  input?: mixed, // eslint-disable-next-line
 };
 
 type Props = InputFieldProps & {
   validate: mixed,
 };
 
-const InputField = ({ input, type, placeholder }: InputFieldProps) => (
-  <input {...input} type={type} placeholder={placeholder} />
+const InputField = (props: InputFieldProps) => (
+  <input {...props.input} type={props.type} placeholder={props.placeholder} />
 );
 
 export const Input = ({ name, type, placeholder, validate, value }: Props) => {

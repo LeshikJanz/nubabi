@@ -60,15 +60,16 @@ export const Button = ({
   p,
   ...rest
 }: Props) =>
-  primary ? (
+  (primary && (
     <ButtonElement onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
     </ButtonElement>
-  ) : plus ? (
+  )) ||
+  (plus && (
     <ButtonPlus onClick={onClick} disabled={disabled} {...rest}>
       <ICross />
     </ButtonPlus>
-  ) : (
+  )) || (
     <ButtonOutline onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
     </ButtonOutline>

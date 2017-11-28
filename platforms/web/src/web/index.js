@@ -56,10 +56,10 @@ persistStore(
 const apollo = configureApollo();
 
 // TODO: remove after deps update
-console.ignoredYellowBox = [
-  'Warning: checkPropTypes',
-  'Using <Image> with children',
-];
+// console.ignoredYellowBox = [
+//   'Warning: checkPropTypes',
+//   'Using <Image> with children',
+// ];
 
 const renderApp = Component => {
   render(
