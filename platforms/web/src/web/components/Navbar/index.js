@@ -102,7 +102,7 @@ class NavBar extends PureComponent<Props> {
           <MainMenu>
             <MenuItem>
               <MenuLink to="/profile" active={location.pathname === '/profile'}>
-                <IPerson /> {baby && baby.name}`s overview
+                <IPerson /> {`${baby && baby.name}'s overview`}
               </MenuLink>
             </MenuItem>
             <MenuItem>

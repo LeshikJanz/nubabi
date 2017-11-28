@@ -73,6 +73,8 @@ class Equipment extends PureComponent<Props> {
 
   render() {
     const { equipments } = this.props;
+    const weekInterval = `${this.getNextWeekStart().format('DD MMMM')}
+     - ${this.getNextWeekEnd().format('DD MMMM YYYY')}`;
 
     return (
       <Wrapper>
@@ -82,10 +84,7 @@ class Equipment extends PureComponent<Props> {
         <EquipmentContent>
           <EquipmentText>Equipment for next week</EquipmentText>
           <CalendarText>
-            <CalendarIcon />
-            {`${this.getNextWeekStart().format(
-              'DD MMMM',
-            )} - ${this.getNextWeekEnd().format('DD MMMM YYYY')}`}
+            <CalendarIcon /> {weekInterval}{' '}
           </CalendarText>
           <EquipmentList>
             {equipments.map(e => (

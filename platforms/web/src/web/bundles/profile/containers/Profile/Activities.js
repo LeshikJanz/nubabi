@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import ActivityItem from 'web/elements/ActivityItem/index';
-import { ActivityConnection } from 'core/types/modelTypes';
+import { ActivityConnection } from 'core/types';
 
 type Props = {
   activities: ActivityConnection,
@@ -43,7 +43,9 @@ class Activities extends PureComponent<Props> {
     return (
       <ActivitiesListWrapper>
         <ActivitiesListHeader justify="space-between" align="center">
-          <ActivitiesListTitle is="h3">{name}`s week ahead</ActivitiesListTitle>
+          <ActivitiesListTitle is="h3">{`${
+            name
+          }'s week ahead`}</ActivitiesListTitle>
           <MoreLink is="a" href="/profile">
             See all activities
           </MoreLink>

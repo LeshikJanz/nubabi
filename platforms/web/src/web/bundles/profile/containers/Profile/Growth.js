@@ -113,7 +113,7 @@ class ProfileMain extends PureComponent<Props> {
       <Growth>
         <GrowthContent>
           <GrowthHeader justify="space-between" align="center">
-            <GrowthTitle is="h3">This Week`s Growth</GrowthTitle>
+            <GrowthTitle is="h3">This {`Week's`} Growth</GrowthTitle>
             <GrowthDoB is="span">{moment(dob).fromNow(true)} old</GrowthDoB>
           </GrowthHeader>
           {this.state.isIntroductionCollapsed ? (
