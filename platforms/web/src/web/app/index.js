@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import type { State, Dispatch } from 'web/types';
 import styled from 'styled-components';
@@ -32,7 +32,6 @@ const Profile = Loadable({
 });
 
 import Stimulation from 'web/bundles/stimulation/containers';
-import { getBabySuccess } from '../actions';
 import { Baby } from 'core/types/modelTypes';
 import Growth from 'web/bundles/growth';
 import Library from 'web/bundles/library';
@@ -60,73 +59,53 @@ const AppContent = styled(Section)`
   margin-top: 2px;
 `;
 
-export class App extends Component<Props> {
-  componentWillReceiveProps() {
-    if (this.props.baby) {
-      this.props.setBabyToStore(this.props.baby);
-    }
-  }
-
-  render() {
-    return (
-      <Wrapper>
-        <Loader active={this.props.isLoading} />
-        <Header
-          pathname={this.props.pathname}
-          isAuthenticated={this.props.isAuthenticated}
-          logout={this.props.logout}
-        />
-        <AppContent>
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/login" component={Login} />
-            <NavBar>
-              <AuthenticatedRoute
-                path="/test"
-                component={Test}
-                props={this.props}
-              />
-              <AuthenticatedRoute
-                path="/profile"
-                component={Profile}
-                props={this.props}
-              />
-              <AuthenticatedRoute
-                path="/growth"
-                component={Growth}
-                props={this.props}
-              />
-              <AuthenticatedRoute
-                path="/stimulation"
-                component={Stimulation}
-                props={this.props}
-              />
-              <AuthenticatedRoute
-                path="/library"
-                component={Library}
-                props={this.props}
-              />
-              <AuthenticatedRoute
-                path="/memories"
-                component={Memories}
-                props={this.props}
-              />
-            </NavBar>
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </AppContent>
-      </Wrapper>
-    );
-  }
-}
+const App = (props: Props) => (
+  <Wrapper>
+    <Loader active={props.isLoading} />
+    <Header
+      pathname={props.pathname}
+      isAuthenticated={props.isAuthenticated}
+      logout={props.logout}
+      baby={props.baby}
+    />
+    <AppContent>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/login" component={Login} />
+        <NavBar {...props}>
+          <AuthenticatedRoute path="/test" component={Test} props={props} />
+          <AuthenticatedRoute
+            path="/profile"
+            component={Profile}
+            props={props}
+          />
+          <AuthenticatedRoute path="/growth" component={Growth} props={props} />
+          <AuthenticatedRoute
+            path="/stimulation"
+            component={Stimulation}
+            props={props}
+          />
+          <AuthenticatedRoute
+            path="/library"
+            component={Library}
+            props={props}
+          />
+          <AuthenticatedRoute
+            path="/memories"
+            component={Memories}
+            props={props}
+          />
+        </NavBar>
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </AppContent>
+  </Wrapper>
+);
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   logout: () => {
     dispatch(logout());
-  },
-  setBabyToStore: (baby: Baby) => {
-    dispatch(getBabySuccess(baby));
   },
 });
 

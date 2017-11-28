@@ -4,9 +4,6 @@ import { Header } from 'web/elements';
 import styled from 'styled-components';
 import { Flex, Box } from 'grid-styled';
 import { Link } from 'react-router-dom';
-
-import { connect } from 'react-redux';
-import compose from 'ramda/src/compose';
 import Logo from 'web/assets/images/icons/logo.svg';
 import Notifications from './Notifications';
 import BabySelect from './BabySelect';
@@ -98,9 +95,4 @@ class AppHeader extends PureComponent<Props> {
   }
 }
 
-export default compose(
-  connect(({ baby, settings }) => ({
-    baby,
-    unitDisplay: settings.unitDisplay,
-  })),
-)(AppHeader);
+export default AppHeader;

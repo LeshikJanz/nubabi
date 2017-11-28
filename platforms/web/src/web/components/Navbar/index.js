@@ -3,9 +3,6 @@ import React, { PureComponent } from 'react';
 import { Box, Flex } from 'grid-styled';
 import styled from 'styled-components';
 import { Nav, Menu } from 'web/elements';
-
-import { connect } from 'react-redux';
-import compose from 'ramda/src/compose';
 import IChart from 'web/assets/images/icons/chart.svg';
 import IPerson from 'web/assets/images/icons/person.svg';
 import ILibrary from 'web/assets/images/icons/library.svg';
@@ -143,9 +140,4 @@ class NavBar extends PureComponent<Props> {
   }
 }
 
-export default compose(
-  connect(({ baby, settings }) => ({
-    baby,
-    unitDisplay: settings.unitDisplay,
-  })),
-)(NavBar);
+export default NavBar;

@@ -161,9 +161,11 @@ class Select extends Component<Props> {
   }
 
   render() {
+    const avatar = this.props.avatar && this.props.avatar.url;
+
     return (
       <BabySelect className="BabySelect">
-        <BabyProfileImage image={this.props.avatar.url} />
+        <BabyProfileImage image={avatar} />
         <BabySelected onClick={this.openModal}>Charlotte</BabySelected>
 
         <Modal
