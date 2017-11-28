@@ -21,6 +21,7 @@ import { ThemeProvider } from 'styled-components';
 import App from 'web/app';
 import registerServiceWorker from './registerServiceWorker';
 import { epics as appEpics } from './app/actions';
+import baby from 'web/reducers/babyReducer';
 
 const routingMiddlware: Middleware = routerMiddleware((history: History));
 
@@ -36,6 +37,7 @@ const store = configureStore({
   },
   platformReducers: {
     navigation: routerReducer,
+    baby,
   },
   platformMiddleware: [reportingMiddleware, routingMiddlware],
   platformEpics: [...appEpics],
