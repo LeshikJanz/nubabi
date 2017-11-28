@@ -5,7 +5,7 @@ import EquipmentIcon from 'web/assets/images/icons/equipment.svg';
 import CalendarIcon from 'web/assets/images/icons/calendar.svg';
 import { Flex } from 'grid-styled';
 import moment from 'moment';
-import EquipmentItem from './EquipmentItem';
+import EquipmentList from './EquipmentList';
 
 const IconWrapper = styled.div`
   position: absolute;
@@ -52,12 +52,6 @@ const CalendarText = styled.div`
   }
 `;
 
-const EquipmentList = styled(Flex)`
-  flex-direction: column;
-  text-align: left;
-  margin-top: 18px;
-`;
-
 class Equipment extends PureComponent<Props> {
   getNextWeekStart = () =>
     moment()
@@ -69,7 +63,9 @@ class Equipment extends PureComponent<Props> {
       .add(1, 'weeks')
       .endOf('isoWeek');
 
-  handleCheckbox = ({ target }) => target;
+  handleCheckbox = ({ target }) => {
+    return target;
+  };
 
   render() {
     const { equipments } = this.props;
@@ -86,15 +82,10 @@ class Equipment extends PureComponent<Props> {
           <CalendarText>
             <CalendarIcon /> {weekInterval}{' '}
           </CalendarText>
-          <EquipmentList>
-            {equipments.map(e => (
-              <EquipmentItem
-                key={e.id}
-                {...e}
-                handleCheckbox={this.handleCheckbox}
-              />
-            ))}
-          </EquipmentList>
+          <EquipmentList
+            equipments={equipments}
+            handleCheckbox={this.handleCheckbox}
+          />
         </EquipmentContent>
       </Wrapper>
     );
