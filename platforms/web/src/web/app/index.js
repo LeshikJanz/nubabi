@@ -32,7 +32,7 @@ const Profile = Loadable({
 });
 
 import Stimulation from 'web/bundles/stimulation/containers';
-import { Baby } from 'core/types/modelTypes';
+import { Baby } from 'core/types';
 import Growth from 'web/bundles/growth';
 import Library from 'web/bundles/library';
 import Memories from 'web/bundles/memories';

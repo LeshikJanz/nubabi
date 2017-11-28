@@ -7,7 +7,7 @@ import onClickOutside from 'react-onclickoutside';
 
 import { Menu, Button } from 'web/elements';
 import IPerson from 'web/assets/images/icons/person.svg';
-import { Baby } from 'core/types/modelTypes';
+import { Baby } from 'core/types';
 
 type Props = Baby;
 

@@ -1,5 +1,5 @@
 // @flow
-import { Baby } from 'core/types/modelTypes';
+import { Baby } from 'core/types';
 
 export type GlobalLoaderAction = {
   type: String,

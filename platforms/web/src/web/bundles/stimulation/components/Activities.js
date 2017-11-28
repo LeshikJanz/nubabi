@@ -1,11 +1,11 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled, { css } from 'styled-components';
-import { Baby } from 'core/types/modelTypes';
-import ActivityItem from 'web/elements/ActivityItem';
+import { Baby } from 'core/types';
 import { STIMULATION_BUTTONS } from '../constants';
 import StimulationButton from './StimulationButton';
+import ActivityList from './ActivityList';
 
 type Props = Baby;
 
@@ -42,37 +42,21 @@ const ActivitiesListTitle = styled(Box)`
   color: ${props => props.theme.colors.open.black0};
 `;
 
-const ActivitiesList = styled.ul`
-  margin: 0;
-  padding: 0;
-`;
+const Activities = ({ activities }: Props) => (
+  <ActivitiesListWrapper>
+    <ActivityButtons>
+      {STIMULATION_BUTTONS.map(b => (
+        <StimulationButton key={b.id} button={b} />
+      ))}
+    </ActivityButtons>
+    <ActivitiesListHeader justify="space-between" align="center">
+      <ActivitiesListTitle is="h3">
+        {`This Week's activities`}
+      </ActivitiesListTitle>
+    </ActivitiesListHeader>
 
-class Activities extends PureComponent<Props> {
-  render() {
-    const { activities } = this.props;
-
-    return (
-      <ActivitiesListWrapper>
-        <ActivityButtons>
-          {STIMULATION_BUTTONS.map(b => (
-            <StimulationButton key={b.id} button={b} />
-          ))}
-        </ActivityButtons>
-        <ActivitiesListHeader justify="space-between" align="center">
-          <ActivitiesListTitle is="h3">
-            {`This Week's activities`}
-          </ActivitiesListTitle>
-        </ActivitiesListHeader>
-
-        <ActivitiesList>
-          {activities &&
-            activities.edges.map(({ node }) => (
-              <ActivityItem key={node.id} activity={node} />
-            ))}
-        </ActivitiesList>
-      </ActivitiesListWrapper>
-    );
-  }
-}
+    <ActivityList activities={activities} />
+  </ActivitiesListWrapper>
+);
 
 export default Activities;

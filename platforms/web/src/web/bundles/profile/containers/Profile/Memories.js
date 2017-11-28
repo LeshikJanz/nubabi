@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Button from 'web/elements/Button';
 import EmptyGalleryIcon from 'web/assets/images/icons/moment.svg';
 import LibBackground from 'web/assets/images/lib-background.png';
-import { MemoryConnection } from 'core/types/modelTypes';
+import { MemoryConnection } from 'core/types';
 
 type Props = {
   memories: MemoryConnection,

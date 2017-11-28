@@ -9,7 +9,7 @@ type Props = {
 
 const WrapperContent = styled(Flex)`
   width: 100%;
-  justify-content: center;
+  justify-content: flex-start;
 `;
 
 export const NoContentView = ({ message = 'Nothing found' }: Props) => {
