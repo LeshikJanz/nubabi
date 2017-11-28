@@ -82,5 +82,13 @@ module.exports = {
     // See:  https://github.com/yannickcr/eslint-plugin-react/issues/1452
     'react/boolean-prop-naming': 0,
     'react/default-props-match-prop-types': 0,
+    'jsx-a11y/anchor-is-valid': [
+      'error',
+      {
+        components: ['Link'],
+        specialLink: ['hrefLeft', 'hrefRight', 'to'],
+        aspects: ['noHref', 'invalidHref', 'preferButton'],
+      },
+    ],
   },
 };

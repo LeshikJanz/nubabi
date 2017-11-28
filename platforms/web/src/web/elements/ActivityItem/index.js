@@ -99,11 +99,7 @@ class ActivityItem extends PureComponent<Props> {
         </ActivitiesListItemContent>
         <ActionArea>
           <ArrowRight />
-          <SquaredCheckbox
-            type="checkbox"
-            id={activity.id}
-            className="squared"
-          />
+          <input type="checkbox" id={activity.id} className="squared" />
           <label htmlFor={activity.id} />
         </ActionArea>
       </ActivitiesListItem>

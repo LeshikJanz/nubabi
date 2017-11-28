@@ -4,7 +4,7 @@ import type {
   ActivityConnection,
   ProfileGrowthFragment,
 } from 'core/types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Box } from 'grid-styled';
 import { Main } from 'web/elements';
 import Growth from './Growth';

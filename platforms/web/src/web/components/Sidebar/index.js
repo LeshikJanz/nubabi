@@ -76,58 +76,54 @@ const BannerImage = styled.a`
   }
 `;
 
-class Sidebar extends PureComponent<Props> {
-  render() {
-    return (
-      <SideBar width={1 / 6} is={Aside}>
-        <Panel>
-          <PanelHeader align="center">
-            <PanelHeaderImage>
-              <IPersons />
-            </PanelHeaderImage>
-            Parenting Tips
-          </PanelHeader>
-          <PanelBody>
-            <a href="/profile">Twins: How do you handle two of everything?</a>
-            <br />
-            <br />
-            <a href="#">Bonding with your baby </a>
-            <br />
-            <br />
-            <a href="#">The benefits of wearing your baby </a>
-          </PanelBody>
-        </Panel>
+const Sidebar = () => (
+  <SideBar width={1 / 6} is={Aside}>
+    <Panel>
+      <PanelHeader align="center">
+        <PanelHeaderImage>
+          <IPersons />
+        </PanelHeaderImage>
+        Parenting Tips
+      </PanelHeader>
+      <PanelBody>
+        <a href="/profile">Twins: How do you handle two of everything?</a>
+        <br />
+        <br />
+        <a href="#">Bonding with your baby </a>
+        <br />
+        <br />
+        <a href="#">The benefits of wearing your baby </a>
+      </PanelBody>
+    </Panel>
 
-        <Panel>
-          <PanelBody>
-            <Banner>
-              <img src={INubabiApp} alt="Nubabi App" />
-              <h4>Have you tried the Nubabi Mobile App?</h4>
-              <p>Enjoy easy access to your baby’s content, on the go!</p>
-              <br />
-              <BannerImage href="">
-                <img src={IAppStore} alt="App Store" />
-              </BannerImage>
-              <BannerImage href="">
-                <img src={IPlayMarket} alt="Google Play" />
-              </BannerImage>
-            </Banner>
-          </PanelBody>
-        </Panel>
+    <Panel>
+      <PanelBody>
+        <Banner>
+          <img src={INubabiApp} alt="Nubabi App" />
+          <h4>Have you tried the Nubabi Mobile App?</h4>
+          <p>Enjoy easy access to your baby’s content, on the go!</p>
+          <br />
+          <BannerImage href="">
+            <img src={IAppStore} alt="App Store" />
+          </BannerImage>
+          <BannerImage href="">
+            <img src={IPlayMarket} alt="Google Play" />
+          </BannerImage>
+        </Banner>
+      </PanelBody>
+    </Panel>
 
-        <SideBarFooter>
-          <small>
-            ©2017 Nubabi. About Us • FAQ & Support • Contact Us • Log Out
-          </small>
-          <hr />
-          <small>
-            All rights reserved. Use of this website is regulated by our website
-            Terms of Use and Privacy Policy.
-          </small>
-        </SideBarFooter>
-      </SideBar>
-    );
-  }
-}
+    <SideBarFooter>
+      <small>
+        ©2017 Nubabi. About Us • FAQ & Support • Contact Us • Log Out
+      </small>
+      <hr />
+      <small>
+        All rights reserved. Use of this website is regulated by our website
+        Terms of Use and Privacy Policy.
+      </small>
+    </SideBarFooter>
+  </SideBar>
+);
 
 export default Sidebar;
