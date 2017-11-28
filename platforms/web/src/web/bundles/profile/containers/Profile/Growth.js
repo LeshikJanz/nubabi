@@ -29,6 +29,7 @@ const GrowthContent = styled.div`
     font-weight: normal;
     margin: 0 0 15px;
     line-height: 24px;
+    white-space: pre-wrap;
   }
 `;
 
@@ -87,6 +88,8 @@ const limitText = (str, limit = 365) => {
   return str.length > limit ? `${str.substring(0, limit - 1)}...` : str;
 };
 
+const withMarkDowns = (text: string) => text.replace(/\*/g, '•');
+
 class ProfileMain extends PureComponent<Props> {
   constructor() {
     super();
@@ -115,13 +118,13 @@ class ProfileMain extends PureComponent<Props> {
           </GrowthHeader>
           {this.state.isIntroductionCollapsed ? (
             <p>
-              {limitText(introduction)}
+              {limitText(withMarkDowns(introduction))}
               <ReadMore to="/profile" onClick={this.handleIntroduction}>
                 Read More
               </ReadMore>
             </p>
           ) : (
-            <p>{introduction}</p>
+            <p>{withMarkDowns(introduction)}</p>
           )}
         </GrowthContent>
 
