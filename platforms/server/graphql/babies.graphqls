@@ -1,12 +1,6 @@
 extend type Viewer {
   babies: BabyConnection!
   baby(id: ID): Baby
-  allSkillAreas(
-    before: String
-    after: String
-    first: Int
-    last: Int
-  ): SkillAreaConnection!
 }
 
 extend type Mutation {
@@ -41,27 +35,12 @@ type Baby implements Node, Timestampable {
   updatedAt: DateTime
   # Relationship to Viewer
   relationship: BabyRelationship
-  activities(
-    before: String
-    after: String
-    first: Int
-    last: Int
-    filter: ActivityFilterInput
-  ): ActivityConnection
-  activity(id: ID!): Activity
   achievements(
     before: String
     after: String
     first: Int
     last: Int
   ): AchievementConnection
-  memories(
-    before: String
-    after: String
-    first: Int
-    last: Int
-    filter: MemoryFilter
-  ): MemoryConnection
   measurements: Measurements
 }
 

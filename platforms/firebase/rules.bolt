@@ -72,8 +72,8 @@ type User {
 
 type Baby {
   name: NameString
-  avatar: Image | Null
-  coverImage: Image | Null
+  avatar: File | Null
+  coverImage: File | Null
   dob: Date
 
   // Weight and height are updated separately to track historical data

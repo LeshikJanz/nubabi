@@ -32,7 +32,7 @@ export const theme = mergeDeepRight(defaultTheme, {
   colors: {
     open: {
       white2: '#E9ECF4',
-      red1: '#CB2E4A',
+      red1: '#ed3154',
     },
     paragraph: PANEL_BUTTON_TEXT,
   },

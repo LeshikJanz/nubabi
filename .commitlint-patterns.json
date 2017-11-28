@@ -4,7 +4,8 @@
       "build",
       "deps",
       "packaging",
-      "release"
+      "release",
+      "schema"
     ],
     "packages": [
       "core",

@@ -82,7 +82,7 @@ style = Object {}
         style={
           Object {
             "alignSelf": "center",
-            "height": 120,
+            "height": 130,
             "width": 200,
           }
         }
@@ -265,7 +265,7 @@ style = Object {}
         style={
           Object {
             "alignSelf": "center",
-            "height": 120,
+            "height": 130,
             "width": 200,
           }
         }

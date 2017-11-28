@@ -57,7 +57,7 @@ export const BrowseActivitiesButton = ({
         <View style={StyleSheet.absoluteFill}>
           <Image
             source={background}
-            style={{ height: 120, width: 200, alignSelf: 'center' }}
+            style={{ height: 130, width: 200, alignSelf: 'center' }}
             resizeMode="contain"
           />
         </View>
