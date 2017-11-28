@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
+import DisplayLoadingState from 'web/components/displayLoadingState';
 
 const query = gql`
   query getBabyActivity($id: ID!) {
@@ -47,4 +48,5 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
+  DisplayLoadingState,
 )(Stimulation);
