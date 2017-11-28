@@ -2,8 +2,8 @@
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
-import ActivityItem from 'web/elements/ActivityItem/index';
 import { ActivityConnection } from 'core/types';
+import ActivityList from 'web/bundles/stimulation/components/ActivityList';
 
 type Props = {
   activities: ActivityConnection,
@@ -31,11 +31,6 @@ const MoreLink = styled(Box)`
   text-decoration: none;
 `;
 
-const ActivitiesList = styled.ul`
-  margin: 0;
-  padding: 0;
-`;
-
 class Activities extends PureComponent<Props> {
   render() {
     const { activities, name } = this.props;
@@ -50,13 +45,7 @@ class Activities extends PureComponent<Props> {
             See all activities
           </MoreLink>
         </ActivitiesListHeader>
-
-        <ActivitiesList>
-          {activities &&
-            activities.edges.map(({ node }) => (
-              <ActivityItem key={node.id} activity={node} />
-            ))}
-        </ActivitiesList>
+        <ActivityList activities={activities} />
       </ActivitiesListWrapper>
     );
   }
