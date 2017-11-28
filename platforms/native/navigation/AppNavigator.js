@@ -71,7 +71,7 @@ type State = {
 // on Android, the URI prefix typically contains a host in addition to scheme
 const uriPrefix = Platform.OS === 'android' ? 'nubabi://nubabi/' : 'nubabi://';
 
-const routes = {
+export const routes = {
   // Settings
   settings: { screen: SettingsScreen },
   notifications: { screen: NotificationsScreen },
@@ -92,8 +92,22 @@ const routes = {
   nextWeeksEquipment: { screen: NextWeeksEquipment },
   browseActivities: { screen: BrowseActivitiesScreen },
   browseActivitiesList: { screen: BrowseActivitiesListScreen },
-  viewActivity: { screen: ViewActivity },
-  viewThisWeeksActivity: { screen: ViewThisWeeksActivity },
+  viewActivity: {
+    screen: ViewActivity,
+    meta: {
+      analytics: {
+        eventName: 'activity_view',
+      },
+    },
+  },
+  viewThisWeeksActivity: {
+    screen: ViewThisWeeksActivity,
+    meta: {
+      analytics: {
+        eventName: 'this_week_activity_view',
+      },
+    },
+  },
   viewActivityMedia: { screen: ActivityMediaScreen },
   activityHistory: { screen: ActivityHistoryScreen },
   activityHistoryDetail: { screen: ActivityHistoryDetailScreen },
@@ -102,11 +116,21 @@ const routes = {
   viewGrowthContent: {
     screen: ViewGrowthContentScreen,
     path: 'content/growth/:id',
+    meta: {
+      analytics: {
+        eventName: 'growth_article_view',
+      },
+    },
   },
   browseArticles: { screen: BrowseArticlesScreen },
   viewArticle: {
     screen: ViewArticleScreen,
     path: 'articles/:id',
+    meta: {
+      analytics: {
+        eventName: 'article_view',
+      },
+    },
   },
   parentingTips: { screen: ParentingTipsScreen },
   healthHelp: { screen: HealthHelpScreen },
@@ -115,6 +139,11 @@ const routes = {
   viewMemory: {
     screen: ViewMemoryScreen,
     path: 'memories/:id',
+    meta: {
+      analytics: {
+        eventName: 'memory_view',
+      },
+    },
   },
   editMemory: {
     screen: EditMemoryScreen,

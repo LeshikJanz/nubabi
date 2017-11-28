@@ -4,6 +4,7 @@ import React, { PureComponent } from 'react';
 import { AsyncStorage } from 'react-native';
 import { ApolloProvider } from 'react-apollo';
 import { persistStore } from 'redux-persist';
+import firebase from 'react-native-firebase';
 import Raven from 'raven-js';
 import { createRenderer } from 'fela-native';
 import configureStore from 'core/configureStore';
@@ -57,6 +58,15 @@ const apollo = configureApollo();
 const { renderer } = configureFela(createRenderer);
 const FelaProvider = NativeFelaProvider(renderer, theme);
 
+if (__DEV__) {
+  firebase.analytics().setAnalyticsCollectionEnabled(false);
+}
+
+/* Not sure about the implications of using stateless fn
+ * here, once we setup babel plugin for functional HMR
+ * which is the main reason we're using a class here
+ */
+// eslint-disable-next-line react/prefer-stateless-function
 class Main extends PureComponent {
   render() {
     return (

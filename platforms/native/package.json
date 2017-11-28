@@ -34,6 +34,7 @@
     "react-native-datepicker": "^1.5.1",
     "react-native-dropdownalert": "^3.0.0",
     "react-native-fetch-blob": "https://github.com/blackxored/react-native-fetch-blob#fix/json-response-fix-with-net-indicator-fix",
+    "react-native-firebase": "^3.1.0",
     "react-native-floating-label-text-input": "https://github.com/blackxored/react-native-floating-label-text-input#feat/customize-styles",
     "react-native-image-crop-picker": "^0.17.1",
     "react-native-image-picker": "^0.26.3",

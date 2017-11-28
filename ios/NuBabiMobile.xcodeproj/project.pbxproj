@@ -12,6 +12,7 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* NuBabiMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NuBabiMobileTests.m */; };
+		0C87872A7098756F9245F1FD /* libPods-NuBabiMobileTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 54F0FCF1FA9FD22596AC6AD2 /* libPods-NuBabiMobileTests.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -34,6 +35,7 @@
 		2DCD954D1E0B4F2C00145EB5 /* NuBabiMobileTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* NuBabiMobileTests.m */; };
 		43AA2B78AECD467C964BA834 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 830D68BA987140CE87DFE68D /* libRNFetchBlob.a */; };
 		48344BB267D4418DA0AB3B28 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 242CD5411AE54D85A005605C /* MaterialCommunityIcons.ttf */; };
+		4C0ECC0CC4C69EAAF26105D1 /* libPods-NuBabiMobile-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ED9A765DBD29BE9A1890794 /* libPods-NuBabiMobile-tvOS.a */; };
 		569C16822A63402A8E673901 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5983EDA923144503824116A9 /* libRCTOrientation.a */; };
 		5713CB077289473E821625F9 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 36F674DBFED3496A85D887C7 /* Octicons.ttf */; };
 		57B66908158A40D8A63C5F4C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F623AB85522E4148A30B4307 /* FontAwesome.ttf */; };
@@ -79,7 +81,9 @@
 		8038F5191F41FB980092A3E8 /* SF-Pro-Text-Heavy.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4FB1F41FB980092A3E8 /* SF-Pro-Text-Heavy.otf */; };
 		8038F51A1F41FB980092A3E8 /* SF-Pro-Text-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4FC1F41FB980092A3E8 /* SF-Pro-Text-BoldItalic.otf */; };
 		8038F51B1F41FB980092A3E8 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4FD1F41FB980092A3E8 /* SF-Pro-Text-Bold.otf */; };
+		805A3BBE1FCC7E390033BCDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805A3BBD1FCC7E380033BCDF /* GoogleService-Info.plist */; };
 		80B333DC1EBB3A9A00F6C116 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80B333DB1EBB3A7F00F6C116 /* libART.a */; };
+		80C085711FCCC84400CA75C4 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C085701FCCC83800CA75C4 /* libRNFirebase.a */; };
 		80F4D92A1E8BE5EC0012B26B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D9221E8BE5EC0012B26B /* AssetsLibrary.framework */; };
 		80F4D92B1E8BE5EC0012B26B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D9231E8BE5EC0012B26B /* AVFoundation.framework */; };
 		80F4D92C1E8BE5EC0012B26B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D9241E8BE5EC0012B26B /* CoreMedia.framework */; };
@@ -91,12 +95,14 @@
 		80F4D94E1E8BE6080012B26B /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D94D1E8BE6080012B26B /* BuddyBuildSDK.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A49EDCDE357C41418C653568 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 39B3FBD74EAA4F77A59C2E83 /* Foundation.ttf */; };
+		AAB67BD79AA15E71F81428C7 /* libPods-NuBabiMobile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E577FB5C7D7E3E80DD566165 /* libPods-NuBabiMobile.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		B785EE1AB2A742A5A41084A5 /* libRCTContactsWrapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A08741203DB54C489D0E5C80 /* libRCTContactsWrapper.a */; };
 		B9CFC255CB6746DEA4A75C0C /* libRNSound.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F19BD2FE7BA4CFD90AB7C58 /* libRNSound.a */; };
 		B9F1AF60A7434228A405EA15 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B751AB2613014F7885039184 /* EvilIcons.ttf */; };
 		BB86ABF2215C4EFCA45E6284 /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C2899A79A8A471AB02DB7B7 /* libRNSpinkit.a */; };
 		C24680215D594138A2823816 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D6B785432BC4EA1A2A1E983 /* libRNSVG.a */; };
+		C45AA6709D720269358AFD58 /* libPods-NuBabiMobile-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A2C4C3ACB4E09481CC27BE4 /* libPods-NuBabiMobile-tvOSTests.a */; };
 		C6730AD9939147B5AEECE6C6 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA4D46E9D9334C90ACE1C7B0 /* MaterialIcons.ttf */; };
 		C6BA90A907DC411D9386D333 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F7295902EF36476F8B098FAA /* libRNVectorIcons.a */; };
 		DC9071781E55E7DE001DA412 /* nubabi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC9071771E55E7DE001DA412 /* nubabi.ttf */; };
@@ -456,6 +462,13 @@
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = ART;
 		};
+		80C0856F1FCCC83800CA75C4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNFirebase;
+		};
 		80E4F27F1F18C95D00CCC9FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -519,6 +532,7 @@
 		00E356EE1AD99517003FC87E /* NuBabiMobileTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NuBabiMobileTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* NuBabiMobileTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NuBabiMobileTests.m; sourceTree = "<group>"; };
+		0EB7EC5D527E9DFC17357330 /* Pods-NuBabiMobile-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobile-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobile-tvOS/Pods-NuBabiMobile-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		10963A33B0574DB9BC5F7351 /* libimageCropPicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libimageCropPicker.a; sourceTree = "<group>"; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -533,21 +547,26 @@
 		1BDF114D873C47EDAB8F6E67 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		1D95847877D241C8AC2C9251 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		242CD5411AE54D85A005605C /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		2B58D8F43FE3D37894D152CD /* Pods-NuBabiMobileTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobileTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobileTests/Pods-NuBabiMobileTests.release.xcconfig"; sourceTree = "<group>"; };
 		2C2899A79A8A471AB02DB7B7 /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* NuBabiMobile-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NuBabiMobile-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* NuBabiMobile-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NuBabiMobile-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F19BD2FE7BA4CFD90AB7C58 /* libRNSound.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSound.a; sourceTree = "<group>"; };
 		31C43423F7D948CD8754E442 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
+		32429E1D921EBD36959C6C36 /* Pods-NuBabiMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobile/Pods-NuBabiMobile.debug.xcconfig"; sourceTree = "<group>"; };
 		36F674DBFED3496A85D887C7 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		39B3FBD74EAA4F77A59C2E83 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		3AC3FEF59C154F098A82E54A /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		3D6B785432BC4EA1A2A1E983 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		4A757C00FD844D65B4B57A8B /* RNSpinkit.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSpinkit.xcodeproj; path = "../node_modules/react-native-spinkit/ios/RNSpinkit.xcodeproj"; sourceTree = "<group>"; };
 		4AC079C62B9744B898F8892F /* ContactsWrapper.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ContactsWrapper.xcodeproj; path = "../node_modules/react-native-contacts-wrapper/ios/ContactsWrapper.xcodeproj"; sourceTree = "<group>"; };
+		54F0FCF1FA9FD22596AC6AD2 /* libPods-NuBabiMobileTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuBabiMobileTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5983EDA923144503824116A9 /* libRCTOrientation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOrientation.a; sourceTree = "<group>"; };
 		5A88E2F25D6742B0AC5E2FD3 /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNFetchBlob.xcodeproj; path = "../node_modules/react-native-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
+		69BDEEC2C340B6AD837D9E57 /* Pods-NuBabiMobile-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobile-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobile-tvOSTests/Pods-NuBabiMobile-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6C5EC64F96FB4B7F88D43A22 /* libRCTVideo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTVideo.a; sourceTree = "<group>"; };
+		6ED9A765DBD29BE9A1890794 /* libPods-NuBabiMobile-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuBabiMobile-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7984B3D604C64410A4D5EA71 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		7EB40E42E3A542E58FD0DC95 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
@@ -585,8 +604,10 @@
 		8038F4FB1F41FB980092A3E8 /* SF-Pro-Text-Heavy.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Heavy.otf"; sourceTree = "<group>"; };
 		8038F4FC1F41FB980092A3E8 /* SF-Pro-Text-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-BoldItalic.otf"; sourceTree = "<group>"; };
 		8038F4FD1F41FB980092A3E8 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
+		805A3BBD1FCC7E380033BCDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		80B333B11EBB3A4D00F6C116 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		80B333D61EBB3A7F00F6C116 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		80F4D9221E8BE5EC0012B26B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		80F4D9231E8BE5EC0012B26B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		80F4D9241E8BE5EC0012B26B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -598,6 +619,7 @@
 		80F4D94D1E8BE6080012B26B /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
 		830D68BA987140CE87DFE68D /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8A2C4C3ACB4E09481CC27BE4 /* libPods-NuBabiMobile-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuBabiMobile-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A08741203DB54C489D0E5C80 /* libRCTContactsWrapper.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTContactsWrapper.a; sourceTree = "<group>"; };
 		A7BD8C1222FA450896B9F394 /* libRNAudio.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAudio.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -605,9 +627,14 @@
 		AE4ADAABDE9B4EEDBFF1C194 /* RNSound.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNSound.xcodeproj; path = "../node_modules/react-native-sound/RNSound.xcodeproj"; sourceTree = "<group>"; };
 		B751AB2613014F7885039184 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		BA4D46E9D9334C90ACE1C7B0 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		C276952751EE508D4652F819 /* Pods-NuBabiMobileTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobileTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobileTests/Pods-NuBabiMobileTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C50BC06142B077E5656BDCE7 /* Pods-NuBabiMobile-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobile-tvOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobile-tvOS/Pods-NuBabiMobile-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		DC9071771E55E7DE001DA412 /* nubabi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = nubabi.ttf; path = ../fonts/nubabi.ttf; sourceTree = "<group>"; };
+		DEF09EA92FF49DC819B318EF /* Pods-NuBabiMobile.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobile.release.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobile/Pods-NuBabiMobile.release.xcconfig"; sourceTree = "<group>"; };
 		DF9557B898464C6A837A1F58 /* RNAudio.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNAudio.xcodeproj; path = "../node_modules/react-native-audio/ios/RNAudio.xcodeproj"; sourceTree = "<group>"; };
+		E577FB5C7D7E3E80DD566165 /* libPods-NuBabiMobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-NuBabiMobile.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE97D2B0A0514E17A6ED0721 /* libRNImagePicker.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNImagePicker.a; sourceTree = "<group>"; };
+		EF300C10A4DCB9739F2801E7 /* Pods-NuBabiMobile-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NuBabiMobile-tvOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NuBabiMobile-tvOSTests/Pods-NuBabiMobile-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		F623AB85522E4148A30B4307 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		F7295902EF36476F8B098FAA /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -618,6 +645,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				0C87872A7098756F9245F1FD /* libPods-NuBabiMobileTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +688,8 @@
 				7F79BDCA884B4F3596AE1519 /* libRNAudio.a in Frameworks */,
 				C24680215D594138A2823816 /* libRNSVG.a in Frameworks */,
 				569C16822A63402A8E673901 /* libRCTOrientation.a in Frameworks */,
+				AAB67BD79AA15E71F81428C7 /* libPods-NuBabiMobile.a in Frameworks */,
+				80C085711FCCC84400CA75C4 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -675,6 +705,7 @@
 				2D02E4C61E0B4AEC006451C7 /* libRCTSettings-tvOS.a in Frameworks */,
 				2D02E4C71E0B4AEC006451C7 /* libRCTText-tvOS.a in Frameworks */,
 				2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */,
+				4C0ECC0CC4C69EAAF26105D1 /* libPods-NuBabiMobile-tvOS.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +713,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45AA6709D720269358AFD58 /* libPods-NuBabiMobile-tvOSTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -799,6 +831,21 @@
 				802002D41FC464DE00A44875 /* libprivatedata-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		5D933F03ED72FA3F80FE992F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				32429E1D921EBD36959C6C36 /* Pods-NuBabiMobile.debug.xcconfig */,
+				DEF09EA92FF49DC819B318EF /* Pods-NuBabiMobile.release.xcconfig */,
+				0EB7EC5D527E9DFC17357330 /* Pods-NuBabiMobile-tvOS.debug.xcconfig */,
+				C50BC06142B077E5656BDCE7 /* Pods-NuBabiMobile-tvOS.release.xcconfig */,
+				69BDEEC2C340B6AD837D9E57 /* Pods-NuBabiMobile-tvOSTests.debug.xcconfig */,
+				EF300C10A4DCB9739F2801E7 /* Pods-NuBabiMobile-tvOSTests.release.xcconfig */,
+				C276952751EE508D4652F819 /* Pods-NuBabiMobileTests.debug.xcconfig */,
+				2B58D8F43FE3D37894D152CD /* Pods-NuBabiMobileTests.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		5E91572E1DD0AC6500FF2AA8 /* Products */ = {
@@ -938,6 +985,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		80C0856C1FCCC83800CA75C4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				80C085701FCCC83800CA75C4 /* libRNFirebase.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		80F4D9211E8BE5EC0012B26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -952,6 +1007,10 @@
 				80F4D9271E8BE5EC0012B26B /* CoreVideo.framework */,
 				80F4D9281E8BE5EC0012B26B /* QuartzCore.framework */,
 				80F4D9291E8BE5EC0012B26B /* SystemConfiguration.framework */,
+				E577FB5C7D7E3E80DD566165 /* libPods-NuBabiMobile.a */,
+				6ED9A765DBD29BE9A1890794 /* libPods-NuBabiMobile-tvOS.a */,
+				8A2C4C3ACB4E09481CC27BE4 /* libPods-NuBabiMobile-tvOSTests.a */,
+				54F0FCF1FA9FD22596AC6AD2 /* libPods-NuBabiMobileTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -959,6 +1018,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */,
 				802002E11FC4654300A44875 /* RNSVG.xcodeproj */,
 				80B333D61EBB3A7F00F6C116 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -999,6 +1059,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				805A3BBD1FCC7E380033BCDF /* GoogleService-Info.plist */,
 				8025C9091F165EAB0048FC03 /* QBImagePicker.framework */,
 				8025C9051F165EA60048FC03 /* RSKImageCropper.framework */,
 				13B07FAE1A68108700A75B9A /* NuBabiMobile */,
@@ -1008,6 +1069,7 @@
 				A16EF5AC54A64A2687DD18F9 /* Resources */,
 				80F4D9211E8BE5EC0012B26B /* Frameworks */,
 				800DCC261F43387D008E887F /* Recovered References */,
+				5D933F03ED72FA3F80FE992F /* Pods */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -1097,9 +1159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "NuBabiMobileTests" */;
 			buildPhases = (
+				AB5238B7151CEE6D02E457A9 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				C624954F248EF8CCF7971281 /* [CP] Embed Pods Frameworks */,
+				29CBF5ED805FD24962297F40 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1115,11 +1180,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "NuBabiMobile" */;
 			buildPhases = (
+				66CC1821CBF8821E3C23229F /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				8025C9081F165EA70048FC03 /* Embed Frameworks */,
+				B3AC80CFEA8509294951F4DD /* [CP] Embed Pods Frameworks */,
+				19FDCF9C42565A8C556AE023 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1134,10 +1202,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "NuBabiMobile-tvOS" */;
 			buildPhases = (
+				A09735F0F8A1A9C3C163A11E /* [CP] Check Pods Manifest.lock */,
 				2D02E4771E0B4A5D006451C7 /* Sources */,
 				2D02E4781E0B4A5D006451C7 /* Frameworks */,
 				2D02E4791E0B4A5D006451C7 /* Resources */,
 				2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */,
+				CDC7FFC99C8A90E929692262 /* [CP] Embed Pods Frameworks */,
+				22B33AE492FB5D135B01C312 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1152,9 +1223,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "NuBabiMobile-tvOSTests" */;
 			buildPhases = (
+				92381EE1A26A3FA35CFE221A /* [CP] Check Pods Manifest.lock */,
 				2D02E48C1E0B4A5D006451C7 /* Sources */,
 				2D02E48D1E0B4A5D006451C7 /* Frameworks */,
 				2D02E48E1E0B4A5D006451C7 /* Resources */,
+				05B91246C4C0A1FC287C8321 /* [CP] Embed Pods Frameworks */,
+				03F77D9C2DF5CDE0CFDB1EED /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1284,6 +1358,10 @@
 				{
 					ProductGroup = 803A11E51ED460E50038ADFE /* Products */;
 					ProjectRef = 5A88E2F25D6742B0AC5E2FD3 /* RNFetchBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = 80C0856C1FCCC83800CA75C4 /* Products */;
+					ProjectRef = 80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */;
 				},
 				{
 					ProductGroup = 803A12D31E9E9D8900BD621D /* Products */;
@@ -1653,6 +1731,13 @@
 			remoteRef = 80B333DA1EBB3A7F00F6C116 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		80C085701FCCC83800CA75C4 /* libRNFirebase.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNFirebase.a;
+			remoteRef = 80C0856F1FCCC83800CA75C4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		80E4F2801F18C95D00CCC9FE /* libthird-party.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1743,6 +1828,7 @@
 				68F8DB48710A458B8EF0D9BA /* SimpleLineIcons.ttf in Resources */,
 				8038F5011F41FB980092A3E8 /* SF-Pro-Display-Thin.otf in Resources */,
 				8038F5111F41FB980092A3E8 /* SF-Pro-Text-Semibold.otf in Resources */,
+				805A3BBE1FCC7E390033BCDF /* GoogleService-Info.plist in Resources */,
 				8038F5051F41FB980092A3E8 /* SF-Pro-Display-Regular.otf in Resources */,
 				782DBD3D3E254DD4A40456B3 /* Zocial.ttf in Resources */,
 			);
@@ -1780,6 +1866,81 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		03F77D9C2DF5CDE0CFDB1EED /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobile-tvOSTests/Pods-NuBabiMobile-tvOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		05B91246C4C0A1FC287C8321 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobile-tvOSTests/Pods-NuBabiMobile-tvOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		19FDCF9C42565A8C556AE023 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobile/Pods-NuBabiMobile-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		22B33AE492FB5D135B01C312 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobile-tvOS/Pods-NuBabiMobile-tvOS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		29CBF5ED805FD24962297F40 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobileTests/Pods-NuBabiMobileTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1793,6 +1954,123 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		66CC1821CBF8821E3C23229F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NuBabiMobile-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		92381EE1A26A3FA35CFE221A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NuBabiMobile-tvOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A09735F0F8A1A9C3C163A11E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NuBabiMobile-tvOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB5238B7151CEE6D02E457A9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NuBabiMobileTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3AC80CFEA8509294951F4DD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobile/Pods-NuBabiMobile-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C624954F248EF8CCF7971281 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobileTests/Pods-NuBabiMobileTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDC7FFC99C8A90E929692262 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NuBabiMobile-tvOS/Pods-NuBabiMobile-tvOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1849,6 +2127,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C276952751EE508D4652F819 /* Pods-NuBabiMobileTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1879,6 +2158,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NuBabiMobile.app/NuBabiMobile";
@@ -1887,6 +2167,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2B58D8F43FE3D37894D152CD /* Pods-NuBabiMobileTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1914,6 +2195,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NuBabiMobile.app/NuBabiMobile";
@@ -1922,6 +2204,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32429E1D921EBD36959C6C36 /* Pods-NuBabiMobile.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1960,6 +2243,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DEF09EA92FF49DC819B318EF /* Pods-NuBabiMobile.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1997,6 +2281,7 @@
 		};
 		2D02E4971E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0EB7EC5D527E9DFC17357330 /* Pods-NuBabiMobile-tvOS.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2030,6 +2315,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.NuBabiMobile-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2041,6 +2327,7 @@
 		};
 		2D02E4981E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C50BC06142B077E5656BDCE7 /* Pods-NuBabiMobile-tvOS.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2074,6 +2361,7 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-lc++",
+					"$(inherited)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.facebook.REACT.NuBabiMobile-tvOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2085,6 +2373,7 @@
 		};
 		2D02E4991E0B4A5E006451C7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69BDEEC2C340B6AD837D9E57 /* Pods-NuBabiMobile-tvOSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2111,6 +2400,7 @@
 		};
 		2D02E49A1E0B4A5E006451C7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF300C10A4DCB9739F2801E7 /* Pods-NuBabiMobile-tvOSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NONNULL = YES;

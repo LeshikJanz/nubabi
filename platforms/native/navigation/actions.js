@@ -52,8 +52,42 @@ const goBackAfterSubmitEpic = (action$: any) => {
     .mapTo(NavigationActions.back());
 };
 
+const navigationAnalyticsEpic = (action$: any) => {
+  const firebase = require('react-native-firebase').default;
+  const { routes } = require('./AppNavigator').default;
+  return action$
+    .filter(action => {
+      return (
+        action.type === 'Navigation/NAVIGATE' ||
+        action.type === 'Navigation/RESET'
+      );
+    })
+    .mergeMap(action => {
+      let routeName;
+      if (action.type === 'Navigation/NAVIGATE') {
+        // eslint-disable-next-line prefer-destructuring
+        routeName = action.routeName;
+      } else {
+        // eslint-disable-next-line prefer-destructuring
+        routeName = action.actions[0].routeName;
+      }
+
+      if (routeName) {
+        firebase.analytics().setCurrentScreen(routeName);
+      }
+
+      const routeEvent = path([routeName, 'meta', 'analytics'], routes);
+      if (routeEvent) {
+        firebase.analytics().logEvent(routeEvent.eventName, action.params);
+      }
+
+      return Observable.of();
+    });
+};
+
 export const epics = [
   resetNavigationEpic,
   goBackAfterSubmitEpic,
   resetTabNavigatorEpic,
+  navigationAnalyticsEpic,
 ];
