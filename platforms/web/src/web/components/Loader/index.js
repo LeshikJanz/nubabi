@@ -10,6 +10,9 @@ class Header extends PureComponent<Props> {
   render() {
     const Wrapper = styled.div`
       position: absolute;
+      z-index: 10,
+      top: 50%;
+      left: 50%;
       display: ${this.props.active ? 'fixed' : 'none'};
       width: 100%;
       height: 100%;

@@ -19,20 +19,14 @@ type Props = {
   name: string,
 };
 
-class ProfileMain extends PureComponent<Props> {
-  render() {
-    const { memories, growth, activities, name, dob } = this.props;
+const ProfileMain = ({ memories, growth, activities, name, dob }: Props) => (
+  <Box is={Main} p={15} pt={25}>
+    <Growth growth={growth} dob={dob} />
 
-    return (
-      <Box is={Main} p={15} pt={25}>
-        <Growth growth={growth} dob={dob} />
+    <Activities name={name} activities={activities} />
 
-        <Activities name={name} activities={activities} />
-
-        <Memories memories={memories} />
-      </Box>
-    );
-  }
-}
+    <Memories memories={memories} />
+  </Box>
+);
 
 export default ProfileMain;

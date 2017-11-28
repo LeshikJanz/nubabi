@@ -6,9 +6,8 @@ import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-
-import { Loader } from 'web/components';
-import Main from './Main';
+import ProfileMain from './Main';
+import DisplayLoadingState from 'web/components/displayLoadingState';
 
 type Props = {
   navigation: any,
@@ -127,13 +126,9 @@ class Profile extends PureComponent<Props> {
   render() {
     const { baby } = this.props;
 
-    if (!baby) {
-      return <Loader active />;
-    }
-
     return (
       <Wrapper>
-        <Main {...baby} />
+        <ProfileMain {...baby} />
       </Wrapper>
     );
   }
@@ -173,4 +168,5 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
+  DisplayLoadingState,
 )(Profile);

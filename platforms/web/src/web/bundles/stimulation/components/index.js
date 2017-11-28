@@ -23,10 +23,6 @@ class Stimulation extends PureComponent<Props> {
   render() {
     const { baby } = this.props;
 
-    if (!baby) {
-      return <Loader active />;
-    }
-
     return (
       <Wrapper>
         <Activities activities={baby && baby.activities} />

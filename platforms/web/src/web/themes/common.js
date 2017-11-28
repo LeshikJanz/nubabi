@@ -80,6 +80,11 @@ injectGlobal([
       &:not(:checked) + label, &:checked + label, &:checked + label:before {
         border-radius: 50%;
       }
+      
+      &:checked + label:after {
+        left: 4px;
+        top: 8px;
+      }
     }
   }
 `,
