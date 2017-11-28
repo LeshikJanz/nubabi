@@ -8,7 +8,8 @@ type InputFieldProps = {
   type: string,
   placeholder: string,
   value: mixed,
-  input?: mixed, // eslint-disable-next-line
+  // eslint-disable-next-line
+  input?: mixed,
 };
 
 type Props = InputFieldProps & {

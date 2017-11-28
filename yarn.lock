@@ -17,25 +17,6 @@
   version "5.1.3"
   resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-5.1.3.tgz#460a92feaa2911bc49731d5922052fed4be4e07f"
 
-"@commitlint/core@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/core/-/core-4.2.2.tgz#24f37b5afdeca993173f1696724570015148c1f8"
-  dependencies:
-    "@marionebl/git-raw-commits" "^1.2.0"
-    "@marionebl/sander" "^0.6.0"
-    babel-runtime "^6.23.0"
-    chalk "^2.0.1"
-    conventional-changelog-angular "^1.3.3"
-    conventional-commits-parser "^1.3.0"
-    cosmiconfig "^3.0.1"
-    find-up "^2.1.0"
-    franc "^2.0.0"
-    lodash "^4.17.4"
-    path-exists "^3.0.0"
-    pos "^0.4.2"
-    resolve-from "^3.0.0"
-    semver "^5.3.0"
-
 "@commitlint/core@^5.1.1":
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/@commitlint/core/-/core-5.1.1.tgz#72163b9b6083fe44bb4a902f69edf14f70b75afc"
@@ -55,21 +36,21 @@
     resolve-global "^0.1.0"
     semver "^5.3.0"
 
-"@commitlint/prompt-cli@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/prompt-cli/-/prompt-cli-4.2.2.tgz#3a659a0fd06f39c3dc3619fd8f011829752db71f"
+"@commitlint/prompt-cli@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/prompt-cli/-/prompt-cli-5.1.2.tgz#e493c1bfcdfbe71f6b009e732b8ecf1db3e70c30"
   dependencies:
-    "@commitlint/prompt" "^4.2.2"
-    execa "^0.7.0"
-    meow "^3.7.0"
+    "@commitlint/prompt" "^5.1.2"
+    execa "0.8.0"
+    meow "3.7.0"
 
-"@commitlint/prompt@^4.2.2":
-  version "4.2.2"
-  resolved "https://registry.yarnpkg.com/@commitlint/prompt/-/prompt-4.2.2.tgz#3594a0140722e95c31dd416a31280cb00bc86b23"
+"@commitlint/prompt@^5.1.2":
+  version "5.1.2"
+  resolved "https://registry.yarnpkg.com/@commitlint/prompt/-/prompt-5.1.2.tgz#5f3fe03ac7d794a55cbec875e59d27adf6ea35b5"
   dependencies:
-    "@commitlint/core" "^4.2.2"
+    "@commitlint/core" "^5.1.1"
     babel-runtime "^6.23.0"
-    chalk "^1.1.1"
+    chalk "^2.0.0"
     lodash "^4.17.4"
     throat "^4.1.0"
     vorpal "^1.10.0"
@@ -2694,18 +2675,6 @@ conventional-commits-filter@^1.1.0:
     is-subset "^0.1.1"
     modify-values "^1.0.0"
 
-conventional-commits-parser@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/conventional-commits-parser/-/conventional-commits-parser-1.3.0.tgz#e327b53194e1a7ad5dc63479ee9099a52b024865"
-  dependencies:
-    JSONStream "^1.0.4"
-    is-text-path "^1.0.0"
-    lodash "^4.2.1"
-    meow "^3.3.0"
-    split2 "^2.0.0"
-    through2 "^2.0.0"
-    trim-off-newlines "^1.0.0"
-
 conventional-commits-parser@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/conventional-commits-parser/-/conventional-commits-parser-2.0.0.tgz#71d01910cb0a99aeb20c144e50f81f4df3178447"
@@ -4177,9 +4146,9 @@ exec-sh@^0.2.0:
   dependencies:
     merge "^1.1.3"
 
-execa@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
+execa@0.8.0, execa@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
@@ -4189,9 +4158,9 @@ execa@^0.7.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
-execa@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
+execa@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
   dependencies:
     cross-spawn "^5.0.1"
     get-stream "^3.0.0"
@@ -4726,12 +4695,6 @@ forwarded@~0.1.0:
 forwarded@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/forwarded/-/forwarded-0.1.2.tgz#98c23dab1175657b8c0573e8ceccd91b0ff18c84"
-
-franc@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/franc/-/franc-2.0.0.tgz#d9939eded4b486acf4b9f33591fe8e69e5464616"
-  dependencies:
-    trigram-utils "^0.1.0"
 
 fresh@0.3.0:
   version "0.3.0"
@@ -7578,10 +7541,6 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-n-gram@^0.1.0:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/n-gram/-/n-gram-0.1.2.tgz#9acecb0f797fbfd22a0ad8a28d987880a63002ab"
-
 nan@^2.3.0:
   version "2.7.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.7.0.tgz#d95bf721ec877e08db276ed3fc6eb78f9083ad46"
@@ -8331,10 +8290,6 @@ portfinder@^1.0.9:
     async "^1.5.2"
     debug "^2.2.0"
     mkdirp "0.5.x"
-
-pos@^0.4.2:
-  version "0.4.2"
-  resolved "https://registry.yarnpkg.com/pos/-/pos-0.4.2.tgz#20e9c77fbeedcc356823cea63c7585cace93be2a"
 
 postcss-calc@^5.2.0:
   version "5.3.1"
@@ -10890,12 +10845,6 @@ tr46@~0.0.3:
 traverse@0.6.6:
   version "0.6.6"
   resolved "https://registry.yarnpkg.com/traverse/-/traverse-0.6.6.tgz#cbdf560fd7b9af632502fed40f918c157ea97137"
-
-trigram-utils@^0.1.0:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/trigram-utils/-/trigram-utils-0.1.1.tgz#7df8a092c9897fc2e09dac22f423e283231762e7"
-  dependencies:
-    n-gram "^0.1.0"
 
 trim-newlines@^1.0.0:
   version "1.0.0"
