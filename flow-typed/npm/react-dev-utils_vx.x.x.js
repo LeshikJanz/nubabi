@@ -143,9 +143,7 @@ declare module 'react-dev-utils/ModuleScopePlugin.js' {
   declare module.exports: $Exports<'react-dev-utils/ModuleScopePlugin'>;
 }
 declare module 'react-dev-utils/noopServiceWorkerMiddleware.js' {
-  declare module.exports: $Exports<
-    'react-dev-utils/noopServiceWorkerMiddleware',
-  >;
+  declare module.exports: $Exports<'react-dev-utils/noopServiceWorkerMiddleware'>;
 }
 declare module 'react-dev-utils/openBrowser.js' {
   declare module.exports: $Exports<'react-dev-utils/openBrowser'>;
@@ -157,9 +155,7 @@ declare module 'react-dev-utils/printHostingInstructions.js' {
   declare module.exports: $Exports<'react-dev-utils/printHostingInstructions'>;
 }
 declare module 'react-dev-utils/WatchMissingNodeModulesPlugin.js' {
-  declare module.exports: $Exports<
-    'react-dev-utils/WatchMissingNodeModulesPlugin',
-  >;
+  declare module.exports: $Exports<'react-dev-utils/WatchMissingNodeModulesPlugin'>;
 }
 declare module 'react-dev-utils/WebpackDevServerUtils.js' {
   declare module.exports: $Exports<'react-dev-utils/WebpackDevServerUtils'>;

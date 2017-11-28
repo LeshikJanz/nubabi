@@ -91,22 +91,16 @@ declare module 'redux-observable/dist/redux-observable.js' {
   declare module.exports: $Exports<'redux-observable/dist/redux-observable'>;
 }
 declare module 'redux-observable/dist/redux-observable.min.js' {
-  declare module.exports: $Exports<
-    'redux-observable/dist/redux-observable.min',
-  >;
+  declare module.exports: $Exports<'redux-observable/dist/redux-observable.min'>;
 }
 declare module 'redux-observable/lib/cjs/ActionsObservable.js' {
-  declare module.exports: $Exports<
-    'redux-observable/lib/cjs/ActionsObservable',
-  >;
+  declare module.exports: $Exports<'redux-observable/lib/cjs/ActionsObservable'>;
 }
 declare module 'redux-observable/lib/cjs/combineEpics.js' {
   declare module.exports: $Exports<'redux-observable/lib/cjs/combineEpics'>;
 }
 declare module 'redux-observable/lib/cjs/createEpicMiddleware.js' {
-  declare module.exports: $Exports<
-    'redux-observable/lib/cjs/createEpicMiddleware',
-  >;
+  declare module.exports: $Exports<'redux-observable/lib/cjs/createEpicMiddleware'>;
 }
 declare module 'redux-observable/lib/cjs/EPIC_END.js' {
   declare module.exports: $Exports<'redux-observable/lib/cjs/EPIC_END'>;
@@ -121,17 +115,13 @@ declare module 'redux-observable/lib/cjs/utils/console.js' {
   declare module.exports: $Exports<'redux-observable/lib/cjs/utils/console'>;
 }
 declare module 'redux-observable/lib/esm/ActionsObservable.js' {
-  declare module.exports: $Exports<
-    'redux-observable/lib/esm/ActionsObservable',
-  >;
+  declare module.exports: $Exports<'redux-observable/lib/esm/ActionsObservable'>;
 }
 declare module 'redux-observable/lib/esm/combineEpics.js' {
   declare module.exports: $Exports<'redux-observable/lib/esm/combineEpics'>;
 }
 declare module 'redux-observable/lib/esm/createEpicMiddleware.js' {
-  declare module.exports: $Exports<
-    'redux-observable/lib/esm/createEpicMiddleware',
-  >;
+  declare module.exports: $Exports<'redux-observable/lib/esm/createEpicMiddleware'>;
 }
 declare module 'redux-observable/lib/esm/EPIC_END.js' {
   declare module.exports: $Exports<'redux-observable/lib/esm/EPIC_END'>;
