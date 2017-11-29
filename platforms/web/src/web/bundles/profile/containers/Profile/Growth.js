@@ -11,6 +11,10 @@ type Props = {
   dob: any,
 };
 
+type State = {
+  isIntroductionCollapsed: boolean,
+};
+
 const Growth = styled.article`
   background: ${props => props.theme.colors.white};
   overflow: hidden;
@@ -90,19 +94,15 @@ const limitText = (str, limit = 365) => {
 
 const withMarkDowns = (text: string) => text.replace(/\*/g, '•');
 
-class ProfileMain extends PureComponent<Props> {
-  constructor() {
-    super();
-
-    this.state = {
-      isIntroductionCollapsed: true,
-    };
-  }
+class ProfileMain extends PureComponent<Props, State> {
+  state = {
+    isIntroductionCollapsed: true,
+  };
 
   handleIntroduction = () => {
-    this.setState({
-      isIntroductionCollapsed: !this.state.isIntroductionCollapsed,
-    });
+    this.setState(({ isIntroductionCollapsed }) => ({
+      isIntroductionCollapsed: !isIntroductionCollapsed,
+    }));
   };
 
   render() {
