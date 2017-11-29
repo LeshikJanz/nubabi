@@ -11,7 +11,9 @@ import IPhotos from 'web/assets/images/icons/photos.svg';
 import IFirstBirth from 'core/images/memories/first-birthday.png';
 import IFirstTooth from 'core/images/memories/first-tooth.png';
 
-type Props = {};
+type Props = {
+  name: string,
+};
 
 const Notifications = styled.div`
   position: relative;
@@ -144,6 +146,7 @@ class AppNotifications extends Component<Props> {
   }
 
   render() {
+    const { name: babyName } = this.props;
     return (
       <Notifications className="AppNotifications">
         <INotification onClick={this.openModal} />
@@ -176,7 +179,7 @@ class AppNotifications extends Component<Props> {
                 <NotificationImage src={IFirstTooth} />
                 <NotificationContent>
                   <p>
-                    <strong>Charlotte</strong> added a Special Memory for
+                    <strong>{babyName}</strong> added a Special Memory for
                     Joshua: First Tooth
                   </p>
                   <NotificationInfo>

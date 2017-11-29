@@ -161,12 +161,13 @@ class Select extends Component<Props> {
   }
 
   render() {
+    const { name } = this.props;
     const avatar = this.props.avatar && this.props.avatar.url;
 
     return (
       <BabySelect className="BabySelect">
         <BabyProfileImage image={avatar} />
-        <BabySelected onClick={this.openModal}>Charlotte</BabySelected>
+        <BabySelected onClick={this.openModal}>{name}</BabySelected>
 
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -181,14 +182,7 @@ class Select extends Component<Props> {
                 <BabyImage>
                   <IPerson />
                 </BabyImage>
-                <BabyName>Charlotte</BabyName>
-              </BabiesListItem>
-
-              <BabiesListItem>
-                <BabyImage>
-                  <IPerson />
-                </BabyImage>
-                <BabyName>Harry</BabyName>
+                <BabyName>{name}</BabyName>
               </BabiesListItem>
 
               <BabiesListItem justify="center">

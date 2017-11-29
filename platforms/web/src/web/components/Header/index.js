@@ -85,7 +85,7 @@ class AppHeader extends PureComponent<Props> {
               8 days of your trial remaining. <Link to="/"> Subscribe Now</Link>{' '}
             </HeaderInfoBox>
 
-            <Notifications />
+            <Notifications {...this.props.baby} />
 
             <HeaderMenu is={Menu} {...this.props} />
           </HeaderRight>
