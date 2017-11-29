@@ -28,6 +28,7 @@ export type QueryOpts<T> =
 
 export type { Activity, Avatar, User, SkillArea, Baby };
 export type {
+  ActivityConnection,
   Article,
   File,
   FileConnection,
@@ -35,6 +36,7 @@ export type {
   Image,
   GrowthArticle,
   Memory,
+  MemoryConnection,
   Measurement,
 } from './modelTypes';
 export * from './queryTypes';
