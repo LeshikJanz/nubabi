@@ -1,8 +1,9 @@
 // @flow
+import type { ActivityConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
-import { ActivityConnection } from 'core/types';
+import formatPossessive from 'core/helpers/formatPossessive';
 import ActivityList from 'web/bundles/stimulation/components/ActivityList';
 
 type Props = {
@@ -34,13 +35,12 @@ const MoreLink = styled(Box)`
 class Activities extends PureComponent<Props> {
   render() {
     const { activities, name } = this.props;
+    const title = `${formatPossessive(name)} week ahead`;
 
     return (
       <ActivitiesListWrapper>
         <ActivitiesListHeader justify="space-between" align="center">
-          <ActivitiesListTitle is="h3">{`${
-            name
-          }'s week ahead`}</ActivitiesListTitle>
+          <ActivitiesListTitle is="h3">{title}</ActivitiesListTitle>
           <MoreLink is="a" href="/profile">
             See all activities
           </MoreLink>
