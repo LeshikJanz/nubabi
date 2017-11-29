@@ -38,6 +38,7 @@ const config = {
   appName: "$NUBABI_APP_NAME",
   appVersion: "$NUBABI_APP_VERSION",
   apiUrl: "$NUBABI_API_URL",
+  environment: "$NUBABI_ENV",
   firebase: {
     "apiKey": "$NUBABI_FIREBASE_API_KEY",
     "authDomain": "$NUBABI_FIREBASE_AUTH_DOMAIN",
@@ -51,9 +52,10 @@ const config = {
 export default config;
 EOF
 export BABEL_ENV="production"
-echo "Exported config for environment "$NUBABI_ENV" to core/config/index.js"
+echo "Exported config for environment \"$NUBABI_ENV\" to \"core/config/index.js\""
 echo "Set App version string to $NUBABI_APP_VERSION"
 # Workaround the fact that buddybuild doesn't seem to handle env vars correctly
 tee $BUDDYBUILD_WORKSPACE/.env > /dev/null <<EOF
   export NUBABI_APP_VERSION=$NUBABI_APP_VERSION
+  export NUBABI_ENV=$NUBABI_ENV
 EOF

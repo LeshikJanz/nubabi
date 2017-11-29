@@ -6,6 +6,7 @@ const config = {
   appName: process.env.NUBABI_APP_NAME || 'app',
   appVersion: process.env.NUBABI_APP_VERSION,
   apiUrl: process.env.NUBABI_API_URL,
+  environment: process.env.NUBABI_ENV || 'development',
   graphqlEndpoint: process.env.NUBABI_GRAPHQL_ENDPOINT,
   firebase: {
     apiKey: process.env.NUBABI_FIREBASE_API_KEY,
