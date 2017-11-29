@@ -7,7 +7,7 @@ import path from 'ramda/src/path';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import ProfileMain from './Main';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
 
 type Props = {
   navigation: any,
@@ -135,21 +135,21 @@ class Profile extends PureComponent<Props> {
 }
 
 const query = gql`
-    query getBaby($id: ID!) {
-        viewer {
-            baby(id: $id) {
-                ...Profile
-                ...ProfileGrowth
-                ...ProfileActivities
-                ...RecentMemories
-            }
-        }
+  query getBaby($id: ID!) {
+    viewer {
+      baby(id: $id) {
+        ...Profile
+        ...ProfileGrowth
+        ...ProfileActivities
+        ...RecentMemories
+      }
     }
+  }
 
-    ${Profile.fragments.baby}
-    ${Profile.fragments.growth}
-    ${Profile.fragments.activities}
-    ${Profile.fragments.recentMemories}
+  ${Profile.fragments.baby}
+  ${Profile.fragments.growth}
+  ${Profile.fragments.activities}
+  ${Profile.fragments.recentMemories}
 `;
 
 export default compose(
@@ -168,5 +168,5 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
-  DisplayLoadingState,
+  displayLoadingState,
 )(Profile);
