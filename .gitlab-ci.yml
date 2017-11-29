@@ -1,6 +1,7 @@
 image: node:latest
 
 stages:
+  - set_version
   - test
   - build
   - deploy
@@ -13,8 +14,31 @@ cache:
 before_script:
   - >
     if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
+      apt-get update && apt-get install -yqq jq
+      export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
+      export WEB_BASE_VERSION=$(cat ./platforms/web/package.json | jq -r .version)
       yarn install
     fi
+
+set_dev_app_version:
+  stage: set_version
+  script:
+    - >
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
+        export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA
+      fi
+  except:
+    - master
+
+set_prod_app_version:
+  stage: set_version
+  script:
+    - >
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
+        export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID
+      fi
+  only:
+    - master
 
 run_tests:
   stage: test
