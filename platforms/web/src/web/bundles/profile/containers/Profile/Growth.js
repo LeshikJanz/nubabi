@@ -1,5 +1,4 @@
 // @flow
-import type { ProfileGrowthFragment } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
@@ -7,7 +6,10 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { pathOr } from 'ramda';
 
-type Props = ProfileGrowthFragment;
+type Props = {
+  growth: any,
+  dob: any,
+};
 
 const Growth = styled.article`
   background: ${props => props.theme.colors.white};
@@ -27,6 +29,7 @@ const GrowthContent = styled.div`
     font-weight: normal;
     margin: 0 0 15px;
     line-height: 24px;
+    white-space: pre-wrap;
   }
 `;
 
@@ -85,7 +88,23 @@ const limitText = (str, limit = 365) => {
   return str.length > limit ? `${str.substring(0, limit - 1)}...` : str;
 };
 
+const withMarkDowns = (text: string) => text.replace(/\*/g, '•');
+
 class ProfileMain extends PureComponent<Props> {
+  constructor() {
+    super();
+
+    this.state = {
+      isIntroductionCollapsed: true,
+    };
+  }
+
+  handleIntroduction = () => {
+    this.setState({
+      isIntroductionCollapsed: !this.state.isIntroductionCollapsed,
+    });
+  };
+
   render() {
     const { growth, dob } = this.props;
     const introduction = pathOr('', ['current', 'introduction'], growth);
@@ -94,14 +113,19 @@ class ProfileMain extends PureComponent<Props> {
       <Growth>
         <GrowthContent>
           <GrowthHeader justify="space-between" align="center">
-            <GrowthTitle is="h3">This Week's Growth</GrowthTitle>
+            <GrowthTitle is="h3">This {`Week's`} Growth</GrowthTitle>
             <GrowthDoB is="span">{moment(dob).fromNow(true)} old</GrowthDoB>
           </GrowthHeader>
-
-          <p>
-            {limitText(introduction)}{' '}
-            <ReadMore to="/profile">Read More</ReadMore>
-          </p>
+          {this.state.isIntroductionCollapsed ? (
+            <p>
+              {limitText(withMarkDowns(introduction))}
+              <ReadMore to="/profile" onClick={this.handleIntroduction}>
+                Read More
+              </ReadMore>
+            </p>
+          ) : (
+            <p>{withMarkDowns(introduction)}</p>
+          )}
         </GrowthContent>
 
         <GrowthExpert p={15} align="center">

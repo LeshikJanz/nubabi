@@ -70,7 +70,7 @@ class Link extends PureComponent {
         typeof to === 'string' ? { pathname: to } : to,
       );
     }
-    if (props.hasOwnProperty('active')) {
+    if (Object.prototype.hasOwnProperty.call(props, 'active')) {
       if (props.active) {
         props.className += ' active';
       }

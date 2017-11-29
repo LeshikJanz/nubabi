@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import ICross from '../../../images/icons/cross.svg';
+import ICross from 'web/assets/images/icons/cross.svg';
 
 type Props = {
   onClick: () => void,
@@ -58,18 +58,18 @@ export const Button = ({
   children,
   disabled,
   p,
-  ...rest,
-  pink,
+  ...rest
 }: Props) =>
-  primary ? (
+  (primary && (
     <ButtonElement onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
     </ButtonElement>
-  ) : plus ? (
+  )) ||
+  (plus && (
     <ButtonPlus onClick={onClick} disabled={disabled} {...rest}>
       <ICross />
     </ButtonPlus>
-  ) : (
+  )) || (
     <ButtonOutline onClick={onClick} disabled={disabled} p={p} {...rest}>
       {children}
     </ButtonOutline>

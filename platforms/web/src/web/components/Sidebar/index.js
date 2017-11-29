@@ -1,18 +1,21 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
 import { Aside } from 'web/elements';
-import IAppStore from '../../../images/appstore.png';
-import IPlayMarket from '../../../images/googleplay.png';
-import INubabiApp from '../../../images/nubabiapp.png';
-import IPersons from '../../../images/icons/persons.svg';
+import IAppStore from 'web/assets/images/appstore.png';
+import IPlayMarket from 'web/assets/images/googleplay.png';
+import INubabiApp from 'web/assets/images/nubabiapp.png';
+import IPersons from 'web/assets/images/icons/persons.svg';
+import { Link } from 'react-router-dom';
 
 type Props = {};
 
 const SideBar = styled(Box)`
-  padding: 25px 0 0;
+  margin: 25px 0 0;
+  min-width: 235px;
+  background: ${props => props.theme.bg.panel};
 `;
 
 const SideBarFooter = styled.div`
@@ -74,57 +77,54 @@ const BannerImage = styled.a`
   }
 `;
 
-class Sidebar extends PureComponent<Props> {
-  render() {
-    return (
-      <SideBar width={1 / 6} is={Aside}>
-        <Panel>
-          <PanelHeader align="center">
-            <PanelHeaderImage>
-              <IPersons />
-            </PanelHeaderImage>
-            Parenting Tips
-          </PanelHeader>
-          <PanelBody>
-            <a href="/profile">Twins: How do you handle two of everything?</a>
-            <br />
-            <br />
-            Bonding with your baby <br />
-            <br />
-            The benefits of wearing your baby
-          </PanelBody>
-        </Panel>
+const Sidebar = (): Props => (
+  <SideBar width={1 / 6} is={Aside}>
+    <Panel>
+      <PanelHeader align="center">
+        <PanelHeaderImage>
+          <IPersons />
+        </PanelHeaderImage>
+        Parenting Tips
+      </PanelHeader>
+      <PanelBody>
+        <Link to="/profile">Twins: How do you handle two of everything?</Link>
+        <br />
+        <br />
+        <Link to="/profile">Bonding with your baby </Link>
+        <br />
+        <br />
+        <Link to="/profile">The benefits of wearing your baby </Link>
+      </PanelBody>
+    </Panel>
 
-        <Panel>
-          <PanelBody>
-            <Banner>
-              <img src={INubabiApp} alt="Nubabi App" />
-              <h4>Have you tried the Nubabi Mobile App?</h4>
-              <p>Enjoy easy access to your baby’s content, on the go!</p>
-              <br />
-              <BannerImage href="">
-                <img src={IAppStore} alt="App Store" />
-              </BannerImage>
-              <BannerImage href="">
-                <img src={IPlayMarket} alt="Google Play" />
-              </BannerImage>
-            </Banner>
-          </PanelBody>
-        </Panel>
+    <Panel>
+      <PanelBody>
+        <Banner>
+          <img src={INubabiApp} alt="Nubabi App" />
+          <h4>Have you tried the Nubabi Mobile App?</h4>
+          <p>Enjoy easy access to your baby’s content, on the go!</p>
+          <br />
+          <BannerImage href="">
+            <img src={IAppStore} alt="App Store" />
+          </BannerImage>
+          <BannerImage href="">
+            <img src={IPlayMarket} alt="Google Play" />
+          </BannerImage>
+        </Banner>
+      </PanelBody>
+    </Panel>
 
-        <SideBarFooter>
-          <small>
-            ©2017 Nubabi. About Us  • FAQ & Support • Contact Us • Log Out
-          </small>
-          <hr />
-          <small>
-            All rights reserved. Use of this website is regulated by our website
-            Terms of Use and Privacy Policy.
-          </small>
-        </SideBarFooter>
-      </SideBar>
-    );
-  }
-}
+    <SideBarFooter>
+      <small>
+        ©2017 Nubabi. About Us • FAQ & Support • Contact Us • Log Out
+      </small>
+      <hr />
+      <small>
+        All rights reserved. Use of this website is regulated by our website
+        Terms of Use and Privacy Policy.
+      </small>
+    </SideBarFooter>
+  </SideBar>
+);
 
 export default Sidebar;

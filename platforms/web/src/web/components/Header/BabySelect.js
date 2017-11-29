@@ -5,10 +5,11 @@ import Modal from 'react-modal';
 import { Box } from 'grid-styled';
 import onClickOutside from 'react-onclickoutside';
 
-import { Menu, Button } from '../../../../src/web/elements';
-import IPerson from '../../../images/icons/person.svg';
+import { Menu, Button } from 'web/elements';
+import IPerson from 'web/assets/images/icons/person.svg';
+import { Baby } from 'core/types';
 
-type Props = {};
+type Props = Baby;
 
 const BabySelect = styled.div`
   margin: -10px 0 0 0;
@@ -79,6 +80,21 @@ const BabiesListItem = styled(Menu.Link)`
   }
 `;
 
+const BabyProfileImage = styled.div`
+  width: 70px;
+  height: 70px;
+  position: absolute;
+  left: 50%;
+  top: 50px;
+  transform: translate(-50%, -50%);
+  border: 8px solid ${props => props.theme.colors.white};
+  border-radius: 100%;
+  background: url(${props => props.image});
+  background-size: cover;
+  background-position: center;
+  z-index: 3;
+`;
+
 const BabyImage = styled(Box)`
   width: 40px;
   height: 40px;
@@ -132,7 +148,7 @@ class Select extends Component<Props> {
     this.closeModal = this.closeModal.bind(this);
   }
 
-  handleClickOutside(e) {
+  handleClickOutside() {
     this.closeModal();
   }
 
@@ -145,8 +161,11 @@ class Select extends Component<Props> {
   }
 
   render() {
+    const avatar = this.props.avatar && this.props.avatar.url;
+
     return (
       <BabySelect className="BabySelect">
+        <BabyProfileImage image={avatar} />
         <BabySelected onClick={this.openModal}>Charlotte</BabySelected>
 
         <Modal

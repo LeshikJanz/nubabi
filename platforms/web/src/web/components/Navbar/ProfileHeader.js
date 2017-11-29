@@ -7,10 +7,10 @@ import moment from 'moment';
 import Modal from 'react-modal';
 import onClickOutside from 'react-onclickoutside';
 
-import IWeight from '../../../../../images/icons/weight.svg';
-import IHeight from '../../../../../images/icons/height.svg';
-import IEdit from '../../../../../images/icons/edit.svg';
-import ICamera from '../../../../../images/icons/camera.svg';
+import IWeight from 'web/assets/images/icons/weight.svg';
+import IHeight from 'web/assets/images/icons/height.svg';
+import IEdit from 'web/assets/images/icons/edit.svg';
+import ICamera from 'web/assets/images/icons/camera.svg';
 
 import { Header, Button } from 'web/elements';
 
@@ -52,21 +52,6 @@ const EditPhotosButton = styled(Flex)`
   > svg {
     margin: 0 0 10px;
   }
-`;
-
-const BabyImage = styled.div`
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  left: 50%;
-  top: 0;
-  transform: translate(-50%, -50%);
-  border: 8px solid ${props => props.theme.colors.white};
-  border-radius: 100%;
-  background: url(${props => props.image});
-  background-size: cover;
-  background-position: center;
-  z-index: 3;
 `;
 
 const BabyInfo = styled(Flex)`
@@ -251,7 +236,7 @@ class ProfileHeader extends Component<Props> {
   }
 
   render() {
-    const { coverImage, avatar, dob, name, weight, height } = this.props;
+    const { coverImage, dob, name, weight, height } = this.props;
 
     return (
       <Box width={1} is={Header}>
@@ -262,7 +247,6 @@ class ProfileHeader extends Component<Props> {
         >
           {' '}
           {/* Be careful! Modal depend on className */}
-          <BabyImage image={avatar.url} />
           {this.state.modalIsOpen && (
             <PhotoChangeIcon>
               <ICamera />

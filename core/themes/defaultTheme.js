@@ -21,11 +21,13 @@ const open = {
   gray1: '#CFD6DF',
   gray2: '#9EABBC',
   gray3: '#748294',
+  gray4: '#454D57',
   blue0: '#33B7EB',
   blue1: '#58A4FF',
   red0: '#EA3154',
   black0: '#454D56',
   black1: '#3D414B',
+  pink: '#EC4469',
 };
 
 const colors = {

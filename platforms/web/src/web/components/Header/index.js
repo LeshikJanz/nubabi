@@ -4,17 +4,18 @@ import { Header } from 'web/elements';
 import styled from 'styled-components';
 import { Flex, Box } from 'grid-styled';
 import { Link } from 'react-router-dom';
-
-import Logo from '../../../images/icons/logo.svg';
+import Logo from 'web/assets/images/icons/logo.svg';
 import Notifications from './Notifications';
 import BabySelect from './BabySelect';
 
 import Menu from './Menu';
+import { Baby } from 'core/types';
 
 type Props = {
   pathname: string,
   isLoggedIn: boolean,
   logout: () => void,
+  baby: Baby,
 };
 
 const Wrapper = styled(Header)`
@@ -24,6 +25,7 @@ const Wrapper = styled(Header)`
   justify-content: center;
   height: 70px;
   padding: 0 20px;
+  box-shadow: ${props => props.theme.shadows.panel};
   background: ${props => props.theme.colors.white};
 `;
 
@@ -75,7 +77,7 @@ class AppHeader extends PureComponent<Props> {
           </HeaderLeft>
 
           <HeaderCenter width={1 / 4}>
-            <BabySelect />
+            <BabySelect {...this.props.baby} />
           </HeaderCenter>
 
           <HeaderRight width={1 / 3}>

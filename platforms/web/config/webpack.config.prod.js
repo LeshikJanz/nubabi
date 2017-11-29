@@ -78,7 +78,7 @@ module.exports = {
     // https://github.com/facebookincubator/create-react-app/issues/253
     modules: ['node_modules', paths.appNodeModules].concat(
       // It is guaranteed to exist because we tweak it in `env.js`
-      process.env.NODE_PATH.split(path.delimiter).filter(Boolean),
+      process.env.NODE_PATH.split(path.delimiter).filter(Boolean)
     ),
     // These are the reasonable defaults supported by the Node ecosystem.
     // We also include JSX as a common component filename extension to support
@@ -95,7 +95,7 @@ module.exports = {
       web: path.resolve(__dirname, '../src/web'),
       'react-native-fetch-blob': path.resolve(
         __dirname,
-        '../config/react-native-fetch-blob',
+        '../config/react-native-fetch-blob'
       ),
     },
     plugins: [
@@ -162,7 +162,7 @@ module.exports = {
             exclude: [
               path.resolve(
                 __dirname,
-                '../../node_modules/react-native-fetch-blob',
+                '../../node_modules/react-native-fetch-blob'
               ),
             ],
             loader: require.resolve('babel-loader'),
@@ -237,8 +237,8 @@ module.exports = {
                     },
                   ],
                 },
-                extractTextPluginOptions,
-              ),
+                extractTextPluginOptions
+              )
             ),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },

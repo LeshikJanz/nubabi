@@ -6,12 +6,8 @@ import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-
-import { Loader } from 'web/components';
-import NavBar from './Navbar';
-import Header from './Header';
-import Main from './Main';
-import SideBar from '../../../../components/Sidebar';
+import ProfileMain from './Main';
+import DisplayLoadingState from 'web/components/displayLoadingState';
 
 type Props = {
   navigation: any,
@@ -21,10 +17,12 @@ type Props = {
     height: 'cm' | 'in',
   },
   data: { loading: boolean },
-  location: mixed,
 };
 
-const Wrapper = styled(Flex)``;
+const Wrapper = styled(Flex)`
+  width: 100%;
+  background: ${props => props.theme.bg.panel};
+`;
 
 class Profile extends PureComponent<Props> {
   static fragments = {
@@ -78,6 +76,11 @@ class Profile extends PureComponent<Props> {
               skillArea {
                 id
                 icon
+                image {
+                  thumb {
+                    url
+                  }
+                }
               }
             }
           }
@@ -121,44 +124,32 @@ class Profile extends PureComponent<Props> {
   };
 
   render() {
-    const { baby, location } = this.props;
-
-    console.log('location', location);
-
-    if (!baby) {
-      return <Loader active />;
-    }
+    const { baby } = this.props;
 
     return (
-      <Wrapper wrap justify="space-between">
-        <Header {...baby} />
-
-        <NavBar {...baby} />
-
-        <Main {...baby} />
-
-        <SideBar />
+      <Wrapper>
+        <ProfileMain {...baby} />
       </Wrapper>
     );
   }
 }
 
 const query = gql`
-  query getBaby($id: ID!) {
-    viewer {
-      baby(id: $id) {
-        ...Profile
-        ...ProfileGrowth
-        ...ProfileActivities
-        ...RecentMemories
-      }
+    query getBaby($id: ID!) {
+        viewer {
+            baby(id: $id) {
+                ...Profile
+                ...ProfileGrowth
+                ...ProfileActivities
+                ...RecentMemories
+            }
+        }
     }
-  }
 
-  ${Profile.fragments.baby}
-  ${Profile.fragments.growth}
-  ${Profile.fragments.activities}
-  ${Profile.fragments.recentMemories}
+    ${Profile.fragments.baby}
+    ${Profile.fragments.growth}
+    ${Profile.fragments.activities}
+    ${Profile.fragments.recentMemories}
 `;
 
 export default compose(
@@ -177,4 +168,5 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
+  DisplayLoadingState,
 )(Profile);

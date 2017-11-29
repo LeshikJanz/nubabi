@@ -3,26 +3,32 @@ import defaultTheme, {
   PANEL_BUTTON_TEXT,
 } from 'core/themes/defaultTheme';
 import { mergeDeepRight } from 'ramda';
+import { activityItem, checkbox, shadows } from './elements';
+import './common';
 
-const shadows = {
-  primary: `0 2px 4px 0 rgba(0, 0, 0, .5)`,
-  light: `0 1px 0 0 ${defaultTheme.colors.open.white2}`,
-  panel: `0 1px 3px 0 rgba(0, 0, 0, .15)`,
-};
-
-const bg = {
+export const bg = {
   panel: PANEL_BACKGROUND,
 };
 
-const overlay = {
+export const overlay = {
   gray3: 'rgba(116, 130, 148, .7)',
   blue0: 'rgba(51, 183, 235, .07)',
 };
 
-const theme = mergeDeepRight(defaultTheme, {
+export const screens = {
+  laptop: '1366px',
+  tablet: '1024px',
+  tabletMini: '768px',
+  mobile: '600px',
+};
+
+export const theme = mergeDeepRight(defaultTheme, {
   overlay,
   bg,
   shadows,
+  activityItem,
+  screens,
+  checkbox,
   colors: {
     open: {
       white2: '#E9ECF4',
@@ -33,6 +39,9 @@ const theme = mergeDeepRight(defaultTheme, {
   button: {
     borderRadius: 20,
     fontSize: 14,
+  },
+  a: {
+    color: 'red !important',
   },
   paragraph: {
     color: defaultTheme.colors.open.gray3,
