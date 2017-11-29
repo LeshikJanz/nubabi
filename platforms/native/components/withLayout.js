@@ -5,7 +5,7 @@ import { getContext } from 'recompose';
 import PropTypes from 'prop-types';
 import hoistStatics from './hoistStatics';
 
-type LayoutState = {
+export type LayoutState = {
   layout: {
     viewportWidth: number,
     viewportHeight: number,
