@@ -1,10 +1,16 @@
 // @flow
+import type { Baby } from 'core/types';
+import type { State, Dispatch } from 'web/types';
 import React from 'react';
 import { connect } from 'react-redux';
-import type { State, Dispatch } from 'web/types';
+import { gql, graphql } from 'react-apollo';
+import compose from 'ramda/src/compose';
 import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
+import path from 'ramda/src/path';
+import 'sanitize.css/sanitize.css';
+import { logout } from 'core/auth/actions';
 import { Section } from 'web/elements';
 import {
   Loader,
@@ -16,13 +22,11 @@ import {
   NotFound,
 } from 'web/components';
 import Login from 'web/auth';
-import { logout } from 'core/auth/actions';
 import NavBar from '../components/Navbar';
-import { gql, graphql } from 'react-apollo';
-import compose from 'ramda/src/compose';
-import path from 'ramda/src/path';
-
-import 'sanitize.css/sanitize.css';
+import Stimulation from 'web/bundles/stimulation/containers';
+import Growth from 'web/bundles/growth';
+import Library from 'web/bundles/library';
+import Memories from 'web/bundles/memories';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -31,19 +35,12 @@ const Profile = Loadable({
   },
 });
 
-import Stimulation from 'web/bundles/stimulation/containers';
-import { Baby } from 'core/types';
-import Growth from 'web/bundles/growth';
-import Library from 'web/bundles/library';
-import Memories from 'web/bundles/memories';
-
 type Props = {
   isLoading: boolean,
   pathname: string,
   logout: Function,
   isAuthenticated: boolean,
   baby: Baby,
-  setBabyToStore: Function,
 };
 
 const Wrapper = styled.div`
