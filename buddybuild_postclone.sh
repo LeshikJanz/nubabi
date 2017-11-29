@@ -2,7 +2,11 @@
 export GIT_REVISION_SHA=$(git rev-parse HEAD)
 export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
 
-BUNDLE_BASE_VERSION=$(/usr/libexec/PListBuddy -c "Print :CFBundleShortVersionString" $BUDDYBUILD_WORKSPACE/ios/NubabiMobile/Info.plist)
+PKG_VERSION=$(cd $BUDDYBUILD_WORKSPACE && node -p "require('./platforms/native/package.json').version")
+BUNDLE_BASE_VERSION=$PKG_VERSION
+
+echo "Setting CFBundleShortVersionString to $BUNDLE_BASE_VERSION..."
+/usr/libexec/PListBuddy -c "Set :CFBundleShortVersionString $BUNDLE_BASE_VERSION" $BUDDYBUILD_WORKSPACE/ios/NubabiMobile/Info.plist
 
 if [[ "$BUDDYBUILD_BRANCH" =~ "release" ]]; then
   NUBABI_ENV=release
