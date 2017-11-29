@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable no-param-reassign,prefer-destructuring */
 import palx from 'palx';
 
 const palette = palx('#07c');
