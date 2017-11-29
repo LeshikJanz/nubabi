@@ -1,15 +1,15 @@
 // @flow
+import type { MemoryConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
-
 import Button from 'web/elements/Button';
 import EmptyGalleryIcon from 'web/assets/images/icons/moment.svg';
 import LibBackground from 'web/assets/images/lib-background.png';
-import { MemoryConnection } from 'core/types';
 
 type Props = {
   memories: MemoryConnection,
+  name: string,
 };
 
 const Memories = styled.div``;
@@ -140,8 +140,9 @@ const MemoriesEmptyContainer = styled(Flex)`
 
 class ProfileMain extends PureComponent<Props> {
   render() {
-    const { memories } = this.props;
+    const { name, memories } = this.props;
 
+    // FIXME: memories.edges could be null as Flow correctly tells us
     return (
       <Memories>
         {memories.edges.length !== 0 && (
@@ -174,7 +175,7 @@ class ProfileMain extends PureComponent<Props> {
             <BackgroundImage src={LibBackground} />
             <MemoriesTitle is="h3">Recent Memories </MemoriesTitle>
             <MemoriesEmptyText>
-              Upload voice notes, videos and photos of Charlotte to Memories and
+              Upload voice notes, videos and photos of {name} to Memories and
               they’ll display here for you to enjoy.
             </MemoriesEmptyText>
             <button>

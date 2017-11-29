@@ -25,7 +25,7 @@ const ProfileMain = ({ memories, growth, activities, name, dob }: Props) => (
 
     <Activities name={name} activities={activities} />
 
-    <Memories memories={memories} />
+    <Memories name={name} memories={memories} />
   </Box>
 );
 
