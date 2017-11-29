@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import EquipmentItem from './EquipmentItem';
+import { compose } from 'ramda';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import ShowNoContentViewIf from 'web/components/showNoContentViewIf';
-import { compose } from 'ramda';
+import EquipmentItem from './EquipmentItem';
 
 type Props = {
   equipments: any,
