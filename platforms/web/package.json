@@ -2,6 +2,12 @@
   "name": "nubabi-web",
   "version": "1.0.0",
   "private": true,
+  "eslintConfig": {
+    "globals": {
+      "window": true,
+      "document": true
+    }
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "data.task": "^3.1.1",
