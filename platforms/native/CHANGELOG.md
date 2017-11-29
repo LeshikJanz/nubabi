@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.0.0...nubabi-native@1.1.0) (2017-11-28)
+
+
+### Features
+
+* analytics support ([be20d72](https://gitlab.com/nubabi/mobile/commit/be20d72))
+
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2017-11-27)
 
@@ -552,6 +563,3 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * prefetch ChooseBaby queries and cache remaining images that can be ([80f6729](https://gitlab.com/nubabi/mobile/commit/80f6729))
 * **stimulation:** cache skill and expert image in Activity ([47c3ca6](https://gitlab.com/nubabi/mobile/commit/47c3ca6))
 * store media on state in Activity ([3cc2781](https://gitlab.com/nubabi/mobile/commit/3cc2781))
-
-
-

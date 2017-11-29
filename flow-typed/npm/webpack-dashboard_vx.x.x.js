@@ -79,9 +79,7 @@ declare module 'webpack-dashboard/plugin/index.js' {
   declare module.exports: $Exports<'webpack-dashboard/plugin/index'>;
 }
 declare module 'webpack-dashboard/utils/error-serialization.js' {
-  declare module.exports: $Exports<
-    'webpack-dashboard/utils/error-serialization',
-  >;
+  declare module.exports: $Exports<'webpack-dashboard/utils/error-serialization'>;
 }
 declare module 'webpack-dashboard/utils/format-assets.js' {
   declare module.exports: $Exports<'webpack-dashboard/utils/format-assets'>;

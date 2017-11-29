@@ -44,24 +44,16 @@ declare module 'react-test-renderer/shallow' {
 
 // Filename aliases
 declare module 'react-test-renderer/cjs/react-test-renderer-shallow.development.js' {
-  declare module.exports: $Exports<
-    'react-test-renderer/cjs/react-test-renderer-shallow.development',
-  >;
+  declare module.exports: $Exports<'react-test-renderer/cjs/react-test-renderer-shallow.development'>;
 }
 declare module 'react-test-renderer/cjs/react-test-renderer-shallow.production.min.js' {
-  declare module.exports: $Exports<
-    'react-test-renderer/cjs/react-test-renderer-shallow.production.min',
-  >;
+  declare module.exports: $Exports<'react-test-renderer/cjs/react-test-renderer-shallow.production.min'>;
 }
 declare module 'react-test-renderer/cjs/react-test-renderer.development.js' {
-  declare module.exports: $Exports<
-    'react-test-renderer/cjs/react-test-renderer.development',
-  >;
+  declare module.exports: $Exports<'react-test-renderer/cjs/react-test-renderer.development'>;
 }
 declare module 'react-test-renderer/cjs/react-test-renderer.production.min.js' {
-  declare module.exports: $Exports<
-    'react-test-renderer/cjs/react-test-renderer.production.min',
-  >;
+  declare module.exports: $Exports<'react-test-renderer/cjs/react-test-renderer.production.min'>;
 }
 declare module 'react-test-renderer/index' {
   declare module.exports: $Exports<'react-test-renderer'>;

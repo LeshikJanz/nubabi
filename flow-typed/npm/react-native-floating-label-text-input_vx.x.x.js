@@ -23,6 +23,7 @@ declare module 'react-native-floating-label-text-input' {
  * needed.
  */
 
+
 // Filename aliases
 declare module 'react-native-floating-label-text-input/index' {
   declare module.exports: $Exports<'react-native-floating-label-text-input'>;

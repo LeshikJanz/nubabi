@@ -118,7 +118,5 @@ declare module 'react-router-redux/umd/react-router-redux.js' {
   declare module.exports: $Exports<'react-router-redux/umd/react-router-redux'>;
 }
 declare module 'react-router-redux/umd/react-router-redux.min.js' {
-  declare module.exports: $Exports<
-    'react-router-redux/umd/react-router-redux.min',
-  >;
+  declare module.exports: $Exports<'react-router-redux/umd/react-router-redux.min'>;
 }

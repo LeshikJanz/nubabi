@@ -40,14 +40,10 @@ declare module 'react-onclickoutside/lib/index' {
 
 // Filename aliases
 declare module 'react-onclickoutside/dist/react-onclickoutside.js' {
-  declare module.exports: $Exports<
-    'react-onclickoutside/dist/react-onclickoutside',
-  >;
+  declare module.exports: $Exports<'react-onclickoutside/dist/react-onclickoutside'>;
 }
 declare module 'react-onclickoutside/dist/react-onclickoutside.min.js' {
-  declare module.exports: $Exports<
-    'react-onclickoutside/dist/react-onclickoutside.min',
-  >;
+  declare module.exports: $Exports<'react-onclickoutside/dist/react-onclickoutside.min'>;
 }
 declare module 'react-onclickoutside/es/index.js' {
   declare module.exports: $Exports<'react-onclickoutside/es/index'>;

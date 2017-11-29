@@ -14,7 +14,7 @@
     "test": "jest",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",
-    "release": "lerna --skip-npm --conventional-commits publish",
+    "release": "lerna publish --skip-npm --conventional-commits",
     "firebase:deploy": "firebase deploy",
     "firebase:deploy:functions": "firebase deploy --only functions",
     "firebase:deploy:rules": "firebase deploy --only database",

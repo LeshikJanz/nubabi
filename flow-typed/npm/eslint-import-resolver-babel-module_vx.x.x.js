@@ -56,42 +56,26 @@ declare module 'eslint-import-resolver-babel-module/test/index.test' {
 
 // Filename aliases
 declare module 'eslint-import-resolver-babel-module/lib/index.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/lib/index',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/lib/index'>;
 }
 declare module 'eslint-import-resolver-babel-module/src/index.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/src/index',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/src/index'>;
 }
 declare module 'eslint-import-resolver-babel-module/test/examples/components/c1.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/test/examples/components/c1',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/test/examples/components/c1'>;
 }
 declare module 'eslint-import-resolver-babel-module/test/examples/components/c3.jsx' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/test/examples/components/c3',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/test/examples/components/c3'>;
 }
 declare module 'eslint-import-resolver-babel-module/test/examples/components/sub/envonly/yo.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/test/examples/components/sub/envonly/yo',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/test/examples/components/sub/envonly/yo'>;
 }
 declare module 'eslint-import-resolver-babel-module/test/examples/components/sub/sub/c2.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/test/examples/components/sub/sub/c2',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/test/examples/components/sub/sub/c2'>;
 }
 declare module 'eslint-import-resolver-babel-module/test/examples/file1.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/test/examples/file1',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/test/examples/file1'>;
 }
 declare module 'eslint-import-resolver-babel-module/test/index.test.js' {
-  declare module.exports: $Exports<
-    'eslint-import-resolver-babel-module/test/index.test',
-  >;
+  declare module.exports: $Exports<'eslint-import-resolver-babel-module/test/index.test'>;
 }
