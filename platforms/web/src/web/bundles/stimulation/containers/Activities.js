@@ -4,8 +4,8 @@ import { Flex, Box } from 'grid-styled';
 import styled, { css } from 'styled-components';
 import { Baby } from 'core/types';
 import { STIMULATION_BUTTONS } from '../constants';
-import StimulationButton from './StimulationButton';
-import ActivityList from './ActivityList';
+import StimulationButton from '../components/StimulationButton';
+import ActivityList from '../components/ActivityList';
 
 type Props = Baby;
 

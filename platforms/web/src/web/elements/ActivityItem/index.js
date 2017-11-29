@@ -71,10 +71,13 @@ const ActionArea = styled(Flex)`
 
 class ActivityItem extends PureComponent<Props> {
   render() {
-    const { activity } = this.props;
+    const { activity, handleClick } = this.props;
 
     return (
-      <ActivitiesListItem key={activity.id}>
+      <ActivitiesListItem
+        key={activity.id}
+        onClick={() => handleClick(activity)}
+      >
         <ActivitiesListItemImage
           src={activity.skillArea.image && activity.skillArea.image.thumb.url}
         />

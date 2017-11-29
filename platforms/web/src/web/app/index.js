@@ -27,6 +27,7 @@ import Stimulation from 'web/bundles/stimulation/containers';
 import Growth from 'web/bundles/growth';
 import Library from 'web/bundles/library';
 import Memories from 'web/bundles/memories';
+import Activity from 'web/bundles/stimulation/containers/activity';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -79,8 +80,15 @@ const App = (props: Props) => (
           />
           <AuthenticatedRoute path="/growth" component={Growth} props={props} />
           <AuthenticatedRoute
+            exact
             path="/stimulation"
             component={Stimulation}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/:id"
+            component={Activity}
             props={props}
           />
           <AuthenticatedRoute
