@@ -5,7 +5,7 @@ export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
 PKG_VERSION=$(cd $BUDDYBUILD_WORKSPACE && node -p "require('./platforms/native/package.json').version")
 BUNDLE_BASE_VERSION=$PKG_VERSION
 
-echo "Setting CFBundleShortVersionString to $BUNDLE_BASE_VERSION..."
+echo "Setting CFBundleShortVersionString to $BUNDLE_BASE_VERSION"
 /usr/libexec/PListBuddy -c "Set :CFBundleShortVersionString $BUNDLE_BASE_VERSION" $BUDDYBUILD_WORKSPACE/ios/NubabiMobile/Info.plist
 
 if [[ "$BUDDYBUILD_BRANCH" =~ "release" ]]; then
@@ -51,8 +51,8 @@ const config = {
 export default config;
 EOF
 export BABEL_ENV="production"
-echo "Exported config for environment $NUBABI_ENV to core/config/index.js"
-cat $BUDDYBUILD_WORKSPACE/core/config/index.js
+echo "Exported config for environment "$NUBABI_ENV" to core/config/index.js"
+echo "Set App version string to $NUBABI_APP_VERSION"
 # Workaround the fact that buddybuild doesn't seem to handle env vars correctly
 tee $BUDDYBUILD_WORKSPACE/.env > /dev/null <<EOF
   export NUBABI_APP_VERSION=$NUBABI_APP_VERSION
