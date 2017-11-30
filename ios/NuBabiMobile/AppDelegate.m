@@ -14,7 +14,6 @@
 #import <React/RCTLinkingManager.h>
 
 #import "Orientation.h"
-@import Firebase;
 
 @implementation AppDelegate
 
@@ -24,9 +23,6 @@
 
   /* Setup BuddyBuild SDK */
   [BuddyBuildSDK setup];
-
-  /* Setup Firebase SDK */
-  [FIRApp configure];
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
@@ -40,7 +36,7 @@
   /* Set background color to match splash screen */
   self.defaultBackground = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   rootView.backgroundColor = self.defaultBackground;
-
+  
   /*
    * Set root view's background to the splash screen (LaunchImage)
    *
@@ -50,7 +46,7 @@
   for (NSString *imgName in allPngImageNames){
     if ([imgName containsString:@"LaunchImage"]){
       UIImage *img = [UIImage imageNamed:imgName];
-
+      
       if (img.scale == [UIScreen mainScreen].scale
           && CGSizeEqualToSize(img.size, [UIScreen mainScreen].bounds.size)) {
         self.launchImageBackground = [UIColor colorWithPatternImage:img];
@@ -58,7 +54,7 @@
       }
     }
   }
-
+  
   /* Subscribe to RN's event for when JavaScript finishes loading */
   [[NSNotificationCenter defaultCenter] addObserver:self
         selector:@selector(javascriptLoadEvent:) 

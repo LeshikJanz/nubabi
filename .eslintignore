@@ -2,21 +2,12 @@
 ios/**
 flow-typed/**
 /node_modules/eslint-config-airbnb/rules/react-a11y.js
-
 # used by transform on development
-core/config/getConfig.js
-platforms/server/firebase/functions
+src/common/config/getConfig.js 
+src/server/firebase/functions
 
 # a local server I use to test the non-firebase (and Firebase Admin SDK-backed in the future)
-platforms/server/graphql/server.js
-platforms/server/graphql/helpers/printSchema.js
+src/server/graphql/server.js
+src/server/graphql/helpers/printSchema.js
 
-**/node_modules/
-
-# CRA
-platforms/web/scripts/
-platforms/web/src/web/registerServiceWorker.js
-platforms/web/config/
-
-# mocks
 __mocks__/**/*.js

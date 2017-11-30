@@ -1,12 +1,8 @@
 {
   "database": {
-    "rules": "platforms/firebase/rules.bolt"
+    "rules": "src/server/firebase/rules.bolt"
   },
   "functions": {
-    "source": "platforms/firebase/functions"
-  },
-  "hosting": {
-    "public": "platforms/web/build",
-    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
+    "source": "src/server/firebase/functions"
   }
 }

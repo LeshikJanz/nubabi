@@ -1,5 +1,5 @@
-// flow-typed signature: f6a3c0f029897f2a4b83578ebd8fe0ec
-// flow-typed version: 203e176de6/ramda_v0.x.x/flow_>=v0.49.x
+// flow-typed signature: c98ab630ca1653817fb3e561a8571a8b
+// flow-typed version: 5701a11906/ramda_v0.x.x/flow_>=v0.49.x
 
 /* eslint-disable no-unused-vars, no-redeclare */
 
@@ -331,7 +331,6 @@ declare module ramda {
     (<A, B, C, D, E>(
       ab: UnaryFn<A, B>,
       bc: UnaryFn<B, C>,
-      cd: UnaryFn<C, D>,
       de: UnaryFn<D, E>,
       ...rest: Array<void>
     ) => UnaryFn<A, E>) &
@@ -705,13 +704,14 @@ declare module ramda {
   ): ((xs: string) => string) & ((xs: T) => ?V);
   declare function nth<T: string>(i: number, xs: T): T;
 
-  declare type Find = (<V, T: Array<V>>(
-    fn: UnaryPredicateFn<V>
-  ) => (xs: T) => ?V) &
-    (<V, T: Array<V>>(fn: UnaryPredicateFn<V>, xs: T) => ?V);
-
-  declare var find: Find;
-
+  declare function find<V, O: { [key: string]: * }, T: Array<V> | O>(
+    fn: UnaryPredicateFn<V>,
+    ...rest: Array<void>
+  ): (xs: T | O) => ?V | O;
+  declare function find<V, O: { [key: string]: * }, T: Array<V> | O>(
+    fn: UnaryPredicateFn<V>,
+    xs: T | O
+  ): ?V | O;
   declare function findLast<V, O: { [key: string]: * }, T: Array<V> | O>(
     fn: UnaryPredicateFn<V>,
     ...rest: Array<void>
@@ -1368,8 +1368,12 @@ declare module ramda {
     src: { [k: string]: T }
   ): { [k: string]: T };
 
-  declare function evolve<A: Object>(NestedObject<Function>, A): A;
-  declare function evolve<A: Object>(NestedObject<Function>): A => A;
+  // TODO: Started failing in v31... (Attempt to fix below)
+  // declare type __UnwrapNestedObjectR<T, U, V: NestedObject<(t: T) => U>> = U
+  // declare type UnwrapNestedObjectR<T> = UnwrapNestedObjectR<*, *, T>
+  //
+  // declare function evolve<R, T: NestedObject<(x:any) => R>>(fn: T, ...rest: Array<void>): (src: NestedObject<any>) => UnwrapNestedObjectR<T>;
+  // declare function evolve<R: NestedObject<(x:any) => R>>(fn: T, src: NestedObject<any>): UnwrapNestedObjectR<T>;
 
   declare function eqProps(
     key: string,
@@ -1899,12 +1903,12 @@ declare module ramda {
   declare function or(x: boolean, y: boolean): boolean;
   declare function or(x: boolean): (y: boolean) => boolean;
 
-  declare var pathSatisfies: CurriedFunction3<
-    UnaryPredicateFn<any>,
-    string[],
-    Object,
-    boolean
-  >;
+  // TODO: pathSatisfies: Started failing in v39...
+  // declare function pathSatisfies<T>(cond: (x: T) => boolean, path: Array<string>, o: NestedObject<T>): boolean;
+  // declare function pathSatisfies<T>(cond: (x: T) => boolean, path: Array<string>, ...rest: Array<void>): (o: NestedObject<T>) => boolean;
+  // declare function pathSatisfies<T>(cond: (x: T) => boolean, ...rest: Array<void>):
+  // ((path: Array<string>, ...rest: Array<void>) => (o: NestedObject<T>) => boolean)
+  // & ((path: Array<string>, o: NestedObject<T>) => boolean)
 
   declare function propSatisfies<T>(
     cond: (x: T) => boolean,

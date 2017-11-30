@@ -3,23 +3,14 @@
     "react-native" // this is required for debugging with react-native/packager/transformer
   ],
   "plugins": [
-    ["inline-import", { "extensions": [".graphql", ".graphqls"] }],
-    ["module-resolver", {
-      "extensions": [".js", ".ios.js", ".android.js"],
-      "alias": {
-        "core": "./core",
-        "native": "./platforms/native",
-        "web": "./platforms/web/src/web"
-      }
-    }]
-
+    ["inline-import", { "extensions": [".graphql", ".graphqls"] }] 
   ],
 
   "env": {
     "development": {
       "plugins": [
         ["flow-react-proptypes", { "ignoreNodeModules": true}],
-        ["transform-define", "./core/config/getConfig.js"]
+        ["transform-define", "./src/common/config/getConfig.js"]
       ]
     }
   },

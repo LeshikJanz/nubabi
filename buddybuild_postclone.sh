@@ -2,11 +2,7 @@
 export GIT_REVISION_SHA=$(git rev-parse HEAD)
 export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
 
-PKG_VERSION=$(cd $BUDDYBUILD_WORKSPACE && node -p "require('./platforms/native/package.json').version")
-BUNDLE_BASE_VERSION=$PKG_VERSION
-
-echo "Setting CFBundleShortVersionString to $BUNDLE_BASE_VERSION"
-/usr/libexec/PListBuddy -c "Set :CFBundleShortVersionString $BUNDLE_BASE_VERSION" $BUDDYBUILD_WORKSPACE/ios/NubabiMobile/Info.plist
+BUNDLE_BASE_VERSION=$(/usr/libexec/PListBuddy -c "Print :CFBundleShortVersionString" $BUDDYBUILD_WORKSPACE/ios/NubabiMobile/Info.plist)
 
 if [[ "$BUDDYBUILD_BRANCH" =~ "release" ]]; then
   NUBABI_ENV=release
@@ -33,12 +29,11 @@ fi
 # I've tried everything else, BuddyBuild is just weird when it comes to
 # environment variables, they don't get preserved between custom script
 # stages, so I had to resort to just nuking and replacing the file.
-tee $BUDDYBUILD_WORKSPACE/core/config/index.js > /dev/null <<EOF
+tee $BUDDYBUILD_WORKSPACE/src/common/config/index.js > /dev/null <<EOF
 const config = {
   appName: "$NUBABI_APP_NAME",
   appVersion: "$NUBABI_APP_VERSION",
   apiUrl: "$NUBABI_API_URL",
-  environment: "$NUBABI_ENV",
   firebase: {
     "apiKey": "$NUBABI_FIREBASE_API_KEY",
     "authDomain": "$NUBABI_FIREBASE_AUTH_DOMAIN",
@@ -52,10 +47,9 @@ const config = {
 export default config;
 EOF
 export BABEL_ENV="production"
-echo "Exported config for environment \"$NUBABI_ENV\" to \"core/config/index.js\""
-echo "Set App version string to $NUBABI_APP_VERSION"
+echo "Exported config for environment $NUBABI_ENV to src/common/config/index.js"
+cat $BUDDYBUILD_WORKSPACE/src/common/config/index.js
 # Workaround the fact that buddybuild doesn't seem to handle env vars correctly
 tee $BUDDYBUILD_WORKSPACE/.env > /dev/null <<EOF
   export NUBABI_APP_VERSION=$NUBABI_APP_VERSION
-  export NUBABI_ENV=$NUBABI_ENV
 EOF
