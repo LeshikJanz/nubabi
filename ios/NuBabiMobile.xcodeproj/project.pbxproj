@@ -51,7 +51,6 @@
 		8025C9071F165EA60048FC03 /* RSKImageCropper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8025C9051F165EA60048FC03 /* RSKImageCropper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8025C90A1F165EAB0048FC03 /* QBImagePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8025C9091F165EAB0048FC03 /* QBImagePicker.framework */; };
 		8025C90B1F165EAB0048FC03 /* QBImagePicker.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 8025C9091F165EAB0048FC03 /* QBImagePicker.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		802CFDEF1FCEDA400025F6E5 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 802002E81FC4654400A44875 /* libRNSVG.a */; };
 		8038F4FE1F41FB980092A3E8 /* SF-Pro-Display-UltralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4E01F41FB980092A3E8 /* SF-Pro-Display-UltralightItalic.otf */; };
 		8038F4FF1F41FB980092A3E8 /* SF-Pro-Display-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4E11F41FB980092A3E8 /* SF-Pro-Display-Ultralight.otf */; };
 		8038F5001F41FB980092A3E8 /* SF-Pro-Display-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4E21F41FB980092A3E8 /* SF-Pro-Display-ThinItalic.otf */; };
@@ -645,7 +644,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				802CFDEF1FCEDA400025F6E5 /* libRNSVG.a in Frameworks */,
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
 				0C87872A7098756F9245F1FD /* libPods-NuBabiMobileTests.a in Frameworks */,
 			);
