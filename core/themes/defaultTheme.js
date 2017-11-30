@@ -17,17 +17,20 @@ export const PANEL_BUTTON_TEXT = '#454D56';
 const open = {
   white0: '#FFFFFF',
   white1: '#F8F9FC',
+  white2: '#E9ECF4',
   gray0: '#E0E4E7',
   gray1: '#CFD6DF',
   gray2: '#9EABBC',
   gray3: '#748294',
-  gray4: '#454D57',
+  gray45: '#454D57',
+  gray6b: '#6B7683',
+  gray74: DARK_GREY,
   blue0: '#33B7EB',
   blue1: '#58A4FF',
   red0: '#EA3154',
+  red1: '#CB2E4A',
   black0: '#454D56',
   black1: '#3D414B',
-  pink: '#EC4469',
 };
 
 const colors = {

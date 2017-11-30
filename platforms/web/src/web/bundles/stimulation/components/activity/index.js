@@ -3,13 +3,21 @@ import React from 'react';
 import { Baby } from 'core/types';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import ActivityProfile from './acitivityProfile';
+import ActivityProfile from './activityProfile';
+import ActivityExpert from './activityExpert';
+import ActivityEquipment from './activityEquipment';
+import ActivitySkittles from './activitySkittles';
 
 type Props = {
   baby: Baby,
 };
 
-const ActivityWrapper = styled(Flex)``;
+const ActivityWrapper = styled(Flex)`
+  flex-direction: column;
+  background-color: #fff;
+  margin: 50px 15px;
+  height: 100%;
+`;
 
 const Activity = ({ baby: { activity = {} } }: Props) => {
   console.log('activity');
@@ -18,7 +26,9 @@ const Activity = ({ baby: { activity = {} } }: Props) => {
   return (
     <ActivityWrapper>
       <ActivityProfile activity={activity} />
-      <h1>Hello</h1>
+      <ActivityExpert {...activity} />
+      <ActivityEquipment {...activity} />
+      <ActivitySkittles {...activity} />
     </ActivityWrapper>
   );
 };

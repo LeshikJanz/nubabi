@@ -19,6 +19,25 @@ export const activityItem = {
   maxHeight: '119px',
 };
 
+export const text = {
+  h3: {
+    fontSize: '18px',
+    color: defaultTheme.colors.open.gray45,
+  },
+  default: {
+    fontSize: '16px',
+    lineHeight: '1.63',
+    color: defaultTheme.colors.open.gray6b,
+  },
+  small: {
+    fontSize: '14px',
+    lineHeight: 1.71,
+    color: defaultTheme.colors.open.gray74,
+  },
+};
+
+export const tooltip = {};
+
 export const checkbox = {
   rounded: {},
   squared: {},
