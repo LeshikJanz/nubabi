@@ -1,8 +1,8 @@
 // @flow
 import type { NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
-import { TouchableOpacity } from 'react-native';
-import { Box, Icon, Screen } from '../components';
+import { Image, TouchableOpacity } from 'react-native';
+import { Box, Screen } from '../components';
 import ViewMemory from './ViewMemory';
 
 type Props = {
@@ -23,11 +23,9 @@ export class ViewMemoryScreen extends PureComponent {
       title: 'Memory Details',
       headerRight: (
         <TouchableOpacity style={{ paddingRight: 10 }} onPress={editMemory}>
-          <Icon
-            size={20}
-            name="md-create"
-            color="#454D56"
-            style={{ marginLeft: 10 }}
+          <Image
+            style={{ width: 16, height: 16 }}
+            source={require('core/images/edit-black.png')}
           />
         </TouchableOpacity>
       ),
