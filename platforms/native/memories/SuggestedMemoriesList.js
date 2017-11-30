@@ -15,9 +15,9 @@ type Props = {
 };
 
 type HeaderProps = {
-  onDismiss: () => void,
+  onDismiss?: () => void,
   centered: boolean,
-}
+};
 
 export type SuggestedMemoryType = {
   id: string,
@@ -48,7 +48,7 @@ export const stickersList = [
   stickers.heart,
   stickers.firstSmile,
   stickers.cake,
-  stickers.birthday1,
+  stickers.firstBirthday,
   stickers.birthday2,
   stickers.birthday3,
   stickers.kisses,
