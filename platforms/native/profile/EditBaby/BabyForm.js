@@ -51,7 +51,11 @@ type Props = {
  * Otherwise, remove the file prefix.
  */
 export const normalizeAvatarAndCoverImage = (input, values) => {
+  // TODO: fix param reassignment, in the past we used to assign in place
+  // since we didn't want to copy object because of the big blob of base64
+  // but this is no longer the case.
   if (isNewFile(values.avatar)) {
+    // eslint-disable-next-line no-param-reassign
     input.avatar = {
       ...values.avatar,
       url: values.avatar.url.replace('file://', ''),
@@ -59,6 +63,7 @@ export const normalizeAvatarAndCoverImage = (input, values) => {
   }
 
   if (isNewFile(values.coverImage)) {
+    // eslint-disable-next-line no-param-reassign
     input.coverImage = {
       ...values.coverImage,
       url: values.coverImage.url.replace('file://', ''),
@@ -169,7 +174,7 @@ class Form extends PureComponent {
     // TODO: remove duplication with renderTextInput, extract
     // we can access errors on field.meta.errors and dirty state and field.meta.touched
     const { unitDisplay } = this.props;
-    const { label, input: { name, value } } = field;
+    const { label, input: { name, value }, editable } = field;
     const { touched, error } = field.meta;
 
     const hasError = touched && error;
@@ -206,9 +211,11 @@ class Form extends PureComponent {
         </View>
         <View style={{ flexDirection: 'row' }}>
           <Text style={styles.textInput}>{measurementText}</Text>
-          <TouchableOpacity onPress={update}>
-            <Text style={{ color: theme.colors.secondary }}>EDIT</Text>
-          </TouchableOpacity>
+          {editable && (
+            <TouchableOpacity onPress={update}>
+              <Text style={{ color: theme.colors.secondary }}>EDIT</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );
@@ -287,12 +294,14 @@ class Form extends PureComponent {
           name="weight"
           label="WEIGHT"
           component={renderMeasurementInput}
+          {...editableProps}
         />
 
         <Field
           name="height"
           label="HEIGHT"
           component={renderMeasurementInput}
+          {...editableProps}
         />
       </View>
     );
