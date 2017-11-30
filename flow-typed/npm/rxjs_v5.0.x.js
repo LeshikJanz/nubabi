@@ -1,5 +1,5 @@
-// flow-typed signature: 745b227a0b5788ad7462065b7a14804f
-// flow-typed version: f6f8972cd6/rxjs_v5.0.x/flow_>=v0.34.x
+// flow-typed signature: 6872c6fa58c5cd5e67af75acc24b216a
+// flow-typed version: d79976a445/rxjs_v5.0.x/flow_>=v0.34.x
 
 // FIXME(samgoldman) Remove top-level interface once Babel supports
 // `declare interface` syntax.
@@ -43,6 +43,9 @@ type rxjs$EventListenerOptions =
   | boolean;
 
 type rxjs$ObservableInput<T> = rxjs$Observable<T> | Promise<T> | Iterable<T>;
+
+type rxjs$OperatorFunction<T, R> = rxjs$Observable<T> => rxjs$Observable<R>;
+type rxjs$OperatorFunctionLast<T, R: rxjs$Observable<*>> = rxjs$Observable<T> => R;
 
 declare class rxjs$Observable<+T> {
   static bindCallback(
@@ -603,6 +606,36 @@ declare class rxjs$Observable<+T> {
   observeOn(scheduler: rxjs$SchedulerClass): rxjs$Observable<T>;
 
   pairwise(): rxjs$Observable<[T, T]>;
+
+  pipe(): rxjs$Observable<T>;
+
+  pipe<A>(op1: rxjs$OperatorFunctionLast<T, A>): A;
+
+  pipe<A, B>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunctionLast<A, B>
+  ): B;
+
+  pipe<A, B, C>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunctionLast<B, C>
+  ): C;
+
+  pipe<A, B, C, D>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunctionLast<C, D>
+  ): D;
+
+  pipe<A, B, C, D, E>(
+    op1: rxjs$OperatorFunction<T, A>,
+    op2: rxjs$OperatorFunction<A, B>,
+    op3: rxjs$OperatorFunction<B, C>,
+    op4: rxjs$OperatorFunction<C, D>,
+    op5: rxjs$OperatorFunctionLast<D, E>
+  ): E;
 
   publish(): rxjs$ConnectableObservable<T>;
 

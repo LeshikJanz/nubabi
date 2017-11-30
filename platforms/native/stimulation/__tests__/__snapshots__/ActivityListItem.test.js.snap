@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "borderBottomLeftRadius": 4,
+    "borderTopLeftRadius": 4,
+    "overflow": "hidden",
+    "flex": 1
+}
+
+<View
+  accessibilityComponentType={undefined}
+  accessibilityLabel={undefined}
+  accessibilityTraits={undefined}
+  accessible={true}
+  hasTVPreferredFocus={undefined}
+  hitSlop={undefined}
+  isTVSelectable={true}
+  nativeID={undefined}
+  onLayout={undefined}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Array [
+      Object {
+        "backgroundColor": "transparent",
+      },
+      undefined,
+    ]
+  }
+  testID={undefined}
+  tvParallaxProperties={undefined}
+>
+  <View
+    style={
+      Object {
+        "backgroundColor": "#fff",
+        "borderRadius": 4,
+        "flexDirection": "row",
+        "height": 100,
+        "marginLeft": 10,
+        "marginRight": 10,
+        "marginTop": 10,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 2,
+          "width": 1,
+        },
+        "shadowOpacity": 0.1,
+        "shadowRadius": 3,
+        "width": 730,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderBottomLeftRadius": 4,
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopLeftRadius": 4,
+          "borderTopWidth": 0,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "http://example.com/example.png",
+          }
+        }
+        style={
+          Object {
+            "height": 100,
+            "width": 100,
+          }
+        }
+      />
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "padding": 10,
+          }
+        }
+      >
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#454D56",
+              "fontSize": 16,
+              "marginBottom": 5,
+            }
+          }
+        >
+          Sensory
+        </Text>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail"
+          style={
+            Object {
+              "color": "#748294",
+              "fontSize": 14,
+            }
+          }
+        >
+          Sensory Activity 1
+        </Text>
+      </View>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "flex": 1,
+          }
+        }
+      >
+        <Image
+          resizeMode="contain"
+          source={
+            Object {
+              "testUri": "../../../core/images/sensory_icon.png",
+            }
+          }
+          style={
+            Object {
+              "height": 22,
+              "position": "absolute",
+              "right": 10,
+              "top": 10,
+              "width": 22,
+            }
+          }
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;

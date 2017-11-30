@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {}
+
+<View>
+  <Image
+    source={
+      Object {
+        "testUri": "../../../core/images/profileBackground.jpg",
+      }
+    }
+    style={
+      Object {
+        "height": 210,
+        "position": "absolute",
+        "width": 750,
+      }
+    }
+  />
+  <View
+    style={
+      Array [
+        Object {
+          "backgroundColor": "#748294",
+          "flex": 1,
+          "height": 210,
+          "left": 0,
+          "opacity": 0.7,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        },
+        Object {
+          "width": 750,
+        },
+      ]
+    }
+  />
+</View>
+`;

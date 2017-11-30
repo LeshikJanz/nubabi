@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`it renders correctly 1`] = `
+style = Object {
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "width": 750,
+    "height": 375,
+    "flex": 1,
+    "alignItems": "stretch",
+    "justifyContent": "flex-end",
+    "fontSize": 24.78737792164831,
+    "lineHeight": 32,
+    "color": "#FFFFFF",
+    "fontFamily": "SF Pro Display",
+    "textAlign": "center",
+    "paddingBottom": 16,
+    "paddingLeft": 16,
+    "paddingRight": 16,
+    "paddingTop": 16,
+    "alignSelf": "stretch"
+}
+
+<View
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "height": 375,
+      "width": 750,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "width": 750,
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../core/images/graph-detail-header.png",
+        }
+      }
+      style={
+        Array [
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          },
+          Object {
+            "height": undefined,
+            "width": 750,
+          },
+          undefined,
+        ]
+      }
+    />
+    <View
+      style={
+        Object {
+          "flex": 1,
+        }
+      }
+    >
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "backgroundColor": "rgb(116, 130, 148)",
+              "bottom": 0,
+              "flex": 1,
+              "justifyContent": "center",
+              "left": 0,
+              "opacity": 0.4,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            },
+            Object {
+              "opacity": 0.7,
+            },
+          ]
+        }
+      />
+      <View
+        style={
+          Array [
+            Object {
+              "alignItems": "center",
+              "alignSelf": "stretch",
+              "backgroundColor": "transparent",
+              "flex": 1,
+              "flexDirection": "column",
+              "justifyContent": "center",
+            },
+            Object {},
+          ]
+        }
+      >
+        <View
+          style={
+            Object {
+              "alignItems": "center",
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "flex": 1,
+              "justifyContent": "center",
+            }
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "color": "#FFFFFF",
+                "fontFamily": "SF Pro Display",
+                "fontSize": 24.78737792164831,
+                "lineHeight": 32,
+                "textAlign": "center",
+              }
+            }
+          >
+            Watch 
+            Baby
+             grow
+          </Text>
+        </View>
+        <View
+          style={
+            Object {
+              "alignItems": "stretch",
+              "alignSelf": "stretch",
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "justifyContent": "flex-end",
+              "paddingBottom": 16,
+              "paddingLeft": 16,
+              "paddingRight": 16,
+              "paddingTop": 16,
+            }
+          }
+        >
+          <RCTSegmentedControl
+            enabled={true}
+            onChange={[Function]}
+            onValueChange={[Function]}
+            selectedIndex={1}
+            style={
+              Array [
+                Object {
+                  "height": 28,
+                },
+                Object {
+                  "height": 35,
+                },
+              ]
+            }
+            tintColor="#FFFFFF"
+            values={
+              Array [
+                "Height",
+                "Weight",
+              ]
+            }
+          />
+        </View>
+      </View>
+    </View>
+  </View>
+</View>
+`;
