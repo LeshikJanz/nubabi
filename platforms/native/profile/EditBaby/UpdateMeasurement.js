@@ -7,6 +7,7 @@ import type {
 import React, { PureComponent } from 'react';
 import { Image, TextInput } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { NavigationActions } from 'react-navigation';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, pathOr } from 'ramda';
@@ -26,6 +27,7 @@ type Props = {
   babyId: string,
   updateMeasurement: (any) => Promise<*>, // prettier-ignore
   unitDisplay: UnitDisplaySettingsState,
+  goBack: typeof NavigationActions.back,
 };
 
 type State = {
@@ -61,7 +63,8 @@ export class UpdateMeasurement extends PureComponent {
       value: parseFloat(this.state.value),
     };
 
-    this.props.updateMeasurement({ variables: { input } });
+    const { goBack } = this.props;
+    this.props.updateMeasurement({ variables: { input } }).then(goBack);
   };
 
   render() {
@@ -172,10 +175,15 @@ export const mutation = gql`
 `;
 
 export default compose(
-  connect(({ babies: { currentBabyId }, settings }) => ({
-    babyId: currentBabyId,
-    unitDisplay: settings.unitDisplay,
-  })),
+  connect(
+    ({ babies: { currentBabyId }, settings }) => ({
+      babyId: currentBabyId,
+      unitDisplay: settings.unitDisplay,
+    }),
+    dispatch => ({
+      goBack: () => dispatch(NavigationActions.back()),
+    }),
+  ),
   graphql(mutation, {
     name: 'updateMeasurement',
     options: {
