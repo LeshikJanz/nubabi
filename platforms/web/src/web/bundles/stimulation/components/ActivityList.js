@@ -21,11 +21,13 @@ const ActivityList = ({ activities, history }: Props) => {
   const handleNavigateToActivity = ({ id }) =>
     history.push(`/stimulation/${id}`);
 
+  // Elements could be repeated
+  /* eslint-disable react/no-array-index-key */
   return (
     <ActivitiesList>
-      {activities.edges.map(({ node }) => (
+      {activities.edges.map(({ node }, i) => (
         <ActivityItem
-          key={node.id}
+          key={i}
           activity={node}
           handleClick={handleNavigateToActivity}
         />

@@ -6,7 +6,7 @@ type Props = {
   active: boolean,
 };
 
-class Header extends PureComponent<Props> {
+class Loader extends PureComponent<Props> {
   render() {
     const Wrapper = styled.div`
       position: absolute;
@@ -25,4 +25,4 @@ class Header extends PureComponent<Props> {
   }
 }
 
-export default Header;
+export default Loader;
