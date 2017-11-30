@@ -176,7 +176,12 @@ export default compose(
     babyId: currentBabyId,
     unitDisplay: settings.unitDisplay,
   })),
-  graphql(mutation, { name: 'updateMeasurement' }),
+  graphql(mutation, {
+    name: 'updateMeasurement',
+    options: {
+      refetchQueries: ['Growth'],
+    },
+  }),
   graphql(
     gql`
       query CurrentMeasurements($babyId: ID!) {
