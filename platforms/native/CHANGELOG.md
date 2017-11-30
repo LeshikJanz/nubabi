@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.1.0...nubabi-native@1.2.0) (2017-11-30)
+
+
+### Bug Fixes
+
+* **growth:** refetchQuery after measurement update ([4063fc9](https://gitlab.com/nubabi/mobile/commit/4063fc9))
+* **memories:** first-birthday from Suggested grid mapping ([342c027](https://gitlab.com/nubabi/mobile/commit/342c027))
+* **profile:** hide Edit measurement buttons while submitting ([3d42241](https://gitlab.com/nubabi/mobile/commit/3d42241))
+
+
+### Features
+
+* **memories:** use new edit image ([40be4cc](https://gitlab.com/nubabi/mobile/commit/40be4cc))
+* **profile:** go back after measurement update ([feda8e0](https://gitlab.com/nubabi/mobile/commit/feda8e0))
+* **system:** add error boundary ([510f839](https://gitlab.com/nubabi/mobile/commit/510f839))
+
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.0.0...nubabi-native@1.1.0) (2017-11-28)
 

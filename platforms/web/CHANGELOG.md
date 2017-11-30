@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.0.1...nubabi-web@1.1.0) (2017-11-30)
+
+
+### Bug Fixes
+
+* changed activities type of any to ActivityConnection ([2dc1b54](https://gitlab.com/nubabi/mobile/commit/2dc1b54))
+* delete eslint config from web ([26f27d2](https://gitlab.com/nubabi/mobile/commit/26f27d2))
+* deleted baby reducer and connect header+sidebar to apollo ([24929d8](https://gitlab.com/nubabi/mobile/commit/24929d8))
+* deleted unnecessary commas from webpack.config.prod.js ([2ff9f78](https://gitlab.com/nubabi/mobile/commit/2ff9f78))
+* disable eslint for registerServiceWorker ([6e1e425](https://gitlab.com/nubabi/mobile/commit/6e1e425))
+* **web:** hardcoded baby name ([eaac845](https://gitlab.com/nubabi/mobile/commit/eaac845))
+* fix eslint warnings ([c94f38a](https://gitlab.com/nubabi/mobile/commit/c94f38a))
+* fix eslint warnings ([2a2d0d5](https://gitlab.com/nubabi/mobile/commit/2a2d0d5))
+* fix eslint warnings ([7483a68](https://gitlab.com/nubabi/mobile/commit/7483a68))
+* **web:** memories baby name was hardcoded ([fb03b63](https://gitlab.com/nubabi/mobile/commit/fb03b63))
+* **web:** setState is batched, use callback form, use class prop ([aae5ce2](https://gitlab.com/nubabi/mobile/commit/aae5ce2))
+* **web:** use formatPossessive for baby name ([2236658](https://gitlab.com/nubabi/mobile/commit/2236658))
+
+
+### Features
+
+* add checkbox to activity item and refactor activity item ([d8fdd9f](https://gitlab.com/nubabi/mobile/commit/d8fdd9f))
+* add eslint rule for ignoring react router links for href attr ([8d0b308](https://gitlab.com/nubabi/mobile/commit/8d0b308))
+* add loading spinner to Stimulation page ([432aeb1](https://gitlab.com/nubabi/mobile/commit/432aeb1))
+* add noContentViewIf to activityList in Profile ([007a31b](https://gitlab.com/nubabi/mobile/commit/007a31b))
+* add noContentViewIf to equipmentList ([ca2066b](https://gitlab.com/nubabi/mobile/commit/ca2066b))
+* add sshowNoContentViewIf component ([00f9058](https://gitlab.com/nubabi/mobile/commit/00f9058))
+* added .env.local file to .gitignore ([ba15ee0](https://gitlab.com/nubabi/mobile/commit/ba15ee0))
+* added activities to stimulation page ([0d89761](https://gitlab.com/nubabi/mobile/commit/0d89761))
+* added global styles to themes/common.js ([5569799](https://gitlab.com/nubabi/mobile/commit/5569799))
+* added loader to stimulation page ([85415da](https://gitlab.com/nubabi/mobile/commit/85415da))
+* added noContentView hoc for activity list ([009c564](https://gitlab.com/nubabi/mobile/commit/009c564))
+* added route to stimulation page ([7e5f82b](https://gitlab.com/nubabi/mobile/commit/7e5f82b))
+* added stimulation buttons ([8598170](https://gitlab.com/nubabi/mobile/commit/8598170))
+* added time interval for equipment block ([0ac6db1](https://gitlab.com/nubabi/mobile/commit/0ac6db1))
+* created baby reducer ([e60de93](https://gitlab.com/nubabi/mobile/commit/e60de93))
+* get out NavBar component for future wrapping ([7b7f455](https://gitlab.com/nubabi/mobile/commit/7b7f455))
+* implement equipment block on stimulation page ([b410c2d](https://gitlab.com/nubabi/mobile/commit/b410c2d))
+* implement loader ([c415a5c](https://gitlab.com/nubabi/mobile/commit/c415a5c))
+* implement text-wrapping by markdowns on the Profile page ([5e92ce0](https://gitlab.com/nubabi/mobile/commit/5e92ce0))
+* move baby reducer to platformReducer ([654402d](https://gitlab.com/nubabi/mobile/commit/654402d))
+* move old profile files and refactoring ([a1bddf9](https://gitlab.com/nubabi/mobile/commit/a1bddf9))
+* moved baby profile image to header ([3db8244](https://gitlab.com/nubabi/mobile/commit/3db8244))
+
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.0.0...nubabi-web@1.0.1) (2017-11-28)
 
