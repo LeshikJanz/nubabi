@@ -9,6 +9,9 @@ const iconMappings = {
   'icon-favorite': require('web/assets/images/icons/favourite.svg'),
   'icon-activity': require('web/assets/images/icons/activity.svg'),
   'icon-history': require('web/assets/images/icons/history.svg'),
+  'icon-not-ready': require('web/assets/images/icons/not-ready-icon.svg'),
+  'icon-done': require('web/assets/images/icons/done-icon.svg'),
+  'icon-too-ease': require('web/assets/images/icons/too-easy-icon.svg'),
 };
 
 const pinkBg = '#FDE8EC';

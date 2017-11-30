@@ -1,9 +1,9 @@
-import Stimulation from '../components/index';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
+import ActivitySwitcher from '../../components/activity/ActivitySwitcher';
 
 const query = gql`
   query getBabyActivity($id: ID!) {
@@ -15,16 +15,6 @@ const query = gql`
             node {
               id
               name
-              introduction
-              skillArea {
-                id
-                icon
-                image {
-                  thumb {
-                    url
-                  }
-                }
-              }
             }
           }
         }
@@ -49,4 +39,4 @@ export default compose(
     }),
   }),
   DisplayLoadingState,
-)(Stimulation);
+)(ActivitySwitcher);

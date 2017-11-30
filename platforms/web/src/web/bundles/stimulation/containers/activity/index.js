@@ -4,8 +4,6 @@ import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
-
-const ACTIVITY_TEMP_ID = 'QWN0aXZpdHk6MTU1';
 import { ActivityFragments } from '../../fragments/activity';
 
 const query = gql`
@@ -33,7 +31,7 @@ export default compose(
     options: ({ currentBabyId, match }) => ({
       variables: {
         babyId: currentBabyId,
-        activityId: match.params.id || ACTIVITY_TEMP_ID,
+        activityId: match.params.id,
       },
       skip: !currentBabyId,
     }),

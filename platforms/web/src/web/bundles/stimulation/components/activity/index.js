@@ -3,10 +3,12 @@ import React from 'react';
 import { Baby } from 'core/types';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import ActivityProfile from './activityProfile';
-import ActivityExpert from './activityExpert';
-import ActivityEquipment from './activityEquipment';
-import ActivitySkittles from './activitySkittles';
+import ActivityProfile from './ActivityProfile';
+import ActivityExpert from './ActivityExpert';
+import ActivityEquipment from '../equipment/ActivityEquipment';
+import ActivitySkittles from './ActivitySkittles';
+import ActivityStatus from './ActivityStatus';
+import ActivitySwitcher from '../../containers/activity/activitySwitcher';
 
 type Props = {
   baby: Baby,
@@ -19,9 +21,8 @@ const ActivityWrapper = styled(Flex)`
   height: 100%;
 `;
 
-const Activity = ({ baby: { activity = {} } }: Props) => {
-  console.log('activity');
-  console.log(activity);
+const Activity = ({ baby }: Props) => {
+  const { activity } = baby;
 
   return (
     <ActivityWrapper>
@@ -29,6 +30,8 @@ const Activity = ({ baby: { activity = {} } }: Props) => {
       <ActivityExpert {...activity} />
       <ActivityEquipment {...activity} />
       <ActivitySkittles {...activity} />
+      <ActivityStatus {...activity} />
+      <ActivitySwitcher activity={activity} />
     </ActivityWrapper>
   );
 };
