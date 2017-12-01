@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import iconMappings from 'web/common/iconMappings';
@@ -14,13 +14,15 @@ const ButtonWrapper = styled(Flex)`
   min-width: 190px;
   margin-top: 15px;
   margin: 15px 5px 0;
-  background-color: #ffffff;
   box-shadow: ${props => props.theme.shadows.panel};
   justify-content: center;
 
   &:hover {
     background-color: ${props => props.theme.colors.open.grayHov};
   }
+
+  background-color: ${props =>
+    (JSON.parse(props.active) && props.theme.shadows.panel) || '#fff'};
 
   > svg {
     max-height: 25px;
@@ -37,17 +39,20 @@ const ButtonText = styled.div`
   color: ${props => props.theme.colors.gray3};
 `;
 
-class StimulationButton extends PureComponent<Props> {
-  render() {
-    const { button } = this.props;
+type Props = {
+  button: StimulationButtonType,
+  selectedFilter: string,
+  handleFilter: Function,
+};
 
-    return (
-      <ButtonWrapper>
-        {iconMappings(button.icon)()}
-        <ButtonText>{button.text}</ButtonText>
-      </ButtonWrapper>
-    );
-  }
-}
+const StimulationButton = ({ button, selectedFilter, handleFilter }: Props) => (
+  <ButtonWrapper
+    active={(selectedFilter === button.type).toString()}
+    onClick={() => handleFilter(button.type)}
+  >
+    {iconMappings(button.icon)()}
+    <ButtonText>{button.text}</ButtonText>
+  </ButtonWrapper>
+);
 
 export default StimulationButton;

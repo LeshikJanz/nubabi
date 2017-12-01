@@ -2,12 +2,18 @@
 import React from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled, { css } from 'styled-components';
-import { Baby } from 'core/types';
 import { STIMULATION_BUTTONS } from '../constants';
 import StimulationButton from './StimulationButton';
 import ActivityList from './ActivityList';
+import { compose, withState } from 'recompose';
+import { ACTIVITY_FILTERS } from './constants/index';
+import { ActivityConnection } from 'core/types';
 
-type Props = Baby;
+type Props = {
+  activities: ActivityConnection[],
+  selectedFilter: string,
+  handleFilter: Function,
+};
 
 export const media = {
   handheld: (...args) => css`
@@ -42,11 +48,16 @@ const ActivitiesListTitle = styled(Box)`
   color: ${props => props.theme.colors.open.black0};
 `;
 
-const Activities = ({ activities }: Props) => (
+const Activities = ({ activities, selectedFilter, handleFilter }: Props) => (
   <ActivitiesListWrapper>
     <ActivityButtons>
       {STIMULATION_BUTTONS.map(b => (
-        <StimulationButton key={b.id} button={b} />
+        <StimulationButton
+          key={b.id}
+          button={b}
+          selectedFilter={selectedFilter}
+          handleFilter={handleFilter}
+        />
       ))}
     </ActivityButtons>
     <ActivitiesListHeader justify="space-between" align="center">
@@ -59,4 +70,6 @@ const Activities = ({ activities }: Props) => (
   </ActivitiesListWrapper>
 );
 
-export default Activities;
+export default compose(
+  withState('selectedFilter', 'handleFilter', ACTIVITY_FILTERS.activities),
+)(Activities);

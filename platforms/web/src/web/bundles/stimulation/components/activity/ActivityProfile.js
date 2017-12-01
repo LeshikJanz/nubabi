@@ -25,6 +25,7 @@ const ProfileWrapper = styled(Flex)`
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    z-index: 2;
 
     ${ProfileLabel} {
       font-size: 22px;
@@ -41,6 +42,19 @@ const ProfileWrapper = styled(Flex)`
       cursor: default;
     }
   }
+`;
+
+const Backdrop = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0.2;
+  border-radius: 0 0 45% 45%;
+`;
+
+const ProfileImageContainer = styled.div`
+  position: relative;
 `;
 
 const ProfileImage = styled.img`
@@ -98,7 +112,10 @@ const ActivityProfile = ({ activity }: Props) => {
           {activity.skillArea.name}
         </Button>
       </MainLabels>
-      <ProfileImage src={activity.skillArea.image.large.url} />
+      <ProfileImageContainer>
+        <Backdrop />
+        <ProfileImage src={activity.skillArea.image.large.url} />
+      </ProfileImageContainer>
       <Actions>
         <FavoriteIcon onClick={handleFavorite} />
         <SeparatorIcon />

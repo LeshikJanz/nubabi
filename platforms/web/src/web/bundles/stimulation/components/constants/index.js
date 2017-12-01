@@ -1,4 +1,7 @@
-export const ACTIVITY_BUTTONS = [
+// @flow
+import { StimulationButtonType } from 'web/types/custom';
+
+export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
   {
     type: 'tooDifficult',
     icon: 'icon-not-ready',
@@ -21,3 +24,9 @@ export const ACTIVITY_BUTTONS = [
     callback: 'swoopActivity',
   },
 ];
+
+export const ACTIVITY_FILTERS = {
+  favorites: 'favorites',
+  activities: 'activities',
+  history: 'history',
+};

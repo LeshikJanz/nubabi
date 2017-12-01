@@ -1,8 +1,9 @@
 // @flow
-export type IStimulationButton = {
+export type StimulationButtonType = {
   id: number,
   icon: string,
   text: string,
+  type: string,
 };
 
 export type Equipment = {
