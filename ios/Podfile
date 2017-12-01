@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'NuBabiMobile' do
   # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
@@ -7,6 +7,16 @@ target 'NuBabiMobile' do
 
   # Pods for NuBabiMobile
   pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+  pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+	pod 'React', :path => '../node_modules/react-native', :subspecs => [
+		'BatchedBridge', # Required For React Native 0.45.0+
+		'Core',
+		# Add any other subspecs you want to use in your project
+  ]
+
 
   target 'NuBabiMobileTests' do
     inherit! :search_paths

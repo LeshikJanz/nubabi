@@ -54,16 +54,29 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
   });
 };
 
-const authAnalyticsEpic = (action$: any) => {
+const onAuthEpic = (action$: any, { firebase: firebaseWeb }) => {
   return action$
     .filter(action => action.type === 'ON_AUTH' && action.payload.user)
     .switchMap(action => {
-      firebase.analytics().setUserId(action.payload.user.uid);
+      const userId = action.payload.user.uid;
+
+      // Analytics
+      firebase.analytics().setUserId(userId);
       firebase
         .analytics()
         .setUserProperty('user_email', action.payload.user.email);
+
+      // Push notifications
+      firebase.messaging().requestPermissions();
+      firebase
+        .messaging()
+        .getToken()
+        .then(token => {
+          firebaseWeb.child(`/users/${userId}/pushToken`).set(token);
+        });
+
       return Observable.of();
     });
 };
 
-export const epics = [appOnlineEpic, authAnalyticsEpic];
+export const epics = [appOnlineEpic, onAuthEpic];

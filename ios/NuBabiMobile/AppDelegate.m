@@ -15,6 +15,7 @@
 
 #import "Orientation.h"
 @import Firebase;
+#import "RNFirebaseMessaging.h"
 
 @implementation AppDelegate
 
@@ -27,6 +28,9 @@
 
   /* Setup Firebase SDK */
   [FIRApp configure];
+
+  /* Subscribe to push notifications */
+  [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 
@@ -61,15 +65,18 @@
 
   /* Subscribe to RN's event for when JavaScript finishes loading */
   [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(javascriptLoadEvent:) 
+        selector:@selector(javascriptLoadEvent:)
         name:@"RCTContentDidAppearNotification"
         object:nil];
 
   [[NSNotificationCenter defaultCenter] addObserver:self
-        selector:@selector(javascriptLoadEvent:) 
+        selector:@selector(javascriptLoadEvent:)
         name:@"RCTJavaScriptWillStartLoadingNotification"
         object:nil];
 
+
+
+  /* Setup main window */
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];
   rootViewController.view = rootView;
@@ -107,6 +114,33 @@
 /* Detect orientation changes with react-native-orientation */
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
   return [Orientation getOrientation];
+}
+
+/* Push notifications */
+
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
+  [RNFirebaseMessaging didReceiveLocalNotification:notification];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo {
+  [RNFirebaseMessaging didReceiveRemoteNotification:userInfo];
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo
+fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler{
+  [RNFirebaseMessaging didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+       willPresentNotification:(UNNotification *)notification
+         withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
+  [RNFirebaseMessaging willPresentNotification:notification withCompletionHandler:completionHandler];
+}
+
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center
+didReceiveNotificationResponse:(UNNotificationResponse *)response
+         withCompletionHandler:(void (^)())completionHandler {
+  [RNFirebaseMessaging didReceiveNotificationResponse:response withCompletionHandler:completionHandler];
 }
 
 @end

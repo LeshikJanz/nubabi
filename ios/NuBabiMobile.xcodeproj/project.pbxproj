@@ -83,7 +83,6 @@
 		8038F51B1F41FB980092A3E8 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8038F4FD1F41FB980092A3E8 /* SF-Pro-Text-Bold.otf */; };
 		805A3BBE1FCC7E390033BCDF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 805A3BBD1FCC7E380033BCDF /* GoogleService-Info.plist */; };
 		80B333DC1EBB3A9A00F6C116 /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80B333DB1EBB3A7F00F6C116 /* libART.a */; };
-		80C085711FCCC84400CA75C4 /* libRNFirebase.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 80C085701FCCC83800CA75C4 /* libRNFirebase.a */; };
 		80F4D92A1E8BE5EC0012B26B /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D9221E8BE5EC0012B26B /* AssetsLibrary.framework */; };
 		80F4D92B1E8BE5EC0012B26B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D9231E8BE5EC0012B26B /* AVFoundation.framework */; };
 		80F4D92C1E8BE5EC0012B26B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 80F4D9241E8BE5EC0012B26B /* CoreMedia.framework */; };
@@ -462,13 +461,6 @@
 			remoteGlobalIDString = 0CF68AC11AF0540F00FF9E5C;
 			remoteInfo = ART;
 		};
-		80C0856F1FCCC83800CA75C4 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 134814201AA4EA6300B7C361;
-			remoteInfo = RNFirebase;
-		};
 		80E4F27F1F18C95D00CCC9FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -570,6 +562,7 @@
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		7984B3D604C64410A4D5EA71 /* imageCropPicker.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = imageCropPicker.xcodeproj; path = "../node_modules/react-native-image-crop-picker/ios/imageCropPicker.xcodeproj"; sourceTree = "<group>"; };
 		7EB40E42E3A542E58FD0DC95 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOrientation.xcodeproj; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; };
+		801FAC941FD16F7C00408DDF /* NuBabiMobile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = NuBabiMobile.entitlements; path = NuBabiMobile/NuBabiMobile.entitlements; sourceTree = "<group>"; };
 		802002E11FC4654300A44875 /* RNSVG.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSVG.xcodeproj; path = "../platforms/native/node_modules/react-native-svg/ios/RNSVG.xcodeproj"; sourceTree = "<group>"; };
 		8025C9031F165E7B0048FC03 /* ImageCropPickerSDK */ = {isa = PBXFileReference; lastKnownFileType = folder; path = ImageCropPickerSDK; sourceTree = "<group>"; };
 		8025C9051F165EA60048FC03 /* RSKImageCropper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = RSKImageCropper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -607,7 +600,6 @@
 		805A3BBD1FCC7E380033BCDF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		80B333B11EBB3A4D00F6C116 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		80B333D61EBB3A7F00F6C116 /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
-		80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNFirebase.xcodeproj; path = "../node_modules/react-native-firebase/ios/RNFirebase.xcodeproj"; sourceTree = "<group>"; };
 		80F4D9221E8BE5EC0012B26B /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		80F4D9231E8BE5EC0012B26B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		80F4D9241E8BE5EC0012B26B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -689,7 +681,6 @@
 				C24680215D594138A2823816 /* libRNSVG.a in Frameworks */,
 				569C16822A63402A8E673901 /* libRCTOrientation.a in Frameworks */,
 				AAB67BD79AA15E71F81428C7 /* libPods-NuBabiMobile.a in Frameworks */,
-				80C085711FCCC84400CA75C4 /* libRNFirebase.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,6 +793,7 @@
 		13B07FAE1A68108700A75B9A /* NuBabiMobile */ = {
 			isa = PBXGroup;
 			children = (
+				801FAC941FD16F7C00408DDF /* NuBabiMobile.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -985,14 +977,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		80C0856C1FCCC83800CA75C4 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				80C085701FCCC83800CA75C4 /* libRNFirebase.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		80F4D9211E8BE5EC0012B26B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1018,7 +1002,6 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */,
 				802002E11FC4654300A44875 /* RNSVG.xcodeproj */,
 				80B333D61EBB3A7F00F6C116 /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -1255,6 +1238,14 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 3533Q6T32E;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -1358,10 +1349,6 @@
 				{
 					ProductGroup = 803A11E51ED460E50038ADFE /* Products */;
 					ProjectRef = 5A88E2F25D6742B0AC5E2FD3 /* RNFetchBlob.xcodeproj */;
-				},
-				{
-					ProductGroup = 80C0856C1FCCC83800CA75C4 /* Products */;
-					ProjectRef = 80C0856B1FCCC83800CA75C4 /* RNFirebase.xcodeproj */;
 				},
 				{
 					ProductGroup = 803A12D31E9E9D8900BD621D /* Products */;
@@ -1729,13 +1716,6 @@
 			fileType = archive.ar;
 			path = libART.a;
 			remoteRef = 80B333DA1EBB3A7F00F6C116 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		80C085701FCCC83800CA75C4 /* libRNFirebase.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNFirebase.a;
-			remoteRef = 80C0856F1FCCC83800CA75C4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		80E4F2801F18C95D00CCC9FE /* libthird-party.a */ = {
@@ -2208,6 +2188,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NuBabiMobile/NuBabiMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 3533Q6T32E;
@@ -2229,6 +2210,7 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 				);
 				INFOPLIST_FILE = NuBabiMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -2247,6 +2229,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = NuBabiMobile/NuBabiMobile.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3533Q6T32E;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2267,6 +2250,7 @@
 					"$(SRCROOT)/../node_modules/react-native-orientation/iOS/RCTOrientation/**",
 				);
 				INFOPLIST_FILE = NuBabiMobile/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
