@@ -16,8 +16,7 @@ type Props = {
 
 const ActivityWrapper = styled(Flex)`
   flex-direction: column;
-  background-color: #fff;
-  margin: 50px 15px;
+  margin: 50px 15px 0;
   height: 100%;
 `;
 

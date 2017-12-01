@@ -4,12 +4,18 @@ import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import ArrowLeft from 'web/assets/images/icons/arrow-left-icon.svg';
 import { Baby, ActivityConnection } from 'core/types';
+import { withRouter } from 'react-router-dom';
 
 const SwitcherWrapper = styled(Flex)`
   width: 100%;
   justify-content: space-between;
   height: 60px;
   background-color: #fff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+
+  .separator {
+    height: 60px;
+  }
 `;
 
 const SwitchText = styled(Flex)`
@@ -26,8 +32,20 @@ const SwitchText = styled(Flex)`
   }
 `;
 
+const Separator = styled.div`
+  width: 2px;
+  height: 60px;
+  background-color: #e9ecf4;
+`;
+
 const PreviousElement = styled(Flex)`
   align-items: center;
+  cursor: pointer;
+  width: 100%;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.open.grayHov};
+  }
 
   > svg {
     margin: 0 15px;
@@ -36,6 +54,13 @@ const PreviousElement = styled(Flex)`
 
 const NextElement = styled(Flex)`
   align-items: center;
+  cursor: pointer;
+  width: 100%;
+  justify-content: flex-end;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.open.grayHov};
+  }
 
   > svg {
     margin: 0 15px;
@@ -46,36 +71,40 @@ const NextElement = styled(Flex)`
 type Props = {
   baby: Baby,
   activity: ActivityConnection,
+  history: any,
 };
 
-const ActivitySwitcher = ({ baby, activity }: Props) => {
+const ActivitySwitcher = ({ baby, activity, history }: Props) => {
   const curActivityIndex = baby.activities.edges.findIndex(
     ({ node }) => node.id === activity.id,
   );
-  const prevActivity = baby.activities.edges[curActivityIndex - 1].node || {
+  const prevActivity = (baby.activities.edges[curActivityIndex - 1] &&
+    baby.activities.edges[curActivityIndex - 1].node) || {
     id: '',
     name: 'Return to list',
   };
-  const nextActivity = baby.activities.edges[curActivityIndex + 1].node || {
+  const nextActivity = (baby.activities.edges[curActivityIndex + 1] &&
+    baby.activities.edges[curActivityIndex + 1].node) || {
     id: '',
     name: 'Return to list',
   };
 
-  console.log('prevActivity');
-  console.log(prevActivity);
-  console.log('nextActivity');
-  console.log(nextActivity);
+  const handleRedirect = (id: string) => {
+    history.push(`/stimulation/${id}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <SwitcherWrapper>
-      <PreviousElement>
+      <PreviousElement onClick={() => handleRedirect(prevActivity.id)}>
         <ArrowLeft />
         <SwitchText>
           <div>Back</div>
           <div>{prevActivity.name}</div>
         </SwitchText>
       </PreviousElement>
-      <NextElement>
+      <Separator />
+      <NextElement onClick={() => handleRedirect(nextActivity.id)}>
         <SwitchText>
           <div>Next</div>
           <div>{nextActivity.name}</div>
@@ -86,4 +115,4 @@ const ActivitySwitcher = ({ baby, activity }: Props) => {
   );
 };
 
-export default ActivitySwitcher;
+export default withRouter(ActivitySwitcher);

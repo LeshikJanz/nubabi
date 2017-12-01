@@ -25,6 +25,7 @@ const open = {
   gray45: '#454D57',
   gray6b: '#6B7683',
   gray74: DARK_GREY,
+  grayHov: '#F7F8FC',
   blue0: '#33B7EB',
   blue1: '#58A4FF',
   red0: '#EA3154',

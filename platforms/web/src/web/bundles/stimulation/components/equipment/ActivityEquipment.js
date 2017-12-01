@@ -7,6 +7,7 @@ const Wrapper = styled(Flex)`
   padding: 28px 15px;
   border: 1px solid ${props => props.theme.colors.open.white2};
   border-top: none;
+  background-color: #fff;
 `;
 
 const EquipmentText = styled.div`

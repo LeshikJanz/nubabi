@@ -6,6 +6,7 @@ import { ActivityConnection } from 'core/types';
 
 const ProfileWrapper = styled(Flex)`
   flex-direction: column;
+  background-color: #fff;
 `;
 
 const ProfileImage = styled.img``;

@@ -11,6 +11,7 @@ const Wrapper = styled(Flex)`
   padding: 28px 15px;
   border: 1px solid ${props => props.theme.colors.open.white2};
   border-top: none;
+  background-color: #fff;
 `;
 
 const ExpertHeading = styled(Flex)`
@@ -59,8 +60,11 @@ const ExpertFooter = styled(Flex)`
     line-height: 1.71;
     color: ${props => props.theme.colors.open.gray6b} !important;
     box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+    margin-top: 15px !important;
 
-    &:.type-warning.place-bottom:after {
+    &.type-warning.place-bottom:after {
+      border-bottom-color: #fff !important;
+      filter: drop-shadow(rgba(0, 0, 0, 0.3) 0 -3px 5px);
     }
   }
 `;

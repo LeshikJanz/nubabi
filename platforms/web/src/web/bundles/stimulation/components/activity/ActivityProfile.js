@@ -16,6 +16,7 @@ const ProfileWrapper = styled(Flex)`
   flex-direction: column;
   border: solid 1px ${props => props.theme.colors.open.white2};
   position: relative;
+  background-color: #fff;
 
   > ${MainLabels} {
     position: absolute;
@@ -37,6 +38,7 @@ const ProfileWrapper = styled(Flex)`
       border: none;
       font-size: 12px;
       margin-top: 11px;
+      cursor: default;
     }
   }
 `;
@@ -86,9 +88,7 @@ const ActivityProfile = ({ activity }: Props) => {
 
   const handlePrint = () => null;
 
-  const onClick = () => {
-    console.log('onCLick');
-  };
+  const onClick = () => {};
 
   return (
     <ProfileWrapper>

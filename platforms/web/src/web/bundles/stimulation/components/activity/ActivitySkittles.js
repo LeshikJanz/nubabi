@@ -9,6 +9,7 @@ const SkittlesWrapper = styled(Flex)`
   border: solid 1px ${props => props.theme.colors.open.white2};
   position: relative;
   border-top: none;
+  background-color: #fff;
 `;
 
 const SkittleStepNumber = styled.div`

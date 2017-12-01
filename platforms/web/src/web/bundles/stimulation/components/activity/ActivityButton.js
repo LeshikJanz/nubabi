@@ -15,10 +15,9 @@ const Wrapper = styled(Flex)`
   padding: 13px;
   text-align: center;
   cursor: pointer;
-  opacity: 0.9;
 
   &:hover {
-    opacity: 1;
+    background-color: ${props => props.theme.colors.open.grayHov};
   }
 
   > svg {
