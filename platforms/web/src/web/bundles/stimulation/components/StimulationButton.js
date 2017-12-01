@@ -18,6 +18,10 @@ const ButtonWrapper = styled(Flex)`
   box-shadow: ${props => props.theme.shadows.panel};
   justify-content: center;
 
+  &:hover {
+    background-color: ${props => props.theme.colors.open.grayHov};
+  }
+
   > svg {
     max-height: 25px;
     max-width: 25px;

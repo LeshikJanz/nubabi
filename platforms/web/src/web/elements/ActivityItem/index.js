@@ -7,6 +7,11 @@ import ArrowRight from 'web/assets/images/icons/arrowRight.svg';
 
 const ActivitiesListItem = styled.li`
   ${props => props.theme.activityItem};
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${props => props.theme.colors.open.grayHov};
+  }
 `;
 
 const ActivitiesListItemImage = styled.img`
@@ -95,7 +100,13 @@ class ActivityItem extends PureComponent<Props> {
         </ActivitiesListItemContent>
         <ActionArea>
           <ArrowRight />
-          <input type="checkbox" id={activity.id} className="squared" />
+          <input
+            type="checkbox"
+            id={activity.id}
+            checked={activity.isCompleted}
+            disabled
+            className="squared"
+          />
           <label htmlFor={activity.id} />
         </ActionArea>
       </ActivitiesListItem>

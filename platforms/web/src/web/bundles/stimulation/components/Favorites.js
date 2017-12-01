@@ -1,9 +1,6 @@
 import React from 'react';
 
-const Favorites = props => {
-  console.log('props');
-  console.log(props);
-
+const Favorites = () => {
   return <h1>Favorites</h1>;
 };
 

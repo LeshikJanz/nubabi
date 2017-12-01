@@ -7,7 +7,7 @@ import ActivityProfile from './ActivityProfile';
 import ActivityExpert from './ActivityExpert';
 import ActivityEquipment from '../equipment/ActivityEquipment';
 import ActivitySkittles from './ActivitySkittles';
-import ActivityStatus from './ActivityStatus';
+import ActivityStatus from '../../containers/activity/activityStatus';
 import ActivitySwitcher from '../../containers/activity/activitySwitcher';
 
 type Props = {

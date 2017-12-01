@@ -16,6 +16,8 @@ const query = gql`
               id
               name
               introduction
+              isCompleted
+              isFavorite
               skillArea {
                 id
                 icon

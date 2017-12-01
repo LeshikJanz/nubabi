@@ -68,20 +68,20 @@ export default compose(
   withCurrentBaby,
   graphql(
     gql`
-      query ViewActivity($babyId: ID!, $activityId: ID!) {
-        viewer {
-          baby(id: $babyId) {
-            id
-            name
+        query ViewActivity($babyId: ID!, $activityId: ID!) {
+            viewer {
+                baby(id: $babyId) {
+                    id
+                    name
 
-            activity(id: $activityId) {
-              ...Activity
-              isFavorite
+                    activity(id: $activityId) {
+                        ...Activity
+                        isFavorite
+                    }
+                }
             }
-          }
         }
-      }
-      ${Activity.fragments.activity}
+        ${Activity.fragments.activity}
     `,
     // TODO: remove duplication with ViewThisWeeksActivity
     {

@@ -3,11 +3,10 @@ import React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import iconMappings from 'web/common/iconMappings';
+import { Button } from 'web/elements/Button/index';
 
 const Wrapper = styled(Flex)`
-  width: 165px;
-  height: 139.6px;
-  flex-direction: column;
+  width: 70%;
   align-items: center;
   border-radius: 4px;
   background-color: #ffffff;
@@ -15,18 +14,30 @@ const Wrapper = styled(Flex)`
   padding: 13px;
   text-align: center;
   cursor: pointer;
-
-  &:hover {
-    background-color: ${props => props.theme.colors.open.grayHov};
-  }
+  height: 80px;
+  justify-content: space-around;
 
   > svg {
     width: 46px;
+    height: 100%;
   }
 
   > div:last-child {
     width: 90px;
     min-height: 30px;
+  }
+
+  > button {
+    border-radius: 100px;
+    background-color: #ea3154;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+    opacity: 0.9;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 
@@ -49,7 +60,7 @@ type Props = {
   handleActivity: Function,
 };
 
-const ActivityButton = ({
+const FinishedActivityButton = ({
   icon,
   mainText,
   additionalText,
@@ -57,9 +68,12 @@ const ActivityButton = ({
 }: Props) => (
   <Wrapper onClick={handleActivity}>
     {iconMappings(icon)()}
-    <ButtonMainText>{mainText}</ButtonMainText>
-    <ButtonAdditionalText>{additionalText}</ButtonAdditionalText>
+    <div>
+      <ButtonMainText>{mainText}</ButtonMainText>
+      <ButtonAdditionalText>{additionalText}</ButtonAdditionalText>
+    </div>
+    <Button>Change</Button>
   </Wrapper>
 );
 
-export default ActivityButton;
+export default FinishedActivityButton;
