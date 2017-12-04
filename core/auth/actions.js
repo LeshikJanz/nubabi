@@ -1,21 +1,37 @@
 // @flow
-import type { Action, Deps } from '../types';
+import type { Action, AuthProvider, AuthProviderData, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { resetNavigation } from '../navigation/actions';
 
 export function loginRequest(
-  email: string,
-  password: string,
-  uid?: string,
+  emailOrProviderData: string | AuthProviderData,
+  passwordOrProvider: string | AuthProvider,
 ): Action {
+  let providerData;
+  let provider: AuthProvider;
+
+  if (typeof emailOrProviderData === 'string') {
+    console.warn(
+      "DEPRECATED: loginRequest should take arguments in form loginRequest(providerData, provider). Invocations with (email, password) will be removed in the next major version. Use loginRequest({ email, password }, 'email') instead.",
+    );
+
+    providerData = {
+      email: emailOrProviderData,
+      password: passwordOrProvider,
+    };
+    provider = 'email';
+  } else {
+    providerData = emailOrProviderData;
+    // $FlowFixMe$
+    provider = passwordOrProvider;
+  }
+
+  // $FlowFixMe$
   return {
     type: 'LOGIN_REQUEST',
-    payload: {
-      email,
-      password,
-    },
+    payload: providerData,
     meta: {
-      uid,
+      provider,
     },
   };
 }

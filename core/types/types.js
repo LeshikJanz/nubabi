@@ -277,10 +277,27 @@ export type OnAuthAction = {
   payload: { user: ?FirebaseUser, token: ?string },
 };
 
+export type AuthProvider = 'email' | 'facebook';
+
+export type AuthProviderEmailData = {
+  email: string,
+  password: string,
+};
+
+export type AuthProviderFacebookData = {
+  credential: string,
+};
+
+export type AuthProviderData = AuthProviderEmailData | AuthProviderFacebookData;
+
 export type LoginRequestAction = {
   type: 'LOGIN_REQUEST',
-  payload: { email: string, password: string },
-  meta: { uid?: string },
+  payload: AuthProviderData,
+  meta: {
+    // TODO: provider is optional because we provide a deprecation notice
+    // remove accordingly
+    provider?: AuthProvider,
+  },
 };
 
 export type LoginSuccessAction = {
