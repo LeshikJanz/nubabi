@@ -62,67 +62,59 @@ const ProfileImage = styled.img`
   border-radius: 0 0 45% 45%;
 `;
 
-type Props = {
-  activity: ActivityConnection,
-  theme: any,
-};
+const Actions = styled(Flex)`
+  justify-content: center;
+  padding: 15px;
 
-const ActivityProfile = ({ activity }: Props) => {
-  const Actions = styled(Flex)`
-    justify-content: center;
-    padding: 15px;
+  > svg {
+    cursor: pointer;
+    opacity: 0.9;
 
-    > svg {
-      cursor: pointer;
-      opacity: 0.9;
+    &:hover {
+      opacity: 1;
+    }
 
-      &:hover {
-        opacity: 1;
-      }
-
-      &:first-child {
-        g {
-          fill: ${props => activity.isFavorite && props.theme.colors.open.red0};
-        }
-      }
-
-      &:nth-child(2) {
-        margin: 0 40px;
-      }
-
-      &:last-child {
-        g {
-          fill: ${props => activity.isFavorite && props.theme.colors.open.red0};
-        }
+    &:first-child {
+      g {
+        fill: ${props =>
+          JSON.parse(props.isfavorite) && props.theme.colors.open.red0};
       }
     }
-  `;
 
-  const handleFavorite = () => null;
+    &:nth-child(2) {
+      margin: 0 40px;
+    }
+  }
+`;
 
-  const handlePrint = () => null;
-
-  const onClick = () => {};
-
-  return (
-    <ProfileWrapper>
-      <MainLabels>
-        <ProfileLabel>{activity.name}</ProfileLabel>
-        <Button type="button" onClick={onClick}>
-          {activity.skillArea.name}
-        </Button>
-      </MainLabels>
-      <ProfileImageContainer>
-        <Backdrop />
-        <ProfileImage src={activity.skillArea.image.large.url} />
-      </ProfileImageContainer>
-      <Actions>
-        <FavoriteIcon onClick={handleFavorite} />
-        <SeparatorIcon />
-        <PrintIcon onClick={handlePrint} />
-      </Actions>
-    </ProfileWrapper>
-  );
+type Props = {
+  activity: ActivityConnection,
+  isFavorite: boolean,
+  handleFavorite: Function,
+  handlePrint: Function,
 };
+
+const ActivityProfile = ({
+  activity,
+  isFavorite,
+  handleFavorite,
+  handlePrint,
+}: Props) => (
+  <ProfileWrapper>
+    <MainLabels>
+      <ProfileLabel>{activity.name}</ProfileLabel>
+      <Button type="button">{activity.skillArea.name}</Button>
+    </MainLabels>
+    <ProfileImageContainer>
+      <Backdrop />
+      <ProfileImage src={activity.skillArea.image.large.url} />
+    </ProfileImageContainer>
+    <Actions isfavorite={`${isFavorite}`}>
+      <FavoriteIcon onClick={handleFavorite} />
+      <SeparatorIcon />
+      <PrintIcon onClick={handlePrint} />
+    </Actions>
+  </ProfileWrapper>
+);
 
 export default ActivityProfile;
