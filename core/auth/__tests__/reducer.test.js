@@ -4,7 +4,10 @@ import { onAuth } from '../../app/actions';
 
 test('handles LOGIN_REQUEST', () => {
   expect(
-    reducer(initialState, loginRequest('foo@example.com', 'foo')),
+    reducer(
+      initialState,
+      loginRequest({ email: 'foo@example.com', password: 'foo' }, 'email'),
+    ),
   ).toMatchSnapshot();
 });
 
