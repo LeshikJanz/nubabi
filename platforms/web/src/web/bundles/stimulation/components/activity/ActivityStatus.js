@@ -53,7 +53,6 @@ const StatusText = styled.div`
 type Props = {
   currentBabyId: string,
   activity: ActivityConnection,
-  handleActivityMenu: Function,
   history: any,
   refetch: Function,
 };
@@ -61,7 +60,6 @@ type Props = {
 const ActivityStatus = ({
   currentBabyId,
   activity,
-  handleActivityMenu,
   refetch,
   history,
   ...props
@@ -76,7 +74,6 @@ const ActivityStatus = ({
       input = { ...input, level: activityAction.level };
     }
 
-    window.scrollTo(0, 0);
     return props[activityAction.callback]({
       variables: {
         input,
@@ -97,7 +94,6 @@ const ActivityStatus = ({
 
     if (completedActivity) {
       refetch();
-      history.replace(`/stimulation/${completedActivity.edge.node.id}`);
     }
   };
 

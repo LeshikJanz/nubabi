@@ -6,7 +6,6 @@ import ActivityButton from './ActivityButton';
 import { ACTIVITY_BUTTONS } from '../constants/index';
 import FinishedActivityButton from './FinishedActivityButton';
 import { compose, withState, lifecycle } from 'recompose';
-import DisplayLoadingState from 'web/components/displayLoadingState';
 
 const ActivityButtons = styled(Flex)`
   justify-content: center;
@@ -31,12 +30,13 @@ const ActivityMenu = ({
   isCompleted,
 }: Props) => {
   const selectActivity = a => {
+    if (a.type !== 'done') {
+      window.scrollTo(0, 0);
+    }
+
     handleActivityMenu(false);
     handleActivity(a);
   };
-
-  console.log('isCompleted');
-  console.log(isCompleted);
 
   return (
     <ActivityButtons>
@@ -60,4 +60,4 @@ export default compose(
       this.props.handleActivityMenu(!this.props.isCompleted);
     },
   }),
-)(DisplayLoadingState(ActivityMenu));
+)(ActivityMenu);
