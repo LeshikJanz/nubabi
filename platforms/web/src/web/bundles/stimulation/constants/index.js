@@ -12,13 +12,13 @@ export const STIMULATION_BUTTONS: IStimulationButton[] = [
   {
     id: 2,
     icon: 'icon-activity',
-    text: 'View Activities',
+    text: 'Browse Activities',
     type: ACTIVITY_FILTERS.activities,
   },
   {
     id: 3,
     icon: 'icon-history',
-    text: 'View History',
+    text: 'Activity History',
     type: ACTIVITY_FILTERS.history,
   },
 ];

@@ -8,6 +8,7 @@ export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
     mainText: 'TOO DIFFICULT',
     additionalText: 'Not quite ready for this',
     callback: 'changeActivityLevel',
+    level: 'DECREASE',
   },
   {
     type: 'done',
@@ -21,7 +22,8 @@ export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
     icon: 'icon-too-ease',
     mainText: 'TOO EASE',
     additionalText: 'Increase the level',
-    callback: 'swoopActivity',
+    callback: 'changeActivityLevel',
+    level: 'INCREASE',
   },
 ];
 

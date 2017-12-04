@@ -42,6 +42,7 @@ export default compose(
   })),
   graphql(query, {
     options: ({ currentBabyId }) => ({
+      fetchPolicy: 'network-only',
       variables: { id: currentBabyId },
       skip: !currentBabyId,
     }),

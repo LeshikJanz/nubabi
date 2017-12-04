@@ -37,6 +37,7 @@ export default compose(
     }),
     props: ({ data }) => ({
       data,
+      refetch: data.refetch,
       baby: path(['viewer', 'baby'], data),
     }),
   }),

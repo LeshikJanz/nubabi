@@ -4,6 +4,7 @@ import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import iconMappings from 'web/common/iconMappings';
 import { Button } from 'web/elements/Button/index';
+import { ACTIVITY_BUTTONS } from '../constants/index';
 
 const Wrapper = styled(Flex)`
   width: 70%;
@@ -54,26 +55,24 @@ const ButtonAdditionalText = styled.div`
 `;
 
 type Props = {
-  icon: string,
-  mainText: string,
-  additionalText: string,
-  handleActivity: Function,
+  handleMenu: Function,
 };
 
-const FinishedActivityButton = ({
-  icon,
-  mainText,
-  additionalText,
-  handleActivity,
-}: Props) => (
-  <Wrapper onClick={handleActivity}>
-    {iconMappings(icon)()}
-    <div>
-      <ButtonMainText>{mainText}</ButtonMainText>
-      <ButtonAdditionalText>{additionalText}</ButtonAdditionalText>
-    </div>
-    <Button>Change</Button>
-  </Wrapper>
-);
+const FinishedActivityButton = ({ handleMenu }: Props) => {
+  const completedActivity = ACTIVITY_BUTTONS.find(a => a.type === 'done');
+
+  return (
+    <Wrapper>
+      {iconMappings(completedActivity.icon)()}
+      <div>
+        <ButtonMainText>{completedActivity.mainText}</ButtonMainText>
+        <ButtonAdditionalText>
+          {completedActivity.additionalText}
+        </ButtonAdditionalText>
+      </div>
+      <Button onClick={() => handleMenu(true)}>Change</Button>
+    </Wrapper>
+  );
+};
 
 export default FinishedActivityButton;

@@ -7,7 +7,7 @@ type Props = GraphQLDataProp<Query>;
 
 const DisplayLoadingState = Component => {
   const LoadingWrapper = ({ data = {}, ...props }: Props) => {
-    const isLoading = !data.viewer;
+    const isLoading = data.loading && !data.viewer;
 
     return isLoading ? <Loader {...props} active /> : <Component {...props} />;
   };

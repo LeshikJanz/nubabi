@@ -19,7 +19,7 @@ class Loader extends PureComponent<Props> {
     `;
     return (
       <Wrapper>
-        <div>Loading</div>
+        <h1 style={{ color: 'red' }}>Loading</h1>
       </Wrapper>
     );
   }

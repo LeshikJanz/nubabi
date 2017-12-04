@@ -4,6 +4,7 @@ export type StimulationButtonType = {
   icon: string,
   text: string,
   type: string,
+  level: 'INCREASE' | 'DECREASE',
 };
 
 export type Equipment = {

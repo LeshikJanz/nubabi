@@ -3,6 +3,7 @@ import { compose } from 'ramda';
 import { ActivityFragments } from '../../fragments/activity';
 import ActivityStatus from '../../components/activity/ActivityStatus';
 import withCurrentBaby from 'web/components/withCurrentBaby';
+import { withRouter } from 'react-router-dom';
 
 const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
 
@@ -50,9 +51,11 @@ export default compose(
     {
       name: 'completeActivity',
       options: {
+        fetchPolicy: 'network-only',
         refetchQueries: ['ThisWeeksActivitiesList'],
       },
     },
   ),
   withCurrentBaby,
+  withRouter,
 )(ActivityStatus);

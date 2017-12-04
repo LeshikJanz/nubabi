@@ -3,9 +3,11 @@ import React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import GrossIcon from 'web/assets/images/icons/gross-icon.svg';
-import { ACTIVITY_BUTTONS } from '../constants/index';
-import ActivityButton from './ActivityButton';
-import FinishedActivityButton from './FinishedActivityButton';
+import { compose, withState } from 'recompose';
+import ActivityMenu from './ActivityMenu';
+import { ActivityConnection, AdjustActivityLevelInput } from 'core/types';
+import { StimulationButtonType } from 'web/types/custom';
+import { path } from 'ramda';
 
 const IconWrapper = styled.div`
   position: absolute;
@@ -48,51 +50,55 @@ const StatusText = styled.div`
   ${props => props.theme.text.default};
 `;
 
-const ActivityButtons = styled(Flex)`
-  justify-content: center;
-  margin-top: 24px;
-
-  > div {
-    margin: 0 8px;
-  }
-`;
-
 type Props = {
-  id: string,
   currentBabyId: string,
-  isCompleted: boolean,
-};
-
-const refreshActivity = () => {
-  // console.log('data');
-  // console.log(data);
-  // const newActivity =
-  //   path(['swoopActivity', 'newActivity'], data) ||
-  //   path(['changeActivity', 'newActivity'], data);
-  //
-  // if (newActivity) {
-  //   this.props.navigation.setParams({
-  //     id: newActivity.id,
-  //     title: newActivity.name,
-  //   });
-  // }
+  activity: ActivityConnection,
+  handleActivityMenu: Function,
+  history: any,
+  refetch: Function,
 };
 
 const ActivityStatus = ({
-  id,
   currentBabyId,
-  isCompleted,
+  activity,
+  handleActivityMenu,
+  refetch,
+  history,
   ...props
 }: Props) => {
-  const handleActivity = activityAction => {
-    props[activityAction.callback]({
+  const handleActivity = (activityAction: StimulationButtonType) => {
+    let input: AdjustActivityLevelInput = {
+      id: activity.id,
+      babyId: currentBabyId,
+    };
+
+    if (activityAction.level) {
+      input = { ...input, level: activityAction.level };
+    }
+
+    window.scrollTo(0, 0);
+    return props[activityAction.callback]({
       variables: {
-        input: {
-          id,
-          babyId: currentBabyId,
-        },
+        input,
       },
     }).then(refreshActivity);
+  };
+
+  const refreshActivity = ({ data }) => {
+    const newActivity =
+      path(['swoopActivity', 'newActivity'], data) ||
+      path(['changeActivity', 'newActivity'], data);
+
+    const completedActivity = path(['completeActivity'], data);
+
+    if (newActivity) {
+      history.push(`/stimulation/${newActivity.id}`);
+    }
+
+    if (completedActivity) {
+      refetch();
+      history.replace(`/stimulation/${completedActivity.edge.node.id}`);
+    }
   };
 
   return (
@@ -105,22 +111,14 @@ const ActivityStatus = ({
         <StatusText>Adjust the level of activity for Charlotte:</StatusText>
       </StatusContent>
 
-      <ActivityButtons>
-        {(isCompleted && (
-          <FinishedActivityButton
-            {...ACTIVITY_BUTTONS.find(a => a.type === 'done')}
-          />
-        )) ||
-          ACTIVITY_BUTTONS.map((a, i) => (
-            <ActivityButton
-              key={i}
-              handleActivity={() => handleActivity(a)}
-              {...a}
-            />
-          ))}
-      </ActivityButtons>
+      <ActivityMenu
+        handleActivity={handleActivity}
+        isCompleted={activity.isCompleted}
+      />
     </Wrapper>
   );
 };
 
-export default ActivityStatus;
+export default compose(withState('loading', 'handleLoading', false))(
+  ActivityStatus,
+);

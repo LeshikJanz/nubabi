@@ -12,6 +12,7 @@ import ActivitySwitcher from '../../containers/activity/activitySwitcher';
 
 type Props = {
   baby: Baby,
+  refetch: Function,
 };
 
 const ActivityWrapper = styled(Flex)`
@@ -20,7 +21,7 @@ const ActivityWrapper = styled(Flex)`
   height: 100%;
 `;
 
-const Activity = ({ baby }: Props) => {
+const Activity = ({ baby, refetch }: Props) => {
   const { activity } = baby;
 
   return (
@@ -29,7 +30,7 @@ const Activity = ({ baby }: Props) => {
       <ActivityExpert {...activity} />
       <ActivityEquipment {...activity} />
       <ActivitySkittles {...activity} />
-      <ActivityStatus {...activity} />
+      <ActivityStatus activity={activity} refetch={refetch} />
       <ActivitySwitcher activity={activity} />
     </ActivityWrapper>
   );
