@@ -1,35 +1,44 @@
 // @flow
 import type { UpdateUserInput, User } from 'core/types';
 import React, { PureComponent } from 'react';
-import { compose, path, omit } from 'ramda';
+import { compose, omit, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { formValues } from 'core/helpers/graphqlUtils';
-import { displayLoadingState } from '../components';
+import { Box, displayLoadingState } from '../components';
 import UserForm from './UserForm';
 import { normalizeAvatarAndCoverImage } from '../profile/EditBaby/BabyForm';
+import { LinkedAccountsList } from './LinkedAccountsList';
+import { linkAccount, unlinkAccount } from './accountLinking';
 
 type Props = {
   user: User,
   onSubmit: (values: UpdateUserInput) => Promise<*>,
+  onLinkAccount: mixed => Promise<*>,
+  onUnlinkAccount: string => Promise<*>,
 };
 
-export class EditUserProfile extends PureComponent {
-  props: Props;
-
+export class EditUserProfile extends PureComponent<Props> {
   render() {
     const { user } = this.props;
 
     return (
-      <UserForm
-        initialValues={formValues(filter(UserForm.fragments.form, user))}
-        onSubmit={this.props.onSubmit}
-      />
+      <Box flex={1} backgroundColor="white">
+        <UserForm
+          {...filter(LinkedAccountsList.fragments.list, user)}
+          initialValues={formValues(filter(UserForm.fragments.form, user))}
+          onSubmit={this.props.onSubmit}
+          onLinkAccount={this.props.onLinkAccount}
+          onUnlinkAccount={this.props.onUnlinkAccount}
+        />
+      </Box>
     );
   }
 }
 
 export default compose(
+  linkAccount,
+  unlinkAccount,
   graphql(
     gql`
       mutation UpdateUserProfile($input: UpdateUserInput!) {
@@ -48,6 +57,7 @@ export default compose(
         viewer {
           user {
             ...UserForm
+            ...LinkedAccounts
             # For settings view
             avatar {
               thumb {
@@ -58,6 +68,7 @@ export default compose(
         }
       }
       ${UserForm.fragments.form}
+      ${LinkedAccountsList.fragments.list}
     `,
     {
       options: {

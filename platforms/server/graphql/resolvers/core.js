@@ -1,5 +1,5 @@
 import { GraphQLString } from 'graphql';
-import { assoc, assocPath, compose, map, path, pick, prop } from 'ramda';
+import { always, cond, equals, path, prop, T } from 'ramda';
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date';
 // noinspection ES6UnusedImports
 import {
@@ -11,7 +11,10 @@ import {
   toDate,
   transform,
 } from './common';
-import { addEdgeAndCursorToMutationResult } from '../../../../core/helpers/graphqlUtils';
+import {
+  addEdgeAndCursorToMutationResult,
+  addEdgeToMutationResult,
+} from '../../../../core/helpers/graphqlUtils';
 
 const resolvers = {
   DateTime: GraphQLDateTime,
@@ -63,8 +66,23 @@ const resolvers = {
 
       return avatars;
     },
+    linkedAccounts: (_, args, { connectors: { firebase } }) => {
+      return connectionFromPromisedArrayWithCount(
+        firebase.getLinkedAccounts(),
+        args,
+      );
+    },
     totalAchievements: () => 0, // TODO
     totalMemories: () => 0, // TODO
+  },
+  LinkedAccount: {
+    id: globalIdField('LinkedAccount', prop('uid')),
+    provider: ({ providerId }) => {
+      return cond([
+        [equals('facebook.com'), always('FACEBOOK')],
+        [T, always(null)],
+      ])(providerId);
+    },
   },
   File: {
     __resolveType: ({ contentType }) => {
@@ -133,6 +151,8 @@ const resolvers = {
       if (obj.title && obj.authorId) {
         return 'Memory';
       }
+
+      return null;
     },
   },
   LikeEdge: {
@@ -182,6 +202,16 @@ const resolvers = {
             },
           };
         });
+      },
+    ),
+    linkAccount: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase.linkAccount(input).then(addEdgeToMutationResult);
+      },
+    ),
+    unlinkAccount: mutationWithClientMutationId(
+      (input, { connectors: { firebase } }) => {
+        return firebase.unlinkAccount(input);
       },
     ),
     createComment: mutationWithClientMutationId(

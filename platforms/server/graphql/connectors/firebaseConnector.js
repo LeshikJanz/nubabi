@@ -1,5 +1,10 @@
 // @flow
-import type { MeasurementType, MeasurementUnit } from '../../../../core/types';
+import type {
+  LinkAccountInput,
+  MeasurementType,
+  MeasurementUnit,
+} from 'core/types';
+import { getProviderClass } from 'core/auth/actions';
 // noinspection ES6UnusedImports
 import {
   fromGlobalId,
@@ -207,10 +212,15 @@ const createOrUpdateBaby = async (firebase, values, id) => {
   }
 
   // prettier-ignore
-  await firebase.database().ref().child(path).update(object);
+  await firebase.database()
+    .ref()
+    .child(path)
+    .update(object);
 
   // prettier-ignore
-  await firebase.database().ref().update(updates);
+  await firebase.database()
+    .ref()
+    .update(updates);
 
   if (values.relationship) {
     await firebase
@@ -360,6 +370,52 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
     .ref()
     .update(updates);
   return friend;
+};
+
+const getLinkedAccounts = firebase => {
+  return Promise.resolve(
+    firebase.auth().currentUser.providerData.filter(provider => {
+      return provider.providerId !== 'password';
+    }),
+  );
+};
+
+const linkAccount = async (firebase, input: LinkAccountInput) => {
+  const { accessToken } = input;
+  const provider = getProviderClass(input.providerId);
+  if (!provider) {
+    throw new Error('Unknown provider');
+  }
+
+  const credential = firebase.auth[provider].credential(accessToken);
+
+  return firebase
+    .auth()
+    .currentUser.link(credential)
+    .then(user => R.head(user.providerData));
+};
+
+const unlinkAccount = (firebase, input) => {
+  const providerId = cond([
+    [equals('FACEBOOK'), always('facebook.com')],
+    [R.T, always(null)],
+  ])(input.providerId);
+
+  if (!providerId) {
+    throw new Error('Unknown provider to unlink');
+  }
+
+  const deletedProvider = R.find(
+    R.propEq('providerId', providerId),
+    firebase.auth().currentUser.providerData,
+  );
+
+  return firebase
+    .auth()
+    .currentUser.unlink(providerId)
+    .then(() => ({
+      deletedEdge: { node: deletedProvider },
+    }));
 };
 
 const getBabies = firebase => {
@@ -815,6 +871,9 @@ const firebaseConnector = firebase => {
     getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
     inviteUser: input => inviteUser(firebase, input),
+    getLinkedAccounts: input => getLinkedAccounts(firebase),
+    linkAccount: input => linkAccount(firebase, input),
+    unlinkAccount: input => unlinkAccount(firebase, input),
     getBabies: () => getBabies(firebase),
     getBaby: (id: string) => getBaby(firebase, id),
     getRelationship: (id: string) => getRelationship(firebase, id),

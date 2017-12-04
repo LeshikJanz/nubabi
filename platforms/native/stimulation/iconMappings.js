@@ -1,5 +1,6 @@
 // @flow
 const iconMappings = {
+  // Stimulation
   'icon-thinking': require('core/images/thinking_reasoning.png'),
   'icon-gross': require('core/images/gross_motor_icon.png'),
   'icon-fine': require('core/images/fine_motor_icon.png'),

@@ -23,11 +23,15 @@ import {
   required,
 } from '../shared/forms';
 import { fileFromImagePickerResult } from '../shared/fileUtils';
+import LinkedAccounts from './LinkedAccounts';
 
 type Props = {
   // redux-form uses initialValues prop
   initialValues: User, // eslint-disable-line react/no-unused-prop-types
   onSubmit: () => void,
+  linkedAccounts: LinkedAccountsConnection,
+  onLinkAccount: mixed => Promise<*>,
+  onUnlinkAccount: string => Promise<*>,
   handleSubmit: () => void,
   change: () => void,
 };
@@ -110,6 +114,7 @@ class UserForm extends Component {
 
   render() {
     const { renderTextInput, renderAvatar } = this;
+    const { linkedAccounts, onLinkAccount, onUnlinkAccount } = this.props;
 
     return (
       <KeyboardAwareScrollView
@@ -153,6 +158,14 @@ class UserForm extends Component {
           component={renderDatePicker}
           validate={[formattedDate('YYYY-MM-DD')]}
         />
+
+        <View style={{ marginHorizontal: 30 }}>
+          <LinkedAccounts
+            linkedAccounts={linkedAccounts}
+            onLinkAccount={onLinkAccount}
+            onUnlinkAccount={onUnlinkAccount}
+          />
+        </View>
       </KeyboardAwareScrollView>
     );
   }

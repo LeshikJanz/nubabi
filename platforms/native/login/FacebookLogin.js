@@ -1,12 +1,12 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { AccessToken, LoginManager } from 'react-native-fbsdk';
 import { compose } from 'ramda';
 import { connect } from 'react-redux';
 import { appError } from 'core/app/actions';
 import { loginRequest } from 'core/auth/actions';
 import { Box, Icon, Text } from '../components';
+import { loginWithFacebook } from '../auth/actions';
 
 type Props = {
   appError: typeof appError,
@@ -17,22 +17,9 @@ export class FacebookLogin extends PureComponent<Props> {
   handleLogin = () => {
     /* eslint-disable no-shadow */
     const { appError, loginRequest } = this.props;
-    LoginManager.logInWithReadPermissions(['public_profile', 'email']).then(
-      result => {
-        if (result.isCancelled) {
-          appError(new Error('Facebook login was cancelled'));
-        } else {
-          AccessToken.getCurrentAccessToken()
-            .then(data => {
-              loginRequest(data, 'facebook');
-            })
-            .catch(error => appError(error));
-        }
-      },
-      error => {
-        appError(error);
-      },
-    );
+    loginWithFacebook()
+      .then(data => loginRequest(data, 'facebook'))
+      .catch(error => appError(error));
     /* eslint-enable no-shadow */
   };
 

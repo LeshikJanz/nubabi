@@ -14,7 +14,7 @@ import { ImageCacheManager } from 'react-native-cached-image';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { compose, path } from 'ramda';
-import firebase from 'react-native-firebase';
+// import firebase from 'react-native-firebase';
 import { sample } from 'lodash';
 import { NavigationActions } from 'react-navigation';
 import theme from 'core/themes/defaultTheme';
@@ -87,10 +87,9 @@ class SplashScreen extends Component {
   };
 
   navigateToApp = async () => {
-    const initialNotification = await firebase
-      .messaging()
-      .getInitialNotification();
-    console.log('App opened from notification', initialNotification);
+    // const initialNotification = await firebase
+    //   .messaging()
+    //   .getInitialNotification();
     this.navigateTo('home');
   };
 

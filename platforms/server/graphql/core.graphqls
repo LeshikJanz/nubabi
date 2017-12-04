@@ -28,6 +28,8 @@ type Query {
 type Mutation {
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   inviteUser(input: InviteUserInput!): InviteUserPayload
+  linkAccount(input: LinkAccountInput!): LinkAccountPayload
+  unlinkAccount(input: UnlinkAccountInput!): UnlinkAccountPayload
   createComment(input: CreateCommentInput!): CreateOrUpdateCommentPayload
 }
 
@@ -71,6 +73,7 @@ type User implements Node {
   # Date of Birth
   dob: Date
   avatar: Avatar
+  linkedAccounts: LinkedAccountsConnection!
   totalAchievements: Int
   totalMemories: Int
 }
@@ -121,11 +124,16 @@ type UpdateUserPayload {
   clientMutationId: String
 }
 
-input AuthProviderSignupData {
-  email: AuthProviderEmail
+enum AuthProvider {
+  EMAIL
+  FACEBOOK
 }
 
-input AuthProviderEmail {
+input AuthProviderSignupData {
+  email: AuthProviderEmailInput
+}
+
+input AuthProviderEmailInput {
   email: String!
   password: String!
 }
@@ -142,6 +150,51 @@ type InviteUserPayload {
   inviteToken: String
   invitedUser: User
   changedEdge: UserEdge
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+# A connection to a list of items.
+type LinkedAccountsConnection {
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+  # A list of edges.
+  edges: [LinkedAccountEdge]
+}
+
+type LinkedAccountEdge {
+  # The item at the end of the edge.
+  node: LinkedAccount!
+  # A cursor for use in pagination.
+  cursor: String!
+}
+
+type LinkedAccount {
+  id: ID!
+  provider: AuthProvider
+  displayName: String!
+  email: String
+  photoURL: String
+}
+
+input LinkAccountInput {
+  providerId: AuthProvider!
+  accessToken: String!
+}
+
+type LinkAccountPayload {
+  edge: LinkedAccountEdge
+  # An opaque string used by frontend frameworks like relay to track requests and responses.
+  clientMutationId: String
+}
+
+input UnlinkAccountInput {
+  providerId: String!
+}
+
+type UnlinkAccountPayload {
+  # The LinkedAccount that was deleted as the result of the unlink
+  deletedEdge: LinkedAccountEdge
   # An opaque string used by frontend frameworks like relay to track requests and responses.
   clientMutationId: String
 }

@@ -12,9 +12,12 @@ export function loginRequest(
   let provider: AuthProvider;
 
   if (typeof emailOrProviderData === 'string') {
-    console.warn(
-      "DEPRECATED: loginRequest should take arguments in form loginRequest(providerData, provider). Invocations with (email, password) will be removed in the next major version. Use loginRequest({ email, password }, 'email') instead.",
-    );
+    if (__DEV__) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        "DEPRECATED: loginRequest should take arguments in form loginRequest(providerData, provider). Invocations with (email, password) will be removed in the next major version. Use loginRequest({ email, password }, 'email') instead.",
+      );
+    }
 
     providerData = {
       email: emailOrProviderData,
@@ -72,21 +75,34 @@ const signInWithEmailAndPassword = (firebaseAuth, action) => {
   return firebaseAuth().signInWithEmailAndPassword(email, password);
 };
 
+export const getProviderClass = (provider: string) => {
+  const providerName = provider.toUpperCase();
+  switch (providerName) {
+    case 'FACEBOOK':
+      return 'FacebookAuthProvider';
+    default:
+      return null;
+  }
+};
+
 const signInWithProvider = (firebaseAuth, action) => {
   return new Promise((resolve, reject) => {
     const { provider: providerName } = action.meta;
-    let provider;
+    const provider = getProviderClass(providerName);
     let accessToken;
-    switch (providerName) {
-      case 'facebook':
-        provider = 'FacebookAuthProvider';
-        accessToken = prop('accessToken', action.payload);
-        break;
-      default:
-        provider = null;
+
+    if (providerName === 'facebook') {
+      accessToken = prop('accessToken', action.payload);
     }
+
     if (!provider) {
       reject(new Error('Tried to authenticate with unknown provider'));
+    }
+
+    if (!accessToken) {
+      reject(
+        new Error('An access token was not retrieved. Sign in has failed.'),
+      );
     }
 
     const credential = firebaseAuth[provider].credential(accessToken);
