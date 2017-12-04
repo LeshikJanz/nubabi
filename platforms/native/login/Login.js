@@ -37,7 +37,7 @@ export class Login extends Component {
 
   login = () => {
     const { email, password } = this.state;
-    this.props.loginRequest(email, password);
+    this.props.loginRequest({ email, password }, 'email');
   };
 
   loginViaKeyboard = () => {
