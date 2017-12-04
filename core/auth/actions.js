@@ -1,6 +1,7 @@
 // @flow
 import type { Action, AuthProvider, AuthProviderData, Deps } from '../types';
 import { Observable } from 'rxjs/Observable';
+import { prop } from 'ramda';
 import { resetNavigation } from '../navigation/actions';
 
 export function loginRequest(
@@ -66,21 +67,54 @@ export function logout(): Action {
   };
 }
 
+const signInWithEmailAndPassword = (firebaseAuth, action) => {
+  const { email, password } = action.payload;
+  return firebaseAuth().signInWithEmailAndPassword(email, password);
+};
+
+const signInWithProvider = (firebaseAuth, action) => {
+  return new Promise((resolve, reject) => {
+    const { provider: providerName } = action.meta;
+    let provider;
+    let accessToken;
+    switch (providerName) {
+      case 'facebook':
+        provider = 'FacebookAuthProvider';
+        accessToken = prop('accessToken', action.payload);
+        break;
+      default:
+        provider = null;
+    }
+    if (!provider) {
+      reject(new Error('Tried to authenticate with unknown provider'));
+    }
+
+    const credential = firebaseAuth[provider].credential(accessToken);
+    firebaseAuth()
+      .signInWithCredential(credential)
+      .then(user => {
+        resolve(user);
+      })
+      .catch(err => reject(err));
+  });
+};
+
 const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
-  const signInWithEmailAndPassword = options => {
-    const { email, password } = options;
-    const promise = firebaseAuth().signInWithEmailAndPassword(email, password);
-
-    return Observable.from(promise)
-      .map(firebaseUser => loginSuccess(firebaseUser))
-      .catch(err => Observable.of(loginFailure(err)));
-  };
-
   return action$
     .filter((action: Action) => action.type === 'LOGIN_REQUEST')
     .mergeMap(action => {
+      const promise =
+        action.meta.provider === 'email'
+          ? signInWithEmailAndPassword
+          : signInWithProvider;
+
+      // $FlowFixMe$
+      const signIn = Observable.from(promise(firebaseAuth, action))
+        .map(firebaseUser => loginSuccess(firebaseUser))
+        .catch(err => Observable.of(loginFailure(err)));
+
       return Observable.merge(
-        signInWithEmailAndPassword(action.payload),
+        signIn,
         action$
           .ofType('APP_ONLINE')
           .withLatestFrom(action$.ofType('GET_BABIES_SUCCESS'))

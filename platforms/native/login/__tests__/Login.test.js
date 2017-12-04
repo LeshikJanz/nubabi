@@ -4,6 +4,7 @@ import { Login } from '../Login';
 import { expectRender } from '../../shared/testUtils';
 
 jest.mock('../../components/Alert');
+jest.mock('../FacebookLogin');
 
 test('renders correctly', () => {
   expectRender(<Login isFetching={false} actions={{}} />);

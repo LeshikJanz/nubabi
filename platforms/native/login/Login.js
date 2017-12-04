@@ -11,8 +11,9 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { connect } from 'react-redux';
 import theme, { NUBABI_RED } from 'core/themes/defaultTheme';
-import { Link, SubmitButton, Text } from '../components';
 import { loginRequest } from 'core/auth/actions';
+import { Link, SubmitButton, Text } from '../components';
+import FacebookLogin from './FacebookLogin';
 
 const background = require('core/images/loginBackground.jpg');
 const logo = require('core/images/logo.png');
@@ -122,6 +123,7 @@ export class Login extends Component {
                   fontFamily: 'SF Pro Display',
                 }}
               />
+              <FacebookLogin />
             </View>
           </View>
           <View style={{ alignItems: 'center', marginBottom: 15 }}>
