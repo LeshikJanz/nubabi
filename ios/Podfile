@@ -8,15 +8,19 @@ target 'NuBabiMobile' do
   # Pods for NuBabiMobile
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
-
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
+  pod "FBSDKCoreKit";
+  pod "FBSDKLoginKit";
+  pod "FBSDKShareKit";
+  pod "react-native-fbsdk", :path => '../platforms/native/node_modules/react-native-fbsdk/ios'
+
   pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
 	pod 'React', :path => '../node_modules/react-native', :subspecs => [
 		'BatchedBridge', # Required For React Native 0.45.0+
 		'Core',
 		# Add any other subspecs you want to use in your project
   ]
-
 
   target 'NuBabiMobileTests' do
     inherit! :search_paths

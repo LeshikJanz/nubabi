@@ -16,6 +16,7 @@
 #import "Orientation.h"
 @import Firebase;
 #import "RNFirebaseMessaging.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 @implementation AppDelegate
 
@@ -31,6 +32,10 @@
 
   /* Subscribe to push notifications */
   [[UNUserNotificationCenter currentNotificationCenter] setDelegate:self];
+
+  /* Setup Facebook SDK */
+  [[FBSDKApplicationDelegate sharedInstance] application:application
+                           didFinishLaunchingWithOptions:launchOptions];
 
   jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
 

@@ -30,6 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>nubabi</string>
+        <string>fb131973027491425</string>
 			</array>
 		</dict>
 	</array>
@@ -94,5 +95,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+  <key>FacebookAppID</key>
+  <string>131973027491425</string>
+  <key>FacebookDisplayName</key>
+  <string>Nubabi</string>
+  <key>LSApplicationQueriesSchemes</key>
+  <array>
+    <string>fbapi</string>
+    <string>fb-messenger-api</string>
+    <string>fbauth2</string>
+    <string>fbshareextension</string>
+  </array>
 </dict>
 </plist>
