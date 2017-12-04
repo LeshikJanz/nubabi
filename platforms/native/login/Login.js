@@ -49,6 +49,8 @@ export class Login extends Component {
   render() {
     const { isFetching } = this.props;
 
+    const signupIntro = "Don't have an account yet?";
+
     return (
       <View style={styles.container}>
         <Image source={background} style={styles.background} />
@@ -124,15 +126,15 @@ export class Login extends Component {
           </View>
           <View style={{ alignItems: 'center', marginBottom: 15 }}>
             <Text size={1} color="white" style={() => ({ marginBottom: 5 })}>
-              Don't have an account yet?
+              {signupIntro}
             </Text>
 
             <View style={{ flexDirection: 'row' }}>
               <Text color="white">Sign up for free on</Text>
               <Link
                 title="Nubabi.com"
+                href="https://nubabi.com"
                 color="white"
-                url="https://nubabi.com"
                 textStyle={{
                   marginLeft: 5,
                   fontWeight: theme.text.bold,

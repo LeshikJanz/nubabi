@@ -5,7 +5,7 @@ import Text from './Text';
 
 type Props = {
   title: string,
-  url: string,
+  href: string,
   onOpenURL?: (url: string) => void,
   containerStyle?: Object | number,
   textStyle?: Object,
@@ -18,14 +18,14 @@ export const openURL = (url: string) => {
 
 export const Link = ({
   title,
-  url,
+  href,
   onOpenURL = openURL,
   containerStyle,
   textStyle = {},
   color = 'primary',
 }: Props) => {
   return (
-    <TouchableOpacity onPress={() => onOpenURL(url)} style={containerStyle}>
+    <TouchableOpacity onPress={() => onOpenURL(href)} style={containerStyle}>
       <Text color={color} style={() => textStyle}>
         {title}
       </Text>

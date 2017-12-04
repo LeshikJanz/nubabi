@@ -4,5 +4,5 @@ import Link from '../Link';
 import { expectRender } from '../../shared/testUtils';
 
 test('it renders correctly', () => {
-  expectRender(<Link title="Some title" url="http://example.com" />);
+  expectRender(<Link title="Some title" href="http://example.com" />);
 });

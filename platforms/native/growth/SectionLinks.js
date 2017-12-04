@@ -45,7 +45,7 @@ export const SectionLinkItem = ({ title, id }: SectionLinkItemProps) => {
 
   return (
     // eslint-disable-next-line jsx-a11y/anchor-is-valid
-    <Link containerStyle={{ marginVertical: 5 }} title={title} url={url} />
+    <Link containerStyle={{ marginVertical: 5 }} title={title} href={url} />
   );
 };
 
