@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.2.0...nubabi-core@1.2.1) (2017-12-04)
+
+
+### Bug Fixes
+
+* **auth:** disallow sign-ups via Facebook on mobile ([5d50e6a](https://gitlab.com/nubabi/mobile/commit/5d50e6a))
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.1.0...nubabi-core@1.2.0) (2017-12-04)
 
