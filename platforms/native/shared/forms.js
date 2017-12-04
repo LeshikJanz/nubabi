@@ -146,6 +146,7 @@ export const renderDatePicker = field => {
         date={field.input.value}
         format={format}
         mode={mode}
+        disabled={!field.editable}
       />
     </View>
   );

@@ -1,13 +1,7 @@
 // @flow
 import type { User } from 'core/types';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { gql } from 'react-apollo';
 import { Field, reduxForm } from 'redux-form';
@@ -20,6 +14,7 @@ import {
   formattedDate,
   maxLength,
   renderDatePicker,
+  renderTextInput,
   required,
 } from '../shared/forms';
 import { fileFromImagePickerResult } from '../shared/fileUtils';
@@ -34,6 +29,7 @@ type Props = {
   onUnlinkAccount: string => Promise<*>,
   handleSubmit: () => void,
   change: () => void,
+  submitting: boolean,
 };
 
 class UserForm extends Component {
@@ -72,38 +68,6 @@ class UserForm extends Component {
     );
   };
 
-  renderTextInput(field) {
-    // we can access errors on field.meta.errors and dirty state and field.meta.touched
-    const { label } = field;
-    const { touched, error } = field.meta;
-
-    const hasError = touched && error;
-    // We don't want to show required as an error since the coloring
-    // should suffice
-    const hasExplicitError = hasError && error !== 'Required';
-
-    const containerStyle = [
-      styles.inputContainer,
-      hasError ? styles.inputContainerError : {},
-    ];
-
-    const labelStyle = [styles.inputLabel, hasError ? styles.hasError : {}];
-
-    return (
-      <View style={containerStyle}>
-        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          {label ? (
-            <Text style={[...labelStyle, { flex: 1 }]}>{label}</Text>
-          ) : null}
-          {hasExplicitError ? (
-            <Text style={labelStyle}>{error.toUpperCase()}</Text>
-          ) : null}
-        </View>
-        <TextInput {...field.input} style={styles.textInput} />
-      </View>
-    );
-  }
-
   renderAvatar(field) {
     return (
       <Box margin={2} alignItems="center" justifyContent="center">
@@ -113,7 +77,10 @@ class UserForm extends Component {
   }
 
   render() {
-    const { renderTextInput, renderAvatar } = this;
+    const editable = !this.props.submitting;
+    const editableProps = { editable };
+
+    const { renderAvatar } = this;
     const { linkedAccounts, onLinkAccount, onUnlinkAccount } = this.props;
 
     return (
@@ -124,18 +91,20 @@ class UserForm extends Component {
         <View style={styles.headerContainer}>
           <Field name="avatar" component={renderAvatar} />
 
-          <View style={styles.changeAvatarContainer}>
-            <View style={styles.changeAvatarView}>
-              <View style={styles.changeAvatarInnerView}>
-                <TouchableOpacity onPress={this.handleAvatar}>
-                  <Icon
-                    name="ios-camera-outline"
-                    style={styles.changeAvatarIcon}
-                  />
-                </TouchableOpacity>
+          {editable && (
+            <View style={styles.changeAvatarContainer}>
+              <View style={styles.changeAvatarView}>
+                <View style={styles.changeAvatarInnerView}>
+                  <TouchableOpacity onPress={this.handleAvatar}>
+                    <Icon
+                      name="ios-camera-outline"
+                      style={styles.changeAvatarIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
-          </View>
+          )}
         </View>
 
         <Field
@@ -143,6 +112,7 @@ class UserForm extends Component {
           label="FIRST NAME"
           component={renderTextInput}
           validate={[required, maxLength(32)]}
+          {...editableProps}
         />
 
         <Field
@@ -150,6 +120,7 @@ class UserForm extends Component {
           label="LAST NAME"
           component={renderTextInput}
           validate={[required, maxLength(32)]}
+          {...editableProps}
         />
 
         <Field
@@ -157,6 +128,7 @@ class UserForm extends Component {
           label="DATE OF BIRTH"
           component={renderDatePicker}
           validate={[formattedDate('YYYY-MM-DD')]}
+          {...editableProps}
         />
 
         <View style={{ marginHorizontal: 30 }}>
