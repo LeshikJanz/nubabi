@@ -109,9 +109,21 @@ const signInWithProvider = (firebaseAuth, action) => {
     firebaseAuth()
       .signInWithCredential(credential)
       .then(user => {
+        // Only allow signups on web by specifying `allowSignup` meta property
+        // to loginRequest.
+        // We should have 2 providers here.
+        if (action.meta.allowSignup !== true && user.providerData.length < 2) {
+          user.delete();
+          reject(
+            new Error(
+              "We couldn't find an existing user account with the information provided",
+            ),
+          );
+        }
+
         resolve(user);
       })
-      .catch(err => reject(err));
+      .catch(reject);
   });
 };
 
@@ -125,9 +137,9 @@ const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
           : signInWithProvider;
 
       // $FlowFixMe$
-      const signIn = Observable.from(promise(firebaseAuth, action))
-        .map(firebaseUser => loginSuccess(firebaseUser))
-        .catch(err => Observable.of(loginFailure(err)));
+      const signIn = Observable.from(promise(firebaseAuth, action)).map(
+        firebaseUser => loginSuccess(firebaseUser),
+      );
 
       return Observable.merge(
         signIn,
@@ -136,7 +148,7 @@ const loginEpic = (action$: any, { firebaseAuth }: Deps) => {
           .withLatestFrom(action$.ofType('GET_BABIES_SUCCESS'))
           .take(1)
           .mapTo(resetNavigation('home')),
-      );
+      ).catch(err => Observable.of(loginFailure(err)));
     });
 };
 
