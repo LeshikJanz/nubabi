@@ -18,6 +18,7 @@ import config from 'core/config';
 import Root from './root';
 import { epics as appEpics } from './app/actions';
 import { epics as navigationEpics } from './navigation/actions';
+import { epics as notificationEpics } from './notifications/reducer';
 import navigation from './navigation/reducer';
 import device from './device/reducer';
 
@@ -38,7 +39,7 @@ const store = configureStore({
     device,
   },
   platformMiddleware: [reportingMiddleware],
-  platformEpics: [...appEpics, ...navigationEpics],
+  platformEpics: [...appEpics, ...navigationEpics, ...notificationEpics],
 });
 
 persistStore(
