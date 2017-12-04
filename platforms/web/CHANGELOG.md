@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.1"></a>
+## [1.1.1](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.1.0...nubabi-web@1.1.1) (2017-12-04)
+
+
+
+
+**Note:** Version bump only for package nubabi-web
+
 <a name="1.1.0"></a>
 # [1.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.0.1...nubabi-web@1.1.0) (2017-11-30)
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.1.0...nubabi-core@1.2.0) (2017-12-04)
+
+
+### Features
+
+* **auth:** account linking and unlinking plus display ([568a640](https://gitlab.com/nubabi/mobile/commit/568a640))
+* **auth:** add Facebook login ([1a2dff3](https://gitlab.com/nubabi/mobile/commit/1a2dff3))
+* **auth:** deprecate `loginRequest` with email, password as args ([1503171](https://gitlab.com/nubabi/mobile/commit/1503171))
+
+
+
+
 <a name="1.1.0"></a>
 # [1.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.0.0...nubabi-core@1.1.0) (2017-11-30)
 

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.2.0...nubabi-native@1.3.0) (2017-12-04)
+
+
+### Bug Fixes
+
+* **auth:** use new loginRequest form from Login ([02a15ad](https://gitlab.com/nubabi/mobile/commit/02a15ad))
+
+
+### Features
+
+* enable push notification support ([f4a5b71](https://gitlab.com/nubabi/mobile/commit/f4a5b71))
+* **auth:** account linking and unlinking plus display ([568a640](https://gitlab.com/nubabi/mobile/commit/568a640))
+* **auth:** add Facebook login ([1a2dff3](https://gitlab.com/nubabi/mobile/commit/1a2dff3))
+* **notifications:** add app opened from notification support ([9210b91](https://gitlab.com/nubabi/mobile/commit/9210b91))
+* **notifications:** dispatch action on in-app notification received ([ffe05d5](https://gitlab.com/nubabi/mobile/commit/ffe05d5))
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.1.0...nubabi-native@1.2.0) (2017-11-30)
 
