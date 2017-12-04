@@ -21,7 +21,7 @@ import {
   Test,
   NotFound,
 } from 'web/components';
-import Login from 'web/auth';
+import { Login, SignUp } from 'web/auth';
 import NavBar from '../components/Navbar';
 import Stimulation from 'web/bundles/stimulation/containers';
 import Growth from 'web/bundles/growth';
@@ -74,6 +74,7 @@ const App = (props: Props) => (
     />
     <AppContent>
       <Switch>
+        <Route path="/signup" component={SignUp} />
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />

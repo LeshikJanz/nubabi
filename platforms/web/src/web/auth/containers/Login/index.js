@@ -3,8 +3,8 @@ import type { State, Dispatch } from 'web/types';
 import React from 'react';
 import reduxForm from 'redux-form/es/reduxForm';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router-dom';
-import { Title } from 'web/elements';
+import { withRouter, Redirect, Link } from 'react-router-dom';
+import { Title, Button } from 'web/elements';
 import { Helmet } from 'react-helmet';
 import { parse } from 'qs';
 import styled from 'styled-components';
@@ -43,8 +43,8 @@ export const Login = (props: LoginProps) => {
     const searchs = search.substring(1);
     const params = parse(searchs);
     if (params.redirect && params.redirect.length > 0)
-    // eslint-disable-next-line prefer-destructuring
-    redirect = params.redirect;
+      // eslint-disable-next-line prefer-destructuring
+      redirect = params.redirect;
   }
   const doRedirect = redirect !== undefined && isAuthenticated;
   return doRedirect ? (
@@ -61,6 +61,9 @@ export const Login = (props: LoginProps) => {
         submitting={submitting}
         reset={reset}
       />
+      <Button>
+        <Link to="/signup">Sign Up</Link>
+      </Button>
     </Wrapper>
   );
 };
