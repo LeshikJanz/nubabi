@@ -36,7 +36,7 @@ style = Object {
     "marginRight": 10
 }
 
-<View
+<RCTSafeAreaView
   onLayout={[Function]}
   style={
     Array [
@@ -446,5 +446,5 @@ style = Object {
       </View>
     </View>
   </RCTScrollView>
-</View>
+</RCTSafeAreaView>
 `;

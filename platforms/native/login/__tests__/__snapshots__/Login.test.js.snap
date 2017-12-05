@@ -21,6 +21,7 @@ style = Object {
     Object {
       "backgroundColor": "transparent",
       "flex": 1,
+      "paddingBottom": 5,
     }
   }
 >
@@ -80,6 +81,7 @@ style = Object {
       Object {
         "backgroundColor": "transparent",
         "flex": 1,
+        "paddingBottom": 5,
       }
     }
   >
@@ -400,6 +402,7 @@ style = Object {
     Object {
       "backgroundColor": "transparent",
       "flex": 1,
+      "paddingBottom": 5,
     }
   }
 >
@@ -459,6 +462,7 @@ style = Object {
       Object {
         "backgroundColor": "transparent",
         "flex": 1,
+        "paddingBottom": 5,
       }
     }
   >

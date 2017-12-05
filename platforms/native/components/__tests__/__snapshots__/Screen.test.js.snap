@@ -3,7 +3,7 @@
 exports[`it renders a View with a panel background and an Alert component 1`] = `
 style = Object {}
 
-<View
+<RCTSafeAreaView
   onLayout={[Function]}
   style={
     Array [
