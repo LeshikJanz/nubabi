@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.3.2...nubabi-native@1.4.0) (2017-12-05)
+
+
+### Features
+
+* **native:** initial iPhone X support ([993c1b3](https://gitlab.com/nubabi/mobile/commit/993c1b3))
+* rewritte Choose Baby animation and improve interactions ([24ab225](https://gitlab.com/nubabi/mobile/commit/24ab225))
+
+
+
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.3.1...nubabi-native@1.3.2) (2017-12-04)
 
