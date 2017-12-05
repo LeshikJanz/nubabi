@@ -1,5 +1,5 @@
 import { gql, graphql } from 'react-apollo';
-import { compose, withState, lifecycle, withHandlers } from 'recompose';
+import { compose, withHandlers } from 'recompose';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 import ActivityProfile from '../../components/activity/ActivityProfile';
@@ -20,11 +20,31 @@ export default compose(
         }
       }
     `,
-    { name: 'toggleFavorite', options: () => ({ refetchQueries }) },
+    {
+      name: 'toggleFavorite',
+      options: () => ({
+        fetchPolicy: 'network-only',
+        refetchQueries,
+      }),
+      // props: ({ mutate }) => ({
+      //   submit({ input }) {
+      //     return mutate({
+      //       variables: { input },
+      //       optimisticResponse: {
+      //         __typename: 'Mutation',
+      //         toggleActivityFavorite: {
+      //           id: input.id,
+      //           __typename: 'Comment',
+      //           isFavorite: input.favorite
+      //         },
+      //       },
+      //     });
+      //   }
+      // }),
+    },
   ),
   withCurrentBaby,
   withRouter,
-  withState('isFavorite', 'setFavorite', false),
   withHandlers({
     handlePrint: () => () => null,
     refreshFavoriteActivity: () => ({ data }) => data,
@@ -32,19 +52,15 @@ export default compose(
   withCurrentBaby,
   withHandlers({
     handleFavorite: ({
-      isFavorite,
-      setFavorite,
       activity,
       currentBabyId,
       toggleFavorite,
       refreshFavoriteActivity,
     }) => () => {
-      setFavorite(!isFavorite);
-
       const input = {
         id: activity.id,
         babyId: currentBabyId,
-        favorite: !isFavorite,
+        favorite: !activity.isFavorite,
       };
 
       return toggleFavorite({
@@ -52,11 +68,6 @@ export default compose(
           input,
         },
       }).then(refreshFavoriteActivity);
-    },
-  }),
-  lifecycle({
-    componentDidMount() {
-      this.props.setFavorite(!this.props.activity.isFavorite);
     },
   }),
 )(ActivityProfile);

@@ -89,17 +89,11 @@ const Actions = styled(Flex)`
 
 type Props = {
   activity: ActivityConnection,
-  isFavorite: boolean,
   handleFavorite: Function,
   handlePrint: Function,
 };
 
-const ActivityProfile = ({
-  activity,
-  isFavorite,
-  handleFavorite,
-  handlePrint,
-}: Props) => (
+const ActivityProfile = ({ activity, handleFavorite, handlePrint }: Props) => (
   <ProfileWrapper>
     <MainLabels>
       <ProfileLabel>{activity.name}</ProfileLabel>
@@ -109,7 +103,7 @@ const ActivityProfile = ({
       <Backdrop />
       <ProfileImage src={activity.skillArea.image.large.url} />
     </ProfileImageContainer>
-    <Actions isfavorite={`${isFavorite}`}>
+    <Actions isfavorite={`${activity.isFavorite}`}>
       <FavoriteIcon onClick={handleFavorite} />
       <SeparatorIcon />
       <PrintIcon onClick={handlePrint} />

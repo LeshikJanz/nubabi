@@ -5,15 +5,8 @@ import styled, { css } from 'styled-components';
 import { STIMULATION_BUTTONS } from '../constants';
 import StimulationButton from './StimulationButton';
 import ActivityList from './ActivityList';
-import { compose, withState } from 'recompose';
+import { compose, withState, withHandlers } from 'recompose';
 import { ACTIVITY_FILTERS } from './constants/index';
-import { ActivityConnection } from 'core/types';
-
-type Props = {
-  activities: ActivityConnection[],
-  selectedFilter: string,
-  handleFilter: Function,
-};
 
 export const media = {
   handheld: (...args) => css`
@@ -48,7 +41,17 @@ const ActivitiesListTitle = styled(Box)`
   color: ${props => props.theme.colors.open.black0};
 `;
 
-const Activities = ({ activities, selectedFilter, handleFilter }: Props) => (
+type Props = {
+  selectedFilter: string,
+  handleFilter: Function,
+  getFilteredActivities: Function,
+};
+
+const Activities = ({
+  selectedFilter,
+  handleFilter,
+  getFilteredActivities,
+}: Props) => (
   <ActivitiesListWrapper>
     <ActivityButtons>
       {STIMULATION_BUTTONS.map(b => (
@@ -62,14 +65,28 @@ const Activities = ({ activities, selectedFilter, handleFilter }: Props) => (
     </ActivityButtons>
     <ActivitiesListHeader justify="space-between" align="center">
       <ActivitiesListTitle is="h3">
-        {`This Week's activities`}
+        {/* {`This Week's activities`} */}
       </ActivitiesListTitle>
     </ActivitiesListHeader>
 
-    <ActivityList activities={activities} />
+    <ActivityList activities={getFilteredActivities()} />
   </ActivitiesListWrapper>
 );
 
 export default compose(
   withState('selectedFilter', 'handleFilter', ACTIVITY_FILTERS.activities),
+  withHandlers({
+    getFilteredActivities: ({
+      selectedFilter,
+      activities,
+      favoriteActivities,
+    }) => () => {
+      switch (selectedFilter) {
+        case ACTIVITY_FILTERS.favorites:
+          return favoriteActivities.edges;
+        default:
+          return activities.edges;
+      }
+    },
+  }),
 )(Activities);

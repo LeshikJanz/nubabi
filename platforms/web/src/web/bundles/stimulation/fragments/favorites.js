@@ -1,6 +1,6 @@
 import { gql } from 'react-apollo';
 
-export const activityListFragment = {
+export const ActivityListFragment = {
   activities: gql`
     fragment ActivityList on Activity {
       id
@@ -22,7 +22,7 @@ export const activityListFragment = {
   `,
 };
 
-export const favoriteActivitiesFragment = {
+export const FavoriteActivitiesFragment = {
   favorites: gql`
       fragment FavoriteActivities on Baby {
           favoriteActivities {
@@ -33,6 +33,6 @@ export const favoriteActivitiesFragment = {
               }
           }
       }
-      ${activityListFragment.activities}
+      ${ActivityListFragment.activities}
   `,
 };

@@ -24,7 +24,7 @@ class Stimulation extends PureComponent<Props> {
 
     return (
       <Wrapper>
-        <Activities activities={baby && baby.activities} />
+        <Activities {...baby} />
         <Equipment equipments={equipmentsMockData} />
       </Wrapper>
     );

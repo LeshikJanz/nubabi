@@ -4,6 +4,7 @@ import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
+import { FavoriteActivitiesFragment } from '../fragments/favorites';
 
 const query = gql`
   query getBabyActivity($id: ID!) {
@@ -21,6 +22,7 @@ const query = gql`
               skillArea {
                 id
                 icon
+                  name
                 image {
                   thumb {
                     url
@@ -30,9 +32,12 @@ const query = gql`
             }
           }
         }
+          ...FavoriteActivities
       }
     }
   }
+
+  ${FavoriteActivitiesFragment.favorites}
 `;
 
 export default compose(

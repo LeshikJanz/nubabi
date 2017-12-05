@@ -23,7 +23,7 @@ const ActivityList = ({ activities, history }: Props) => {
 
   return (
     <ActivitiesList>
-      {activities.edges.map(({ node }, i) => (
+      {activities.map(({ node }, i) => (
         <ActivityItem
           key={i}
           activity={node}

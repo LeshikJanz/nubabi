@@ -20,6 +20,8 @@ const ActivitiesListItemImage = styled.img`
   border-radius: 4px 0 0 4px;
 `;
 
+const SkillIcon = styled.div``;
+
 const ActivitiesHeader = styled(Flex)`
   justify-content: space-between;
 
@@ -27,10 +29,11 @@ const ActivitiesHeader = styled(Flex)`
     margin: 0;
   }
 
-  > div {
+  > ${SkillIcon} {
     background-color: #fde4e9;
     padding: 5px;
     border-radius: 50%;
+    height: 38px;
 
     > img {
       max-width: 30px;
@@ -39,6 +42,8 @@ const ActivitiesHeader = styled(Flex)`
     }
   }
 `;
+
+const ActivityName = styled.div``;
 
 const ActivitiesListItemContent = styled(Box)`
   padding: 15px 0 15px 15px;
@@ -51,15 +56,14 @@ const ActivitiesListItemContent = styled(Box)`
     margin: 0 0 10px;
   }
 
-  > p {
-    font-size: 12px;
+  ${ActivityName} {
+    font-size: 14px;
     color: ${props => props.theme.colors.secondary};
-    line-height: 18px;
     overflow: hidden;
+    line-height: 1.57;
     display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
     padding-right: 10px;
+    padding-top: 3px;
   }
 `;
 
@@ -88,15 +92,17 @@ class ActivityItem extends PureComponent<Props> {
         />
         <ActivitiesListItemContent>
           <ActivitiesHeader>
-            <h4>{activity.name}</h4>
             <div>
+              <h4>{activity.skillArea.name}</h4>
+              <ActivityName>{activity.name}</ActivityName>
+            </div>
+            <SkillIcon>
               <img
                 src={iconMappings(activity.skillArea.icon)}
                 alt="skill area"
               />
-            </div>
+            </SkillIcon>
           </ActivitiesHeader>
-          <p>{activity.introduction}</p>
         </ActivitiesListItemContent>
         <ActionArea>
           <ArrowRight />
