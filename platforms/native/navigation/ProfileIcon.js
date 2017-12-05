@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { DeviceInfo, View, StyleSheet } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
 import type { ImageSource } from 'react-native';
 import { compose, path } from 'ramda';
@@ -48,12 +48,13 @@ const styles = StyleSheet.create({
   tabIconOuterView: {
     width: 80,
     borderWidth: 1,
+    borderBottomWidth: 0,
     borderColor: '#e6e9f0',
     height: 80,
-    top: 5,
     borderRadius: 80 / 2,
     padding: 13,
     margin: 0,
+    top: -20,
     backgroundColor: '#fff',
     zIndex: -3,
   },
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
     padding: 2,
     margin: 0,
     backgroundColor: '#fff',
-    marginTop: -7,
+    marginTop: -6,
+    paddingTop: DeviceInfo.isIPhoneX_deprecated ? 5 : 0,
     zIndex: 300,
   },
   tabIconInnerImageHolder: {

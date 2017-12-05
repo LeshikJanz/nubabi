@@ -1,10 +1,10 @@
 // @flow
 import React from 'react';
-import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitioner';
+import { CardStackTransitioner } from 'react-navigation';
 import type {
-  NavigationSceneRendererProps,
   NavigationProp,
   NavigationRouter,
+  NavigationSceneRendererProps,
 } from 'react-navigation/src/TypeDefinition';
 
 type Props = {

@@ -18,7 +18,7 @@ class AddBaby extends Component {
     headerTitle: 'Add Baby',
     headerStyle: {
       backgroundColor: theme.colors.white,
-      shadowOpacity: 0,
+      borderBottomWidth: 0,
     },
     headerRight: <SubmitFormNavButton form="baby" />,
   };

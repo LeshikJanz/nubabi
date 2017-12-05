@@ -31,7 +31,7 @@ class EditBaby extends Component {
     title: <BabyNameTitle />,
     headerStyle: {
       backgroundColor: theme.colors.white,
-      shadowOpacity: 0,
+      borderBottomWidth: 0,
     },
     headerRight: <SubmitFormNavButton form="baby" />,
   };

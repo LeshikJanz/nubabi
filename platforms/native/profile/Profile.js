@@ -53,7 +53,7 @@ class Profile extends PureComponent {
   static navigationOptions: NavigationOptions = {
     title: <BabyNameTitle />,
     headerStyle: {
-      shadowOpacity: 0,
+      borderBottomWidth: 0,
     },
     tabBarLabel: () => null,
     tabBarIcon: ({ tintColor, focused }) => (

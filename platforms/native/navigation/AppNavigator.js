@@ -8,7 +8,7 @@ import {
   NavigationActions,
   StackRouter,
 } from 'react-navigation';
-import CardStackTransitioner from 'react-navigation/src/views/CardStackTransitioner';
+import { CardStackTransitioner } from 'react-navigation';
 
 import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import theme from 'core/themes/defaultTheme';

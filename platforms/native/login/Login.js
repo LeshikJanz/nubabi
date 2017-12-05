@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'transparent',
+    paddingBottom: 5,
   },
   scrollContainer: {
     flex: 1,
