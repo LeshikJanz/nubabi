@@ -3,6 +3,7 @@ import { compose, withHandlers } from 'recompose';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 import ActivityProfile from '../../components/activity/ActivityProfile';
+import { optimisticResponse } from 'core/helpers/graphqlUtils';
 
 const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
 
@@ -25,22 +26,23 @@ export default compose(
       options: () => ({
         fetchPolicy: 'network-only',
         refetchQueries,
+        optimisticResponse: optimisticResponse(
+          'toggleActivityFavorite',
+          'ToggleFavoritePayload',
+          ({ input }) => ({
+            wasFavorited: input.favorite,
+            __activityId: input.id,
+            edge: {
+              __typename: 'ActivityEdge',
+              node: {
+                __typename: 'Activity',
+                id: input.id,
+                isFavorite: input.favorite,
+              },
+            },
+          }),
+        ),
       }),
-      // props: ({ mutate }) => ({
-      //   submit({ input }) {
-      //     return mutate({
-      //       variables: { input },
-      //       optimisticResponse: {
-      //         __typename: 'Mutation',
-      //         toggleActivityFavorite: {
-      //           id: input.id,
-      //           __typename: 'Comment',
-      //           isFavorite: input.favorite
-      //         },
-      //       },
-      //     });
-      //   }
-      // }),
     },
   ),
   withCurrentBaby,
