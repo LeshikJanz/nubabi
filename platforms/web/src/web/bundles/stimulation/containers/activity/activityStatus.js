@@ -51,10 +51,10 @@ export default compose(
     `,
     {
       name: 'completeActivity',
-      options: {
+      options: () => ({
         fetchPolicy: 'network-only',
         refetchQueries: ['ThisWeeksActivitiesList'],
-      },
+      }),
     },
   ),
   withCurrentBaby,
@@ -93,9 +93,7 @@ export default compose(
       }
 
       return props[activityAction.callback]({
-        variables: {
-          input,
-        },
+        variables: { input },
       }).then(refreshActivity);
     },
   }),

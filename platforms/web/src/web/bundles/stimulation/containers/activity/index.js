@@ -6,7 +6,7 @@ import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import { ActivityFragments } from '../../fragments/activity';
 
-const query = gql`
+export const viewActivityQuery = gql`
     query ViewActivity($babyId: ID!, $activityId: ID!) {
         viewer {
             baby(id: $babyId) {
@@ -27,7 +27,7 @@ export default compose(
     currentBabyId: babies.currentBabyId,
     unitDisplay: settings.unitDisplay,
   })),
-  graphql(query, {
+  graphql(viewActivityQuery, {
     options: ({ currentBabyId, match }) => ({
       variables: {
         babyId: currentBabyId,
