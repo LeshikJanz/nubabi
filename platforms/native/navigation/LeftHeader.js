@@ -1,8 +1,6 @@
 // @flow
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { View, StyleSheet } from 'react-native';
-import { delay } from 'lodash';
+import React, { PureComponent } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { NubabiIcon } from '../components';
 import { HEADER_FONT_COLOR } from 'core/themes/defaultTheme';
 
@@ -10,19 +8,9 @@ type Props = {
   navigate: () => void,
 };
 
-class LeftHeader extends Component {
-  props: Props;
-
-  static contextTypes = {
-    setActiveTransition: PropTypes.func,
-    getActiveTransition: PropTypes.func,
-  };
-
-  navigateTo = (routeName: string) => {
-    this.context.setActiveTransition('chooseBaby', () => {
-      delay(this.props.navigate.bind(null, routeName), 0.5);
-    });
-  };
+class LeftHeader extends PureComponent<Props> {
+  navigate = () =>
+    this.props.navigate('chooseBaby', { transition: 'chooseBaby' });
 
   render() {
     return (
@@ -30,12 +18,13 @@ class LeftHeader extends Component {
         <NubabiIcon
           name="changeBabyIcon"
           style={styles.headerIcon}
-          onPress={() => this.navigateTo('chooseBaby')}
+          onPress={this.navigate}
         />
       </View>
     );
   }
 }
+
 const styles = StyleSheet.create({
   headerIcon: {
     padding: 10,

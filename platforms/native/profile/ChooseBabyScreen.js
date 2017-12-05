@@ -5,6 +5,13 @@ import { Screen } from '../components';
 class ChooseBabyScreen extends PureComponent {
   static navigationOptions = {
     gesturesEnabled: false,
+    headerLeft: null,
+    headerStyle: {
+      opacity: 1,
+      borderBottomWidth: 0,
+      shadowOpacity: 0,
+      backgroundColor: '#fff',
+    },
   };
 
   render() {

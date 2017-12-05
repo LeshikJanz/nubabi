@@ -9,12 +9,9 @@ import {
   StackRouter,
 } from 'react-navigation';
 import { CardStackTransitioner } from 'react-navigation';
-
+import { path } from 'ramda';
 import type { NavigationRouteConfigMap } from 'react-navigation/src/TypeDefinition'; // $FlowFixMe
 import theme from 'core/themes/defaultTheme';
-import sharedElements from './transitioners/MaterialSharedElementTransitioner';
-import crossFade from './transitioners/CrossFadeTransitioner';
-import android from './transitioners/AndroidDefaultTransitioner';
 import chooseBaby from './transitioners/ChooseBabyTransitioner';
 import TabsNavigator from './TabsNavigator';
 
@@ -154,49 +151,38 @@ export const routes = {
   stickers: { screen: StickersScreen, mode: 'modal' },
 };
 
+const transitionMap = {
+  chooseBaby,
+};
+
 class TransitionerSwitcher extends PureComponent {
-  state: State;
-
-  // For simplicity, we use context to pass these functions to children
-  // We will be moving to having this managed on Redux
-  static childContextTypes = {
-    setActiveTransition: PropTypes.func,
-    getActiveTransition: PropTypes.func,
-  };
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      transition: 'cardStack',
-    };
-  }
-
-  getChildContext() {
-    const self = this;
-
-    return {
-      setActiveTransition(transition: TransitionName, callback) {
-        return self.setState({ transition }, callback);
-      },
-      getActiveTransition(): TransitionName {
-        return self.state.transition;
-      },
-    };
-  }
+  previousTransition: Object;
 
   render() {
-    const transitionMap = {
-      cardStack: CardStackTransitioner,
-      materialSharedElement: sharedElements,
-      crossFade,
-      androidDefault: android,
-      chooseBaby,
-    };
+    const transitionType = path([
+      'state',
+      'routes',
+      this.props.navigation.state.index,
+      'params',
+      'transition'
+    ], this.props.navigation);
 
-    const Transitioner = transitionMap[this.state.transition || 'cardStack'];
+    let props;
 
-    return <Transitioner {...this.props} />;
+    const transition = transitionMap[transitionType];
+    if (transition) {
+      this.previousTransition = transition;
+      props = { ...this.props, ...transition};
+    } else {
+      if (this.previousTransition) {
+        props = {...this.props, transitionConfig: this.previousTransition.transitionConfig};
+        this.previousTransition = null;
+      } else {
+        props = this.props;
+      }
+    }
+
+    return <CardStackTransitioner {...props} />
   }
 }
 

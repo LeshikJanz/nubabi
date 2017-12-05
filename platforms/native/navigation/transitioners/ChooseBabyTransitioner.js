@@ -7,37 +7,24 @@ import type {
   NavigationSceneRendererProps,
 } from 'react-navigation/src/TypeDefinition';
 
-type Props = {
-  navigation: NavigationProp<*, *>,
-  router: NavigationRouter<*, *, *>,
-};
-const ChooseBabyTransitioner = (props: Props) => {
-  const transitionConfig = () => ({
+export default {
+  headerMode: 'float',
+
+  transitionConfig: () => ({
     screenInterpolator: (sceneProps: NavigationSceneRendererProps) => {
       const { position, scene } = sceneProps;
       const { index } = scene;
 
-      const inputRange = [index - 1, index, index + 1];
+      const inputRange = [0, 0.5, 1];
 
       const opacity = position.interpolate({
         inputRange,
-        outputRange: [0.5, 0.9, 1],
+        outputRange: [1, 1, 0.9],
       });
 
       return {
         opacity,
       };
     },
-  });
-
-  return (
-    <CardStackTransitioner
-      {...props}
-      mode="card"
-      headerMode="none"
-      transitionConfig={transitionConfig}
-    />
-  );
+  }),
 };
-
-export default ChooseBabyTransitioner;

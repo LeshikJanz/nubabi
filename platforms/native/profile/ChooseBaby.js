@@ -8,7 +8,7 @@ import type {
 } from 'core/types/index';
 import type { NavigationProp } from 'react-navigation';
 import { NavigationActions } from 'react-navigation';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
   Animated,
@@ -17,10 +17,13 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  LayoutAnimation,
+  InteractionManager,
   TouchableOpacity,
   View,
 } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
+import { Header } from 'react-navigation';
 import SVGPath from 'art/modes/svg/path';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -43,7 +46,25 @@ type Props = {
   selectBaby: (id: string) => void,
 };
 
-class ChooseBaby extends Component {
+const shape = new SVGPath()
+  .moveTo(242.0284455, 326.522878)
+  .curveTo(242.828957, 347.908578, 260.418521, 365, 282, 365)
+  .curveTo(303.756979, 365, 321.456854, 347.629474, 321.987736, 326.00031)
+  .curveTo(410.423065, 317.73135, 491.521973, 284.207863, 558, 232.714294)
+  .lineTo(558, 0)
+  .lineTo(0, 0)
+  .lineTo(0, 232.714294)
+  .curveTo(
+    67.9827067,
+    285.373381,
+    151.25565,
+    319.239702,
+    242.028455,
+    326.522878,
+  )
+  .close();
+
+class ChooseBaby extends PureComponent {
   props: Props;
 
   static fragments = {
@@ -56,10 +77,6 @@ class ChooseBaby extends Component {
         }
       }
     `,
-  };
-
-  static contextTypes = {
-    setActiveTransition: PropTypes.func,
   };
 
   componentDidMount() {
@@ -132,21 +149,23 @@ class ChooseBaby extends Component {
   listAnimation = new Animated.Value(0);
 
   goBack = () => {
+    this.closeChooser();
     this.props.navigation.goBack();
-    this.context.setActiveTransition('cardStack');
+  };
+
+  closeChooser = (cb) => {
+    Animated.spring(this.elementsAnimation, {
+      toValue: 0,
+      velocity: 3,
+      tension: -10,
+    }).start(cb);
   };
 
   goToAddBaby = () => {
-    this.context.setActiveTransition('cardStack');
-    this.props.navigation.dispatch(
-      NavigationActions.reset({
-        index: 1,
-        actions: [
-          NavigationActions.navigate({ routeName: 'home' }),
-          NavigationActions.navigate({ routeName: 'addBaby' }),
-        ],
-      }),
-    );
+    // We're doing this until we fix the interpolations that prevent a reset from getting
+    // the transitioner view in the right opacity.
+    this.goBack();
+    InteractionManager.runAfterInteractions(() => this.props.navigation.navigate('addBaby'));
   };
 
   selectBaby = id => {
@@ -229,23 +248,6 @@ class ChooseBaby extends Component {
       this.props.layout.viewportWidth / 0.672,
     );
 
-    const shape = new SVGPath()
-      .moveTo(242.0284455, 326.522878)
-      .curveTo(242.828957, 347.908578, 260.418521, 365, 282, 365)
-      .curveTo(303.756979, 365, 321.456854, 347.629474, 321.987736, 326.00031)
-      .curveTo(410.423065, 317.73135, 491.521973, 284.207863, 558, 232.714294)
-      .lineTo(558, 0)
-      .lineTo(0, 0)
-      .lineTo(0, 232.714294)
-      .curveTo(
-        67.9827067,
-        285.373381,
-        151.25565,
-        319.239702,
-        242.028455,
-        326.522878,
-      )
-      .close();
     return (
       <Animated.View style={styles.overlay}>
         <Animated.View
@@ -300,6 +302,8 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: 'rgba(0,0,0, .6)',
     flex: 1,
+    //marginTop: -Header.HEIGHT,
+    paddingBottom: Header.HEIGHT,
   },
   container: {
     alignItems: 'center',
