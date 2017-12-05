@@ -1,7 +1,7 @@
 // @flow
 import type { LayoutState } from './withLayout';
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, SafeAreaView } from 'react-native';
 import Raven from 'raven-js';
 import {
   childContextTypes,
@@ -50,10 +50,11 @@ export class Screen extends PureComponent<Props, State> {
   }
 
   render() {
-    const { style, children } = this.props;
+    const { style, children, useSafeArea } = this.props;
 
+    const Container = useSafeArea === false ? View : SafeAreaView;
     return (
-      <View
+      <Container
         style={[{ flex: 1, backgroundColor: theme.colors.panel }, style]}
         onLayout={this.handleLayout}
       >
@@ -62,7 +63,7 @@ export class Screen extends PureComponent<Props, State> {
         ) : (
           children
         )}
-      </View>
+      </Container>
     );
   }
 }

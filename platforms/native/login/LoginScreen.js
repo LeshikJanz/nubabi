@@ -10,7 +10,7 @@ export class LoginScreen extends PureComponent {
 
   render() {
     return (
-      <Screen>
+      <Screen useSafeArea={false}>
         <Login />
       </Screen>
     );
