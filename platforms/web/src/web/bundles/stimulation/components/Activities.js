@@ -7,6 +7,8 @@ import StimulationButton from './StimulationButton';
 import ActivityList from './ActivityList';
 import { compose, withState, withHandlers } from 'recompose';
 import { ACTIVITY_FILTERS } from './constants/index';
+import { withRouter } from 'react-router-dom';
+import { ActivityConnection } from 'core/types';
 
 export const media = {
   handheld: (...args) => css`
@@ -43,15 +45,11 @@ const ActivitiesListTitle = styled(Box)`
 
 type Props = {
   selectedFilter: string,
-  handleFilter: Function,
-  getFilteredActivities: Function,
+  handleNavigate: Function,
+  activities: ActivityConnection[],
 };
 
-const Activities = ({
-  selectedFilter,
-  handleFilter,
-  getFilteredActivities,
-}: Props) => (
+const Activities = ({ selectedFilter, handleNavigate, activities }: Props) => (
   <ActivitiesListWrapper>
     <ActivityButtons>
       {STIMULATION_BUTTONS.map(b => (
@@ -59,34 +57,24 @@ const Activities = ({
           key={b.id}
           button={b}
           selectedFilter={selectedFilter}
-          handleFilter={handleFilter}
+          handleClick={() => handleNavigate(b.redirect)}
         />
       ))}
     </ActivityButtons>
     <ActivitiesListHeader justify="space-between" align="center">
       <ActivitiesListTitle is="h3">
-        {/* {`This Week's activities`} */}
+        {`This Week's activities`}
       </ActivitiesListTitle>
     </ActivitiesListHeader>
 
-    <ActivityList activities={getFilteredActivities()} />
+    <ActivityList activities={activities.edges} />
   </ActivitiesListWrapper>
 );
 
 export default compose(
-  withState('selectedFilter', 'handleFilter', ACTIVITY_FILTERS.activities),
+  withRouter,
+  withState('selectedFilter', 'handleFilter', ACTIVITY_FILTERS.weeks),
   withHandlers({
-    getFilteredActivities: ({
-      selectedFilter,
-      activities,
-      favoriteActivities,
-    }) => () => {
-      switch (selectedFilter) {
-        case ACTIVITY_FILTERS.favorites:
-          return favoriteActivities.edges;
-        default:
-          return activities.edges;
-      }
-    },
+    handleNavigate: ({ history }) => redirect => history.push(redirect),
   }),
 )(Activities);

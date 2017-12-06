@@ -31,4 +31,5 @@ export const ACTIVITY_FILTERS = {
   favorites: 'favorites',
   activities: 'activities',
   history: 'history',
+  weeks: 'weeks',
 };

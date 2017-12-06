@@ -42,13 +42,13 @@ const ButtonText = styled.div`
 type Props = {
   button: StimulationButtonType,
   selectedFilter: string,
-  handleFilter: Function,
+  handleClick: Function,
 };
 
-const StimulationButton = ({ button, selectedFilter, handleFilter }: Props) => (
+const StimulationButton = ({ button, selectedFilter, handleClick }: Props) => (
   <ButtonWrapper
     active={(selectedFilter === button.type).toString()}
-    onClick={() => handleFilter(button.type)}
+    onClick={handleClick}
   >
     {iconMappings(button.icon)()}
     <ButtonText>{button.text}</ButtonText>

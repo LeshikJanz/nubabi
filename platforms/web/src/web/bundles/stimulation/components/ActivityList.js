@@ -19,7 +19,7 @@ const ActivitiesList = styled.ul`
 
 const ActivityList = ({ activities, history }: Props) => {
   const handleNavigateToActivity = ({ id }) =>
-    history.push(`/stimulation/${id}`);
+    history.push(`/stimulation/activity/${id}`);
 
   return (
     <ActivitiesList>

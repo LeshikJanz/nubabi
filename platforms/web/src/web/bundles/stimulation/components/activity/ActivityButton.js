@@ -11,7 +11,7 @@ const Wrapper = styled(Flex)`
   align-items: center;
   border-radius: 4px;
   background-color: #ffffff;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
+  box-shadow: ${props => props.theme.shadows.panel};
   padding: 13px;
   text-align: center;
   cursor: pointer;

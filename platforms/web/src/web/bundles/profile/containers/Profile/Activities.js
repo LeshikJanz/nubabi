@@ -45,7 +45,7 @@ class Activities extends PureComponent<Props> {
             See all activities
           </MoreLink>
         </ActivitiesListHeader>
-        <ActivityList activities={activities} />
+        <ActivityList activities={activities.edges} />
       </ActivitiesListWrapper>
     );
   }

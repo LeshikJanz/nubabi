@@ -28,6 +28,8 @@ import Growth from 'web/bundles/growth';
 import Library from 'web/bundles/library';
 import Memories from 'web/bundles/memories';
 import Activity from 'web/bundles/stimulation/containers/activity';
+import BrowseActivities from 'web/bundles/stimulation/components/BrowseActivities';
+import Favorites from '../bundles/stimulation/containers/favorites';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -87,8 +89,20 @@ const App = (props: Props) => (
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/:id"
+            path="/stimulation/activity/:id"
             component={Activity}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/favorites"
+            component={Favorites}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/browse"
+            component={BrowseActivities}
             props={props}
           />
           <AuthenticatedRoute
