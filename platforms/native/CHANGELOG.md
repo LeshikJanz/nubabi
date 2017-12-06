@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.1"></a>
+## [1.5.1](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.5.0...nubabi-native@1.5.1) (2017-12-06)
+
+
+
+
+**Note:** Version bump only for package nubabi-native
+
 <a name="1.5.0"></a>
 # [1.5.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.4.0...nubabi-native@1.5.0) (2017-12-06)
 

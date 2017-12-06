@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@1.2.0...nubabi-graphql-server@1.2.1) (2017-12-06)
+
+
+### Performance Improvements
+
+* **schema:** dataloader for activities and experts ([3afd1ed](https://gitlab.com/nubabi/mobile/commit/3afd1ed))
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@1.1.0...nubabi-graphql-server@1.2.0) (2017-12-06)
 
