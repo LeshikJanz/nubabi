@@ -10,7 +10,6 @@ import theme from 'core/themes/defaultTheme';
 
 type Props = {
   isLikedByViewer: boolean,
-  onToggleLike: (input: ToggleMemoryLikeInput) => Promise<ApolloQueryResult<*>>,
   onToggle: (isLiked: boolean) => void,
   likes?: { count: number },
   withCount?: boolean,
@@ -18,7 +17,8 @@ type Props = {
 
 type InputProps = Props & {
   id: string,
-}
+  onToggleLike: (input: ToggleMemoryLikeInput) => Promise<ApolloQueryResult<*>>,
+};
 
 export const LikeMemoryButton = ({
   onToggle,
@@ -54,6 +54,7 @@ LikeMemoryButton.fragments = {
         count
         edges {
           actor {
+            id
             firstName
           }
         }
@@ -65,8 +66,12 @@ LikeMemoryButton.fragments = {
 export default hoistStatics(
   compose(
     withHandlers({
-      onToggle: ({ id, onToggleLike, isLikedByViewer, likes }: InputProps) => () =>
-        onToggleLike(id, !isLikedByViewer, likes.count),
+      onToggle: ({
+        id,
+        onToggleLike,
+        isLikedByViewer,
+        likes,
+      }: InputProps) => () => onToggleLike(id, !isLikedByViewer, likes.count),
     }),
   ),
 )(LikeMemoryButton);

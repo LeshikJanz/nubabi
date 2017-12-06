@@ -64,6 +64,7 @@ MemoryComment.fragments = {
       text
       createdAt
       author {
+        id
         firstName
         lastName
         avatar {
