@@ -28,8 +28,10 @@ import Growth from 'web/bundles/growth';
 import Library from 'web/bundles/library';
 import Memories from 'web/bundles/memories';
 import Activity from 'web/bundles/stimulation/containers/activity';
-import BrowseActivities from 'web/bundles/stimulation/components/BrowseActivities';
+import BrowseActivities from 'web/bundles/stimulation/containers/browseActivities';
 import Favorites from '../bundles/stimulation/containers/favorites';
+import FilteredSkillActivities from '../bundles/stimulation/containers/filteredSkillActiivities';
+import FilteredCategoryActivities from '../bundles/stimulation/containers/filteredCategoryActiivities';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -103,6 +105,18 @@ const App = (props: Props) => (
             exact
             path="/stimulation/browse"
             component={BrowseActivities}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/browse/skill/:id"
+            component={FilteredSkillActivities}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/browse/category/:id"
+            component={FilteredCategoryActivities}
             props={props}
           />
           <AuthenticatedRoute

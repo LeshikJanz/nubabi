@@ -33,3 +33,6 @@ export const ACTIVITY_FILTERS = {
   history: 'history',
   weeks: 'weeks',
 };
+
+export const INDOOR_CATEGORY_ID = 1;
+export const OUTDOOR_CATEGORY_ID = 2;

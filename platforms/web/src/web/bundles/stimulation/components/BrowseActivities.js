@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import indoorActivity from 'web/assets/images/indoor-activity.png';
 import outdoorActivity from 'web/assets/images/outdoor-activity.png';
-import { SKILLS } from './constants/skillArea';
 import iconMappings from 'web/common/iconMappings';
+import { SkillAreaConnection } from 'core/types';
+import { INDOOR_CATEGORY_ID, OUTDOOR_CATEGORY_ID } from './constants/index';
 
 const categoryImageWidth = '328px';
 const skillWidth = '200px';
@@ -113,16 +114,26 @@ const Skill = styled(Flex)`
   }
 `;
 
-const BrowseActivities = () => (
+type Props = {
+  skillAreas: SkillAreaConnection[],
+  handleSkillFilter: Function,
+  handleCategoryFilter: Function,
+};
+
+const BrowseActivities = ({
+  skillAreas,
+  handleSkillFilter,
+  handleCategoryFilter,
+}: Props) => (
   <Wrapper>
     <CategoryLabel>By Category</CategoryLabel>
     <Categories>
-      <Category>
+      <Category onClick={() => handleCategoryFilter(INDOOR_CATEGORY_ID)}>
         <label>Indoors</label>
         <Backdrop />
         <img src={indoorActivity} alt="indoors" />
       </Category>
-      <Category>
+      <Category onClick={() => handleCategoryFilter(OUTDOOR_CATEGORY_ID)}>
         <label>Outdoors</label>
         <Backdrop />
         <img src={outdoorActivity} alt="outdoors" />
@@ -130,12 +141,12 @@ const BrowseActivities = () => (
     </Categories>
     <CategoryLabel>Development Skills</CategoryLabel>
     <Skills>
-      {SKILLS.map(s => (
-        <Skill key={s.id}>
+      {skillAreas.edges.map(({ node }) => (
+        <Skill key={node.id} onClick={() => handleSkillFilter(node.id)}>
           <SkillIcon>
-            <img src={iconMappings(s.icon)} alt={s.label} />
+            <img src={iconMappings(node.icon)} alt={node.label} />
           </SkillIcon>
-          <label>{s.label}</label>
+          <label>{node.name}</label>
         </Skill>
       ))}
     </Skills>
