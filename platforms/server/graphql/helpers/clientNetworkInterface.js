@@ -1,6 +1,7 @@
 import { graphql, print } from 'graphql';
 import { schema } from '../schema';
 import firebaseConnector from '../connectors/firebaseConnector';
+import { genLoaders } from './loaders';
 
 /* eslint-disable */
 
@@ -51,6 +52,7 @@ class ClientNetworkInterfaceWithMiddleware {
 
       if (options.headers && options.headers.authorization) {
         context.token = options.headers.authorization.split(' ')[1];
+        context.loaders = genLoaders(context.token, context.connectors.firebase);
       }
 
       return graphql(

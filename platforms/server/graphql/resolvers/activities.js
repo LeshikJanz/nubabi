@@ -91,11 +91,11 @@ export const resolvers = {
   },
   Activity: {
     id: globalIdField(),
-    skillArea: (obj: RawActivity, _: mixed, { token }: Context) => {
-      return connector.getSkillArea(token, obj['skill_area_id']); // eslint-disable-line dot-notation
+    skillArea: (obj: RawActivity, _: mixed, { loaders: { skillArea } }: Context) => {
+      return skillArea.load(obj.skill_area_id);
     },
-    expert: (obj: RawActivity, _: mixed, { token }: Context) => {
-      return connector.getExpert(token, obj.expert_id);
+    expert: (obj: RawActivity, _: mixed, { loaders: { expert }}: Context) => {
+      return expert.load(obj.expert_id);
     }, // eslint-disable-line dot-notation
     steps: (
       { id, babyId, steps }: RawActivity,
