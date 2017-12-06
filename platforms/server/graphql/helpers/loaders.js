@@ -5,7 +5,6 @@ import * as babies from '../connectors/babiesConnector';
 const genBabyLoader = (token, loadFn) => {
   return new DataLoader(keys => {
     return Promise.all(keys.map(id => {
-      console.log('loader called for ', id);
       return loadFn(token, id);
     }));
   });
