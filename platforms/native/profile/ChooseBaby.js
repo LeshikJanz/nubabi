@@ -7,7 +7,7 @@ import type {
   State,
 } from 'core/types/index';
 import type { NavigationProp } from 'react-navigation';
-import { NavigationActions } from 'react-navigation';
+import { Header, NavigationActions } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -23,7 +23,6 @@ import {
   View,
 } from 'react-native';
 import { CachedImage as Image } from 'react-native-cached-image';
-import { Header } from 'react-navigation';
 import SVGPath from 'art/modes/svg/path';
 import { gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
@@ -80,6 +79,8 @@ class ChooseBaby extends PureComponent {
   };
 
   componentDidMount() {
+    this.props.navigation.setParams({ onBack: this.goBack });
+
     Animated.stagger(400, [
       Animated.spring(this.elementsAnimation, {
         toValue: 2,
@@ -153,7 +154,7 @@ class ChooseBaby extends PureComponent {
     this.props.navigation.goBack();
   };
 
-  closeChooser = (cb) => {
+  closeChooser = cb => {
     Animated.spring(this.elementsAnimation, {
       toValue: 0,
       velocity: 3,
@@ -165,7 +166,9 @@ class ChooseBaby extends PureComponent {
     // We're doing this until we fix the interpolations that prevent a reset from getting
     // the transitioner view in the right opacity.
     this.goBack();
-    InteractionManager.runAfterInteractions(() => this.props.navigation.navigate('addBaby'));
+    InteractionManager.runAfterInteractions(() =>
+      this.props.navigation.navigate('addBaby'),
+    );
   };
 
   selectBaby = id => {
@@ -264,17 +267,9 @@ class ChooseBaby extends PureComponent {
           </Svg>
 
           <View style={styles.babyContainer}>
-            <Animated.View
-              style={[styles.closeButton, this.getListAnimatedStyle()]}
-            >
-              <Icon
-                name="ios-close-outline"
-                style={styles.closeIcon}
-                onPress={this.goBack}
-              />
-            </Animated.View>
             <ScrollView
               contentContainerStyle={{
+                marginTop: 15,
                 width,
                 height: 80,
                 paddingLeft: 10,
@@ -302,7 +297,7 @@ const styles = StyleSheet.create({
   overlay: {
     backgroundColor: 'rgba(0,0,0, .6)',
     flex: 1,
-    //marginTop: -Header.HEIGHT,
+    // marginTop: -Header.HEIGHT,
     paddingBottom: Header.HEIGHT,
   },
   container: {
@@ -349,19 +344,6 @@ const styles = StyleSheet.create({
     width: 558,
     marginTop: -200,
     marginLeft: -7,
-  },
-  closeButton: {
-    marginTop: 15,
-    height: 25,
-    alignSelf: 'flex-start',
-  },
-  closeIcon: {
-    padding: 10,
-    backgroundColor: 'transparent',
-    color: HEADER_FONT_COLOR,
-    fontSize: 25,
-    marginTop: -6,
-    marginRight: -4,
   },
 });
 
