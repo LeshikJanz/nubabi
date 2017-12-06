@@ -14,9 +14,8 @@ cache:
 before_script:
   - >
     if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
-      apt-get update && apt-get install -yqq jq
       export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
-      export WEB_BASE_VERSION=$(cat ./platforms/web/package.json | jq -r .version)
+      export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
       yarn install
     fi
 
