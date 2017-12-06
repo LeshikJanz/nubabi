@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { compose } from 'recompose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { toGlobalId } from 'graphql-relay';
+import withCurrentBaby from 'web/components/withCurrentBaby';
 
 const query = gql`
   query getCategoryActivities($categories: [ID!]) {
@@ -32,10 +32,7 @@ const query = gql`
 `;
 
 export default compose(
-  connect(({ babies, settings }) => ({
-    currentBabyId: babies.currentBabyId,
-    unitDisplay: settings.unitDisplay,
-  })),
+  withCurrentBaby,
   graphql(query, {
     options: ({ match }) => ({
       variables: { $categories: toGlobalId('Category', [match.params.id]) },

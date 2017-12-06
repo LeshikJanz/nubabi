@@ -30,8 +30,10 @@ import Memories from 'web/bundles/memories';
 import Activity from 'web/bundles/stimulation/containers/activity';
 import BrowseActivities from 'web/bundles/stimulation/containers/browseActivities';
 import Favorites from '../bundles/stimulation/containers/favorites';
+import History from '../bundles/stimulation/containers/history';
 import FilteredSkillActivities from '../bundles/stimulation/containers/filteredSkillActiivities';
 import FilteredCategoryActivities from '../bundles/stimulation/containers/filteredCategoryActiivities';
+import HistoryList from '../bundles/stimulation/containers/history/historyList';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -105,6 +107,18 @@ const App = (props: Props) => (
             exact
             path="/stimulation/browse"
             component={BrowseActivities}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/history"
+            component={History}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/stimulation/history/:id"
+            component={HistoryList}
             props={props}
           />
           <AuthenticatedRoute

@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import ActivitySwitcher from '../../components/activity/ActivitySwitcher';
 import { ActivityFragments } from '../../fragments/activity';
+import withCurrentBaby from 'web/components/withCurrentBaby';
 
 const query = gql`
   query getBabyActivity($id: ID!) {
@@ -27,10 +27,7 @@ const query = gql`
 const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
 
 export default compose(
-  connect(({ babies, settings }) => ({
-    currentBabyId: babies.currentBabyId,
-    unitDisplay: settings.unitDisplay,
-  })),
+  withCurrentBaby,
   graphql(query, {
     options: ({ currentBabyId }) => ({
       variables: { id: currentBabyId },

@@ -1,10 +1,10 @@
 import Stimulation from '../components/index';
-import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import { FavoriteActivitiesFragment } from '../fragments/favorites';
+import withCurrentBaby from 'web/components/withCurrentBaby';
 
 const query = gql`
   query getBabyActivity($id: ID!) {
@@ -41,10 +41,7 @@ const query = gql`
 `;
 
 export default compose(
-  connect(({ babies, settings }) => ({
-    currentBabyId: babies.currentBabyId,
-    unitDisplay: settings.unitDisplay,
-  })),
+  withCurrentBaby,
   graphql(query, {
     options: ({ currentBabyId }) => ({
       fetchPolicy: 'network-only',

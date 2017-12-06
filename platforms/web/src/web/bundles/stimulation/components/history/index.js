@@ -2,8 +2,7 @@
 import React from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
-import ActivityList from './ActivityList';
-import { ActivityConnection } from 'core/types';
+import HistoryItem from './HistoryItem';
 
 const Wrapper = styled.div`
   padding: 15px;
@@ -21,17 +20,26 @@ const ListTitle = styled(Box)`
 `;
 
 type Props = {
-  favoriteActivities: ActivityConnection[],
+  activityHistory: ActivityHistoryItemFragment,
+  handleHistory: Function,
 };
 
-const Favorites = ({ favoriteActivities }: Props) => (
+const History = ({ activityHistory, handleHistory }: Props) => (
   <Wrapper>
     <ListHeader justify="space-between" align="center">
-      <ListTitle>{`This Week's activities`}</ListTitle>
+      <ListTitle>Activity History</ListTitle>
     </ListHeader>
 
-    <ActivityList activities={favoriteActivities.edges} />
+    <div>
+      {activityHistory.edges.map(({ node }) => (
+        <HistoryItem
+          key={node.id}
+          item={node}
+          handleClick={() => handleHistory(node.id)}
+        />
+      ))}
+    </div>
   </Wrapper>
 );
 
-export default Favorites;
+export default History;
