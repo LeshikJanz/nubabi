@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.2.1...nubabi-core@1.3.0) (2017-12-06)
+
+
+### Features
+
+* add memories from activities and display on list ([ad73e88](https://gitlab.com/nubabi/mobile/commit/ad73e88))
+
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.2.0...nubabi-core@1.2.1) (2017-12-04)
 

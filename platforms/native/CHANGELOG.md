@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.4.0...nubabi-native@1.5.0) (2017-12-06)
+
+
+### Bug Fixes
+
+* **memories:** request IDs for actors of likes/comments ([0bc538e](https://gitlab.com/nubabi/mobile/commit/0bc538e))
+
+
+### Features
+
+* add memories from activities and display on list ([ad73e88](https://gitlab.com/nubabi/mobile/commit/ad73e88))
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.3.2...nubabi-native@1.4.0) (2017-12-05)
 
