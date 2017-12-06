@@ -90,7 +90,7 @@ const ActivitySwitcher = ({ baby, activity, history }: Props) => {
   };
 
   const handleRedirect = (id: string) => {
-    history.push(`/stimulation/${id}`);
+    history.push(`/stimulation/activity/${id}`);
     window.scrollTo(0, 0);
   };
 

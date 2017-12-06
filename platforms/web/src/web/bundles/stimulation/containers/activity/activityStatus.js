@@ -68,7 +68,7 @@ export default compose(
       const completedActivity = path(['completeActivity'], data);
 
       if (newActivity) {
-        history.push(`/stimulation/${newActivity.id}`);
+        history.push(`/stimulation/activity/${newActivity.id}`);
       }
 
       if (completedActivity) {

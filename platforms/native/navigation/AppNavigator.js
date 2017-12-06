@@ -173,14 +173,12 @@ class TransitionerSwitcher extends PureComponent {
     if (transition) {
       this.previousTransition = transition;
       props = { ...this.props, ...transition};
-    } else {
-      if (this.previousTransition) {
+    } else if (this.previousTransition) {
         props = {...this.props, transitionConfig: this.previousTransition.transitionConfig};
         this.previousTransition = null;
       } else {
         props = this.props;
       }
-    }
 
     return <CardStackTransitioner {...props} />
   }
