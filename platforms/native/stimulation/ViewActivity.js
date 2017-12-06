@@ -10,7 +10,7 @@ import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import { toggleFavorite } from './toggleFavorite';
-import Activity from './Activity';
+import Activity, { handleActivityShare } from './Activity';
 
 type Props = {
   activity: ActivityType,
@@ -44,6 +44,8 @@ export class ViewActivity extends PureComponent {
     });
   };
 
+  handleActivityShare = handleActivityShare.bind(this);
+
   render() {
     const { activity, babyName } = this.props;
 
@@ -54,6 +56,7 @@ export class ViewActivity extends PureComponent {
           babyName={babyName}
           isFavorite={activity.isFavorite}
           onToggleFavorite={this.handleToggleFavorite}
+          onShare={this.handleActivityShare}
           onActivityMediaPress={this.handleActivityMediaPress}
         />
       </Screen>

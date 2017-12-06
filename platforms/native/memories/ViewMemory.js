@@ -119,6 +119,7 @@ export default compose(
                 ['comments'],
                 id,
                 'head',
+                { fragmentName: 'MemoryComment' },
               )(store, data);
             },
 

@@ -16,7 +16,7 @@ export const MemoryCommentsSummary = ({ connection }: Props) => {
   }
 
   return (
-    <Box flexDirection="row" alignItems="center">
+    <Box flexDirection="row" alignItems="center" marginRight={0.5}>
       <Icon name="md-chatboxes" color={theme.colors.gray} size={14} />
       <Text color="gray" letterSpacing={-0.14} marginLeft={0.5}>
         {pluralizeWithSubject('comment', connection.count)}

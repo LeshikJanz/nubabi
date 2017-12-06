@@ -10,6 +10,7 @@ import {
   transform,
 } from './common';
 import { addEdgeAndCursorToMutationResult } from '../../../../core/helpers/graphqlUtils';
+import { getActivity } from '../connectors/babiesConnector';
 
 export const resolvers = {
   Mutation: {
@@ -92,6 +93,13 @@ export const resolvers = {
         Promise.resolve(firebase.nestedArrayToArray(likes)),
         args,
       );
+    },
+    fromActivity: ({ fromActivityId }, _, { token }) => {
+      if (!fromActivityId) {
+        return null;
+      }
+
+      return getActivity(token, fromActivityId);
     },
   },
 };

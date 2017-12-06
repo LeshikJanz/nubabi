@@ -1,15 +1,17 @@
 // @flow
 import type { ApolloQueryResult, CreateMemoryInput, State } from 'core/types';
 import type { SuggestedMemoryType } from './SuggestedMemoriesList';
+import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import React from 'react';
 import { gql, graphql } from 'react-apollo';
 import {
-  assoc,
   compose,
   filter,
+  merge,
   omit,
   path,
   pluck,
+  prop,
   propEq,
   propOr,
 } from 'ramda';
@@ -28,20 +30,23 @@ import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
 import { ViewMemories } from './ViewMemories';
-import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 
 type Props = {
   onSubmit: (input: CreateMemoryInput) => Promise<ApolloQueryResult<*>>,
   onAddVoiceNote: (id?: string) => void,
   onEditSticker: () => void,
-  suggestedMemoryType: mixed,
+  fromActivity?: { id: string, name: string },
+  suggestedMemoryType?: {
+    id: string,
+    title: string,
+  },
 };
 
 type InputProps = Props & {
   currentBabyId: string,
   goBack: () => void,
   mutate: (input: object) => Promise<ApolloQueryResult<*>>,
-}
+};
 
 const suggestedMemoryTypeProps = (
   suggestedMemoryType: ?SuggestedMemoryType,
@@ -61,15 +66,19 @@ export const AddMemory = ({
   onAddVoiceNote,
   onEditSticker,
   suggestedMemoryType,
-}: Props) => (
-  <MemoryForm
-    onSubmit={onSubmit}
-    onAddVoiceNote={onAddVoiceNote}
-    onEditSticker={onEditSticker}
-    initialValues={suggestedMemoryTypeProps(suggestedMemoryType)}
-    suggestedMemoryType={suggestedMemoryType}
-  />
-);
+  fromActivity,
+}: Props) => {
+  return (
+    <MemoryForm
+      onSubmit={onSubmit}
+      onAddVoiceNote={onAddVoiceNote}
+      onEditSticker={onEditSticker}
+      initialValues={suggestedMemoryTypeProps(suggestedMemoryType)}
+      suggestedMemoryType={suggestedMemoryType}
+      fromActivity={fromActivity}
+    />
+  );
+};
 
 export default compose(
   connect(
@@ -84,6 +93,7 @@ export default compose(
   ),
   withProps((ownerProps: Props) => ({
     suggestedMemoryType: findSuggestedMemoryById(ownerProps.suggestedMemoryId),
+    fromActivity: ownerProps.fromActivity,
   })),
   graphql(
     gql`
@@ -108,6 +118,7 @@ export default compose(
           toggleNetworkActivityIndicator,
           currentUserId,
           suggestedMemoryType,
+          fromActivity,
           // eslint-disable-next-line no-shadow
           appError,
         },
@@ -115,7 +126,10 @@ export default compose(
         onSubmit: async (values: CreateMemoryInput) => {
           toggleNetworkActivityIndicator(true);
 
-          const input = assoc('babyId', currentBabyId, values);
+          const input = merge(values, {
+            babyId: currentBabyId,
+            fromActivity: path(['id'], fromActivity),
+          });
 
           goBack();
 

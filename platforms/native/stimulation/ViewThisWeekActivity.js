@@ -14,7 +14,7 @@ import { compose, path, pathOr } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { displayLoadingState, Screen, withCurrentBaby } from '../components';
 import toggleFavorite from './toggleFavorite';
-import Activity from './Activity';
+import Activity, { handleActivityShare } from './Activity';
 
 type Props = {
   activity: ActivityType,
@@ -146,6 +146,8 @@ class ViewThisWeeksActivity extends PureComponent {
     });
   };
 
+  handleActivityShare = handleActivityShare.bind(this);
+
   render() {
     const { isLoading } = this.state;
     const { activity, nextActivity, previousActivity, babyName } = this.props;
@@ -172,6 +174,7 @@ class ViewThisWeeksActivity extends PureComponent {
           onLevelIncrease={this.handleLevelIncrease}
           onLevelDecrease={this.handleLevelDecrease}
           onActivityMediaPress={this.handleActivityMediaPress}
+          onShare={this.handleActivityShare}
         />
       </Screen>
     );

@@ -46,6 +46,7 @@ type Memory implements Node, Timestampable, Commentable, Likeable {
   suggestedMemoryType: String
   likes(before: String, after: String, first: Int, last: Int): LikeConnection!
   isLikedByViewer: Boolean!
+  fromActivity: Activity
 }
 
 # A connection to a list of items.
@@ -103,6 +104,8 @@ input CreateMemoryInput {
   # A string identifier of the suggested memory that was selected
   # when creating this memory
   suggestedMemoryType: String
+  # An activity that was used to create this Memory
+  fromActivity: ID
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }

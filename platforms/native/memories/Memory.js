@@ -12,6 +12,7 @@ import MemoryMedia from '../components/MemoryMedia';
 import { findSuggestedMemoryById } from './SuggestedMemoriesList';
 import LikeMemoryButton from './LikeMemoryButton';
 import MemoryCommentsSummary from './MemoryCommentsSummary';
+import MemoryActivity from './MemoryActivity';
 
 type Props = MemoryType & {
   id: String,
@@ -130,12 +131,16 @@ class Memory extends PureComponent<Props> {
         }
 
         suggestedMemoryType
+        fromActivity {
+          ...MemoryActivity
+        }
 
         ...MemoryCommentsSummary
         ...LikeMemoryButton
       }
       ${MemoryCommentsSummary.fragments.summary}
       ${LikeMemoryButton.fragments.item}
+      ${MemoryActivity.fragments.activity}
     `,
   };
 
@@ -156,6 +161,7 @@ class Memory extends PureComponent<Props> {
       suggestedMemoryType,
       createdAt,
       onToggleLike,
+      fromActivity,
     } = this.props;
 
     const date = formatMemoryDate(createdAt);
@@ -241,7 +247,15 @@ class Memory extends PureComponent<Props> {
                   />
                 )}
               </Box>
-              <MemoryCommentsSummary connection={commentsConnection} />
+              <Box flex={1} flexDirection="row" justifyContent="space-between">
+                <MemoryCommentsSummary connection={commentsConnection} />
+
+                {fromActivity && (
+                  <MemoryActivity
+                    {...filter(MemoryActivity.fragments.activity, fromActivity)}
+                  />
+                )}
+              </Box>
             </Box>
           </Card>
         </Box>

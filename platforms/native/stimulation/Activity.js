@@ -9,7 +9,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import { path } from 'ramda';
+import { path, pick } from 'ramda';
 import { gql } from 'react-apollo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import ActivityContainer from './ActivityContainer';
@@ -31,6 +31,7 @@ type ActivityProps = {
   babyName: string,
   isFavorite: boolean,
   onToggleFavorite: () => void,
+  onShare: () => void,
   enableActions: boolean,
   enableNavigation: boolean,
   onActivityMediaPress?: () => void,
@@ -53,6 +54,12 @@ type ActivityNavigationProps = {
 };
 
 type Props = ActivityProps & ActivityNavigationProps & ActivityActionProps;
+
+export function handleActivityShare() {
+  this.props.navigation.navigate('addMemory', {
+    fromActivity: pick(['id', 'name'], this.props.activity),
+  });
+}
 
 export class Activity extends PureComponent {
   props: Props;
@@ -128,7 +135,6 @@ export class Activity extends PureComponent {
   }
 
   scrollView = null;
-
 
   handleLayout = handleLayout.bind(this);
 
@@ -250,6 +256,7 @@ export class Activity extends PureComponent {
               activityName={activity.name}
               isFavoriteActivity={isFavorite}
               onToggleFavorite={this.props.onToggleFavorite}
+              onShare={this.props.onShare}
             />
 
             <ExpertInfo

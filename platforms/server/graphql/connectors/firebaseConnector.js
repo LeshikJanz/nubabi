@@ -497,13 +497,17 @@ const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
     .push().key;
 
   const memory = {
-    ...omit(['babyId', 'files'], input),
+    ...omit(['babyId', 'files', 'fromActivity'], input),
     id: memoryId,
     babyId,
     authorId: currentUserId,
     createdAt: input.createdAt.getTime(),
     files: {},
   };
+
+  if (input.fromActivity) {
+    memory.fromActivityId = fromGlobalId(input.fromActivity).id;
+  }
 
   updates[`/memories/${memoryId}`] = memory;
   updates[`/babies/${babyId}/memories/${memoryId}`] = true;

@@ -4,6 +4,7 @@ exports[`it renders correctly 1`] = `null`;
 
 exports[`it renders correctly 2`] = `
 style = Object {
+    "marginRight": 8,
     "borderColor": "#9EABBC",
     "borderBottomWidth": 0,
     "borderLeftWidth": 0,
@@ -28,6 +29,7 @@ style = Object {
       "borderRightWidth": 0,
       "borderTopWidth": 0,
       "flexDirection": "row",
+      "marginRight": 8,
     }
   }
 >

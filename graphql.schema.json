@@ -5870,6 +5870,18 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "fromActivity",
+              "description": "",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Activity",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -8810,6 +8822,16 @@
               "type": {
                 "kind": "SCALAR",
                 "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "fromActivity",
+              "description": "An activity that was used to create this Memory",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
                 "ofType": null
               },
               "defaultValue": null

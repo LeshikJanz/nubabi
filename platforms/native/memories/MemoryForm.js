@@ -45,6 +45,7 @@ type Props = {
   files: ?Array<File>,
   initialValues: Object,
   suggestedMemoryType: ?string,
+  fromActivity?: { id: string, name: string },
   removeFiles: Array<string>,
   onMemoryRemoved?: () => void,
 };
@@ -188,6 +189,7 @@ class MemoryForm extends PureComponent {
       suggestedMemoryType,
       onMemoryRemoved,
       submitting: isSubmitting,
+      fromActivity,
     } = this.props;
 
     const editableProps = { editable: !isSubmitting };
@@ -241,11 +243,21 @@ class MemoryForm extends PureComponent {
                 leftIcon="md-flower"
                 iconColor={theme.colors.primary}
                 onPress={this.props.onEditSticker}
-                last
+                last={!fromActivity}
                 {...editableProps}
               >
                 <Text color="secondary">Stickers</Text>
               </ListItem>
+              {fromActivity && (
+                <ListItem
+                  editable={false}
+                  leftIcon="ios-albums"
+                  iconColor={theme.colors.primary}
+                  last
+                >
+                  <Text color="secondary">{fromActivity.name}</Text>
+                </ListItem>
+              )}
             </List>
           </Box>
         </Box>

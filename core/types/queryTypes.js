@@ -13,6 +13,8 @@ export type CreateMemoryInput = {|
   // A string identifier of the suggested memory that was selected
   // when creating this memory
   suggestedMemoryType?: ?string,
+  // An activity that was used to create this Memory
+  fromActivity?: ?string,
   // An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId?: ?string,
 |};
@@ -113,6 +115,17 @@ export type InviteUserInput = {|
   relationship: BabyRelationship,
 |};
 
+export type AuthProvider = 'EMAIL' | 'FACEBOOK';
+
+export type LinkAccountInput = {|
+  providerId: AuthProvider,
+  accessToken: string,
+|};
+
+export type UnlinkAccountInput = {|
+  providerId: string,
+|};
+
 export type ActivityFilterInput = {|
   skillAreas?: ?Array<string>,
   categories?: ?Array<string>,
@@ -149,20 +162,6 @@ export type ToggleFavoriteInput = {|
   id: string,
   babyId: string,
   favorite: boolean,
-|};
-
-export type CurrentUserQuery = {|
-  viewer: {|
-    user: ?{|
-      // The ID of an object
-      id: string,
-      firstName: ?string,
-      lastName: ?string,
-      avatar: ?{|
-        url: string,
-      |},
-    |},
-  |},
 |};
 
 export type getBabiesQuery = {|
@@ -318,6 +317,7 @@ export type WhatYouNeedToKnowQuery = {|
       id: string,
       // Date of birth
       dob: any,
+      name: string,
       growth: {|
         edges: ?Array<?{|
           // The item at the end of the edge.
@@ -564,6 +564,16 @@ export type AddMemoryMutation = {|
           |}>,
         |},
         suggestedMemoryType: ?string,
+        fromActivity: ?{|
+          // The ID of an object
+          id: string,
+          name: string,
+          skillArea: {|
+            // The ID of an object
+            id: string,
+            icon: string,
+          |},
+        |},
         comments: {|
           count: ?number,
         |},
@@ -714,6 +724,16 @@ export type UpdateMemoryMutation = {|
           // Count of filtered result set without considering pagination arguments
           count: ?number,
         |},
+        fromActivity: ?{|
+          // The ID of an object
+          id: string,
+          name: string,
+          skillArea: {|
+            // The ID of an object
+            id: string,
+            icon: string,
+          |},
+        |},
         comments: {|
           count: ?number,
         |},
@@ -730,19 +750,6 @@ export type UpdateMemoryMutation = {|
           |}>,
         |},
       |},
-    |},
-  |},
-|};
-
-export type DeleteMemoryMutationVariables = {|
-  input: DeleteMemoryInput,
-|};
-
-export type DeleteMemoryMutation = {|
-  deleteMemory: ?{|
-    memory: ?{|
-      // The ID of an object
-      id: string,
     |},
   |},
 |};
@@ -816,6 +823,16 @@ export type ViewMemoriesQuery = {|
               |}>,
             |},
             suggestedMemoryType: ?string,
+            fromActivity: ?{|
+              // The ID of an object
+              id: string,
+              name: string,
+              skillArea: {|
+                // The ID of an object
+                id: string,
+                icon: string,
+              |},
+            |},
             comments: {|
               count: ?number,
             |},
@@ -872,6 +889,19 @@ export type MemoryCommentsQuery = {|
           |}>,
         |},
       |},
+    |},
+  |},
+|};
+
+export type DeleteMemoryMutationVariables = {|
+  input: DeleteMemoryInput,
+|};
+
+export type DeleteMemoryMutation = {|
+  deleteMemory: ?{|
+    memory: ?{|
+      // The ID of an object
+      id: string,
     |},
   |},
 |};
@@ -1392,6 +1422,18 @@ export type EditUserProfileQuery = {|
           url: string,
         |},
       |},
+      linkedAccounts: {|
+        // A list of edges.
+        edges: ?Array<?{|
+          // The item at the end of the edge.
+          node: {|
+            // The ID of an object
+            id: string,
+            provider: ?AuthProvider,
+            displayName: string,
+          |},
+        |}>,
+      |},
     |},
   |},
 |};
@@ -1460,6 +1502,42 @@ export type UserProfileQuery = {|
         thumb: ?{|
           url: string,
         |},
+      |},
+    |},
+  |},
+|};
+
+export type LinkAccountMutationVariables = {|
+  input: LinkAccountInput,
+|};
+
+export type LinkAccountMutation = {|
+  linkAccount: ?{|
+    edge: ?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        provider: ?AuthProvider,
+        displayName: string,
+      |},
+    |},
+  |},
+|};
+
+export type UnlinkAccountMutationVariables = {|
+  input: UnlinkAccountInput,
+|};
+
+export type UnlinkAccountMutation = {|
+  unlinkAccount: ?{|
+    // The LinkedAccount that was deleted as the result of the unlink
+    deletedEdge: ?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        provider: ?AuthProvider,
       |},
     |},
   |},
@@ -2346,6 +2424,16 @@ export type MemoryItemFragment = {|
     |}>,
   |},
   suggestedMemoryType: ?string,
+  fromActivity: ?{|
+    // The ID of an object
+    id: string,
+    name: string,
+    skillArea: {|
+      // The ID of an object
+      id: string,
+      icon: string,
+    |},
+  |},
   comments: {|
     count: ?number,
   |},
@@ -2360,6 +2448,17 @@ export type MemoryItemFragment = {|
         firstName: ?string,
       |},
     |}>,
+  |},
+|};
+
+export type MemoryActivityFragment = {|
+  // The ID of an object
+  id: string,
+  name: string,
+  skillArea: {|
+    // The ID of an object
+    id: string,
+    icon: string,
   |},
 |};
 
@@ -2557,6 +2656,16 @@ export type MemoriesFragment = {|
           |}>,
         |},
         suggestedMemoryType: ?string,
+        fromActivity: ?{|
+          // The ID of an object
+          id: string,
+          name: string,
+          skillArea: {|
+            // The ID of an object
+            id: string,
+            icon: string,
+          |},
+        |},
         comments: {|
           count: ?number,
         |},
@@ -2867,6 +2976,28 @@ export type FriendListEdgeFragment = {|
   relationship: ?BabyRelationship,
   // Whether the user is invited but have not accepted yet
   isPending: ?boolean,
+|};
+
+export type LinkedAccountItemFragment = {|
+  // The ID of an object
+  id: string,
+  provider: ?AuthProvider,
+  displayName: string,
+|};
+
+export type LinkedAccountsFragment = {|
+  linkedAccounts: {|
+    // A list of edges.
+    edges: ?Array<?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        provider: ?AuthProvider,
+        displayName: string,
+      |},
+    |}>,
+  |},
 |};
 
 export type UserFormFragment = {|

@@ -27,6 +27,7 @@ type Props = {
   skillImage: ImageType,
   skillName: string,
   onToggleFavorite: () => void,
+  onShare: () => void,
   isFavoriteActivity: boolean,
   layout: LayoutProps,
 };
@@ -36,6 +37,7 @@ const Header = ({
   skillName,
   skillImage,
   onToggleFavorite,
+  onShare,
   isFavoriteActivity,
   layout,
 }: Props) => {
@@ -79,7 +81,7 @@ const Header = ({
             </Svg>
           </TouchableOpacity>
         </View>
-        <View style={styles.headerButton}>
+        <TouchableOpacity onPress={onShare} style={styles.headerButton}>
           <Svg style={styles.cameraButton}>
             <Path
               d={cameraPath}
@@ -88,7 +90,7 @@ const Header = ({
               fill-rule="evenodd"
             />
           </Svg>
-        </View>
+        </TouchableOpacity>
         <View
           style={[
             styles.headerButton,

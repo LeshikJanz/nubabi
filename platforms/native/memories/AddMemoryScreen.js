@@ -2,7 +2,7 @@
 import type { NavigationProp } from 'core/types';
 import React, { PureComponent } from 'react';
 import { InteractionManager } from 'react-native';
-import { path } from 'ramda';
+import { path, prop } from 'ramda';
 import { Screen, SubmitFormNavButton } from '../components';
 import AddMemory from './AddMemory';
 
@@ -31,10 +31,10 @@ export class AddMemoryScreen extends PureComponent {
   };
 
   render() {
-    const suggestedMemoryId = path(
-      ['navigation', 'state', 'params', 'suggestedMemoryId'],
-      this.props,
-    );
+    const params = path(['navigation', 'state', 'params'], this.props);
+
+    const suggestedMemoryId = prop('suggestedMemoryId', params);
+    const fromActivity = prop('fromActivity', params);
 
     return (
       <Screen>
@@ -43,6 +43,7 @@ export class AddMemoryScreen extends PureComponent {
           onAddVoiceNote={this.handleAddVoiceNote}
           goBack={this.handleGoBack}
           suggestedMemoryId={suggestedMemoryId}
+          fromActivity={fromActivity}
         />
       </Screen>
     );
