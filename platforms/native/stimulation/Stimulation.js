@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
     height: 68,
     flexDirection: 'row',
     borderColor: 'rgba(0,0,0,0.1)',
-    borderTopWidth: 1,
     borderBottomWidth: 1,
   },
   scrollContainer: {
