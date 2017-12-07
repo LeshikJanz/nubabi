@@ -6,8 +6,9 @@ import type {
   UpdateBabyInput,
 } from 'core/types';
 import React, { Component } from 'react';
+import { InteractionManager } from 'react-native';
 import { gql, graphql } from 'react-apollo';
-import { assoc, compose, omit, path } from 'ramda';
+import { assoc, compose, merge, omit, path } from 'ramda';
 import {
   displayLoadingState,
   Screen,
@@ -17,6 +18,11 @@ import {
 import BabyNameTitle from '../BabyNameTitle';
 import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
 import theme from 'core/themes/defaultTheme';
+import {
+  getContentTypeFromFilename,
+  getTypenameForFile,
+  optimisticResponse,
+} from '../../../../libs/graphql-utils';
 
 type Props = {
   baby: Baby,
@@ -73,14 +79,64 @@ export default compose(
       ${BabyForm.fragments.form}
     `,
     {
-      props: ({ mutate, ownProps: { currentBabyId } }) => ({
+      props: ({ mutate, ownProps: { currentBabyId, navigation } }) => ({
         onSubmit: values => {
           const input = normalizeAvatarAndCoverImage(
             assoc('id', currentBabyId, omit(['avatar', 'coverImage'], values)),
             values,
           );
 
-          return mutate({ variables: { input } });
+          InteractionManager.runAfterInteractions(navigation.goBack);
+
+          const response = optimisticResponse(
+            'updateBaby',
+            'UpdateBabyPayload',
+            () => {
+              const baby = merge(values, {
+                __typename: 'Baby',
+                id: currentBabyId,
+              });
+
+              /* eslint-disable no-param-reassign */
+              if (baby.avatar) {
+                baby.avatar.contentType = getContentTypeFromFilename(
+                  values.avatar.url,
+                );
+                baby.avatar = assoc(
+                  '__typename',
+                  getTypenameForFile(values.avatar),
+                  values.avatar,
+                );
+              }
+
+              if (baby.coverImage) {
+                baby.coverImage.contentType = getContentTypeFromFilename(
+                  values.coverImage.url,
+                );
+                baby.coverImage = assoc(
+                  '__typename',
+                  getTypenameForFile(values.coverImage),
+                  values.coverImage,
+                );
+              }
+              /* eslint-enable no-param-reassign */
+
+              return {
+                edge: {
+                  __typename: 'BabyEdge',
+                  node: {
+                    __typename: 'Baby',
+                    ...baby,
+                  },
+                },
+              };
+            },
+          );
+
+          return mutate({
+            variables: { input },
+            optimisticResponse: response,
+          });
         },
       }),
     },
