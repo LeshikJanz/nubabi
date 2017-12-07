@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 export const media = {
   handheld: (...args) => css`
-    @media (max-width: 1180px) {
+    @media (max-width: 1200px) {
       ${css(...args)};
     }
   `,
@@ -26,7 +26,7 @@ export const Buttons = styled(Flex)`
 `;
 
 export const ListHeader = styled(Flex)`
-  margin: 34px 0 15px;
+  margin: 54px 0 15px;
 `;
 
 export const ListTitle = styled(Box)`

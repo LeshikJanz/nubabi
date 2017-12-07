@@ -1,6 +1,6 @@
 // @flow
 import { gql, graphql } from 'react-apollo';
-import { compose } from 'recompose';
+import { compose, withProps } from 'recompose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import withCurrentBaby from 'web/components/withCurrentBaby';
@@ -8,7 +8,7 @@ import HistoryList from '../../components/history/HistoryList';
 import { ActivityListFragment } from '../../fragments/favorites';
 import { ActivityHistory } from '../../fragments/history';
 
-const queryy = gql`
+const query = gql`
     query ActivityHistoryDetail($periodId: ID!, $babyId: ID!) {
         viewer {
             baby(id: $babyId) {
@@ -36,7 +36,7 @@ const queryy = gql`
 
 export default compose(
   withCurrentBaby,
-  graphql(queryy, {
+  graphql(query, {
     options: ({ currentBabyId, match }) => ({
       variables: {
         babyId: currentBabyId,
@@ -46,7 +46,13 @@ export default compose(
     props: ({ data }) => ({
       data,
       activities: path(['viewer', 'baby', 'activities'], data),
+      history: path(['viewer', 'baby', 'activityHistory'], data),
     }),
   }),
+  withProps(({ history, match }) => ({
+    activeHistory:
+      history &&
+      history.edges.find(({ node }) => node.id === match.params.id).node,
+  })),
   DisplayLoadingState,
 )(HistoryList);

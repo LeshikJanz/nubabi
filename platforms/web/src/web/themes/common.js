@@ -82,7 +82,7 @@ injectGlobal([
       }
       
       &:checked + label:after {
-        left: 4px;
+        left: 3px;
         top: 8px;
       }
     }
