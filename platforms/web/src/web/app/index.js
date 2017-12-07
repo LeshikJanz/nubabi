@@ -57,7 +57,7 @@ const Wrapper = styled.div`
 `;
 
 const AppContent = styled(Section)`
-  max-width: 1400px;
+  max-width: 1200px;
   min-width: 768px;
   margin: 0 auto;
   margin-top: 2px;

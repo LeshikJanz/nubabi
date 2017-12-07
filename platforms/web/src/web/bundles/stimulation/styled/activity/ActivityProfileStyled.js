@@ -23,7 +23,7 @@ export const Wrapper = styled(Flex)`
     ${Label} {
       font-size: 22px;
       color: #ffffff;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     }
 
     button {
@@ -41,8 +41,8 @@ export const Backdrop = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  opacity: 0.2;
+  background: gray;
+  opacity: 0.25;
   border-radius: 0 0 75% 75%;
 `;
 
@@ -57,15 +57,10 @@ export const Image = styled(Flex)`
   border-radius: 0 0 75% 75%;
   height: 100%;
   width: 100%;
-  transform: scale(1);
-  background-size: cover;
   flex: 1;
-  -webkit-align-self: stretch;
-  -ms-flex-item-align: stretch;
   background: url(${props => props.src}) no-repeat;
   background-size: cover;
   background-color: #fff;
-  transform: scale(1);
 `;
 
 export const Actions = styled(Flex)`
