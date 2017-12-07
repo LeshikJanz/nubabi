@@ -2,8 +2,10 @@
 import type { Avatar } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
+import { compose } from 'ramda';
 import { CachedImage as Image } from 'react-native-cached-image';
 import Svg, { Path, Circle } from 'react-native-svg';
+import { dontUpdateForUploadedImage } from '../../components';
 
 const babyIcon = require('core/images/face_icon.jpg');
 
@@ -57,4 +59,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default IconHeader;
+export default compose(dontUpdateForUploadedImage('avatar'))(IconHeader);

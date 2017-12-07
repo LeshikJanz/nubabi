@@ -36,6 +36,7 @@ import withPullToRefresh from './withPullToRefresh';
 import withCurrentBaby from './withCurrentBaby';
 import withCurrentBabyRequired from './withCurrentBabyRequired';
 import requireBaby, { RequireBabyView } from './requireBaby';
+import dontUpdateForUploadedImage from './dontUpdateForUploadedImage';
 
 export {
   Box,
@@ -77,4 +78,5 @@ export {
   withCurrentBabyRequired,
   requireBaby,
   RequireBabyView,
+  dontUpdateForUploadedImage,
 };

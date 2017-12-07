@@ -20,8 +20,7 @@ import BabyNameTitle from '../BabyNameTitle';
 import BabyForm, { normalizeAvatarAndCoverImage } from './BabyForm';
 import theme from 'core/themes/defaultTheme';
 import {
-  getContentTypeFromFilename,
-  getTypenameForFile,
+  optimisticFileResponse,
   optimisticResponse,
 } from '../../../../libs/graphql-utils';
 
@@ -88,82 +87,64 @@ export default compose(
           );
 
           InteractionManager.runAfterInteractions(navigation.goBack);
-
-          const response = optimisticResponse(
-            'updateBaby',
-            'UpdateBabyPayload',
-            () => {
-              const baby = merge(values, {
-                __typename: 'Baby',
-                id: currentBabyId,
-              });
-
-              /* eslint-disable no-param-reassign */
-              if (baby.avatar) {
-                baby.avatar.contentType = getContentTypeFromFilename(
-                  values.avatar.url,
-                );
-                baby.avatar = assoc(
-                  '__typename',
-                  getTypenameForFile(values.avatar),
-                  values.avatar,
-                );
-              }
-
-              if (baby.coverImage) {
-                baby.coverImage.contentType = getContentTypeFromFilename(
-                  values.coverImage.url,
-                );
-                baby.coverImage = assoc(
-                  '__typename',
-                  getTypenameForFile(values.coverImage),
-                  values.coverImage,
-                );
-              }
-              /* eslint-enable no-param-reassign */
-
-              return {
-                edge: {
-                  __typename: 'BabyEdge',
-                  node: {
-                    __typename: 'Baby',
-                    ...baby,
-                  },
-                },
-              };
+          const baby = merge(
+            {
+              __typename: 'Baby',
+              id: currentBabyId,
             },
+            values,
           );
+          /* eslint-disable no-param-reassign */
+          if (baby.avatar) {
+            baby.avatar = optimisticFileResponse(baby.avatar);
+          }
+
+          if (baby.coverImage) {
+            baby.coverImage = optimisticFileResponse(baby.coverImage);
+          }
+          /* eslint-enable no-param-reassign */
+
+          const response = {
+            edge: {
+              __typename: 'BabyEdge',
+              node: {
+                __typename: 'Baby',
+                ...baby,
+              },
+            },
+          };
 
           return mutate({
             variables: { input },
-            optimisticResponse: response,
-          }).then(data => {
-            return new Promise(async resolve => {
-              const result = path(['data', 'updateBaby', 'edge', 'node'], data);
+            optimisticResponse: optimisticResponse(
+              'updateBaby',
+              'UpdateBabyPayload',
+              response,
+            ),
+          }).then(async data => {
+            const result = path(['data', 'updateBaby', 'edge', 'node'], data);
 
-              if (!result) {
-                return;
-              }
+            if (!result) {
+              return data;
+            }
 
-              if (values.avatar && result.avatar.url !== values.avatar.url) {
-                await ImageCacheManager().seedAndCacheUrl(
-                  result.avatar.url,
-                  values.avatar.url,
-                );
-              }
+            if (values.avatar && result.avatar.url !== values.avatar.url) {
+              await ImageCacheManager().seedAndCacheUrl(
+                result.avatar.url,
+                values.avatar.url,
+              );
+            }
 
-              if (
-                values.coverImage &&
-                result.coverImage.url !== values.coverImage.url
-              ) {
-                await ImageCacheManager().seedAndCacheUrl(
-                  result.coverImage.url,
-                  values.coverImage.url,
-                );
-              }
-
-              resolve();
-            });
+            if (
+              values.coverImage &&
+              result.coverImage.url !== values.coverImage.url
+            ) {
+              await ImageCacheManager().seedAndCacheUrl(
+                result.coverImage.url,
+                values.coverImage.url,
+              );
+            }
+            return data;
           });
         },
       }),

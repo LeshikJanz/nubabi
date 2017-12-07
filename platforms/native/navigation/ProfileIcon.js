@@ -6,7 +6,7 @@ import type { ImageSource } from 'react-native';
 import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import color from 'color';
-import { withCurrentBaby } from '../components';
+import { dontUpdateForUploadedImage, withCurrentBaby } from '../components';
 
 const babyIcon = require('core/images/face_icon.jpg');
 
@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ProfileIcon = ({ avatarSource, active, tintColor }: Props) => {
-  const avatar = avatarSource && avatarSource.uri ? avatarSource : babyIcon;
+  const avatar = avatarSource && avatarSource.url ? avatarSource : babyIcon;
 
   const activeStyle = active
     ? {
@@ -120,9 +120,10 @@ export default compose(
         const avatar = path(['viewer', 'baby', 'avatar', 'url'], data);
 
         return {
-          avatarSource: { uri: avatar },
+          avatarSource: { url: avatar },
         };
       },
     },
   ),
+  dontUpdateForUploadedImage('avatarSource'),
 )(ProfileIcon);

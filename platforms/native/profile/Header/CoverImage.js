@@ -2,8 +2,9 @@
 import type { LayoutProps, Image as ImageType } from 'core/types';
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
+import { compose } from 'ramda';
 import { CachedImage as Image } from 'react-native-cached-image';
-import withLayout from '../../components/withLayout';
+import { dontUpdateForUploadedImage, withLayout } from '../../components';
 
 const headerBackground = require('core/images/profileBackground.jpg');
 
@@ -50,4 +51,6 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withLayout(CoverImage);
+export default compose(withLayout, dontUpdateForUploadedImage('coverImage'))(
+  CoverImage,
+);

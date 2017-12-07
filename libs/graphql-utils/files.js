@@ -5,6 +5,7 @@ import {
   cond,
   last,
   memoize,
+  merge,
   prop,
   startsWith,
   T,
@@ -29,4 +30,25 @@ export const getTypenameForFile = (file: { contentType: string }) => {
     ]),
     prop('contentType'),
   )(file);
+};
+
+export const optimisticFileResponse = file => {
+  if (!file.name) {
+    return file;
+  }
+
+  const isLocal = !file.url.startsWith('http');
+
+  if (!isLocal) {
+    return file;
+  }
+
+  const contentType = getContentTypeFromFilename(file.name);
+  return merge(
+    {
+      contentType,
+      __typename: getTypenameForFile({ contentType }),
+    },
+    file,
+  );
 };
