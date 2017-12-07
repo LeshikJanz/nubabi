@@ -83,12 +83,6 @@ export default compose(
           return mutate({ variables: { input } });
         },
       }),
-      // Since Firebase returns the same url for files we workaround this by using refetchQueries
-      // TODO: confirm we need to refetch these. also, we're now able to upload different filenames
-      // so URL would change
-      options: {
-        refetchQueries: ['Profile', 'getBabyAvatar'],
-      },
     },
   ),
   graphql(
