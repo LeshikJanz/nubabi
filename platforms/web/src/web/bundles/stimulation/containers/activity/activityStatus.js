@@ -45,6 +45,7 @@ export default compose(
           edge {
             node {
               id
+              isCompleted
             }
           }
         }

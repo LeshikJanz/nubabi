@@ -43,16 +43,29 @@ export const Backdrop = styled.div`
   height: 100%;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0.2;
-  border-radius: 0 0 45% 45%;
+  border-radius: 0 0 75% 75%;
 `;
 
-export const ImageContainer = styled.div`
+export const ImageContainer = styled(Flex)`
+  justify-content: center;
+  align-items: flex-start;
   position: relative;
+  height: 250px;
 `;
 
-export const Image = styled.img`
-  max-width: 100%;
-  border-radius: 0 0 45% 45%;
+export const Image = styled(Flex)`
+  border-radius: 0 0 75% 75%;
+  height: 100%;
+  width: 100%;
+  transform: scale(1);
+  background-size: cover;
+  flex: 1;
+  -webkit-align-self: stretch;
+  -ms-flex-item-align: stretch;
+  background: url(${props => props.src}) no-repeat;
+  background-size: cover;
+  background-color: #fff;
+  transform: scale(1);
 `;
 
 export const Actions = styled(Flex)`

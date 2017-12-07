@@ -2,11 +2,17 @@ import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 
 const categoryImageWidth = '328px';
+const laptopWidth = '1350px';
 const skillWidth = '200px';
 
 export const Wrapper = styled(Flex)`
   flex-direction: column;
   margin-top: 50px;
+  padding: 0 5%;
+
+  @media (max-width: ${laptopWidth}) {
+    padding: 0;
+  }
 `;
 
 export const CategoryLabel = styled.div`
@@ -56,12 +62,20 @@ export const Backdrop = styled.div`
 
 export const Categories = styled(Flex)`
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+
+  @media (max-width: ${laptopWidth}) {
+    justify-content: center;
+  }
 `;
 
 export const Skills = styled(Flex)`
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+
+  @media (max-width: ${laptopWidth}) {
+    justify-content: center;
+  }
 `;
 
 export const SkillIcon = styled.div``;

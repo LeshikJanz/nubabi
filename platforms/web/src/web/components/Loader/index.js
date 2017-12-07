@@ -10,11 +10,13 @@ type Props = {
 class Loader extends PureComponent<Props> {
   render() {
     const Wrapper = styled.div`
-      position: absolute;
+      display: flex;
       z-index: 10;
       display: ${this.props.active ? 'fixed' : 'none'};
       width: 100%;
       height: 100%;
+      justify-content: center;
+      align-items: center;
     `;
     return (
       <Wrapper>
