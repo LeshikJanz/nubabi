@@ -12,6 +12,7 @@ import {
   mutationWithClientMutationId,
 } from './common';
 import { getClosestContentForPeriod } from '../../../../core/growth/reducer';
+import { addEdgeAndCursorToMutationResult } from '../../../../libs/graphql-utils';
 
 const resolvers = {
   Viewer: {
@@ -25,14 +26,24 @@ const resolvers = {
   Mutation: {
     createBaby: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) =>
-        firebase.createBaby(input).then(createdBaby => ({ createdBaby })),
+        firebase
+          .createBaby(input)
+          .then(addEdgeAndCursorToMutationResult(firebase.getBabies))
+          .then(result => ({
+            ...result,
+            changedBaby: result.edge.node,
+          })),
     ),
 
     updateBaby: mutationWithClientMutationId(
       (input, { connectors: { firebase } }) =>
         firebase
           .updateBaby(fromGlobalId(input.id).id, input)
-          .then(baby => ({ changedBaby: baby })),
+          .then(addEdgeAndCursorToMutationResult(firebase.getBabies))
+          .then(result => ({
+            ...result,
+            changedBaby: result.edge.node,
+          })),
     ),
 
     recordBabyMeasurement: mutationWithClientMutationId(

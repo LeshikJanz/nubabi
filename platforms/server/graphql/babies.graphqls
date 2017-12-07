@@ -73,7 +73,9 @@ input CreateBabyInput {
 }
 
 type CreateBabyPayload {
-  createdBaby: Baby
+  createdBaby: Baby @deprecated(reason: "Use 'edge' instead.")
+  # An edge for the Baby that was created
+  edge: BabyEdge
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }
@@ -94,7 +96,9 @@ input UpdateBabyInput {
 }
 
 type UpdateBabyPayload {
-  changedBaby: Baby
+  changedBaby: Baby @deprecated(reason: "Use 'edge' instead.")
+  # An edge for the Baby that was updated
+  edge: BabyEdge
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
 }

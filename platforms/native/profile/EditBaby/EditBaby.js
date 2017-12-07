@@ -62,8 +62,10 @@ export default compose(
     gql`
       mutation UpdateBaby($input: UpdateBabyInput!) {
         updateBaby(input: $input) {
-          changedBaby {
-            ...BabyForm
+          edge {
+            node {
+              ...BabyForm
+            }
           }
         }
       }

@@ -8086,6 +8086,18 @@
                 "name": "Baby",
                 "ofType": null
               },
+              "isDeprecated": true,
+              "deprecationReason": "Use 'edge' instead."
+            },
+            {
+              "name": "edge",
+              "description": "An edge for the Baby that was created",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "BabyEdge",
+                "ofType": null
+              },
               "isDeprecated": false,
               "deprecationReason": null
             },
@@ -8244,6 +8256,18 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "Baby",
+                "ofType": null
+              },
+              "isDeprecated": true,
+              "deprecationReason": "Use 'edge' instead."
+            },
+            {
+              "name": "edge",
+              "description": "An edge for the Baby that was updated",
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "BabyEdge",
                 "ofType": null
               },
               "isDeprecated": false,

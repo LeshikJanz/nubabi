@@ -46,8 +46,10 @@ export default compose(
     gql`
       mutation CreateBaby($input: CreateBabyInput!) {
         createBaby(input: $input) {
-          createdBaby {
-            ...BabyForm
+          edge {
+            node {
+              ...BabyForm
+            }
           }
         }
       }
@@ -71,7 +73,7 @@ export default compose(
             return assocPath(
               edges,
               prepend(
-                mutationResult.data.createBaby.createdBaby,
+                mutationResult.data.createBaby.edge.node,
                 path(edges, previousData),
               ),
               previousData,
