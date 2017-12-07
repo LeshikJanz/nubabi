@@ -1,7 +1,9 @@
-import React from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import SignUp from '../../components/SignUp';
 
-export const SignUp = () => {
-  return <div>SignUp page</div>;
-};
+const mapDispatchToProps = () => ({});
 
-export default SignUp;
+const mapStateToProps = () => ({});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));
