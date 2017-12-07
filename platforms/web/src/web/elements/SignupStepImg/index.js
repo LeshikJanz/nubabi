@@ -11,7 +11,7 @@ type Props = {
 
 const SubTitle = styled.span`
   color: ${props => props.theme.colors.white};
-  background: ${props => props.theme.colors.lightBlue};
+  background: ${props => props.theme.colors.lightblue};
   height: 40px;
   width: 230px;
   display: flex;
