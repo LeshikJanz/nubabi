@@ -7,6 +7,7 @@ import type {
 } from 'core/types';
 import React, { Component } from 'react';
 import { InteractionManager } from 'react-native';
+import { ImageCacheManager } from 'react-native-cached-image';
 import { gql, graphql } from 'react-apollo';
 import { assoc, compose, merge, omit, path } from 'ramda';
 import {
@@ -136,6 +137,33 @@ export default compose(
           return mutate({
             variables: { input },
             optimisticResponse: response,
+          }).then(data => {
+            return new Promise(async resolve => {
+              const result = path(['data', 'updateBaby', 'edge', 'node'], data);
+
+              if (!result) {
+                return;
+              }
+
+              if (values.avatar && result.avatar.url !== values.avatar.url) {
+                await ImageCacheManager().seedAndCacheUrl(
+                  result.avatar.url,
+                  values.avatar.url,
+                );
+              }
+
+              if (
+                values.coverImage &&
+                result.coverImage.url !== values.coverImage.url
+              ) {
+                await ImageCacheManager().seedAndCacheUrl(
+                  result.coverImage.url,
+                  values.coverImage.url,
+                );
+              }
+
+              resolve();
+            });
           });
         },
       }),
