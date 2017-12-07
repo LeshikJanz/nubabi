@@ -150,6 +150,7 @@ export default compose(
                       __typename: 'Memory',
                       id: uuid.v4(),
                       ...input,
+                      fromActivity: fromActivity || null,
                       files: {
                         __typename: 'FileConnection',
                         count: input.files.length,
