@@ -1,21 +1,17 @@
 // @flow
 import React from 'react';
-import styled from 'styled-components';
 import { ActivityConnection } from 'core/types';
-import ActivityList from './ActivityList';
+import ActivityList from '../containers/activityList';
+import * as FilteredStyled from '../styled/FilteredActivitiesStyled';
 
 type Props = {
   activities: ActivityConnection[],
 };
 
-const Wrapper = styled.div`
-  padding: 15px;
-`;
-
 const FilteredActivities = ({ activities }: Props) => (
-  <Wrapper>
+  <FilteredStyled.Wrapper>
     <ActivityList activities={activities.edges} />
-  </Wrapper>
+  </FilteredStyled.Wrapper>
 );
 
 export default FilteredActivities;

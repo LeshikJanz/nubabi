@@ -4,7 +4,7 @@ import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import formatPossessive from 'core/helpers/formatPossessive';
-import ActivityList from 'web/bundles/stimulation/components/ActivityList';
+import ActivityList from 'web/bundles/stimulation/containers/activityList';
 
 type Props = {
   activities: ActivityConnection,

@@ -1,8 +1,14 @@
 // @flow
-import { IStimulationButton } from 'web/types/custom';
-import { ACTIVITY_FILTERS } from '../components/constants/index';
+import { StimulationButtonType } from '../../../types/custom';
 
-export const STIMULATION_BUTTONS: IStimulationButton[] = [
+export const ACTIVITY_FILTERS = {
+  favorites: 'favorites',
+  activities: 'activities',
+  history: 'history',
+  weeks: 'weeks',
+};
+
+export const STIMULATION_BUTTONS = [
   {
     id: 1,
     icon: 'icon-favorite',
@@ -25,3 +31,32 @@ export const STIMULATION_BUTTONS: IStimulationButton[] = [
     redirect: '/stimulation/history',
   },
 ];
+
+export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
+  {
+    type: 'tooDifficult',
+    icon: 'icon-not-ready',
+    mainText: 'TOO DIFFICULT',
+    additionalText: 'Not quite ready for this',
+    callback: 'changeActivityLevel',
+    level: 'DECREASE',
+  },
+  {
+    type: 'done',
+    icon: 'icon-done',
+    mainText: 'MARK AS DONE',
+    additionalText: "Tick if you've completed it",
+    callback: 'completeActivity',
+  },
+  {
+    type: 'tooEase',
+    icon: 'icon-too-ease',
+    mainText: 'TOO EASE',
+    additionalText: 'Increase the level',
+    callback: 'changeActivityLevel',
+    level: 'INCREASE',
+  },
+];
+
+export const INDOOR_CATEGORY_ID = 1;
+export const OUTDOOR_CATEGORY_ID = 2;
