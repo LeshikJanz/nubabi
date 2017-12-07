@@ -3,7 +3,6 @@ import ActivityMenu from '../../components/activity/ActivityMenu';
 
 export default compose(
   withState('isActivityMenuOpen', 'handleActivityMenu', true),
-  withState('loading', 'handleLoading', false),
   withHandlers({
     selectActivity: ({ handleActivityMenu, handleActivity }) => a => {
       if (a.type !== 'done') {

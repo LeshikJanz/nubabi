@@ -7,44 +7,42 @@ import { FavoriteActivitiesFragment } from '../fragments/favorites';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 
 const query = gql`
-  query getBabyActivity($id: ID!) {
-    viewer {
-      baby(id: $id) {
-        id
-        activities(first: 1000) {
-          edges {
-            node {
-              id
-              name
-              introduction
-              isCompleted
-              isFavorite
-              skillArea {
+    query ThisWeeksActivitiesList($id: ID!) {
+        viewer {
+            baby(id: $id) {
                 id
-                icon
-                  name
-                image {
-                  thumb {
-                    url
-                  }
+                activities(first: 1000) {
+                    edges {
+                        node {
+                            id
+                            name
+                            introduction
+                            isCompleted
+                            skillArea {
+                                id
+                                icon
+                                name
+                                image {
+                                    thumb {
+                                        url
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
+                ...FavoriteActivities
             }
-          }
         }
-          ...FavoriteActivities
-      }
     }
-  }
 
-  ${FavoriteActivitiesFragment.favorites}
+    ${FavoriteActivitiesFragment.favorites}
 `;
 
 export default compose(
   withCurrentBaby,
   graphql(query, {
     options: ({ currentBabyId }) => ({
-      fetchPolicy: 'network-only',
       variables: { id: currentBabyId },
       skip: !currentBabyId,
     }),

@@ -10,25 +10,30 @@ type Props = {
   handleActivity: Function,
 };
 
-const ActivityStatus = ({ activity, handleActivity }: Props) => (
-  <ActivityStatusStyled.Wrapper>
-    <ActivityStatusStyled.IconWrapper>
-      <GrossIcon />
-    </ActivityStatusStyled.IconWrapper>
-    <ActivityStatusStyled.Content>
-      <ActivityStatusStyled.SkittlesName>
-        Skittles
-      </ActivityStatusStyled.SkittlesName>
-      <ActivityStatusStyled.Text>
-        Adjust the level of activity for Charlotte:
-      </ActivityStatusStyled.Text>
-    </ActivityStatusStyled.Content>
+const ActivityStatus = ({ activity, handleActivity }: Props) => {
+  console.log('activity');
+  console.log(activity);
 
-    <ActivityMenu
-      handleActivity={handleActivity}
-      isCompleted={activity.isCompleted}
-    />
-  </ActivityStatusStyled.Wrapper>
-);
+  return (
+    <ActivityStatusStyled.Wrapper>
+      <ActivityStatusStyled.IconWrapper>
+        <GrossIcon />
+      </ActivityStatusStyled.IconWrapper>
+      <ActivityStatusStyled.Content>
+        <ActivityStatusStyled.SkittlesName>
+          Skittles
+        </ActivityStatusStyled.SkittlesName>
+        <ActivityStatusStyled.Text>
+          Adjust the level of activity for Charlotte:
+        </ActivityStatusStyled.Text>
+      </ActivityStatusStyled.Content>
+
+      <ActivityMenu
+        handleActivity={handleActivity}
+        isCompleted={activity.isCompleted}
+      />
+    </ActivityStatusStyled.Wrapper>
+  );
+};
 
 export default ActivityStatus;

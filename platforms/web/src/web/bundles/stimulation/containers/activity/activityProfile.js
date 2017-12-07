@@ -5,8 +5,6 @@ import { withRouter } from 'react-router-dom';
 import ActivityProfile from '../../components/activity/ActivityProfile';
 import { optimisticResponse } from 'core/helpers/graphqlUtils';
 
-const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
-
 export default compose(
   graphql(
     gql`
@@ -24,8 +22,7 @@ export default compose(
     {
       name: 'toggleFavorite',
       options: () => ({
-        fetchPolicy: 'network-only',
-        refetchQueries,
+        fetchPolicy: 'cache-and-network',
         optimisticResponse: optimisticResponse(
           'toggleActivityFavorite',
           'ToggleFavoritePayload',

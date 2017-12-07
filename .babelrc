@@ -1,6 +1,7 @@
 {
   "presets": [
-    "react-native" // this is required for debugging with react-native/packager/transformer
+    "react-native"
+    // this is required for debugging with react-native/packager/transformer
   ],
   "plugins": [
     ["inline-import", { "extensions": [".graphql", ".graphqls"] }],
@@ -12,18 +13,25 @@
         "web": "./platforms/web/src/web",
         "graphql-utils": "./libs/graphql-utils"
       }
-    }]
-
+    ],
   ],
-
   "env": {
     "development": {
       "plugins": [
-        ["flow-react-proptypes", { "ignoreNodeModules": true}],
-        ["transform-define", "./core/config/getConfig.js"]
+        [
+          "flow-react-proptypes",
+          {
+            "ignoreNodeModules": true
+          }
+        ],
+        [
+          "transform-define",
+          "./core/config/getConfig.js"
+        ]
       ]
     }
   },
-  "sourceMaps": true // must be true react-native/packager/transformer using with node-module-debug
+  "sourceMaps": true
+  // must be true react-native/packager/transformer using with node-module-debug
   // because of some bugs from vscode-node-debug & vscode-react-native, "sourceMaps" cannot be "inline" or "both"
 }

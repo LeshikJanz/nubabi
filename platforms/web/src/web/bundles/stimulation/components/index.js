@@ -10,9 +10,9 @@ type Props = {
   baby: Baby,
 };
 
-const Stimulation = ({ baby }: Props) => (
+const Stimulation = (data: Props) => (
   <StimulationStyled.Wrapper>
-    <Activities {...baby} />
+    <Activities {...data.baby} />
     <Equipment equipments={equipmentsMockData} />
   </StimulationStyled.Wrapper>
 );

@@ -1,6 +1,6 @@
 import Activity from '../../components/activity/index';
 import { gql, graphql } from 'react-apollo';
-import compose from 'ramda/src/compose';
+import { compose } from 'recompose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import { ActivityFragments } from '../../fragments/activity';
@@ -35,7 +35,7 @@ export default compose(
     props: ({ data }) => ({
       data,
       refetch: data.refetch,
-      baby: path(['viewer', 'baby'], data),
+      activity: path(['viewer', 'baby', 'activity'], data),
     }),
   }),
   DisplayLoadingState,

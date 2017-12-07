@@ -5,8 +5,9 @@ import ActivityStatus from '../../components/activity/ActivityStatus';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 import { path } from 'ramda';
+import { optimisticResponse } from 'core/helpers/graphqlUtils';
 
-const refetchQueries = ['ThisWeeksActivitiesList', 'Profile'];
+const refetchQueries = ['ThisWeeksActivitiesList', 'ViewActivity'];
 
 export default compose(
   graphql(
@@ -52,7 +53,21 @@ export default compose(
     {
       name: 'completeActivity',
       options: () => ({
-        fetchPolicy: 'network-only',
+        optimisticResponse: optimisticResponse(
+          'completeActivity',
+          'CompleteActivityPayload',
+          ({ input }) => ({
+            edge: {
+              __typename: 'ActivityEdge',
+              node: {
+                __typename: 'Activity',
+                id: input.id,
+                isCompleted: true,
+              },
+            },
+          }),
+        ),
+        fetchPolicy: 'cache-and-network',
         refetchQueries: ['ThisWeeksActivitiesList'],
       }),
     },
@@ -60,19 +75,13 @@ export default compose(
   withCurrentBaby,
   withRouter,
   withHandlers({
-    refreshActivity: ({ refetch, history }) => ({ data }) => {
+    refreshActivity: ({ history }) => ({ data }) => {
       const newActivity =
         path(['swoopActivity', 'newActivity'], data) ||
         path(['changeActivity', 'newActivity'], data);
 
-      const completedActivity = path(['completeActivity'], data);
-
       if (newActivity) {
         history.push(`/stimulation/activity/${newActivity.id}`);
-      }
-
-      if (completedActivity) {
-        refetch();
       }
     },
   }),
