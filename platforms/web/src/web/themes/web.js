@@ -22,6 +22,11 @@ export const screens = {
   mobile: '600px',
 };
 
+export const margins = {
+  appLeft: '15px',
+  appRight: '15px',
+};
+
 export const theme = mergeDeepRight(defaultTheme, {
   overlay,
   bg,
@@ -30,6 +35,7 @@ export const theme = mergeDeepRight(defaultTheme, {
   screens,
   checkbox,
   text,
+  margins,
   colors: {
     open: {
       white2: '#E9ECF4',

@@ -11,6 +11,8 @@ export const media = {
 
 export const ListWrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
+  margin-left: ${props => props.theme.margins.appLeft};
+  margin-right: ${props => props.theme.margins.appRight};
 `;
 
 export const Buttons = styled(Flex)`
