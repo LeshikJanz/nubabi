@@ -27,7 +27,12 @@ const ActivitySwitcher = ({ baby, activity, history }: Props) => {
   };
 
   const handleRedirect = (id: string) => {
-    history.push(`/stimulation/activity/${id}`);
+    if (id) {
+      history.push(`/stimulation/activity/${id}`);
+    } else {
+      // Redirect to the full Activity list for edge elements
+      history.push('/stimulation');
+    }
     window.scrollTo(0, 0);
   };
 

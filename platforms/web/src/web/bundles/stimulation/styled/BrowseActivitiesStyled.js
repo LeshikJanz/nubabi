@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 
-const categoryImageWidth = '328px';
+const categoryImageWidth = '290px';
 const laptopWidth = '1350px';
 const skillWidth = '200px';
 
 export const Wrapper = styled(Flex)`
   flex-direction: column;
   margin-top: 50px;
-  padding: 0 5%;
+  padding: 0 1%;
 
   @media (max-width: ${laptopWidth}) {
     padding: 0;
