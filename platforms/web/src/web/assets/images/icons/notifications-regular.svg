@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="14px" height="17px" viewBox="0 0 14 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Menu---Settings---Family-" transform="translate(-17.000000, -172.000000)" fill-rule="nonzero" fill="#9EABBC">
+            <g id="Shape">
+                <path d="M24,189 C24.9058824,189 25.6470588,188.235 25.6470588,187.3 L22.3529412,187.3 C22.3529412,188.235 23.0941176,189 24,189 Z M29.3529412,183.9 L29.3529412,179.225 C29.3529412,176.59 27.6235294,174.465 25.2352941,173.87 L25.2352941,173.275 C25.2352941,172.595 24.6588235,172 24,172 C23.3411765,172 22.7647059,172.595 22.7647059,173.275 L22.7647059,173.87 C20.3764706,174.465 18.6470588,176.59 18.6470588,179.225 L18.6470588,183.9 L17,185.6 L17,186.45 L31,186.45 L31,185.6 L29.3529412,183.9 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -14,3 +14,4 @@ export { default as Selector } from './Selector';
 export { default as InputWithRadio } from './InputWithRadio';
 export { default as RadioForInput } from './RadioForInput';
 export { default as MenuProfileDetails } from './MenuProfileDetails';
+export { default as Icon } from './Icon';
