@@ -37,11 +37,20 @@ export default compose(
     }),
     props: ({ data, ownProps }) => {
       const { fetchMore } = data;
-      const activities = path(['viewer', 'allActivities', 'edges'], data);
 
       return {
         data,
-        activities: activities || [],
+        activities: path(['viewer', 'allActivities', 'edges'], data) || [],
+        getCurrentCategory: () => {
+          switch (+ownProps.match.params.id) {
+            case 1:
+              return 'Indoors';
+            case 2:
+              return 'Outdoors';
+            default:
+              return 'Custom Filter';
+          }
+        },
         loadMoreEntries: () => {
           if (!ownProps.isFetching) {
             ownProps.handleFetch(true);

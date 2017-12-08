@@ -20,6 +20,14 @@ const query = gql`
                     hasNextPage
                 }
             }
+            allSkillAreas {
+                edges {
+                    node {
+                        id
+                        name
+                    }
+                }
+            }
         }
     }
     ${ActivityListFragment.activities}
@@ -36,11 +44,17 @@ export default compose(
     }),
     props: ({ data, ownProps }) => {
       const { fetchMore } = data;
-      const activities = path(['viewer', 'allActivities', 'edges'], data);
 
       return {
         data,
-        activities: activities || [],
+        activities: path(['viewer', 'allActivities', 'edges'], data) || [],
+        getCurrentCategory: () => {
+          const skillAreas =
+            path(['viewer', 'allSkillAreas', 'edges'], data) || [];
+          return skillAreas.find(
+            ({ node }) => node.id === ownProps.match.params.id,
+          );
+        },
         loadMoreEntries: () => {
           if (!ownProps.isFetching) {
             ownProps.handleFetch(true);

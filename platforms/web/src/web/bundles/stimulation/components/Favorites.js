@@ -11,9 +11,7 @@ type Props = {
 const Favorites = ({ favoriteActivities }: Props) => (
   <FavoritesStyled.Wrapper>
     <FavoritesStyled.ListHeader justify="space-between" align="center">
-      <FavoritesStyled.ListTitle>
-        {`This Week's activities`}
-      </FavoritesStyled.ListTitle>
+      <FavoritesStyled.ListTitle>Favorite Activities</FavoritesStyled.ListTitle>
     </FavoritesStyled.ListHeader>
 
     <ActivityList activities={favoriteActivities.edges} />

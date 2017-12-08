@@ -13,8 +13,8 @@ type Props = {
 const HistoryItem = ({ item, handleClick }: Props) => (
   <HistoryItemStyled.Wrapper onClick={handleClick}>
     <HistoryItemStyled.Text>
-      {moment(item.startDate).format('DD MMMM')} -{' '}
-      {moment(item.endDate).format('DD MMMM YYYY')}
+      {moment(item.startDate).format('D MMMM')} -{' '}
+      {moment(item.endDate).format('D MMMM YYYY')}
     </HistoryItemStyled.Text>
     <ArrowRight />
   </HistoryItemStyled.Wrapper>
