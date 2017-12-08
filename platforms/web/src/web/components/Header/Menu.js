@@ -137,8 +137,8 @@ class MenuComponent extends Component<Props> {
           <HeaderMenu>
             {this.props.isAuthenticated && (
               <HeaderMenuItem
-                to="/profile"
-                active={this.props.pathname === '/profile'}
+                to="/settings"
+                active={this.props.pathname === '/settings'}
               >
                 My Profile &amp; settings
               </HeaderMenuItem>

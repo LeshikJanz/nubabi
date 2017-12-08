@@ -34,6 +34,7 @@ import History from '../bundles/stimulation/containers/history';
 import FilteredSkillActivities from '../bundles/stimulation/containers/filteredSkillActivities';
 import FilteredCategoryActivities from '../bundles/stimulation/containers/filteredCategoryActivities';
 import HistoryList from '../bundles/stimulation/containers/history/historyList';
+import Settings from 'web/settings';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -79,6 +80,11 @@ const App = (props: Props) => (
         <Route path="/" exact component={Home} />
         <Route path="/about" component={About} />
         <Route path="/login" component={Login} />
+        <AuthenticatedRoute
+          path="/settings"
+          component={Settings}
+          props={props}
+        />
         <NavBar {...props}>
           <AuthenticatedRoute path="/test" component={Test} props={props} />
           <AuthenticatedRoute

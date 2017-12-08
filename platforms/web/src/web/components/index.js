@@ -6,3 +6,4 @@ export { default as Loader } from './Loader';
 export { default as Test } from './Test';
 export { default as NotFound } from './NotFound';
 export { default as Steps } from './Steps';
+export { default as SettingsNavbar } from './SettingsNavbar';

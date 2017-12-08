@@ -10,10 +10,14 @@ type Props = {
   location: {
     pathname: string,
     search: string,
-  }
+  },
 };
 
-export const AuthenticatedRoute = ({ component: C, props: cProps, ...rest }: Props) => (
+export const AuthenticatedRoute = ({
+  component: C,
+  props: cProps,
+  ...rest
+}: Props) => (
   <Route
     {...rest}
     render={props =>
