@@ -3,15 +3,15 @@ import { injectGlobal } from 'styled-components';
 injectGlobal([
   `
   html {
-    height: 100%;
+
   }
 
   body {
-    height: 100%;
+  
   }
 
   #root {
-    height: 100%;
+
   }
 
   a {

@@ -55,7 +55,6 @@ const Wrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
   background: ${props => props.theme.bg.panel};
   padding-bottom: 50px;
-  height: 100%;
 `;
 
 const AppContent = styled(Section)`

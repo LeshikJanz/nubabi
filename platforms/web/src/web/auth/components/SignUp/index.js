@@ -5,9 +5,9 @@ import { Steps } from 'web/components';
 import SignupStepsImg from 'web/assets/images/signup_steps.png';
 
 const SignUpContainer = styled(Section)`
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 const SignUp = () => {
