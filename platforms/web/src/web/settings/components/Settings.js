@@ -18,7 +18,7 @@ type Props = {
 
 const menuItems = [
   {
-    route: 'profiledetails',
+    route: '',
     label: 'My Profile Details',
     component: ProfileDetails,
     menuItemComponent: MenuProfileDetails,
@@ -49,6 +49,8 @@ const SettingsContainer = styled(Flex)`
   width: 100%;
   max-width: 1166px;
   background-color: red;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 const SettingsPages = styled(Flex)``;
@@ -60,24 +62,26 @@ class Settings extends PureComponent<Props> {
   }
 
   renderSettingsInnerPage = (page, i, match) => {
-    return (
+    return page.route ? (
       <Route
         path={`${match.url}/${page.route}`}
         component={page.component}
         key={i}
       />
+    ) : (
+      <Route exact path="/settings" component={page.component} key={i} />
     );
   };
 
   render() {
+    const { match, history } = this.props;
     return (
-      <Router history={this.props.history}>
+      <Router history={history}>
         <SettingsContainer>
-          <SettingsNavbar match={this.props.match} menuItems={menuItems} />
-
+          <SettingsNavbar match={match} menuItems={menuItems} />
           <SettingsPages>
             {menuItems.map((page, i) =>
-              this.renderSettingsInnerPage(page, i, this.props.match),
+              this.renderSettingsInnerPage(page, i, match),
             )}
           </SettingsPages>
         </SettingsContainer>

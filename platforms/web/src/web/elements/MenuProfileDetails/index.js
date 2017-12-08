@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 type Props = {
-  to: string,
+  // to: string,
   label: string,
 };
 
 const CustomLink = styled(Link)``;
 
 const MenuProfileDetails = (props: Props) => {
-  const { to, label } = props;
+  const { label } = props;
 
   return (
-    <CustomLink to={to}>
+    <CustomLink to="/settings">
       <h3>{label}</h3>
     </CustomLink>
   );

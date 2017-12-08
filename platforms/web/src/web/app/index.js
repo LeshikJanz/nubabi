@@ -63,6 +63,8 @@ const AppContent = styled(Section)`
   margin: 0 auto;
   margin-top: 2px;
   height: 100%;
+  display: flex;
+  justify-content: center;
 `;
 
 const App = (props: Props) => (
