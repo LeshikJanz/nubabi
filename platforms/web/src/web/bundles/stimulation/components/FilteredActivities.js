@@ -6,11 +6,12 @@ import * as FilteredStyled from '../styled/FilteredActivitiesStyled';
 
 type Props = {
   activities: ActivityConnection[],
+  loadMoreEntries: Function,
 };
 
-const FilteredActivities = ({ activities }: Props) => (
+const FilteredActivities = ({ activities, loadMoreEntries }: Props) => (
   <FilteredStyled.Wrapper>
-    <ActivityList activities={activities.edges} />
+    <ActivityList activities={activities} onLoadMore={loadMoreEntries} />
   </FilteredStyled.Wrapper>
 );
 

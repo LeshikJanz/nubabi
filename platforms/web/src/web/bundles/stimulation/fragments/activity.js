@@ -119,3 +119,25 @@ export const ActivityFragments = {
     }
   `,
 };
+
+export const ActivityListFragment = {
+  activities: gql`
+    fragment ActivityList on Activity {
+      id
+      name
+      skillArea {
+        id
+        name
+        image {
+          thumb {
+            url
+          }
+        }
+        icon
+        completedIcon
+      }
+      equipment
+      isCompleted
+    }
+  `,
+};

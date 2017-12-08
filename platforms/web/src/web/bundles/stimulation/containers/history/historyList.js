@@ -5,7 +5,7 @@ import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import HistoryList from '../../components/history/HistoryList';
-import { ActivityListFragment } from '../../fragments/favorites';
+import { ActivityListFragment } from '../../fragments/activity';
 import { ActivityHistory } from '../../fragments/history';
 
 const query = gql`

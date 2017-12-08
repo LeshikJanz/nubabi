@@ -31,8 +31,8 @@ import Activity from 'web/bundles/stimulation/containers/activity';
 import BrowseActivities from 'web/bundles/stimulation/containers/browseActivities';
 import Favorites from '../bundles/stimulation/containers/favorites';
 import History from '../bundles/stimulation/containers/history';
-import FilteredSkillActivities from '../bundles/stimulation/containers/filteredSkillActiivities';
-import FilteredCategoryActivities from '../bundles/stimulation/containers/filteredCategoryActiivities';
+import FilteredSkillActivities from '../bundles/stimulation/containers/filteredSkillActivities';
+import FilteredCategoryActivities from '../bundles/stimulation/containers/filteredCategoryActivities';
 import HistoryList from '../bundles/stimulation/containers/history/historyList';
 
 const Profile = Loadable({

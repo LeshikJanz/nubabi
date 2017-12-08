@@ -1,26 +1,5 @@
 import { gql } from 'react-apollo';
-
-export const ActivityListFragment = {
-  activities: gql`
-    fragment ActivityList on Activity {
-      id
-      name
-      skillArea {
-        id
-        name
-        image {
-          thumb {
-            url
-          }
-        }
-        icon
-        completedIcon
-      }
-      equipment
-      isCompleted
-    }
-  `,
-};
+import { ActivityListFragment } from './activity';
 
 export const FavoriteActivitiesFragment = {
   favorites: gql`
