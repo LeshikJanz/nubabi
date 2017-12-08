@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-FLOW_VERSION=0.56.0
+FLOW_VERSION=0.60.1
 FLOW_OPTIONS="-f $FLOW_VERSION install --overwrite"
 echo "\nInstalling defs for root...\n"
 flow-typed install
