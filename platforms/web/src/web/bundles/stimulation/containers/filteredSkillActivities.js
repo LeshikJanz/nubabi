@@ -4,6 +4,7 @@ import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { ActivityListFragment } from '../fragments/activity';
+import ShowNoContentViewIf from '../../../components/showNoContentViewIf';
 
 const query = gql`
     query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
@@ -77,4 +78,5 @@ export default compose(
     },
   }),
   DisplayLoadingState,
+  ShowNoContentViewIf(props => !props.activities.length),
 )(FilteredActivities);

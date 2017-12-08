@@ -8,8 +8,10 @@ type Props = {
 };
 
 const WrapperContent = styled(Flex)`
+  height: 100%;
   width: 100%;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const NoContentView = ({ message = 'Nothing found' }: Props) => {
