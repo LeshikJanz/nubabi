@@ -3,7 +3,6 @@ import { compose, withState } from 'recompose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
-import withCurrentBaby from 'web/components/withCurrentBaby';
 import { ActivityListFragment } from '../fragments/activity';
 
 const query = gql`
@@ -26,7 +25,6 @@ const query = gql`
 `;
 
 export default compose(
-  withCurrentBaby,
   withState('isFetching', 'handleFetch', false),
   graphql(query, {
     options: ({ match }) => ({
@@ -48,6 +46,7 @@ export default compose(
             return fetchMore({
               query,
               variables: {
+                filter: { skillAreas: [ownProps.match.params.id] },
                 cursor: data.viewer.allActivities.pageInfo.endCursor,
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {

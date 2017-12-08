@@ -3,8 +3,8 @@ import { compose, withState } from 'recompose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
-import withCurrentBaby from 'web/components/withCurrentBaby';
 import { ActivityListFragment } from '../fragments/activity';
+import { toGlobalId } from 'graphql-relay';
 
 const query = gql`
     query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
@@ -26,13 +26,13 @@ const query = gql`
 `;
 
 export default compose(
-  withCurrentBaby,
   withState('isFetching', 'handleFetch', false),
   graphql(query, {
     options: ({ match }) => ({
       variables: {
-        filter: { skillAreas: [match.params.id] },
+        filter: { categories: toGlobalId('Category', [match.params.id]) },
       },
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
     }),
     props: ({ data, ownProps }) => {
       const { fetchMore } = data;
@@ -47,6 +47,11 @@ export default compose(
             return fetchMore({
               query,
               variables: {
+                filter: {
+                  categories: toGlobalId('Category', [
+                    ownProps.match.params.id,
+                  ]),
+                },
                 cursor: data.viewer.allActivities.pageInfo.endCursor,
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {
