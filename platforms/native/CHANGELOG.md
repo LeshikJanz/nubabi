@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.5.2...nubabi-native@1.6.0) (2017-12-11)
+
+
+### Features
+
+* add Choose Baby header title, move close button ([a307599](https://gitlab.com/nubabi/mobile/commit/a307599))
+
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.5.1...nubabi-native@1.5.2) (2017-12-11)
 
