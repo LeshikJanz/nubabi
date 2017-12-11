@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.0"></a>
+# [1.1.0](https://gitlab.com/nubabi/mobile/tree/master/platforms/firebase/compare/nubabi-firebase@1.0.0...nubabi-firebase@1.1.0) (2017-12-11)
+
+
+### Features
+
+* **profile:** delete baby ([319a970](https://gitlab.com/nubabi/mobile/tree/master/platforms/firebase/commit/319a970))
+
+
+
+
 <a name="1.0.0"></a>
 # 1.0.0 (2017-11-27)
 

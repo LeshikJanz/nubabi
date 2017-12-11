@@ -1,6 +1,6 @@
 {
   "name": "nubabi-firebase",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Firebase functions and security rules for Nubabi app",
   "repository": "https://gitlab.com/nubabi/mobile/tree/master/platforms/firebase",

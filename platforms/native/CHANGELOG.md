@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.6.0...nubabi-native@1.7.0) (2017-12-11)
+
+
+### Features
+
+* **profile:** delete baby ([319a970](https://gitlab.com/nubabi/mobile/commit/319a970))
+
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.5.2...nubabi-native@1.6.0) (2017-12-11)
 

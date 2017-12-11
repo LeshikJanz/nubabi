@@ -1,7 +1,7 @@
 {
   "name": "nubabi-graphql-utils",
   "private": true,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
     "mime": "^2.0.3",

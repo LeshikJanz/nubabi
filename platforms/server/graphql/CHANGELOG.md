@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@1.2.2...nubabi-graphql-server@1.3.0) (2017-12-11)
+
+
+### Bug Fixes
+
+* **schema:** add connection params to Viewer.babies ([50ecdc5](https://gitlab.com/nubabi/mobile/commit/50ecdc5))
+
+
+### Features
+
+* **profile:** delete baby ([319a970](https://gitlab.com/nubabi/mobile/commit/319a970))
+
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@1.2.1...nubabi-graphql-server@1.2.2) (2017-12-11)
 
