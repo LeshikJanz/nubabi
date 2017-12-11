@@ -10,11 +10,31 @@ type Props = {
   handleClick: Function,
 };
 
+const getWeekName = (startDate, endDate) => {
+  const period = `${moment(startDate).format('D MMMM')} - ${moment(
+    endDate,
+  ).format('D MMMM YYYY')}`;
+  const dayDiff = moment().diff(moment(startDate), 'days');
+
+  if (dayDiff >= 0) {
+    return 'Current week';
+  }
+
+  if (dayDiff > 7) {
+    return 'Last week';
+  }
+
+  if (dayDiff > 14) {
+    return 'Two weeks ago';
+  }
+
+  return period;
+};
+
 const HistoryItem = ({ item, handleClick }: Props) => (
   <HistoryItemStyled.Wrapper onClick={handleClick}>
     <HistoryItemStyled.Text>
-      {moment(item.startDate).format('D MMMM')} -{' '}
-      {moment(item.endDate).format('D MMMM YYYY')}
+      {getWeekName(item.startDate, item.endDate)}
     </HistoryItemStyled.Text>
     <ArrowRight />
   </HistoryItemStyled.Wrapper>
