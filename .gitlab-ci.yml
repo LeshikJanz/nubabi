@@ -65,7 +65,23 @@ deploy_staging:
       if git diff HEAD^ HEAD --name-only|grep 'platforms/web'; then
         yarn global add firebase-tools
         firebase use --token $FIREBASE_DEPLOY_KEY nubabitest1
-        firebase deploy -m "Pipeline $CI_PIPELINE_ID, build $CI_BUILD_ID" --non-interactive --token $FIREBASE_DEPLOY_KEY --only hosting
+        firebase deploy -m "Pipeline $CI_PIPELINE_ID, Build $CI_BUILD_ID, Staging" --non-interactive --token $FIREBASE_DEPLOY_KEY --only hosting
       fi
   environment:
     name: staging
+  only:
+    - master
+
+deploy_dev:
+  stage: deploy
+  script:
+    - >
+      if git diff HEAD^ HEAD --name-only|grep 'platforms/web'; then
+        yarn global add firebase-tools
+        firebase use --token $FIREBASE_DEPLOY_KEY nubabi-dev
+        firebase deploy -m "Pipeline $CI_PIPELINE_ID, Build $CI_BUILD_ID, Development" --non-interactive --token $FIREBASE_DEPLOY_KEY --only hosting
+      fi
+  environment:
+    name: development
+  except:
+    - master
