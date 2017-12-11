@@ -61,17 +61,7 @@ export const addEdgeToFragment = (
   store.writeFragment({ fragment, ...fragmentOptions, id, data });
 };
 
-export const removeEdgeFromFragment = (
-  fragment: DocumentNode,
-  edgeId: string,
-  rootId: string,
-  edgePath: Array<string>,
-  fragmentOptions?:
-    | DataProxyReadFragmentOptions
-    | DataProxyWriteFragmentOptions = {},
-) => (store: DataProxy, { data: payload }) => {
-  const data = store.readFragment({ fragment, id: rootId, ...fragmentOptions });
-
+export const removeEdge = (edgePath, edgeId, data, payload) => {
   if (last(edgePath) !== 'edges') {
     edgePath.push('edges');
   }
@@ -85,19 +75,37 @@ export const removeEdgeFromFragment = (
 
   if (!payload[operationName]) {
     // The operation didn't complete successfully so we return early.
-    return;
+    return null;
   }
 
   const edge = find(pathEq(['node', 'id'], edgeId), edges);
 
   const newEdges = set(edgesPath, without([edge], edges), data);
 
-  store.writeFragment({
-    fragment,
-    ...fragmentOptions,
-    id: rootId,
-    data: newEdges,
-  });
+  return newEdges;
+};
+
+export const removeEdgeFromFragment = (
+  fragment: DocumentNode,
+  edgeId: string,
+  rootId: string,
+  edgePath: Array<string>,
+  fragmentOptions?:
+    | DataProxyReadFragmentOptions
+    | DataProxyWriteFragmentOptions = {},
+) => (store: DataProxy, { data: payload }) => {
+  const data = store.readFragment({ fragment, id: rootId, ...fragmentOptions });
+
+  const newData = removeEdge(edgePath, edgeId, data, payload);
+
+  if (newData) {
+    store.writeFragment({
+      fragment,
+      ...fragmentOptions,
+      id: rootId,
+      data: newData,
+    });
+  }
 };
 
 const updateFragment = curry(
@@ -114,9 +122,7 @@ const updateFragment = curry(
       id: rootId,
       ...fragmentOptions,
     });
-    console.log(oldData);
     const newData = updaterFn(oldData);
-    console.log(newData);
     if (newData) {
       store.writeFragment({
         fragment,
@@ -161,7 +167,6 @@ export const getCurrentUserFromStore = (gql, store) => {
       `,
     });
   } catch (err) {
-    console.log(err);
     return null;
   }
 };
