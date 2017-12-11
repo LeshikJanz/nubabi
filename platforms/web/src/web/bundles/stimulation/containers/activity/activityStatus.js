@@ -6,10 +6,18 @@ import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 import { path } from 'ramda';
 import { optimisticResponse } from 'core/helpers/graphqlUtils';
+import { connect } from 'react-redux';
+import { globalLoaderSuccess, globalLoaderError } from 'web/actions';
 
 const refetchQueries = ['ThisWeeksActivitiesList', 'ViewActivity'];
 
+const mapDispatchToProps = dispatch => ({
+  handleGlobalLoadingSuccess: () => dispatch(globalLoaderSuccess),
+  handleGlobalLoadingError: error => dispatch(globalLoaderError(error)),
+});
+
 export default compose(
+  connect(null, mapDispatchToProps),
   graphql(
     gql`
         mutation SwoopActivity($input: SwoopActivityInput!) {
@@ -76,13 +84,16 @@ export default compose(
   withCurrentBaby,
   withRouter,
   withHandlers({
-    refreshActivity: ({ history }) => ({ data }) => {
+    refreshActivity: ({ history, handleGlobalLoadingSuccess }) => ({
+      data,
+    }) => {
       const newActivity =
         path(['swoopActivity', 'newActivity'], data) ||
         path(['changeActivity', 'newActivity'], data);
 
       if (newActivity) {
         history.push(`/stimulation/activity/${newActivity.id}`);
+        handleGlobalLoadingSuccess();
       }
     },
   }),
@@ -91,6 +102,7 @@ export default compose(
       refreshActivity,
       activity,
       currentBabyId,
+      handleGlobalLoadingError,
       ...props
     }) => activityAction => {
       let input = {
@@ -104,7 +116,9 @@ export default compose(
 
       return props[activityAction.callback]({
         variables: { input },
-      }).then(refreshActivity);
+      })
+        .then(refreshActivity)
+        .catch(handleGlobalLoadingError);
     },
   }),
 )(ActivityStatus);

@@ -4,6 +4,7 @@ import type { AppState, GlobalLoaderAction } from 'web/types';
 export const initialState: AppState = {
   isFetching: false,
   failure: false,
+  error: null,
 };
 
 const useGlobalLoader = (action: GlobalLoaderAction) => {
@@ -27,6 +28,13 @@ const reducer = (
     return {
       ...state,
       isFetching: false,
+    };
+  }
+  if (action.type.endsWith('/ERROR') && useGlobalLoader(action)) {
+    return {
+      ...state,
+      isFetching: false,
+      failure: true,
     };
   }
   if (action.type === 'NAVIGATION_RESET') {

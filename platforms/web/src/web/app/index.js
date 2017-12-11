@@ -15,6 +15,7 @@ import { Section } from 'web/elements';
 import {
   Loader,
   Header,
+  GlobalLoader,
   Home,
   About,
   AuthenticatedRoute,
@@ -68,7 +69,7 @@ const AppContent = styled(Section)`
 
 const App = (props: Props) => (
   <Wrapper>
-    <Loader active={props.isLoading} />
+    <GlobalLoader active={props.isLoading} />
     <Header
       pathname={props.pathname}
       isAuthenticated={props.isAuthenticated}
@@ -166,13 +167,13 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const mapStateToProps = ({
-  app,
+  globalLoader,
   auth,
   navigation,
   babies,
   settings,
 }: State) => ({
-  isLoading: app.isFetching,
+  isLoading: globalLoader.isFetching,
   pathname: navigation.location.pathname,
   isAuthenticated: auth.isAuthenticated,
   currentBabyId: babies.currentBabyId,
