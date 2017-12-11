@@ -10,7 +10,7 @@ type Epic = (action$: any, deps: Deps) => Observable<Action>;
 
 const commonEpics = [...appEpics, ...authEpics, ...babyEpics];
 
-const configureEpics = (deps: Object, platformEpics: Array<Epic>) => (
+const configureEpics = (deps: Deps, platformEpics: Array<Epic>) => (
   action$: any,
   { getState }: any,
 ) => {

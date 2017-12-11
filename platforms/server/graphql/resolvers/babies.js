@@ -46,6 +46,12 @@ const resolvers = {
           })),
     ),
 
+    deleteBaby: mutationWithClientMutationId(
+      ({ id }, { connectors: { firebase } }) => {
+        return firebase.deleteBaby(fromGlobalId(id).id);
+      },
+    ),
+
     recordBabyMeasurement: mutationWithClientMutationId(
       ({ babyId, type, unit, value }, { connectors: { firebase } }) => {
         return firebase.recordMeasurement(

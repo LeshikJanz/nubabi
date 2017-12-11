@@ -243,6 +243,19 @@ const createOrUpdateBaby = async (firebase, values, id) => {
     .then(returnValWithKeyAsId);
 };
 
+// Mark a baby as deleted, let Firebase functions handle the actual deletion and cleanup
+const deleteBaby = async (firebase, id: string) => {
+  const ref = firebase
+    .database()
+    .ref()
+    .child(`/babies/${id}`);
+  await ref.update({ wasDeleted: true });
+
+  const baby = await ref.once('value').then(returnValWithKeyAsId);
+
+  return { edge: { node: baby } };
+};
+
 const getViewer = firebase => firebase.auth().currentUser;
 const getViewerWithProfile = async firebase => {
   const user = getViewer(firebase);
@@ -439,7 +452,10 @@ const getBabies = firebase => {
         }),
       ),
     )
-    .then(([...babies]) => babies)
+    .then(([...babies]) => {
+      // TODO: do this with Firebase API if possible
+      return R.filter(baby => baby.wasDeleted !== true, babies);
+    })
     .catch(err => {
       console.warn(err);
       return [];
@@ -888,6 +904,7 @@ const firebaseConnector = firebase => {
     createBaby: (values: mixed) => createOrUpdateBaby(firebase, values),
     updateBaby: (id: string, values: mixed) =>
       createOrUpdateBaby(firebase, values, id),
+    deleteBaby: (id: string) => deleteBaby(firebase, id),
     recordMeasurement: (
       id: string,
       type: MeasurementType,

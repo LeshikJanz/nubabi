@@ -52,6 +52,7 @@ class EditBaby extends Component {
       <Screen>
         <BabyForm
           mode="edit"
+          id={this.props.baby.id}
           initialValues={omit(['id', '__typename'], this.props.baby)}
           onSubmit={this.props.onSubmit}
           onUpdateWeight={this.handleUpdateWeight}

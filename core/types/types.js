@@ -277,8 +277,6 @@ export type OnAuthAction = {
   payload: { user: ?FirebaseUser, token: ?string },
 };
 
-export type AuthProvider = 'email' | 'facebook';
-
 export type AuthProviderEmailData = {
   email: string,
   password: string,
@@ -355,6 +353,16 @@ export type ToggleNetworkIndicatorAction = {
   payload: boolean,
 };
 
+export type SelectBabyAction = {
+  type: 'SELECT_BABY',
+  payload: string,
+};
+
+export type DeleteBabyAction = {
+  type: 'DELETE_BABY',
+  payload: string,
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -367,6 +375,8 @@ export type Action =
   | GetBabiesRequestAction
   | GetBabiesSuccessAction
   | GetBabiesFailureAction
+  | SelectBabyAction
+  | DeleteBabyAction
   | SeenGrowthGlobalIntroAction
   | SkipGrowthIntroductionAction
   | SettingsSetValueAction

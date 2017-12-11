@@ -79,7 +79,9 @@ class ChooseBaby extends PureComponent {
   };
 
   componentDidMount() {
-    this.props.navigation.setParams({ onBack: this.goBack });
+    InteractionManager.runAfterInteractions(() => {
+      this.props.navigation.setParams({ onBack: this.goBack });
+    });
 
     Animated.stagger(400, [
       Animated.spring(this.elementsAnimation, {

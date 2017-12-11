@@ -6,6 +6,7 @@ extend type Viewer {
 extend type Mutation {
   createBaby(input: CreateBabyInput!): CreateBabyPayload
   updateBaby(input: UpdateBabyInput!): UpdateBabyPayload
+  deleteBaby(input: DeleteBabyInput!): UpdateBabyPayload
   recordBabyMeasurement(
     input: RecordMeasurementInput!
   ): RecordMeasurementPayload
@@ -101,6 +102,10 @@ type UpdateBabyPayload {
   edge: BabyEdge
   # An opaque string used by frontend frameworks like relay to track requests and responses
   clientMutationId: String
+}
+
+input DeleteBabyInput {
+  id: ID!
 }
 
 # A connection to a list of items.

@@ -27,10 +27,12 @@ import { unitDisplaySelector } from 'core/settings/reducer';
 import { formatMeasurement } from 'core/helpers/measurement';
 
 import { fileFromImagePickerResult, isNewFile } from '../../shared/fileUtils';
+import RemoveBaby from './RemoveBaby';
 
 type Props = {
   // redux-form uses initialValues prop
   initialValues: Baby, // eslint-disable-line react/no-unused-prop-types
+  id?: string,
   submitting: boolean,
   change: (field: string, value: mixed) => void,
   mode: 'add' | 'edit',
@@ -414,6 +416,8 @@ class Form extends PureComponent {
         </View>
 
         {this.renderMeasurementsSection()}
+
+        {this.props.mode === 'edit' && <RemoveBaby id={this.props.id} />}
       </KeyboardAwareScrollView>
     );
   }
