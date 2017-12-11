@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.2"></a>
+## [1.5.2](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.5.1...nubabi-native@1.5.2) (2017-12-11)
+
+
+### Bug Fixes
+
+* **memories:** include fromActivity in optimistic response ([d48227a](https://gitlab.com/nubabi/mobile/commit/d48227a))
+* **profile:** remove need to `refetchQueries` on baby update ([1bef924](https://gitlab.com/nubabi/mobile/commit/1bef924))
+* **schema:** deprecate {created,changed} in payloads, use edge instead ([8847d22](https://gitlab.com/nubabi/mobile/commit/8847d22))
+
+
+### Performance Improvements
+
+* **profile:** seed images if avatar/coverImage changes ([ea8cff9](https://gitlab.com/nubabi/mobile/commit/ea8cff9))
+* avoid re-rendering when an image is uploaded ([594ccd8](https://gitlab.com/nubabi/mobile/commit/594ccd8))
+* optimistic response for edit baby ([14ac6a2](https://gitlab.com/nubabi/mobile/commit/14ac6a2))
+
+
+
+
 <a name="1.5.1"></a>
 ## [1.5.1](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.5.0...nubabi-native@1.5.1) (2017-12-06)
 

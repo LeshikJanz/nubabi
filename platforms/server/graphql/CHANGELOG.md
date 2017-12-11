@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.2"></a>
+## [1.2.2](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@1.2.1...nubabi-graphql-server@1.2.2) (2017-12-11)
+
+
+### Bug Fixes
+
+* **schema:** deprecate {created,changed} in payloads, use edge instead ([8847d22](https://gitlab.com/nubabi/mobile/commit/8847d22))
+
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@1.2.0...nubabi-graphql-server@1.2.1) (2017-12-06)
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.0.2"></a>
+## [1.0.2](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-utils@1.0.1...nubabi-graphql-utils@1.0.2) (2017-12-11)
+
+
+### Performance Improvements
+
+* avoid re-rendering when an image is uploaded ([594ccd8](https://gitlab.com/nubabi/mobile/commit/594ccd8))
+
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-utils@1.0.0...nubabi-graphql-utils@1.0.1) (2017-11-28)
 
