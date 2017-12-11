@@ -1,13 +1,16 @@
 // @flow
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import { gql, graphql } from 'react-apollo';
 import Modal from 'react-modal';
 import { Box } from 'grid-styled';
 import onClickOutside from 'react-onclickoutside';
-
+import { compose } from 'recompose';
 import { Menu, Button } from 'web/elements';
-import IPerson from 'web/assets/images/icons/person.svg';
+import PersonDefaultIcon from 'web/assets/images/icons/person.svg';
 import { Baby } from 'core/types';
+import path from 'ramda/src/path';
+import { connect } from 'react-redux';
 
 type Props = Baby;
 
@@ -136,6 +139,25 @@ const modalStyles = {
   },
 };
 
+const query = gql`
+  query getBabies {
+    viewer {
+      babies {
+        count
+        edges {
+          node {
+            id
+            name
+            avatar {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
 class Select extends Component<Props> {
   constructor() {
     super();
@@ -161,7 +183,7 @@ class Select extends Component<Props> {
   }
 
   render() {
-    const { name } = this.props;
+    const { name, babies = [], handleBabySelect } = this.props;
     const avatar = this.props.avatar && this.props.avatar.url;
 
     return (
@@ -178,13 +200,20 @@ class Select extends Component<Props> {
         >
           <BabiesListWrapper>
             <BabiesList>
-              <BabiesListItem>
-                <BabyImage>
-                  <IPerson />
-                </BabyImage>
-                <BabyName>{name}</BabyName>
-              </BabiesListItem>
-
+              {babies.map(({ node }) => (
+                <BabiesListItem
+                  key={node.id}
+                  onClick={() => handleBabySelect(node.id)}
+                >
+                  <BabyImage>
+                    {(node.avatar &&
+                      node.avatar.url && (
+                        <img src={node.avatar.url} alt={node.nam} />
+                      )) || <PersonDefaultIcon />}
+                  </BabyImage>
+                  <BabyName>{node.name}</BabyName>
+                </BabiesListItem>
+              ))}
               <BabiesListItem justify="center">
                 <Button plus /> Add Baby
               </BabiesListItem>
@@ -196,4 +225,20 @@ class Select extends Component<Props> {
   }
 }
 
-export default onClickOutside(Select);
+const mapStateToProps = ({ auth }: State) => ({
+  isAuthenticated: auth.isAuthenticated,
+});
+
+export default compose(
+  connect(mapStateToProps),
+  graphql(query, {
+    options: ({ isAuthenticated }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
+      skip: !isAuthenticated,
+    }),
+    props: ({ data }) => ({
+      data,
+      babies: path(['viewer', 'babies', 'edges'], data),
+    }),
+  }),
+)(onClickOutside(Select));
