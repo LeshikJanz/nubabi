@@ -1,5 +1,5 @@
 extend type Viewer {
-  babies: BabyConnection!
+  babies(before: String, after: String, first: Int, last: Int): BabyConnection!
   baby(id: ID): Baby
 }
 
