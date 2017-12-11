@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="31px" height="31px" viewBox="0 0 31 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 47.1 (45422) - http://www.bohemiancoding.com/sketch -->
+    <title>Shape</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-16.0%" y="-12.0%" width="132.0%" height="132.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feMerge>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Design" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Nubabi-App-Settings-Web-01a" transform="translate(-710.000000, -198.000000)" fill="#FFFFFF">
+            <g id="Group-3" filter="url(#filter-1)" transform="translate(701.000000, 185.000000)">
+                <polygon id="Shape" transform="translate(24.874369, 26.124369) rotate(-315.000000) translate(-24.874369, -26.124369) " points="33.6243687 19.1368687 31.8618687 17.3743687 24.8743687 24.3618687 17.8868687 17.3743687 16.1243687 19.1368687 23.1118687 26.1243687 16.1243687 33.1118687 17.8868687 34.8743687 24.8743687 27.8868687 31.8618687 34.8743687 33.6243687 33.1118687 26.6368687 26.1243687"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

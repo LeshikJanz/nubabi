@@ -51,7 +51,7 @@ const UserName = styled.span`
   color: ${props => props.theme.colors.label};
   margin-bottom: 5px;
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 300;
   position: relative;
   width: 100%;
 `;

@@ -27,6 +27,7 @@ const open = {
   gray45: '#454D57',
   gray6b: '#6B7683',
   gray74: DARK_GREY,
+  gray8: '#EDF0F9',
   grayHov: '#F7F8FC',
   blue0: '#33B7EB',
   blue1: '#58A4FF',
@@ -51,6 +52,7 @@ const colors = {
   border: open.gray5,
   label: open.gray4,
   lightblue: open.blue0,
+  lightgrey: open.gray8,
   // This is Apple's recommended background, we're not using it yet
   background: Color('#F8F8F8')
     .alpha(0.8)

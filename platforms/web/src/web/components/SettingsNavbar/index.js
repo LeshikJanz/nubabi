@@ -29,7 +29,7 @@ const MenuItem = styled(Link)`
   align-items: center;
   border-bottom: 1px solid ${props => props.theme.colors.border};
   font-size: 17px;
-  font-weight: 400;
+  font-weight: 300;
   color: ${props => props.theme.colors.label};
   background-color: ${props =>
     props.isActive ? props.theme.colors.border : props.theme.colors.white};
