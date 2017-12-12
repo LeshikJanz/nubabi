@@ -47,7 +47,7 @@ app.use(
       try {
         const user = await admin.auth().verifyIdToken(token);
         if (user) {
-          admin.app().auth().currentUser = user;
+          admin.app().auth().currentUser = await admin.auth().getUser(user.uid);
           admin.app().options_.databaseAuthVariableOverride = {
             uid: user.uid,
             token: token,
