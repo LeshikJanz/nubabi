@@ -4,7 +4,7 @@ import Activities from '../containers/activities';
 import { Baby } from 'core/types';
 import Equipment from './equipment/index';
 import equipmentsMockData from 'web/assets/mock-data/stimulation/equipments.json';
-import * as StimulationStyled from '../styled/indexStyled';
+import * as StimulationStyled from '../styled/index';
 
 type Props = {
   baby: Baby,

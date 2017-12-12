@@ -11,6 +11,7 @@ import PersonDefaultIcon from 'web/assets/images/icons/person.svg';
 import { Baby } from 'core/types';
 import path from 'ramda/src/path';
 import { connect } from 'react-redux';
+import { selectBaby } from 'web/actions';
 
 type Props = Baby;
 
@@ -38,6 +39,7 @@ const BabySelect = styled.div`
 
 const BabySelected = styled.span`
   cursor: pointer;
+  margin: 10px;
 `;
 
 const BabiesListWrapper = styled(Menu)`
@@ -88,7 +90,7 @@ const BabyProfileImage = styled.div`
   height: 70px;
   position: absolute;
   left: 50%;
-  top: 50px;
+  top: 53px;
   transform: translate(-50%, -50%);
   border: 8px solid ${props => props.theme.colors.white};
   border-radius: 100%;
@@ -183,12 +185,19 @@ class Select extends Component<Props> {
   }
 
   render() {
-    const { name, babies = [], handleBabySelect } = this.props;
+    const { name, babies = [] } = this.props;
     const avatar = this.props.avatar && this.props.avatar.url;
+
+    const handleSelect = (babyId: string) => {
+      this.props.handleBabySelect(babyId);
+      this.closeModal();
+    };
 
     return (
       <BabySelect className="BabySelect">
-        <BabyProfileImage image={avatar} />
+        {(avatar && <BabyProfileImage image={avatar} />) || (
+          <PersonDefaultIcon />
+        )}
         <BabySelected onClick={this.openModal}>{name}</BabySelected>
 
         <Modal
@@ -203,7 +212,7 @@ class Select extends Component<Props> {
               {babies.map(({ node }) => (
                 <BabiesListItem
                   key={node.id}
-                  onClick={() => handleBabySelect(node.id)}
+                  onClick={() => handleSelect(node.id)}
                 >
                   <BabyImage>
                     {(node.avatar &&
@@ -229,8 +238,12 @@ const mapStateToProps = ({ auth }: State) => ({
   isAuthenticated: auth.isAuthenticated,
 });
 
+const mapDispatchToProps = dispatch => ({
+  handleBabySelect: (babyId: string) => dispatch(selectBaby(babyId)),
+});
+
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   graphql(query, {
     options: ({ isAuthenticated }) => ({
       fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default

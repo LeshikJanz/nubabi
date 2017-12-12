@@ -1,5 +1,5 @@
 // @flow
-import { Action, ActivityConnection } from 'core/types';
+import { Action } from 'core/types';
 
 export const globalLoaderInit = () => ({
   type: '/REQUEST',
@@ -19,9 +19,7 @@ export const globalLoaderError = (error): Action => ({
   },
 });
 
-export const refreshActivityList = (
-  activities: ActivityConnection[],
-): Action => ({
-  type: 'REFRESH_ACTIVITY_LIST',
-  payload: activities,
+export const selectBaby = (babyId: string): Action => ({
+  type: 'SELECT_BABY',
+  payload: babyId,
 });
