@@ -5,6 +5,7 @@ import DisplayLoadingState from 'web/components/displayLoadingState';
 import { FavoriteActivitiesFragment } from '../fragments/favorites';
 import Favorites from '../components/Favorites';
 import withCurrentBaby from 'web/components/withCurrentBaby';
+import { withRouter } from 'react-router-dom';
 
 const query = gql`
     query getBabyActivity($id: ID!) {
@@ -20,6 +21,7 @@ const query = gql`
 
 export default compose(
   withCurrentBaby,
+  withRouter,
   graphql(query, {
     options: ({ currentBabyId }) => ({
       fetchPolicy: 'network-only',

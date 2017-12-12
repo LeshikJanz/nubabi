@@ -4,7 +4,7 @@ import EquipmentIcon from 'web/assets/images/icons/equipment.svg';
 import CalendarIcon from 'web/assets/images/icons/calendar.svg';
 import moment from 'moment';
 import EquipmentList from './EquipmentList';
-import * as EquipmentStyled from '../../styled/equipment/indexStyled';
+import * as EquipmentStyled from '../../styled/equipment/index';
 
 class Equipment extends PureComponent<Props> {
   getNextWeekStart = () =>

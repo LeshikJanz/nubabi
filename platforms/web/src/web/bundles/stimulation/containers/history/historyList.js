@@ -7,6 +7,7 @@ import withCurrentBaby from 'web/components/withCurrentBaby';
 import HistoryList from '../../components/history/HistoryList';
 import { ActivityListFragment } from '../../fragments/activity';
 import { ActivityHistory } from '../../fragments/history';
+import { withRouter } from 'react-router-dom';
 
 const query = gql`
     query ActivityHistoryDetail($periodId: ID!, $babyId: ID!) {
@@ -36,6 +37,7 @@ const query = gql`
 
 export default compose(
   withCurrentBaby,
+  withRouter,
   graphql(query, {
     options: ({ currentBabyId, match }) => ({
       variables: {

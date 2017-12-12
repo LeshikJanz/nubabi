@@ -15,7 +15,7 @@ export const IconWrapper = styled.div`
 export const Wrapper = styled(Flex)`
   flex-direction: column;
   position: relative;
-  margin-top: 30px;
+  margin-top: 62px;
 
   > svg {
     width: 69px;

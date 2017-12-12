@@ -87,9 +87,6 @@ export default compose(
     refreshActivity: ({ history, handleGlobalLoadingSuccess }) => ({
       data,
     }) => {
-      console.log('data');
-      console.log(data);
-
       const newActivity =
         path(['swoopActivity', 'newActivity'], data) ||
         path(['changeActivity', 'newActivity'], data);

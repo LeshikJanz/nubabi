@@ -11,22 +11,25 @@ import { ActivityConnection } from 'core/types';
 
 type Props = {
   activity: ActivityConnection,
-  history: { goBack: Function },
-  location: { state: { switchable: boolean } },
+  handleBackRedirect: Function,
+  isSwitchable: boolean,
 };
 
-const Activity = ({ activity, history, location }: Props) => (
+const Activity = ({ activity, handleBackRedirect, isSwitchable }: Props) => (
   <ActivityStyled.Wrapper>
-    <ActivityStyled.BackButton onClick={history.goBack}>
+    <ActivityStyled.BackButton onClick={handleBackRedirect}>
       Back
     </ActivityStyled.BackButton>
     <ActivityProfile activity={activity} />
     <ActivityExpert {...activity} />
     <ActivityEquipment {...activity} />
-    <ActivitySkittles {...activity} />
-    <ActivityStatus activity={activity} />
-    {location.state &&
-      location.state.switchable && <ActivitySwitcher activity={activity} />}
+    {isSwitchable && (
+      <div>
+        <ActivitySkittles {...activity} />
+        <ActivityStatus activity={activity} />
+        <ActivitySwitcher activity={activity} />
+      </div>
+    )}
   </ActivityStyled.Wrapper>
 );
 

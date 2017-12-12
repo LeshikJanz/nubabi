@@ -8,9 +8,10 @@ import Equipment from './equipment/index';
 
 type Props = {
   activities: ActivityConnection[],
+  location: { pathname: string },
 };
 
-const WeekActivities = ({ activities }: Props) => (
+const WeekActivities = ({ activities, location: { pathname } }: Props) => (
   <ActivitiesStyled.ListWrapper>
     <ActivitiesStyled.ListHeader justify="space-between" align="center">
       <ActivitiesStyled.ListTitle is="h3">
@@ -18,7 +19,7 @@ const WeekActivities = ({ activities }: Props) => (
       </ActivitiesStyled.ListTitle>
     </ActivitiesStyled.ListHeader>
 
-    <ActivityList activities={activities} switchable />
+    <ActivityList activities={activities} switchable backLink={pathname} />
     <Equipment equipments={equipmentsMockData} />
   </ActivitiesStyled.ListWrapper>
 );

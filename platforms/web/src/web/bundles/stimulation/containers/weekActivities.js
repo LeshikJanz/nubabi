@@ -29,6 +29,7 @@ export default compose(
   withCurrentBaby,
   graphql(query, {
     options: ({ currentBabyId }) => ({
+      fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
       variables: { id: currentBabyId },
       skip: !currentBabyId,
     }),

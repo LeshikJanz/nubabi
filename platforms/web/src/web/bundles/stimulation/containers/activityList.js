@@ -8,8 +8,11 @@ export default compose(
   ShowNoContentViewIf(props => !props.activities),
   withRouter,
   withHandlers({
-    handleNavigateToActivity: ({ history, switchable }) => ({ id }) =>
-      history.push({ pathname: `/activity/${id}`, state: { switchable } }),
+    handleNavigateToActivity: ({ history, switchable, backLink }) => ({ id }) =>
+      history.push({
+        pathname: `/activity/${id}`,
+        state: { switchable, backLink },
+      }),
     getScrollHeight: () => () =>
       Math.max(
         document.body.scrollHeight,

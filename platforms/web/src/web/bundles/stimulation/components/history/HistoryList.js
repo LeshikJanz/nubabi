@@ -13,9 +13,14 @@ const HistoryWrapper = styled.div`
 type Props = {
   activities: ActivityConnection[],
   activeHistory: ActivityHistoryItemFragment,
+  location: { pathname: string },
 };
 
-const HistoryList = ({ activities, activeHistory }: Props) => (
+const HistoryList = ({
+  activities,
+  activeHistory,
+  location: { pathname },
+}: Props) => (
   <HistoryWrapper>
     <ActivitiesStyled.ListWrapper>
       <ActivitiesStyled.ListHeader justify="space-between" align="center">
@@ -25,7 +30,7 @@ const HistoryList = ({ activities, activeHistory }: Props) => (
         </ActivitiesStyled.ListTitle>
       </ActivitiesStyled.ListHeader>
 
-      <ActivityList activities={activities.edges} />
+      <ActivityList activities={activities.edges} backLink={pathname} />
     </ActivitiesStyled.ListWrapper>
   </HistoryWrapper>
 );
