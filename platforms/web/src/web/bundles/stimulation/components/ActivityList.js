@@ -7,15 +7,21 @@ import * as ActivityListStyled from '../styled/ActivityListStyled';
 type Props = {
   activities: ActivityConnection,
   handleNavigateToActivity: Function,
+  switchable: boolean,
 };
 
-const ActivityList = ({ activities, handleNavigateToActivity }: Props) => (
+const ActivityList = ({
+  activities,
+  handleNavigateToActivity,
+  switchable = false,
+}: Props) => (
   <ActivityListStyled.List>
     {activities.map(({ node }, i) => (
       <ActivityItem
         key={i}
         activity={node}
         handleClick={handleNavigateToActivity}
+        switchable={switchable}
       />
     ))}
   </ActivityListStyled.List>

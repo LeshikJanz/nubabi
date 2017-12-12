@@ -18,7 +18,7 @@ const WeekActivities = ({ activities }: Props) => (
       </ActivitiesStyled.ListTitle>
     </ActivitiesStyled.ListHeader>
 
-    <ActivityList activities={activities} />
+    <ActivityList activities={activities} switchable />
     <Equipment equipments={equipmentsMockData} />
   </ActivitiesStyled.ListWrapper>
 );

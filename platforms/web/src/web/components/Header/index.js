@@ -30,7 +30,7 @@ const Wrapper = styled(Header)`
 `;
 
 const HeaderContent = styled(Flex)`
-  max-width: 1400px;
+  max-width: 1200px;
   align-items: stretch;
 `;
 
