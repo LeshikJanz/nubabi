@@ -8,11 +8,12 @@ import config from '../../../core/config';
 import firebaseConnector from './connectors/firebaseConnector';
 import fs from 'fs';
 import cors from 'cors';
+import { genLoaders } from './helpers/loaders';
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
 const debug = require('debug')('graphqlServer:server');
 const PORT = 8080;
-const serviceAccount = require('./nubabitest1-firebase-adminsdk-r7bmb-8f86f51d8b.json');
+const serviceAccount = require('./nubabitest1-firebase-adminsdk-r7bmb-4056976942.json');
 
 const app = express();
 
@@ -28,7 +29,10 @@ app.use(
   bodyParser.json(),
   cors(),
   graphqlExpress(async request => {
+    const firebaseConn = firebaseConnector(firebase);
     let token;
+    let loaders = {};
+
     if (request.headers.authorization) {
       token = request.headers.authorization.split(' ')[1];
       try {
@@ -40,16 +44,20 @@ app.use(
             token: token,
             provider: user.firebase.sign_in_provider,
           };
+          loaders = genLoaders(token, firebaseConn);
         }
-      } catch (e) {}
+      } catch (e) {
+        console.error(e);
+      }
     }
 
     return {
       schema,
       context: {
         token,
+        loaders,
         connectors: {
-          firebase: firebaseConnector(firebase),
+          firebase: firebaseConn,
         },
       },
     };

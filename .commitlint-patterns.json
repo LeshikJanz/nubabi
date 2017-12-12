@@ -12,6 +12,7 @@
       "native",
       "web",
       "graphql-utils",
+      "graphql-server",
       "firebase"
     ],
     "components": {
