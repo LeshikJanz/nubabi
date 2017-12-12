@@ -8,9 +8,10 @@ import * as ActivityStatusStyled from '../../styled/activity/ActivityStatusStyle
 type Props = {
   activity: ActivityConnection,
   handleActivity: Function,
+  handleMenu: Function,
 };
 
-const ActivityStatus = ({ activity, handleActivity }: Props) => (
+const ActivityStatus = ({ activity, handleActivity, handleMenu }: Props) => (
   <ActivityStatusStyled.Wrapper>
     <ActivityStatusStyled.IconWrapper>
       <GrossIcon />
@@ -25,6 +26,7 @@ const ActivityStatus = ({ activity, handleActivity }: Props) => (
     </ActivityStatusStyled.Content>
 
     <ActivityMenu
+      handlActivityMenu={handleMenu}
       handleActivity={handleActivity}
       isCompleted={activity.isCompleted}
     />

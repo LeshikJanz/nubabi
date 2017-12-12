@@ -6,14 +6,15 @@ import { connect } from 'react-redux';
 const mapDispatchToProps = dispatch => ({
   runGlobalLoading: () => dispatch(globalLoaderInit),
 });
+
 export default compose(
   connect(null, mapDispatchToProps),
   withState('isActivityMenuOpen', 'handleActivityMenu', true),
   withHandlers({
     selectActivity: ({
-      handleActivityMenu,
       handleActivity,
       runGlobalLoading,
+      handleActivityMenu,
     }) => a => {
       runGlobalLoading();
 

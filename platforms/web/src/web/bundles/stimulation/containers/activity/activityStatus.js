@@ -5,7 +5,6 @@ import ActivityStatus from '../../components/activity/ActivityStatus';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 import { path } from 'ramda';
-import { optimisticResponse } from 'core/helpers/graphqlUtils';
 import { connect } from 'react-redux';
 import { globalLoaderSuccess, globalLoaderError } from 'web/actions';
 
@@ -60,25 +59,9 @@ export default compose(
     `,
     {
       name: 'completeActivity',
-      options: () => ({
-        refetchQueies: ['ViewActivity'],
-        optimisticResponse: optimisticResponse(
-          'completeActivity',
-          'CompleteActivityPayload',
-          ({ input }) => ({
-            edge: {
-              __typename: 'ActivityEdge',
-              node: {
-                __typename: 'Activity',
-                id: input.id,
-                isCompleted: true,
-              },
-            },
-          }),
-        ),
-        fetchPolicy: 'network-only',
+      options: {
         refetchQueries: ['ThisWeeksActivitiesList'],
-      }),
+      },
     },
   ),
   withCurrentBaby,
@@ -94,6 +77,7 @@ export default compose(
       if (newActivity) {
         history.push(`/activity/${newActivity.id}`);
       }
+
       handleGlobalLoadingSuccess();
     },
   }),
