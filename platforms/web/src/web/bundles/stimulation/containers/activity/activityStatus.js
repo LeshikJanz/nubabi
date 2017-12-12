@@ -53,7 +53,6 @@ export default compose(
           edge {
             node {
               id
-              isCompleted
             }
           }
         }
@@ -62,6 +61,7 @@ export default compose(
     {
       name: 'completeActivity',
       options: () => ({
+        refetchQueies: ['ViewActivity'],
         optimisticResponse: optimisticResponse(
           'completeActivity',
           'CompleteActivityPayload',
@@ -76,7 +76,7 @@ export default compose(
             },
           }),
         ),
-        fetchPolicy: 'cache-and-network',
+        fetchPolicy: 'network-only',
         refetchQueries: ['ThisWeeksActivitiesList'],
       }),
     },
@@ -87,14 +87,17 @@ export default compose(
     refreshActivity: ({ history, handleGlobalLoadingSuccess }) => ({
       data,
     }) => {
+      console.log('data');
+      console.log(data);
+
       const newActivity =
         path(['swoopActivity', 'newActivity'], data) ||
         path(['changeActivity', 'newActivity'], data);
 
       if (newActivity) {
         history.push(`/activity/${newActivity.id}`);
-        handleGlobalLoadingSuccess();
       }
+      handleGlobalLoadingSuccess();
     },
   }),
   withHandlers({

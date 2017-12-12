@@ -15,14 +15,14 @@ type Props = {
 
 const ActivityProfile = ({ activity, handleFavorite, handlePrint }: Props) => (
   <ActivityProfileStyled.Wrapper>
-    <ActivityProfileStyled.MainLabels>
-      <ActivityProfileStyled.Label>{activity.name}</ActivityProfileStyled.Label>
-      <Button type="button">{activity.skillArea.name}</Button>
-    </ActivityProfileStyled.MainLabels>
     <ActivityProfileStyled.ImageContainer>
       <ActivityProfileStyled.Backdrop />
       <ActivityProfileStyled.Image src={activity.skillArea.image.large.url} />
     </ActivityProfileStyled.ImageContainer>
+    <ActivityProfileStyled.MainLabels>
+      <ActivityProfileStyled.Label>{activity.name}</ActivityProfileStyled.Label>
+      <Button type="button">{activity.skillArea.name}</Button>
+    </ActivityProfileStyled.MainLabels>
     <ActivityProfileStyled.Actions isfavorite={`${activity.isFavorite}`}>
       <FavoriteIcon onClick={handleFavorite} />
       <SeparatorIcon />

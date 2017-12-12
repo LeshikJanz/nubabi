@@ -18,7 +18,6 @@ export const Wrapper = styled(Flex)`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    z-index: 2;
 
     ${Label} {
       font-size: 22px;

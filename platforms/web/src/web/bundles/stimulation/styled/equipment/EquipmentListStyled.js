@@ -4,5 +4,5 @@ import { Flex } from 'grid-styled';
 export const List = styled(Flex)`
   flex-direction: column;
   text-align: left;
-  margin-top: 18px;
+  padding: 18px;
 `;
