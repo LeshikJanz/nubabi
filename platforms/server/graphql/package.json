@@ -18,10 +18,12 @@
     "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
     "graphql-server-express": "^1.0.2",
     "graphql-tools": "^0.11.0",
+    "nubabi-core": "^1.4.0",
     "moment": "^2.17.1",
+    "multer": "^1.3.0",
+    "lodash.sample": "^4.2.1",
     "qs": "^6.5.1",
     "ramda": "^0.24.1",
-    "react-native-fetch-blob": "https://github.com/blackxored/react-native-fetch-blob#fix/json-response-fix-with-net-indicator-fix",
     "reading-time": "^1.1.0",
     "string": "^3.3.3"
   }

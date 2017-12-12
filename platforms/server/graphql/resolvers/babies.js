@@ -25,9 +25,9 @@ const resolvers = {
 
   Mutation: {
     createBaby: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) =>
+      (input, { connectors: { firebase }, uploads }) =>
         firebase
-          .createBaby(input)
+          .createBaby(input, uploads)
           .then(addEdgeAndCursorToMutationResult(firebase.getBabies))
           .then(result => ({
             ...result,
@@ -36,9 +36,9 @@ const resolvers = {
     ),
 
     updateBaby: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) =>
+      (input, { connectors: { firebase }, uploads }) =>
         firebase
-          .updateBaby(fromGlobalId(input.id).id, input)
+          .updateBaby(fromGlobalId(input.id).id, input, uploads)
           .then(addEdgeAndCursorToMutationResult(firebase.getBabies))
           .then(result => ({
             ...result,

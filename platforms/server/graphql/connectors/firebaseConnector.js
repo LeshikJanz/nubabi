@@ -82,79 +82,40 @@ const toFirebaseBaby = values => {
   );
 };
 
-const uploadFileFromDataUri = () => {
-  /*
-     * We can't use data_url with putString since Firebase is unconditionally
-     * using `atob` which fails on RN when run on JSC.
-     */
-  /* eslint-disable no-useless-escape */
-  const dataUrlRegExp = new RegExp(
-    /data:([\w\/\+]+);(charset=[\w-]+|base64).*,([a-zA-Z0-9+\/]+={0,2})/g,
-  );
-  /* eslint-enable no-useless-escape */
-
-  // data_url is in format data:image/jpeg;base64,<content>
-  const match = dataUrlRegExp.exec(fileUrl);
-
-  const ref = firebase
-    .storage()
-    .ref()
-    .child(refPath);
-
-  const isDataUri = !!match;
-
-  const contentType = match[1];
-
-  const content = new Uint8Array(
-    decode(match[3])
-      .split('')
-      .map(c => c.charCodeAt(0)),
-  );
-};
-
-const uploadFile = (firebase, refPath, file, fileMetadata = {}) => {
+const uploadFile = (firebase, storagePath, file, upload, fileMetadata = {}) => {
   return new Promise(async (resolve, reject) => {
-    const ref = firebase
+    const fileUpload = firebase
       .storage()
-      .ref()
-      .child(refPath);
+      .bucket()
+      .file(storagePath);
+    const blobStream = fileUpload.createWriteStream({
+      metadata: {
+        ...fileMetadata,
+        contentType: file.contentType,
+      },
+    });
 
-    if (process.env.IS_BROWSER) {
-      return reject(new Error('upload for web is not implemented yet'));
-      // webpack requires RNFetchBlob if no else despite check above
-      // eslint-disable-next-line no-else-return
-    } else {
-      const RNFetchBlob = require('react-native-fetch-blob').default;
-      const uploadUri = file.url;
-      const uri = RNFetchBlob.wrap(uploadUri);
-      const contentType = file.contentType || 'application/octet-stream';
+    blobStream.on('error', reject);
+    blobStream.on('finish', () => {
+      fileUpload.getSignedUrl(
+        {
+          action: 'read',
+          expires: '06-06-2026',
+        },
+        (err, url) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(url);
+        },
+      );
+    });
 
-      return Blob.build(uri, { type: contentType }).then(blob => {
-        const metadata = { contentType, customMetadata: fileMetadata };
-        const uploadTask = ref.put(blob);
-
-        uploadTask.on(
-          firebase.storage.TaskEvent.STATE_CHANGED,
-          () => {
-            /* progress */
-          },
-          error => {
-            reject(error);
-          },
-          () => {
-            blob.close();
-            ref
-              .updateMetadata(metadata)
-              .then(resolve(uploadTask.snapshot.downloadURL))
-              .catch(err => reject(err));
-          },
-        );
-      });
-    }
+    blobStream.end(upload.buffer);
   });
 };
 
-const createOrUpdateBaby = async (firebase, values, id) => {
+const createOrUpdateBaby = async (firebase, values, id, uploads) => {
   const creating = !id;
 
   const currentUserId = getViewer(firebase).uid;
@@ -188,6 +149,7 @@ const createOrUpdateBaby = async (firebase, values, id) => {
       firebase,
       `/${path}/${avatar.name}`,
       avatar,
+      findUploadForFile(uploads, avatar),
       { role: 'avatar' },
     );
     if (fileUrl) {
@@ -202,6 +164,7 @@ const createOrUpdateBaby = async (firebase, values, id) => {
       firebase,
       `${path}/${coverImage.name}`,
       coverImage,
+      findUploadForFile(uploads, coverImage),
       { role: 'coverImage' },
     );
 
@@ -322,7 +285,7 @@ const getFriends = async firebase => {
     });
 };
 
-const updateUser = async (firebase, input) => {
+const updateUser = async (firebase, input, uploads) => {
   const currentUser = getViewer(firebase);
   const user = evolve(transforms, omit(['avatar'], input));
   const updates = {};
@@ -336,6 +299,7 @@ const updateUser = async (firebase, input) => {
       firebase,
       `users/${currentUser.uid}/${input.avatar.name}`,
       input.avatar,
+      findUploadForFile(uploads, input.avatar),
       { role: 'avatar' },
     );
 
@@ -472,11 +436,16 @@ const upsert = (basePath: string, obj: Object) => {
   return target;
 };
 
+const findUploadForFile = (uploads, file) => {
+  return R.find(R.propEq('fieldname', file.url), uploads);
+};
+
 const uploadMemoryFiles = (
   firebase,
   memoryId,
   babyId,
   files,
+  uploads,
 ): Promise<Array<Object>> => {
   if (files && files.length) {
     const storagePath = `/babies/${babyId}/memories/${memoryId}`;
@@ -487,6 +456,7 @@ const uploadMemoryFiles = (
           firebase,
           [storagePath, file.name].join('/'),
           file,
+          findUploadForFile(uploads, file),
         ).then(url => {
           const id = firebase
             .database()
@@ -503,7 +473,12 @@ const uploadMemoryFiles = (
   return Promise.resolve([]);
 };
 
-const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
+const createMemory = (
+  firebase,
+  babyId: string,
+  input: CreateMemoryInput,
+  uploads,
+) => {
   const updates = {};
   const currentUserId = getViewer(firebase).uid;
   const memoryId = firebase
@@ -528,7 +503,7 @@ const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
   updates[`/memories/${memoryId}`] = memory;
   updates[`/babies/${babyId}/memories/${memoryId}`] = true;
 
-  return uploadMemoryFiles(firebase, memoryId, babyId, input.files)
+  return uploadMemoryFiles(firebase, memoryId, babyId, input.files, uploads)
     .then(files => {
       files.forEach(file => (memory.files[file.id] = file.file));
       return files;
@@ -545,7 +520,12 @@ const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
     });
 };
 
-const updateMemory = async (firebase, id: string, input: any) => {
+const updateMemory = async (
+  firebase,
+  id: string,
+  input: any,
+  uploads: Array<any>,
+) => {
   const toFirebaseMemory = {
     createdAt: toTimestamp,
   };
@@ -567,7 +547,13 @@ const updateMemory = async (firebase, id: string, input: any) => {
 
   if (input.files.length) {
     const babyId = (await get(firebase, path)).babyId;
-    const files = await uploadMemoryFiles(firebase, id, babyId, input.files);
+    const files = await uploadMemoryFiles(
+      firebase,
+      id,
+      babyId,
+      input.files,
+      uploads,
+    );
 
     files.forEach(file => {
       updates[`${path}/files/${file.id}`] = file.file;
@@ -901,9 +887,10 @@ const firebaseConnector = firebase => {
     getBabyHeights: (id: string) => getBabyHeights(firebase, id),
     getMemories: (babyId, args) => getMemories(firebase, babyId, args),
     getMemory: id => getMemory(firebase, id),
-    createBaby: (values: mixed) => createOrUpdateBaby(firebase, values),
-    updateBaby: (id: string, values: mixed) =>
-      createOrUpdateBaby(firebase, values, id),
+    createBaby: (values: mixed, uploads) =>
+      createOrUpdateBaby(firebase, values, uploads),
+    updateBaby: (id: string, values: mixed, uploads: mixed) =>
+      createOrUpdateBaby(firebase, values, id, uploads),
     deleteBaby: (id: string) => deleteBaby(firebase, id),
     recordMeasurement: (
       id: string,
@@ -911,8 +898,10 @@ const firebaseConnector = firebase => {
       unit: MeasurementUnit,
       value: number,
     ) => recordMeasurement(firebase, id, type, unit, value),
-    createMemory: (babyId, input) => createMemory(firebase, babyId, input),
-    updateMemory: (id, input) => updateMemory(firebase, id, input),
+    createMemory: (babyId, input, uploads) =>
+      createMemory(firebase, babyId, input, uploads),
+    updateMemory: (id, input, uploads) =>
+      updateMemory(firebase, id, input, uploads),
     deleteMemory: id => deleteMemory(firebase, id),
     toggleMemoryLike: (memoryId, isLiked) =>
       toggleMemoryLike(firebase, memoryId, isLiked),

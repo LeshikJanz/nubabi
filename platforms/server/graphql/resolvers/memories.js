@@ -15,11 +15,11 @@ import { getActivity } from '../connectors/babiesConnector';
 export const resolvers = {
   Mutation: {
     createMemory: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) => {
+      (input, { connectors: { firebase }, uploads }) => {
         const babyId = fromGlobalId(input.babyId).id;
 
         return firebase
-          .createMemory(babyId, input)
+          .createMemory(babyId, input, uploads)
           .then(
             addEdgeAndCursorToMutationResult(() =>
               firebase.getMemories(babyId),
@@ -28,9 +28,9 @@ export const resolvers = {
       },
     ),
     updateMemory: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) => {
+      (input, { uploads, connectors: { firebase } }) => {
         return firebase
-          .updateMemory(fromGlobalId(input.id).id, input)
+          .updateMemory(fromGlobalId(input.id).id, input, uploads)
           .then(memory => {
             return addEdgeAndCursorToMutationResult(
               () => firebase.getMemories(memory.babyId),

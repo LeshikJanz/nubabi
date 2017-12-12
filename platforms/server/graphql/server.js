@@ -1,6 +1,7 @@
 // @flow
 import express from 'express';
 import bodyParser from 'body-parser';
+import Multer from 'multer';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { schema } from './schema';
 import admin from 'firebase-admin';
@@ -21,11 +22,19 @@ const firebase = admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: config.firebase.databaseURL,
   databaseAuthVariableOverride: null,
+  storageBucket: config.firebase.storageBucket,
+});
+
+firebase.database.ServerValue = admin.database.ServerValue;
+
+const multer = Multer({
+  storage: Multer.memoryStorage(),
 });
 
 app.options('/graphql', cors());
 app.use(
   '/graphql',
+  multer.any(),
   bodyParser.json(),
   cors(),
   graphqlExpress(async request => {
@@ -56,6 +65,7 @@ app.use(
       context: {
         token,
         loaders,
+        uploads: request.files,
         connectors: {
           firebase: firebaseConn,
         },

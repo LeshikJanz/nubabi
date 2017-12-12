@@ -10,7 +10,7 @@ import {
   globalIdField,
   fromGlobalId,
 } from './common';
-import { sample } from 'lodash';
+import sample from 'lodash.sample';
 import * as connector from '../connectors/babiesConnector';
 
 const readingTime = curry((propName, obj) => {

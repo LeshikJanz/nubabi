@@ -14,7 +14,7 @@ import {
 import {
   addEdgeAndCursorToMutationResult,
   addEdgeToMutationResult,
-} from '../../../../core/helpers/graphqlUtils';
+} from 'core/helpers/graphqlUtils';
 
 const resolvers = {
   DateTime: GraphQLDateTime,
@@ -179,9 +179,9 @@ const resolvers = {
   },
   Mutation: {
     updateUser: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) => {
+      (input, { connectors: { firebase }, uploads }) => {
         return firebase
-          .updateUser(input)
+          .updateUser(input, uploads)
           .then(changedUser => ({ changedUser }));
       },
     ),
