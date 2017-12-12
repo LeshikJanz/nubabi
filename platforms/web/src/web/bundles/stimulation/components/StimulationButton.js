@@ -2,21 +2,24 @@
 import React from 'react';
 import iconMappings from 'web/common/iconMappings';
 import * as StimulationButtonStyled from '../styled/StimulationButtonStyled';
+import { withRouter } from 'react-router-dom';
 
 type Props = {
   button: StimulationButtonType,
-  selectedFilter: string,
   handleClick: Function,
+  location: { pathname: string },
 };
 
-const StimulationButton = ({ button, selectedFilter, handleClick }: Props) => (
+const StimulationButton = ({ button, handleClick, location }: Props) => (
   <StimulationButtonStyled.Wrapper
-    active={(selectedFilter === button.type).toString()}
+    active={(button.redirect === location.pathname).toString()}
     onClick={handleClick}
   >
-    {iconMappings(button.icon)()}
+    <StimulationButtonStyled.Icon>
+      {iconMappings(button.icon)()}
+    </StimulationButtonStyled.Icon>
     <StimulationButtonStyled.Text>{button.text}</StimulationButtonStyled.Text>
   </StimulationButtonStyled.Wrapper>
 );
 
-export default StimulationButton;
+export default withRouter(StimulationButton);

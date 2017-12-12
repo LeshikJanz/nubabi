@@ -1,6 +1,7 @@
 // @flow
 const iconMappings = {
   'icon-thinking': require('web/assets/images/thinking_reasoning.png'),
+  'icon-puzzle': require('web/assets/images/icons/puzzle.svg'),
   'icon-gross': require('web/assets/images/gross_motor_icon.png'),
   'icon-fine': require('web/assets/images/fine_motor_icon.png'),
   'icon-sensory': require('web/assets/images/sensory_icon.png'),

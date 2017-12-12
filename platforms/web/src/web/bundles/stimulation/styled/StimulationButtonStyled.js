@@ -4,12 +4,11 @@ import styled from 'styled-components';
 export const Wrapper = styled(Flex)`
   border-radius: 4px;
   cursor: pointer;
-  justify-content: space-around;
   align-items: center;
   height: 68px;
-  width: 30%;
-  min-width: 190px;
-  margin-top: 15px;
+  width: 23%;
+  min-width: 130px;
+  padding: 17px;
   margin: 15px 5px 0;
   box-shadow: ${props => props.theme.shadows.panel};
   justify-content: center;
@@ -20,11 +19,19 @@ export const Wrapper = styled(Flex)`
 
   background-color: ${props =>
     (JSON.parse(props.active) && props.theme.shadows.panel) || '#fff'};
+`;
+
+export const Icon = styled.div`
+  justify-content: center;
 
   > svg {
     max-height: 25px;
     max-width: 25px;
     margin-right: 10px;
+
+    > g > g {
+      fill: red;
+    }
   }
 `;
 

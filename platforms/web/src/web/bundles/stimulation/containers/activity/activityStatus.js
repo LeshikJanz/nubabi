@@ -92,7 +92,7 @@ export default compose(
         path(['changeActivity', 'newActivity'], data);
 
       if (newActivity) {
-        history.push(`/stimulation/activity/${newActivity.id}`);
+        history.push(`/activity/${newActivity.id}`);
         handleGlobalLoadingSuccess();
       }
     },

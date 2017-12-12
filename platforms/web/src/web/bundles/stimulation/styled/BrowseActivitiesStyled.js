@@ -7,7 +7,6 @@ const skillWidth = '200px';
 
 export const Wrapper = styled(Flex)`
   flex-direction: column;
-  margin-top: 50px;
   padding: 0 1%;
 
   @media (max-width: ${laptopWidth}) {
@@ -18,7 +17,6 @@ export const Wrapper = styled(Flex)`
 export const CategoryLabel = styled.div`
   font-size: 18px;
   text-align: center;
-  margin-top: 15px;
   color: ${props => props.theme.colors.open.black0};
 `;
 

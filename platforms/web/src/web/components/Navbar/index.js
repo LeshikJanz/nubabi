@@ -112,8 +112,8 @@ class NavBar extends PureComponent<Props> {
             </MenuItem>
             <MenuItem>
               <MenuLink
-                to="/stimulation"
-                active={location.pathname === '/stimulation'}
+                to="/stimulation/weeks"
+                active={location.pathname.includes('/stimulation')}
               >
                 <IPuzzle /> Stimulation
               </MenuLink>

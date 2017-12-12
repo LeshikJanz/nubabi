@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import HistoryItem from './HistoryItem';
-import * as HistoryStyled from '../../styled/history/indexStyled';
+import * as HistoryStyled from '../../styled/history/index';
 
 type Props = {
   activityHistory: ActivityHistoryItemFragment,

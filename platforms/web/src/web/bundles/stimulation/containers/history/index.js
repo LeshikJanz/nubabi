@@ -38,8 +38,7 @@ export default compose(
   }),
   withRouter,
   withHandlers({
-    handleHistory: ({ history }) => id =>
-      history.push(`/stimulation/history/${id}`),
+    handleHistory: ({ history }) => id => history.push(`/history/${id}`),
   }),
   DisplayLoadingState,
 )(History);

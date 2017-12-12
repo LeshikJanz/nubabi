@@ -1,19 +1,24 @@
 // @flow
 import React from 'react';
-import Activities from '../containers/activities';
-import { Baby } from 'core/types';
-import Equipment from './equipment/index';
-import equipmentsMockData from 'web/assets/mock-data/stimulation/equipments.json';
 import * as StimulationStyled from '../styled/index';
+import { STIMULATION_BUTTONS } from '../constants';
+import StimulationButton from './StimulationButton';
 
 type Props = {
-  baby: Baby,
+  handleNavigate: Function,
 };
 
-const Stimulation = (data: Props) => (
+const Stimulation = ({ handleNavigate }: Props) => (
   <StimulationStyled.Wrapper>
-    <Activities {...data.baby} />
-    <Equipment equipments={equipmentsMockData} />
+    <StimulationStyled.Buttons>
+      {STIMULATION_BUTTONS.map(b => (
+        <StimulationButton
+          key={b.id}
+          button={b}
+          handleClick={() => handleNavigate(b.redirect)}
+        />
+      ))}
+    </StimulationStyled.Buttons>
   </StimulationStyled.Wrapper>
 );
 

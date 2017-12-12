@@ -36,6 +36,7 @@ import FilteredSkillActivities from '../bundles/stimulation/containers/filteredS
 import FilteredCategoryActivities from '../bundles/stimulation/containers/filteredCategoryActivities';
 import HistoryList from '../bundles/stimulation/containers/history/historyList';
 import Settings from 'web/settings';
+import WeekActivities from '../bundles/stimulation/containers/weekActivities';
 
 const Profile = Loadable({
   loader: () => import(/* webpackChunkName: "profile" */ 'web/bundles/profile'),
@@ -96,14 +97,18 @@ const App = (props: Props) => (
           />
           <AuthenticatedRoute path="/growth" component={Growth} props={props} />
           <AuthenticatedRoute
-            exact
             path="/stimulation"
             component={Stimulation}
             props={props}
           />
           <AuthenticatedRoute
+            path="/stimulation/weeks"
+            component={WeekActivities}
+            props={props}
+          />
+          <AuthenticatedRoute
             exact
-            path="/stimulation/activity/:id"
+            path="/activity/:id"
             component={Activity}
             props={props}
           />
@@ -127,19 +132,19 @@ const App = (props: Props) => (
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/history/:id"
+            path="/history/:id"
             component={HistoryList}
             props={props}
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/browse/skill/:id"
+            path="/browse/skill/:id"
             component={FilteredSkillActivities}
             props={props}
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/browse/category/:id"
+            path="/browse/category/:id"
             component={FilteredCategoryActivities}
             props={props}
           />

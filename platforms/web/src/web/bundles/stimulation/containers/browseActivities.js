@@ -33,9 +33,9 @@ export default compose(
   withRouter,
   withHandlers({
     handleSkillFilter: ({ history }) => skillId =>
-      history.push(`/stimulation/browse/skill/${skillId}`),
+      history.push(`/browse/skill/${skillId}`),
     handleCategoryFilter: ({ history }) => categoryId =>
-      history.push(`/stimulation/browse/category/${categoryId}`),
+      history.push(`/browse/category/${categoryId}`),
   }),
   DisplayLoadingState,
 )(BrowseActivities);

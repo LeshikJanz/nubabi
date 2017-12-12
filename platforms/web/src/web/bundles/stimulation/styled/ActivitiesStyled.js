@@ -1,13 +1,5 @@
 import { Flex, Box } from 'grid-styled';
-import styled, { css } from 'styled-components';
-
-export const media = {
-  handheld: (...args) => css`
-    @media (max-width: 1200px) {
-      ${css(...args)};
-    }
-  `,
-};
+import styled from 'styled-components';
 
 export const ListWrapper = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
@@ -15,18 +7,8 @@ export const ListWrapper = styled.div`
   margin-right: ${props => props.theme.margins.appRight};
 `;
 
-export const Buttons = styled(Flex)`
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  flex-wrap: wrap;
-  ${media.handheld`
-    justify-content: center;
-  `};
-`;
-
 export const ListHeader = styled(Flex)`
-  margin: 54px 0 15px;
+  margin-bottom: 14px;
 `;
 
 export const ListTitle = styled(Box)`

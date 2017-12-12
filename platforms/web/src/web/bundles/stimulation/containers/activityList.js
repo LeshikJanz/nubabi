@@ -9,7 +9,7 @@ export default compose(
   withRouter,
   withHandlers({
     handleNavigateToActivity: ({ history }) => ({ id }) =>
-      history.push(`/stimulation/activity/${id}`),
+      history.push(`/activity/${id}`),
     getScrollHeight: () => () =>
       Math.max(
         document.body.scrollHeight,

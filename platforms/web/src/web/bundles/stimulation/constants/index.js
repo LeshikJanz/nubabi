@@ -1,33 +1,29 @@
 // @flow
 import { StimulationButtonType } from '../../../types/custom';
 
-export const ACTIVITY_FILTERS = {
-  favorites: 'favorites',
-  activities: 'activities',
-  history: 'history',
-  weeks: 'weeks',
-};
-
 export const STIMULATION_BUTTONS = [
   {
     id: 1,
-    icon: 'icon-favorite',
-    text: 'View Favorites',
-    type: ACTIVITY_FILTERS.favorites,
-    redirect: '/stimulation/favorites',
+    icon: 'icon-puzzle',
+    text: `Week's activities`,
+    redirect: '/stimulation/weeks',
   },
   {
     id: 2,
-    icon: 'icon-activity',
-    text: 'Browse Activities',
-    type: ACTIVITY_FILTERS.activities,
-    redirect: '/stimulation/browse',
+    icon: 'icon-favorite',
+    text: 'View Favorites',
+    redirect: '/stimulation/favorites',
   },
   {
     id: 3,
+    icon: 'icon-activity',
+    text: 'Browse Activities',
+    redirect: '/stimulation/browse',
+  },
+  {
+    id: 4,
     icon: 'icon-history',
     text: 'Activity History',
-    type: ACTIVITY_FILTERS.history,
     redirect: '/stimulation/history',
   },
 ];
