@@ -12,7 +12,7 @@
     "debug": "^3.1.0",
     "express": "^4.15.3",
     "faker": "^4.1.0",
-    "firebase-admin": "^5.0.1",
+    "firebase-admin": "^5.5.1",
     "graphql": "^0.10.5",
     "graphql-iso-date": "^3.1.0",
     "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
