@@ -12,7 +12,7 @@ const UnitPreferencesContainer = styled(Flex)`
   height: 532px;
 `;
 
-const Title = styled.h3`
+export const Title = styled.h3`
   font-weight: 300;
   font-size: 18px;
   margin: 0;
