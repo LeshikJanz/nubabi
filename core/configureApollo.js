@@ -1,24 +1,14 @@
 // @flow
 import type { Action, State } from './types';
-import { ApolloClient, createNetworkInterface } from 'apollo-client';
+import { ApolloClient } from 'apollo-client';
 // $FlowFixMe$
 import { IntrospectionFragmentMatcher } from 'react-apollo';
-import * as firebase from 'firebase';
 import config from './config';
+import ServerNetworkInterface from './helpers/serverNetworkInterface';
 
 let client = null; // singleton
-let networkInterface;
 
-if (config.graphqlEndpoint && config.graphqlEndpoint !== 'memory://') {
-  networkInterface = createNetworkInterface({
-    uri: config.graphqlEndpoint,
-  });
-} else {
-  const MemoryNetworkInterface = require('../platforms/server/graphql/helpers/clientNetworkInterface')
-    .default;
-
-  networkInterface = new MemoryNetworkInterface({ firebase });
-}
+const networkInterface = new ServerNetworkInterface(config.graphqlEndpoint);
 
 export const configureApollo = (): ApolloClient => {
   if (!client) {

@@ -21,6 +21,7 @@
     "firebase:deploy:rules": "firebase deploy --only database",
     "server": "babel-node platforms/server/graphql/server.js",
     "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=graphqlServer:*,axios babel-node\" -e js,graphqls platforms/server/graphql/server.js",
+    "server:watch-debug": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=graphqlServer:*,axios babel-node\" --inspect-brk -e js,graphqls platforms/server/graphql/server.js",
     "commitmsg": "commitlint -e $GIT_PARAMS",
     "commit": "commit",
     "extract-queries": "scripts/extractQueries.js"
