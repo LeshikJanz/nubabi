@@ -24,6 +24,7 @@ const resolvers = {
   Query: {
     viewer: () => ({}),
     node: nodeFieldResolver,
+    ping: () => 'PONG',
   },
   Viewer: {
     user(_, args, { connectors: { firebase } }) {
