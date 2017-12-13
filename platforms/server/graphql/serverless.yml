@@ -1,0 +1,34 @@
+service: nubabi-graphql-server
+
+provider:
+  name: google
+  runtime: nodejs
+  project: nubabitest1
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'us-central1'}
+  # the path to the credentials file needs to be absolute
+  credentials: ~/.gcloud/keyfile.json
+  environment:
+    NUBABI_GRAPHQL_ENDPOINT: "https://${self:provider.region}-${self:provider.project}.cloudfunctions.net/handler"
+
+plugins:
+  - serverless-google-cloudfunctions
+  - serverless-webpack
+  - serverless-offline
+
+# needs more granular excluding in production as only the serverless provider npm
+# package should be excluded (and not the whole node_modules directory)
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+functions:
+  graphql:
+    handler: handler
+    events:
+      - http: /{any+}
+
+custom:
+  webpackIncludeModules: true
