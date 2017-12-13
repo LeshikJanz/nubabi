@@ -101,8 +101,8 @@ class ProfileDetails extends PureComponent<Props, State> {
     };
   }
 
-  pwdSectionVisibilityOnChange = (isVisible: boolean) => {
-    this.setState({ isPwdSectionVisible: isVisible });
+  pwdSectionVisibilityOnChange = (isvisible: boolean) => {
+    this.setState({ isPwdSectionVisible: isvisible });
   };
 
   render() {

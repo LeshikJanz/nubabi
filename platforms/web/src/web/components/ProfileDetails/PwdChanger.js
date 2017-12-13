@@ -39,7 +39,7 @@ const Label = styled.span`
 `;
 
 const PasswordFields = styled(Flex)`
-  display: ${props => (props.isVisible ? 'flex' : 'none')};
+  display: ${props => (props.isvisible ? 'flex' : 'none')};
   flex-direction: column;
 `;
 
@@ -68,7 +68,7 @@ const PwdChanger = ({
       <VisibilityLabel onClick={() => visibleOnChange(!isSectionVisible)}>
         {isSectionVisible ? 'Cancel' : 'Change Password'}
       </VisibilityLabel>
-      <PasswordFields isVisible={isSectionVisible}>
+      <PasswordFields isvisible={isSectionVisible}>
         {pwdFields.map((field, i) => renderPwdFields(field, i))}
       </PasswordFields>
     </PwdChangerContainer>
