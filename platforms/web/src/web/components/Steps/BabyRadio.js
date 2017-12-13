@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import { BABY_GENDERS } from 'web/constants';
 
 type Props = {
-  babyRadio: mixed,
   input: { onChange: Function, value: string },
 };
 
@@ -47,22 +47,22 @@ const Label = styled.label`
 const Variant = styled(Flex)``;
 
 const renderRadio = (variant, input) => (
-  <Variant key={variant}>
+  <Variant key={variant.id}>
     <Radio
-      onChange={() => input.onChange(variant)}
-      checked={input.value === variant}
-      id={variant}
+      onChange={() => input.onChange(variant.value)}
+      checked={input.value === variant.value}
+      id={variant.label}
       name="babyRadio"
       type="radio"
-      value={variant}
+      value={variant.value}
     />
-    <Label htmlFor={variant}>{variant}</Label>
+    <Label htmlFor={variant.label}>{variant.label}</Label>
   </Variant>
 );
 
-const BabyRadio = ({ babyRadio, input }: Props) => (
+const BabyRadio = ({ input }: Props) => (
   <BabyRadioBox>
-    {babyRadio.variants.map(variant => renderRadio(variant, input))}
+    {BABY_GENDERS.map(variant => renderRadio(variant, input))}
   </BabyRadioBox>
 );
 

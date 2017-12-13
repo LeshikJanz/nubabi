@@ -42,10 +42,6 @@ class Steps extends PureComponent<Props, State> {
           value: 'password',
         },
       ],
-      babyRadio: {
-        current: 'girl',
-        variants: ['girl', 'boy'],
-      },
     };
   }
 

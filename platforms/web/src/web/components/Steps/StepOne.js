@@ -60,6 +60,11 @@ export const RedButton = styled(Button)`
   font-weight: 300;
   letter-spacing: 0.5px;
   padding: 7px 20px;
+
+  &:disabled {
+    background-color: ${props => props.theme.colors.lightgrey};
+    color: ${props => props.theme.colors.gray};
+  }
 `;
 
 const StepOne = ({ onNexStep, onClickSignup, inputs }: Props) => {
