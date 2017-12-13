@@ -121,3 +121,6 @@ platforms/server/graphql/nubabitest1-firebase-adminsdk-*.json
 #           - Also handy if you have a lage number of dependant pods
 #           - AS PER https://guides.cocoapods.org/using/using-cocoapods.html NEVER IGONRE THE LOCK FILE
 Pods/
+
+### Serverless ###
+**/.serverless

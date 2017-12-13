@@ -20,7 +20,6 @@
     "react-apollo": "^1.4.16",
     "react-fela": "^4.3.5",
     "react-native-uuid": "^1.4.9",
-    "react-redux": "^5.0.2",
     "recursive-iterator": "^3.3.0",
     "redux": "^3.6.0",
     "redux-form": "^7.1.1",
