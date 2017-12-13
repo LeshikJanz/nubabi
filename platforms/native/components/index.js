@@ -32,6 +32,10 @@ import RightNavButton from '../navigation/RightNavButton';
 import withLayout from './withLayout';
 import displayLoadingState from './displayLoadingState';
 import showNoContentViewIf from './showNoContentViewIf';
+import {
+  withNetworkIndicator,
+  withNetworkIndicatorActions,
+} from './withNetworkIndicator';
 import withPullToRefresh from './withPullToRefresh';
 import withCurrentBaby from './withCurrentBaby';
 import withCurrentBabyRequired from './withCurrentBabyRequired';
@@ -73,6 +77,8 @@ export {
   withLayout,
   displayLoadingState,
   showNoContentViewIf,
+  withNetworkIndicator,
+  withNetworkIndicatorActions,
   withPullToRefresh,
   withCurrentBaby,
   withCurrentBabyRequired,

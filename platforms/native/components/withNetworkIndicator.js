@@ -1,7 +1,7 @@
 // @flow
 import { curry } from 'ramda';
 import { connect } from 'react-redux';
-import { toggleNetworkActivityIndicator } from '../../core/ui/reducer';
+import { toggleNetworkActivityIndicator } from '../../../core/ui/reducer';
 
 export const withNetworkIndicator = curry(
   (

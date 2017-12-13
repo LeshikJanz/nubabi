@@ -19,6 +19,7 @@ import {
   displayLoadingState,
   showNoContentViewIf,
   withCurrentBaby,
+  withNetworkIndicatorActions,
 } from '../components';
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
@@ -28,7 +29,6 @@ import {
   getTypenameForFile,
   isEmptyProp,
   replaceEdgeInFragment,
-  withNetworkIndicatorActions,
 } from 'core/helpers/graphqlUtils';
 
 type Props = {

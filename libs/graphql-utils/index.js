@@ -7,7 +7,6 @@ import * as isEmpty from './isEmpty';
 import * as isOptimistic from './isOptimistic';
 import * as mutations from './mutations';
 import * as props from './props';
-import * as withNetworkIndicator from './withNetworkIndicator';
 
 export * from './apollo';
 export * from './connection';
@@ -17,7 +16,6 @@ export * from './isEmpty';
 export * from './isOptimistic';
 export * from './mutations';
 export * from './props';
-export * from './withNetworkIndicator';
 
 export default {
   ...apollo,
@@ -28,5 +26,4 @@ export default {
   ...isOptimistic,
   ...mutations,
   ...props,
-  ...withNetworkIndicator,
 };

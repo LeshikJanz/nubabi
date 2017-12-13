@@ -1,12 +1,8 @@
 // @flow
 import { GraphQLDataProp } from 'core/types';
 import { compose, tap } from 'ramda';
-import {
-  withHandlers,
-  withState,
-  hoistStatics,
-} from 'recompose';
-import { withNetworkIndicatorActions } from 'core/helpers/graphqlUtils';
+import { withHandlers, withState, hoistStatics } from 'recompose';
+import { withNetworkIndicatorActions } from './withNetworkIndicator';
 import { toggleNetworkActivityIndicator } from 'core/ui/reducer';
 
 export type PullToRefreshProps = {

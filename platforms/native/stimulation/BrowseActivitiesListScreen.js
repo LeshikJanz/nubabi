@@ -1,16 +1,20 @@
 // @flow
-import type { ActivityEdge, GraphQLDataProp, NavigationOptionsGetter } from 'core/types';
+import type {
+  ActivityEdge,
+  GraphQLDataProp,
+  NavigationOptionsGetter,
+} from 'core/types';
 import type { NavigationProp } from 'react-navigation';
 import React, { PureComponent } from 'react';
 import { compose, path, pathOr } from 'ramda';
 import { gql, graphql } from 'react-apollo';
-import displayLoadingState from '../components/displayLoadingState';
-import { Screen } from '../components';
-import ActivityList from './ActivityList';
 import {
+  displayLoadingState,
   withNetworkIndicator,
   withNetworkIndicatorActions,
-} from 'core/helpers/graphqlUtils';
+  Screen,
+} from '../components';
+import ActivityList from './ActivityList';
 
 type Props = {
   navigation: NavigationProp<*>,
@@ -87,7 +91,10 @@ export default compose(
                 cursor: data.viewer.allActivities.pageInfo.endCursor,
               },
               updateQuery: (previousResult, { fetchMoreResult }) => {
-                const { edges: newEdges, pageInfo } = fetchMoreResult.viewer.allActivities;
+                const {
+                  edges: newEdges,
+                  pageInfo,
+                } = fetchMoreResult.viewer.allActivities;
 
                 return {
                   viewer: {
