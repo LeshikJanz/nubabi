@@ -12,6 +12,7 @@ import { Baby } from 'core/types';
 import path from 'ramda/src/path';
 import { connect } from 'react-redux';
 import { selectBaby } from 'web/actions';
+import { withRouter } from 'react-router-dom';
 
 type Props = Baby;
 
@@ -170,6 +171,8 @@ class Select extends Component<Props> {
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.redirectToBabyAdd = this.redirectToBabyAdd.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   handleClickOutside() {
@@ -184,14 +187,19 @@ class Select extends Component<Props> {
     this.setState({ modalIsOpen: false });
   }
 
+  redirectToBabyAdd() {
+    this.props.history.push('/babyprofile');
+    this.closeModal();
+  }
+
+  handleSelect(babyId: string) {
+    this.props.handleBabySelect(babyId);
+    this.closeModal();
+  }
+
   render() {
     const { name, babies = [] } = this.props;
     const avatar = this.props.avatar && this.props.avatar.url;
-
-    const handleSelect = (babyId: string) => {
-      this.props.handleBabySelect(babyId);
-      this.closeModal();
-    };
 
     return (
       <BabySelect className="BabySelect">
@@ -212,7 +220,7 @@ class Select extends Component<Props> {
               {babies.map(({ node }) => (
                 <BabiesListItem
                   key={node.id}
-                  onClick={() => handleSelect(node.id)}
+                  onClick={() => this.handleSelect(node.id)}
                 >
                   <BabyImage>
                     {(node.avatar &&
@@ -223,7 +231,7 @@ class Select extends Component<Props> {
                   <BabyName>{node.name}</BabyName>
                 </BabiesListItem>
               ))}
-              <BabiesListItem justify="center">
+              <BabiesListItem justify="center" onClick={this.redirectToBabyAdd}>
                 <Button plus /> Add Baby
               </BabiesListItem>
             </BabiesList>
@@ -244,6 +252,7 @@ const mapDispatchToProps = dispatch => ({
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
+  withRouter,
   graphql(query, {
     options: ({ isAuthenticated }) => ({
       fetchPolicy: 'cache-and-network', // TODO: remove when there's a way to set a default
