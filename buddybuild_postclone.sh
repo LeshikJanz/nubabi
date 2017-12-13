@@ -30,6 +30,11 @@ else
   export NUBABI_FIREBASE_MESSAGING_SENDER_ID=$NUBABI_STAGING_FIREBASE_MESSAGING_SENDER_ID
 fi
 
+# TODO: remove this after, and fix var in config
+if [[ "$BUDDYBUILD_BRANCH" =~ "serverless-graphql" ]]; then
+  export NUBABI_GRAPHQL_ENDPOINT_=$NUBABI_GRAPHQL_ENDPOINT
+fi
+
 # I've tried everything else, BuddyBuild is just weird when it comes to
 # environment variables, they don't get preserved between custom script
 # stages, so I had to resort to just nuking and replacing the file.
@@ -46,7 +51,8 @@ const config = {
     "storageBucket": "$NUBABI_FIREBASE_STORAGE_BUCKET",
     "messagingSenderId": "$NUBABI_FIREBASE_MESSAGING_SENDER_ID",
   },
-  sentryUrl: "$NUBABI_SENTRY_URL"
+  sentryUrl: "$NUBABI_SENTRY_URL",
+  graphqlEndpoint: "$NUBABI_GRAPHQL_ENDPOINT_"
 };
 
 export default config;
