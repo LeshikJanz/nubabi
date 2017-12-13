@@ -11,6 +11,7 @@ import {
   AuthenticatedRoute,
   Test,
   NotFound,
+  GlobalLoader,
 } from 'web/components';
 import { Login, SignUp } from 'web/auth';
 import NavBar from 'web/components/Navbar';
@@ -27,6 +28,8 @@ import FilteredSkillActivities from 'web/bundles/stimulation/containers/filtered
 import FilteredCategoryActivities from 'web/bundles/stimulation/containers/filteredCategoryActivities';
 import HistoryList from 'web/bundles/stimulation/containers/history/historyList';
 import { Wrapper, AppContent } from '../styled';
+import WeekActivities from '../../bundles/stimulation/containers/weekActivities';
+import BabyProfile from '../../bundles/babyProfile/containers';
 
 type Props = {
   isLoading: boolean,
@@ -45,7 +48,7 @@ const Profile = Loadable({
 
 const App = (props: Props) => (
   <Wrapper>
-    <Loader active={props.isLoading} />
+    <GlobalLoader active={props.isLoading} />
     <Header
       pathname={props.pathname}
       isAuthenticated={props.isAuthenticated}
@@ -72,14 +75,18 @@ const App = (props: Props) => (
           />
           <AuthenticatedRoute path="/growth" component={Growth} props={props} />
           <AuthenticatedRoute
-            exact
             path="/stimulation"
             component={Stimulation}
             props={props}
           />
           <AuthenticatedRoute
+            path="/stimulation/weeks"
+            component={WeekActivities}
+            props={props}
+          />
+          <AuthenticatedRoute
             exact
-            path="/stimulation/activity/:id"
+            path="/activity/:id"
             component={Activity}
             props={props}
           />
@@ -103,19 +110,19 @@ const App = (props: Props) => (
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/history/:id"
+            path="/history/:id"
             component={HistoryList}
             props={props}
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/browse/skill/:id"
+            path="/browse/skill/:id"
             component={FilteredSkillActivities}
             props={props}
           />
           <AuthenticatedRoute
             exact
-            path="/stimulation/browse/category/:id"
+            path="/browse/category/:id"
             component={FilteredCategoryActivities}
             props={props}
           />
@@ -127,6 +134,11 @@ const App = (props: Props) => (
           <AuthenticatedRoute
             path="/memories"
             component={Memories}
+            props={props}
+          />
+          <AuthenticatedRoute
+            path="/babyprofile"
+            component={BabyProfile}
             props={props}
           />
         </NavBar>
