@@ -4,11 +4,12 @@ import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
+import { Field } from 'redux-form';
 
 type Props = {
   options?: Array<mixed>,
   name?: string,
-  fieldPlaceholder?: string,
+  placeholder?: string,
 };
 
 const InputContainer = styled(Flex)`
@@ -56,13 +57,24 @@ const Label = styled.span`
   font-weight: 300;
 `;
 
-export const Selector = ({ fieldPlaceholder, options, name }: Props) => {
+export const Selector = ({ placeholder, options, name }: Props) => {
+  const reactSelect = ({ input }: *) => (
+    <RelationshipSelector
+      {...input}
+      value={input.value}
+      onChange={value => input.onChange(value)}
+      onBlur={() => input.onBlur(input.value)}
+      options={options}
+    />
+  );
+
   return (
     <InputContainer>
-      <Label>{fieldPlaceholder ? fieldPlaceholder.toUpperCase() : ''}</Label>
-      <RelationshipSelector
+      <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
+      <Field
+        name={name}
+        component={reactSelect}
         options={options && options.length ? options : []}
-        name={name && name.length ? name : 'selector'}
       />
     </InputContainer>
   );

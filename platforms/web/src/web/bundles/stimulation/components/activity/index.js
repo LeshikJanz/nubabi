@@ -23,9 +23,9 @@ const Activity = ({ activity, handleBackRedirect, isSwitchable }: Props) => (
     <ActivityProfile activity={activity} />
     <ActivityExpert {...activity} />
     <ActivityEquipment {...activity} />
+    <ActivitySkittles {...activity} />
     {isSwitchable && (
       <div>
-        <ActivitySkittles {...activity} />
         <ActivityStatus activity={activity} />
         <ActivitySwitcher activity={activity} />
       </div>

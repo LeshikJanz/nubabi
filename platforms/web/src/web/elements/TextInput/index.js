@@ -6,8 +6,8 @@ import HelpIcon from 'web/assets/images/ic_help.svg';
 
 type Props = {
   placeholder?: string,
-  value?: string,
-  inputType?: string,
+  type?: string,
+  input: { value?: string, type?: string, onChange: Function },
   help?: string,
 };
 
@@ -35,6 +35,12 @@ const Input = styled.input`
   &:focus {
     outline: none;
   }
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 `;
 
 const HelpElem = styled(HelpIcon)`
@@ -46,15 +52,11 @@ const HelpElem = styled(HelpIcon)`
 
 const renderHelp = help => <HelpElem help={help} />;
 
-const TextInput = ({ placeholder, value, inputType, help }: Props) => {
+const TextInput = ({ placeholder, help, input, type }: Props) => {
   return (
     <InputContainer>
       <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
-      <Input
-        type={inputType && inputType.length ? inputType : 'text'}
-        value={value}
-        onChange={() => {}}
-      />
+      <Input {...input} type={type || 'text'} />
       {help ? renderHelp(help) : null}
     </InputContainer>
   );

@@ -2,13 +2,15 @@
 import * as React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-import { RadioForInput } from 'web/elements';
+import { RadioForInput, TextInput } from 'web/elements';
+import { Field } from 'redux-form';
 
 type Props = {
   placeholder?: string,
-  value?: string,
   variants?: Array<mixed>,
-  unitsRadioName: string,
+  type: string,
+  name: string,
+  radioName: string,
 };
 
 const InputContainer = styled(Flex)`
@@ -25,31 +27,18 @@ const Label = styled.span`
   font-weight: 300;
 `;
 
-const Input = styled.input`
-  border-width: 0;
-  border-bottom: 1px solid ${props => props.theme.colors.border};
-  color: ${props => props.theme.colors.grey};
-  padding: 5px 0 5px 0;
-  font-weight: 300;
-
-  &:focus {
-    outline: none;
-  }
-`;
-
 const InputWithRadio = ({
   placeholder,
-  value,
   variants,
-  unitsRadioName,
-}: Props) => {
-  return (
-    <InputContainer>
-      <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
-      <Input type="text" value={value} onChange={() => {}} />
-      <RadioForInput variants={variants} unitsRadioName={unitsRadioName} />
-    </InputContainer>
-  );
-};
+  type,
+  name,
+  radioName,
+}: Props) => (
+  <InputContainer>
+    <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
+    <Field component={TextInput} name={name} type={type || 'text'} />
+    <Field component={RadioForInput} name={radioName} variants={variants} />
+  </InputContainer>
+);
 
 export default InputWithRadio;

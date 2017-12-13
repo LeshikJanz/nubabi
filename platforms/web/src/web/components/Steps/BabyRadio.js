@@ -5,7 +5,7 @@ import { Flex } from 'grid-styled';
 
 type Props = {
   babyRadio: mixed,
-  radioOnChange: Function,
+  input: { onChange: Function, value: string },
 };
 
 const BabyRadioBox = styled(Flex)`
@@ -46,30 +46,24 @@ const Label = styled.label`
 
 const Variant = styled(Flex)``;
 
-const renderRadio = (variant, i, babyRadio, radioOnChange) => {
-  return (
-    <Variant key={i}>
-      <Radio
-        onChange={e => radioOnChange(e.target.value)}
-        checked={babyRadio.current === variant}
-        id={variant}
-        name="babyRadio"
-        type="radio"
-        value={variant}
-      />
-      <Label htmlFor={variant}>{variant}</Label>
-    </Variant>
-  );
-};
+const renderRadio = (variant, input) => (
+  <Variant key={variant}>
+    <Radio
+      onChange={() => input.onChange(variant)}
+      checked={input.value === variant}
+      id={variant}
+      name="babyRadio"
+      type="radio"
+      value={variant}
+    />
+    <Label htmlFor={variant}>{variant}</Label>
+  </Variant>
+);
 
-const BabyRadio = ({ babyRadio, radioOnChange }: Props) => {
-  return (
-    <BabyRadioBox>
-      {babyRadio.variants.map((variant, i) =>
-        renderRadio(variant, i, babyRadio, radioOnChange),
-      )}
-    </BabyRadioBox>
-  );
-};
+const BabyRadio = ({ babyRadio, input }: Props) => (
+  <BabyRadioBox>
+    {babyRadio.variants.map(variant => renderRadio(variant, input))}
+  </BabyRadioBox>
+);
 
 export default BabyRadio;

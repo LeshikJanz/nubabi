@@ -5,7 +5,8 @@ import styled from 'styled-components';
 
 type Props = {
   variants: Array<mixed>,
-  unitsRadioName: string,
+  name: string,
+  input: { onChange: Function, value: string },
 };
 
 const RadioContainer = styled(Flex)`
@@ -42,23 +43,26 @@ const Label = styled.label`
   padding-top: 1px;
 `;
 
-const renderVariant = (variant, i, unitsRadioName) => {
-  return (
-    <Variant key={i}>
-      <Radio id={variant} name={unitsRadioName} type="radio" value={variant} />
-      <Label htmlFor={variant}>{variant}</Label>
-    </Variant>
-  );
-};
+const renderVariant = (variant, name, input) => (
+  <Variant key={variant}>
+    <Radio
+      onChange={() => input.onChange(variant)}
+      checked={input.value === variant}
+      id={variant}
+      name={name}
+      type="radio"
+      value={variant}
+    />
+    <Label htmlFor={variant}>{variant}</Label>
+  </Variant>
+);
 
-const RadioForInput = ({ variants, unitsRadioName }: Props) => {
-  return (
-    <RadioContainer>
-      {variants &&
-        variants.length &&
-        variants.map((variant, i) => renderVariant(variant, i, unitsRadioName))}
-    </RadioContainer>
-  );
-};
+const RadioForInput = ({ variants, name, input }: Props) => (
+  <RadioContainer>
+    {variants &&
+      variants.length &&
+      variants.map(variant => renderVariant(variant, name, input))}
+  </RadioContainer>
+);
 
 export default RadioForInput;
