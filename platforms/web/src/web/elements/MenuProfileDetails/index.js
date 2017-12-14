@@ -4,11 +4,20 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Flex } from 'grid-styled';
 import ArrowRight from 'web/assets/images/icons/arrowRight.svg';
+import { path } from 'ramda';
 
 type Props = {
   label: string,
-  avatar: React.Component<*>,
   isActive: boolean,
+  user: {
+    firstName: string,
+    lastName: string,
+    avatar: {
+      thumb: {
+        url: string,
+      },
+    },
+  },
 };
 
 const CustomLink = styled(Link)`
@@ -35,9 +44,12 @@ const AvatarBox = styled(Flex)`
   align-items: center;
 `;
 
-const Image = styled.img`
-  height: 50px;
+const Image = styled.div`
+  background-image: url(${props => props.image});
+  border-radius: 50%;
+  background-size: cover;
   width: 50px;
+  height: 50px;
 `;
 
 const UserNameBox = styled(Flex)`
@@ -71,16 +83,17 @@ const Arrow = styled(ArrowRight)`
 `;
 
 const MenuProfileDetails = (props: Props) => {
-  const { label, avatar, isActive } = props;
+  const { label, isActive, user } = props;
 
   return (
     <CustomLink to="/settings" isActive={isActive}>
       <AvatarBox>
-        <Image src={avatar} />
+        <Image image={path(['avatar', 'thumb', 'url'], user)} />
       </AvatarBox>
       <UserNameBox>
         <UserName>
-          Savannah Cooper <Arrow />
+          {`${path(['firstName'], user)}  ${path(['lastName'], user)}`}
+          <Arrow />
         </UserName>
         <RouteLabel>{label}</RouteLabel>
       </UserNameBox>

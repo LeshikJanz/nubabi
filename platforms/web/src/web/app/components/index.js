@@ -19,7 +19,7 @@ import Stimulation from 'web/bundles/stimulation/containers';
 import Growth from 'web/bundles/growth';
 import Library from 'web/bundles/library';
 import Memories from 'web/bundles/memories';
-import Settings from 'web/settings';
+import Settings from 'web/bundles/settings';
 import Activity from 'web/bundles/stimulation/containers/activity';
 import BrowseActivities from 'web/bundles/stimulation/containers/browseActivities';
 import Favorites from 'web/bundles/stimulation/containers/favorites';

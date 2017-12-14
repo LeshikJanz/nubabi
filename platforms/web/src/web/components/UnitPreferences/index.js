@@ -43,11 +43,11 @@ const UnitPreferences = () => {
       <Title>Unit Preferences</Title>
       <Option>
         <Label>Weight</Label>
-        <Radio unitsRadioName="weight" variants={['kg', 'lbs']} />
+        <Radio name="weight" variants={['kg', 'lbs']} />
       </Option>
       <Option>
         <Label>Height</Label>
-        <Radio unitsRadioName="height" variants={['cm', 'in']} />
+        <Radio name="height" variants={['cm', 'in']} />
       </Option>
     </UnitPreferencesContainer>
   );

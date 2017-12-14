@@ -69,29 +69,15 @@ const HelpElem = styled(HelpIcon)`
 
 const renderHelp = help => <HelpElem help={help} />;
 
-const TextInput = ({
-  placeholder,
-  help,
-  input,
-  type,
-  meta: { touched, error, warning },
-}: Props) => (
-  <InputContainer>
-    <Label touched={touched} error={error} warning={warning}>
-      {placeholder ? placeholder.toUpperCase() : ''}
-    </Label>
-    <Input
-      {...input}
-      type={type || 'text'}
-      touched={touched}
-      error={error}
-      warning={warning}
-    />
-    {help ? renderHelp(help) : null}
-    {touched &&
-      ((error && <span className="hint">{error}</span>) ||
-        (warning && <span className="hint">{warning}</span>))}
-  </InputContainer>
-);
+const TextInput = (props: Props) => {
+  const { placeholder, help, input, type } = props;
+  return (
+    <InputContainer>
+      <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
+      <Input {...input} type={type || 'text'} />
+      {help ? renderHelp(help) : null}
+    </InputContainer>
+  );
+};
 
 export default TextInput;
