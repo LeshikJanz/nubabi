@@ -4,7 +4,7 @@ import { TextInput, Selector, InputWithRadio } from 'web/elements';
 import { Field, reduxForm } from 'redux-form';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
-import BabyPhoto from './BabyPhoto';
+import DropzoneField from 'web/elements/DropzoneField';
 import BabyRadio from './BabyRadio';
 import { ButtonContainer, RedButton } from './StepOne';
 import { required } from '../../utils/validation';
@@ -45,7 +45,7 @@ type Props = {
 let BabyEditForm = ({ handleSubmit, invalid }: Props) => (
   <form onSubmit={handleSubmit}>
     <BabyInfoContainer>
-      <Field name="babyPhoto" component={BabyPhoto} />
+      <Field name="avatar" component={DropzoneField} />
 
       <Field component={BabyRadio} name="gender" validate={required} />
       <InputsContainer>
