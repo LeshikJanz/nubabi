@@ -48,6 +48,10 @@ const RelationshipSelector = styled(Select)`
     vertical-align: bottom;
     bottom: 3px;
   }
+
+  & .Select-value {
+    padding-left: 0;
+  }
 `;
 
 const Label = styled.span`

@@ -9,6 +9,11 @@ type Props = {
   type?: string,
   input: { value?: string, type?: string, onChange: Function },
   help?: string,
+  meta: {
+    touched: boolean,
+    error: boolean,
+    warning: boolean,
+  },
 };
 
 const InputContainer = styled(Flex)`
@@ -16,18 +21,30 @@ const InputContainer = styled(Flex)`
   width: 100%;
   max-width: 400px;
   position: relative;
+
+  span.hint {
+    color: ${props => props.theme.colors.open.red1};
+  }
 `;
 
 const Label = styled.span`
-  color: ${props => props.theme.colors.grey};
   font-family: sans-serif;
   font-size: 10px;
   font-weight: 300;
+
+  color: ${props =>
+    props.touched && (props.error || props.warning)
+      ? props.theme.colors.open.red1
+      : props.theme.colors.grey};
 `;
 
 const Input = styled.input`
   border-width: 0;
-  border-bottom: 1px solid ${props => props.theme.colors.border};
+  border-bottom: 1px solid
+    ${props =>
+      props.touched && (props.error || props.warning)
+        ? props.theme.colors.open.red1
+        : props.theme.colors.border};
   color: ${props => props.theme.colors.grey};
   padding: 5px 0 5px 0;
   font-weight: 300;
@@ -52,14 +69,29 @@ const HelpElem = styled(HelpIcon)`
 
 const renderHelp = help => <HelpElem help={help} />;
 
-const TextInput = ({ placeholder, help, input, type }: Props) => {
-  return (
-    <InputContainer>
-      <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
-      <Input {...input} type={type || 'text'} />
-      {help ? renderHelp(help) : null}
-    </InputContainer>
-  );
-};
+const TextInput = ({
+  placeholder,
+  help,
+  input,
+  type,
+  meta: { touched, error, warning },
+}: Props) => (
+  <InputContainer>
+    <Label touched={touched} error={error} warning={warning}>
+      {placeholder ? placeholder.toUpperCase() : ''}
+    </Label>
+    <Input
+      {...input}
+      type={type || 'text'}
+      touched={touched}
+      error={error}
+      warning={warning}
+    />
+    {help ? renderHelp(help) : null}
+    {touched &&
+      ((error && <span className="hint">{error}</span>) ||
+        (warning && <span className="hint">{warning}</span>))}
+  </InputContainer>
+);
 
 export default TextInput;

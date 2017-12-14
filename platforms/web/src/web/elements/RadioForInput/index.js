@@ -7,12 +7,15 @@ type Props = {
   variants: Array<mixed>,
   name: string,
   input: { onChange: Function, value: string },
+  disabled: boolean,
 };
 
 const RadioContainer = styled(Flex)`
   position: absolute;
   right: 0;
-  bottom: 10px;
+  top: 10px;
+
+  pointer-events: ${props => (props.disabled ? 'none' : 'auto')};
 `;
 
 const Variant = styled(Flex)``;
@@ -57,8 +60,8 @@ const renderVariant = (variant, name, input) => (
   </Variant>
 );
 
-const RadioForInput = ({ variants, name, input }: Props) => (
-  <RadioContainer>
+const RadioForInput = ({ variants, name, input, disabled }: Props) => (
+  <RadioContainer disabled={disabled}>
     {variants &&
       variants.length &&
       variants.map(variant => renderVariant(variant, name, input))}

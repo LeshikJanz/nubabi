@@ -11,6 +11,7 @@ type Props = {
   type: string,
   name: string,
   radioName: string,
+  inputValidate: string[],
 };
 
 const InputContainer = styled(Flex)`
@@ -18,6 +19,10 @@ const InputContainer = styled(Flex)`
   width: 100%;
   max-width: 400px;
   position: relative;
+
+  .radioInput {
+    width: 75%;
+  }
 `;
 
 const Label = styled.span`
@@ -33,11 +38,23 @@ const InputWithRadio = ({
   type,
   name,
   radioName,
+  inputValidate,
 }: Props) => (
   <InputContainer>
     <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
-    <Field component={TextInput} name={name} type={type || 'text'} />
-    <Field component={RadioForInput} name={radioName} variants={variants} />
+    <Field
+      component={TextInput}
+      className="radioInput"
+      name={name}
+      type={type || 'text'}
+      validate={inputValidate}
+    />
+    <Field
+      component={RadioForInput}
+      name={radioName}
+      variants={variants}
+      disabled
+    />
   </InputContainer>
 );
 
