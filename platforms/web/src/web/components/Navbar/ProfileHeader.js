@@ -241,7 +241,7 @@ class ProfileHeader extends Component<Props> {
     return (
       <Box width={1} is={Header}>
         <Main
-          image={coverImage.url}
+          image={coverImage && coverImage.url}
           align="flex-end"
           className="ProfileHeaderMain"
         >

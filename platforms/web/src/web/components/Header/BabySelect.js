@@ -12,7 +12,7 @@ import { Baby } from 'core/types';
 import path from 'ramda/src/path';
 import { connect } from 'react-redux';
 import { selectBaby } from 'web/actions';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 type Props = Baby;
 
@@ -194,18 +194,21 @@ class Select extends Component<Props> {
 
   handleSelect(babyId: string) {
     this.props.handleBabySelect(babyId);
+    this.props.history.push('/profile');
     this.closeModal();
   }
 
   render() {
-    const { name, babies = [] } = this.props;
+    const { name, id, babies = [] } = this.props;
     const avatar = this.props.avatar && this.props.avatar.url;
 
     return (
       <BabySelect className="BabySelect">
-        {(avatar && <BabyProfileImage image={avatar} />) || (
-          <PersonDefaultIcon />
-        )}
+        <Link to={`/babyprofile/${id}`}>
+          {(avatar && <BabyProfileImage image={avatar} />) || (
+            <PersonDefaultIcon />
+          )}
+        </Link>
         <BabySelected onClick={this.openModal}>{name}</BabySelected>
 
         <Modal

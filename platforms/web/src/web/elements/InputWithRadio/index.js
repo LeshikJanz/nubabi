@@ -25,13 +25,6 @@ const InputContainer = styled(Flex)`
   }
 `;
 
-const Label = styled.span`
-  color: ${props => props.theme.colors.grey};
-  font-family: sans-serif;
-  font-size: 10px;
-  font-weight: 300;
-`;
-
 const InputWithRadio = ({
   placeholder,
   variants,
@@ -41,12 +34,12 @@ const InputWithRadio = ({
   inputValidate,
 }: Props) => (
   <InputContainer>
-    <Label>{placeholder ? placeholder.toUpperCase() : ''}</Label>
     <Field
       component={TextInput}
       className="radioInput"
       name={name}
       type={type || 'text'}
+      placeholder={placeholder ? placeholder.toUpperCase() : ''}
       validate={inputValidate}
     />
     <Field

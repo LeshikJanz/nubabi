@@ -2,14 +2,16 @@
 import React from 'react';
 import BabyEditForm from 'web/components/Steps/BabyEditForm';
 import * as BabyProfileStyled from '../styled';
+import { Baby } from 'core/types';
 
 type Props = {
   handleSubmit: Function,
+  editableBaby: Baby,
 };
 
-const BabyProfile = ({ handleSubmit }: Props) => (
+const BabyProfile = ({ handleSubmit, editableBaby }: Props) => (
   <BabyProfileStyled.Wrapper>
-    <BabyEditForm onSubmit={handleSubmit} />
+    <BabyEditForm onSubmit={handleSubmit} initialValues={editableBaby} />
   </BabyProfileStyled.Wrapper>
 );
 

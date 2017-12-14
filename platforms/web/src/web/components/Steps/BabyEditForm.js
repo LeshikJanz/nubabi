@@ -85,7 +85,7 @@ let BabyEditForm = ({ handleSubmit, invalid }: Props) => (
           radioName="weightUnits"
           name="weight"
           type="number"
-          inputValidate={required}
+          inputValidate={[required]}
           variants={['kg', 'lbs']}
           radioValue="kg"
           placeholder="weight"
@@ -95,7 +95,7 @@ let BabyEditForm = ({ handleSubmit, invalid }: Props) => (
           radioName="heightUnits"
           name="height"
           type="number"
-          inputValidate={required}
+          inputValidate={[required]}
           variants={['cm', 'in']}
           placeholder="height"
         />

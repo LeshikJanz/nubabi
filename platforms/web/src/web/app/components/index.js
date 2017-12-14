@@ -137,7 +137,7 @@ const App = (props: Props) => (
             props={props}
           />
           <AuthenticatedRoute
-            path="/babyprofile"
+            path="/babyprofile/:id"
             component={BabyProfile}
             props={props}
           />

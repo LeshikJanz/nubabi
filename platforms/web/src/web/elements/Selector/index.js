@@ -50,7 +50,7 @@ const RelationshipSelector = styled(Select)`
   }
 
   & .Select-value {
-    padding-left: 0;
+    padding-left: 0 !important;
   }
 `;
 
