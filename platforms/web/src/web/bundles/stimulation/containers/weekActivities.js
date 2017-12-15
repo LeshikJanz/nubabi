@@ -4,6 +4,7 @@ import { compose } from 'recompose';
 import { ActivityListFragment } from '../fragments/activity';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import path from 'ramda/src/path';
+import DisplayLoadingState from 'web/components/displayLoadingState';
 
 const query = gql`
     query ThisWeeksActivitiesList($id: ID!) {
@@ -38,4 +39,5 @@ export default compose(
       activities: path(['viewer', 'baby', 'activities', 'edges'], data),
     }),
   }),
+  DisplayLoadingState,
 )(WeekActivities);

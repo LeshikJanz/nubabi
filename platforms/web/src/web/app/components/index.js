@@ -12,24 +12,26 @@ import {
   Test,
   NotFound,
   GlobalLoader,
+  NavBar,
 } from 'web/components';
 import { Login, SignUp } from 'web/auth';
-import NavBar from 'web/components/Navbar';
-import Stimulation from 'web/bundles/stimulation/containers';
-import Growth from 'web/bundles/growth';
-import Library from 'web/bundles/library';
-import Memories from 'web/bundles/memories';
-import Settings from 'web/bundles/settings';
-import Activity from 'web/bundles/stimulation/containers/activity';
-import BrowseActivities from 'web/bundles/stimulation/containers/browseActivities';
-import Favorites from 'web/bundles/stimulation/containers/favorites';
-import History from 'web/bundles/stimulation/containers/history';
-import FilteredSkillActivities from 'web/bundles/stimulation/containers/filteredSkillActivities';
-import FilteredCategoryActivities from 'web/bundles/stimulation/containers/filteredCategoryActivities';
-import HistoryList from 'web/bundles/stimulation/containers/history/historyList';
 import { Wrapper, AppContent } from '../styled';
-import WeekActivities from '../../bundles/stimulation/containers/weekActivities';
-import BabyProfile from '../../bundles/babyProfile/containers';
+import {
+  Stimulation,
+  Growth,
+  Memories,
+  Library,
+  Settings,
+  Activity,
+  BrowseActivities,
+  Favorites,
+  History,
+  FilteredSkillActivities,
+  FilteredCategoryActivities,
+  HistoryList,
+  WeekActivities,
+  BabyProfile,
+} from 'web/bundles';
 
 type Props = {
   isLoading: boolean,
