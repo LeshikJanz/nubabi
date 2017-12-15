@@ -1,7 +1,16 @@
-import { compose, withState, lifecycle, withHandlers } from 'recompose';
+// @flow
+import {
+  compose,
+  withState,
+  lifecycle,
+  withHandlers,
+  branch,
+  renderComponent,
+} from 'recompose';
 import ActivityMenu from '../../components/activity/ActivityMenu';
 import { globalLoaderInit } from 'web/actions';
 import { connect } from 'react-redux';
+import FinishedActivityButton from '../../components/activity/FinishedActivityButton';
 
 const mapDispatchToProps = dispatch => ({
   runGlobalLoading: () => dispatch(globalLoaderInit),
@@ -31,4 +40,8 @@ export default compose(
       this.props.handleActivityMenu(!this.props.isCompleted);
     },
   }),
+  branch(
+    ({ isCompleted, isActivityMenuOpen }) => isCompleted && !isActivityMenuOpen,
+    renderComponent(FinishedActivityButton),
+  ),
 )(ActivityMenu);

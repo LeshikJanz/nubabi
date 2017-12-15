@@ -2,6 +2,15 @@ import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 
 export const Wrapper = styled(Flex)`
+  justify-content: center;
+  margin-top: 24px;
+
+  > div {
+    margin: 0 8px;
+  }
+`;
+
+export const Button = styled(Flex)`
   width: 70%;
   align-items: center;
   border-radius: 4px;

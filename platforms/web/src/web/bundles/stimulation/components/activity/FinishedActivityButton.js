@@ -6,24 +6,28 @@ import { ACTIVITY_BUTTONS } from '../../constants/index';
 import * as ButtonStyled from '../../styled/activity/FinishedActivityButtonStyled';
 
 type Props = {
-  handleMenu: Function,
+  handleActivityMenu: Function,
 };
 
-const FinishedActivityButton = ({ handleMenu }: Props) => {
+const FinishedActivityButton = (props: Props) => {
+  console.log('props');
+  console.log(props);
   const completedActivity = ACTIVITY_BUTTONS.find(a => a.type === 'done');
 
   return (
     <ButtonStyled.Wrapper>
-      {iconMappings(completedActivity.icon)()}
-      <div>
-        <ButtonStyled.MainText>
-          {completedActivity.mainText}
-        </ButtonStyled.MainText>
-        <ButtonStyled.AdditionalText>
-          {completedActivity.additionalText}
-        </ButtonStyled.AdditionalText>
-      </div>
-      <Button onClick={() => handleMenu(true)}>Change</Button>
+      <ButtonStyled.Button>
+        {iconMappings(completedActivity.icon)()}
+        <div>
+          <ButtonStyled.MainText>
+            {completedActivity.mainText}
+          </ButtonStyled.MainText>
+          <ButtonStyled.AdditionalText>
+            {completedActivity.additionalText}
+          </ButtonStyled.AdditionalText>
+        </div>
+        <Button onClick={() => props.handleActivityMenu(true)}>Change</Button>
+      </ButtonStyled.Button>
     </ButtonStyled.Wrapper>
   );
 };
