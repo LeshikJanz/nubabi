@@ -1,12 +1,12 @@
 // @flow
 import type { ActivityConnection } from 'core/types';
 import React from 'react';
-import ActivityProfile from '../../containers/activity/activityProfile';
+import ActivityProfile from '../../containers/activity/ActivityProfile';
 import ActivityExpert from './ActivityExpert';
 import ActivityEquipment from '../equipment/ActivityEquipment';
 import ActivitySkittles from './ActivitySkittles';
-import ActivityStatus from '../../containers/activity/activityStatus';
-import ActivitySwitcher from '../../containers/activity/activitySwitcher';
+import ActivityStatus from '../../containers/activity/ActivityStatus';
+import ActivitySwitcher from '../../containers/activity/ActivitySwitcher';
 import * as ActivityStyled from '../../styled/activity';
 
 type Props = {

@@ -6,19 +6,19 @@ export { default as Settings } from './settings';
 export { default as Activity } from './stimulation/containers/activity';
 export {
   default as BrowseActivities,
-} from './stimulation/containers/browseActivities';
-export { default as Favorites } from './stimulation/containers/favorites';
+} from './stimulation/containers/BrowseActivities';
+export { default as Favorites } from './stimulation/containers/Favorites';
 export { default as History } from './stimulation/containers/history';
 export {
   default as FilteredSkillActivities,
-} from './stimulation/containers/filteredSkillActivities';
+} from './stimulation/containers/FilteredSkillActivities';
 export {
   default as FilteredCategoryActivities,
-} from './stimulation/containers/filteredCategoryActivities';
+} from './stimulation/containers/FilteredCategoryActivities';
 export {
   default as HistoryList,
-} from './stimulation/containers/history/historyList';
+} from './stimulation/containers/history/HistoryList';
 export {
   default as WeekActivities,
-} from './stimulation/containers/weekActivities';
+} from './stimulation/containers/WeekActivities';
 export { default as BabyProfile } from './babyProfile/containers';

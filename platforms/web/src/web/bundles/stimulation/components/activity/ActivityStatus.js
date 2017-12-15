@@ -2,7 +2,7 @@
 import type { ActivityConnection } from 'core/types';
 import React from 'react';
 import GrossIcon from 'web/assets/images/icons/gross-icon.svg';
-import ActivityMenu from '../../containers/activity/activityMenu';
+import ActivityMenu from '../../containers/activity/ActivityMenu';
 import * as ActivityStatusStyled from '../../styled/activity/ActivityStatusStyled';
 
 type Props = {

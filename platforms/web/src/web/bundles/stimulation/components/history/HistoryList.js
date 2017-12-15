@@ -5,7 +5,7 @@ import type {
 } from 'core/types';
 import React from 'react';
 import * as ActivitiesStyled from '../../styled/ActivitiesStyled';
-import ActivityList from '../../containers/activityList';
+import ActivityList from '../../containers/ActivityList';
 import moment from 'moment';
 import styled from 'styled-components';
 
