@@ -16,7 +16,7 @@ import {
 } from './common';
 import * as connector from '../connectors/babiesConnector';
 import { assoc } from 'ramda';
-import { addEdgeToMutationResult } from '../../../../core/helpers/graphqlUtils';
+import { addEdgeToMutationResult } from 'graphql-utils/mutations';
 
 export const resolvers = {
   Viewer: {

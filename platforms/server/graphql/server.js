@@ -5,7 +5,6 @@ import Multer from 'multer';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express';
 import { schema } from './schema';
 import admin from 'firebase-admin';
-import config from '../../../core/config';
 import firebaseConnector from './connectors/firebaseConnector';
 import fs from 'fs';
 import cors from 'cors';
@@ -16,7 +15,7 @@ const debug = require('debug')('graphqlServer:server');
 const PORT = 8080;
 const serviceAccount = JSON.parse(
   fs.readFileSync(
-    './nubabitest1-firebase-adminsdk-r7bmb-4056976942.json',
+    './nubabitest1-firebase-adminsdk-r7bmb-2f00516d5e.json',
     'utf-8',
   ),
 );
@@ -31,9 +30,9 @@ global.firebase =
   global.firebase ||
   admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    databaseURL: config.firebase.databaseURL,
+    databaseURL: process.env.NUBABI_FIREBASE_DATABASE_URL,
     databaseAuthVariableOverride: null,
-    storageBucket: config.firebase.storageBucket,
+    storageBucket: process.env.NUBABI_FIREBASE_STORAGE_BUCKET,
   });
 
 const firebase = global.firebase;
@@ -71,6 +70,7 @@ app.use(
 
     return {
       schema,
+      logFunction: console.log.bind(console),
       context: {
         token,
         loaders,

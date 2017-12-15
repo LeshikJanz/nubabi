@@ -9,7 +9,7 @@ import {
   toDate,
   transform,
 } from './common';
-import { addEdgeAndCursorToMutationResult } from '../../../../core/helpers/graphqlUtils';
+import { addEdgeAndCursorToMutationResult } from 'graphql-utils/mutations';
 import { getActivity } from '../connectors/babiesConnector';
 
 export const resolvers = {

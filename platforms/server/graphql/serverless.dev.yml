@@ -1,0 +1,38 @@
+service: nubabi-graphql-server
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${opt:stage, 'dev'}
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+# needs more granular excluding in production as only the serverless provider npm
+# package should be excluded (and not the whole node_modules directory)
+package:
+  exclude:
+    - node_modules/**
+    - .gitignore
+    - .git/**
+
+functions:
+  graphql:
+    description: "GraphQL server for Nubabi app"
+    handler: handler.handler
+    events:
+      - http:
+          path: /{any+}
+          method: ANY
+    environment:
+      NUBABI_API_URL: ${env:NUBABI_API_URL}
+      NUBABI_FIREBASE_API_KEY: ${env:NUBABI_FIREBASE_API_KEY}
+      NUBABI_FIREBASE_DATABASE_URL: ${env:NUBABI_FIREBASE_DATABASE_URL}
+      NUBABI_FIREBASE_STORAGE_BUCKET: ${env:NUBABI_FIREBASE_STORAGE_BUCKET}
+      # For Google Cloud Storage which attemps writes in order to enable resumable uploads
+      XDG_CONFIG_HOME: /tmp
+
+custom:
+  webpackIncludeModules: true
+  webpack: "./webpack.dev.config.js"

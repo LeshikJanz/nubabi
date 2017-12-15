@@ -12,9 +12,17 @@ import {
   path,
   uniq,
 } from 'ramda';
+import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { filter as gqlFilter } from 'graphql-anywhere';
 import uuid from 'react-native-uuid';
+import { appError } from 'core/app/actions';
+import {
+  flattenEdges,
+  getTypenameForFile,
+  isEmptyProp,
+  replaceEdgeInFragment,
+} from 'core/helpers/graphqlUtils';
 import {
   displayLoadingState,
   showNoContentViewIf,
@@ -24,12 +32,6 @@ import {
 import MemoryForm from './MemoryForm';
 import Memory from './Memory';
 import RecentMemories from '../profile/RecentMemories';
-import {
-  flattenEdges,
-  getTypenameForFile,
-  isEmptyProp,
-  replaceEdgeInFragment,
-} from 'core/helpers/graphqlUtils';
 
 type Props = {
   memory: MemoryType,
@@ -75,6 +77,7 @@ const transforms = {
 export default compose(
   withCurrentBaby,
   withNetworkIndicatorActions,
+  connect(null, { appError }),
   graphql(
     gql`
       query EditMemory($id: ID!, $babyId: ID!) {
@@ -127,7 +130,8 @@ export default compose(
     {
       props: ({
         mutate,
-        ownProps: { id, toggleNetworkActivityIndicator, currentBabyId, goBack },
+        // eslint-disable-next-line no-shadow
+        ownProps: { id, toggleNetworkActivityIndicator, currentBabyId, goBack, appError },
       }) => ({
         onSubmit: async values => {
           // $FlowFixMe$
@@ -185,7 +189,9 @@ export default compose(
                 )(store, data);
               }
             },
-          }).finally(() => {
+          })
+            .catch(() => appError(new Error("There was a problem updating this memory.")))
+            .finally(() => {
             toggleNetworkActivityIndicator(false);
           });
         },

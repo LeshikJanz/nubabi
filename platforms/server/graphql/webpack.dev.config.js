@@ -6,7 +6,7 @@ const WebpackPluginCopy = require('webpack-plugin-copy');
 const rootModules = path.resolve(__dirname, '../../../node_modules');
 
 module.exports = {
-  entry: './handler',
+  entry: './handler-dev',
   target: 'node',
   externals: [
     nodeExternals({
@@ -17,14 +17,14 @@ module.exports = {
   output: {
     libraryTarget: 'commonjs',
     path: path.join(__dirname, '.webpack'),
-    filename: 'index.js',
+    filename: 'handler.js',
   },
   resolve: {
     modules: ['node_modules', rootModules],
   },
   plugins: [
     new WebpackPluginCopy([
-      { from: 'nubabitest1-firebase-adminsdk-r7bmb-2f00516d5e.json' }
+      { from: 'nubabitest1-firebase-adminsdk-r7bmb-2f00516d5e.json' },
     ]),
   ],
   module: {
@@ -39,7 +39,6 @@ module.exports = {
               presets: ['react-native'],
               plugins: [
                 'transform-runtime',
-                ["transform-define", "../../../core/config/getConfig.js"],
                 ['inline-import', { extensions: ['.graphql', '.graphqls'] }],
                 [
                   'module-resolver',

@@ -11,8 +11,8 @@ import {
   fromGlobalId,
   mutationWithClientMutationId,
 } from './common';
-import { getClosestContentForPeriod } from '../../../../core/growth/reducer';
-import { addEdgeAndCursorToMutationResult } from '../../../../libs/graphql-utils';
+import { getClosestContentForPeriod } from 'core/growth/reducer';
+import { addEdgeAndCursorToMutationResult } from 'graphql-utils/mutations';
 
 const resolvers = {
   Viewer: {

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+cd platforms/server/graphql
+mv serverless.yml serverless.yml.bak
+cp serverless.dev.yml serverless.yml
+serverless offline start
+mv serverless.yml.bak serverless.yml

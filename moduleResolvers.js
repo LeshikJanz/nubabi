@@ -4,5 +4,6 @@ System.config({
     'core/*': './core/*',
     'native/*': './platforms/native/*',
     'web/*': './platforms/web/*',
+    'graphql-utils/*': './libs/graphql-utils/*'
   },
 });

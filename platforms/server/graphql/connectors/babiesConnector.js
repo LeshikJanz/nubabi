@@ -1,12 +1,12 @@
 // @flow
-import formatPossessive from '../../../../core/helpers/formatPossessive';
+import formatPossessive from 'core/helpers/formatPossessive';
 import type { ConnectionArguments } from '../resolvers/common';
 import { fromGlobalId, getPaginationArguments } from '../resolvers/common';
 import type {
   ActivityFilterInput,
   ActivityLevelOperation,
   Baby,
-} from '../../../../core/types';
+} from 'core/types';
 import {
   find,
   merge,
@@ -20,13 +20,12 @@ import {
 import qs from 'qs';
 import axios from 'axios';
 import S from 'string';
-import config from '../../../../core/config/index';
 
 type SwapActivityAction = 'swop' | 'increase' | 'decrease';
 type CompleteActivityAction = 'completed';
 
 const instance = axios.create({
-  baseURL: config.apiUrl,
+  baseURL: process.env.NUBABI_API_URL,
   responseType: 'json',
 });
 

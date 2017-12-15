@@ -27,7 +27,7 @@ import Task from 'data.task';
 import {
   toCentimeters,
   toKilograms,
-} from '../../../../core/helpers/measurement';
+} from 'core/helpers/measurement';
 
 const get = (firebase, path: string) =>
   firebase
@@ -95,7 +95,10 @@ const uploadFile = (firebase, storagePath, file, upload, fileMetadata = {}) => {
       },
     });
 
-    blobStream.on('error', reject);
+    blobStream.on('error', (err) => {
+      console.log(err);
+      reject(err);
+    });
     blobStream.on('finish', () => {
       fileUpload.getSignedUrl(
         {
@@ -106,12 +109,15 @@ const uploadFile = (firebase, storagePath, file, upload, fileMetadata = {}) => {
           if (err) {
             reject(err);
           }
+          console.log('resolving')
           resolve(url);
         },
       );
     });
 
-    blobStream.end(upload.buffer);
+    blobStream.end(upload.buffer, () => {
+      console.log('callback for blobStream');
+    });
   });
 };
 
@@ -448,7 +454,7 @@ const uploadMemoryFiles = (
   uploads,
 ): Promise<Array<Object>> => {
   if (files && files.length) {
-    const storagePath = `/babies/${babyId}/memories/${memoryId}`;
+    const storagePath = `babies/${babyId}/memories/${memoryId}`;
 
     return Promise.all(
       files.map(file => {

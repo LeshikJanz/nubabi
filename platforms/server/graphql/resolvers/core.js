@@ -14,7 +14,7 @@ import {
 import {
   addEdgeAndCursorToMutationResult,
   addEdgeToMutationResult,
-} from 'core/helpers/graphqlUtils';
+} from 'graphql-utils/mutations';
 
 const resolvers = {
   DateTime: GraphQLDateTime,

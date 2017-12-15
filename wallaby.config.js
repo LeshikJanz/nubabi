@@ -1,5 +1,11 @@
 process.env.BABEL_ENV = 'test';
 
+const glob = (suffix, prefix = '') => {
+  return ['core', 'libs', 'platforms', 'services', 'web'].map(subsystem => {
+    return `${prefix}${subsystem}/**/${suffix}`;
+  });
+};
+
 module.exports = function(wallaby) {
   const babel = wallaby.compilers.babel();
   return {
@@ -18,6 +24,8 @@ module.exports = function(wallaby) {
       '!core/**/__tests__/*.js',
       '!core/**/__tests__/*.js',
       '!platforms/**/__tests__/*.test.js',
+      '!**/.webpack/**',
+      '!flow-typed/**',
       'package.json',
     ],
     tests: [
@@ -46,5 +54,8 @@ module.exports = function(wallaby) {
     setup: wallaby => {
       wallaby.testFramework.configure(require('./package.json').jest);
     },
+    debug: true,
   };
 };
+
+
