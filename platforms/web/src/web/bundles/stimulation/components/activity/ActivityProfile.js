@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import { ActivityConnection } from 'core/types';
+import type { ActivityConnection } from 'core/types';
 import FavoriteIcon from 'web/assets/images/icons/favorite.svg';
 import SeparatorIcon from 'web/assets/images/icons/separator.svg';
 import PrintIcon from 'web/assets/images/icons/print.svg';

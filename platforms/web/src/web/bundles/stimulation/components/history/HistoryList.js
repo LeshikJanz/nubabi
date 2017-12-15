@@ -1,6 +1,9 @@
 // @flow
 import React from 'react';
-import { ActivityConnection, ActivityHistoryItemFragment } from 'core/types';
+import type {
+  ActivityConnection,
+  ActivityHistoryItemFragment,
+} from 'core/types';
 import * as ActivitiesStyled from '../../styled/ActivitiesStyled';
 import ActivityList from '../../containers/activityList';
 import moment from 'moment';

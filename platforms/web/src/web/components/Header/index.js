@@ -9,7 +9,7 @@ import Notifications from './Notifications';
 import BabySelect from './BabySelect';
 
 import Menu from './Menu';
-import { Baby } from 'core/types';
+import type { Baby } from 'core/types';
 
 type Props = {
   pathname: string,

@@ -1,5 +1,5 @@
 // @flow
-import { Action } from 'core/types';
+import type { Action } from 'core/types';
 
 export const globalLoaderInit = () => ({
   type: 'LOADING_REQUEST/REQUEST',

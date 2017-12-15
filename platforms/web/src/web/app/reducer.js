@@ -3,7 +3,6 @@ import type { AppState, GlobalLoaderAction } from 'web/types';
 
 export const initialState: AppState = {
   isFetching: false,
-  failure: false,
   error: null,
 };
 

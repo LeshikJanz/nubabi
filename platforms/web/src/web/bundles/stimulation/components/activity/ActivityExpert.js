@@ -2,7 +2,7 @@
 import React from 'react';
 import InfoIcon from 'web/assets/images/icons/info-icon.svg';
 import ReactTooltip from 'react-tooltip';
-import { Expert } from 'core/types';
+import type { Expert } from 'core/types';
 import * as ActivityExpertStyled from '../../styled/activity/ActivityExpertStyled';
 
 type Props = {
