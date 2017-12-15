@@ -4,8 +4,7 @@ import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 import Button from 'web/elements/Button';
-import EmptyGalleryIcon from 'web/assets/images/icons/moment.svg';
-import LibBackground from 'web/assets/images/lib-background.png';
+import { EmptyGalleryIcon, LibBackground } from 'web/assets/images';
 
 type Props = {
   memories: MemoryConnection,

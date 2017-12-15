@@ -1,9 +1,7 @@
 // @flow
 import type { ActivityConnection } from 'core/types';
 import React from 'react';
-import FavoriteIcon from 'web/assets/images/icons/favorite.svg';
-import SeparatorIcon from 'web/assets/images/icons/separator.svg';
-import PrintIcon from 'web/assets/images/icons/print.svg';
+import { FavoriteIcon, SeparatorIcon, PrintIcon } from 'web/assets/images';
 import { Button } from 'web/elements';
 import * as ActivityProfileStyled from '../../styled/activity/ActivityProfileStyled';
 

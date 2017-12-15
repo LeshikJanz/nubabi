@@ -1,7 +1,7 @@
 // @flow
 import type { ActivityConnection } from 'core/types';
 import React from 'react';
-import GrossIcon from 'web/assets/images/icons/gross-icon.svg';
+import { GrossIcon } from 'web/assets/images';
 import ActivityMenu from '../../containers/activity/ActivityMenu';
 import * as ActivityStatusStyled from '../../styled/activity/ActivityStatusStyled';
 

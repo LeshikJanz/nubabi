@@ -1,7 +1,7 @@
 // @flow
 import type { Expert } from 'core/types';
 import React from 'react';
-import InfoIcon from 'web/assets/images/icons/info-icon.svg';
+import { InfoIcon } from 'web/assets/images';
 import ReactTooltip from 'react-tooltip';
 import * as ActivityExpertStyled from '../../styled/activity/ActivityExpertStyled';
 

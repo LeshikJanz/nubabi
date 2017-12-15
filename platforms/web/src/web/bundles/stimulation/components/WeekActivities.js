@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 // @flow
 import type { ActivityConnection } from 'core/types';
 import React from 'react';
@@ -15,7 +16,7 @@ const WeekActivities = ({ activities, location: { pathname } }: Props) => (
   <ActivitiesStyled.ListWrapper>
     <ActivitiesStyled.ListHeader justify="space-between" align="center">
       <ActivitiesStyled.ListTitle is="h3">
-        {`This Week's activities`}
+        This Week's activities
       </ActivitiesStyled.ListTitle>
     </ActivitiesStyled.ListHeader>
 

@@ -1,7 +1,6 @@
 // @flow
 import React, { PureComponent } from 'react';
-import EquipmentIcon from 'web/assets/images/icons/equipment.svg';
-import CalendarIcon from 'web/assets/images/icons/calendar.svg';
+import { EquipmentIcon, CalendarIcon } from 'web/assets/images';
 import moment from 'moment';
 import EquipmentList from './EquipmentList';
 import * as EquipmentStyled from '../../styled/equipment/index';
