@@ -67,7 +67,6 @@ const HeaderMenu = styled(Box)``;
 
 class AppHeader extends PureComponent<Props> {
   render() {
-    console.log('header', this.props);
     return (
       <Wrapper>
         <HeaderContent align="center" justify="space-between" flex="1 1 auto">

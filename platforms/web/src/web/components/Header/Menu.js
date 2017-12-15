@@ -122,7 +122,6 @@ class MenuComponent extends Component<Props> {
   };
 
   render() {
-    console.log('eee', this.props);
     const { user } = this.props;
     return (
       <Wrapper className="AppHeaderMenu">
