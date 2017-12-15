@@ -1,9 +1,9 @@
 // @flow
+import type { SkillAreaConnection } from 'core/types';
 import React from 'react';
 import indoorActivity from 'web/assets/images/indoor-activity.png';
 import outdoorActivity from 'web/assets/images/outdoor-activity.png';
 import iconMappings from 'web/common/iconMappings';
-import type { SkillAreaConnection } from 'core/types';
 import { INDOOR_CATEGORY_ID, OUTDOOR_CATEGORY_ID } from '../constants/index';
 import * as BrowseActivitiesStyled from '../styled/BrowseActivitiesStyled';
 

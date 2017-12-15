@@ -1,4 +1,5 @@
 // @flow
+import type { Baby } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Header } from 'web/elements';
 import styled from 'styled-components';
@@ -9,7 +10,6 @@ import Notifications from './Notifications';
 import BabySelect from './BabySelect';
 
 import Menu from './Menu';
-import type { Baby } from 'core/types';
 
 type Props = {
   pathname: string,

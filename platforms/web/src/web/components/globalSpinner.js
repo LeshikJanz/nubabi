@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
 import type { GraphQLDataProp, Query } from 'core/types';
+import React from 'react';
 import { Loader } from './index';
 
 type Props = GraphQLDataProp<Query>;

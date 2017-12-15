@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
 import type { ActivityConnection } from 'core/types';
+import React from 'react';
 import ActivityList from '../containers/activityList';
 import * as FilteredStyled from '../styled/FilteredActivitiesStyled';
 import * as ActivitiesStyled from '../styled/ActivitiesStyled';

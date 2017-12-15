@@ -1,6 +1,6 @@
 // @flow
-import React from 'react';
 import type { ActivityHistoryItemFragment } from 'core/types';
+import React from 'react';
 import ArrowRight from 'web/assets/images/icons/arrowRight.svg';
 import moment from 'moment';
 import * as HistoryItemStyled from '../../styled/history/HistoryItemStyled';

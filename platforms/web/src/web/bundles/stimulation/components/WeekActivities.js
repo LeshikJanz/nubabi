@@ -1,7 +1,7 @@
 // @flow
+import type { ActivityConnection } from 'core/types';
 import React from 'react';
 import ActivityList from '../containers/activityList';
-import type { ActivityConnection } from 'core/types';
 import * as ActivitiesStyled from '../styled/ActivitiesStyled';
 import equipmentsMockData from 'web/assets/mock-data/stimulation/equipments.json';
 import Equipment from './equipment/index';

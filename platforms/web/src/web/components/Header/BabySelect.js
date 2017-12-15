@@ -1,4 +1,5 @@
 // @flow
+import type { Baby } from 'core/types';
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { gql, graphql } from 'react-apollo';
@@ -8,7 +9,6 @@ import onClickOutside from 'react-onclickoutside';
 import { compose } from 'recompose';
 import { Menu, Button } from 'web/elements';
 import PersonDefaultIcon from 'web/assets/images/icons/person.svg';
-import type { Baby } from 'core/types';
 import path from 'ramda/src/path';
 import { connect } from 'react-redux';
 import { selectBaby } from 'core/babies/actions';

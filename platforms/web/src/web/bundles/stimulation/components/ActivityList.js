@@ -1,7 +1,7 @@
 // @flow
+import type { ActivityConnection } from 'core/types';
 import React from 'react';
 import ActivityItem from 'web/elements/ActivityItem';
-import type { ActivityConnection } from 'core/types';
 import * as ActivityListStyled from '../styled/ActivityListStyled';
 
 type Props = {

@@ -1,7 +1,7 @@
 // @flow
+import type { Baby, ActivityConnection } from 'core/types';
 import React from 'react';
 import ArrowLeft from 'web/assets/images/icons/arrow-left-icon.svg';
-import type { Baby, ActivityConnection } from 'core/types';
 import { withRouter } from 'react-router-dom';
 import * as SwitcherStyled from '../../styled/activity/ActivitySwitcherStyled';
 

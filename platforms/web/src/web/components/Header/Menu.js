@@ -1,6 +1,6 @@
 // @flow
-import React, { Component } from 'react';
 import type { User } from 'core/types';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import onClickOutside from 'react-onclickoutside';
