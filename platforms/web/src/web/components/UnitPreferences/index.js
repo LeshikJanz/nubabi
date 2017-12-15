@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import { RadioForInput } from 'web/elements';
+import { Field, reduxForm } from 'redux-form';
 
 const UnitPreferencesContainer = styled(Flex)`
   flex-direction: column;
@@ -37,20 +38,23 @@ const Radio = styled(RadioForInput)`
   bottom: 5px;
 `;
 
-const UnitPreferences = () => {
-  return (
-    <UnitPreferencesContainer>
-      <Title>Unit Preferences</Title>
-      <Option>
-        <Label>Weight</Label>
-        <Radio name="weight" variants={['kg', 'lbs']} />
-      </Option>
-      <Option>
-        <Label>Height</Label>
-        <Radio name="height" variants={['cm', 'in']} />
-      </Option>
-    </UnitPreferencesContainer>
-  );
-};
+/* eslint-disable import/no-mutable-exports */
+let UnitPreferencesForm = () => (
+  <UnitPreferencesContainer>
+    <Title>Unit Preferences</Title>
+    <Option>
+      <Label>Weight</Label>
+      <Field component={Radio} name="weight" variants={['kg', 'lbs']} />
+    </Option>
+    <Option>
+      <Label>Height</Label>
+      <Field component={Radio} name="height" variants={['cm', 'in']} />
+    </Option>
+  </UnitPreferencesContainer>
+);
 
-export default UnitPreferences;
+UnitPreferencesForm = reduxForm({
+  form: 'UnitPreferencesForm',
+})(UnitPreferencesForm);
+
+export default UnitPreferencesForm;

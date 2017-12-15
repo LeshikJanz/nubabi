@@ -3,6 +3,7 @@ import React from 'react';
 import { TextInput } from 'web/elements';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
+import { Field } from 'redux-form';
 
 type Props = {
   inputs: Array<mixed>,
@@ -29,21 +30,22 @@ const UserCredentialsSignUpContainer = styled(Flex)`
   padding: 30px 0;
 `;
 
-const renderInput = (input, i) => {
-  return (
-    <InputContainer key={i}>
-      <Label>{input.placeholder.toUpperCase()}</Label>
-      <TextInput inputType={input.type} value={input.value} />
-    </InputContainer>
-  );
-};
+const renderInput = (input, i) => (
+  <InputContainer key={i}>
+    <Label>{input.placeholder.toUpperCase()}</Label>
+    <Field
+      component={TextInput}
+      name={input.name}
+      inputType={input.type}
+      value={input.value}
+    />
+  </InputContainer>
+);
 
-const UserCredentialsSignUp = ({ inputs }: Props) => {
-  return (
-    <UserCredentialsSignUpContainer>
-      {inputs.map((input, i) => renderInput(input, i))}
-    </UserCredentialsSignUpContainer>
-  );
-};
+const UserCredentialsSignUp = ({ inputs }: Props) => (
+  <UserCredentialsSignUpContainer>
+    {inputs.map((input, i) => renderInput(input, i))}
+  </UserCredentialsSignUpContainer>
+);
 
 export default UserCredentialsSignUp;

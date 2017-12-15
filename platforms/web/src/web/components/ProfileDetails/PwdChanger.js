@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
 import { TextInput } from 'web/elements';
+import { Field, reduxForm } from 'redux-form';
 
 type Props = {
   isSectionVisible: boolean,
@@ -53,12 +54,18 @@ const renderPwdFields = (field, i) => {
   return (
     <InputContainer key={i}>
       <Label>{field.placeholder.toUpperCase()}</Label>
-      <TextInput inputType={field.type} value={field.value} />
+      <Field
+        component={TextInput}
+        name={field.name}
+        inputType={field.type}
+        value={field.value}
+      />
     </InputContainer>
   );
 };
 
-const PwdChanger = ({
+/* eslint-disable import/no-mutable-exports */
+let PwdChangerForm = ({
   isSectionVisible,
   visibleOnChange,
   pwdFields,
@@ -75,4 +82,8 @@ const PwdChanger = ({
   );
 };
 
-export default PwdChanger;
+PwdChangerForm = reduxForm({
+  form: 'PwdChangerForm',
+})(PwdChangerForm);
+
+export default PwdChangerForm;

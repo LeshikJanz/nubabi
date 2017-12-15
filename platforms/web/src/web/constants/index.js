@@ -18,14 +18,17 @@ export const BABY_GENDERS = [
 export const USER_INFO_FIELDS = [
   {
     type: 'firstName',
+    name: 'firstName',
     placeholder: 'First name',
   },
   {
     type: 'lastName',
+    name: 'lastName',
     placeholder: 'Last name',
   },
   {
     type: 'email',
+    name: 'email',
     placeholder: 'Email',
   },
 ];

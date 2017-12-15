@@ -3,9 +3,7 @@ import React from 'react';
 import { Section, Button } from 'web/elements';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import FaceBookSignUp from './FaceBookSignUp';
-import UserCredentialsSignUp from './UserCredentialsSignUp';
-import OrElem from './OrElem';
+import UserCredentialsForm from './UserForm';
 
 type Props = {
   onNexStep: Function,
@@ -34,17 +32,6 @@ export const SubTitle = styled.span`
   font-size: 15px;
 `;
 
-const UserDataInputContainer = styled(Flex)`
-  background-color: white;
-  flex-direction: row;
-  border-radius: 4px;
-  box-shadow: 0 1px 9px -1px ${props => props.theme.colors.gray};
-  overflow: hidden;
-  height: 334px;
-  position: relative;
-  margin: 35px 0px 20px 0;
-`;
-
 export const ButtonContainer = styled(Flex)`
   justify-content: flex-end;
 `;
@@ -68,25 +55,19 @@ export const RedButton = styled(Button)`
   }
 `;
 
-const StepOne = ({ onNexStep, onClickSignup, inputs }: Props) => {
-  return (
-    <StepContainer>
-      <StepTitle>
-        <Red>Step 1:</Red> Create your free account
-      </StepTitle>
-      <SubTitle>Complete our quick sign up below</SubTitle>
-      <UserDataInputContainer>
-        <OrElem />
-        <FaceBookSignUp onClickSignup={onClickSignup} />
-        <UserCredentialsSignUp inputs={inputs} />
-      </UserDataInputContainer>
-      <ButtonContainer>
-        <RedButton onClick={onNexStep} type="primary">
-          next
-        </RedButton>
-      </ButtonContainer>
-    </StepContainer>
-  );
-};
+const StepOne = ({ onNexStep, onClickSignup, inputs }: Props) => (
+  <StepContainer>
+    <StepTitle>
+      <Red>Step 1:</Red> Create your free account
+    </StepTitle>
+    <SubTitle>Complete our quick sign up below</SubTitle>
+    <UserCredentialsForm onClickSignup={onClickSignup} inputs={inputs} />
+    <ButtonContainer>
+      <RedButton onClick={onNexStep} type="primary">
+        next
+      </RedButton>
+    </ButtonContainer>
+  </StepContainer>
+);
 
 export default StepOne;

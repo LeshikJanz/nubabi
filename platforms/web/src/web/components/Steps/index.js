@@ -28,16 +28,19 @@ class Steps extends PureComponent<Props, State> {
       stepOneInputs: [
         {
           type: 'name',
+          name: 'name',
           placeholder: 'Your full name',
           value: 'Savannah Cooper',
         },
         {
           type: 'email',
+          name: 'email',
           placeholder: 'Email address',
           value: 'savannahcooper@gmail.com',
         },
         {
           type: 'password',
+          name: 'password',
           placeholder: 'Nubabi password (at least 6 characters)',
           value: 'password',
         },
