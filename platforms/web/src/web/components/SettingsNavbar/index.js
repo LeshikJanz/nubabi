@@ -19,19 +19,20 @@ const renderMenuItem = (item, match, pathname, userData) =>
     item.menuItemComponent({
       to: `${match.url}/${item.route}`,
       label: item.label,
+      itemId: item.id,
       user: userData,
-      isActive: pathname === '/settings',
+      isactive: pathname === '/settings' ? 1 : 0,
     })
   ) : (
     <MenuItem
       to={`${match.url}/${item.route}`}
       key={item.id}
-      isActive={pathname === `${match.url}/${item.route}`}
+      isactive={pathname === `${match.url}/${item.route}` ? 1 : 0}
     >
       <IconBox>
         <Icon
           name={item.iconName}
-          isActive={pathname === `${match.url}/${item.route}`}
+          isactive={pathname === `${match.url}/${item.route}` ? 1 : 0}
         />
       </IconBox>
 

@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import type { Baby } from 'core/types';
+import type { Baby, User } from 'core/types';
 import Loadable from 'react-loadable';
 import { Route, Switch } from 'react-router-dom';
 import {
@@ -37,6 +37,7 @@ type Props = {
   logout: Function,
   isAuthenticated: boolean,
   baby: Baby,
+  user: User,
 };
 
 const Profile = Loadable({
@@ -54,6 +55,7 @@ const App = (props: Props) => (
       isAuthenticated={props.isAuthenticated}
       logout={props.logout}
       baby={props.baby}
+      user={props.user}
     />
     <AppContent>
       <Switch>

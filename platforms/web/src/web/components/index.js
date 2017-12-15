@@ -9,3 +9,4 @@ export { default as NotFound } from './NotFound';
 export { default as Steps } from './Steps';
 export { default as SettingsNavbar } from './SettingsNavbar';
 export { default as UserInfoEditor } from './UserInfoEditor';
+export { default as ProfileDetails } from './ProfileDetails';

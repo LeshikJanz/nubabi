@@ -8,7 +8,8 @@ import { path } from 'ramda';
 
 type Props = {
   label: string,
-  isActive: boolean,
+  isactive: number,
+  itemId: string,
   user: {
     firstName: string,
     lastName: string,
@@ -26,10 +27,10 @@ const CustomLink = styled(Link)`
   display: flex;
   flex-direction: row;
   background-color: ${props =>
-    props.isActive ? props.theme.colors.panel : props.theme.colors.white};
+    props.isactive ? props.theme.colors.panel : props.theme.colors.white};
   border-left: 2px solid
     ${props =>
-      props.isActive ? props.theme.colors.primary : props.theme.colors.white};
+      props.isactive ? props.theme.colors.primary : props.theme.colors.white};
 
   &:hover {
     text-decoration: none;
@@ -83,10 +84,10 @@ const Arrow = styled(ArrowRight)`
 `;
 
 const MenuProfileDetails = (props: Props) => {
-  const { label, isActive, user } = props;
+  const { label, isactive, user, itemId } = props;
 
   return (
-    <CustomLink to="/settings" isActive={isActive}>
+    <CustomLink to="/settings" isactive={isactive} key={itemId}>
       <AvatarBox>
         <Image image={path(['avatar', 'thumb', 'url'], user)} />
       </AvatarBox>

@@ -11,7 +11,7 @@ import PersonRegular from 'web/assets/images/icons/person-regular.svg';
 
 type Props = {
   name: string,
-  isActive: boolean,
+  isactive: number,
 };
 
 const icons = {
@@ -33,7 +33,7 @@ const icons = {
   },
 };
 
-const Icon = ({ name, isActive }: Props) =>
-  isActive ? icons[name].active : icons[name].regular;
+const Icon = ({ name, isactive }: Props) =>
+  isactive ? icons[name].active : icons[name].regular;
 
 export default Icon;

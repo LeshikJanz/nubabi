@@ -1,16 +1,19 @@
 // @flow
 import React, { Component } from 'react';
+import type { User } from 'core/types';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import onClickOutside from 'react-onclickoutside';
+import { path } from 'ramda';
 
 import { Menu } from 'web/elements';
-import Avatar from 'core/images/avatar.png';
+// import Avatar from 'core/images/avatar.png';
 
 type Props = {
   isAuthenticated: boolean,
   pathname: string,
   logout: () => void,
+  user: User,
 };
 
 const Wrapper = styled.div`
@@ -73,6 +76,7 @@ const MenuAvatar = styled.div`
 
   > img {
     max-width: 100%;
+    border-radius: 50%;
   }
 
   &:hover {
@@ -103,28 +107,27 @@ class MenuComponent extends Component<Props> {
     this.state = {
       modalIsOpen: false,
     };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   handleClickOutside() {
     this.closeModal();
   }
 
-  openModal() {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
-  }
+  };
 
-  closeModal() {
+  closeModal = () => {
     this.setState({ modalIsOpen: false });
-  }
+  };
 
   render() {
+    console.log('eee', this.props);
+    const { user } = this.props;
     return (
       <Wrapper className="AppHeaderMenu">
         <MenuAvatar onClick={this.openModal}>
-          <img src={Avatar} alt="me" />
+          <img src={path(['avatar', 'thumb', 'url'], user)} alt="me" />
         </MenuAvatar>
 
         <Modal

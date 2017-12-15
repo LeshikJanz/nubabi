@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { AvatarContainer, Image, EditBtn, CameraIcon } from './styled';
+import { AvatarContainer, Image, EditBtn, CameraIcon } from '../styled';
 
 type Props = {
   image: string,

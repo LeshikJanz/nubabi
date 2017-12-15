@@ -20,10 +20,10 @@ export const MenuItem = styled(Link)`
   font-weight: 300;
   color: ${props => props.theme.colors.label};
   background-color: ${props =>
-    props.isActive ? props.theme.colors.border : props.theme.colors.white};
+    props.isactive ? props.theme.colors.border : props.theme.colors.white};
   border-left: 2px solid
     ${props =>
-      props.isActive ? props.theme.colors.primary : props.theme.colors.white};
+      props.isactive ? props.theme.colors.primary : props.theme.colors.white};
   &:hover {
     text-decoration: none;
     background-color: ${props => props.theme.colors.panel};
