@@ -2,14 +2,17 @@ import BabyProfile from '../components/index';
 import { connect } from 'react-redux';
 import { compose, withHandlers } from 'recompose';
 import { graphql } from 'react-apollo';
-import { createBaby } from '../grapghQl/createBaby';
+import { createBaby } from '../grapghQl/mutations/createBaby';
 import { withRouter } from 'react-router-dom';
 import { selectBaby } from 'web/actions';
 import path from 'ramda/src/path';
-import { editBaby } from '../grapghQl/editBaby';
+import { getBabyQuery } from '../grapghQl/queries/getBaby';
+import { updateBaby } from '../grapghQl/mutations/updateBaby';
+import { filter } from 'graphql-anywhere';
+import { babyForm } from '../grapghQl/fragments/babyForm';
 
 const mapStateToProps = state => ({
-  babyForm: state.form.BabyForm && state.form.BabyForm.values,
+  babyEditForm: state.form.BabyForm && state.form.BabyForm.values,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,7 +22,7 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   withRouter,
-  graphql(editBaby, {
+  graphql(getBabyQuery, {
     options: ({ match }) => ({
       variables: { id: match.params.id },
       skip: !match.params.id,
@@ -29,9 +32,9 @@ export default compose(
     }),
   }),
   graphql(createBaby, {
-    props: ({ mutate, ownProps: { babyForm, history, changeBaby } }) => ({
+    props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
       handleCreateBaby: () =>
-        mutate({ variables: { input: babyForm } })
+        mutate({ variables: { input: filter(babyForm.form, babyEditForm) } })
           .then(({ data }) => {
             const createdBaby = path(['createBaby', 'createdBaby'], data);
             if (createdBaby) {
@@ -50,10 +53,23 @@ export default compose(
       refetchQueries: ['Profile', 'getBabies'],
     },
   }),
-  graphql(createBaby, {
-    props: () => ({
+  graphql(updateBaby, {
+    props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
       handleEditBaby: () => {
-        console.log('handleEditBaby');
+        mutate({ variables: { input: filter(babyForm.form, babyEditForm) } })
+          .then(({ data }) => {
+            const updatedBaby = path(['updateBaby', 'edge', 'node'], data);
+            if (updatedBaby) {
+              changeBaby(updatedBaby.id);
+              history.push('/profile');
+            } else {
+              console.error('Baby has not been updated');
+              console.error(updatedBaby);
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
       },
     }),
     options: {
@@ -63,9 +79,9 @@ export default compose(
   withHandlers({
     handleSubmit: ({ match, handleCreateBaby, handleEditBaby }) => () => {
       if (match.params.id) {
-        handleCreateBaby();
-      } else {
         handleEditBaby();
+      } else {
+        handleCreateBaby();
       }
     },
   }),

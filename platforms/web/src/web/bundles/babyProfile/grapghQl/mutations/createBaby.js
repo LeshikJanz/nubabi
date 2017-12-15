@@ -1,5 +1,5 @@
 import { gql } from 'react-apollo';
-import { babyForm } from './babyForm';
+import { babyForm } from '../fragments/babyForm';
 
 export const createBaby = gql`
     mutation CreateBaby($input: CreateBabyInput!) {

@@ -1,8 +1,8 @@
 import { gql } from 'react-apollo';
-import { babyForm } from './babyForm';
+import { babyForm } from '../fragments/babyForm';
 
-export const editBaby = gql`
-    query EditBaby($id: ID!) {
+export const getBabyQuery = gql`
+    query GetBaby($id: ID!) {
         viewer {
             baby(id: $id) {
                 ...BabyForm

@@ -42,12 +42,7 @@ const InputWithRadio = ({
       placeholder={placeholder ? placeholder.toUpperCase() : ''}
       validate={inputValidate}
     />
-    <Field
-      component={RadioForInput}
-      name={radioName}
-      variants={variants}
-      disabled
-    />
+    <Field component={RadioForInput} name={radioName} variants={variants} />
   </InputContainer>
 );
 
