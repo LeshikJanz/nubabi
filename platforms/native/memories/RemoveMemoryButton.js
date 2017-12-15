@@ -18,7 +18,7 @@ type Props = {
   onSubmit: () => Promise<ApolloQueryResult<*>>,
 };
 
-class RemoveMemoryButton extends PureComponent {
+export class RemoveMemoryButton extends PureComponent<Props> {
   props: Props;
 
   promptForDeletion = () => {

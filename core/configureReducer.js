@@ -15,7 +15,7 @@ import { configureApollo } from './configureApollo';
 
 // stackoverflow.com/q/35622588/233902
 /* eslint-disable no-unused-vars */
-const resetStateOnSignOutReducer = (reducer, initialState) => {
+export const resetStateOnSignOutReducer = (reducer, initialState) => {
   /* eslint-enable no-unused-vars */
   return (state: State, action: Action) => {
     // TODO: this is too attached to Firebase

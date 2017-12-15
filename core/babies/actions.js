@@ -1,5 +1,5 @@
 // @flow
-import type { Action, DeleteBabyAction, MutationResultAction } from '../types';
+import type { Action, SelectBabyAction, DeleteBabyAction, MutationResultAction } from '../types';
 import { Observable } from 'rxjs/Observable';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';
@@ -8,14 +8,14 @@ import { resetNavigation } from '../navigation/actions';
 import formatPossessive from '../helpers/formatPossessive';
 import { removeEdge } from '../../libs/graphql-utils';
 
-export function selectBaby(id): Action {
+export function selectBaby(id: string): SelectBabyAction {
   return {
     type: 'SELECT_BABY',
     payload: id,
   };
 }
 
-export function deleteBaby(id): DeleteBabyAction {
+export function deleteBaby(id: string): DeleteBabyAction {
   return {
     type: 'DELETE_BABY',
     payload: id,

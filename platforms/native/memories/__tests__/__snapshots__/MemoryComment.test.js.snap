@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MemoryComment renders correctly 1`] = `
+style = Object {
+    "paddingBottom": 10,
+    "paddingLeft": 10,
+    "paddingRight": 10,
+    "paddingTop": 10,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "flexDirection": "row",
+    "marginTop": 8,
+    "alignItems": "center",
+    "justifyContent": "center",
+    "marginRight": 16,
+    "backgroundColor": "#FFFFFF",
+    "borderRadius": 15,
+    "height": 30,
+    "width": 30,
+    "overflow": "hidden",
+    "flex": 1,
+    "fontSize": 13,
+    "lineHeight": 16,
+    "color": "#748294",
+    "fontFamily": "SF Pro Text",
+    "letterSpacing": 0.17
+}
+
+<View
+  contentSpacing={true}
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flexDirection": "row",
+      "paddingBottom": 10,
+      "paddingLeft": 10,
+      "paddingRight": 10,
+      "paddingTop": 10,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "justifyContent": "flex-start",
+        "marginRight": 10,
+        "marginTop": 8,
+      }
+    }
+  >
+    <View
+      id={undefined}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#FFFFFF",
+          "borderRadius": 15,
+          "height": 30,
+          "justifyContent": "center",
+          "overflow": "hidden",
+          "width": 30,
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": "http://example.com",
+          }
+        }
+        style={
+          Object {
+            "flex": 1,
+            "height": 30,
+            "width": 30,
+          }
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "color": "#454D56",
+            "fontFamily": "SF Pro Text",
+            "fontSize": 14,
+            "letterSpacing": 0.17,
+            "lineHeight": 20,
+            "marginRight": 16,
+          }
+        }
+      >
+        Some comment
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "marginTop": 8,
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "color": "#748294",
+            "fontFamily": "SF Pro Text",
+            "fontSize": 13,
+            "lineHeight": 16,
+          }
+        }
+      >
+        Alice Doe • 8 September 00:00
+      </Text>
+    </View>
+  </View>
+</View>
+`;

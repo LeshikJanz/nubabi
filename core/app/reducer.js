@@ -36,10 +36,6 @@ const reducer = (state: AppState = initialState, action: Action): AppState => {
       return { ...state, error: null, info: action.payload };
     }
 
-    case 'ALERT_SHOWN': {
-      return { ...state, error: null, success: null };
-    }
-
     default:
       return state;
   }

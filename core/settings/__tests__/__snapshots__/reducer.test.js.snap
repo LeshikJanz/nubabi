@@ -1,6 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles SETTINGS_SET_VALUE 1`] = `
+exports[`settings actions resetSettings creates a RESET_SETTINGS action 1`] = `
+Object {
+  "type": "RESET_SETTINGS",
+}
+`;
+
+exports[`settings reducer handles SETTINGS_SET_VALUE 1`] = `
 Object {
   "memories": Object {
     "displaySuggestions": true,
@@ -19,7 +25,7 @@ Object {
 }
 `;
 
-exports[`has an initial state 1`] = `
+exports[`settings reducer has an initial state 1`] = `
 Object {
   "memories": Object {
     "displaySuggestions": true,

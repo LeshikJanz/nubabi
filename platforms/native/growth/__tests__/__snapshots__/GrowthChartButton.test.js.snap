@@ -1,0 +1,457 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GrowthChartButton renders correctly 1`] = `
+style = Object {
+    "marginBottom": 16,
+    "paddingBottom": 8,
+    "paddingLeft": 16,
+    "paddingRight": 16,
+    "paddingTop": 8,
+    "flex": 1,
+    "backgroundColor": "#FFFFFF",
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "alignItems": "center",
+    "borderBottomLeftRadius": 4,
+    "borderBottomRightRadius": 4,
+    "borderTopLeftRadius": 4,
+    "borderTopRightRadius": 4,
+    "justifyContent": "center",
+    "shadowColor": "#000",
+    "shadowOpacity": 0.15,
+    "shadowRadius": 3,
+    "shadowOffset": {
+        "height": 1,
+        "width": 0
+    },
+    "flexDirection": "row",
+    "fontSize": 16.828997530864196,
+    "lineHeight": 32,
+    "color": "#454D56",
+    "fontFamily": "SF Pro Display",
+    "letterSpacing": -0.71,
+    "fontWeight": "300",
+    "marginLeft": -20,
+    "marginTop": 9,
+    "borderTopColor": "#E0E4E7"
+}
+
+<View
+  onLayout={[Function]}
+  onPress={undefined}
+  style={
+    Object {
+      "alignItems": "stretch",
+      "backgroundColor": "#FFFFFF",
+      "borderBottomLeftRadius": 4,
+      "borderBottomRightRadius": 4,
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopLeftRadius": 4,
+      "borderTopRightRadius": 4,
+      "borderTopWidth": 0,
+      "flex": 1,
+      "justifyContent": "center",
+      "marginBottom": 16,
+      "paddingBottom": 0,
+      "paddingLeft": 0,
+      "paddingRight": 0,
+      "paddingTop": 0,
+      "shadowColor": "#000",
+      "shadowOffset": Object {
+        "height": 1,
+        "width": 0,
+      },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 3,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopWidth": 0,
+        "flex": 1,
+        "paddingBottom": 32,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 32,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "flexDirection": "row",
+          "justifyContent": "flex-start",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Image
+          resizeMode="contain"
+          source={
+            Object {
+              "testUri": "../../../core/images/growth-chart-button-weight.png",
+            }
+          }
+          style={
+            Object {
+              "flex": 1,
+              "height": 69,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "flex": 1,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#454D56",
+                  "fontFamily": "SF Pro Display",
+                  "fontSize": 32.08820937230901,
+                  "fontWeight": "300",
+                  "letterSpacing": -0.71,
+                  "lineHeight": 48,
+                }
+              }
+            >
+              N/A
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#454D56",
+                  "fontFamily": "SF Pro Display",
+                  "fontSize": 19.147659412894374,
+                  "fontWeight": "300",
+                  "lineHeight": 32,
+                  "marginLeft": 2,
+                  "marginTop": 9,
+                }
+              }
+            >
+              kg
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "justifyContent": "flex-end",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#748294",
+                  "fontFamily": "SF Pro Text",
+                  "fontSize": 13,
+                  "lineHeight": 16,
+                }
+              }
+            >
+              N/A
+            </Text>
+          </View>
+        </View>
+      </View>
+      <View
+        style={
+          Object {
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "flex": 1,
+            "flexDirection": "row",
+          }
+        }
+      >
+        <Image
+          resizeMode="contain"
+          source={
+            Object {
+              "testUri": "../../../core/images/growth-chart-button-height.png",
+            }
+          }
+          style={
+            Object {
+              "flex": 1,
+              "height": 69,
+              "marginLeft": -20,
+              "width": 23,
+            }
+          }
+        />
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "flex": 1,
+              "justifyContent": "center",
+              "marginLeft": -20,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "alignItems": "center",
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "flex": 1,
+                "flexDirection": "row",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#454D56",
+                  "fontFamily": "SF Pro Display",
+                  "fontSize": 32.08820937230901,
+                  "fontWeight": "300",
+                  "letterSpacing": -0.71,
+                  "lineHeight": 48,
+                }
+              }
+            >
+              N/A
+            </Text>
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#454D56",
+                  "fontFamily": "SF Pro Display",
+                  "fontSize": 19.147659412894374,
+                  "fontWeight": "300",
+                  "lineHeight": 32,
+                  "marginLeft": 2,
+                  "marginTop": 9,
+                }
+              }
+            >
+              cm
+            </Text>
+          </View>
+          <View
+            style={
+              Object {
+                "borderBottomWidth": 0,
+                "borderColor": "#9EABBC",
+                "borderLeftWidth": 0,
+                "borderRightWidth": 0,
+                "borderTopWidth": 0,
+                "justifyContent": "flex-end",
+              }
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "borderBottomWidth": 0,
+                  "borderColor": "#9EABBC",
+                  "borderLeftWidth": 0,
+                  "borderRightWidth": 0,
+                  "borderTopWidth": 0,
+                  "color": "#748294",
+                  "fontFamily": "SF Pro Text",
+                  "fontSize": 13,
+                  "lineHeight": 16,
+                }
+              }
+            >
+              N/A
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "borderBottomWidth": 0,
+        "borderColor": "#9EABBC",
+        "borderLeftWidth": 0,
+        "borderRightWidth": 0,
+        "borderTopColor": "#E0E4E7",
+        "borderTopWidth": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "paddingBottom": 8,
+        "paddingLeft": 16,
+        "paddingRight": 16,
+        "paddingTop": 8,
+      }
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "color": "#454D56",
+          "flex": 1,
+          "fontFamily": "SF Pro Display",
+          "fontSize": 16.828997530864196,
+          "lineHeight": 32,
+        }
+      }
+    >
+      Track 
+      Alice's
+       Height & Weight
+    </Text>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={false}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {
+              "color": "#748294",
+              "fontSize": 20,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Ionicons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`auth actions loginRequest creates LOGIN_REQUEST action 1`] = `
+Object {
+  "meta": Object {
+    "provider": "email",
+  },
+  "payload": Object {
+    "email": "foo@example.com",
+    "password": "foo",
+  },
+  "type": "LOGIN_REQUEST",
+}
+`;
+
+exports[`auth actions loginSuccess creates LOGIN_SUCCESS action 1`] = `
+Object {
+  "meta": Object {
+    "token": undefined,
+  },
+  "payload": Object {
+    "email": undefined,
+  },
+  "type": "LOGIN_SUCCESS",
+}
+`;

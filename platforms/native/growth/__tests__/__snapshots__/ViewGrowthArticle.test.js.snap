@@ -1,0 +1,503 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewGrowthArticle renders correctly 1`] = `
+style = Object {
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0,
+    "backgroundColor": "#FFFFFF",
+    "paddingBottom": 16,
+    "paddingLeft": 16,
+    "paddingRight": 16,
+    "paddingTop": 16
+}
+
+<RCTScrollView
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View>
+    <View
+      style={
+        Object {
+          "backgroundColor": "#FFFFFF",
+          "borderBottomWidth": 0,
+          "borderColor": "#9EABBC",
+          "borderLeftWidth": 0,
+          "borderRightWidth": 0,
+          "borderTopWidth": 0,
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "flex": 1,
+          }
+        }
+      >
+        <Image
+          resizeMode="cover"
+          source={
+            Object {
+              "testUri": "../../../core/images/gross_motor_large.jpg",
+            }
+          }
+          style={
+            Array [
+              Object {
+                "flex": 1,
+              },
+              Object {
+                "height": 600,
+                "width": 750,
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "backgroundColor": "#748294",
+                "opacity": 0.4,
+                "position": "absolute",
+              },
+              Object {
+                "height": 600,
+                "width": 750,
+              },
+            ]
+          }
+        />
+        <View
+          style={
+            Array [
+              Object {
+                "alignItems": "center",
+                "backgroundColor": "transparent",
+              },
+              Object {
+                "marginTop": -341,
+              },
+              undefined,
+            ]
+          }
+        >
+          <Text
+            accessible={true}
+            allowFontScaling={true}
+            ellipsizeMode="tail"
+            style={
+              Array [
+                Object {
+                  "color": "#fff",
+                  "fontSize": 22,
+                  "fontWeight": "500",
+                  "shadowColor": "#000",
+                  "shadowOffset": Object {
+                    "height": 1,
+                    "width": 0,
+                  },
+                  "shadowOpacity": 0.2,
+                  "shadowRadius": 2,
+                  "textAlign": "center",
+                },
+                undefined,
+              ]
+            }
+          >
+            Some Article
+          </Text>
+        </View>
+        <RNSVGSvgView
+          style={
+            Array [
+              Object {
+                "backgroundColor": "transparent",
+              },
+              Array [
+                Object {
+                  "marginLeft": 0,
+                },
+                Object {
+                  "height": 130,
+                  "marginTop": 62,
+                  "width": 750,
+                },
+                undefined,
+              ],
+              false,
+              undefined,
+            ]
+          }
+        >
+          <RNSVGGroup
+            fill={
+              Array [
+                0,
+                0,
+                0,
+                0,
+                1,
+              ]
+            }
+            fillOpacity={1}
+            fillRule={1}
+            matrix={
+              Array [
+                1,
+                0,
+                0,
+                1,
+                0,
+                0,
+              ]
+            }
+            opacity={1}
+            propList={Array []}
+            stroke={null}
+            strokeDasharray={null}
+            strokeDashoffset={null}
+            strokeLinecap={0}
+            strokeLinejoin={0}
+            strokeMiterlimit={4}
+            strokeOpacity={1}
+            strokeWidth={null}
+          >
+            <RNSVGPath
+              d="M0 0 C 275 150, 475 150, 750 0M0 0 H 750 V 116 H 0 L 0 0"
+              fill={
+                Array [
+                  0,
+                  1,
+                  1,
+                  1,
+                  1,
+                ]
+              }
+              fillOpacity={1}
+              fillRule={1}
+              matrix={
+                Array [
+                  1,
+                  0,
+                  0,
+                  1,
+                  0,
+                  0,
+                ]
+              }
+              opacity={1}
+              propList={
+                Array [
+                  "stroke",
+                  "fill",
+                ]
+              }
+              stroke={
+                Array [
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                ]
+              }
+              strokeDasharray={null}
+              strokeDashoffset={null}
+              strokeLinecap={0}
+              strokeLinejoin={0}
+              strokeMiterlimit={4}
+              strokeOpacity={1}
+              strokeWidth={null}
+            />
+          </RNSVGGroup>
+        </RNSVGSvgView>
+        <View
+          style={
+            Object {
+              "flex": 1,
+              "marginTop": -8,
+            }
+          }
+        />
+      </View>
+      <View
+        style={
+          Object {
+            "backgroundColor": "#FFFFFF",
+            "borderBottomWidth": 0,
+            "borderColor": "#9EABBC",
+            "borderLeftWidth": 0,
+            "borderRightWidth": 0,
+            "borderTopWidth": 0,
+            "paddingBottom": 16,
+            "paddingLeft": 16,
+            "paddingRight": 16,
+            "paddingTop": 16,
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "borderBottomWidth": 0,
+              "borderColor": "#9EABBC",
+              "borderLeftWidth": 0,
+              "borderRightWidth": 0,
+              "borderTopWidth": 0,
+              "flex": 1,
+            }
+          }
+        >
+          <View
+            style={
+              Array [
+                Object {},
+                Object {
+                  "flex": 1,
+                },
+              ]
+            }
+          >
+            <Text
+              accessible={true}
+              allowFontScaling={true}
+              ellipsizeMode="tail"
+              style={
+                Object {
+                  "color": "#748294",
+                  "fontSize": 16,
+                  "lineHeight": 26,
+                  "marginBottom": 10,
+                }
+              }
+            >
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                    undefined,
+                  ]
+                }
+              >
+                This 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                    undefined,
+                  ]
+                }
+              >
+                is 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                    undefined,
+                  ]
+                }
+              >
+                a 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                    undefined,
+                  ]
+                }
+              >
+                
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Object {
+                    "fontWeight": "700",
+                  }
+                }
+              >
+                <Text
+                  accessible={true}
+                  allowFontScaling={true}
+                  ellipsizeMode="tail"
+                  style={
+                    Array [
+                      Object {},
+                    ]
+                  }
+                >
+                  nice
+                </Text>
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                article 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                written 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                by 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                someone 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                at 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                some 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                point 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                in 
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                time
+              </Text>
+              <Text
+                accessible={true}
+                allowFontScaling={true}
+                ellipsizeMode="tail"
+                style={
+                  Array [
+                    Object {},
+                  ]
+                }
+              >
+                .
+              </Text>
+            </Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  </View>
+</RCTScrollView>
+`;

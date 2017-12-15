@@ -1,6 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`creates GET_BABIES_FAILURE action 1`] = `
+exports[`babies actions deleteBaby creates DELETE_BABY action 1`] = `
+Object {
+  "payload": 1,
+  "type": "DELETE_BABY",
+}
+`;
+
+exports[`babies actions getBabiesFailure creates GET_BABIES_FAILURE action 1`] = `
 Object {
   "error": true,
   "payload": [Error: foo],
@@ -8,13 +15,13 @@ Object {
 }
 `;
 
-exports[`creates GET_BABIES_REQUEST action 1`] = `
+exports[`babies actions getBabiesRequest creates GET_BABIES_REQUEST action 1`] = `
 Object {
   "type": "GET_BABIES_REQUEST",
 }
 `;
 
-exports[`creates GET_BABIES_SUCCESS action 1`] = `
+exports[`babies actions getBabiesSuccess creates GET_BABIES_SUCCESS action 1`] = `
 Object {
   "payload": Array [
     Object {
@@ -26,7 +33,7 @@ Object {
 }
 `;
 
-exports[`creates SELECT_BABY action 1`] = `
+exports[`babies actions selectBaby creates SELECT_BABY action 1`] = `
 Object {
   "payload": 1,
   "type": "SELECT_BABY",

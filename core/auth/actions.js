@@ -70,7 +70,7 @@ export function logout(): Action {
   };
 }
 
-const signInWithEmailAndPassword = (firebaseAuth, action) => {
+export const signInWithEmailAndPassword = (firebaseAuth, action) => {
   const { email, password } = action.payload;
   return firebaseAuth().signInWithEmailAndPassword(email, password);
 };

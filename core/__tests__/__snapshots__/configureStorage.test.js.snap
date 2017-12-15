@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`configureStorage setups redux-persist 1`] = `
+Object {
+  "debounce": 100,
+  "keyPrefix": "testapp:",
+  "transforms": Array [
+    Object {
+      "in": [Function],
+      "out": [Function],
+    },
+    Object {
+      "in": [Function],
+      "out": [Function],
+    },
+    Object {
+      "in": [Function],
+      "out": [Function],
+    },
+    Object {
+      "in": [Function],
+      "out": [Function],
+    },
+  ],
+  "whitelist": Array [
+    "auth",
+    "apollo",
+    "babies",
+    "growth",
+    "settings",
+    "viewer",
+  ],
+}
+`;

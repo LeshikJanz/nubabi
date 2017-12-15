@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles APP_ERROR 1`] = `
+exports[`app reducer handles APP_ERROR 1`] = `
 Object {
   "error": [Error: bar],
   "online": false,
@@ -9,7 +9,17 @@ Object {
 }
 `;
 
-exports[`handles APP_ONLINE 1`] = `
+exports[`app reducer handles APP_INFO 1`] = `
+Object {
+  "error": null,
+  "info": "info",
+  "online": false,
+  "started": false,
+  "success": null,
+}
+`;
+
+exports[`app reducer handles APP_ONLINE 1`] = `
 Object {
   "error": null,
   "online": true,
@@ -18,9 +28,36 @@ Object {
 }
 `;
 
-exports[`maps all actions ending with FAILURE to APP_ERROR 1`] = `
+exports[`app reducer handles APP_STARTED 1`] = `
 Object {
-  "error": [Error: foo],
+  "error": null,
+  "online": false,
+  "started": true,
+  "success": null,
+}
+`;
+
+exports[`app reducer handles APP_SUCCESS 1`] = `
+Object {
+  "error": null,
+  "online": false,
+  "started": false,
+  "success": "success!",
+}
+`;
+
+exports[`app reducer has an initial state 1`] = `
+Object {
+  "error": null,
+  "online": false,
+  "started": false,
+  "success": null,
+}
+`;
+
+exports[`app reducer maps all actions ending with FAILURE to APP_ERROR 1`] = `
+Object {
+  "error": [Error: some],
   "online": false,
   "started": false,
   "success": null,

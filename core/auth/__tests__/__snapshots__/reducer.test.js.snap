@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles LOGIN_FAILURE 1`] = `
+exports[`auth reducer handles LOGIN_FAILURE 1`] = `
 Object {
   "errorMessage": "some error",
   "isAuthenticated": false,
@@ -9,7 +9,7 @@ Object {
 }
 `;
 
-exports[`handles LOGIN_REQUEST 1`] = `
+exports[`auth reducer handles LOGIN_REQUEST 1`] = `
 Object {
   "errorMessage": "",
   "isAuthenticated": false,
@@ -18,7 +18,7 @@ Object {
 }
 `;
 
-exports[`handles LOGIN_SUCCESS 1`] = `
+exports[`auth reducer handles LOGIN_SUCCESS 1`] = `
 Object {
   "errorMessage": "",
   "isAuthenticated": true,
@@ -27,7 +27,7 @@ Object {
 }
 `;
 
-exports[`handles LOGOUT 1`] = `
+exports[`auth reducer handles LOGOUT 1`] = `
 Object {
   "errorMessage": "",
   "isAuthenticated": false,
@@ -36,7 +36,7 @@ Object {
 }
 `;
 
-exports[`handles ON_AUTH when logged in 1`] = `
+exports[`auth reducer handles ON_AUTH when logged in 1`] = `
 Object {
   "errorMessage": null,
   "isAuthenticated": true,
@@ -45,11 +45,20 @@ Object {
 }
 `;
 
-exports[`handles ON_AUTH when logged out 1`] = `
+exports[`auth reducer handles ON_AUTH when logged out 1`] = `
 Object {
   "errorMessage": null,
   "isAuthenticated": false,
   "isFetching": false,
   "token": undefined,
+}
+`;
+
+exports[`auth reducer has an initial state 1`] = `
+Object {
+  "errorMessage": "",
+  "isAuthenticated": false,
+  "isFetching": false,
+  "token": null,
 }
 `;

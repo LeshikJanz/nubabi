@@ -9,7 +9,8 @@
       "alias": {
         "core": "./core",
         "native": "./platforms/native",
-        "web": "./platforms/web/src/web"
+        "web": "./platforms/web/src/web",
+        "graphql-utils": "./libs/graphql-utils"
       }
     }]
 

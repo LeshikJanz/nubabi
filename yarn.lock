@@ -378,6 +378,10 @@ apollo-server-module-graphiql@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.0.2.tgz#cf5746821a96415a36cb418239bb66c7c5d0ff32"
 
+apollo-utilities@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/apollo-utilities/-/apollo-utilities-1.0.3.tgz#bf435277609850dd442cf1d5c2e8bc6655eaa943"
+
 app-root-path@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.0.1.tgz#cd62dcf8e4fd5a417efc664d2e5b10653c651b46"
@@ -5205,6 +5209,14 @@ graphql-server-express@^1.0.2:
 graphql-tag@^2.0.0, graphql-tag@^2.4.2:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-2.5.0.tgz#b43bfd8b5babcd2c205ad680c03e98b238934e0f"
+
+graphql-tools@*:
+  version "2.13.0"
+  resolved "https://registry.yarnpkg.com/graphql-tools/-/graphql-tools-2.13.0.tgz#3c7aad3bb1284a651dd80b385e06b3d13ac2a6f2"
+  dependencies:
+    apollo-utilities "^1.0.1"
+    deprecated-decorator "^0.1.6"
+    uuid "^3.1.0"
 
 graphql-tools@^0.11.0:
   version "0.11.0"
@@ -11300,7 +11312,7 @@ uuid@^2.0.1, uuid@^2.0.2:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0, uuid@^3.0.1:
+uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
 

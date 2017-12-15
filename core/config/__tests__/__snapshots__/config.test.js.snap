@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`config gets config from environment variables 1`] = `
+Object {
+  "apiUrl": "mock",
+  "appName": "mock",
+  "appVersion": "mock",
+  "environment": "mock",
+  "firebase": Object {
+    "apiKey": "mock",
+    "authDomain": "mock",
+    "databaseURL": "mock",
+    "messagingSenderId": "mock",
+    "storageBucket": "mock",
+  },
+  "graphqlEndpoint": "mock",
+  "sentryUrl": "mock",
+}
+`;
+
+exports[`config reducer has a default state even though gets rehydrated to config 1`] = `
+Object {
+  "apiUrl": "",
+  "appName": "",
+  "appVersion": "",
+  "firebase": null,
+  "graphqlEndpoint": null,
+  "sentryUrl": "",
+}
+`;

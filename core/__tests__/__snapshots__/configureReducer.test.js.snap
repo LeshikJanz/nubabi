@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`configureReducer configures platform specific reducers 1`] = `
+Object {
+  "apollo": Object {
+    "data": Object {},
+    "optimistic": Array [],
+    "reducerError": null,
+  },
+  "app": Object {
+    "error": null,
+    "online": false,
+    "started": false,
+    "success": null,
+  },
+  "auth": Object {
+    "errorMessage": "",
+    "isAuthenticated": false,
+    "isFetching": false,
+    "token": null,
+  },
+  "babies": Object {
+    "currentBabyId": null,
+    "failure": false,
+    "isFetching": false,
+  },
+  "config": Object {
+    "apiUrl": "",
+    "appName": "",
+    "appVersion": "",
+    "firebase": null,
+    "graphqlEndpoint": null,
+    "sentryUrl": "",
+  },
+  "device": Object {
+    "host": "",
+  },
+  "form": Object {},
+  "growth": Object {
+    "hasSeenGlobalIntro": false,
+  },
+  "settings": Object {
+    "memories": Object {
+      "displaySuggestions": true,
+    },
+    "notifications": Object {
+      "activities": false,
+      "email": true,
+      "growth": true,
+      "memories": true,
+      "stimulation": true,
+    },
+    "unitDisplay": Object {
+      "height": "cm",
+      "weight": "kg",
+    },
+  },
+  "some": Object {
+    "myPlatformState": "foo",
+  },
+  "ui": Object {
+    "gallery": Object {
+      "scrollEnabled": true,
+    },
+    "showNetworkIndicator": false,
+  },
+  "viewer": null,
+}
+`;

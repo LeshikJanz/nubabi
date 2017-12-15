@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Article renders correctly 1`] = `
+style = Object {
+    "flex": 1,
+    "borderColor": "#9EABBC",
+    "borderBottomWidth": 0,
+    "borderLeftWidth": 0,
+    "borderRightWidth": 0,
+    "borderTopWidth": 0
+}
+
+<View
+  style={
+    Object {
+      "borderBottomWidth": 0,
+      "borderColor": "#9EABBC",
+      "borderLeftWidth": 0,
+      "borderRightWidth": 0,
+      "borderTopWidth": 0,
+      "flex": 1,
+    }
+  }
+>
+  <View
+    style={
+      Array [
+        Object {},
+        Object {
+          "flex": 1,
+        },
+      ]
+    }
+  >
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={undefined}
+    >
+      
+
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Array [
+          Object {
+            "color": "#748294",
+            "marginVertical": 10,
+          },
+          Object {
+            "color": "#454D56",
+            "fontFamily": "System",
+            "fontSize": 14,
+            "letterSpacing": -0.88,
+            "lineHeight": 20,
+            "marginBottom": 1,
+          },
+        ]
+      }
+    >
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Array [
+            Object {},
+          ]
+        }
+      >
+        Article
+      </Text>
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "fontFamily": "Courier",
+          "fontWeight": "500",
+        }
+      }
+    />
+  </View>
+</View>
+`;

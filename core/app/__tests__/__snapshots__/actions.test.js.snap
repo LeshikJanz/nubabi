@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`creates APP_ERROR action 1`] = `
+exports[`app actions appError creates APP_ERROR action 1`] = `
 Object {
   "error": true,
   "payload": [Error: foo],
@@ -8,7 +8,14 @@ Object {
 }
 `;
 
-exports[`creates APP_ONLINE action 1`] = `
+exports[`app actions appInfo creates APP_INFO action 1`] = `
+Object {
+  "payload": "info",
+  "type": "APP_INFO",
+}
+`;
+
+exports[`app actions appOnline creates APP_ONLINE action 1`] = `
 Object {
   "payload": Object {
     "online": true,
@@ -17,7 +24,20 @@ Object {
 }
 `;
 
-exports[`creates ON_AUTH action 1`] = `
+exports[`app actions appStarted creates APP_STARTED action 1`] = `
+Object {
+  "type": "APP_STARTED",
+}
+`;
+
+exports[`app actions appSuccess creates APP_SUCCESS action 1`] = `
+Object {
+  "payload": "success!",
+  "type": "APP_SUCCESS",
+}
+`;
+
+exports[`app actions onAuth creates ON_AUTH action 1`] = `
 Object {
   "payload": Object {
     "token": "TOKEN",
@@ -26,5 +46,11 @@ Object {
     },
   },
   "type": "ON_AUTH",
+}
+`;
+
+exports[`app actions resetSettings creates RESET_SETTINGS action 1`] = `
+Object {
+  "type": "RESET_SETTINGS",
 }
 `;

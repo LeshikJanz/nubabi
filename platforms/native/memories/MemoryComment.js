@@ -1,12 +1,12 @@
 // @flow
-import type { Comment } from 'core/types';
+import type { MemoryCommentFragment } from 'core/types';
 import React from 'react';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';
 import moment from 'moment';
 import { Avatar, Box, Text } from '../components';
 
-type Props = Comment & {};
+type Props = MemoryCommentFragment & {};
 
 export const MemoryComment = ({ text, author, createdAt }: Props) => {
   const timestamp = moment(createdAt);

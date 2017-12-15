@@ -1,6 +1,7 @@
 // @flow
 import axios from 'axios';
 import { Observable } from 'rxjs/Observable';
+import "../shared/observable";
 
 import type {
   Action,
@@ -9,7 +10,12 @@ import type {
   OnAuthAction,
   Deps,
   FirebaseUser,
+  ResetSettingsAction,
 } from '../types';
+
+export const appStarted = (): AppStartedAction => ({
+  type: 'APP_STARTED',
+});
 
 export const appError = (error: Object): AppErrorAction => ({
   type: 'APP_ERROR',
@@ -22,18 +28,23 @@ export const appOnline = (online: boolean): AppOnlineAction => ({
   payload: { online },
 });
 
-export const appSuccess = (message: string) => ({
+export const appSuccess = (message: string): AppSuccessAction => ({
   type: 'APP_SUCCESS',
   payload: message,
 });
 
-export const alertShown = {
-  type: 'ALERT_SHOWN',
-};
+export const appInfo = (message: string): AppInfoAction => ({
+  type: 'APP_INFO',
+  payload: message,
+});
 
 export const onAuth = (user: ?FirebaseUser, token?: string): OnAuthAction => ({
   type: 'ON_AUTH',
   payload: { user, token },
+});
+
+export const resetSettings = (): ResetSettingsAction => ({
+  type: 'RESET_SETTINGS',
 });
 
 const appStartedEpic = (action$: any, deps: Deps) => {
@@ -68,7 +79,7 @@ const appStartedEpic = (action$: any, deps: Deps) => {
     .mergeMap(() => Observable.merge(...streams));
 };
 
-const resetSettingsEpic = (action$: any) => {
+export const resetSettingsEpic = (action$: any) => {
   return action$
     .filter(action => action.type === 'RESET_SETTINGS')
     .mapTo(appSuccess('Settings has been reset'));

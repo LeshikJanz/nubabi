@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`navigation actions resetNavigation creates a RESET_NAVIGATION action 1`] = `
+Object {
+  "payload": Object {
+    "index": 0,
+    "routeName": "home",
+  },
+  "type": "NAVIGATION_RESET",
+}
+`;

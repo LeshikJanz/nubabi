@@ -1,7 +1,5 @@
 // prettier-ignore
 // Used from transform-define
-const { execSync } = require('child_process');
-
 var configMap = {};
 [
   'APP_NAME',
@@ -21,6 +19,7 @@ var configMap = {};
   configMap['process.env.' + fullKey] = process.env[fullKey];
 });
 
+// FIXME: this should be "process.env.NUBABI_APP_VERSION"
 if (!configMap['NUBABI_APP_VERSION']) {
   configMap['process.env.NUBABI_APP_VERSION'] = 'DEV';
 }

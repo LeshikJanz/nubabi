@@ -363,6 +363,10 @@ export type DeleteBabyAction = {
   payload: string,
 };
 
+export type ResetSettingsAction = {
+  type: 'RESET_SETTINGS',
+};
+
 export type Action =
   | AppStartedAction
   | AppOnlineAction
@@ -381,4 +385,5 @@ export type Action =
   | SkipGrowthIntroductionAction
   | SettingsSetValueAction
   | ToggleGalleryScrollEnabledAction
-  | ToggleNetworkIndicatorAction;
+  | ToggleNetworkIndicatorAction
+  | ResetSettingsAction;

@@ -63,7 +63,6 @@ const findContent = (
     const contentAgeDuration = isRaw
       ? prop('age_duration', element).toUpperCase()
       : prop('ageDuration', element);
-
     return (
       contentAgeDuration === ageDuration &&
       minimumAge >= currentAge &&
@@ -79,9 +78,7 @@ function reducer(state: GrowthState = initialState, action: Action) {
         hasSeenGlobalIntro: action.payload,
       });
     }
-    case 'RESET_TIPS': {
-      return merge(state, { hasSeenGlobalIntro: false });
-    }
+
     default: {
       return state;
     }

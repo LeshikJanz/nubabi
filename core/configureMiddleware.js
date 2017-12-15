@@ -8,7 +8,7 @@ import isReactNative from './app/isReactNative';
 import { configureApollo } from './configureApollo';
 
 // Like redux-thunk, but with just one argument for dependencies.
-const injectMiddleware = deps => ({ dispatch, getState }: any) => (
+export const injectMiddleware = deps => ({ dispatch, getState }: any) => (
   next: any,
 ) => (action: any) =>
   next(
@@ -23,10 +23,10 @@ const configureMiddleware = (
   platformMiddleware: any,
   platformEpics: any,
 ) => {
-  const deps = configureDeps(initialState, platformDeps);
-  const rootEpic = configureEpics(deps, platformEpics);
-  const epicMiddleware = createEpicMiddleware(rootEpic);
-  const apolloMiddleware = configureApollo().middleware();
+  const deps = configureDeps(initialState, platformDeps); /*?*/
+  const rootEpic = configureEpics(deps, platformEpics); /*?*/
+  const epicMiddleware = createEpicMiddleware(rootEpic); /*?*/
+  const apolloMiddleware = configureApollo().middleware(); /*?*/
 
   const middleware = [
     injectMiddleware(deps),

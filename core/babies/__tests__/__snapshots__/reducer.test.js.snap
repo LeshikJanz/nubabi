@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`handles GET_BABIES_FAILURE 1`] = `
+exports[`babies reducer handles GET_BABIES_FAILURE 1`] = `
 Object {
   "currentBabyId": null,
   "failure": true,
@@ -8,7 +8,7 @@ Object {
 }
 `;
 
-exports[`handles GET_BABIES_REQUEST 1`] = `
+exports[`babies reducer handles GET_BABIES_REQUEST 1`] = `
 Object {
   "currentBabyId": null,
   "failure": false,
@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`handles GET_BABIES_SUCCESS 1`] = `
+exports[`babies reducer handles GET_BABIES_SUCCESS 1`] = `
 Object {
   "currentBabyId": 1,
   "failure": false,
@@ -24,9 +24,17 @@ Object {
 }
 `;
 
-exports[`handles SELECT_BABY 1`] = `
+exports[`babies reducer handles SELECT_BABY 1`] = `
 Object {
   "currentBabyId": 1,
+  "failure": false,
+  "isFetching": false,
+}
+`;
+
+exports[`babies reducer has an initial state 1`] = `
+Object {
+  "currentBabyId": null,
   "failure": false,
   "isFetching": false,
 }

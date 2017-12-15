@@ -35,20 +35,18 @@ export const configureApollo = (): ApolloClient => {
   return client;
 };
 
-export const configureApolloAuth = (store: Store<Action, State>) => {
-  /* eslint-disable no-param-reassign */
-  networkInterface.use([
-    {
-      applyMiddleware(req, next) {
-        if (!req.options.headers) {
-          req.options.headers = {};
-        }
+export const authTokenMiddleware = (store) => ({
+  applyMiddleware(req, next) {
+    if (!req.options.headers) {
+      req.options.headers = {};
+    }
 
-        const { token } = store.getState().auth;
-        req.options.headers.authorization = token ? `Bearer ${token}` : null;
-        next();
-      },
-    },
-  ]);
-  /* eslint-enable no-param-reassign */
+    const { token } = store.getState().auth;
+    req.options.headers.authorization = token ? `Bearer ${token}` : null;
+    next();
+  },
+});
+
+export const configureApolloAuth = (store: Store<Action, State>) => {
+  networkInterface.use([authTokenMiddleware(store)]);
 };

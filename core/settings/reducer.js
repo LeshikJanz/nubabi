@@ -35,10 +35,6 @@ export const resetSettings = () => ({
   type: 'RESET_SETTINGS',
 });
 
-export const resetTips = () => ({
-  type: 'RESET_TIPS',
-});
-
 export const unitDisplaySelector = (state: State) => state.settings.unitDisplay;
 
 export default function reducer(
@@ -51,13 +47,6 @@ export default function reducer(
     }
     case 'RESET_SETTINGS': {
       return initialState;
-    }
-    case 'RESET_TIPS': {
-      return merge(state, {
-        memories: {
-          displaySuggestions: true,
-        },
-      });
     }
     default: {
       return state;
