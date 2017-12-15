@@ -6,6 +6,7 @@ type Props = {
   steps: string[],
 };
 
+/* eslint-disable react/no-array-index-key */
 const ActivitySkittles = ({ steps }: Props) => (
   <SkittlesStyled.Wrapper>
     <SkittlesStyled.ActivityHeadingText>

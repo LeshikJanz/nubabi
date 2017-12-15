@@ -20,9 +20,9 @@ const ActivityMenu = ({
 }: Props) => (
   <ActivityMenuStyled.Buttons>
     {((!isCompleted || isActivityMenuOpen) &&
-      ACTIVITY_BUTTONS.map((a, i) => (
+      ACTIVITY_BUTTONS.map(a => (
         <ActivityButton
-          key={i}
+          key={a.id}
           handleActivity={() => selectActivity(a)}
           {...a}
         />

@@ -2,24 +2,19 @@
 import { Action } from 'core/types';
 
 export const globalLoaderInit = () => ({
-  type: '/REQUEST',
+  type: 'LOADING_REQUEST/REQUEST',
   payload: { useGlobalLoader: 'useGlobalLoader' },
 });
 
 export const globalLoaderSuccess = () => ({
-  type: '/SUCCESS',
+  type: 'LOADING_REQUEST/SUCCESS',
   payload: { useGlobalLoader: 'useGlobalLoader' },
 });
 
 export const globalLoaderError = (error): Action => ({
-  type: '/ERROR',
+  type: 'LOADING_REQUEST/ERROR',
   payload: {
     useGlobalLoader: 'useGlobalLoader',
     error,
   },
-});
-
-export const selectBaby = (babyId: string): Action => ({
-  type: 'SELECT_BABY',
-  payload: babyId,
 });

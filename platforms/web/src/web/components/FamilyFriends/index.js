@@ -65,18 +65,21 @@ const Plus = styled(PlusIco)`
 
 const relatives = [
   {
+    id: 1,
     name: 'Leonard Massey',
     status: 'Uncle',
     isPending: false,
     avatar: '',
   },
   {
+    id: 2,
     name: 'Andy Jonson',
     status: 'Grandpa',
     isPending: true,
     avatar: '',
   },
   {
+    id: 3,
     name: 'Miranda Jonson',
     status: 'Grandma',
     isPending: true,
@@ -98,7 +101,7 @@ const FamilyFriends = () => {
         </Add>
       </Header>
       <RelativesList>
-        {relatives.map((item, i) => <Relative key={i} {...item} />)}
+        {relatives.map(item => <Relative key={item.id} {...item} />)}
       </RelativesList>
     </FamilyFriensContainer>
   );

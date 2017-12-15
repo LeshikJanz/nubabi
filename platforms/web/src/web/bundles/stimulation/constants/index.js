@@ -30,6 +30,7 @@ export const STIMULATION_BUTTONS = [
 
 export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
   {
+    id: 1,
     type: 'tooDifficult',
     icon: 'icon-not-ready',
     mainText: 'TOO DIFFICULT',
@@ -38,6 +39,7 @@ export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
     level: 'DECREASE',
   },
   {
+    id: 2,
     type: 'done',
     icon: 'icon-done',
     mainText: 'MARK AS DONE',
@@ -45,6 +47,7 @@ export const ACTIVITY_BUTTONS: StimulationButtonType[] = [
     callback: 'completeActivity',
   },
   {
+    id: 3,
     type: 'tooEase',
     icon: 'icon-too-ease',
     mainText: 'TOO EASE',

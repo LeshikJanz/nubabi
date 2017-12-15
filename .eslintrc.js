@@ -29,7 +29,6 @@ module.exports = {
     'global-require': 0,
     'import/first': 0,
     'no-duplicate-imports': 0,
-    'react/no-array-index-key': 0,
     // handled by eslint-plugin-import
     'no-use-before-define': 0,
     'no-underscore-dangle': [

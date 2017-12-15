@@ -11,7 +11,7 @@ import PersonDefaultIcon from 'web/assets/images/icons/person.svg';
 import { Baby } from 'core/types';
 import path from 'ramda/src/path';
 import { connect } from 'react-redux';
-import { selectBaby } from 'web/actions';
+import { selectBaby } from 'core/babies/actions';
 import { withRouter, Link } from 'react-router-dom';
 
 type Props = Baby;

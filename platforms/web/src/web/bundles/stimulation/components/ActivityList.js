@@ -16,9 +16,9 @@ const ActivityList = ({
   switchable = false,
 }: Props) => (
   <ActivityListStyled.List>
-    {activities.map(({ node }, i) => (
+    {activities.map(({ node }) => (
       <ActivityItem
-        key={i}
+        key={node.id}
         activity={node}
         handleClick={handleNavigateToActivity}
         switchable={switchable}
