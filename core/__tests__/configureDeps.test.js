@@ -1,3 +1,4 @@
+import { mockFirebase } from '../shared/testUtils';
 import configureDeps from '../configureDeps';
 import config from '../config';
 import { ApolloClient } from 'apollo-client';
@@ -6,13 +7,17 @@ describe('configureDeps', () => {
   const now = 1482363367071;
   Date.now = jest.fn(() => now);
 
-  const deps = configureDeps({
-    config: {
-      firebase: config.firebase,
-    }
-  }, {
-    somePlatformDependency: true,
-  });  /*?*/
+  const deps = configureDeps(
+    {
+      config: {
+        firebase: config.firebase,
+      },
+    },
+    {
+      firebase: mockFirebase(),
+      somePlatformDependency: true,
+    },
+  );
 
   it('adds platform-specific dependencies', () => {
     expect(deps).toHaveProperty('somePlatformDependency');

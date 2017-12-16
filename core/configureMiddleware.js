@@ -18,15 +18,15 @@ export const injectMiddleware = deps => ({ dispatch, getState }: any) => (
   );
 
 const configureMiddleware = (
-  initialState: any,
-  platformDeps: any,
+  initialState: Object,
+  platformDeps: Object,
   platformMiddleware: any,
   platformEpics: any,
 ) => {
-  const deps = configureDeps(initialState, platformDeps); /*?*/
-  const rootEpic = configureEpics(deps, platformEpics); /*?*/
-  const epicMiddleware = createEpicMiddleware(rootEpic); /*?*/
-  const apolloMiddleware = configureApollo().middleware(); /*?*/
+  const deps = configureDeps(initialState, platformDeps);
+  const rootEpic = configureEpics(deps, platformEpics);
+  const epicMiddleware = createEpicMiddleware(rootEpic);
+  const apolloMiddleware = configureApollo().middleware();
 
   const middleware = [
     injectMiddleware(deps),

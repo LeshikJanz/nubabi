@@ -8,7 +8,7 @@ import { configureApolloAuth } from './configureApollo';
 
 type Options = {
   initialState: Object,
-  platformDeps?: Object,
+  platformDeps: { firebase: any },
   platformReducers?: Object,
   platformMiddleware?: Array<Function>,
   platformStoreEnhancers?: Array<Function>,
@@ -18,7 +18,7 @@ type Options = {
 const configureStore = (options: Options) => {
   const {
     initialState,
-    platformDeps = {},
+    platformDeps,
     platformMiddleware = [],
     platformReducers = {},
     platformStoreEnhancers = [],
