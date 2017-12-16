@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewThisWeekActivity 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "activity": Object {
+        "__typename": "Activity",
+        "expert": Object {
+          "__typename": "Expert",
+          "avatar": Object {
+            "__typename": "Avatar",
+            "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carly.jpg",
+          },
+          "biography": "Carly Tzanos is a graduate of the University of Cape Town (BSc Occupational Therapy) and also holds a sensory integration training qualification. biography:s experience includes work in private practice and a paediatric ward at a secondary hospital in South Africa. She has also taught and developed programmes at a pregnancy and parenting centre in Canada.
+iography:s special field of interest is infant An occupational therapist can play a big role in helping parents and those working with infants to understand the importance of a biography:s sensory development and how their environment impacts on theirshe says.
+
+Together with Lourdes Bruwer, Carly authored Jump Leap Fly/Groovy Adventurers, a book that helps parents to encourage their babies to move from one developmental stage to the next while having fun.
+With our fast-paced society today, time, resources and technological advances impact family interactions and the quality of time spent together. Simply spending a few hours playing with your child often seems like a luxury, but making the most of the time you do have together can make lasting impressions on future skillshe says. Carly is married with two sons, Ethan (5) and Jesse (2).",
+          "discipline": "Occupational Therapist",
+          "id": "RXhwZXJ0OjE=",
+          "name": "Carly Tzanos",
+        },
+        "id": "QWN0aXZpdHk6MjU3",
+        "introduction": "The delight of bashing over a tower is one that can entertain Agatha for many happy moments! Before he is able to, you will need to rebuild his tower each time, but soon enough he will be able to collect the fallen blocks and place them on top of one another to build his own tower. Start with bigger \\"blocks\\" such as empty boxes as these will be easier for Agatha to pick up and balance on top of each other than smaller blocks.",
+        "isCompleted": true,
+        "isFavorite": true,
+        "media": Object {
+          "__typename": "ActivityMediaConnection",
+          "edges": Array [],
+        },
+        "name": "Tons of towering fun",
+        "skillArea": Object {
+          "__typename": "SkillArea",
+          "icon": "icon-gross",
+          "id": "U2tpbGxBcmVhOjE=",
+          "image": Object {
+            "__typename": "SkillAreaImage",
+            "large": Object {
+              "__typename": "Image",
+              "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_cover.jpg?alt=media&token=dae4fc1f-805c-4b18-aef1-8fd287808407",
+            },
+          },
+          "name": "Gross Motor",
+        },
+        "steps": Array [
+          "Agatha will love to bash down towers of stacked items. You can stack blocks, empty boxes, tins, containers or stacking cups and watch as he delights in pushing them over. ",
+          "Use words like “crash”, “boom” and “bang” as they fall. ",
+          "Try this game with Agatha sitting or lying on his tummy. ",
+        ],
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "name": "Agatha",
+      "nextActivity": Object {
+        "__typename": "ActivityConnection",
+        "edges": Array [
+          Object {
+            "__typename": "ActivityEdge",
+            "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+            "node": Object {
+              "__typename": "Activity",
+              "id": "QWN0aXZpdHk6MjA5",
+              "name": "Undress for success",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "id": "U2tpbGxBcmVhOjI=",
+                "name": "Fine Motor",
+              },
+            },
+          },
+        ],
+      },
+      "previousActivity": Object {
+        "__typename": "ActivityConnection",
+        "edges": Array [],
+      },
+    },
+  },
+}
+`;

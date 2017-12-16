@@ -1,0 +1,651 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WhatYouNeedToKnow 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "dob": "2017-08-28",
+      "growth": Object {
+        "__typename": "GrowthConnection",
+        "edges": Array [
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "At birth Agatha's brain is not developed, it needs experience to make pathways between the brain cells. We have 1 billion brain cells at birth and by the age of 3, a thousand billion connections have been created. The relationship between parent and child is crucial to brain development, and it is up to you to provide the sensory input to literally grow Agatha's brain.
+
+As early as day 1, Agatha can see round shapes, red colours, contrasts of light and dark, and can hear and will respond to loud noises. He will pick up your energy and you can transmit calmness and confidence through the way you handle and interact with him. It is never too early to talk and sing to him and to promote bonding through caress and close physical contact.
+
+Babies learn to look with both eyes together in a parallel fashion after birth so if you notice that Agatha is squinting intermittently, don’t be concerned as this is quite normal. He may also be a little jaundiced and this may persist for several weeks but should not get progressively worse. It is usually a good idea to re-weigh Agatha at about 1 week of age. His birth weight should be regained by 7 to 10 days.",
+              "expert": Object {
+                "__typename": "Expert",
+                "avatar": Object {
+                  "__typename": "Avatar",
+                  "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+                },
+                "discipline": "Paediatrician",
+                "id": "RXhwZXJ0Ojc=",
+                "name": "Martin Bailey",
+              },
+              "growthDevelopmentContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZToycHhWZWIxY09zd3NLY0tBV21PMHU=",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "Jaundice, also known as icterus, is a term used to describe a yellowish tinge to the skin and sclerae (the white part of the eye). Breakdown products of old blood cells are converted to bilirubin and before birth, this is excreted via the placenta. At birth, the placenta is gone and this excretion must be done through the baby’s kidneys (as urine) and gut (as stools).  This biological change is slow to switch on and bilirubin accumulates in baby's system to produce visible jaundice.",
+                      "title": "What is jaundice?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo1S1V2VmJKNlFvcWtLa09vUXNHZVdB",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "Some babies have a particularly strong oral urge and a pacifier can avoid mom becoming the dummy!  There is no proven advantage of one product over the other and introduction remains a personal choice.",
+                      "title": "Should I be using a dummy or pacifier?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTozWjYyNVY0SzFhQVNPVXNxQ09TbWVP",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "Male circumcision remains a personal choice although there is more recent evidence in favour of the procedure via reduced transmission of HIV, HPV and reduced incidence of urinary tract infection. It is usually best done early.",
+                      "title": "Should I circumcise my child?",
+                    },
+                  },
+                ],
+              },
+              "id": "R3Jvd3RoOmNDQjljd0p1VFlVZ1dTUWF5S0t1aw==",
+              "introduction": "Hi Last,
+
+Congratulations on the birth of Agatha and the start of your amazing journey together. Over the coming weeks and months you will observe your precious bundle growing and develop right before our eyes and we hope to be able to provide useful insight into what to expect. Be peaceful and enjoy your little miracle.",
+              "introductionContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo3N1NUNXR3OGZLWUMyMFd3bWdBNDRB",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Secure bonding and attachment doesn’t happen overnight. It is an on-going partnership between you and your baby. Within the first few months, it will become easier to understand, interpret and respond to the important signals of when he needs food, sleep, love, and comfort. You will learn what makes him alert and what makes him calm and when he is ready for stimulation. Allow yourself and your baby time to learn about each other. The key is to observe his behaviour on an on-going basis, especially in new situations. Look out for signs of enjoyment and signs of sensory overload, so that you can intervene and help him before he gets overwhelmed.
+
+As your baby grows into toddlerhood, you can continue to strengthen your special bond. Daily attentive play ensures that you are nurturing his early learning potential while also building and strengthening your relationship. Whatever stage he is in, dedicate at least 5 minutes of your focussed attention every day, which is uninterrupted. Get rid of all distractions (TV, radio, computer etc), get down to eye level and just play! ",
+                      "title": "Bonding with your baby",
+                    },
+                  },
+                ],
+              },
+              "maximumAge": 1,
+              "minimumAge": 1,
+              "title": "Week 1",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "As you are adjusting to your new bundle, so Agatha is slowly adjusting to his noisy and bright new world. Feeding on demand should become a little more predictable as your breast milk comes through and his birth weight is usually regained in 7 to 10 days.
+
+Newborn babies move in a jerky and uncoordinated way and you may notice Agatha displaying frequent motor tics. This is normal. He will need to grow and develop his complex cortex to damp down these movements which will happen over the coming weeks. His main activity at this stage is sucking and chewing on his hands. Soothing touch and loving contact are vital for Agatha so be calm and make reassuring, slow and confident movements with him.
+
+Agatha's eyes will frequently drift off from parallel gaze and he may squint intermittently until around 4 months Don’t let this stop you gazing lovingly into his eyes keeping your head about 25 cm’s from his. He will love the start of this special communication between the two of you.",
+              "expert": Object {
+                "__typename": "Expert",
+                "avatar": Object {
+                  "__typename": "Avatar",
+                  "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+                },
+                "discipline": "Paediatrician",
+                "id": "RXhwZXJ0Ojc=",
+                "name": "Martin Bailey",
+              },
+              "growthDevelopmentContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTpuVWtzRFNxSHhBMjZtd2dRZ1VzTWc=",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "All babies need at least one thorough examination, preferably by a paediatrician to exclude important and sometimes vital variations or abnormalities.",
+                      "title": "Should I do a newborn examination?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo2SDdzc2ZLY0hDT1NZQ1EwT2tJMmFP",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "For the first few days, babies pass initial green meconium but this changes to more typical yellow, looser stools over the next few days. As many as 8 stools per day or 1 stool every 8 days can be normal for your baby.",
+                      "title": "Stools – what is normal?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZToxVlIyYjBXU04yZ21xVWF1VWdZMnM0",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "The most common rash in the first 5 days is Erythema toxicum. This show as small yellow or white bumps surrounded by red skin anywhere on baby’s body except palms and soles. 
+
+It often starts on the face and proceeds down the trunk to the nappy area. It is completely harmless and no treatment is needed apart from standard moisturisers such as aqueous cream.",
+                      "title": "Skin rashes in newborns",
+                    },
+                  },
+                ],
+              },
+              "id": "R3Jvd3RoOjY3dHlnd2thTmFDR1UwRzZtbWVjQ0c=",
+              "introduction": "Hi Last,
+
+You've made it through the first week. Well done! Broken sleep and the demands of a newborn can take their toll so be sure to take good care of yourself and to rest as much as possible.
+
+You may find that it will take a little time for all the members of your household from siblings to parents (and even that family pet!) to adjust to your precious newcomer so expect a little disruption at this time and try to let it concern you too much.",
+              "introductionContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZToxdDl4WlBUODdxOHNDd2FTUXNjQXVF",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Hey, Dad. Feeling a little excluded?
+
+Breastfeeding creates a special closeness between baby and mom so dads can sometimes feel excluded and inadequate at this time. This can even include some resentment towards the new baby for monopolising ”your wife” and coming between the two of you. Try to be patient and supportive. The exclusive relationship with mom soon becomes diluted as babies explore their world and you can play a much more active role in their life from about 3 months.
+
+Babies love to be touched and frequent skin to skin contact is good so why not try baby massage as a great way to get involved and bond. ",
+                      "title": "Dad feeling a little excluded?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo1ZVdjcFN6Q3N3YXNHNEcwRTg2Q2lT",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Remember to choose your massage moment carefully for best results (like after bath time). Avoid massage just after feeds!
+
+**Legs:** Put a little oil on the hands and wrap around the width of baby's thighs and pull down, one hand after another as if “ milking the leg”. Switch legs and repeat.
+**Feet:** Rotate feet gently then stroke top of the foot from ankle to toes.  Use thumbs to trace circles over the bottom of each foot. Switch feet and repeat.
+**Toes:** Take each toe between thumb and forefinger and gently pull allowing the toe to slip through fingers.
+**Arms:** “Milk” each arm from armpit to wrist and rotate wrist in each direction a few times.
+**Hands:** Move your thumbs in a circular fashion on the palms of each of baby’s hands 
+**Fingers:** Take each finger between thumb and forefinger and gently pull allowing the finger to slip through your grasp.
+**Chest:** Place hands together with small fingers on the centre of baby’s chest and then lightly flatten hands to stroke outwards repetitively.
+**Back:** Roll baby onto tummy and using fingertips trace circles on either side of the spine from the neck down to buttocks. Finish with long strokes from shoulders down to feet.",
+                      "title": "How to massage your baby",
+                    },
+                  },
+                ],
+              },
+              "maximumAge": 2,
+              "minimumAge": 2,
+              "title": "Week 2",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "When Agatha is asleep, the recommended position is on his back. While awake, however, some lying on his tummy is important. Agatha may even be able to lift his head briefly and turn from side to side.
+
+As early as 3 weeks, he will be able to see contrasts of black and white and round shapes and enjoys red colours best. At this stage, however, his eyes will still be unfocused and he may even squint at times.
+
+Talking, singing and music will give Agatha auditory experiences and it’s never too early to start reading! Try to find picture books that have high contrast patterns and pictures with strong line drawings.",
+              "expert": Object {
+                "__typename": "Expert",
+                "avatar": Object {
+                  "__typename": "Avatar",
+                  "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+                },
+                "discipline": "Paediatrician",
+                "id": "RXhwZXJ0Ojc=",
+                "name": "Martin Bailey",
+              },
+              "growthDevelopmentContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZToxMHp6SkJIQWI2TTZTWUlNOFVhNmth",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "The recommended sleep position is with your baby on the back only as this makes SIDS less likely. Side sleeping is not preferred.",
+                      "title": "What sleeping position is best for my baby?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTozRHJiOHVpdkNvUU8yUU9jT1E2a2NN",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "Sudden Infant Death Syndrome (SIDS) or Cot Death is diagnosed when a baby dies without warning and no cause is established clinically or at post mortem.
+Nobody knows the cause but it is thought to be related to an immaturity in the brain centre responsible for breathing and waking.
+
+SIDS occurs usually during sleep and is most commonly in the 2nd month. 90% will occur before 6 months.
+
+Factors which increase risk are:
+* Males (60%)
+* Premature birth (< 37/52)
+* Low birth weight (< 2.5kg)
+
+Prevention:
+* Babies must sleep on their backs, not on their sides (healthy babies do not choke)
+* Put baby in a cot in the room with you to start but do not share a bed
+* Don’t smoke during pregnancy nor around your baby after birth
+* Make sure baby is not too hot. Ideal room temperature is 16-20ºC. No hot water bottles or electric blankets
+* Remove baby's hat once inside
+* Avoid waterbeds, beanbags, baby nests, fleeced and other soft surfaces as they are not suitable to sleep on
+* Use a mattress with a waterproof cover and single over-sheet
+* Avoid duvets, quilts, bedding rolls or pillows
+* Take your baby for regular checkups and keep up to date with immunisations
+* Dummies or pacifiers. There is some evidence that using a dummy reduces incidence of cot death",
+                      "title": "SIDS - What you need to know",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZToyYWhEaUhaYUlveTgwUUtNa2NLaWdF",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Holding your newborn using a sling or papoose worn over your front is a wonderful way of recreating the warmth and closeness that she experienced while still in utero. Fitted snugly against your chest with her head beneath your chin; your movement, warmth and heart beat will communicate love and closeness and will help to settle her as she starts to experience her new world.
+
+There are many physical and emotional benefits to baby wearing:
+* Baby feels safe and secure.  You will be able to pick up on distress cues sooner, allowing you to respond quickly strengthening your trust relationship.
+* It’s convenient. You are able to walk around with your hands free, without loosing contact with your baby. Your sling also allows for discreet breastfeeding while in public.
+* Dad can join in. Wearing your baby is not limited to Mom. This is a wonderful opportunity for Dad to begin to bond with your new arrival and her her to get to know Dad too.",
+                      "title": "The benefits of wearing your baby",
+                    },
+                  },
+                ],
+              },
+              "id": "R3Jvd3RoOjFadVNiSU5LRVFDRUNZS01VTVNJNks=",
+              "introduction": "This week Agatha's eating and sleeping patterns begin to emerge which should making feeding more predictable. Despite this improvement, you may be suffering from sleep deprivation and feelings of exhaustion as Agatha may be showing early signs of abdominal discomfort or baby colic. Try to accept as much help as possible, rest as often as you can and remember to be gentle with yourself.",
+              "introductionContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTp2NmZweHI0MjhvMlVVYXFVR2Nnb3E=",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Babies need you round the clock and it’s a big adjustment to cope with short bursts of sleep.
+
+Here are some suggestions on how to cope:
+* Cut out caffeine, nicotine and alcohol in the late afternoon and evening.
+* Exercise with particular reference to pelvic floor exercise.
+* Stick to a regular routine with your baby and yourself particularly when it comes to bedtime.
+* Grab a 15-20min snooze in the day as this can improve alertness.
+* Avoid falling asleep in chairs or on the couch.  Try to sleep only in your bed.
+* Avoid heavy meals just before bedtime.
+* Keep a notepad next to your bed and unload your thoughts onto the pad until morning.",
+                      "title": "Tips on how to cope with sleep deprivation",
+                    },
+                  },
+                ],
+              },
+              "maximumAge": 3,
+              "minimumAge": 3,
+              "title": "Week 3",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "As early as 3 weeks, Agatha will be able to see contrasts of black and white, round shapes and enjoys red colours best. At this stage, however, his eyes will still be unfocused and he may even squint at times.
+
+Talking, singing and music will give Agatha auditory experiences and it’s never too early to start reading! Try to find picture books that have high contrast patterns and pictures with strong line drawings to show to Agatha in the coming weeks.
+
+When Agatha is asleep, the recommended position is on his back. While awake, however, some lying on his tummy is important. Agatha may even be able to lift his head briefly and turn from side to side. Calm and reassuring touch and loving contact are vital as babies pick up agitation from us. Placing Agatha in a baby carrier, sling or papoose worn over your front works wonders to settle him and get him to sleep while you can get on with life around the house.",
+              "expert": Object {
+                "__typename": "Expert",
+                "avatar": Object {
+                  "__typename": "Avatar",
+                  "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+                },
+                "discipline": "Paediatrician",
+                "id": "RXhwZXJ0Ojc=",
+                "name": "Martin Bailey",
+              },
+              "growthDevelopmentContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTozOExOalg0M051S1lFT3FzWXFtYUlH",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "Take the following precautions to keep your baby in good health.
+* Try to breastfeed for the first year
+* Place baby on the back to sleep to avoid SIDS
+* Don’t let anyone smoke around baby
+* Avoid contact with unwell people
+* Wash hands after each nappy change
+* Make sure baby is fully immunised
+
+Look out for these signs which may indicate that your baby may be unwell and require a visit to the doctor:
+**Unusual behaviour:**
+* High pitched, weak or incessant crying
+* Baby is inactive with no crying
+* Loss of interest in feeding
+* Difficulty with breathing, e.g. laboured or noisy breathing
+
+**Tummy upsets:**
+* Frequent watery stools
+* Blood in stools
+* Jelly-like stools
+* Dehydration 
+
+**High Temperature:**
+* Babies younger than 3 months with a temperature greater than 37ºC should be seen by a doctor",
+                      "title": "Is my baby unwell? (When to call a doctor)",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo1UjRYQ0pNdXp1UXNRY0tnS0FTT2NN",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "The pelvic floor is formed by a broad sling of muscles, ligaments and sheet-like tissues. It stretches from the pubic bone in front to the base of the spine at the back and these structures are stretched out of shape in pregnancy and childbirth resulting in possible urinary leaks and a less toned birth canal.
+
+Pelvic floor exercises are vital to restoring strength and tone to the area and can be done simply while feeding. These exercises will help the perineum and vagina to heal more quickly, to prevent accidental urinary leaks and reduce swelling and bruising of the perineum.
+
+* To start, breathe in then as you breathe out gently squeeze your pelvic floor muscles.
+* Pull your muscles in as if you’re trying to hold your wee or pass wind.
+* Try to build up to 10 sets with every feed and you will be doing plenty.",
+                      "title": "How to exercise your pelvic floor",
+                    },
+                  },
+                ],
+              },
+              "id": "R3Jvd3RoOjVycGkzWU05ck9jNHlpQXFvbTZBWUk=",
+              "introduction": "Hi Last,
+
+This week Agatha's eating and sleeping patterns begin to emerge which should making feeding more predictable. Despite this improvement, you may be suffering from sleep deprivation and feelings of exhaustion as Agatha may be showing early signs of abdominal discomfort or baby colic. Try to accept as much help as possible, rest as often as you can and remember to be gentle with yourself.",
+              "introductionContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo2YVZEWUVqSEtvb2ltVWNLYUFBRUlz",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Post Natal Depression or PND is common (up to 1 in 4 women may be affected). This is not the same as the Baby Blues which presents in the first few days after delivery and is usually gone by 3-4 weeks. The huge hormonal changes that are going on in your body as well as discomfort relating to the normal birth or caesarean section; sleep deprivation and constant demand, all combine to cause the Baby Blues which mostly resolve without treatment.
+
+Look out for these signs which may indicate that you may have PND:
+* Anxiety about things that wouldn’t normally bother you.
+* You get no pleasure from your baby and even feel hostile towards him/her.
+* You feel anxious about your baby’s health and think that you’re a terrible mom.
+* You feel exhausted and you lack motivation
+* You feel trapped in your life
+* Irritability
+* Tearfulness and loneliness
+* You struggle to get to sleep or you wake early 
+* Panic attacks
+* Stomach pains, headache or blurred vision
+* Low sex drive
+
+If you are experiencing these feelings or signs, talk to someone, preferably your GP or gynaecologist. Don’t try to cope on your own as PND responds well to treatment.",
+                      "title": "Recognising Baby Blues and Post Natal Depression",
+                    },
+                  },
+                ],
+              },
+              "maximumAge": 4,
+              "minimumAge": 4,
+              "title": "Week 4",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "This week Agatha will begin to focus with both eyes and can now detect more detail in colours, designs and shapes. He can track movement and will be transfixed for short periods by a simple rattle passing in front of his face. Agatha's memory is developing all the time and frequent, repeated exposure to different experience builds his brain. Babies tune themselves into their surroundings through their noses using the sharp sense of smell that they are born with and Agatha will already be able to remember you by smell.",
+              "expert": Object {
+                "__typename": "Expert",
+                "avatar": Object {
+                  "__typename": "Avatar",
+                  "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+                },
+                "discipline": "Paediatrician",
+                "id": "RXhwZXJ0Ojc=",
+                "name": "Martin Bailey",
+              },
+              "growthDevelopmentContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo0RkR6SmZieThNWXNZQUMwbTJHMHdN",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "**Air Travel**
+Your baby can travel soon after she is born but it is usually sensible to wait for 2 days after delivery to ensure no complications. Aeroplane travel is fine but feeding on take off and landing is important to reduce possible ear pain.
+
+**Car Travel**
+Make sure your baby seat is properly installed at this stage, in a rear-facing seat.  Never place the baby chair on the front seat – air bags can be fatal. Get movable sun shades to shield eyes and skin from the hot sun.
+
+**NEVER** travel with baby unrestrained.
+**STOP** to breastfeed and then put baby back in the car seat.",
+                      "title": "When can I travel with my newborn?",
+                    },
+                  },
+                ],
+              },
+              "id": "R3Jvd3RoOjVCcDdQQklCR2dhc2dNaXd1dXd1d0s=",
+              "introduction": "Hi Last,
+
+Conflicting advice from well-meaning friends and relatives can become really confusing. Be confident in your growing ability as a parent. Make decisions that are logical and that you feel comfortable with and try not feel guilty about issues pushed by peer pressure. You're doing great!",
+              "introductionContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [],
+              },
+              "maximumAge": 5,
+              "minimumAge": 5,
+              "title": "Week 5",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "This week, Agatha will begin to recognise Mom and Dad and will prefer you to strangers. You may notice that he will often coo and kick with pleasure on seeing you. Keep a close look out as now is the time you may see your first smile! This week ushers in a new chapter in parent-baby interaction and development.
+
+Agatha is becoming more sensitive to his surroundings and may startle with noise or quiet down with stimuli such as music. You may notice that he will begin to stare at soft toys and is fascinated by ceiling lights.
+
+Weight will usually have increased by 1kg compared to birth weight and height by 2 or 3cm.",
+              "expert": Object {
+                "__typename": "Expert",
+                "avatar": Object {
+                  "__typename": "Avatar",
+                  "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+                },
+                "discipline": "Paediatrician",
+                "id": "RXhwZXJ0Ojc=",
+                "name": "Martin Bailey",
+              },
+              "growthDevelopmentContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo1RENRdzRIN1VjVWE4aUVjWXVXWVNP",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "This is the common name for redness and scaly patches on the scalp.  It is like a baby dandruff caused by overactive oil glands on the scalp and face – it frequently includes eyebrows.
+
+When this spreads to other areas, it is called seborrhoeic dermatitis.  Rub baby oil or olive oil on the scalp to soften and loosen the scales and then shampoo once a week with a tar shampoo as would be used for adult dandruff – keep free of the eyes!
+
+There is often a redness and angry appearance to the skin reflecting secondary infection and an antibacterial cream is often useful.
+
+*Contact your health professional to confirm.*",
+                      "title": "What is cradle cap?",
+                    },
+                  },
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTo1WXRZckZDa0dRaThNdUVvMFVHQ1dV",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+                        "name": "Health",
+                      },
+                      "text": "Newborn hair loss in the 1st 6 months is perfectly normal.  This happens because the newborns’ hormone levels drop after birth (moms lose hair for the same reason). Bald patches often become visible in areas where the head is in contact with surfaces; i.e. often back of head or sides.
+
+New hair begins to grow very soon and it may have a completely different texture and colour.  Other conditions that cause hair loss are very uncommon in children under 12 months of age.",
+                      "title": "Newborn hairloss",
+                    },
+                  },
+                ],
+              },
+              "id": "R3Jvd3RoOjZHc2NheGV5elk2OHlFR3FBZ3l1Mjg=",
+              "introduction": "Hi Last,
+
+This is an important week as moms need to visit their Gynae or G.P for their postnatal check-up and their Paediatrician or G.P for the baby’s checkup.
+
+Important issues to discuss for mom:
+* Postnatal depression
+* Physical check
+* Discussion of contraceptive and sexual activity
+* Fitness issues and pelvic floor exercises
+
+Important issues to discuss for baby:
+* Growth and feeding
+* Development and stimulation
+* Comprehensive examination of all systems
+* Supplements – vitamins and others
+* Vaccinations",
+              "introductionContentLinks": Object {
+                "__typename": "GrowthArticleConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "GrowthArticleEdge",
+                    "node": Object {
+                      "__typename": "GrowthArticle",
+                      "id": "R3Jvd3RoQXJ0aWNsZTozNndpcEdCeDRzQ1NhazBjTUdTb0dv",
+                      "section": Object {
+                        "__typename": "GrowthArticleSection",
+                        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+                        "name": "Parenting",
+                      },
+                      "text": "Many people ask about the safety of immunising your child. Some of the concerns arise from data relating to older vaccines and some evidence has been misleading. Recent vaccine technology has refined the number of foreign particles in the vaccine to only the vital immunising ones and there are no additives containing mercury in any of the standard vaccines. In fact, the first breath that your baby takes at birth contains more antigenic particles that the entire 1st set of vaccines. There is also NO association between whooping cough vaccines and epilepsy or febrile seizures and whooping cough vaccines can be given routinely. There is no need or advantage in separating vaccines as combined vaccines are completely safe.",
+                      "title": "Vaccine Safety",
+                    },
+                  },
+                ],
+              },
+              "maximumAge": 6,
+              "minimumAge": 6,
+              "title": "Week 6",
+            },
+          },
+        ],
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "name": "Agatha",
+    },
+  },
+}
+`;

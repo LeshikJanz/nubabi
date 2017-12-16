@@ -12,7 +12,7 @@
     "flow": "flow",
     "flow-typed": "./scripts/flow-typed-all",
     "test": "jest",
-    "test:e2e": "jest --testMatch '<rootDir>/__tests__/e2e/**/*.test.js'",
+    "test:e2e": "jest --testMatch '<rootDir>/__tests__/e2e/**/*.test.js' -i --forceExit",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",
     "release": "lerna publish --skip-npm --conventional-commits",

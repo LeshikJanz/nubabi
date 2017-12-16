@@ -1,0 +1,379 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrowseActivitiesList 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "allActivities": Object {
+      "__typename": "ActivityConnection",
+      "edges": Array [
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6Nw==",
+            "isCompleted": false,
+            "name": "Tiny tips for handling newborns",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6Ng==",
+            "isCompleted": false,
+            "name": "The 4th trimester",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6NQ==",
+            "isCompleted": false,
+            "name": "The Side Show",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6MjQx",
+            "isCompleted": false,
+            "name": "Goodbye Swaddle Befuddle",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6MjQz",
+            "isCompleted": false,
+            "name": "Less is more",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6NzU=",
+            "isCompleted": false,
+            "name": "Handling a newborn - a different position",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "[object Object]",
+            "id": "QWN0aXZpdHk6NzQ=",
+            "isCompleted": false,
+            "name": "Lifting littlies",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "[object Object]",
+            "id": "QWN0aXZpdHk6MjE=",
+            "isCompleted": false,
+            "name": "Put your feet up!",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6MTU=",
+            "isCompleted": false,
+            "name": "Head strong babies",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6MjA=",
+            "isCompleted": false,
+            "name": "I want to ride my bicycle!",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-gross",
+              "icon": "icon-gross",
+              "id": "U2tpbGxBcmVhOjE=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                },
+              },
+              "name": "Gross Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "[object Object]",
+            "id": "QWN0aXZpdHk6MTA3",
+            "isCompleted": false,
+            "name": "1 toy, 2 toys, 3 toys, more",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-fine",
+              "icon": "icon-fine",
+              "id": "U2tpbGxBcmVhOjI=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Ffine_thumb.jpg?alt=media&token=8445027c-66a1-411a-92e4-0247ef58e4b2",
+                },
+              },
+              "name": "Fine Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "[object Object]",
+            "id": "QWN0aXZpdHk6MTA0",
+            "isCompleted": false,
+            "name": "Funny feet ",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-fine",
+              "icon": "icon-fine",
+              "id": "U2tpbGxBcmVhOjI=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Ffine_thumb.jpg?alt=media&token=8445027c-66a1-411a-92e4-0247ef58e4b2",
+                },
+              },
+              "name": "Fine Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "[object Object]",
+            "id": "QWN0aXZpdHk6MTA5",
+            "isCompleted": false,
+            "name": "Hold tight",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-fine",
+              "icon": "icon-fine",
+              "id": "U2tpbGxBcmVhOjI=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Ffine_thumb.jpg?alt=media&token=8445027c-66a1-411a-92e4-0247ef58e4b2",
+                },
+              },
+              "name": "Fine Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "[object Object]",
+            "id": "QWN0aXZpdHk6OTQ=",
+            "isCompleted": false,
+            "name": "Learning to let go",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-fine",
+              "icon": "icon-fine",
+              "id": "U2tpbGxBcmVhOjI=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Ffine_thumb.jpg?alt=media&token=8445027c-66a1-411a-92e4-0247ef58e4b2",
+                },
+              },
+              "name": "Fine Motor",
+            },
+          },
+        },
+        Object {
+          "__typename": "ActivityEdge",
+          "node": Object {
+            "__typename": "Activity",
+            "equipment": "",
+            "id": "QWN0aXZpdHk6MTM0",
+            "isCompleted": false,
+            "name": "Tag time",
+            "skillArea": Object {
+              "__typename": "SkillArea",
+              "completedIcon": "icon-complete-fine",
+              "icon": "icon-fine",
+              "id": "U2tpbGxBcmVhOjI=",
+              "image": Object {
+                "__typename": "SkillAreaImage",
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Ffine_thumb.jpg?alt=media&token=8445027c-66a1-411a-92e4-0247ef58e4b2",
+                },
+              },
+              "name": "Fine Motor",
+            },
+          },
+        },
+      ],
+      "pageInfo": Object {
+        "__typename": "PageInfo",
+        "endCursor": "1j",
+        "hasNextPage": true,
+      },
+    },
+  },
+}
+`;

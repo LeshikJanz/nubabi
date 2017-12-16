@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrowseActivities 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "allSkillAreas": Object {
+      "__typename": "SkillAreaConnection",
+      "edges": Array [
+        Object {
+          "__typename": "SkillAreaEdge",
+          "node": Object {
+            "__typename": "SkillArea",
+            "icon": "icon-gross",
+            "id": "U2tpbGxBcmVhOjE=",
+            "name": "Gross Motor",
+          },
+        },
+        Object {
+          "__typename": "SkillAreaEdge",
+          "node": Object {
+            "__typename": "SkillArea",
+            "icon": "icon-fine",
+            "id": "U2tpbGxBcmVhOjI=",
+            "name": "Fine Motor",
+          },
+        },
+        Object {
+          "__typename": "SkillAreaEdge",
+          "node": Object {
+            "__typename": "SkillArea",
+            "icon": "icon-sensory",
+            "id": "U2tpbGxBcmVhOjM=",
+            "name": "Sensory",
+          },
+        },
+        Object {
+          "__typename": "SkillAreaEdge",
+          "node": Object {
+            "__typename": "SkillArea",
+            "icon": "icon-speech",
+            "id": "U2tpbGxBcmVhOjQ=",
+            "name": "Speech & Language",
+          },
+        },
+        Object {
+          "__typename": "SkillAreaEdge",
+          "node": Object {
+            "__typename": "SkillArea",
+            "icon": "icon-social",
+            "id": "U2tpbGxBcmVhOjU=",
+            "name": "Social & Emotional",
+          },
+        },
+        Object {
+          "__typename": "SkillAreaEdge",
+          "node": Object {
+            "__typename": "SkillArea",
+            "icon": "icon-thinking",
+            "id": "U2tpbGxBcmVhOjY=",
+            "name": "Thinking & Reasoning",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

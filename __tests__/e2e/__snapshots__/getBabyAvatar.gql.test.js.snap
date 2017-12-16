@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getBabyAvatar 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "avatar": Object {
+        "__typename": "Avatar",
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2FIMG_0438.JPG?alt=media&token=a494fd34-aa2d-4b1c-adfb-03c9b25360de",
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+    },
+  },
+}
+`;

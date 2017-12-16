@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HealthHelp 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "allLibraryArticles": Object {
+      "__typename": "GrowthArticleConnection",
+      "edges": Array [
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToxWXYyWm9zUE9NTXNBa21RU0kwS3Ey",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Noisy breathing/Difficulty with breathing",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToycHhWZWIxY09zd3NLY0tBV21PMHU=",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "What is jaundice?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTozWjYyNVY0SzFhQVNPVXNxQ09TbWVP",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Should I circumcise my child?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo1S1V2VmJKNlFvcWtLa09vUXNHZVdB",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Should I be using a dummy or pacifier?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTpuVWtzRFNxSHhBMjZtd2dRZ1VzTWc=",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Should I do a newborn examination?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToxMHp6SkJIQWI2TTZTWUlNOFVhNmth",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "What sleeping position is best for my baby?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo2SDdzc2ZLY0hDT1NZQ1EwT2tJMmFP",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Stools – what is normal?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToxVlIyYjBXU04yZ21xVWF1VWdZMnM0",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Skin rashes in newborns",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo1UjRYQ0pNdXp1UXNRY0tnS0FTT2NN",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "How to exercise your pelvic floor",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTozOExOalg0M051S1lFT3FzWXFtYUlH",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Is my baby unwell? (When to call a doctor)",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo0RkR6SmZieThNWXNZQUMwbTJHMHdN",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "When can I travel with my newborn?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTozc3g2Mm1xN0NvR0M4VXFVWUdXYVFz",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "What should I put in my first aid kit?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTozRHJiOHVpdkNvUU8yUU9jT1E2a2NN",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "SIDS - What you need to know",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo1a25vckpxR2NnY2E4WUNpR3dFYWs4",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Babies and swimming",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo1RENRdzRIN1VjVWE4aUVjWXVXWVNP",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "What is cradle cap?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo1WXRZckZDa0dRaThNdUVvMFVHQ1dV",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246VURaQVlWaU5xS2dtR0lJZ3NpZ1VV",
+              "name": "Health",
+            },
+            "title": "Newborn hairloss",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

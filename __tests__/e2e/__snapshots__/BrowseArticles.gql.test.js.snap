@@ -1,0 +1,218 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BrowseArticles 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "allArticles": Object {
+      "__typename": "ArticleConnection",
+      "edges": Array [
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToyVGY1STdlYldnOE84OEFvQ3M0V2sy",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/2dSBjZvw0c4uEISaome00E/6679a8258c1c3aa88a8f713fdba12e04/mom-dad-playing-daughter.jpg",
+            },
+            "title": "Promoting speech and language development in everyday activities",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo0c1FQd0Z2eXBhS2dnT2NVd3lLZ2Fv",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5jFhdbiiiIwQYCCOemuqI2/c0711f6e6c358b7d3b0a22d6a8ef71ee/potty-training.jpg",
+            },
+            "title": "Potty Training - a sensory perspective",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTozUGdYUGlhZVpXbTRldWlBS2NLOG1Z",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5JUkJ8Yfgkyy6Os0SuOaOs/216f3532387a507bba1acda0f4500c8a/hearing-loss.jpg",
+            },
+            "title": "Your baby's hearing development",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToxTnU1dnFmclJtWTJRQ0lZV01JU21n",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5elu0ZRZVS2S4WUAAy8yGG/d46ef6da6a4768587440a35e1fc8bb83/fine-motor.jpg",
+            },
+            "title": "Fine motor development - the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo2ZGRVS3dDaDhXY3Fla1VNR3E0NEFz",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5ykwiGylosEuQSC6qes0WE/8230a9388fdb79de9fb2833dfd9395e5/thinking-reasoning.jpg",
+            },
+            "title": "Thinking and reasoning development - the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo0VEdKTWdjSFRhZVFBYVlrNEVXb2FX",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/2ofUVbE3fWOKeOMGOUIyiA/4d8a389ffc2218a7b936f68adf55053e/baby-massage.jpg",
+            },
+            "title": "Sensory development - the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTpodkh6eGtrOThjdW9pY0NtazZlWXU=",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/3infD27o48aqgssK08EGMM/70158b56a03436bcece760efd1f5691f/baby-speech-bubble.jpg",
+            },
+            "title": "Speech and language development - the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTozUnhnVEJVdDRrcUVZUW9FV0dLNnNp",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/InjWXlbdwOm2gak0kIyuc/ddd6c6b850794e240971b09e27f1d6fd/baby-talking-to-mom.jpg",
+            },
+            "title": "Social and emotional development – the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo0Rkp2U0ZTQkR5OHNNR0E4eXkyb1M0",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/7yj64unN5KISEwsuEOuWI8/2b2a83cbc18ae67ee71942ba4847ed0a/baby-tummy-time.jpg",
+            },
+            "title": "Gross motor development - the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo2NUZMZUVPYktnc2NjR1Njd3c2MlVT",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/1AP2LLh2hWeYW4kcMmeqqM/3c11bc1f1d36f8b42aaf7379a972fde1/love-drug.jpg",
+            },
+            "title": "The benefits of a mother's love",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToxejFWZEQ3VWdVc2MybVlBTTg4SXFp",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/1w1oPwVhyou2Q2w8aOG4MQ/da52262edab20621737a1098afe2d96a/joyful-mom.jpg",
+            },
+            "title": "Being a joyful mom",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo1b1FuM2JBUVhDeU1zTUtrSXEwQ1U0",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/3JdoTcHmrKMQGqsmwCMsOA/e922c1300524b459afb6b0ae8436c03e/bonding-with-baby.jpg",
+            },
+            "title": "Why bonding with your baby is so important",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo0U3QyS3ZBSHJPU2NpYXlXVUFrRXF5",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/7bn7Gx1DLU0oyaWYo8iWE6/461287be45aac778cd7e48f59c85ad51/babys-first-steps.jpg",
+            },
+            "title": "How to encourage your baby to walk",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToxQkZMa1FPVXRpZUlBZ1cwR0lJaUs0",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/61z2gSTehigwgyoCUogaSe/ddb443b0592ad83329fc4bf3e4918117/baby-crawling.jpg",
+            },
+            "title": "Does your baby really need to crawl?",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToyOTM0TFFVNVVjc3NNV01FME1Vd0lv",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/3138E6t96oauEq26Mi0sOm/4d6c2080cf56a99328575a84633eebc0/social-skills.jpg",
+            },
+            "title": "9 simple ways to boost your baby's social skills",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTozeGI4S1F4N25PSUlvbTh3TWdhZzhZ",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/2LH05bPYgMKI6wq6WwSecM/0991c5118bbf961d22b1391111ee8201/baby-pressure.jpg",
+            },
+            "title": "Why it's wrong to compare your baby to others",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTozQVpBam1BbzJJbVFVT21rTWNzZzRZ",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5yrXwQguycc6AwwKS22I2G/a5150836d6c049e57fef5ca4ba8d5776/baby-milestones.jpg",
+            },
+            "title": "Why you should stop worrying about reaching developmental milestones",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

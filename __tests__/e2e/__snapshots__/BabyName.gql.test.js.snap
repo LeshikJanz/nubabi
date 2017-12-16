@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BabyName 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "name": "Agatha",
+    },
+  },
+}
+`;

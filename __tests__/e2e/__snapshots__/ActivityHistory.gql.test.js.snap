@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ActivityHistory 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "activityHistory": Object {
+        "__typename": "ActivityHistoryConnection",
+        "edges": Array [
+          Object {
+            "__typename": "ActivityHistoryEdge",
+            "node": Object {
+              "__typename": "ActivityHistory",
+              "endDate": "2017-12-16T23:59:59.999Z",
+              "id": "QWN0aXZpdHlIaXN0b3J5OmEwNmQwMGExOWUzZTQ1Y2Y4OWYw",
+              "startDate": "2017-12-15T00:00:00.000Z",
+            },
+          },
+        ],
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+    },
+  },
+}
+`;

@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditUserProfile 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "user": Object {
+      "__typename": "User",
+      "avatar": Object {
+        "__typename": "Avatar",
+        "thumb": Object {
+          "__typename": "Image",
+          "url": "https://storage.googleapis.com/nubabitest1.appspot.com/users/dHY49Iz4O9UByM7ZKBqmJ7GdnX83/thumb_IMG_0162.JPG?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1828691354&Signature=AQuoydWY9nYaswUYyc7stGebJBcCWJkBIaYllIwT2kRf8487QzEFlcz6sva6geQt3DWCaWNDIaOK21BUciTqlE5pg0l7AOsHJZaN%2BDS9rKsaTxwZvZnzrlU8WiaCMASo%2FgD98L6oPc%2BSNcTEj5F8r1ZBc67p0PCTVoIKsM4nllU3xZzZK6xmIpR0c2mqdc4Owt1v94s%2FDje5YsK%2FUgnUARWpQafC%2FOg1lrriPAiuBJ6XMLXKrENK7vXV5s7TnEjor7Yx0w%2BiutefMucfaaCVng%2FKVV88TZiZ2QRW7kARqysCSkI4LzEefo7Dd%2BGdXR6H9mtBlFACyLml0YBP383DUw%3D%3D",
+        },
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/users%2FdHY49Iz4O9UByM7ZKBqmJ7GdnX83%2FIMG_0162.JPG?alt=media&token=ebceb086-94d5-4d28-a91f-218458b906e5",
+      },
+      "dob": "1982-07-06",
+      "firstName": "Last",
+      "id": "VXNlcjpkSFk0OUl6NE85VUJ5TTdaS0JxbUo3R2RuWDgz",
+      "lastName": "Second",
+      "linkedAccounts": Object {
+        "__typename": "LinkedAccountsConnection",
+        "edges": Array [
+          Object {
+            "__typename": "LinkedAccountEdge",
+            "node": Object {
+              "__typename": "LinkedAccount",
+              "displayName": "Adrian Perez",
+              "id": "TGlua2VkQWNjb3VudDoxNzY3OTc5MTk2NTcwNDAz",
+              "provider": "FACEBOOK",
+            },
+          },
+        ],
+      },
+    },
+  },
+}
+`;

@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewActivity 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "activity": Object {
+        "__typename": "Activity",
+        "expert": Object {
+          "__typename": "Expert",
+          "avatar": Object {
+            "__typename": "Avatar",
+            "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/jenny.jpg",
+          },
+          "biography": "Physiotherapist Jenny Lange has 12 biography: experience working with children with a variety of physical and mental challenges. She is passionate about the foundational role that gross motor development plays for other aspects of a biography:s development.\\\\n\\\\nAfter graduating in 2000 with a BSc in Physiotherapy from the University of Cape Town, Jenny joined a private physio practice in Cape Town as a locum where she gained experience working with children. Her interest in paediatrics grew while she worked with spinal cord and traumatic head injury cases. She later joined the Bel Porto School for children with intellectual and physical impairments. After eight years, she moved on to Vista Nova School in Cape Town.\\\\n\\\\nJenny advocates a healthy, active lifestyle with plenty of physical You biography:t need expensive toys and a lot of equipment, use what you have atshe says. She is very active herself, having completed several Comrades and Two Oceans ultra-marathons, as well as the 80-biography: trail challenge.\\\\n\\\\nJenny holds advanced qualifications in infant neurodevelopment, and served as the chairperson of the SA Neurodevelopmental Therapy Association for nine years before stepping away this year to focus on her growing family. She welcomed her first baby, Oliver, in August 2013.",
+          "discipline": "Physiotherapist",
+          "id": "RXhwZXJ0OjM=",
+          "name": "Jenny Lange",
+        },
+        "id": "QWN0aXZpdHk6Nw==",
+        "introduction": "The overwhelming feeling of a new little baby in your life may seem particularly daunting.  Many questions are often asked about handling babies, how to carry them, what is the best position to promote development and what is safe?  Your gut instinct is really what you need to rely on, but there are definitely a few handling positions that promote better gross motor development. If you are feeling insecure about it, you can always practice on a doll.  ",
+        "isCompleted": false,
+        "isFavorite": false,
+        "media": Object {
+          "__typename": "ActivityMediaConnection",
+          "edges": Array [],
+        },
+        "name": "Tiny tips for handling newborns",
+        "skillArea": Object {
+          "__typename": "SkillArea",
+          "icon": "icon-gross",
+          "id": "U2tpbGxBcmVhOjE=",
+          "image": Object {
+            "__typename": "SkillAreaImage",
+            "large": Object {
+              "__typename": "Image",
+              "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_cover.jpg?alt=media&token=dae4fc1f-805c-4b18-aef1-8fd287808407",
+            },
+          },
+          "name": "Gross Motor",
+        },
+        "steps": Array [
+          "Agatha should not be held in a position where he can actively extend or stretch, as he is used to a very flexed or curled up position.  Most importantly, a flexed or curled up position will help to protect his head from flopping backwards.Have a look at the picture and here are some pointers on how to achieve this:",
+          "Pick Agatha up and place him in your arm, looking across your chest.",
+          "Keep your upper arm behind his head.",
+          "Reach your hand forward and place it underneath the leg furthest away from your body.",
+          "Flex this leg or curl it up by directing your support slightly upwards so that his hip remains flexed or bent.",
+          "Your other arm can reach across to support him under his bottom. As you become more practiced at this position, you will be able to free up this hand to use for yourself.",
+        ],
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "name": "Agatha",
+    },
+  },
+}
+`;

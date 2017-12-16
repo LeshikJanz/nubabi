@@ -1,0 +1,102 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getBabies 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "babies": Object {
+      "__typename": "BabyConnection",
+      "edges": Array [
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+            "name": "Agatha",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDA0UTduQ09xZUN3Q08xQUpZbQ==",
+            "name": "Pasha",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBGUW5xVGtCaXVOZEppQmJWcw==",
+            "name": "Alexey ",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBGVU0zTFBXUUpnQWxzNGxjbg==",
+            "name": "123",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBGVWJVckRjekxpMEpoTl8yNA==",
+            "name": "asdgasd",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBGVkVFdTFGRVRpdHB1Nmd2cw==",
+            "name": "OOO",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBGbHd1bUE2eVhzM185a1FSYg==",
+            "name": "asdg",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBGbW83bVc5SlFSSGNORHFnQQ==",
+            "name": "Kate cat",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBKWno1aHhCakQzbEkxTENnTw==",
+            "name": "Leshechka",
+          },
+        },
+        Object {
+          "__typename": "BabyEdge",
+          "node": Object {
+            "__typename": "Baby",
+            "id": "QmFieTotTDBKX3V2RzFUcW1OaDFzZTlyYg==",
+            "name": "Dog",
+          },
+        },
+      ],
+    },
+    "user": Object {
+      "__typename": "User",
+      "avatar": Object {
+        "__typename": "Avatar",
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/users%2FdHY49Iz4O9UByM7ZKBqmJ7GdnX83%2FIMG_0162.JPG?alt=media&token=ebceb086-94d5-4d28-a91f-218458b906e5",
+      },
+      "id": "VXNlcjpkSFk0OUl6NE85VUJ5TTdaS0JxbUo3R2RuWDgz",
+    },
+  },
+}
+`;

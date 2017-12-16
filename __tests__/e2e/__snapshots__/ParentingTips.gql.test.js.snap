@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ParentingTips 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "allLibraryArticles": Object {
+      "__typename": "GrowthArticleConnection",
+      "edges": Array [
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo3N1NUNXR3OGZLWUMyMFd3bWdBNDRB",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Bonding with your baby",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToxdDl4WlBUODdxOHNDd2FTUXNjQXVF",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Dad feeling a little excluded?",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo1ZVdjcFN6Q3N3YXNHNEcwRTg2Q2lT",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "How to massage your baby",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTp2NmZweHI0MjhvMlVVYXFVR2Nnb3E=",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Tips on how to cope with sleep deprivation",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToyYWhEaUhaYUlveTgwUUtNa2NLaWdF",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "The benefits of wearing your baby",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo2YVZEWUVqSEtvb2ltVWNLYUFBRUlz",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Recognising Baby Blues and Post Natal Depression",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTozNndpcEdCeDRzQ1NhazBjTUdTb0dv",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Vaccine Safety",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZToydTA0aVlrTjdTbzBJODZBTWVPZ0Vx",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Understanding your baby's stimulation needs",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTo0WnJTNE5uQWptTWVNRTRnZ2cwUThv",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Calming strategies for overstimulation",
+          },
+        },
+        Object {
+          "__typename": "GrowthArticleEdge",
+          "node": Object {
+            "__typename": "GrowthArticle",
+            "id": "R3Jvd3RoQXJ0aWNsZTpTYTJEa3d4UUllU2tRazQ4dVlnQU8=",
+            "section": Object {
+              "__typename": "GrowthArticleSection",
+              "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+              "name": "Parenting",
+            },
+            "title": "Tips for new Dads",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

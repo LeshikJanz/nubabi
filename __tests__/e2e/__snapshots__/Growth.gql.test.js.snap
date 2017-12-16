@@ -1,0 +1,179 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Growth 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "dob": "2017-08-28",
+      "growth": Object {
+        "__typename": "GrowthConnection",
+        "edges": Array [
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "At birth Agatha's brain is not developed, it needs experience to make pathways between the brain cells. We have 1 billion brain cells at birth and by the age of 3, a thousand billion connections have been created. The relationship between parent and child is crucial to brain development, and it is up to you to provide the sensory input to literally grow Agatha's brain.
+
+As early as day 1, Agatha can see round shapes, red colours, contrasts of light and dark, and can hear and will respond to loud noises. He will pick up your energy and you can transmit calmness and confidence through the way you handle and interact with him. It is never too early to talk and sing to him and to promote bonding through caress and close physical contact.
+
+Babies learn to look with both eyes together in a parallel fashion after birth so if you notice that Agatha is squinting intermittently, don’t be concerned as this is quite normal. He may also be a little jaundiced and this may persist for several weeks but should not get progressively worse. It is usually a good idea to re-weigh Agatha at about 1 week of age. His birth weight should be regained by 7 to 10 days.",
+              "id": "R3Jvd3RoOmNDQjljd0p1VFlVZ1dTUWF5S0t1aw==",
+              "introduction": "Hi Last,
+
+Congratulations on the birth of Agatha and the start of your amazing journey together. Over the coming weeks and months you will observe your precious bundle growing and develop right before our eyes and we hope to be able to provide useful insight into what to expect. Be peaceful and enjoy your little miracle.",
+              "maximumAge": 1,
+              "minimumAge": 1,
+              "title": "Week 1",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "As you are adjusting to your new bundle, so Agatha is slowly adjusting to his noisy and bright new world. Feeding on demand should become a little more predictable as your breast milk comes through and his birth weight is usually regained in 7 to 10 days.
+
+Newborn babies move in a jerky and uncoordinated way and you may notice Agatha displaying frequent motor tics. This is normal. He will need to grow and develop his complex cortex to damp down these movements which will happen over the coming weeks. His main activity at this stage is sucking and chewing on his hands. Soothing touch and loving contact are vital for Agatha so be calm and make reassuring, slow and confident movements with him.
+
+Agatha's eyes will frequently drift off from parallel gaze and he may squint intermittently until around 4 months Don’t let this stop you gazing lovingly into his eyes keeping your head about 25 cm’s from his. He will love the start of this special communication between the two of you.",
+              "id": "R3Jvd3RoOjY3dHlnd2thTmFDR1UwRzZtbWVjQ0c=",
+              "introduction": "Hi Last,
+
+You've made it through the first week. Well done! Broken sleep and the demands of a newborn can take their toll so be sure to take good care of yourself and to rest as much as possible.
+
+You may find that it will take a little time for all the members of your household from siblings to parents (and even that family pet!) to adjust to your precious newcomer so expect a little disruption at this time and try to let it concern you too much.",
+              "maximumAge": 2,
+              "minimumAge": 2,
+              "title": "Week 2",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "When Agatha is asleep, the recommended position is on his back. While awake, however, some lying on his tummy is important. Agatha may even be able to lift his head briefly and turn from side to side.
+
+As early as 3 weeks, he will be able to see contrasts of black and white and round shapes and enjoys red colours best. At this stage, however, his eyes will still be unfocused and he may even squint at times.
+
+Talking, singing and music will give Agatha auditory experiences and it’s never too early to start reading! Try to find picture books that have high contrast patterns and pictures with strong line drawings.",
+              "id": "R3Jvd3RoOjFadVNiSU5LRVFDRUNZS01VTVNJNks=",
+              "introduction": "This week Agatha's eating and sleeping patterns begin to emerge which should making feeding more predictable. Despite this improvement, you may be suffering from sleep deprivation and feelings of exhaustion as Agatha may be showing early signs of abdominal discomfort or baby colic. Try to accept as much help as possible, rest as often as you can and remember to be gentle with yourself.",
+              "maximumAge": 3,
+              "minimumAge": 3,
+              "title": "Week 3",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "As early as 3 weeks, Agatha will be able to see contrasts of black and white, round shapes and enjoys red colours best. At this stage, however, his eyes will still be unfocused and he may even squint at times.
+
+Talking, singing and music will give Agatha auditory experiences and it’s never too early to start reading! Try to find picture books that have high contrast patterns and pictures with strong line drawings to show to Agatha in the coming weeks.
+
+When Agatha is asleep, the recommended position is on his back. While awake, however, some lying on his tummy is important. Agatha may even be able to lift his head briefly and turn from side to side. Calm and reassuring touch and loving contact are vital as babies pick up agitation from us. Placing Agatha in a baby carrier, sling or papoose worn over your front works wonders to settle him and get him to sleep while you can get on with life around the house.",
+              "id": "R3Jvd3RoOjVycGkzWU05ck9jNHlpQXFvbTZBWUk=",
+              "introduction": "Hi Last,
+
+This week Agatha's eating and sleeping patterns begin to emerge which should making feeding more predictable. Despite this improvement, you may be suffering from sleep deprivation and feelings of exhaustion as Agatha may be showing early signs of abdominal discomfort or baby colic. Try to accept as much help as possible, rest as often as you can and remember to be gentle with yourself.",
+              "maximumAge": 4,
+              "minimumAge": 4,
+              "title": "Week 4",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "This week Agatha will begin to focus with both eyes and can now detect more detail in colours, designs and shapes. He can track movement and will be transfixed for short periods by a simple rattle passing in front of his face. Agatha's memory is developing all the time and frequent, repeated exposure to different experience builds his brain. Babies tune themselves into their surroundings through their noses using the sharp sense of smell that they are born with and Agatha will already be able to remember you by smell.",
+              "id": "R3Jvd3RoOjVCcDdQQklCR2dhc2dNaXd1dXd1d0s=",
+              "introduction": "Hi Last,
+
+Conflicting advice from well-meaning friends and relatives can become really confusing. Be confident in your growing ability as a parent. Make decisions that are logical and that you feel comfortable with and try not feel guilty about issues pushed by peer pressure. You're doing great!",
+              "maximumAge": 5,
+              "minimumAge": 5,
+              "title": "Week 5",
+            },
+          },
+          Object {
+            "__typename": "GrowthEdge",
+            "node": Object {
+              "__typename": "Growth",
+              "ageDuration": "WEEK",
+              "content": "This week, Agatha will begin to recognise Mom and Dad and will prefer you to strangers. You may notice that he will often coo and kick with pleasure on seeing you. Keep a close look out as now is the time you may see your first smile! This week ushers in a new chapter in parent-baby interaction and development.
+
+Agatha is becoming more sensitive to his surroundings and may startle with noise or quiet down with stimuli such as music. You may notice that he will begin to stare at soft toys and is fascinated by ceiling lights.
+
+Weight will usually have increased by 1kg compared to birth weight and height by 2 or 3cm.",
+              "id": "R3Jvd3RoOjZHc2NheGV5elk2OHlFR3FBZ3l1Mjg=",
+              "introduction": "Hi Last,
+
+This is an important week as moms need to visit their Gynae or G.P for their postnatal check-up and their Paediatrician or G.P for the baby’s checkup.
+
+Important issues to discuss for mom:
+* Postnatal depression
+* Physical check
+* Discussion of contraceptive and sexual activity
+* Fitness issues and pelvic floor exercises
+
+Important issues to discuss for baby:
+* Growth and feeding
+* Development and stimulation
+* Comprehensive examination of all systems
+* Supplements – vitamins and others
+* Vaccinations",
+              "maximumAge": 6,
+              "minimumAge": 6,
+              "title": "Week 6",
+            },
+          },
+        ],
+        "introduction": "Hi Last!
+
+Welcome to My Learning Baby, where you will find expert guidance on how to nurture and support the growth and development of your precious bundle.
+
+The information you will find in this email, on our [website](https://www.nubabi.com) and in our [blog](https://blog.nubabi.com) is intended to support your efforts to raise Agatha to be happy, healthy and thriving. Our aim to is to equip you and to amplify your skills so as to increase your enjoyment of this wondrous experience of being a parent.
+
+**Please note that this information does not replace your health care provider and should you be concerned in any way, we recommend that you please consult with them or visit your nearest clinic. **",
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "measurements": Object {
+        "__typename": "Measurements",
+        "heights": Object {
+          "__typename": "MeasurementConnection",
+          "edges": Array [
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-10-30T09:24:19.002Z",
+                "value": 133,
+              },
+            },
+          ],
+        },
+        "weights": Object {
+          "__typename": "MeasurementConnection",
+          "edges": Array [
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-12-12T16:22:24.224Z",
+                "value": 7,
+              },
+            },
+          ],
+        },
+      },
+      "name": "Agatha",
+    },
+  },
+}
+`;

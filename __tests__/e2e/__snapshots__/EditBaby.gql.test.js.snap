@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditBaby 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "avatar": Object {
+        "__typename": "Avatar",
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2FIMG_0438.JPG?alt=media&token=a494fd34-aa2d-4b1c-adfb-03c9b25360de",
+      },
+      "coverImage": Object {
+        "__typename": "Image",
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2FIMG_2407.JPG?alt=media&token=544caf31-ebcf-4c5c-9809-b5d04306a09b",
+      },
+      "dob": "2017-08-28",
+      "gender": "FEMALE",
+      "height": 133,
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "name": "Agatha",
+      "relationship": "Other",
+      "weekBorn": 21,
+      "weight": 7,
+    },
+  },
+}
+`;

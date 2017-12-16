@@ -1,0 +1,1 @@
+export NUBABI_AUTH_TOKEN="$(node -p "require('./graphql.config.json').endpoints[0].options.headers.Authorization")"

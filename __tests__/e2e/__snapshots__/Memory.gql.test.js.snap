@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Memory 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "memory": Object {
+        "__typename": "Memory",
+        "comments": Object {
+          "__typename": "CommentConnection",
+          "count": 0,
+          "edges": Array [],
+        },
+        "createdAt": "2017-12-12T18:05:46.000Z",
+        "files": Object {
+          "__typename": "FileConnection",
+          "count": 2,
+          "edges": Array [
+            Object {
+              "__typename": "FileEdge",
+              "node": Object {
+                "__typename": "Image",
+                "contentType": "image/jpeg",
+                "id": "SW1hZ2U6LUwwRU5aOF9qekhlLW5rc1BOY1c=",
+                "large": Object {
+                  "__typename": "Image",
+                  "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L0Atse6giWFP0rbe5vr/large_3F432872-AA6C-4806-806B-AEE170DBB6E5.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1828520342&Signature=Lu14lIym3YSS0kRdYcMt%2F4yea5DRb07Gx6nw9Ofsv0KFglXrP5iylMqJtpJosDkMzAkDxNUFxZj3ANOWxe1YlHue5UGNwgnHZqgj5L2oWOydUuyS6vSnAMp60cUW3yVCMpa4bVUxgyxOJr7hrHpaAp9IuVX%2BxzsHj2J9jXacrFSPLo%2BJ3cm1bstfm%2FMy9dJRfxAxhFSUcjE3Lc4VZu8coYtwN%2FbhAkAWZ8y1bi3l1tH1dt54A%2B6M2VF4ggP0pkITqI1ywA1q33pC3ebUqttPj29O2An4yAmd5ijqCAI6fsLyYx%2BwUWcc2YsbKMSW%2FCkiZNToriaeygKtu7Vpl89mFg%3D%3D",
+                },
+                "thumb": Object {
+                  "__typename": "Image",
+                  "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L0Atse6giWFP0rbe5vr/thumb_3F432872-AA6C-4806-806B-AEE170DBB6E5.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1828520339&Signature=eG36s2AwKX3pXWZc7z1roGt1h0wlUtLNwKzZDWipk8m%2F6rxnQo66tuo5sSc8Gyf0TNcrfuQWq8pwnJisJfbWmnxHv9Mio0PLXu3DUxQnuMK2RiwFAxiSTiJ5pbG1LahM415Yzmq5uotfXDtheauDGL8IN1RGgvxuBoZnBs4hg7TQSwJHnWGYlrz9dTi7DPhSdea0MFOclB0WXljNbtRC%2F4LizWUSar5m41PExDbBnBxfPcj%2Fn4ns6ZveLv5hpU4G3shgI3ydyGqgjsomM%2Blcc3tSaH6rZW6rnsCGYtBmZKPpHWZACa2Jtcc2BgMprw1YyrhvAJasoe%2BL%2BiDRJo1XDw%3D%3D",
+                },
+                "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-L0Atse6giWFP0rbe5vr%2F3F432872-AA6C-4806-806B-AEE170DBB6E5.jpg?alt=media&token=a769d9f2-81e0-435f-8b83-4a1e8a805bc4",
+              },
+            },
+            Object {
+              "__typename": "FileEdge",
+              "node": Object {
+                "__typename": "Image",
+                "contentType": "image/jpeg",
+                "id": "SW1hZ2U6LUwwTE9SVGxfU09EMG9XdnJEVnU=",
+                "large": null,
+                "thumb": null,
+                "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-L0Atse6giWFP0rbe5vr%2F35F0C223-ADDA-49B8-9E87-ED7C75625BB3.jpg?GoogleAccessId=firebase-adminsdk-r7bmb@nubabitest1.iam.gserviceaccount.com&Expires=1780696800&Signature=ZnMV8i%2BmLp6lcyxujbNtQMen5rdw7VxQAErnrb71t%2ByKu8vuAtD%2Bc3eTluSe8GNUuzcy2ZGH5U%2FfEqpTx3FDbXt%2FhEfFNnLmjVsuFacd5WZ0Dx6xdSrnGQga3HUIyuo0Mutac6%2FCE9Qtx%2BatiTjBk%2BWJuEKuOt1Vvcvayo73tCuwr9KbQfUSqy47waXfsTHW4eb16sV5VRhjgGGzO7IFmxaaEGbABDy8qsv4Rs529dvTWX2Po4MzsMOD9t%2B%2FPbiMiHtC88Z%2BixdQJb%2FOzoPyBiic3w%2F64j%2BqfjHUVTCYfP9OGf5luIGp%2BMA6sXL0Zp%2FzcIn5nUIksptGHMYmFLSL0A%3D%3D",
+              },
+            },
+          ],
+        },
+        "id": "TWVtb3J5Oi1MMEF0c2U2Z2lXRlAwcmJlNXZy",
+        "isLikedByViewer": false,
+        "likes": Object {
+          "__typename": "LikeConnection",
+          "count": 0,
+          "edges": Array [],
+        },
+        "suggestedMemoryType": "bath-time",
+        "title": "Bath Time",
+      },
+    },
+  },
+}
+`;

@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewArticle 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "article": Object {
+      "__typename": "Article",
+      "author": Object {
+        "__typename": "Author",
+        "name": "Carianne Vermeulen",
+      },
+      "blogUrl": "https://blog.mylearningbabyguide.com/articles/promoting-speech-and-language-development-in-everyday-activities",
+      "id": "QXJ0aWNsZToyVGY1STdlYldnOE84OEFvQ3M0V2sy",
+      "image": Object {
+        "__typename": "Image",
+        "url": "https://api-staging.nubabi.com/content/assets/2dSBjZvw0c4uEISaome00E/6679a8258c1c3aa88a8f713fdba12e04/mom-dad-playing-daughter.jpg",
+      },
+      "publishedAt": "2017-06-13T07:00:00.000Z",
+      "readingTime": Object {
+        "__typename": "ReadingTime",
+        "text": "9 min read",
+      },
+      "tags": Array [
+        Object {
+          "__typename": "Tag",
+          "id": "5AhnpwuazuuWAKu88kSsKi",
+          "name": "Speech & Language",
+        },
+      ],
+      "text": "Language is important because it forms the foundations for interacting with other people – for communicating our needs, our thoughts and our experiences. From the moment of birth, babies are ready to communicate:
+They listen to and look at people and things in their environment and respond to what they hear and see.
+
+Even the youngest babies need a stimulating environment in which those who care for them respond sensitively to the different meanings of their cries, coos and gestures. This early ability to communicate verbally and non-verbally is the basis on which language is developed. A child’s ability to develop age appropriate speech and language depends on being immersed in a rich environment of words, sounds, and verbal and non-verbal expression from birth.
+
+Language development involves both understanding and using language. Language comprehension is the ability to understand a variety of words, sentences and to follow instructions. Expressive language is the ability to use words, phrases and sentences to express needs and thoughts. There are many everyday experiences that can be turned into great learning opportunities to support language development in babies and toddlers. Activities such as listening, singing, repeating, reading and speaking all promote language development.
+
+An enormous amount of language learning can take place when children are involved in daily routines such as bathing, feeding, diaper changing, grocery shopping, doing the laundry or even riding in the car – things that parents do with their toddlers every day. These daily events are so important because they provide opportunities for repetitive learning in a natural, enjoyable, yet structural way. It is within the context of such daily routines that a toddler begins to make sense of his or her world. This involves understanding:
+
+* How their worlds are organised, e.g. after waking up, they get dressed, brush their teeth and then have breakfast.
+* The words people say in relation to each routine.
+* Social roles, such as how to start a conversation and how to respond appropriately when the other person starts it.
+* How to participate with others in a conversation (even before a toddler can talk) as an equal conversational partner.
+
+## Encourage your toddler to take on an active role
+In the beginning, the parent does most of the work, such as pulling the vest over the toddler’s head or putting toothpaste on the toothbrush and brushing the toddler’s teeth. However, as your toddler participates in the routine over and over with you, he gains confidence and roles start changing. Gradually your toddler can do and say more. For example, your toddler may even tell you what comes next or ask what he needs. He may even suggest a routine or end it. As your toddler’s active participation grows, so does his independence and self-esteem.
+
+![Mom and dad playing with daughter](//api-staging.nubabi.com/content/assets/2dSBjZvw0c4uEISaome00E/6679a8258c1c3aa88a8f713fdba12e04/mom-dad-playing-daughter.jpg)
+
+## Help your toddler learn the meaning of words
+When a parent takes a cup from the shelf, pours juice into it and brings it closer to the toddler, both the toddler and parent share a mutual focus or a common interest. If the parent then says, “Here’s your juice” she is mapping the word “juice” onto the object, allowing the child to begin to attach this word to some aspect of the liquid in the cup. In this brief interaction, the shared activity provides the foundation for understanding. However, at this point, the toddler doesn’t know whether the word “juice” refers to the cup or the liquid inside the cup or even the act of giving the cup. To learn the specific meaning of the word, the toddler will need many more experiences of hearing the word “juice” associated with the drink. The more times the toddler does something with the juice while hearing the word, the clearer the meaning will become. The key to a toddler’s understanding is his motivation to understand, which is heightened in a situation in which he is an active participant.
+
+## Here’s how to build opportunities for participation and learning into daily routines:
+
+**Break routines into a series of small, consistent steps so that there is a shared understanding of how the routine works.** Make sure that you conduct the routine in a similar way each time, saying the same things at each step to help your toddler become familiar with how it works.
+
+**Be flexible.** Toddlers learn best when you follow their lead. If your toddler wants to roll on the bed when he is putting on pyjamas, instead of trying to stop this behaviour, work it into the routine by saying, “First, put on your pyjamas and then you can roll on the bed.” If your toddler sees that there is a reward for following the steps of the routine, he will be more likely to comply. And just as much learning can take place in a playful game of rolling on the bed as in putting on pyjamas.
+
+**Label what your toddler is interested in at the very moment it seems to be his focus.** Studies show that the most important aspect of helping children learn the meaning of a word is timing. For example, if the toddler looks at the pizza and the adult says. ”Let me get your cup”, what the parent says won’t help the child learn the word “pizza”, which is what really interests him at that moment. 
+
+**Be creative.** Routines can be made out of anything that a parent and a toddler do together regularly. Routines can be created around planting or watering plants, changing a bandage, feeding the cat or baking cookies. The best learning opportunities are the ones that are the most interactive and the most fun.
+
+## Top ten guidelines to develop and improve your toddler’s child’s speech and language skills:
+
+There are many everyday activities that you can do with your toddler to develop his speech and language skills. The following guidelines will help you provide the optimal speech and language stimulation for your toddler during these interactions.
+
+1. **Be a good model.** Speak clearly and slowly and face your child when speaking. If your toddler says a word or sentence incorrectly, rather than correcting him or asking him to repeat it, just say the word/sentence back to him correctly to show you have understood. Emphasise the correct word or phrase when repeating your toddler’s sentence. This way your toddler will always hear the correct version (e.g. Toddler: “Puppy high jump!” Parent: “Yes, the puppy jumps high.”). This is how toddlers learn language.
+2. **Remember your language level.** Don’t use words or sentences that your toddler will not understand. Speak to him using language that he can understand, using words that he already knows and add some new words. Remember to explain any new words that your toddler might not know (.e.g. “Look, that boy is walking with his puppy. A baby dog is called a puppy. See how small the puppy is.”).
+3. **Make time to sit down with your toddler.** Even if it is just for a few minutes a day (although the more one-to-one time, the better), spend some quiet time with your toddler, away from distractions. Look through a book together and talk about the pictures. You can even sit in a park and talk about what is happening around you.
+4. **Turn off the TV and take out the dummy.** Toddlers do not learn language and social skills by watching television, and new evidence shows that watching too much television in the early years prior to starting school can affect listening and attention skills, which will impact your toddler’s learning once he starts school.
+5. **Observe, wait and comment.** When you are playing with your toddler, take a step back, do not feel that you have to fill all the silences, just comment on the things your toddler is doing so they can hear (and learn) new vocabulary. Label what he is playing with, name the colours of the objects, the actions he is performing, where he is doing it and why.
+6. **Let your toddler lead.** Let your toddler lead the play; let him be the boss all the way. This can build self-confidence and does not put pressure on him to talk and respond to you all the time. By doing this your toddler will be more likely to learn and remember the new words you might use while talking about the things that interest him.
+7. **Books, books and more books!** Books can be used in many ways to develop language and early literacy skills. Evidence shows that toddlers that have more exposure to books prior to schooling often develop early literacy skills earlier. Your toddler will want to read a favourite book many times – use the same book in different ways to enhance his speech and language development
+8. **Sing songs and nursery rhymes.** Songs and rhymes contain rhythm and rhyme, skills that help with speech and early literacy development. Sing songs while walking to school (e.g. “This is the way we walk to school.”), in the bath (e.g. “5 little speckled frogs”), getting ready for bed (e.g. “Getting ready for bed” – Barney) or driving to school (e.g. “The wheels on the bus.”) 
+9. **Feed language in, don’t force it out.** Comment and expand on your toddler's words and sentences rather than asking him to repeat words. Always repeat what your toddler says and expand on it by adding another word or repeating it in a longer phrase. If your toddler says “car”, respond with “big car”, “yellow car” or “fast car”. This is how toddlers learn words, by hearing new vocabulary and linking it to the items or events they are focusing on. 
+10. **Make every opportunity a language learning activity.** If it’s a trip to the shops or bath time, you can make every activity a language learning activity. Point to things, name them, sing a nursery rhyme, or ask a question. You don’t have to set aside a specific time of day to learn language; every activity is a language learning activity.
+
+Speech and language skills do not just evolve on their own. They are part of a bigger picture involving social interaction, play, observation, manipulating objects, listening and attending. For normally developing children, learning is easy and creating opportunities for learning is also not difficult. Through simple daily interactions and experiences, you can help your toddler acquire new speech and language skills.",
+      "title": "Promoting speech and language development in everyday activities",
+    },
+  },
+}
+`;

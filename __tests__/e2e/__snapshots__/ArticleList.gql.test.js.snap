@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArticleList 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "allArticles": Object {
+      "__typename": "ArticleConnection",
+      "edges": Array [
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToyVGY1STdlYldnOE84OEFvQ3M0V2sy",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/2dSBjZvw0c4uEISaome00E/6679a8258c1c3aa88a8f713fdba12e04/mom-dad-playing-daughter.jpg",
+            },
+            "title": "Promoting speech and language development in everyday activities",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo0c1FQd0Z2eXBhS2dnT2NVd3lLZ2Fv",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5jFhdbiiiIwQYCCOemuqI2/c0711f6e6c358b7d3b0a22d6a8ef71ee/potty-training.jpg",
+            },
+            "title": "Potty Training - a sensory perspective",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTozUGdYUGlhZVpXbTRldWlBS2NLOG1Z",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5JUkJ8Yfgkyy6Os0SuOaOs/216f3532387a507bba1acda0f4500c8a/hearing-loss.jpg",
+            },
+            "title": "Your baby's hearing development",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZToxTnU1dnFmclJtWTJRQ0lZV01JU21n",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5elu0ZRZVS2S4WUAAy8yGG/d46ef6da6a4768587440a35e1fc8bb83/fine-motor.jpg",
+            },
+            "title": "Fine motor development - the first 1000 days",
+          },
+        },
+        Object {
+          "__typename": "ArticleEdge",
+          "node": Object {
+            "__typename": "Article",
+            "id": "QXJ0aWNsZTo2ZGRVS3dDaDhXY3Fla1VNR3E0NEFz",
+            "image": Object {
+              "__typename": "Image",
+              "url": "https://api-staging.nubabi.com/content/assets/5ykwiGylosEuQSC6qes0WE/8230a9388fdb79de9fb2833dfd9395e5/thinking-reasoning.jpg",
+            },
+            "title": "Thinking and reasoning development - the first 1000 days",
+          },
+        },
+      ],
+    },
+  },
+}
+`;

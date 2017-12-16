@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ThisWeeksActivitiesList 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "activities": Object {
+        "__typename": "ActivityConnection",
+        "edges": Array [
+          Object {
+            "__typename": "ActivityEdge",
+            "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
+            "node": Object {
+              "__typename": "Activity",
+              "equipment": "",
+              "id": "QWN0aXZpdHk6MjU3",
+              "isCompleted": true,
+              "name": "Tons of towering fun",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "completedIcon": "icon-complete-gross",
+                "icon": "icon-gross",
+                "id": "U2tpbGxBcmVhOjE=",
+                "image": Object {
+                  "__typename": "SkillAreaImage",
+                  "thumb": Object {
+                    "__typename": "Image",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fgross_thumb.jpg?alt=media&token=23839e2d-419b-425d-b5f7-9cf29f8e86cf",
+                  },
+                },
+                "name": "Gross Motor",
+              },
+            },
+          },
+          Object {
+            "__typename": "ActivityEdge",
+            "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
+            "node": Object {
+              "__typename": "Activity",
+              "equipment": "",
+              "id": "QWN0aXZpdHk6MjA5",
+              "isCompleted": true,
+              "name": "Undress for success",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "completedIcon": "icon-complete-fine",
+                "icon": "icon-fine",
+                "id": "U2tpbGxBcmVhOjI=",
+                "image": Object {
+                  "__typename": "SkillAreaImage",
+                  "thumb": Object {
+                    "__typename": "Image",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Ffine_thumb.jpg?alt=media&token=8445027c-66a1-411a-92e4-0247ef58e4b2",
+                  },
+                },
+                "name": "Fine Motor",
+              },
+            },
+          },
+          Object {
+            "__typename": "ActivityEdge",
+            "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
+            "node": Object {
+              "__typename": "Activity",
+              "equipment": "[object Object]",
+              "id": "QWN0aXZpdHk6MTYz",
+              "isCompleted": true,
+              "name": "Baby beats",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "completedIcon": "icon-complete-sensory",
+                "icon": "icon-sensory",
+                "id": "U2tpbGxBcmVhOjM=",
+                "image": Object {
+                  "__typename": "SkillAreaImage",
+                  "thumb": Object {
+                    "__typename": "Image",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fsensory_thumb.jpg?alt=media&token=0b4a7e7f-9fd6-46cc-9195-b18f856b2d4c",
+                  },
+                },
+                "name": "Sensory",
+              },
+            },
+          },
+          Object {
+            "__typename": "ActivityEdge",
+            "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
+            "node": Object {
+              "__typename": "Activity",
+              "equipment": "[object Object],[object Object],[object Object]",
+              "id": "QWN0aXZpdHk6MTgw",
+              "isCompleted": true,
+              "name": "String of friends",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "completedIcon": "icon-complete-speech",
+                "icon": "icon-speech",
+                "id": "U2tpbGxBcmVhOjQ=",
+                "image": Object {
+                  "__typename": "SkillAreaImage",
+                  "thumb": Object {
+                    "__typename": "Image",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fspeech_thumb.jpg?alt=media&token=4d24133b-d33e-4f3f-8698-2fe516f254a1",
+                  },
+                },
+                "name": "Speech & Language",
+              },
+            },
+          },
+          Object {
+            "__typename": "ActivityEdge",
+            "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
+            "node": Object {
+              "__typename": "Activity",
+              "equipment": "[object Object]",
+              "id": "QWN0aXZpdHk6MjU4",
+              "isCompleted": false,
+              "name": "Out and about",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "completedIcon": "icon-complete-social",
+                "icon": "icon-social",
+                "id": "U2tpbGxBcmVhOjU=",
+                "image": Object {
+                  "__typename": "SkillAreaImage",
+                  "thumb": Object {
+                    "__typename": "Image",
+                    "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/skill_areas%2Fsocial_thumb.jpg?alt=media&token=6cf625b7-3723-4d0d-b4be-23b9e116ee90",
+                  },
+                },
+                "name": "Social & Emotional",
+              },
+            },
+          },
+        ],
+      },
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+    },
+  },
+}
+`;

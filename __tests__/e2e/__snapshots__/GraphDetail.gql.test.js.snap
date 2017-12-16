@@ -1,0 +1,387 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GraphDetail 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "measurements": Object {
+        "__typename": "Measurements",
+        "heights": Object {
+          "__typename": "MeasurementConnection",
+          "edges": Array [
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-05-30T18:21:47.482Z",
+                "value": 53,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-20T21:23:04.570Z",
+                "value": 55,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-21T15:18:15.620Z",
+                "value": 55,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-07-04T16:01:35.179Z",
+                "value": 139.7,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-07-04T16:08:31.435Z",
+                "value": 152.4,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-07-04T16:09:51.743Z",
+                "value": 156,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:22:13.225Z",
+                "value": 132,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:22:13.226Z",
+                "value": 132,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:22:13.348Z",
+                "value": 132,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:22:13.438Z",
+                "value": 132,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-10-07T09:20:47.506Z",
+                "value": 133,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-10-30T09:24:19.002Z",
+                "value": 133,
+              },
+            },
+          ],
+        },
+        "weights": Object {
+          "__typename": "MeasurementConnection",
+          "edges": Array [
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-05-30T18:21:46.482Z",
+                "value": 3.02,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-05-30T18:21:48.889Z",
+                "value": 3.02,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-05-30T18:21:52.934Z",
+                "value": 3.02,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-05-31T16:39:48.479Z",
+                "value": 3.1,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-05-31T16:40:12.506Z",
+                "value": 3.1,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-06T08:41:16.534Z",
+                "value": 3.084428116,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-06T08:41:19.815Z",
+                "value": 3.084428116,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-06T08:41:28.134Z",
+                "value": 3.084428116,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-06T08:53:07.990Z",
+                "value": 3.1,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-20T20:43:01.290Z",
+                "value": 3.1,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-20T21:20:01.003Z",
+                "value": 3.5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-20T21:21:08.134Z",
+                "value": 4.5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-21T10:11:11.630Z",
+                "value": 4.5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-06-21T15:18:11.409Z",
+                "value": 4.5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-07-04T15:49:31.450Z",
+                "value": 4.5268518526,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-07-04T16:08:57.252Z",
+                "value": 4.535923700000001,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-08-16T14:39:03.149Z",
+                "value": 4.54,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:21:55.062Z",
+                "value": 8.54,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:21:55.084Z",
+                "value": 8.54,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:21:55.298Z",
+                "value": 8.54,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:21:56.400Z",
+                "value": 8.54,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-20T15:21:56.966Z",
+                "value": 8.54,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-27T14:20:56.443Z",
+                "value": 9.5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-09-28T15:00:15.388Z",
+                "value": 9.5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-10-07T09:20:23.430Z",
+                "value": 4,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-16T08:14:04.841Z",
+                "value": 5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-16T08:14:23.106Z",
+                "value": 5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-21T14:54:23.380Z",
+                "value": 5,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-21T14:54:27.871Z",
+                "value": 6,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-21T14:54:29.841Z",
+                "value": 6,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-21T14:54:30.379Z",
+                "value": 6,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-11-21T14:54:30.593Z",
+                "value": 6,
+              },
+            },
+            Object {
+              "__typename": "MeasurementEdge",
+              "node": Object {
+                "__typename": "Measurement",
+                "recordedAt": "2017-12-12T16:22:24.224Z",
+                "value": 7,
+              },
+            },
+          ],
+        },
+      },
+      "name": "Agatha",
+    },
+  },
+}
+`;

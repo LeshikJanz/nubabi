@@ -1,0 +1,98 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FriendsList 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "friends": Object {
+      "__typename": "UserConnection",
+      "edges": Array [
+        Object {
+          "__typename": "UserEdge",
+          "isPending": false,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "René",
+            "id": "VXNlcjo=",
+            "lastName": "Johnson",
+          },
+          "relationship": "Parent",
+        },
+        Object {
+          "__typename": "UserEdge",
+          "isPending": false,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "René",
+            "id": "VXNlcjo=",
+            "lastName": "Johnson",
+          },
+          "relationship": "Other",
+        },
+        Object {
+          "__typename": "UserEdge",
+          "isPending": true,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "Lesha",
+            "id": "VXNlcjowNTkyZTA0Yi1jNzRhLTQ0ODItODdmNi03MjJmODMxMWY2MDk=",
+            "lastName": "Black",
+          },
+          "relationship": "Other",
+        },
+        Object {
+          "__typename": "UserEdge",
+          "isPending": true,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "Паша",
+            "id": "VXNlcjowZDc0NjFlYy1lOWUwLTQxYWYtOWY3NC0zMWI5MmEyMjA5OWQ=",
+            "lastName": "Работа",
+          },
+          "relationship": "Other",
+        },
+        Object {
+          "__typename": "UserEdge",
+          "isPending": true,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "Daddy",
+            "id": "VXNlcjo0MzhiM2M3Yi1mMzQzLTRmNzUtYTI2Ny0wMTUyYjM2OTgzOTg=",
+            "lastName": "Foo",
+          },
+          "relationship": "Other",
+        },
+        Object {
+          "__typename": "UserEdge",
+          "isPending": true,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "Lesha",
+            "id": "VXNlcjphYmRkMDZhMC05ODNhLTQzY2UtOTFlOC0xOGY4YTg4MjZkZWM=",
+            "lastName": "Black",
+          },
+          "relationship": "Other",
+        },
+        Object {
+          "__typename": "UserEdge",
+          "isPending": true,
+          "node": Object {
+            "__typename": "User",
+            "avatar": null,
+            "firstName": "Паша",
+            "id": "VXNlcjplN2RkMTI1NC05MTFmLTQ1N2UtOWU3Ni1jZjNkY2JhYzY0ZTg=",
+            "lastName": "Работа",
+          },
+          "relationship": "Other",
+        },
+      ],
+    },
+  },
+}
+`;

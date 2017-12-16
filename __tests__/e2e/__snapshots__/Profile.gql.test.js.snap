@@ -1,0 +1,248 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "activities": Object {
+        "__typename": "ActivityConnection",
+        "edges": Array [
+          Object {
+            "__typename": "ActivityEdge",
+            "node": Object {
+              "__typename": "Activity",
+              "id": "QWN0aXZpdHk6MjU3",
+              "introduction": "The delight of bashing over a tower is one that can entertain Agatha for many happy moments! Before he is able to, you will need to rebuild his tower each time, but soon enough he will be able to collect the fallen blocks and place them on top of one another to build his own tower. Start with bigger \\"blocks\\" such as empty boxes as these will be easier for Agatha to pick up and balance on top of each other than smaller blocks.",
+              "name": "Tons of towering fun",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "icon": "icon-gross",
+                "id": "U2tpbGxBcmVhOjE=",
+              },
+            },
+          },
+          Object {
+            "__typename": "ActivityEdge",
+            "node": Object {
+              "__typename": "Activity",
+              "id": "QWN0aXZpdHk6MjA5",
+              "introduction": "Your little one will love the independence of being able to pull off his own hat, sock or glove! The resistance the sock or glove offers as he tugs on it will give the muscles and joints in his fingers feedback about where his fingers are in space. This awareness of his \\"body position in space\\" is important for him later to enable many fine motor tasks (e.g. holding his pencil correctly).",
+              "name": "Undress for success",
+              "skillArea": Object {
+                "__typename": "SkillArea",
+                "icon": "icon-fine",
+                "id": "U2tpbGxBcmVhOjI=",
+              },
+            },
+          },
+        ],
+      },
+      "avatar": Object {
+        "__typename": "Avatar",
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2FIMG_0438.JPG?alt=media&token=a494fd34-aa2d-4b1c-adfb-03c9b25360de",
+      },
+      "coverImage": Object {
+        "__typename": "Image",
+        "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2FIMG_2407.JPG?alt=media&token=544caf31-ebcf-4c5c-9809-b5d04306a09b",
+      },
+      "dob": "2017-08-28",
+      "growth": Object {
+        "__typename": "GrowthConnection",
+        "current": Object {
+          "__typename": "Growth",
+          "expert": Object {
+            "__typename": "Expert",
+            "avatar": Object {
+              "__typename": "Avatar",
+              "url": "https://s3.amazonaws.com/assets.mylearningbabyguide.com/production/team_members/carianne.jpg",
+            },
+            "discipline": "Paediatrician",
+            "id": "RXhwZXJ0Ojc=",
+            "name": "Martin Bailey",
+          },
+          "id": "R3Jvd3RoOjZHc2NheGV5elk2OHlFR3FBZ3l1Mjg=",
+          "introduction": "Hi Last,
+
+This is an important week as moms need to visit their Gynae or G.P for their postnatal check-up and their Paediatrician or G.P for the baby’s checkup.
+
+Important issues to discuss for mom:
+* Postnatal depression
+* Physical check
+* Discussion of contraceptive and sexual activity
+* Fitness issues and pelvic floor exercises
+
+Important issues to discuss for baby:
+* Growth and feeding
+* Development and stimulation
+* Comprehensive examination of all systems
+* Supplements – vitamins and others
+* Vaccinations",
+          "maximumAge": 6,
+          "title": "Week 6",
+        },
+      },
+      "height": 133,
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "memories": Object {
+        "__typename": "MemoryConnection",
+        "edges": Array [
+          Object {
+            "__typename": "MemoryEdge",
+            "node": Object {
+              "__typename": "Memory",
+              "files": Object {
+                "__typename": "FileConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "FileEdge",
+                    "node": Object {
+                      "__typename": "Image",
+                      "contentType": "image/jpeg",
+                      "id": "SW1hZ2U6LUwwRU5aOF9qekhlLW5rc1BOY1c=",
+                      "large": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L0Atse6giWFP0rbe5vr/large_3F432872-AA6C-4806-806B-AEE170DBB6E5.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1828520342&Signature=Lu14lIym3YSS0kRdYcMt%2F4yea5DRb07Gx6nw9Ofsv0KFglXrP5iylMqJtpJosDkMzAkDxNUFxZj3ANOWxe1YlHue5UGNwgnHZqgj5L2oWOydUuyS6vSnAMp60cUW3yVCMpa4bVUxgyxOJr7hrHpaAp9IuVX%2BxzsHj2J9jXacrFSPLo%2BJ3cm1bstfm%2FMy9dJRfxAxhFSUcjE3Lc4VZu8coYtwN%2FbhAkAWZ8y1bi3l1tH1dt54A%2B6M2VF4ggP0pkITqI1ywA1q33pC3ebUqttPj29O2An4yAmd5ijqCAI6fsLyYx%2BwUWcc2YsbKMSW%2FCkiZNToriaeygKtu7Vpl89mFg%3D%3D",
+                      },
+                      "thumb": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L0Atse6giWFP0rbe5vr/thumb_3F432872-AA6C-4806-806B-AEE170DBB6E5.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1828520339&Signature=eG36s2AwKX3pXWZc7z1roGt1h0wlUtLNwKzZDWipk8m%2F6rxnQo66tuo5sSc8Gyf0TNcrfuQWq8pwnJisJfbWmnxHv9Mio0PLXu3DUxQnuMK2RiwFAxiSTiJ5pbG1LahM415Yzmq5uotfXDtheauDGL8IN1RGgvxuBoZnBs4hg7TQSwJHnWGYlrz9dTi7DPhSdea0MFOclB0WXljNbtRC%2F4LizWUSar5m41PExDbBnBxfPcj%2Fn4ns6ZveLv5hpU4G3shgI3ydyGqgjsomM%2Blcc3tSaH6rZW6rnsCGYtBmZKPpHWZACa2Jtcc2BgMprw1YyrhvAJasoe%2BL%2BiDRJo1XDw%3D%3D",
+                      },
+                      "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-L0Atse6giWFP0rbe5vr%2F3F432872-AA6C-4806-806B-AEE170DBB6E5.jpg?alt=media&token=a769d9f2-81e0-435f-8b83-4a1e8a805bc4",
+                    },
+                  },
+                ],
+              },
+              "id": "TWVtb3J5Oi1MMEF0c2U2Z2lXRlAwcmJlNXZy",
+              "title": "Bath Time",
+            },
+          },
+          Object {
+            "__typename": "MemoryEdge",
+            "node": Object {
+              "__typename": "Memory",
+              "files": Object {
+                "__typename": "FileConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "FileEdge",
+                    "node": Object {
+                      "__typename": "Image",
+                      "contentType": "image/jpeg",
+                      "id": "SW1hZ2U6LUwtZ0ZXTnpfTUY0N3lQVlZhYnY=",
+                      "large": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L-gFNJd_nrTXdtmI64-/large_5DF4888F-A80C-439B-BAA5-530F8ED69DCC.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1827931022&Signature=U4EswsYer1vQB1zqfETyYgs%2BYXITYNKLqwlp4u8kZvTdhAQYd6enAR2kjg6MagBaAxTDnL9a%2F%2FrLmJtt0tH7XjvuhKRuRuCWIbwvGfsLPRFuJkGTf8ekX%2FZya3pX7D4McqcRlEXH6UMiJmzIVUk3jhK3DOKOLUgMnETqwrJzP5tqqJvuwx6zpJ0rmOaX5HQ%2FqXXPEkqCN4lSxlHimbhyPuSEtusvhU5QRYRL4ga3TpVnSVXKpDcCMXyO58VbXK5Q1%2FJMi%2BydRGaHxIuiXwcyNb%2B%2F6rhXFy7lqdR7HjCjXAkdAT50i2xZ%2F%2B%2BPP4jwrXHiyPAdjwAK7Lb%2BLyxQxpm82A%3D%3D",
+                      },
+                      "thumb": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L-gFNJd_nrTXdtmI64-/thumb_5DF4888F-A80C-439B-BAA5-530F8ED69DCC.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1827931021&Signature=bxgH5bZklXkRYKmu0Zh3gpKpRt5jTvxPjzESwvhbZ8KI3YATPMFmbM2e11W8bNO12VBX8zr%2BylDa7PEfeSmwRlqlgHDAJ%2Flq9%2FIO51inBRh%2BYjnxpEHpB8Gw906XSl8ZEJvjwO06x9IZIbnzCEQF3mLNMbtljT%2FKgBWrya%2Fa0LK3NNjZqdbwzTqcZSbzjZGIjgrc5iCYY2F6CkX0WzRUn7nXM5C4uDmt%2Fk4Pkno%2FGPqCl3QkxLbMQempq%2FILyWPYvAfVB7JFrRHbN1LH6Crw0xHEt1T9chgiOZI7sUgvn4aZekbDkKYrInCi1PVxgqDntxC4NOVRn8VeflIAeQI60A%3D%3D",
+                      },
+                      "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-L-gFNJd_nrTXdtmI64-%2F5DF4888F-A80C-439B-BAA5-530F8ED69DCC.jpg?alt=media&token=32605c60-74cf-4b02-9abd-e77b1009b810",
+                    },
+                  },
+                ],
+              },
+              "id": "TWVtb3J5Oi1MLWdGTkpkX25yVFhkdG1JNjQt",
+              "title": "Memory from activity",
+            },
+          },
+          Object {
+            "__typename": "MemoryEdge",
+            "node": Object {
+              "__typename": "Memory",
+              "files": Object {
+                "__typename": "FileConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "FileEdge",
+                    "node": Object {
+                      "__typename": "Image",
+                      "contentType": "image/jpeg",
+                      "id": "SW1hZ2U6LUwtZzQ3anU4czhaclhKdlEzd08=",
+                      "large": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L-g3vZEegt-EoTti_eE/large_C9F2256D-EBCF-4C27-8CF0-DA5302003921.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1827928063&Signature=BijgDC6hl424EOaW7kcnajU1D1D%2FFZoJRSC3QsXX4cBWP7%2BTyL74F%2BlyeFZY%2BxwThb2cXYMejgyySs4X4C3zQ%2B4tZTgL3j1KwVikOnzVjgrsceYR7jnNTA4%2BUCI27IuJHkCztlBcwIMaBfMHjlC26TZ2ZkvKbtlRAv5mGXKNGK9%2BTM%2Be25MokHGFhIVh6GhdwnfP7%2BxyE2E50nCtgukh%2BaBKc2CbEjlKTLbCmNxIkOX%2Fl7SI2IrBBVvzooeas21RM19w3Jq1EVtmbEJgukJiTElLiahi65iRjUE8J7pQIu%2BCInb0QjFjj5R8aUdcOu%2FuksGTZb0fj8J%2F7Mk%2FUnyZZg%3D%3D",
+                      },
+                      "thumb": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-L-g3vZEegt-EoTti_eE/thumb_C9F2256D-EBCF-4C27-8CF0-DA5302003921.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1827928058&Signature=AKRGweU70Y3UwPoF0koJBx6x0KiTHub5uP1WMwu9KQGOdqizOeN3DHxL20N4T%2BRDjz%2FkBWl1%2BqsJ5KPOeqwS6GdEOKB9gGHiOJvXWmSXfNSvSCjB50%2FivfUmHSYGFyzo%2BUg%2Fo4dUMa3hYa4RajbbB7qKJyOHVNxZ98WfR9io26fPkHzJIZMq88Xn0oT1GjHAmvcERnaZHWY3hL%2B1GOe12ViydYrQBPph2N18dGoch5Tab7HljNANjGvSS%2BbT0bmfDjtsh975Et8RSrUceNhoSNJO0nMAEtWrDHmAcf5uHyUO4eAvw0WqGOy5qxeneyxf%2F%2F5vEQegZl9pTC0T%2Btimkg%3D%3D",
+                      },
+                      "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-L-g3vZEegt-EoTti_eE%2FC9F2256D-EBCF-4C27-8CF0-DA5302003921.jpg?alt=media&token=714408cc-d5e3-4c90-be47-79c6810492b3",
+                    },
+                  },
+                ],
+              },
+              "id": "TWVtb3J5Oi1MLWczdlpFZWd0LUVvVHRpX2VF",
+              "title": "Memory from activity with comment",
+            },
+          },
+          Object {
+            "__typename": "MemoryEdge",
+            "node": Object {
+              "__typename": "Memory",
+              "files": Object {
+                "__typename": "FileConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "FileEdge",
+                    "node": Object {
+                      "__typename": "Image",
+                      "contentType": "image/jpeg",
+                      "id": "SW1hZ2U6LUt6Mm9xWnY0amZpczFSR2pjcmw=",
+                      "large": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-Kz2oVffqaXqPwLJmBrZ/large_EFC7ABF8-93DC-4C8A-BBEE-80E1FBCE6D3E.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1826178964&Signature=fbqAPVSwnkk1%2FRsye5oYP%2BAAZ5ITyFDetW9N7G9J%2F7dUug3CM7aN1Q35w06GSrqsszT9VSS1D0ZssIK86kMGPD7So5bnMWT2gEjfNO6IVDWeUQSY32GiKnpDurQdHuUrNsLhMAR4BUEmhKlnBHpNVFdLLkwGh6g%2FbtgV%2F7EjxjaTBHAcexyYk%2FgLVcK%2FV%2FCBCy52yRj%2BiukFuzCPA9OkURlNyHfw2p%2BbSeod35UBI5ZBX5CYImbNRaTtKlSRb4hVBom33Buxflcb5%2FEwAbdLOlApj%2FK%2FxTLBfr9b7fRyJJtGSWXgAhhjH742e249kgBHpVn8oUEtrAJmnSUkSoqdMQ%3D%3D",
+                      },
+                      "thumb": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-Kz2oVffqaXqPwLJmBrZ/thumb_EFC7ABF8-93DC-4C8A-BBEE-80E1FBCE6D3E.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1826178961&Signature=OZHzKDrljBr3qyCwJY6VA8RWanBhlFouAZoVWySVt9fm48elJldnTJ1lnxBWP8kXr%2Fn%2FoIuTn3ariOuTzY4S16o1o1%2FeQE2ukz9Nvg%2B%2BKIQv0VNG9istYqSvbD6Y%2B4bKdeGVUYXOXZ2RKoBkCBRGLc6lwTx6d%2FRHUuPisApBl%2BYIaj5Xjp9dv1ImcHubfU4bl%2BErWJd15s5bUCn0dUkUDYqFTfKvmgPbusKarRKKZFSc78MlLVTL%2BmdlDjvuIErBeNEQbK%2FOmizDFcGHM4J2ghVBU62piiJEZnHy1pmgb9FXcupgIowm4C2jFB73hY7JoH%2BrEilwyjK6VKvh0%2FX4Rw%3D%3D",
+                      },
+                      "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-Kz2oVffqaXqPwLJmBrZ%2FEFC7ABF8-93DC-4C8A-BBEE-80E1FBCE6D3E.jpg?alt=media&token=c1317524-0775-472e-a736-ea53859cfb59",
+                    },
+                  },
+                ],
+              },
+              "id": "TWVtb3J5Oi1LejJvVmZmcWFYcVB3TEptQnJa",
+              "title": "New memory",
+            },
+          },
+          Object {
+            "__typename": "MemoryEdge",
+            "node": Object {
+              "__typename": "Memory",
+              "files": Object {
+                "__typename": "FileConnection",
+                "edges": Array [
+                  Object {
+                    "__typename": "FileEdge",
+                    "node": Object {
+                      "__typename": "Image",
+                      "contentType": "image/jpeg",
+                      "id": "SW1hZ2U6LUt5ZFRHM2NBTzFwSjFlUFJHVWc=",
+                      "large": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-Kxn_P-mKzvAopkHF2K6/large_B0AEFE79-EB10-4230-8F17-0336856EC796.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1825736833&Signature=AkIEaOLgZOW4fG7lI4Bj7IiYyN2Ik4POXB5Vx9XaXM9D4UqCA%2FeNZXm4FKg4MF0parmMdUjRA3XjZZgNGdxbHcHhX4dWUTk4Hy8AkPRevps%2FWdTqOqipf7fSGoitlRckv6cGGs4AUhoze%2BGOynwqr4Bg0nOpmpnkoazrEcXWPw%2FZ%2B9YajtfM2a8sgNnKQAMgBCfinsnWOES7XL8Il8nPrukTYeOz%2BV07dWe7lIyLv7UIbTqcGf8qCIT%2BWQ5BUlw%2Fg5DhJBTuPd0ONsmwjn81G3aX5%2BWGK38Kr9Fmk50bpvvAsxHchIzXQWnt6PpZYW7ez7cTr243VdBrh6RUAFwNbA%3D%3D",
+                      },
+                      "thumb": Object {
+                        "__typename": "Image",
+                        "url": "https://storage.googleapis.com/nubabitest1.appspot.com/babies/-KlNutUyADmNPA9ABHtc/memories/-Kxn_P-mKzvAopkHF2K6/thumb_B0AEFE79-EB10-4230-8F17-0336856EC796.jpg?GoogleAccessId=firebase-adminsdk-r7bmb%40nubabitest1.iam.gserviceaccount.com&Expires=1825736829&Signature=PXmO6LNjoO5rzE%2FhIkZ9wVSw4JWj2CGxfjy5XnsG5SwxoMUDBkb%2Fioj1u4EU9jxKYEUnftpSqEEjAq6Ti0Z3Qw2Bw8VckT1nhdBxVDincKj6pDnkk6QeHH8pKFmNs9TCTYXRS4lZKpTB4WV2zf3fTDctUnlwVp9211CO3%2BUhHM8g4GKW26PHbK8unU5W8TXWvfWiSfR8D4mTDuXaBkb6gUwTI6Gxsee13Od3fGE7BEgJfzBRoyqYQXTNoDpumxIVylQXzdb5pMhlpFtzEEvsGfIlpm%2F9uYgZ%2FuatXys7rMOXrCBLqwLu8bhUZQSXvk75D1d4iBk3zrDqQxk607X1iQ%3D%3D",
+                      },
+                      "url": "https://firebasestorage.googleapis.com/v0/b/nubabitest1.appspot.com/o/babies%2F-KlNutUyADmNPA9ABHtc%2Fmemories%2F-Kxn_P-mKzvAopkHF2K6%2FB0AEFE79-EB10-4230-8F17-0336856EC796.jpg?alt=media&token=c4b8658c-5378-4642-b721-8f4492368927",
+                    },
+                  },
+                ],
+              },
+              "id": "TWVtb3J5Oi1LeG5fUC1tS3p2QW9wa0hGMks2",
+              "title": "T",
+            },
+          },
+        ],
+      },
+      "name": "Agatha",
+      "weight": 7,
+    },
+  },
+}
+`;

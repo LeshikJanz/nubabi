@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ViewGrowthArticle 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "growthArticle": Object {
+      "__typename": "GrowthArticle",
+      "id": "R3Jvd3RoQXJ0aWNsZTo3N1NUNXR3OGZLWUMyMFd3bWdBNDRB",
+      "readingTime": Object {
+        "__typename": "ReadingTime",
+        "text": "1 min read",
+      },
+      "section": Object {
+        "__typename": "GrowthArticleSection",
+        "id": "R3Jvd3RoQXJ0aWNsZVNlY3Rpb246Mk1qMFhvNWpiR0VxU3lRTTBZMFFpdQ==",
+        "name": "Parenting",
+      },
+      "text": "Secure bonding and attachment doesn’t happen overnight. It is an on-going partnership between you and your baby. Within the first few months, it will become easier to understand, interpret and respond to the important signals of when he needs food, sleep, love, and comfort. You will learn what makes him alert and what makes him calm and when he is ready for stimulation. Allow yourself and your baby time to learn about each other. The key is to observe his behaviour on an on-going basis, especially in new situations. Look out for signs of enjoyment and signs of sensory overload, so that you can intervene and help him before he gets overwhelmed.
+
+As your baby grows into toddlerhood, you can continue to strengthen your special bond. Daily attentive play ensures that you are nurturing his early learning potential while also building and strengthening your relationship. Whatever stage he is in, dedicate at least 5 minutes of your focussed attention every day, which is uninterrupted. Get rid of all distractions (TV, radio, computer etc), get down to eye level and just play! ",
+      "title": "Bonding with your baby",
+    },
+  },
+}
+`;

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MemoryComments 1`] = `
+Object {
+  "viewer": Object {
+    "__typename": "Viewer",
+    "baby": Object {
+      "__typename": "Baby",
+      "id": "QmFieTotS2xOdXRVeUFEbU5QQTlBQkh0Yw==",
+      "memory": Object {
+        "__typename": "Memory",
+        "comments": Object {
+          "__typename": "CommentConnection",
+          "count": 0,
+          "edges": Array [],
+        },
+        "id": "TWVtb3J5Oi1MMEF0c2U2Z2lXRlAwcmJlNXZy",
+      },
+    },
+  },
+}
+`;
