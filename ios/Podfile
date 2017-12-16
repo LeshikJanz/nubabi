@@ -7,7 +7,10 @@ target 'NuBabiMobile' do
 
   # Pods for NuBabiMobile
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Database'
   pod 'Firebase/Messaging'
+  pod 'Firebase/Storage'
   pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   pod "FBSDKCoreKit";
