@@ -68,7 +68,8 @@ export type Deps = {
   now: () => number,
   firebase: any,
   firebaseAuth: Function,
-  firebaseDatabase: any,
+  firebaseDatabase: Function,
+  firebaseSdk: any,
   apollo: typeof ApolloClient,
 };
 

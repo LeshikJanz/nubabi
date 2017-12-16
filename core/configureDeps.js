@@ -11,7 +11,9 @@ const createFirebaseDeps = (firebase, firebaseConfig) => {
     firebaseDeps = {
       firebase: firebase.database().ref(),
       firebaseAuth: firebase.auth,
+      firebaseAnalytics: firebase.analytics,
       firebaseData: firebase.database,
+      firebaseSdk: firebase,
     };
   }
 

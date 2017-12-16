@@ -3,7 +3,6 @@ import type { Deps } from 'core/types';
 import { Observable } from 'rxjs/Observable';
 import { getBabiesRequest, getBabiesSuccess } from 'core/babies/actions';
 import { gql } from 'react-apollo';
-import firebase from 'react-native-firebase';
 import { appOnline, appError } from 'core/app/actions';
 
 // We will get rid of this once we standarize data fetching
@@ -54,25 +53,29 @@ const appOnlineEpic = (action$: any, deps: Deps) => {
   });
 };
 
-const onAuthEpic = (action$: any, { firebase: firebaseWeb }) => {
+const onAuthEpic = (action$: any, { firebaseSdk }: Deps) => {
   return action$
     .filter(action => action.type === 'ON_AUTH' && action.payload.user)
     .switchMap(action => {
       const userId = action.payload.user.uid;
 
       // Analytics
-      firebase.analytics().setUserId(userId);
-      firebase
+      firebaseSdk.analytics().setUserId(userId);
+      firebaseSdk
         .analytics()
         .setUserProperty('user_email', action.payload.user.email);
 
       // Push notifications
-      firebase.messaging().requestPermissions();
-      firebase
+      firebaseSdk.messaging().requestPermissions();
+      firebaseSdk
         .messaging()
         .getToken()
         .then(token => {
-          firebaseWeb.child(`/users/${userId}/pushToken`).set(token);
+          firebaseSdk
+            .database()
+            .ref()
+            .child(`/users/${userId}/pushToken`)
+            .set(token);
         });
 
       return Observable.of();
