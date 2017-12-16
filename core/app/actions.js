@@ -1,7 +1,7 @@
 // @flow
 import axios from 'axios';
 import { Observable } from 'rxjs/Observable';
-import "../shared/observable";
+import '../shared/observable';
 
 import type {
   Action,
@@ -54,7 +54,7 @@ const appStartedEpic = (action$: any, deps: Deps) => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
         firebaseAuth()
-          .currentUser.getToken()
+          .currentUser.getIdToken()
           .then(token => {
             if (__DEV__) {
               axios
