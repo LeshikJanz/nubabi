@@ -1,7 +1,6 @@
 // @flow
 import express from 'express';
 import bodyParser from 'body-parser';
-import Multer from 'multer';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express';
 import { schema } from './schema';
 import admin from 'firebase-admin';
@@ -22,10 +21,6 @@ const serviceAccount = JSON.parse(
 
 const app = express();
 
-const multer = Multer({
-  storage: Multer.memoryStorage(),
-});
-
 global.firebase =
   global.firebase ||
   admin.initializeApp({
@@ -43,7 +38,6 @@ const firebaseConn = firebaseConnector(firebase);
 app.options('/graphql', cors());
 app.use(
   '/graphql',
-  multer.any(),
   bodyParser.json(),
   cors(),
   graphqlExpress(async request => {
@@ -74,7 +68,6 @@ app.use(
       context: {
         token,
         loaders,
-        uploads: request.files,
         connectors: {
           firebase: firebaseConn,
         },

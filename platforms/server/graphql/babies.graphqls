@@ -64,8 +64,8 @@ input CreateBabyInput {
   name: String!
   # Date of birth
   dob: Date!
-  avatar: FileInputBase64
-  coverImage: FileInputBase64
+  avatar: FileInput
+  coverImage: FileInput
   weight: Float
   height: Float
   gender: Gender!
@@ -85,8 +85,8 @@ input UpdateBabyInput {
   id: ID!
   name: String
   dob: Date
-  avatar: FileInputBase64
-  coverImage: FileInputBase64
+  avatar: FileInput
+  coverImage: FileInput
   weight: Float
   height: Float
   gender: Gender

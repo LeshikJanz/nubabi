@@ -22,12 +22,8 @@ import R, {
   merge,
   omit,
 } from 'ramda';
-import { decode } from 'base-64';
 import Task from 'data.task';
-import {
-  toCentimeters,
-  toKilograms,
-} from 'core/helpers/measurement';
+import { toCentimeters, toKilograms } from 'core/helpers/measurement';
 
 const get = (firebase, path: string) =>
   firebase
@@ -54,16 +50,6 @@ const returnValWithKeyAsId = snapshot => {
   };
 };
 
-const isNewFile = (url: string) => {
-  return !url.startsWith('https://firebasestorage.googleapis.com');
-};
-
-const isNewImage = image => {
-  // Apparently we can't use String.prototype.startsWith on JSC
-  // TODO: confirm
-  return image && image.url.indexOf('data:') !== -1;
-};
-
 const transforms = {
   dob: date => date.getTime(),
   gender: gender => {
@@ -76,52 +62,10 @@ const transforms = {
 };
 
 const toFirebaseBaby = values => {
-  return evolve(
-    transforms,
-    omit(['id', 'relationship', 'avatar', 'coverImage'], values),
-  );
+  return evolve(transforms, omit(['id', 'relationship'], values));
 };
 
-const uploadFile = (firebase, storagePath, file, upload, fileMetadata = {}) => {
-  return new Promise(async (resolve, reject) => {
-    const fileUpload = firebase
-      .storage()
-      .bucket()
-      .file(storagePath);
-    const blobStream = fileUpload.createWriteStream({
-      metadata: {
-        ...fileMetadata,
-        contentType: file.contentType,
-      },
-    });
-
-    blobStream.on('error', (err) => {
-      console.log(err);
-      reject(err);
-    });
-    blobStream.on('finish', () => {
-      fileUpload.getSignedUrl(
-        {
-          action: 'read',
-          expires: '06-06-2026',
-        },
-        (err, url) => {
-          if (err) {
-            reject(err);
-          }
-          console.log('resolving')
-          resolve(url);
-        },
-      );
-    });
-
-    blobStream.end(upload.buffer, () => {
-      console.log('callback for blobStream');
-    });
-  });
-};
-
-const createOrUpdateBaby = async (firebase, values, id, uploads) => {
+const createOrUpdateBaby = async (firebase, values, id) => {
   const creating = !id;
 
   const currentUserId = getViewer(firebase).uid;
@@ -146,50 +90,11 @@ const createOrUpdateBaby = async (firebase, values, id, uploads) => {
     object.createdBy = currentUserId;
   }
 
-  const updates = {};
-
-  // TODO: refactor
-  const { avatar } = values;
-  if (avatar && isNewFile(avatar.url)) {
-    const fileUrl = await uploadFile(
-      firebase,
-      `/${path}/${avatar.name}`,
-      avatar,
-      findUploadForFile(uploads, avatar),
-      { role: 'avatar' },
-    );
-    if (fileUrl) {
-      avatar.url = fileUrl;
-      updates[`${path}/avatar`] = avatar;
-    }
-  }
-
-  const { coverImage } = values;
-  if (coverImage && isNewFile(coverImage.url)) {
-    const fileUrl = await uploadFile(
-      firebase,
-      `${path}/${coverImage.name}`,
-      coverImage,
-      findUploadForFile(uploads, coverImage),
-      { role: 'coverImage' },
-    );
-
-    if (fileUrl) {
-      coverImage.url = fileUrl;
-      updates[`${path}/coverImage`] = coverImage;
-    }
-  }
-
   // prettier-ignore
   await firebase.database()
     .ref()
     .child(path)
     .update(object);
-
-  // prettier-ignore
-  await firebase.database()
-    .ref()
-    .update(updates);
 
   if (values.relationship) {
     await firebase
@@ -291,36 +196,14 @@ const getFriends = async firebase => {
     });
 };
 
-const updateUser = async (firebase, input, uploads) => {
+const updateUser = async (firebase, input) => {
   const currentUser = getViewer(firebase);
-  const user = evolve(transforms, omit(['avatar'], input));
+  const user = evolve(transforms, input);
   const updates = {};
 
   Object.keys(user).forEach(key => {
     updates[`users/${currentUser.uid}/${key}`] = user[key];
   });
-
-  if (input.avatar && isNewFile(input.avatar.url)) {
-    const avatarUrl = await uploadFile(
-      firebase,
-      `users/${currentUser.uid}/${input.avatar.name}`,
-      input.avatar,
-      findUploadForFile(uploads, input.avatar),
-      { role: 'avatar' },
-    );
-
-    if (avatarUrl) {
-      const avatar = {
-        ...input.avatar,
-        url: avatarUrl,
-        // We reset these to null until resize function kicks in
-        large: null,
-        thumb: null,
-      };
-
-      updates[`users/${currentUser.uid}/avatar`] = avatar;
-    }
-  }
 
   await firebase
     .database()
@@ -426,10 +309,7 @@ const getBabies = firebase => {
       // TODO: do this with Firebase API if possible
       return R.filter(baby => baby.wasDeleted !== true, babies);
     })
-    .catch(err => {
-      console.warn(err);
-      return [];
-    });
+    .catch(() => []);
 };
 
 const upsert = (basePath: string, obj: Object) => {
@@ -442,49 +322,7 @@ const upsert = (basePath: string, obj: Object) => {
   return target;
 };
 
-const findUploadForFile = (uploads, file) => {
-  return R.find(R.propEq('fieldname', file.url), uploads);
-};
-
-const uploadMemoryFiles = (
-  firebase,
-  memoryId,
-  babyId,
-  files,
-  uploads,
-): Promise<Array<Object>> => {
-  if (files && files.length) {
-    const storagePath = `babies/${babyId}/memories/${memoryId}`;
-
-    return Promise.all(
-      files.map(file => {
-        return uploadFile(
-          firebase,
-          [storagePath, file.name].join('/'),
-          file,
-          findUploadForFile(uploads, file),
-        ).then(url => {
-          const id = firebase
-            .database()
-            .ref()
-            .child(`/memories/${memoryId}/files`)
-            .push().key;
-
-          return { id, file: assoc('url', url, file) };
-        });
-      }),
-    );
-  }
-
-  return Promise.resolve([]);
-};
-
-const createMemory = (
-  firebase,
-  babyId: string,
-  input: CreateMemoryInput,
-  uploads,
-) => {
+const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
   const updates = {};
   const currentUserId = getViewer(firebase).uid;
   const memoryId = firebase
@@ -493,13 +331,25 @@ const createMemory = (
     .child('/memories/')
     .push().key;
 
+  const files = {};
+  if (input.files && input.files.length) {
+    input.files.forEach(file => {
+      const fileId = firebase
+        .database()
+        .ref()
+        .child(`/memories/${memoryId}/files`)
+        .push().key;
+      files[fileId] = file;
+    });
+  }
+
   const memory = {
     ...omit(['babyId', 'files', 'fromActivity'], input),
     id: memoryId,
     babyId,
     authorId: currentUserId,
     createdAt: input.createdAt.getTime(),
-    files: {},
+    files,
   };
 
   if (input.fromActivity) {
@@ -509,29 +359,14 @@ const createMemory = (
   updates[`/memories/${memoryId}`] = memory;
   updates[`/babies/${babyId}/memories/${memoryId}`] = true;
 
-  return uploadMemoryFiles(firebase, memoryId, babyId, input.files, uploads)
-    .then(files => {
-      files.forEach(file => (memory.files[file.id] = file.file));
-      return files;
-    })
-    .then(() => {
-      firebase
-        .database()
-        .ref()
-        .update(updates);
-    })
-    .then(() => get(firebase, `/memories/${memoryId}`))
-    .then(result => {
-      return result;
-    });
+  return firebase
+    .database()
+    .ref()
+    .update(updates)
+    .then(() => get(firebase, `/memories/${memoryId}`));
 };
 
-const updateMemory = async (
-  firebase,
-  id: string,
-  input: any,
-  uploads: Array<any>,
-) => {
+const updateMemory = async (firebase, id: string, input: any) => {
   const toFirebaseMemory = {
     createdAt: toTimestamp,
   };
@@ -551,18 +386,14 @@ const updateMemory = async (
     updates[`${path}/files/${fromGlobalId(fileId).id}`] = null;
   });
 
-  if (input.files.length) {
-    const babyId = (await get(firebase, path)).babyId;
-    const files = await uploadMemoryFiles(
-      firebase,
-      id,
-      babyId,
-      input.files,
-      uploads,
-    );
-
-    files.forEach(file => {
-      updates[`${path}/files/${file.id}`] = file.file;
+  if (input.files && input.files.length) {
+    input.files.forEach(file => {
+      const fileId = firebase
+        .database()
+        .ref()
+        .child(`${path}/files/`)
+        .push().key;
+      updates[`${path}/files/${fileId}`] = file;
     });
   }
 
@@ -570,6 +401,7 @@ const updateMemory = async (
     .database()
     .ref()
     .update(updates);
+
   return get(firebase, path);
 };
 
@@ -753,7 +585,7 @@ const denormalizeArray = (firebase, denormalizedPath, normalizedPath) => {
       ),
     )
     .then(([...objs]) => objs)
-    .catch(err => {
+    .catch(() => {
       return [];
     });
 };
@@ -766,7 +598,7 @@ export const nestedArrayToArray = (input: Object) => {
   return Object.keys(input).map(key => assoc('id', key, input[key]));
 };
 
-const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
+const getMemories = (firebase, babyId: string) => {
   return denormalizeArray(
     firebase,
     `/babies/${babyId}/memories`,
@@ -774,15 +606,11 @@ const getMemories = (firebase, babyId: string, args: ConnectionArguments) => {
   ).then(compose(R.reverse, sortByTimestamp));
 };
 
-const getMemory = (firebase, id: string, args: ConnectionArguments) => {
+const getMemory = (firebase, id: string) => {
   return get(firebase, `/memories/${id}`);
 };
 
-const getMemoryLikes = async (
-  firebase,
-  id: string,
-  args: ConnectionArguments,
-) => {};
+const getMemoryLikes = async () => {};
 
 const commentablePathFor = cond([[equals('MEMORY'), always('memories')]]);
 
@@ -883,7 +711,7 @@ const firebaseConnector = firebase => {
     getFriends: () => getFriends(firebase),
     updateUser: input => updateUser(firebase, input),
     inviteUser: input => inviteUser(firebase, input),
-    getLinkedAccounts: input => getLinkedAccounts(firebase),
+    getLinkedAccounts: () => getLinkedAccounts(firebase),
     linkAccount: input => linkAccount(firebase, input),
     unlinkAccount: input => unlinkAccount(firebase, input),
     getBabies: () => getBabies(firebase),
@@ -893,10 +721,9 @@ const firebaseConnector = firebase => {
     getBabyHeights: (id: string) => getBabyHeights(firebase, id),
     getMemories: (babyId, args) => getMemories(firebase, babyId, args),
     getMemory: id => getMemory(firebase, id),
-    createBaby: (values: mixed, uploads) =>
-      createOrUpdateBaby(firebase, values, uploads),
-    updateBaby: (id: string, values: mixed, uploads: mixed) =>
-      createOrUpdateBaby(firebase, values, id, uploads),
+    createBaby: (values: mixed) => createOrUpdateBaby(firebase, values),
+    updateBaby: (id: string, values: mixed) =>
+      createOrUpdateBaby(firebase, values, id),
     deleteBaby: (id: string) => deleteBaby(firebase, id),
     recordMeasurement: (
       id: string,
@@ -904,10 +731,8 @@ const firebaseConnector = firebase => {
       unit: MeasurementUnit,
       value: number,
     ) => recordMeasurement(firebase, id, type, unit, value),
-    createMemory: (babyId, input, uploads) =>
-      createMemory(firebase, babyId, input, uploads),
-    updateMemory: (id, input, uploads) =>
-      updateMemory(firebase, id, input, uploads),
+    createMemory: (babyId, input) => createMemory(firebase, babyId, input),
+    updateMemory: (id, input) => updateMemory(firebase, id, input),
     deleteMemory: id => deleteMemory(firebase, id),
     toggleMemoryLike: (memoryId, isLiked) =>
       toggleMemoryLike(firebase, memoryId, isLiked),

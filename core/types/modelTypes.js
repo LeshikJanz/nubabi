@@ -20,6 +20,7 @@ export type Query = {
   viewer: Viewer,
   /** Fetches an object given its ID */
   node: ?Node,
+  ping: ?string,
 };
 
 export type Viewer = {
@@ -29,12 +30,13 @@ export type Viewer = {
   friends: UserConnection,
   babies: BabyConnection,
   baby: ?Baby,
-  allSkillAreas: SkillAreaConnection,
   allActivities: ActivityConnection,
+  allSkillAreas: SkillAreaConnection,
   allExperts: ExpertConnection,
   expert: ?Expert,
   allTips: TipConnection,
   allQuotes: QuoteConnection,
+  randomQuote: ?Quote,
   allArticles: ArticleConnection,
   article: ?Article,
   growthArticle: ?GrowthArticle,
@@ -89,6 +91,7 @@ export type User = {
   /** Date of Birth */
   dob: ?any,
   avatar: ?Avatar,
+  linkedAccounts: LinkedAccountsConnection,
   totalAchievements: ?number,
   totalMemories: ?number,
 };
@@ -99,9 +102,9 @@ export type Node =
   | Expert
   | SkillArea
   | Category
-  | Memory
   | Growth
-  | Article;
+  | Article
+  | Memory;
 
 export type Avatar = {
   id: string,
@@ -137,6 +140,34 @@ export type Image = {
   large: ?Image,
   thumb: ?Image,
 };
+
+/**
+  A connection to a list of items.
+*/
+export type LinkedAccountsConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<LinkedAccountEdge>,
+};
+
+export type LinkedAccountEdge = {
+  /** The item at the end of the edge. */
+  node: LinkedAccount,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type LinkedAccount = {
+  /** The ID of an object */
+  id: string,
+  provider: ?AuthProvider,
+  displayName: string,
+  email: ?string,
+  photoURL: ?string,
+};
+
+export type AuthProvider = 'EMAIL' | 'FACEBOOK';
 
 export type BabyRelationship =
   | 'Parent'
@@ -184,19 +215,84 @@ export type Baby = {
   updatedAt: ?any,
   /** Relationship to Viewer */
   relationship: ?BabyRelationship,
-  activities: ?ActivityConnection,
-  activity: ?Activity,
   achievements: ?AchievementConnection,
-  memories: ?MemoryConnection,
   measurements: ?Measurements,
+  activities: ?ActivityConnection,
   favoriteActivities: ActivityConnection,
+  activity: ?Activity,
+  activityHistory: ?ActivityHistoryConnection,
   growth: GrowthConnection,
+  memories: ?MemoryConnection,
   memory: ?Memory,
 };
 
 export type Timestampable = Baby | Memory | Comment;
 
 export type Gender = 'MALE' | 'FEMALE';
+
+/**
+  A connection to a list of items.
+*/
+export type AchievementConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<AchievementEdge>,
+  /** Count of result set without considering pagination arguments */
+  count: number,
+};
+
+export type AchievementEdge = {
+  /** The item at the end of the edge. */
+  node: Achievement,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Achievement = {
+  id: string,
+  badges: ?Array<Badge>,
+};
+
+export type Badge = {
+  image: ?Image,
+};
+
+export type Measurements = {
+  heights: MeasurementConnection,
+  weights: MeasurementConnection,
+};
+
+/**
+  A connection to a list of items.
+*/
+export type MeasurementConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<MeasurementEdge>,
+};
+
+export type MeasurementEdge = {
+  /** The item at the end of the edge. */
+  node: Measurement,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Measurement = {
+  value: number,
+  unit: MeasurementUnit,
+  recordedAt: any,
+};
+
+export type MeasurementUnit = 'kg' | 'cm' | 'in' | 'lbs';
+
+export type ActivityFilterInput = {
+  skillAreas: ?Array<string>,
+  categories: ?Array<string>,
+  periodId: ?string,
+};
 
 /**
   A connection to a list of items.
@@ -226,7 +322,12 @@ export type Activity = {
   equipment: ?string,
   expert: Expert,
   skillArea: SkillArea,
-  isFavorite: ?boolean,
+  /** Whether an activity is favorite, only valid when it's child of baby
+   (i.e $babyId passed). Will return false otherwise. */
+  isFavorite: boolean,
+  /** Whether this activity has been completed, only valid when it's
+   child of baby (i.e $babyId passed). Will return false otherwise. */
+  isCompleted: boolean,
   categories: CategoryConnection,
   media: ActivityMediaConnection,
 };
@@ -308,140 +409,26 @@ export type ActivityMediaType = 'IMAGE' | 'VIDEO';
 /**
   A connection to a list of items.
 */
-export type AchievementConnection = {
+export type ActivityHistoryConnection = {
   /** Information to aid in pagination. */
   pageInfo: PageInfo,
   /** A list of edges. */
-  edges: ?Array<AchievementEdge>,
-  /** Count of result set without considering pagination arguments */
-  count: number,
+  edges: ?Array<ActivityHistoryEdge>,
 };
 
-export type AchievementEdge = {
+export type ActivityHistoryEdge = {
   /** The item at the end of the edge. */
-  node: Achievement,
+  node: ActivityHistory,
   /** A cursor for use in pagination. */
   cursor: string,
 };
 
-export type Achievement = {
-  id: string,
-  badges: ?Array<Badge>,
-};
-
-export type Badge = {
-  image: ?Image,
-};
-
-export type MemoryFilter = 'ALL' | 'SPECIAL';
-
-/**
-  A connection to a list of items.
-*/
-export type MemoryConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo,
-  /** A list of edges. */
-  edges: ?Array<MemoryEdge>,
-};
-
-export type MemoryEdge = {
-  /** The item at the end of the edge. */
-  node: Memory,
-  /** A cursor for use in pagination. */
-  cursor: string,
-};
-
-export type Memory = {
+export type ActivityHistory = {
   /** The ID of an object */
   id: string,
-  title: string,
-  description: ?string,
-  author: User,
-  files: FileConnection,
-  comments: CommentConnection,
-  createdAt: any,
-  updatedAt: ?any,
+  startDate: any,
+  endDate: any,
 };
-
-export type FileFilter = {
-  contentTypeContains: ?string,
-};
-
-/**
-  A connection to a list of items.
-*/
-export type FileConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo,
-  /** A list of edges. */
-  edges: ?Array<FileEdge>,
-  /** Count of filtered result set without considering pagination arguments */
-  count: ?number,
-};
-
-export type FileEdge = {
-  /** The item at the end of the edge. */
-  node: File,
-  /** A cursor for use in pagination. */
-  cursor: string,
-};
-
-/**
-  A connection to a list of items.
-*/
-export type CommentConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo,
-  /** A list of edges. */
-  edges: ?Array<CommentEdge>,
-  count: ?number,
-};
-
-export type CommentEdge = {
-  /** The item at the end of the edge. */
-  node: Comment,
-  /** A cursor for use in pagination. */
-  cursor: string,
-};
-
-export type Comment = {
-  id: string,
-  text: string,
-  author: User,
-  createdAt: any,
-  updatedAt: ?any,
-};
-
-export type Measurements = {
-  heights: MeasurementConnection,
-  weights: MeasurementConnection,
-};
-
-/**
-  A connection to a list of items.
-*/
-export type MeasurementConnection = {
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo,
-  /** A list of edges. */
-  edges: ?Array<MeasurementEdge>,
-};
-
-export type MeasurementEdge = {
-  /** The item at the end of the edge. */
-  node: Measurement,
-  /** A cursor for use in pagination. */
-  cursor: string,
-};
-
-export type Measurement = {
-  value: number,
-  unit: MeasurementUnit,
-  recordedAt: any,
-};
-
-export type MeasurementUnit = 'kg' | 'cm' | 'in' | 'lbs';
 
 export type GrowthConnection = {
   /** Global introduction to the Growth section */
@@ -573,6 +560,117 @@ export type GrowthArticleSection = {
   name: string,
 };
 
+export type MemoryFilter = 'ALL' | 'SPECIAL';
+
+/**
+  A connection to a list of items.
+*/
+export type MemoryConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<MemoryEdge>,
+};
+
+export type MemoryEdge = {
+  /** The item at the end of the edge. */
+  node: Memory,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Memory = {
+  /** The ID of an object */
+  id: string,
+  title: string,
+  description: ?string,
+  author: User,
+  files: FileConnection,
+  comments: CommentConnection,
+  createdAt: any,
+  updatedAt: ?any,
+  suggestedMemoryType: ?string,
+  likes: LikeConnection,
+  isLikedByViewer: boolean,
+  fromActivity: ?Activity,
+};
+
+export type Commentable = Memory;
+
+/**
+  A connection to a list of items.
+*/
+export type CommentConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<CommentEdge>,
+  count: ?number,
+};
+
+export type CommentEdge = {
+  /** The item at the end of the edge. */
+  node: Comment,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type Comment = {
+  /** The ID of an object */
+  id: string,
+  text: string,
+  author: User,
+  commentable: Commentable,
+  createdAt: any,
+  updatedAt: ?any,
+};
+
+export type Likeable = Memory;
+
+/**
+  A connection to a list of items.
+*/
+export type LikeConnection = {
+  /** Count of filtered result set without considering pagination arguments */
+  count: ?number,
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<LikeEdge>,
+};
+
+export type LikeEdge = {
+  /** The user that performed the like */
+  actor: User,
+  /** The Likeable item at the end of the edge. */
+  node: Likeable,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
+export type FileFilter = {
+  contentTypeContains: ?string,
+};
+
+/**
+  A connection to a list of items.
+*/
+export type FileConnection = {
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo,
+  /** A list of edges. */
+  edges: ?Array<FileEdge>,
+  /** Count of filtered result set without considering pagination arguments */
+  count: ?number,
+};
+
+export type FileEdge = {
+  /** The item at the end of the edge. */
+  node: File,
+  /** A cursor for use in pagination. */
+  cursor: string,
+};
+
 /**
   A connection to a list of items.
 */
@@ -588,11 +686,6 @@ export type SkillAreaEdge = {
   node: SkillArea,
   /** A cursor for use in pagination. */
   cursor: string,
-};
-
-export type ActivityFilterInput = {
-  skillAreas: ?Array<string>,
-  categories: ?Array<string>,
 };
 
 /**
@@ -670,27 +763,35 @@ export type LibraryArticlesFilterInput = {
 export type Mutation = {
   updateUser: ?UpdateUserPayload,
   inviteUser: ?InviteUserPayload,
+  linkAccount: ?LinkAccountPayload,
+  unlinkAccount: ?UnlinkAccountPayload,
+  createComment: ?CreateOrUpdateCommentPayload,
   createBaby: ?CreateBabyPayload,
   updateBaby: ?UpdateBabyPayload,
+  deleteBaby: ?UpdateBabyPayload,
   recordBabyMeasurement: ?RecordMeasurementPayload,
   swoopActivity: ?ChangeActivityPayload,
   changeActivity: ?ChangeActivityPayload,
+  completeActivity: ?CompleteActivityPayload,
   toggleActivityFavorite: ?ToggleFavoritePayload,
   createMemory: ?CreateOrUpdateMemoryPayload,
   updateMemory: ?CreateOrUpdateMemoryPayload,
   deleteMemory: ?DeleteMemoryPayload,
+  toggleMemoryLike: ?ToggleMemoryLikePayload,
 };
 
 export type UpdateUserInput = {
   firstName: ?string,
   lastName: ?string,
   dob: ?any,
-  avatar: ?ImageInput,
+  avatar: ?FileInput,
 };
 
-export type ImageInput = {
-  /** A Base64-encoded data URI representing the image contents */
-  url: ?string,
+export type FileInput = {
+  name: string,
+  contentType: string,
+  size: number,
+  url: string,
 };
 
 export type UpdateUserPayload = {
@@ -716,12 +817,46 @@ export type InviteUserPayload = {
   clientMutationId: ?string,
 };
 
+export type LinkAccountInput = {
+  providerId: AuthProvider,
+  accessToken: string,
+};
+
+export type LinkAccountPayload = {
+  edge: ?LinkedAccountEdge,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses. */
+  clientMutationId: ?string,
+};
+
+export type UnlinkAccountInput = {
+  providerId: string,
+};
+
+export type UnlinkAccountPayload = {
+  /** The LinkedAccount that was deleted as the result of the unlink */
+  deletedEdge: ?LinkedAccountEdge,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses. */
+  clientMutationId: ?string,
+};
+
+export type CreateCommentInput = {
+  id: string,
+  commentableType: string,
+  text: string,
+};
+
+export type CreateOrUpdateCommentPayload = {
+  edge: ?CommentEdge,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses. */
+  clientMutationId: ?string,
+};
+
 export type CreateBabyInput = {
   name: string,
   /** Date of birth */
   dob: any,
-  avatar: ?ImageInput,
-  coverImage: ?ImageInput,
+  avatar: ?FileInput,
+  coverImage: ?FileInput,
   weight: ?number,
   height: ?number,
   gender: Gender,
@@ -731,6 +866,8 @@ export type CreateBabyInput = {
 
 export type CreateBabyPayload = {
   createdBaby: ?Baby,
+  /** An edge for the Baby that was created */
+  edge: ?BabyEdge,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId: ?string,
 };
@@ -739,8 +876,8 @@ export type UpdateBabyInput = {
   id: string,
   name: ?string,
   dob: ?any,
-  avatar: ?ImageInput,
-  coverImage: ?ImageInput,
+  avatar: ?FileInput,
+  coverImage: ?FileInput,
   weight: ?number,
   height: ?number,
   gender: ?Gender,
@@ -752,8 +889,14 @@ export type UpdateBabyInput = {
 
 export type UpdateBabyPayload = {
   changedBaby: ?Baby,
+  /** An edge for the Baby that was updated */
+  edge: ?BabyEdge,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId: ?string,
+};
+
+export type DeleteBabyInput = {
+  id: string,
 };
 
 export type RecordMeasurementInput = {
@@ -797,6 +940,19 @@ export type AdjustActivityLevelInput = {
 
 export type ActivityLevelOperation = 'INCREASE' | 'DECREASE';
 
+export type CompleteActivityInput = {
+  id: string,
+  babyId: string,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId: ?string,
+};
+
+export type CompleteActivityPayload = {
+  edge: ?ActivityEdge,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId: ?string,
+};
+
 export type ToggleFavoriteInput = {
   id: string,
   babyId: string,
@@ -804,7 +960,7 @@ export type ToggleFavoriteInput = {
 };
 
 export type ToggleFavoritePayload = {
-  activity: ?Activity,
+  edge: ?ActivityEdge,
   wasFavorited: ?boolean,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId: ?string,
@@ -813,18 +969,16 @@ export type ToggleFavoritePayload = {
 export type CreateMemoryInput = {
   babyId: string,
   title: string,
-  files: ?Array<FileInputBase64>,
+  files: ?Array<FileInput>,
   /** The date chose by the user to represent this Memory's date */
   createdAt: any,
+  /** A string identifier of the suggested memory that was selected
+   when creating this memory */
+  suggestedMemoryType: ?string,
+  /** An activity that was used to create this Memory */
+  fromActivity: ?string,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId: ?string,
-};
-
-export type FileInputBase64 = {
-  name: string,
-  url: string,
-  contentType: string,
-  size: number,
 };
 
 export type CreateOrUpdateMemoryPayload = {
@@ -836,8 +990,9 @@ export type UpdateMemoryInput = {
   id: string,
   title: ?string,
   createdAt: ?any,
-  files: ?Array<FileInputBase64>,
+  files: ?Array<FileInput>,
   removeFiles: ?Array<string>,
+  suggestedMemoryType: ?string,
 };
 
 export type DeleteMemoryInput = {
@@ -846,6 +1001,17 @@ export type DeleteMemoryInput = {
 
 export type DeleteMemoryPayload = {
   memory: ?Memory,
+  /** An opaque string used by frontend frameworks like relay to track requests and responses */
+  clientMutationId: ?string,
+};
+
+export type ToggleMemoryLikeInput = {
+  id: string,
+  isLiked: boolean,
+};
+
+export type ToggleMemoryLikePayload = {
+  edge: ?MemoryEdge,
   /** An opaque string used by frontend frameworks like relay to track requests and responses */
   clientMutationId: ?string,
 };
@@ -871,10 +1037,10 @@ export type CreateUserPayload = {
 };
 
 export type AuthProviderSignupData = {
-  email: ?AuthProviderEmail,
+  email: ?AuthProviderEmailInput,
 };
 
-export type AuthProviderEmail = {
+export type AuthProviderEmailInput = {
   email: string,
   password: string,
 };
@@ -890,12 +1056,6 @@ export type GenericFile = {
   size: number,
   updatedAt: ?any,
   url: string,
-};
-
-export type FileInput = {
-  name: string,
-  contentType: string,
-  size: number,
 };
 
 export type Video = {
@@ -921,4 +1081,9 @@ export type Audio = {
   size: number,
   updatedAt: ?any,
   duration: ?number,
+};
+
+export type ImageInput = {
+  /** A Base64-encoded data URI representing the image contents */
+  url: ?string,
 };

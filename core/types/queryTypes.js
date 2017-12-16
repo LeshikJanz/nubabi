@@ -7,7 +7,7 @@ export type AgeDuration = 'WEEK' | 'MONTH' | 'YEAR';
 export type CreateMemoryInput = {|
   babyId: string,
   title: string,
-  files?: ?Array<?FileInputBase64>,
+  files?: ?Array<?FileInput>,
   // The date chose by the user to represent this Memory's date
   createdAt: any,
   // A string identifier of the suggested memory that was selected
@@ -19,18 +19,18 @@ export type CreateMemoryInput = {|
   clientMutationId?: ?string,
 |};
 
-export type FileInputBase64 = {|
+export type FileInput = {|
   name: string,
-  url: string,
   contentType: string,
   size: number,
+  url: string,
 |};
 
 export type UpdateMemoryInput = {|
   id: string,
   title?: ?string,
   createdAt?: ?any,
-  files?: ?Array<?FileInputBase64>,
+  files?: ?Array<?FileInput>,
   removeFiles?: ?Array<?string>,
   suggestedMemoryType?: ?string,
 |};
@@ -54,8 +54,8 @@ export type CreateBabyInput = {|
   name: string,
   // Date of birth
   dob: any,
-  avatar?: ?FileInputBase64,
-  coverImage?: ?FileInputBase64,
+  avatar?: ?FileInput,
+  coverImage?: ?FileInput,
   weight?: ?number,
   height?: ?number,
   gender: Gender,
@@ -78,8 +78,8 @@ export type UpdateBabyInput = {|
   id: string,
   name?: ?string,
   dob?: ?any,
-  avatar?: ?FileInputBase64,
-  coverImage?: ?FileInputBase64,
+  avatar?: ?FileInput,
+  coverImage?: ?FileInput,
   weight?: ?number,
   height?: ?number,
   gender?: ?Gender,
@@ -104,7 +104,7 @@ export type UpdateUserInput = {|
   firstName?: ?string,
   lastName?: ?string,
   dob?: ?any,
-  avatar?: ?FileInputBase64,
+  avatar?: ?FileInput,
 |};
 
 export type InviteUserInput = {|
@@ -585,6 +585,8 @@ export type AddMemoryMutation = {|
           edges: ?Array<?{|
             // The user that performed the like
             actor: {|
+              // The ID of an object
+              id: string,
               firstName: ?string,
             |},
           |}>,
@@ -745,6 +747,8 @@ export type UpdateMemoryMutation = {|
           edges: ?Array<?{|
             // The user that performed the like
             actor: {|
+              // The ID of an object
+              id: string,
               firstName: ?string,
             |},
           |}>,
@@ -844,6 +848,8 @@ export type ViewMemoriesQuery = {|
               edges: ?Array<?{|
                 // The user that performed the like
                 actor: {|
+                  // The ID of an object
+                  id: string,
                   firstName: ?string,
                 |},
               |}>,
@@ -879,6 +885,8 @@ export type MemoryCommentsQuery = {|
               text: string,
               createdAt: any,
               author: {|
+                // The ID of an object
+                id: string,
                 firstName: ?string,
                 lastName: ?string,
                 avatar: ?{|
@@ -983,6 +991,8 @@ export type MemoryQuery = {|
               text: string,
               createdAt: any,
               author: {|
+                // The ID of an object
+                id: string,
                 firstName: ?string,
                 lastName: ?string,
                 avatar: ?{|
@@ -1000,6 +1010,8 @@ export type MemoryQuery = {|
           edges: ?Array<?{|
             // The user that performed the like
             actor: {|
+              // The ID of an object
+              id: string,
               firstName: ?string,
             |},
           |}>,
@@ -1147,25 +1159,29 @@ export type CreateBabyMutationVariables = {|
 
 export type CreateBabyMutation = {|
   createBaby: ?{|
-    createdBaby: ?{|
-      // The ID of an object
-      id: string,
-      name: string,
-      gender: Gender,
-      // Date of birth
-      dob: any,
-      weekBorn: number,
-      // Relationship to Viewer
-      relationship: ?BabyRelationship,
-      // The current weight for this Baby
-      weight: ?number,
-      // The current height for this Baby
-      height: ?number,
-      avatar: ?{|
-        url: string,
-      |},
-      coverImage: ?{|
-        url: string,
+    // An edge for the Baby that was created
+    edge: ?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        name: string,
+        gender: Gender,
+        // Date of birth
+        dob: any,
+        weekBorn: number,
+        // Relationship to Viewer
+        relationship: ?BabyRelationship,
+        // The current weight for this Baby
+        weight: ?number,
+        // The current height for this Baby
+        height: ?number,
+        avatar: ?{|
+          url: string,
+        |},
+        coverImage: ?{|
+          url: string,
+        |},
       |},
     |},
   |},
@@ -1177,25 +1193,29 @@ export type UpdateBabyMutationVariables = {|
 
 export type UpdateBabyMutation = {|
   updateBaby: ?{|
-    changedBaby: ?{|
-      // The ID of an object
-      id: string,
-      name: string,
-      gender: Gender,
-      // Date of birth
-      dob: any,
-      weekBorn: number,
-      // Relationship to Viewer
-      relationship: ?BabyRelationship,
-      // The current weight for this Baby
-      weight: ?number,
-      // The current height for this Baby
-      height: ?number,
-      avatar: ?{|
-        url: string,
-      |},
-      coverImage: ?{|
-        url: string,
+    // An edge for the Baby that was updated
+    edge: ?{|
+      // The item at the end of the edge.
+      node: {|
+        // The ID of an object
+        id: string,
+        name: string,
+        gender: Gender,
+        // Date of birth
+        dob: any,
+        weekBorn: number,
+        // Relationship to Viewer
+        relationship: ?BabyRelationship,
+        // The current weight for this Baby
+        weight: ?number,
+        // The current height for this Baby
+        height: ?number,
+        avatar: ?{|
+          url: string,
+        |},
+        coverImage: ?{|
+          url: string,
+        |},
       |},
     |},
   |},
@@ -2253,6 +2273,8 @@ export type LikeMemoryButtonFragment = {|
     edges: ?Array<?{|
       // The user that performed the like
       actor: {|
+        // The ID of an object
+        id: string,
         firstName: ?string,
       |},
     |}>,
@@ -2445,6 +2467,8 @@ export type MemoryItemFragment = {|
     edges: ?Array<?{|
       // The user that performed the like
       actor: {|
+        // The ID of an object
+        id: string,
         firstName: ?string,
       |},
     |}>,
@@ -2468,6 +2492,8 @@ export type MemoryCommentFragment = {|
   text: string,
   createdAt: any,
   author: {|
+    // The ID of an object
+    id: string,
     firstName: ?string,
     lastName: ?string,
     avatar: ?{|
@@ -2488,6 +2514,8 @@ export type MemoryCommentsFragment = {|
         text: string,
         createdAt: any,
         author: {|
+          // The ID of an object
+          id: string,
           firstName: ?string,
           lastName: ?string,
           avatar: ?{|
@@ -2572,6 +2600,8 @@ export type MemoryDetailFragment = {|
         text: string,
         createdAt: any,
         author: {|
+          // The ID of an object
+          id: string,
           firstName: ?string,
           lastName: ?string,
           avatar: ?{|
@@ -2589,6 +2619,8 @@ export type MemoryDetailFragment = {|
     edges: ?Array<?{|
       // The user that performed the like
       actor: {|
+        // The ID of an object
+        id: string,
         firstName: ?string,
       |},
     |}>,
@@ -2677,6 +2709,8 @@ export type MemoriesFragment = {|
           edges: ?Array<?{|
             // The user that performed the like
             actor: {|
+              // The ID of an object
+              id: string,
               firstName: ?string,
             |},
           |}>,

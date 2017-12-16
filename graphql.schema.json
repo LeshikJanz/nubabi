@@ -7561,7 +7561,7 @@
               "description": "",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "FileInputBase64",
+                "name": "FileInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -7573,26 +7573,12 @@
         },
         {
           "kind": "INPUT_OBJECT",
-          "name": "FileInputBase64",
+          "name": "FileInput",
           "description": "",
           "fields": null,
           "inputFields": [
             {
               "name": "name",
-              "description": "",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "url",
               "description": "",
               "type": {
                 "kind": "NON_NULL",
@@ -7628,6 +7614,20 @@
                 "ofType": {
                   "kind": "SCALAR",
                   "name": "Int",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "url",
+              "description": "",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
                   "ofType": null
                 }
               },
@@ -8074,7 +8074,7 @@
               "description": "",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "FileInputBase64",
+                "name": "FileInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -8084,7 +8084,7 @@
               "description": "",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "FileInputBase64",
+                "name": "FileInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -8244,7 +8244,7 @@
               "description": "",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "FileInputBase64",
+                "name": "FileInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -8254,7 +8254,7 @@
               "description": "",
               "type": {
                 "kind": "INPUT_OBJECT",
-                "name": "FileInputBase64",
+                "name": "FileInput",
                 "ofType": null
               },
               "defaultValue": null
@@ -8925,7 +8925,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "FileInputBase64",
+                  "name": "FileInput",
                   "ofType": null
                 }
               },
@@ -9063,7 +9063,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "INPUT_OBJECT",
-                  "name": "FileInputBase64",
+                  "name": "FileInput",
                   "ofType": null
                 }
               },
@@ -10388,59 +10388,6 @@
               "ofType": null
             }
           ],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INPUT_OBJECT",
-          "name": "FileInput",
-          "description": "",
-          "fields": null,
-          "inputFields": [
-            {
-              "name": "name",
-              "description": "",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "contentType",
-              "description": "",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            },
-            {
-              "name": "size",
-              "description": "",
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "defaultValue": null
-            }
-          ],
-          "interfaces": null,
           "enumValues": null,
           "possibleTypes": null
         },

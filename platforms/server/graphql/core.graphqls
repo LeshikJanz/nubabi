@@ -115,7 +115,7 @@ input UpdateUserInput {
   firstName: String
   lastName: String
   dob: Date
-  avatar: FileInputBase64
+  avatar: FileInput
 }
 
 type UpdateUserPayload {
@@ -242,13 +242,7 @@ input FileInput {
   name: String!
   contentType: String!
   size: Int!
-}
-
-input FileInputBase64 {
-  name: String!
   url: String!
-  contentType: String!
-  size: Int!
 }
 
 input FileFilter {
