@@ -34,6 +34,9 @@ const store = configureStore({
   initialState: {
     config,
   },
+  platformDeps: {
+    firebase,
+  },
   platformReducers: {
     navigation,
     device,
