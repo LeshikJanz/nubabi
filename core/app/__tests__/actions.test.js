@@ -72,19 +72,3 @@ describe('app epics', () => {
     });
   });
 });
-
-describe('resetSettingsEpic', () => {
-  let store;
-
-  beforeEach(() => {
-    store = mockStore;
-  });
-
-  afterAll(() => {
-    epicMiddleware.replaceEpic(epic);
-  });
-
-  it('navigates home and shows a notification', () => {
-    store.dispatch(resetSettings())
-  })
-});
