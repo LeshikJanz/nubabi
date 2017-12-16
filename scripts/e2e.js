@@ -25,6 +25,7 @@ queries.forEach(queryString => {
     import gql from 'graphql-tag';
     import firebase from 'firebase';
     import { ApolloClient } from 'apollo-client';
+    import { IntrospectionFragmentMatcher } from 'react-apollo';
     import config from 'core/config';
     import ClientNetworkInterface from '../../platforms/server/graphql/helpers/clientNetworkInterface';
     import { authTokenMiddleware } from 'core/configureApollo';
@@ -32,6 +33,10 @@ queries.forEach(queryString => {
     const networkInterface = new ClientNetworkInterface({ firebase });
     const apollo = new ApolloClient({
       networkInterface,
+      fragmentMatcher: new IntrospectionFragmentMatcher({
+        introspectionQueryResultData: require('../../platforms/server/graphql/introspection.json')
+          .data,
+      }),
     });
     
     const start = async (done) => {
@@ -55,7 +60,7 @@ queries.forEach(queryString => {
     beforeAll(() => start());
     
     describe('E2E GraphQL', () => {
-      test('${queryName} GQL', () => {
+      test('${queryName} GQL', (done) => {
         const queryString = fs.readFileSync(path.resolve(__dirname, '../../__generated__/${queryName}.graphql'), 'utf-8');
         
         const query = gql\`\${queryString}\`;
@@ -63,7 +68,7 @@ queries.forEach(queryString => {
 
         return apollo.query({ query, variables }).then(resp => {
           expect(JSON.parse(JSON.stringify(resp.data))).toMatchSnapshot('${queryName}');
-        });
+        }).catch(err => done(err));
       });
     });
   `;
