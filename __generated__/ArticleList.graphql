@@ -1,0 +1,19 @@
+query ArticleList {
+  viewer {
+    allArticles(first: 5) {
+      edges {
+        node {
+          ...ArticleListItem
+        }
+      }
+    }
+  }
+}
+
+fragment ArticleListItem on Article {
+  id
+  title
+  image {
+    url
+  }
+}

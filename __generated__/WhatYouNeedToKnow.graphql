@@ -1,0 +1,68 @@
+query WhatYouNeedToKnow($babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      dob
+      name
+      growth {
+        edges {
+          node {
+            id
+            ...GrowthPeriod
+            ...CurrentGrowth
+            expert {
+              id
+              ...ExpertAdvice
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment CurrentGrowth on Growth {
+  introduction
+  content
+  introductionContentLinks {
+    edges {
+      node {
+        id
+        title
+        text
+        section {
+          id
+          name
+        }
+      }
+    }
+  }
+  growthDevelopmentContentLinks {
+    edges {
+      node {
+        id
+        title
+        text
+        section {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+
+fragment ExpertAdvice on Expert {
+  name
+  discipline
+  avatar {
+    url
+  }
+}
+
+fragment GrowthPeriod on Growth {
+  title
+  minimumAge
+  maximumAge
+  ageDuration
+}

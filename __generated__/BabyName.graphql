@@ -1,0 +1,8 @@
+query BabyName($id: ID) {
+  viewer {
+    baby(id: $id) {
+      id
+      name
+    }
+  }
+}

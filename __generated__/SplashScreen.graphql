@@ -1,0 +1,18 @@
+query SplashScreen($currentBabyId: ID, $hasCurrentBaby: Boolean!) {
+  viewer {
+    baby(id: $currentBabyId) @include(if: $hasCurrentBaby) {
+      id
+      avatar {
+        url
+      }
+      coverImage {
+        url
+      }
+    }
+    randomQuote {
+      id
+      author
+      text
+    }
+  }
+}

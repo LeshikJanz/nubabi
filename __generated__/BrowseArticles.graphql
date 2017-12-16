@@ -1,0 +1,19 @@
+query BrowseArticles {
+  viewer {
+    allArticles {
+      edges {
+        node {
+          ...ArticleListItem
+        }
+      }
+    }
+  }
+}
+
+fragment ArticleListItem on Article {
+  id
+  title
+  image {
+    url
+  }
+}

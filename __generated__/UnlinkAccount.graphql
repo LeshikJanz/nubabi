@@ -1,0 +1,10 @@
+mutation UnlinkAccount($input: UnlinkAccountInput!) {
+  unlinkAccount(input: $input) {
+    deletedEdge {
+      node {
+        id
+        provider
+      }
+    }
+  }
+}

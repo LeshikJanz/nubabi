@@ -1,0 +1,37 @@
+query EditMemory($id: ID!, $babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      memory(id: $id) {
+        id
+        ...MemoryForm
+      }
+    }
+  }
+}
+
+fragment MemoryForm on Memory {
+  id
+  title
+  createdAt
+  suggestedMemoryType
+  files {
+    edges {
+      node {
+        id
+        contentType
+        url
+        ... on Image {
+          thumb {
+            url
+          }
+        }
+        ... on Video {
+          thumb {
+            url
+          }
+        }
+      }
+    }
+  }
+}

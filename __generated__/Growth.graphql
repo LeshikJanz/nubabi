@@ -1,0 +1,49 @@
+query Growth($babyId: ID!, $hasSeenGlobalIntro: Boolean!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      measurements {
+        weights(last: 1) {
+          edges {
+            node {
+              value
+              recordedAt
+            }
+          }
+        }
+        heights(last: 1) {
+          edges {
+            node {
+              value
+              recordedAt
+            }
+          }
+        }
+      }
+      growth {
+        ...GrowthIntroduction
+        edges {
+          node {
+            id
+            title
+            introduction
+            content
+            minimumAge
+            maximumAge
+            ageDuration
+          }
+        }
+      }
+      ...AgeHeader
+    }
+  }
+}
+
+fragment AgeHeader on Baby {
+  name
+  dob
+}
+
+fragment GrowthIntroduction on GrowthConnection {
+  introduction @skip(if: $hasSeenGlobalIntro)
+}

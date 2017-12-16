@@ -1,0 +1,28 @@
+mutation AddCommentToMemory($input: CreateCommentInput!) {
+  createComment(input: $input) {
+    edge {
+      cursor
+      node {
+        id
+        createdAt
+        text
+        author {
+          id
+          firstName
+          lastName
+          avatar {
+            url
+          }
+        }
+        commentable {
+          ... on Node {
+            id
+          }
+          comments {
+            count
+          }
+        }
+      }
+    }
+  }
+}

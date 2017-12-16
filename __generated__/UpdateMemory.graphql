@@ -1,0 +1,106 @@
+mutation UpdateMemory($input: UpdateMemoryInput!) {
+  updateMemory(input: $input) {
+    edge {
+      cursor
+      node {
+        id
+        ...MemoryForm
+        ...MemoryItem
+      }
+    }
+  }
+}
+
+fragment LikeMemoryButton on Memory {
+  id
+  isLikedByViewer
+  likes {
+    count
+    edges {
+      actor {
+        id
+        firstName
+      }
+    }
+  }
+}
+
+fragment MemoryActivity on Activity {
+  id
+  name
+  skillArea {
+    id
+    icon
+  }
+}
+
+fragment MemoryCommentsSummary on Memory {
+  comments {
+    count
+  }
+}
+
+fragment MemoryForm on Memory {
+  id
+  title
+  createdAt
+  suggestedMemoryType
+  files {
+    edges {
+      node {
+        id
+        contentType
+        url
+        ... on Image {
+          thumb {
+            url
+          }
+        }
+        ... on Video {
+          thumb {
+            url
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment MemoryItem on Memory {
+  id
+  title
+  createdAt
+  files {
+    count
+    edges {
+      node {
+        id
+        contentType
+        url
+        ... on Image {
+          thumb {
+            url
+          }
+          large {
+            url
+          }
+        }
+        ... on Audio {
+          duration
+        }
+        ... on Video {
+          thumb {
+            url
+          }
+          duration
+        }
+      }
+    }
+  }
+  suggestedMemoryType
+  fromActivity {
+    ...MemoryActivity
+  }
+  ...MemoryCommentsSummary
+  ...LikeMemoryButton
+}

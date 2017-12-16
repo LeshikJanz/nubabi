@@ -1,0 +1,87 @@
+query ViewMemories($babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      ...Memories
+    }
+  }
+}
+
+fragment LikeMemoryButton on Memory {
+  id
+  isLikedByViewer
+  likes {
+    count
+    edges {
+      actor {
+        id
+        firstName
+      }
+    }
+  }
+}
+
+fragment Memories on Baby {
+  memories {
+    edges {
+      node {
+        id
+        ...MemoryItem
+      }
+    }
+  }
+}
+
+fragment MemoryActivity on Activity {
+  id
+  name
+  skillArea {
+    id
+    icon
+  }
+}
+
+fragment MemoryCommentsSummary on Memory {
+  comments {
+    count
+  }
+}
+
+fragment MemoryItem on Memory {
+  id
+  title
+  createdAt
+  files {
+    count
+    edges {
+      node {
+        id
+        contentType
+        url
+        ... on Image {
+          thumb {
+            url
+          }
+          large {
+            url
+          }
+        }
+        ... on Audio {
+          duration
+        }
+        ... on Video {
+          thumb {
+            url
+          }
+          duration
+        }
+      }
+    }
+  }
+  suggestedMemoryType
+  fromActivity {
+    ...MemoryActivity
+  }
+  ...MemoryCommentsSummary
+  ...LikeMemoryButton
+}

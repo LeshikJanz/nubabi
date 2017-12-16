@@ -1,0 +1,39 @@
+query EditUserProfile {
+  viewer {
+    user {
+      ...UserForm
+      ...LinkedAccounts
+      avatar {
+        thumb {
+          url
+        }
+      }
+    }
+  }
+}
+
+fragment LinkedAccountItem on LinkedAccount {
+  id
+  provider
+  displayName
+}
+
+fragment LinkedAccounts on User {
+  linkedAccounts {
+    edges {
+      node {
+        ...LinkedAccountItem
+      }
+    }
+  }
+}
+
+fragment UserForm on User {
+  id
+  firstName
+  lastName
+  dob
+  avatar {
+    url
+  }
+}

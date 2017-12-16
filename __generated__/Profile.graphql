@@ -1,0 +1,101 @@
+query Profile($id: ID!) {
+  viewer {
+    baby(id: $id) {
+      ...Profile
+    }
+  }
+}
+
+fragment ExpertAdvice on Expert {
+  name
+  discipline
+  avatar {
+    url
+  }
+}
+
+fragment Header on Baby {
+  name
+  coverImage {
+    url
+  }
+  avatar {
+    url
+  }
+  dob
+  height
+  weight
+}
+
+fragment Profile on Baby {
+  id
+  ...Header
+  ...ProfileGrowth
+  ...ProfileActivities
+  ...RecentMemories
+}
+
+fragment ProfileActivities on Baby {
+  activities(first: 2) {
+    edges {
+      node {
+        id
+        name
+        introduction
+        skillArea {
+          id
+          icon
+        }
+      }
+    }
+  }
+}
+
+fragment ProfileGrowth on Baby {
+  id
+  growth {
+    current {
+      id
+      introduction
+      title
+      maximumAge
+      expert {
+        id
+        ...ExpertAdvice
+      }
+    }
+  }
+}
+
+fragment RecentMemories on Baby {
+  memories(first: 5) {
+    edges {
+      node {
+        id
+        title
+        files(first: 1) {
+          edges {
+            node {
+              id
+              contentType
+              url
+              ... on Image {
+                thumb {
+                  url
+                }
+                large {
+                  url
+                }
+              }
+              ... on Video {
+                thumb {
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

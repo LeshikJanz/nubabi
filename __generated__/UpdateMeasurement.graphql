@@ -1,0 +1,9 @@
+mutation UpdateMeasurement($input: RecordMeasurementInput!) {
+  recordBabyMeasurement(input: $input) {
+    baby {
+      id
+      weight
+      height
+    }
+  }
+}

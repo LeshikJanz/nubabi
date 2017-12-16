@@ -1,0 +1,13 @@
+mutation ToggleMemoryLike($input: ToggleMemoryLikeInput!) {
+  toggleMemoryLike(input: $input) {
+    edge {
+      node {
+        id
+        isLikedByViewer
+        likes {
+          count
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+mutation DeleteMemory($input: DeleteMemoryInput!) {
+  deleteMemory(input: $input) {
+    memory {
+      id
+    }
+  }
+}

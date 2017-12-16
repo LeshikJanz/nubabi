@@ -1,0 +1,26 @@
+mutation CreateBaby($input: CreateBabyInput!) {
+  createBaby(input: $input) {
+    edge {
+      node {
+        ...BabyForm
+      }
+    }
+  }
+}
+
+fragment BabyForm on Baby {
+  id
+  name
+  gender
+  dob
+  weekBorn
+  relationship
+  weight
+  height
+  avatar {
+    url
+  }
+  coverImage {
+    url
+  }
+}

@@ -1,0 +1,9 @@
+mutation CompleteActivity($input: CompleteActivityInput!) {
+  completeActivity(input: $input) {
+    edge {
+      node {
+        id
+      }
+    }
+  }
+}

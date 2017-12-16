@@ -1,0 +1,30 @@
+mutation ToggleFavorite($input: ToggleFavoriteInput!) {
+  toggleActivityFavorite(input: $input) {
+    edge {
+      node {
+        id
+        ...ActivityList
+        isFavorite
+      }
+    }
+    wasFavorited
+  }
+}
+
+fragment ActivityList on Activity {
+  id
+  name
+  skillArea {
+    id
+    name
+    image {
+      thumb {
+        url
+      }
+    }
+    icon
+    completedIcon
+  }
+  equipment
+  isCompleted
+}

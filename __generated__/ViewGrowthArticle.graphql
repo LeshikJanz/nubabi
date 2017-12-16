@@ -1,0 +1,20 @@
+query ViewGrowthArticle($id: ID!, $babyId: ID!) {
+  viewer {
+    growthArticle(id: $id, babyId: $babyId) {
+      ...GrowthArticle
+    }
+  }
+}
+
+fragment GrowthArticle on GrowthArticle {
+  id
+  title
+  text
+  readingTime {
+    text
+  }
+  section {
+    id
+    name
+  }
+}

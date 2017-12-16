@@ -1,0 +1,19 @@
+query ChooseBabyList {
+  viewer {
+    babies {
+      edges {
+        node {
+          ...ChooseBaby
+        }
+      }
+    }
+  }
+}
+
+fragment ChooseBaby on Baby {
+  id
+  name
+  avatar {
+    url
+  }
+}

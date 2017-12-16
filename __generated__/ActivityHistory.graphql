@@ -1,0 +1,20 @@
+query ActivityHistory($babyId: ID!) {
+  viewer {
+    baby(id: $babyId) {
+      id
+      activityHistory {
+        edges {
+          node {
+            ...ActivityHistoryItem
+          }
+        }
+      }
+    }
+  }
+}
+
+fragment ActivityHistoryItem on ActivityHistory {
+  id
+  startDate
+  endDate
+}

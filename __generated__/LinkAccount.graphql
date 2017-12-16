@@ -1,0 +1,15 @@
+mutation LinkAccount($input: LinkAccountInput!) {
+  linkAccount(input: $input) {
+    edge {
+      node {
+        ...LinkedAccountItem
+      }
+    }
+  }
+}
+
+fragment LinkedAccountItem on LinkedAccount {
+  id
+  provider
+  displayName
+}

@@ -1,0 +1,18 @@
+query UserProfile {
+  viewer {
+    user {
+      ...UserProfile
+    }
+  }
+}
+
+fragment UserProfile on User {
+  id
+  firstName
+  lastName
+  avatar {
+    thumb {
+      url
+    }
+  }
+}

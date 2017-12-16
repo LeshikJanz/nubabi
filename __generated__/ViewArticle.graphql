@@ -1,0 +1,28 @@
+query ViewArticle($id: ID!) {
+  viewer {
+    article(id: $id) {
+      ...Article
+    }
+  }
+}
+
+fragment Article on Article {
+  id
+  title
+  text
+  readingTime {
+    text
+  }
+  author {
+    name
+  }
+  publishedAt
+  tags {
+    id
+    name
+  }
+  image {
+    url
+  }
+  blogUrl
+}
