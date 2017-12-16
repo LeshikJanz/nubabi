@@ -270,9 +270,9 @@ class ChooseBaby extends PureComponent {
 
           <View style={styles.babyContainer}>
             <ScrollView
+              style={{ flex: 1 }}
               contentContainerStyle={{
                 marginTop: 15,
-                width,
                 height: 80,
                 paddingLeft: 10,
                 paddingRight: 10,
@@ -314,6 +314,7 @@ const styles = StyleSheet.create({
   babyIconContainerView: {
     flex: 1,
     alignItems: 'center',
+    marginHorizontal: 10,
   },
   babyIconView: {
     height: 50,
