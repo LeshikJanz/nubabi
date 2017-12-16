@@ -12,6 +12,7 @@
     "flow": "flow",
     "flow-typed": "./scripts/flow-typed-all",
     "test": "jest",
+    "test:e2e": "jest --testMatch '<rootDir>/__tests__/e2e/**/*.test.js'",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",
     "release": "lerna publish --skip-npm --conventional-commits",
@@ -21,7 +22,8 @@
     "server": "babel-node platforms/server/graphql/server.js",
     "server:watch": "BABEL_DISABLE_CACHE=1 nodemon --exec \"DEBUG=graphqlServer:*,axios babel-node\" -e js,graphqls platforms/server/graphql/server.js",
     "commitmsg": "commitlint -e $GIT_PARAMS",
-    "commit": "commit"
+    "commit": "commit",
+    "extract-queries": "scripts/extractQueries.js"
   },
   "config": {
     "commitizen": {
@@ -54,7 +56,7 @@
       "<rootDir>/platforms/native/shared/felaSnapshotSerializer"
     ],
     "testMatch": [
-      "<rootDir>/__tests__/**/*.js",
+      "<rootDir>/__tests__/!{e2e}**/*.js",
       "<rootDir>/core/**/__tests__/*.js",
       "<rootDir>/platforms/native/**/__tests__/*.js",
       "<rootDir>/libs/graphql-utils/**/__tests__/*.js",
