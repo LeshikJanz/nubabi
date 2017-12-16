@@ -16,8 +16,7 @@ export const configureApollo = (): ApolloClient => {
       networkInterface,
       dataIdFromObject: obj => obj.id,
       fragmentMatcher: new IntrospectionFragmentMatcher({
-        introspectionQueryResultData: require('../platforms/server/graphql/introspection.json')
-          .data,
+        introspectionQueryResultData: require('../graphql.schema.json').data,
       }),
     });
   }
@@ -25,7 +24,7 @@ export const configureApollo = (): ApolloClient => {
   return client;
 };
 
-export const authTokenMiddleware = (store) => ({
+export const authTokenMiddleware = store => ({
   applyMiddleware(req, next) {
     if (!req.options.headers) {
       req.options.headers = {};
