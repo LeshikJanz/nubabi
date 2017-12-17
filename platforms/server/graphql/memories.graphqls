@@ -23,7 +23,7 @@ extend type Baby {
   memory(id: ID!): Memory
 }
 
-type Memory implements Node, Timestampable, Commentable, Likeable {
+type Memory implements Timestampable, Commentable, Likeable {
   id: ID!
   title: String!
   description: String

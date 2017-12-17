@@ -46,13 +46,24 @@ export const mutationWithClientMutationId = mutateAndGetPayload => {
 const { nodeField } = nodeDefinitions(
   (globalId, { token, connectors: { firebase } }) => {
     const { type, id } = fromGlobalId(globalId);
+
     switch (type) {
       case 'Baby': {
         return firebase.getBaby(id);
       }
-      case 'Activity': {
-        return babies.getActivity(token, id);
+      case 'Expert': {
+        return babies.getExpert(token, id);
       }
+      case 'SkillArea': {
+        return babies.getSkillArea(token, id);
+      }
+      case 'Category': {
+        return babies.getCategory(token, id);
+      }
+      case 'Article': {
+        return babies.getArticle(token, id);
+      }
+
       default: {
         return null;
       }

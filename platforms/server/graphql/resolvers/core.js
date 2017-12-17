@@ -125,23 +125,25 @@ const resolvers = {
   },
   Node: {
     __resolveType(obj) {
-      if (obj.email) {
-        return 'User';
-      }
-
       if (obj.weekBorn) {
         return 'Baby';
       }
 
-      if (obj.introduction) {
-        return 'Activity';
+      if (typeof obj.discipline !== 'undefined') {
+        return 'Expert';
       }
 
-      if (obj.authorId && obj.title) {
-        return 'Memory';
+      if (obj.name && obj.icon) {
+        return 'SkillArea';
       }
 
-      // TODO: extra models
+      if (obj.title && obj.text) {
+        return 'Article';
+      }
+
+      if (obj.name) {
+        return 'Category'; // TODO: revisit this since is too broad
+      }
 
       return null;
     },

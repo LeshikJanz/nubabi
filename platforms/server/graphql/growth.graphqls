@@ -8,7 +8,7 @@ enum AgeDuration {
   YEAR
 }
 
-type Growth implements Node {
+type Growth {
   id: ID!
   title: String!
   introduction: String!

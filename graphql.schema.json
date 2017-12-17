@@ -1238,17 +1238,7 @@
             },
             {
               "kind": "OBJECT",
-              "name": "Growth",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
               "name": "Article",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Memory",
               "ofType": null
             }
           ]
@@ -4751,13 +4741,7 @@
             }
           ],
           "inputFields": null,
-          "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
-            }
-          ],
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -5939,11 +5923,6 @@
           ],
           "inputFields": null,
           "interfaces": [
-            {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
-            },
             {
               "kind": "INTERFACE",
               "name": "Timestampable",
