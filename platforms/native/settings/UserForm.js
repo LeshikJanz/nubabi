@@ -27,6 +27,7 @@ type Props = {
   linkedAccounts: LinkedAccountsConnection,
   onLinkAccount: mixed => Promise<*>,
   onUnlinkAccount: string => Promise<*>,
+  isAuthLinkingFetching: boolean,
   handleSubmit: () => void,
   change: () => void,
   submitting: boolean,
@@ -81,7 +82,12 @@ class UserForm extends Component {
     const editableProps = { editable };
 
     const { renderAvatar } = this;
-    const { linkedAccounts, onLinkAccount, onUnlinkAccount } = this.props;
+    const {
+      linkedAccounts,
+      onLinkAccount,
+      onUnlinkAccount,
+      isAuthLinkingFetching,
+    } = this.props;
 
     return (
       <KeyboardAwareScrollView
@@ -133,6 +139,7 @@ class UserForm extends Component {
 
         <View style={{ marginHorizontal: 30 }}>
           <LinkedAccounts
+            isAuthLinkingFetching={isAuthLinkingFetching}
             linkedAccounts={linkedAccounts}
             onLinkAccount={onLinkAccount}
             onUnlinkAccount={onUnlinkAccount}

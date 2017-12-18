@@ -5,7 +5,7 @@ import { Box, Text } from '../components';
 import FacebookIcon from './FacebookIcon';
 
 type Props = {
-  onLinkAccount: () => Promise<*>,
+  onLinkAccount: () => void,
 };
 
 export const LinkFacebook = ({ onLinkAccount }: Props) => {
@@ -17,7 +17,7 @@ export const LinkFacebook = ({ onLinkAccount }: Props) => {
       alignItems="center"
     >
       <FacebookIcon />
-      <Text marginLeft={0.5} color="success" medium spacing={-0.45}>
+      <Text flex={1} marginLeft={0.5} color="success" medium spacing={-0.45}>
         Link Facebook account
       </Text>
     </Box>

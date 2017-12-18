@@ -38,6 +38,36 @@ const reducer = (
         token: action.payload.token,
       });
     }
+    case 'LINK_ACCOUNT_REQUEST': {
+      return merge(state, {
+        isFetching: true,
+      });
+    }
+    case 'LINK_ACCOUNT_SUCCESS': {
+      return merge(state, {
+        isFetching: false,
+      });
+    }
+    case 'LINK_ACCOUNT_FAILURE': {
+      return merge(state, {
+        isFetching: false,
+      });
+    }
+    case 'UNLINK_ACCOUNT_REQUEST': {
+      return merge(state, {
+        isFetching: true,
+      });
+    }
+    case 'UNLINK_ACCOUNT_SUCCESS': {
+      return merge(state, {
+        isFetching: false,
+      });
+    }
+    case 'UNLINK_ACCOUNT_FAILURE': {
+      return merge(state, {
+        isFetching: false,
+      });
+    }
     case 'LOGOUT':
       return initialState;
     default:

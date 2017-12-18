@@ -11,10 +11,7 @@ import {
   toDate,
   transform,
 } from './common';
-import {
-  addEdgeAndCursorToMutationResult,
-  addEdgeToMutationResult,
-} from 'graphql-utils/mutations';
+import { addEdgeAndCursorToMutationResult } from 'graphql-utils/mutations';
 
 const resolvers = {
   DateTime: GraphQLDateTime,
@@ -205,16 +202,6 @@ const resolvers = {
             },
           };
         });
-      },
-    ),
-    linkAccount: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) => {
-        return firebase.linkAccount(input).then(addEdgeToMutationResult);
-      },
-    ),
-    unlinkAccount: mutationWithClientMutationId(
-      (input, { connectors: { firebase } }) => {
-        return firebase.unlinkAccount(input);
       },
     ),
     createComment: mutationWithClientMutationId(

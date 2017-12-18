@@ -1,10 +1,5 @@
 // @flow
-import type {
-  LinkAccountInput,
-  MeasurementType,
-  MeasurementUnit,
-} from 'core/types';
-import { getProviderClass } from 'core/auth/actions';
+import type { MeasurementType, MeasurementUnit } from 'core/types';
 // noinspection ES6UnusedImports
 import {
   fromGlobalId,
@@ -239,49 +234,14 @@ const inviteUser = async (firebase, input: InviteUserInput) => {
 };
 
 const getLinkedAccounts = firebase => {
-  return Promise.resolve(
-    firebase.auth().currentUser.providerData.filter(provider => {
-      return provider.providerId !== 'password';
-    }),
-  );
-};
-
-const linkAccount = async (firebase, input: LinkAccountInput) => {
-  const { accessToken } = input;
-  const provider = getProviderClass(input.providerId);
-  if (!provider) {
-    throw new Error('Unknown provider');
-  }
-
-  const credential = firebase.auth[provider].credential(accessToken);
-
   return firebase
     .auth()
-    .currentUser.link(credential)
-    .then(user => R.head(user.providerData));
-};
-
-const unlinkAccount = (firebase, input) => {
-  const providerId = cond([
-    [equals('FACEBOOK'), always('facebook.com')],
-    [R.T, always(null)],
-  ])(input.providerId);
-
-  if (!providerId) {
-    throw new Error('Unknown provider to unlink');
-  }
-
-  const deletedProvider = R.find(
-    R.propEq('providerId', providerId),
-    firebase.auth().currentUser.providerData,
-  );
-
-  return firebase
-    .auth()
-    .currentUser.unlink(providerId)
-    .then(() => ({
-      deletedEdge: { node: deletedProvider },
-    }));
+    .getUser(firebase.auth().currentUser.uid)
+    .then(user => {
+      return user.providerData.filter(
+        ({ providerId }) => providerId !== 'password',
+      );
+    });
 };
 
 const getBabies = firebase => {
@@ -712,8 +672,6 @@ const firebaseConnector = firebase => {
     updateUser: input => updateUser(firebase, input),
     inviteUser: input => inviteUser(firebase, input),
     getLinkedAccounts: () => getLinkedAccounts(firebase),
-    linkAccount: input => linkAccount(firebase, input),
-    unlinkAccount: input => unlinkAccount(firebase, input),
     getBabies: () => getBabies(firebase),
     getBaby: (id: string) => getBaby(firebase, id),
     getRelationship: (id: string) => getRelationship(firebase, id),

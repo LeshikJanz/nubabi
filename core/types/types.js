@@ -313,7 +313,43 @@ export type LoginFailureAction = {
 
 export type LogoutAction = { type: 'LOGOUT' };
 
-export type GetBabiesRequestAction = { type: 'GET_BABIES_REQUEST' };
+export type LinkAccountRequestAction = {
+  type: 'LINK_ACCOUNT_REQUEST',
+  payload: {
+    accessToken: string,
+    providerId: AuthProvider,
+  },
+};
+
+export type LinkAccountSuccessAction = {
+  type: 'LINK_ACCOUNT_SUCCESS',
+  payload: AuthProvider,
+  meta: Object,
+};
+
+export type LinkAccountFailureAction = {
+  type: 'LINK_ACCOUNT_FAILURE',
+  payload: Error,
+  error: true,
+};
+
+export type UnlinkAccountRequestAction = {
+  type: 'UNLINK_ACCOUNT_REQUEST',
+  payload: AuthProvider,
+};
+
+export type UnlinkAccountSuccessAction = {
+  type: 'UNLINK_ACCOUNT_SUCCESS',
+  payload: AuthProvider,
+};
+
+export type UnlinkAccountFailureAction = {
+  type: 'UNLINK_ACCOUNT_FAILURE',
+  payload: Error,
+  error: true,
+};
+
+type GetBabiesRequestAction = { type: 'GET_BABIES_REQUEST' };
 
 export type GetBabiesSuccessAction = {
   type: 'GET_BABIES_SUCCESS',
@@ -377,6 +413,12 @@ export type Action =
   | LoginSuccessAction
   | LoginFailureAction
   | LogoutAction
+  | LinkAccountRequestAction
+  | LinkAccountSuccessAction
+  | LinkAccountFailureAction
+  | UnlinkAccountRequestAction
+  | UnlinkAccountSuccessAction
+  | UnlinkAccountFailureAction
   | GetBabiesRequestAction
   | GetBabiesSuccessAction
   | GetBabiesFailureAction

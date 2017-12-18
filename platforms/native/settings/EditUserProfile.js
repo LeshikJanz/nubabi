@@ -9,27 +9,35 @@ import { Box, displayLoadingState } from '../components';
 import UserForm from './UserForm';
 import { normalizeAvatarAndCoverImage } from '../profile/EditBaby/BabyForm';
 import { LinkedAccountsList } from './LinkedAccountsList';
-import { linkAccount, unlinkAccount } from './accountLinking';
+import { accountLinking } from './accountLinking';
 
 type Props = {
   user: User,
   onSubmit: (values: UpdateUserInput) => Promise<*>,
+  isAuthLinkingFetching: boolean,
   onLinkAccount: mixed => Promise<*>,
   onUnlinkAccount: string => Promise<*>,
 };
 
 export class EditUserProfile extends PureComponent<Props> {
   render() {
-    const { user } = this.props;
+    const {
+      user,
+      onSubmit,
+      onLinkAccount,
+      onUnlinkAccount,
+      isAuthLinkingFetching,
+    } = this.props;
 
     return (
       <Box flex={1} backgroundColor="white">
         <UserForm
           {...filter(LinkedAccountsList.fragments.list, user)}
+          isAuthLinkingFetching={isAuthLinkingFetching}
           initialValues={formValues(filter(UserForm.fragments.form, user))}
-          onSubmit={this.props.onSubmit}
-          onLinkAccount={this.props.onLinkAccount}
-          onUnlinkAccount={this.props.onUnlinkAccount}
+          onSubmit={onSubmit}
+          onLinkAccount={onLinkAccount}
+          onUnlinkAccount={onUnlinkAccount}
         />
       </Box>
     );
@@ -37,8 +45,7 @@ export class EditUserProfile extends PureComponent<Props> {
 }
 
 export default compose(
-  linkAccount,
-  unlinkAccount,
+  accountLinking,
   graphql(
     gql`
       mutation UpdateUserProfile($input: UpdateUserInput!) {
