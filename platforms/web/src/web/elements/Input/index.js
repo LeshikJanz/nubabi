@@ -7,7 +7,7 @@ type InputFieldProps = {
   name: string,
   type: string,
   placeholder: string,
-  value: mixed,
+  value?: mixed,
   // eslint-disable-next-line
   input?: mixed,
 };

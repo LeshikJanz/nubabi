@@ -1,31 +1,27 @@
 // @flow
-import type { State, Dispatch } from 'web/types';
 import React from 'react';
-import reduxForm from 'redux-form/es/reduxForm';
-import { connect } from 'react-redux';
-import { withRouter, Redirect, Link } from 'react-router-dom';
-import { Title, Button } from 'web/elements';
+import { Redirect, Link } from 'react-router-dom';
+import { Button } from 'web/elements';
 import { Helmet } from 'react-helmet';
 import { parse } from 'qs';
-import styled from 'styled-components';
-import LoginForm from 'web/auth/components/LoginForm';
-import { loginRequest } from 'core/auth/actions';
-
-const Wrapper = styled.div`
-  padding: 10px;
-`;
+import { Wrapper, UserDataInputContainer } from '../styled';
+import LoginForm from './LoginForm';
+// import styled from 'styled-components';
+// import { Flex } from 'grid-styled';
+import OrElem from '../../../components/Steps/OrElem';
+import FaceBookSignUp from '../../../components/Steps/FaceBookSignUp';
 
 type LoginProps = {
   handleSubmit: () => void,
   pristine: boolean,
-  reset: boolean,
+  reset: Function,
   submitting: boolean,
   login: () => void,
   location: Object,
   isAuthenticated: boolean,
 };
 
-export const Login = (props: LoginProps) => {
+const Login = (props: LoginProps) => {
   const {
     handleSubmit,
     pristine,
@@ -54,13 +50,18 @@ export const Login = (props: LoginProps) => {
       <Helmet>
         <title>Nubabi | Login</title>
       </Helmet>
-      <Title>Login</Title>
-      <LoginForm
-        handleSubmit={handleSubmit(handleFormSubmit)}
-        pristine={pristine}
-        submitting={submitting}
-        reset={reset}
-      />
+
+      <UserDataInputContainer>
+        <OrElem />
+        <FaceBookSignUp onClickSignup={() => {}} />
+        <LoginForm
+          handleSubmit={handleSubmit(handleFormSubmit)}
+          pristine={pristine}
+          submitting={submitting}
+          reset={reset}
+        />
+      </UserDataInputContainer>
+
       <Button>
         <Link to="/signup">Sign Up</Link>
       </Button>
@@ -68,20 +69,4 @@ export const Login = (props: LoginProps) => {
   );
 };
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  login: (username, password) => {
-    dispatch(loginRequest(username, password));
-  },
-});
-
-const mapStateToProps = ({ auth }: State) => ({
-  isAuthenticated: auth.isAuthenticated,
-});
-
-export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(
-    reduxForm({
-      form: 'login',
-    })(Login),
-  ),
-);
+export default Login;

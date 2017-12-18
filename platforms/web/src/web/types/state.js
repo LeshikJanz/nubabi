@@ -16,6 +16,7 @@ export type AuthState = {
   isFetching: boolean,
   error: ?string,
   jwt: ?string,
+  isAuthenticated: boolean,
 };
 
 export type State = {
