@@ -274,6 +274,7 @@ class ChooseBaby extends PureComponent {
               contentContainerStyle={{
                 marginTop: 15,
                 height: 80,
+                minWidth: width,
                 paddingLeft: 10,
                 paddingRight: 10,
               }}
