@@ -4,13 +4,13 @@
   "extensions": {
     "endpoints": {
       "dev": {
-        "url": "http://localhost:8080/graphql",
+        "url": "http://localhost:3000/graphql",
         "headers": {
           "Authorization": "${env:NUBABI_AUTH_TOKEN}"
         }
       },
       "firebase": {
-        "url": "http://us-central1-nubabitest1.cloudfunctions.net/handler",
+        "url": "http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql",
         "headers": {
           "Authorization": "${env:NUBABI_AUTH_TOKEN}"
          }
