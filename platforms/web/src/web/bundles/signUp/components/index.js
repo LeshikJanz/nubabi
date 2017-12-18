@@ -1,14 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { SignupStepImg, Section } from 'web/elements';
+import { SignupStepImg } from 'web/elements';
 import { Steps } from 'web/components';
 import SignupStepsImg from 'web/assets/images/signup_steps.png';
-
-const SignUpContainer = styled(Section)`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
+import { SignUpContainer } from '../styled';
 
 const SignUp = () => {
   return (

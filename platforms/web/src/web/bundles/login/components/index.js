@@ -53,7 +53,10 @@ const Login = (props: LoginProps) => {
 
       <UserDataInputContainer>
         <OrElem />
-        <FaceBookSignUp onClickSignup={() => {}} />
+        <FaceBookSignUp
+          onClickSignup={() => {}}
+          btnText="Login with facebook"
+        />
         <LoginForm
           handleSubmit={handleSubmit(handleFormSubmit)}
           pristine={pristine}

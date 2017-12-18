@@ -27,7 +27,10 @@ const UserDataInputContainer = styled(Flex)`
 let UserCredentialsForm = ({ onClickSignup, inputs }: Props) => (
   <UserDataInputContainer>
     <OrElem />
-    <FaceBookSignUp onClickSignup={onClickSignup} />
+    <FaceBookSignUp
+      onClickSignup={onClickSignup}
+      btnText="Sign up with facebook"
+    />
     <UserCredentialsSignUp inputs={inputs} />
   </UserDataInputContainer>
 );

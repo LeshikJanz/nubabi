@@ -7,6 +7,7 @@ import Pattern from 'web/assets/images/facebook_signup.png';
 
 type Props = {
   onClickSignup: Function,
+  btnText: string,
 };
 
 const FacebookSignupContainer = styled(Flex)`
@@ -20,10 +21,10 @@ const FacebookSignupContainer = styled(Flex)`
   background-repeat: repeat;
 `;
 
-const FaceBookSignUp = ({ onClickSignup }: Props) => {
+const FaceBookSignUp = ({ onClickSignup, btnText }: Props) => {
   return (
     <FacebookSignupContainer>
-      <Button onClick={onClickSignup}>SIGN UP WITH FACEBOOK</Button>
+      <Button onClick={onClickSignup}>{btnText}</Button>
     </FacebookSignupContainer>
   );
 };
