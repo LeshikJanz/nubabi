@@ -20,10 +20,8 @@ const createFirebaseDeps = (firebase, firebaseConfig) => {
   return firebaseDeps;
 };
 
-const apollo = configureApollo();
-
 const configureDeps = (initialState: State, platformDeps: Deps) => ({
-  apollo,
+  apollo: configureApollo(),
   ...createFirebaseDeps(platformDeps.firebase, initialState.config.firebase),
   now: () => Date.now(),
   ...platformDeps,

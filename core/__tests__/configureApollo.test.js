@@ -1,5 +1,10 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import configureMockStore from 'redux-mock-store';
-import { configureApollo, authTokenMiddleware, configureApolloAuth } from '../configureApollo';
+import {
+  configureApollo,
+  authTokenMiddleware,
+  configureApolloAuth,
+} from '../configureApollo';
 import { ApolloClient } from 'apollo-client';
 
 const result = configureApollo();
@@ -20,22 +25,24 @@ describe('authTokenMiddleware', () => {
   const next = jest.fn();
 
   it('appends an authorization token to every request', () => {
-    const middleware = authTokenMiddleware(makeStore({
-      auth: { token: 'SOME_TOKEN'}
-    }));
+    const middleware = authTokenMiddleware(
+      makeStore({
+        auth: { token: 'SOME_TOKEN' },
+      }),
+    );
     middleware.applyMiddleware(request, next);
     expect(request.options.headers.authorization).toEqual('Bearer SOME_TOKEN');
     expect(next).toHaveBeenCalled();
-
-
   });
 
   it('adds null if the user is not logged in', () => {
-    const middleware = authTokenMiddleware(makeStore({
-      auth: {
-        token: null,
-      }
-    }));
+    const middleware = authTokenMiddleware(
+      makeStore({
+        auth: {
+          token: null,
+        },
+      }),
+    );
 
     middleware.applyMiddleware(request, next);
     expect(request.options.headers.authorization).toBe(null);
@@ -45,12 +52,15 @@ describe('authTokenMiddleware', () => {
 
 describe('configureApolloAuth', () => {
   it('uses the authTokenMiddleware', () => {
-    configureApolloAuth(makeStore({
-      auth: {
-        token: 'SOME'
-      }
-    }));
+    configureApolloAuth(
+      makeStore({
+        auth: {
+          token: 'SOME',
+        },
+      }),
+    );
 
-    expect(result.networkInterface._middlewares.length).toEqual(1);
+    // eslint-disable-next-line no-underscore-dangle
+    expect(result.networkInterface._middlewares.length).toBeGreaterThan(0);
   });
 });

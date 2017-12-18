@@ -6,12 +6,23 @@ import { IntrospectionFragmentMatcher } from 'react-apollo';
 import config from './config';
 import ServerNetworkInterface from './helpers/serverNetworkInterface';
 
-let client = null; // singleton
+// Singletons
+let client = null;
+let networkInterface;
 
-const networkInterface = new ServerNetworkInterface(config.graphqlEndpoint);
+export const configureApollo = (firebase?: mixed): ApolloClient => {
+  if (!client && !firebase && typeof jest === 'undefined') {
+    throw new Error(
+      'You called configureApollo without a Firebase parameter before initialized.',
+    );
+  }
 
-export const configureApollo = (): ApolloClient => {
   if (!client) {
+    networkInterface = new ServerNetworkInterface(
+      config.graphqlEndpoint,
+      firebase,
+    );
+
     client = new ApolloClient({
       networkInterface,
       dataIdFromObject: obj => obj.id,
@@ -36,6 +47,16 @@ export const authTokenMiddleware = store => ({
   },
 });
 
+export const contextMiddleware = {
+  applyMiddleware(req, next) {
+    if (req.request.variables && req.request.variables.context) {
+      req.options.context = req.request.variables.context;
+      delete req.request.variables.context;
+    }
+    next();
+  },
+};
+
 export const configureApolloAuth = (store: Store<Action, State>) => {
-  networkInterface.use([authTokenMiddleware(store)]);
+  networkInterface.use([authTokenMiddleware(store), contextMiddleware]);
 };
