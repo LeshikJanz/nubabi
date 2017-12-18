@@ -33,8 +33,8 @@ export class AddMemoryScreen extends PureComponent {
   render() {
     const params = path(['navigation', 'state', 'params'], this.props);
 
-    const suggestedMemoryId = prop('suggestedMemoryId', params);
-    const fromActivity = prop('fromActivity', params);
+    const suggestedMemoryId = params && prop('suggestedMemoryId', params);
+    const fromActivity = params && prop('fromActivity', params);
 
     return (
       <Screen>
