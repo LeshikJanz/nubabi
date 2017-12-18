@@ -1,5 +1,10 @@
 // @flow
-import type { Action, SelectBabyAction, DeleteBabyAction, MutationResultAction } from '../types';
+import type {
+  Action,
+  SelectBabyAction,
+  DeleteBabyAction,
+  MutationResultAction,
+} from '../types';
 import { Observable } from 'rxjs/Observable';
 import { path } from 'ramda';
 import { gql } from 'react-apollo';
@@ -54,7 +59,7 @@ const createBabyEpic = (action$: any) => {
     .mergeMap(({ result: { data } }) => {
       if (data.createBaby) {
         return [
-          selectBaby(data.createBaby.createdBaby.id),
+          selectBaby(data.createBaby.edge.node.id),
           resetNavigation('home'),
         ];
       }

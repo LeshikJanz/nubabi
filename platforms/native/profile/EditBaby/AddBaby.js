@@ -73,7 +73,7 @@ export default compose(
             return assocPath(
               edges,
               prepend(
-                mutationResult.data.createBaby.edge.node,
+                mutationResult.data.createBaby.edge,
                 path(edges, previousData),
               ),
               previousData,
