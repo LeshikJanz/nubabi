@@ -1,24 +1,24 @@
 // @flow
 import React from 'react';
 import { Equipment } from 'web/types/custom';
-import * as EqupipmentItemStyled from '../../styled/equipment/EquipmentItemStyled';
+import * as EquipmentItemStyled from '../../styled/equipment/EquipmentItemStyled';
 
 type Props = Equipment;
 
 const EquipmentItem = ({ heading, text, id, handleCheckbox }: Props) => (
-  <EqupipmentItemStyled.Wrapper>
-    <EqupipmentItemStyled.SquareCheckbox
+  <EquipmentItemStyled.Wrapper>
+    <EquipmentItemStyled.SquareCheckbox
       id={id}
       type="checkbox"
       className="rounded"
       onChange={handleCheckbox}
     />
     <label htmlFor={id} />
-    <EqupipmentItemStyled.Text>
+    <EquipmentItemStyled.Text>
       <div>{heading}</div>
       <div>{text}</div>
-    </EqupipmentItemStyled.Text>
-  </EqupipmentItemStyled.Wrapper>
+    </EquipmentItemStyled.Text>
+  </EquipmentItemStyled.Wrapper>
 );
 
 export default EquipmentItem;

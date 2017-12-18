@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { compose } from 'ramda';
-import ShowNoContentViewIf from 'web/components/showNoContentViewIf';
+import showNoContentViewIf from 'web/components/showNoContentViewIf';
 import EquipmentItem from './EquipmentItem';
 import * as EquipmentListStyled from '../../styled/equipment/EquipmentListStyled';
 
@@ -18,6 +18,6 @@ const EquipmentList = ({ equipments, handleCheckbox }: Props) => (
   </EquipmentListStyled.List>
 );
 
-export default compose(ShowNoContentViewIf(props => !props.equipments))(
+export default compose(showNoContentViewIf(props => !props.equipments))(
   EquipmentList,
 );

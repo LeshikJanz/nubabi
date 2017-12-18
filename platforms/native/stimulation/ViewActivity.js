@@ -70,15 +70,15 @@ export default compose(
     gql`
       query ViewActivity($babyId: ID!, $activityId: ID!) {
         viewer {
-           baby(id: $babyId) {
-               id
-               name
-               activity(id: $activityId) {
-               ...Activity
-               isFavorite
-               }
-           }
-        }
+          baby(id: $babyId) {
+            id
+            name
+            activity(id: $activityId) {
+            ...Activity
+            isFavorite
+            }
+         }
+      }
     }
         ${Activity.fragments.activity}
     `,

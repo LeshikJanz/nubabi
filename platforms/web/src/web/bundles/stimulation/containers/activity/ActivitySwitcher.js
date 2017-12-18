@@ -1,10 +1,11 @@
 import { gql, graphql } from 'react-apollo';
-import compose from 'ramda/src/compose';
+import { compose, withProps, withHandlers } from 'recompose';
 import path from 'ramda/src/path';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import ActivitySwitcher from '../../components/activity/ActivitySwitcher';
 import { ActivityFragments } from '../../fragments/activity';
 import withCurrentBaby from 'web/components/withCurrentBaby';
+import { withRouter } from 'react-router-dom';
 
 const query = gql`
   query getBabyActivity($id: ID!) {
@@ -85,5 +86,40 @@ export default compose(
       },
     },
   ),
+  withRouter,
+  withProps(
+    ({ baby, activity }) =>
+      baby && {
+        curActivityIndex: baby.activities.edges.findIndex(
+          ({ node }) => node.id === activity.id,
+        ),
+      },
+  ),
+  withProps(
+    ({ baby, curActivityIndex }) =>
+      baby && {
+        prevActivity: (baby.activities.edges[curActivityIndex - 1] &&
+          baby.activities.edges[curActivityIndex - 1].node) || {
+          id: '',
+          name: 'Return to list',
+        },
+        nextActivity: (baby.activities.edges[curActivityIndex + 1] &&
+          baby.activities.edges[curActivityIndex + 1].node) || {
+          id: '',
+          name: 'Return to list',
+        },
+      },
+  ),
+  withHandlers({
+    handleRedirect: ({ history }) => id => {
+      if (id) {
+        history.push(`/activity/${id}`);
+      } else {
+        // Redirect to the full Activity list for edge elements
+        history.push('/stimulation/weeks');
+      }
+      window.scrollTo(0, 0);
+    },
+  }),
   DisplayLoadingState,
 )(ActivitySwitcher);

@@ -4,7 +4,7 @@ import NoContentView from './NoContentView';
 
 type TesterFn = (props: any) => boolean;
 
-const ShowNoContentViewIf = (testerFn: TesterFn, Component: *) => {
+const showNoContentViewIf = (testerFn: TesterFn, Component: *) => {
   return branch(
     props => {
       if (props.data && props.data.loading) {
@@ -17,4 +17,4 @@ const ShowNoContentViewIf = (testerFn: TesterFn, Component: *) => {
   );
 };
 
-export default ShowNoContentViewIf;
+export default showNoContentViewIf;

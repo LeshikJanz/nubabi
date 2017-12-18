@@ -1,11 +1,11 @@
-import ShowNoContentViewIf from 'web/components/showNoContentViewIf';
+import showNoContentViewIf from 'web/components/showNoContentViewIf';
 import { compose, withHandlers, lifecycle } from 'recompose';
 import { withRouter } from 'react-router-dom';
 import ActivityList from '../components/ActivityList';
 import { MIN_Y_OFFSET } from '../../../constants/index';
 
 export default compose(
-  ShowNoContentViewIf(props => !props.activities),
+  showNoContentViewIf(props => !props.activities),
   withRouter,
   withHandlers({
     handleNavigateToActivity: ({ history, switchable, backLink }) => ({ id }) =>

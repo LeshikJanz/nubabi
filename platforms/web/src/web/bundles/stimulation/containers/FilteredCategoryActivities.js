@@ -5,7 +5,7 @@ import DisplayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { ActivityListFragment } from '../fragments/activity';
 import { toGlobalId } from 'graphql-relay';
-import ShowNoContentViewIf from '../../../components/showNoContentViewIf';
+import showNoContentViewIf from '../../../components/showNoContentViewIf';
 
 const query = gql`
     query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
@@ -97,6 +97,6 @@ export default compose(
   withProps(({ category }) => ({
     categoryName: category && category.node ? category.node.name : category,
   })),
-  ShowNoContentViewIf(props => !props.activities.length),
+  showNoContentViewIf(props => !props.activities.length),
   DisplayLoadingState,
 )(FilteredActivities);
