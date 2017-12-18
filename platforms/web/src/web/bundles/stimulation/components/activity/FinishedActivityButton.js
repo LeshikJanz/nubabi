@@ -10,8 +10,6 @@ type Props = {
 };
 
 const FinishedActivityButton = (props: Props) => {
-  console.log('props');
-  console.log(props);
   const completedActivity = ACTIVITY_BUTTONS.find(a => a.type === 'done');
 
   return (

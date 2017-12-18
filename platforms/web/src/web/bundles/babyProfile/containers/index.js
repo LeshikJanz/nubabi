@@ -10,6 +10,7 @@ import { updateBaby } from '../grapghQl/mutations/updateBaby';
 import { filter } from 'graphql-anywhere';
 import { babyForm } from '../grapghQl/fragments/babyForm';
 import { selectBaby } from 'core/babies/actions';
+import { handleError } from 'web/common/errorHandler';
 
 const mapStateToProps = state => ({
   babyEditForm: state.form.BabyForm && state.form.BabyForm.values,
@@ -41,13 +42,10 @@ export default compose(
               changeBaby(createdBaby.id);
               history.push('/profile');
             } else {
-              console.error('Baby has not been created');
-              console.error(createdBaby);
+              handleError(new Error('Baby has not been created'));
             }
           })
-          .catch(error => {
-            console.error(error);
-          }),
+          .catch(handleError),
     }),
     options: {
       refetchQueries: ['Profile', 'getBabies'],
@@ -63,13 +61,10 @@ export default compose(
               changeBaby(updatedBaby.id);
               history.push('/profile');
             } else {
-              console.error('Baby has not been updated');
-              console.error(updatedBaby);
+              handleError(new Error('Baby has not been updated'));
             }
           })
-          .catch(error => {
-            console.error(error);
-          });
+          .catch(handleError);
       },
     }),
     options: {
