@@ -13,6 +13,7 @@
     "firebase": "3.7.4",
     "graphql": "^0.10.5",
     "graphql-tag": "^2.6.0",
+    "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
     "moment": "^2.17.1",
     "pluralize": "^4.0.0",
     "prop-types": "^15.6.0",

@@ -116,7 +116,12 @@ export default compose(
           };
 
           return mutate({
-            variables: { input },
+            variables: {
+              input,
+              context: {
+                uploadRoot: `/babies/${values.id}`,
+              },
+            },
             optimisticResponse: optimisticResponse(
               'updateBaby',
               'UpdateBabyPayload',

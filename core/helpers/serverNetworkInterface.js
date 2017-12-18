@@ -1,10 +1,8 @@
 // @flow
 import { HTTPFetchNetworkInterface } from 'apollo-client';
-import { print as printGraphQL } from 'graphql';
 import RecursiveIterator from 'recursive-iterator';
-import { dropLast, last, lensPath, omit, set, view } from 'ramda';
-import uuid from 'react-native-uuid';
-import isReactNative from '../app/isReactNative';
+import { dropLast, last, lensPath, set, view } from 'ramda';
+import { fromGlobalId } from 'graphql-relay';
 
 const isFile = (value, path) => {
   // TODO: implement check for web
@@ -18,7 +16,28 @@ const normalizePath = path => {
   });
 };
 
+const getUploadRoot = path => {
+  return path
+    .split('/')
+    .map(part => {
+      try {
+        const globalId = fromGlobalId(part);
+        const isGlobalId = globalId.type;
+
+        return isGlobalId ? globalId.id : part;
+      } catch (err) {
+        return part;
+      }
+    })
+    .join('/');
+};
+
 class ServerNetworkInterface extends HTTPFetchNetworkInterface {
+  constructor(uri, firebase) {
+    super(uri);
+    this.firebase = firebase;
+  }
+
   fetchFromRemoteEndpoint({ request, options }) {
     const isMutation = request.query.definitions[0].operation === 'mutation';
 
@@ -26,60 +45,66 @@ class ServerNetworkInterface extends HTTPFetchNetworkInterface {
       return super.fetchFromRemoteEndpoint({ request, options });
     }
 
-    let hasFiles = false;
-
-    const formData = new global.FormData();
+    const files = [];
 
     // eslint-disable-next-line no-restricted-syntax
     for (const { node, path } of new RecursiveIterator(request.variables)) {
       if (isFile(node, path)) {
-        hasFiles = true;
-        const id = uuid.v4();
-
         const normalizedPath = normalizePath(path);
         const filePath = lensPath(normalizedPath);
         const file = view(
           lensPath(dropLast(1, normalizedPath)),
           request.variables,
         );
-
-        formData.append(
-          id,
-          isReactNative
-            ? {
-                uri: file.url,
-                name: file.name,
-                type: file.contentType,
-              }
-            : node,
-        );
-        request.variables = set(filePath, id, request.variables);
+        files.push({ file, urlPath: filePath });
       }
     }
 
-    if (!hasFiles) {
+    const { firebase } = this;
+    const uploadFile = (path, file) => {
+      return new Promise((resolve, reject) => {
+        const uploadTask = firebase
+          .storage()
+          .ref()
+          .child(path)
+          .put(file.file.url, {
+            contentType: file.file.contentType,
+          });
+
+        uploadTask.on(
+          firebase.storage.TaskEvent.STATE_CHANGED,
+          () => {
+            /* progress */
+          },
+          error => reject(error),
+          snapshot => {
+            const downloadUrl = snapshot.downloadURL;
+            request.variables = set(
+              file.urlPath,
+              downloadUrl,
+              request.variables,
+            );
+            resolve(true);
+          },
+        );
+      });
+    };
+
+    if (!files.length) {
       return super.fetchFromRemoteEndpoint({ request, options });
     }
 
-    formData.append('query', printGraphQL(request.query));
-    formData.append('variables', JSON.stringify(request.variables || {}));
-    formData.append('debugName', JSON.stringify(request.debugName || ''));
-    formData.append('operationName', request.operationName || '');
+    return Promise.all(
+      files.map(file => {
+        const path =
+          options.context && options.context.uploadRoot
+            ? `${getUploadRoot(options.context.uploadRoot)}/${file.file.name}`
+            : `/tmp/${file.file.name}`;
 
-    const fetchOpts = {
-      ...this._opts,
-      ...options,
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        ...omit(['Content-Type'], options.headers || {}),
-      },
-    };
-
-    return global.fetch(this._uri, {
-      ...fetchOpts,
-      method: 'POST',
-      body: formData,
+        return uploadFile(path, file);
+      }),
+    ).then(() => {
+      return super.fetchFromRemoteEndpoint({ request, options });
     });
   }
 }

@@ -131,7 +131,13 @@ export default compose(
       props: ({
         mutate,
         // eslint-disable-next-line no-shadow
-        ownProps: { id, toggleNetworkActivityIndicator, currentBabyId, goBack, appError },
+        ownProps: {
+          id,
+          toggleNetworkActivityIndicator,
+          currentBabyId,
+          goBack,
+          appError,
+        },
       }) => ({
         onSubmit: async values => {
           // $FlowFixMe$
@@ -159,7 +165,12 @@ export default compose(
 
           // $FlowFixMe$
           return mutate({
-            variables: { input },
+            variables: {
+              input,
+              context: {
+                uploadRoot: `/babies/${currentBabyId}/memories/${id}`,
+              },
+            },
             optimisticResponse: {
               __typename: 'Mutation',
               updateMemory: {
@@ -190,10 +201,12 @@ export default compose(
               }
             },
           })
-            .catch(() => appError(new Error("There was a problem updating this memory.")))
+            .catch(() =>
+              appError(new Error('There was a problem updating this memory.')),
+            )
             .finally(() => {
-            toggleNetworkActivityIndicator(false);
-          });
+              toggleNetworkActivityIndicator(false);
+            });
         },
       }),
     },

@@ -91,7 +91,10 @@ export default compose(
           );
 
           return mutate({
-            variables: { input },
+            variables: {
+              input,
+              uploadRoot: `/users/${values.id}`,
+            },
           });
         },
       }),
