@@ -14,7 +14,26 @@ import {
   GlobalLoader,
   NavBar,
 } from 'web/components';
+<<<<<<< HEAD
 import { Login, SignUp } from 'web/auth';
+=======
+import Subscribe from 'web/bundles/subscribe';
+import Login from 'web/bundles/login';
+import SignUp from 'web/bundles/signUp';
+import NavBar from 'web/components/Navbar';
+import Stimulation from 'web/bundles/stimulation/containers';
+import Growth from 'web/bundles/growth';
+import Library from 'web/bundles/library';
+import Memories from 'web/bundles/memories';
+import Settings from 'web/bundles/settings';
+import Activity from 'web/bundles/stimulation/containers/activity';
+import BrowseActivities from 'web/bundles/stimulation/containers/browseActivities';
+import Favorites from 'web/bundles/stimulation/containers/favorites';
+import History from 'web/bundles/stimulation/containers/history';
+import FilteredSkillActivities from 'web/bundles/stimulation/containers/filteredSkillActivities';
+import FilteredCategoryActivities from 'web/bundles/stimulation/containers/filteredCategoryActivities';
+import HistoryList from 'web/bundles/stimulation/containers/history/historyList';
+>>>>>>> feat: subscribe routing
 import { Wrapper, AppContent } from '../styled';
 import {
   Stimulation,
@@ -68,6 +87,11 @@ const App = (props: Props) => (
         <AuthenticatedRoute
           path="/settings"
           component={Settings}
+          props={props}
+        />
+        <AuthenticatedRoute
+          path="/subscribe"
+          component={Subscribe}
           props={props}
         />
         <NavBar {...props}>

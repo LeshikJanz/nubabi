@@ -11,7 +11,7 @@ type Props = {
   location: {
     pathname: string,
   },
-  user: Object,
+  user?: Object,
 };
 
 const renderMenuItem = (item, match, pathname, userData) =>
@@ -29,12 +29,14 @@ const renderMenuItem = (item, match, pathname, userData) =>
       key={item.id}
       isactive={pathname === `${match.url}/${item.route}` ? 1 : 0}
     >
-      <IconBox>
-        <Icon
-          name={item.iconName}
-          isactive={pathname === `${match.url}/${item.route}` ? 1 : 0}
-        />
-      </IconBox>
+      {item.iconName ? (
+        <IconBox>
+          <Icon
+            name={item.iconName}
+            isactive={pathname === `${match.url}/${item.route}` ? 1 : 0}
+          />
+        </IconBox>
+      ) : null}
 
       {item.label}
     </MenuItem>

@@ -11,3 +11,4 @@ export { default as SettingsNavbar } from './SettingsNavbar';
 export { default as UserInfoEditor } from './UserInfoEditor';
 export { default as ProfileDetails } from './ProfileDetails';
 export { default as NavBar } from './Navbar';
+export { default as SubscribeRightSidebar } from './SubscribeRightSidebar';

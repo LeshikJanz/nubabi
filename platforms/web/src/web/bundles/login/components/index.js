@@ -6,8 +6,6 @@ import { Helmet } from 'react-helmet';
 import { parse } from 'qs';
 import { Wrapper, UserDataInputContainer } from '../styled';
 import LoginForm from './LoginForm';
-// import styled from 'styled-components';
-// import { Flex } from 'grid-styled';
 import OrElem from '../../../components/Steps/OrElem';
 import FaceBookSignUp from '../../../components/Steps/FaceBookSignUp';
 
