@@ -1,7 +1,8 @@
 import { gql, graphql } from 'react-apollo';
 import { compose, withProps, withHandlers } from 'recompose';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
+import requireBaby from 'web/components/requireBaby';
 import ActivitySwitcher from '../../components/activity/ActivitySwitcher';
 import { ActivityFragments } from '../../fragments/activity';
 import withCurrentBaby from 'web/components/withCurrentBaby';
@@ -39,6 +40,7 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
+  requireBaby,
   graphql(
     gql`
         mutation SwoopActivity($input: SwoopActivityInput!) {
@@ -51,7 +53,7 @@ export default compose(
         }
         ${ActivityFragments.activity}
     `,
-    { name: 'swoopActivity', options: () => ({ refetchQueries }) },
+    { name: 'swoopActivity', options: { refetchQueries } },
   ),
   graphql(
     gql`
@@ -65,7 +67,7 @@ export default compose(
         }
         ${ActivityFragments.activity}
     `,
-    { name: 'changeActivityLevel', options: () => ({ refetchQueries }) },
+    { name: 'changeActivityLevel', options: { refetchQueries } },
   ),
   graphql(
     gql`
@@ -121,5 +123,5 @@ export default compose(
       window.scrollTo(0, 0);
     },
   }),
-  DisplayLoadingState,
+  displayLoadingState,
 )(ActivitySwitcher);

@@ -1,7 +1,7 @@
 import { gql, graphql } from 'react-apollo';
 import { compose, withState, withProps } from 'recompose';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { ActivityListFragment } from '../fragments/activity';
 import { toGlobalId } from 'graphql-relay';
@@ -98,5 +98,5 @@ export default compose(
     categoryName: category && category.node ? category.node.name : category,
   })),
   showNoContentViewIf(props => !props.activities.length),
-  DisplayLoadingState,
+  displayLoadingState,
 )(FilteredActivities);

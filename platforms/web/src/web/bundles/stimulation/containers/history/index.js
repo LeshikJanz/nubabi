@@ -1,7 +1,7 @@
 import { gql, graphql } from 'react-apollo';
 import { compose, withHandlers } from 'recompose';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 import { ActivityHistory } from '../../fragments/history';
@@ -40,5 +40,5 @@ export default compose(
   withHandlers({
     handleHistory: ({ history }) => id => history.push(`/history/${id}`),
   }),
-  DisplayLoadingState,
+  displayLoadingState,
 )(History);

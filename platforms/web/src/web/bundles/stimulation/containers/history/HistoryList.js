@@ -3,7 +3,7 @@ import { gql, graphql } from 'react-apollo';
 import { compose, withProps } from 'recompose';
 import path from 'ramda/src/path';
 import { withRouter } from 'react-router-dom';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import HistoryList from '../../components/history/HistoryList';
 import { ActivityListFragment } from '../../fragments/activity';
@@ -56,5 +56,5 @@ export default compose(
       history &&
       history.edges.find(({ node }) => node.id === match.params.id).node,
   })),
-  DisplayLoadingState,
+  displayLoadingState,
 )(HistoryList);

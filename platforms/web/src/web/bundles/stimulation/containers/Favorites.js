@@ -1,22 +1,23 @@
 import { gql, graphql } from 'react-apollo';
 import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
+import requireBaby from 'web/components/requireBaby';
 import { FavoriteActivitiesFragment } from '../fragments/favorites';
 import Favorites from '../components/Favorites';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
 
 const query = gql`
-    query getBabyActivity($id: ID!) {
-        viewer {
-            baby(id: $id) {
-                id
-                ...FavoriteActivities
-            }
+  query getBabyActivity($id: ID!) {
+    viewer {
+      baby(id: $id) {
+        id
+        ...FavoriteActivities
         }
-    }
-    ${FavoriteActivitiesFragment.favorites}
+      }
+  }
+  ${FavoriteActivitiesFragment.favorites}
 `;
 
 export default compose(
@@ -33,5 +34,6 @@ export default compose(
       favoriteActivities: path(['viewer', 'baby', 'favoriteActivities'], data),
     }),
   }),
-  DisplayLoadingState,
+  requireBaby,
+  displayLoadingState,
 )(Favorites);

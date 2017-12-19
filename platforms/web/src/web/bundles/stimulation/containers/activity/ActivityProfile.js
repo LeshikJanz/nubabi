@@ -21,7 +21,7 @@ export default compose(
     `,
     {
       name: 'toggleFavorite',
-      options: () => ({
+      options: {
         fetchPolicy: 'cache-and-network',
         optimisticResponse: optimisticResponse(
           'toggleActivityFavorite',
@@ -39,7 +39,7 @@ export default compose(
             },
           }),
         ),
-      }),
+      },
     },
   ),
   withCurrentBaby,

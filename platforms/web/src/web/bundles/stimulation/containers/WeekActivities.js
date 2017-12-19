@@ -1,10 +1,11 @@
 import WeekActivities from '../components/WeekActivities';
 import { gql, graphql } from 'react-apollo';
 import { compose } from 'recompose';
-import { ActivityListFragment } from '../fragments/activity';
 import withCurrentBaby from 'web/components/withCurrentBaby';
+import requireBaby from 'web/components/requireBaby';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
+import { ActivityListFragment } from '../fragments/activity';
 
 const query = gql`
     query ThisWeeksActivitiesList($id: ID!) {
@@ -39,5 +40,6 @@ export default compose(
       activities: path(['viewer', 'baby', 'activities', 'edges'], data),
     }),
   }),
-  DisplayLoadingState,
+  requireBaby,
+  displayLoadingState,
 )(WeekActivities);

@@ -29,7 +29,7 @@ export default compose(
         }
         ${ActivityFragments.activity}
     `,
-    { name: 'swoopActivity', options: () => ({ refetchQueries }) },
+    { name: 'swoopActivity', options: { refetchQueries } },
   ),
   graphql(
     gql`
@@ -43,7 +43,7 @@ export default compose(
         }
         ${ActivityFragments.activity}
     `,
-    { name: 'changeActivityLevel', options: () => ({ refetchQueries }) },
+    { name: 'changeActivityLevel', options: { refetchQueries } },
   ),
   graphql(
     gql`

@@ -6,6 +6,7 @@ import compose from 'ramda/src/compose';
 import path from 'ramda/src/path';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
+import requireBaby from 'web/components/requireBaby';
 import ProfileMain from './Main';
 import displayLoadingState from 'web/components/displayLoadingState';
 
@@ -168,5 +169,6 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
+  requireBaby,
   displayLoadingState,
 )(Profile);

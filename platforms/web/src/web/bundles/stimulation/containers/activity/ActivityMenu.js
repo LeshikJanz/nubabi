@@ -24,15 +24,15 @@ export default compose(
       handleActivity,
       runGlobalLoading,
       handleActivityMenu,
-    }) => a => {
+    }) => activity => {
       runGlobalLoading();
 
-      if (a.type !== 'done') {
+      if (activity.type !== 'done') {
         window.scrollTo(0, 0);
       }
 
       handleActivityMenu(false);
-      handleActivity(a);
+      handleActivity(activity);
     },
   }),
   lifecycle({

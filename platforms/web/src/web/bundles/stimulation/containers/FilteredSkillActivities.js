@@ -1,7 +1,7 @@
 import { gql, graphql } from 'react-apollo';
 import { compose, withState, withProps } from 'recompose';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
+import displayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { ActivityListFragment } from '../fragments/activity';
 import showNoContentViewIf from '../../../components/showNoContentViewIf';
@@ -97,6 +97,6 @@ export default compose(
   withProps(({ category }) => ({
     categoryName: category && category.node ? category.node.name : category,
   })),
-  DisplayLoadingState,
+  displayLoadingState,
   showNoContentViewIf(props => !props.activities.length),
 )(FilteredActivities);

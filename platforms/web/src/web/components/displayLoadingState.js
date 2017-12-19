@@ -5,7 +5,7 @@ import { Loader } from './index';
 
 type Props = GraphQLDataProp<Query>;
 
-const DisplayLoadingState = Component => {
+const displayLoadingState = Component => {
   const LoadingWrapper = ({ data = {}, ...props }: Props) => {
     const isLoading = !data.viewer;
 
@@ -14,4 +14,4 @@ const DisplayLoadingState = Component => {
   return LoadingWrapper;
 };
 
-export default DisplayLoadingState;
+export default displayLoadingState;
