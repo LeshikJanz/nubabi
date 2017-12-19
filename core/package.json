@@ -1,6 +1,6 @@
 {
   "name": "nubabi-core",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "apollo-client": "^1.9.3",
@@ -12,8 +12,8 @@
     "fela": "4.3.5",
     "firebase": "3.7.4",
     "graphql": "^0.10.5",
-    "graphql-tag": "^2.6.0",
     "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
+    "graphql-tag": "^2.6.0",
     "moment": "^2.17.1",
     "pluralize": "^4.0.0",
     "prop-types": "^15.6.0",

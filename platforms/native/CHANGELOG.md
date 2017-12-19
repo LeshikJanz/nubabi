@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.7.0...nubabi-native@1.8.0) (2017-12-19)
+
+
+### Bug Fixes
+
+* Choose Baby overlaps with lots of babies ([399906f](https://gitlab.com/nubabi/mobile/commit/399906f))
+* **memories:** Recent Memories add button does not need params ([10bf374](https://gitlab.com/nubabi/mobile/commit/10bf374))
+* **native:** add firebase to `platformDeps` ([2b174f4](https://gitlab.com/nubabi/mobile/commit/2b174f4))
+* **profile:** use min-width for small lists ([b72d6e7](https://gitlab.com/nubabi/mobile/commit/b72d6e7))
+* update usage of edges in Baby responses ([b7958fa](https://gitlab.com/nubabi/mobile/commit/b7958fa))
+* **stimulation:** remove top border from Browse Activities screen ([4386850](https://gitlab.com/nubabi/mobile/commit/4386850))
+
+
+### Features
+
+* add upload interceptor and upload root to components ([fececd1](https://gitlab.com/nubabi/mobile/commit/fececd1))
+* move account linking to core ([5c50e71](https://gitlab.com/nubabi/mobile/commit/5c50e71))
+* update Firebase server and fixes ([a61ceac](https://gitlab.com/nubabi/mobile/commit/a61ceac))
+* **memories:** enable EXIF metadata storage for memories ([bb66439](https://gitlab.com/nubabi/mobile/commit/bb66439))
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.6.0...nubabi-native@1.7.0) (2017-12-11)
 

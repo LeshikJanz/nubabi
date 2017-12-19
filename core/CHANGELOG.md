@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.4.0...nubabi-core@2.0.0) (2017-12-19)
+
+
+### Bug Fixes
+
+* `Promise.prototype.finally` is becoming ES, fix RN check ([5fb9c51](https://gitlab.com/nubabi/mobile/commit/5fb9c51))
+* apollo memoization path in initialization ([a361956](https://gitlab.com/nubabi/mobile/commit/a361956))
+* update usage of edges in Baby responses ([b7958fa](https://gitlab.com/nubabi/mobile/commit/b7958fa))
+
+
+### Features
+
+* add upload interceptor and upload root to components ([fececd1](https://gitlab.com/nubabi/mobile/commit/fececd1))
+* move account linking to core ([5c50e71](https://gitlab.com/nubabi/mobile/commit/5c50e71))
+* prepare core for native Firebase SDK ([f1345ee](https://gitlab.com/nubabi/mobile/commit/f1345ee))
+* remove file upload from server and `FileInputBase64` ([35f44a5](https://gitlab.com/nubabi/mobile/commit/35f44a5))
+* update Firebase server and fixes ([a61ceac](https://gitlab.com/nubabi/mobile/commit/a61ceac))
+* use server GraphQL ([490fedb](https://gitlab.com/nubabi/mobile/commit/490fedb))
+
+
+### BREAKING CHANGES
+
+* Server does no longer do file uploads. We expect file fields
+in mutations to include an already-working `url` in Firebase Storage. In
+addition, `FileInputBase64` has been removed to better reflect that we were
+using `FileInput` with an `url`.
+* `configureDeps` now expects `firebase` to be passed through
+`platformDeps`. Firebase should now be initialized by the caller of
+`configureStore`, and we no longer import Web SDK by default.
+* client network interface is no longer available,
+new setup requires a running GraphQL server at `config.graphqlEndpoint`
+which gets derived from `NUBABI_GRAPHQL_ENDPOINT` env var.
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.3.1...nubabi-core@1.4.0) (2017-12-11)
 
