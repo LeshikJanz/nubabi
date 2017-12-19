@@ -1,6 +1,7 @@
 import { GraphQLString } from 'graphql';
 import { always, cond, equals, path, prop, T } from 'ramda';
 import { GraphQLDate, GraphQLDateTime, GraphQLTime } from 'graphql-iso-date';
+import GraphQLJSON from 'graphql-type-json';
 // noinspection ES6UnusedImports
 import {
   connectionFromPromisedArrayWithCount,
@@ -18,6 +19,7 @@ const resolvers = {
   Date: GraphQLDate,
   Time: GraphQLTime,
   Secret: GraphQLString, // TODO
+  JSON: GraphQLJSON,
   Query: {
     viewer: () => ({}),
     node: nodeFieldResolver,

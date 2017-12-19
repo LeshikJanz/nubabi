@@ -35,6 +35,7 @@ export type MediaPickerItem = {|
   mime: string,
   size: number,
   data?: string,
+  metadata?: Object,
 |};
 
 export type MediaPickerResponse = Array<MediaPickerItem>;
@@ -45,6 +46,7 @@ const defaultOptions = {
   waitAnimationEnd: true,
   loadingLabelText: 'Processing...',
   includeBase64: false,
+  includeExif: true,
 };
 
 export function showMediaPicker(

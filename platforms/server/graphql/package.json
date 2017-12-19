@@ -20,6 +20,7 @@
     "graphql-relay": "https://github.com/blackxored/graphql-relay-js#rn-base64",
     "graphql-server-express": "^1.0.2",
     "graphql-tools": "^0.11.0",
+    "graphql-type-json": "^0.1.4",
     "lodash.sample": "^4.2.1",
     "mime": "^2.0.3",
     "moment": "^2.17.1",
@@ -30,10 +31,10 @@
     "raven": "^2.3.0",
     "raw-body": "^2.3.2",
     "reading-time": "^1.1.0",
-    "uuid": "^3.1.0",
     "serverless-google-cloudfunctions": "^1.1.1",
     "serverless-http": "^1.5.2",
-    "string": "^3.3.3"
+    "string": "^3.3.3",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "faker": "^4.1.0",

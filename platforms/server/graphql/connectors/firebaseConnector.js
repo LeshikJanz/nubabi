@@ -299,6 +299,7 @@ const createMemory = (firebase, babyId: string, input: CreateMemoryInput) => {
         .ref()
         .child(`/memories/${memoryId}/files`)
         .push().key;
+
       files[fileId] = file;
     });
   }

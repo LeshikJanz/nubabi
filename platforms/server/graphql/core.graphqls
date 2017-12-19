@@ -6,6 +6,8 @@ scalar Time
 
 scalar Secret
 
+scalar JSON
+
 interface Node {
   # A globally-unique ID
   id: ID!
@@ -219,6 +221,7 @@ input FileInput {
   contentType: String!
   size: Int!
   url: String!
+  metadata: JSON
 }
 
 input FileFilter {
@@ -247,6 +250,7 @@ type Image implements File, ResizableImage, Thumbnailable {
   height: Int
   large: Image
   thumb: Image
+  metadata: JSON
 }
 
 type Avatar implements File, ResizableImage, Thumbnailable {

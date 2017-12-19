@@ -58,12 +58,21 @@ const formatDate = memoize(dateStr => {
 });
 
 const parseImageOrVideo = (file: MediaPickerItem): FileInput => {
-  return {
+  const result = {
     url: file.path,
     contentType: file.mime,
     name: last(file.path.split('/')),
     size: file.size,
   };
+  if (file.exif) {
+    result.metadata = {
+      _raw: JSON.stringify({
+        exif: file.exif,
+      }),
+    };
+  }
+
+  return result;
 };
 
 const parseImagesOrVideos = (files: Array<MediaPickerItem>): Array<File> => {
@@ -82,6 +91,7 @@ class MemoryForm extends PureComponent {
   handleAddMedia = () => {
     mediaPicker().then(assets => {
       const files = parseImagesOrVideos(assets);
+      console.log(files);
       this.updateFiles(union(files, this.props.files));
     });
   };
