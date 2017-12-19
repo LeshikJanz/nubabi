@@ -13,7 +13,7 @@ module.exports = {
       modulesDir: rootModules,
     }),
   ],
-  devtool: 'eval-source-map',
+  devtool: 'source-map',
   output: {
     libraryTarget: 'commonjs',
     path: path.join(__dirname, '.webpack'),
@@ -39,6 +39,7 @@ module.exports = {
               presets: ['react-native'],
               plugins: [
                 'transform-runtime',
+                'source-map-support',
                 ["transform-define", "../../../core/config/getConfig.js"],
                 ['inline-import', { extensions: ['.graphql', '.graphqls'] }],
                 [
