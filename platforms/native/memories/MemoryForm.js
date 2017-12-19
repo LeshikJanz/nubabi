@@ -91,7 +91,6 @@ class MemoryForm extends PureComponent {
   handleAddMedia = () => {
     mediaPicker().then(assets => {
       const files = parseImagesOrVideos(assets);
-      console.log(files);
       this.updateFiles(union(files, this.props.files));
     });
   };
