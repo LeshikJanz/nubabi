@@ -13,6 +13,7 @@ injectGlobal([
 
   #root {
     height: 100%;
+    background: #f8f9fc;
   }
 
   a {

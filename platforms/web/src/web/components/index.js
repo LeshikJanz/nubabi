@@ -12,3 +12,7 @@ export { default as UserInfoEditor } from './UserInfoEditor';
 export { default as ProfileDetails } from './ProfileDetails';
 export { default as NavBar } from './Navbar';
 export { default as SubscribeRightSidebar } from './SubscribeRightSidebar';
+export { default as CreditCard } from './CreditCard';
+export { default as Eft } from './Eft';
+export { default as IPay } from './IPay';
+export { default as Snapscan } from './Snapscan';

@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { SubscribeContainer, SubscribePages } from '../styled';
 import { Router, Route } from 'react-router-dom';
-import { SUBSCRIBE_ROUTES } from 'web/constants';
+import { SUBSCRIBE_ROUTES, CURRENT_PLAN } from 'web/constants';
 import { SettingsNavbar, SubscribeRightSidebar } from 'web/components';
 
 type Props = {
@@ -40,7 +40,7 @@ class Subscribe extends PureComponent<Props> {
               this.renderSubscribePage(page, match),
             )}
           </SubscribePages>
-          <SubscribeRightSidebar />
+          <SubscribeRightSidebar plan={CURRENT_PLAN} />
         </SubscribeContainer>
       </Router>
     );

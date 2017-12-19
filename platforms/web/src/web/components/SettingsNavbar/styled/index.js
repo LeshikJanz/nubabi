@@ -18,6 +18,7 @@ export const MenuItem = styled(Link)`
   border-bottom: 1px solid ${props => props.theme.colors.border};
   font-size: 17px;
   font-weight: 300;
+  padding-left: ${props => (props.icon ? 0 : '20px')};
   color: ${props => props.theme.colors.label};
   background-color: ${props =>
     props.isactive ? props.theme.colors.border : props.theme.colors.white};

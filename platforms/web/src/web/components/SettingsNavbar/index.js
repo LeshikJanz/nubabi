@@ -25,6 +25,7 @@ const renderMenuItem = (item, match, pathname, userData) =>
     })
   ) : (
     <MenuItem
+      icon={item.iconName}
       to={`${match.url}/${item.route}`}
       key={item.id}
       isactive={pathname === `${match.url}/${item.route}` ? 1 : 0}

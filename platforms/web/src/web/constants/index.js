@@ -1,10 +1,6 @@
 import React from 'react';
 import FacebookLogo from 'web/assets/images/facebook-logo.png';
-
-import CreditCard from 'web/bundles/subscribe/components/CreditCard';
-import Eft from 'web/bundles/subscribe/components/Eft';
-import IPay from 'web/bundles/subscribe/components/IPay';
-import Snapscan from 'web/bundles/subscribe/components/Snapscan';
+import { CreditCard, Eft, IPay, Snapscan } from 'web/components';
 
 const renderCreditCard = props => <CreditCard {...props} />;
 const renderEft = props => <Eft {...props} />;
@@ -96,3 +92,11 @@ export const SUBSCRIBE_ROUTES = [
     id: 'snapscan',
   },
 ];
+
+export const CURRENT_PLAN = {
+  title: 'Annual package',
+  price: 37.5,
+  billedAmount: 400,
+  monthsFree: 3,
+  paymentTotal: 400.0,
+};

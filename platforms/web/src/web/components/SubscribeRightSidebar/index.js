@@ -1,16 +1,60 @@
 // @flow
 import * as React from 'react';
-import { Flex } from 'grid-styled';
-import styled from 'styled-components';
+import {
+  RightSidebar,
+  PlanContainer,
+  Title,
+  PlanTitle,
+  Price,
+  R,
+  Asterisk,
+  PM,
+  Annually,
+  Free,
+  ChangePackage,
+  Total,
+  TotalaLabel,
+  TotalAmount,
+} from './styled';
 
-const RightSidebar = styled(Flex)`
-  flex-grow: 1;
-  max-width: 230px;
-  flex-direction: column;
-`;
+type Props = {
+  plan: {
+    billedAmount: number,
+    monthsFree: number,
+    paymentTotal: number,
+    price: number,
+    title: string,
+  },
+};
 
-const SubscribeRightSidebar = () => {
-  return <RightSidebar>RightSidebar</RightSidebar>;
+const renderCurrentPlan = plan => {
+  return (
+    <PlanContainer>
+      <PlanTitle>{plan.title}</PlanTitle>
+      <Price>
+        <R>R</R>
+        <Asterisk>*</Asterisk>
+        <PM>p/m</PM>
+        {plan.price.toFixed(2)}
+      </Price>
+      <Annually>{`*R${plan.billedAmount} Billed Annually`}</Annually>
+      <Free>{`${plan.monthsFree} months free!`}</Free>
+      <ChangePackage>Change Package</ChangePackage>
+      <Total>
+        <TotalaLabel>Payment total</TotalaLabel>
+        <TotalAmount>{`R${plan.paymentTotal.toFixed(2)}`}</TotalAmount>
+      </Total>
+    </PlanContainer>
+  );
+};
+
+const SubscribeRightSidebar = ({ plan }: Props) => {
+  return (
+    <RightSidebar>
+      <Title>Your subscription:</Title>
+      {renderCurrentPlan(plan)}
+    </RightSidebar>
+  );
 };
 
 export default SubscribeRightSidebar;
