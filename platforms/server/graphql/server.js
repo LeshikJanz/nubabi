@@ -2,14 +2,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphiqlExpress, graphqlExpress } from 'graphql-server-express';
-import { schema } from './schema';
 import admin from 'firebase-admin';
-import firebaseConnector from './connectors/firebaseConnector';
+import uuid from 'uuid';
 import fs from 'fs';
 import cors from 'cors';
+import { schema } from './schema';
+import firebaseConnector from './connectors/firebaseConnector';
 import { genLoaders } from './helpers/loaders';
 
 global.__DEV__ = process.env.NODE_ENV !== 'production';
+
 const debug = require('debug')('graphqlServer:server');
 const PORT = 8080;
 const serviceAccount = JSON.parse(
@@ -35,9 +37,15 @@ firebase.database.ServerValue = admin.database.ServerValue;
 
 const firebaseConn = firebaseConnector(firebase);
 
+const requestIdMiddleware = (req, res, next) => {
+  req.id = uuid();
+  next();
+};
+
 app.options('/graphql', cors());
 app.use(
   '/graphql',
+  requestIdMiddleware,
   bodyParser.json(),
   cors(),
   graphqlExpress(async request => {
@@ -62,9 +70,15 @@ app.use(
       }
     }
 
+    const logFunction = obj => {
+      if (obj && obj.key && obj.data) {
+        console.log(`[${request.id}]`, obj);
+      }
+    };
+
     return {
       schema,
-      logFunction: console.log.bind(console),
+      logFunction,
       context: {
         token,
         loaders,
