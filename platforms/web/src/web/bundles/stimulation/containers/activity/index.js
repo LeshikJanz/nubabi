@@ -1,11 +1,11 @@
-import Activity from '../../components/activity/index';
 import { gql, graphql } from 'react-apollo';
 import { compose, withHandlers, withState, lifecycle } from 'recompose';
 import path from 'ramda/src/path';
-import DisplayLoadingState from 'web/components/displayLoadingState';
-import { ActivityFragments } from '../../fragments/activity';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
+import DisplayLoadingState from 'web/components/displayLoadingState';
+import { ActivityFragments } from '../../fragments/activity';
+import Activity from '../../components/activity/index';
 
 export const viewActivityQuery = gql`
     query ViewActivity($babyId: ID!, $activityId: ID!) {

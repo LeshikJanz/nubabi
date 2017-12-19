@@ -2,12 +2,12 @@
 import { gql, graphql } from 'react-apollo';
 import { compose, withProps } from 'recompose';
 import path from 'ramda/src/path';
+import { withRouter } from 'react-router-dom';
 import DisplayLoadingState from 'web/components/displayLoadingState';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import HistoryList from '../../components/history/HistoryList';
 import { ActivityListFragment } from '../../fragments/activity';
 import { ActivityHistory } from '../../fragments/history';
-import { withRouter } from 'react-router-dom';
 
 const query = gql`
     query ActivityHistoryDetail($periodId: ID!, $babyId: ID!) {

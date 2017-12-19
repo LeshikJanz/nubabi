@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import iconMappings from 'web/common/iconMappings';
-import * as StimulationButtonStyled from '../styled/StimulationButtonStyled';
 import { withRouter } from 'react-router-dom';
+import * as StimulationButtonStyled from '../styled/StimulationButtonStyled';
 
 type Props = {
   button: StimulationButtonType,

@@ -1,6 +1,6 @@
-import Stimulation from '../components/index';
 import { compose, withHandlers } from 'recompose';
 import DisplayLoadingState from 'web/components/displayLoadingState';
+import Stimulation from '../components/index';
 
 export default compose(
   withHandlers({

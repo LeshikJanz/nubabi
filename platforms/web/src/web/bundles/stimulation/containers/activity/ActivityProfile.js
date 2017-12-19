@@ -2,8 +2,8 @@ import { gql, graphql } from 'react-apollo';
 import { compose, withHandlers } from 'recompose';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import { withRouter } from 'react-router-dom';
-import ActivityProfile from '../../components/activity/ActivityProfile';
 import { optimisticResponse } from 'core/helpers/graphqlUtils';
+import ActivityProfile from '../../components/activity/ActivityProfile';
 
 export default compose(
   graphql(
