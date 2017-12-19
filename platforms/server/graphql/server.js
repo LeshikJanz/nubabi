@@ -58,8 +58,6 @@ const formatError = err => {
 app.options('/graphql', cors());
 app.use(
   '/graphql',
-  Raven.requestHandler(),
-
   requestIdMiddleware,
   bodyParser.json(),
   cors(),
@@ -114,7 +112,6 @@ app.use(
       },
     };
   }),
-  Raven.errorHandler(),
 );
 
 const endpointURL = process.env.GCLOUD_PROJECT

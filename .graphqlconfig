@@ -9,18 +9,12 @@
           "Authorization": "${env:NUBABI_AUTH_TOKEN}"
         }
       },
-      "firebase": {
+      "prod": {
         "url": "http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql",
         "headers": {
           "Authorization": "${env:NUBABI_AUTH_TOKEN}"
          }
       },
-      "aws": {
-        "url": "https://79paqji348.execute-api.us-east-1.amazonaws.com/dev/graphql",
-        "headers": {
-          "Authorization": "${env:NUBABI_AUTH_TOKEN}"
-         }
-      }
     }
   }
 }
