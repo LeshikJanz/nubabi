@@ -1,41 +1,16 @@
 // @flow
-import type { ActivityHistoryItemFragment } from 'core/types';
 import React from 'react';
 import { ArrowRight } from 'web/assets/images';
-import moment from 'moment';
 import * as HistoryItemStyled from '../../styled/history/HistoryItemStyled';
 
 type Props = {
-  item: ActivityHistoryItemFragment,
+  weekName: string,
   handleClick: Function,
 };
 
-const getWeekName = (startDate, endDate) => {
-  const period = `${moment(startDate).format('D MMMM')} - ${moment(
-    endDate,
-  ).format('D MMMM YYYY')}`;
-  const dayDiff = moment().diff(moment(startDate), 'days');
-
-  if (dayDiff >= 0) {
-    return 'Current week';
-  }
-
-  if (dayDiff > 7) {
-    return 'Last week';
-  }
-
-  if (dayDiff > 14) {
-    return 'Two weeks ago';
-  }
-
-  return period;
-};
-
-const HistoryItem = ({ item, handleClick }: Props) => (
+const HistoryItem = ({ weekName, handleClick }: Props) => (
   <HistoryItemStyled.Wrapper onClick={handleClick}>
-    <HistoryItemStyled.Text>
-      {getWeekName(item.startDate, item.endDate)}
-    </HistoryItemStyled.Text>
+    <HistoryItemStyled.Text>{weekName}</HistoryItemStyled.Text>
     <ArrowRight />
   </HistoryItemStyled.Wrapper>
 );

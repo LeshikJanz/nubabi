@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import HistoryItem from './HistoryItem';
+import HistoryItem from '../../containers/history/HistoryItem';
 import * as HistoryStyled from '../../styled/history/index';
 
 type Props = {

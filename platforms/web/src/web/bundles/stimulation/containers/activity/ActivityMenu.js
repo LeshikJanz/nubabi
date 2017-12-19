@@ -10,7 +10,7 @@ import {
 import ActivityMenu from '../../components/activity/ActivityMenu';
 import { globalLoaderInit } from 'web/actions';
 import { connect } from 'react-redux';
-import FinishedActivityButton from '../../components/activity/FinishedActivityButton';
+import FinishedActivityButton from '../../containers/activity/FinishedActivityButton';
 
 const mapDispatchToProps = dispatch => ({
   runGlobalLoading: () => dispatch(globalLoaderInit),
