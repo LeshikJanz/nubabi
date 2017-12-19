@@ -79,6 +79,21 @@ export type LoadPricingSuccessAction = {
   payload: Array<Object>,
 };
 
+export type GlobalLoaderInitAction = {
+  type: 'LOADING_REQUEST/REQUEST',
+  payload: { useGlobalLoader: string },
+};
+
+export type GlobalLoaderDoneAction = {
+  type: 'LOADING_REQUEST/SUCCESS',
+  payload: { useGlobalLoader: string },
+};
+
+export type BlobalLoaderErrorAction = {
+  type: 'LOADING_REQUEST/ERROR',
+  payload: { useGlobalLoader: string },
+};
+
 export type Action =
   | LoginRequestAction
   | LoginSuccessAction
