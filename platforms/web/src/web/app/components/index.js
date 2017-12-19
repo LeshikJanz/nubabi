@@ -50,6 +50,9 @@ import {
   HistoryList,
   WeekActivities,
   BabyProfile,
+  Subscribe,
+  Login,
+  SignUp,
 } from 'web/bundles';
 
 type Props = {
@@ -162,6 +165,12 @@ const App = (props: Props) => (
           <AuthenticatedRoute
             path="/memories"
             component={Memories}
+            props={props}
+          />
+          <AuthenticatedRoute
+            exact
+            path="/babyprofile"
+            component={BabyProfile}
             props={props}
           />
           <AuthenticatedRoute

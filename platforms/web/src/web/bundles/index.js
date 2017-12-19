@@ -22,3 +22,6 @@ export {
   default as WeekActivities,
 } from './stimulation/containers/WeekActivities';
 export { default as BabyProfile } from './babyProfile/containers';
+export { default as Subscribe } from './subscribe';
+export { default as Login } from './login';
+export { default as SignUp } from './signUp';
