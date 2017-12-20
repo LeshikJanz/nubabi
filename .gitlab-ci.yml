@@ -5,6 +5,7 @@ stages:
   - test
   - build
   - deploy
+  - publish
 
 cache:
   paths:
@@ -100,3 +101,11 @@ deploy_graphql:
       fi
   variables:
     NUBABI_GRAPHQL_ENDPOINT: http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
+
+publish:
+  stage: publish
+  only:
+    - master
+  script:
+    - >
+      yarn release -y && git add . && git push origin master && git push --tags
