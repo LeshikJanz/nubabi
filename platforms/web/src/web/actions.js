@@ -2,17 +2,17 @@
 import type { Action } from 'web/types';
 
 export const globalLoaderInit = (): Action => ({
-  type: 'LOADING_REQUEST/REQUEST',
+  type: 'loading/REQUEST',
   payload: { useGlobalLoader: 'useGlobalLoader' },
 });
 
 export const globalLoaderSuccess = (): Action => ({
-  type: 'LOADING_REQUEST/SUCCESS',
+  type: 'loading/SUCCESS',
   payload: { useGlobalLoader: 'useGlobalLoader' },
 });
 
 export const globalLoaderError = (error: Error): Action => ({
-  type: 'LOADING_REQUEST/ERROR',
+  type: 'loading/ERROR',
   payload: {
     useGlobalLoader: 'useGlobalLoader',
     error,

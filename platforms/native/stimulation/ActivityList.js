@@ -7,7 +7,9 @@ import { compose } from 'ramda';
 import { gql } from 'react-apollo';
 import ActivityListItem from './ActivityListItem';
 import { PANEL_BACKGROUND } from 'core/themes/defaultTheme';
-import withPullToRefresh, { PullToRefreshProps } from '../components/withPullToRefresh';
+import withPullToRefresh, {
+  PullToRefreshProps,
+} from '../components/withPullToRefresh';
 
 type Props = {
   activities: Array<ActivityEdge>,

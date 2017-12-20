@@ -97,7 +97,7 @@ class NavBar extends PureComponent<Props> {
     return (
       <Wrapper width={1 / 4} is={Nav}>
         {baby &&
-          location.pathname === '/profile' && <ProfileHeader {...baby} />}
+        location.pathname === '/profile' && <ProfileHeader {...baby} />}
 
         <MenuWrapper>
           <MainMenu>
@@ -114,7 +114,13 @@ class NavBar extends PureComponent<Props> {
             <MenuItem>
               <MenuLink
                 to="/stimulation/weeks"
-                active={location.pathname.includes('/stimulation')}
+                active={
+                  location.pathname.includes('/stimulation') ||
+                  location.pathname.includes('/browse/skill') ||
+                  location.pathname.includes('/browse/category') ||
+                  location.pathname.includes('/activity') ||
+                  location.pathname.includes('/history')
+                }
               >
                 <IPuzzle /> Stimulation
               </MenuLink>

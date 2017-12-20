@@ -91,10 +91,14 @@ export const resolvers = {
   },
   Activity: {
     id: globalIdField(),
-    skillArea: (obj: RawActivity, _: mixed, { loaders: { skillArea } }: Context) => {
+    skillArea: (
+      obj: RawActivity,
+      _: mixed,
+      { loaders: { skillArea } }: Context,
+    ) => {
       return skillArea.load(obj.skill_area_id);
     },
-    expert: (obj: RawActivity, _: mixed, { loaders: { expert }}: Context) => {
+    expert: (obj: RawActivity, _: mixed, { loaders: { expert } }: Context) => {
       return expert.load(obj.expert_id);
     }, // eslint-disable-line dot-notation
     steps: (

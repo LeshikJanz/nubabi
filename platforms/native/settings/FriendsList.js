@@ -45,7 +45,7 @@ export class FriendsList extends PureComponent<Props> {
     const name = [user.firstName, user.lastName].join(' ');
     const nameText = isPending ? `${name} (Pending)` : name;
 
-    const nameStyle = t => isPending ? { color: t.colors.secondary } : {};
+    const nameStyle = t => (isPending ? { color: t.colors.secondary } : {});
 
     const initials = [user.firstName[0], user.lastName[0]].join('');
     const avatar = isPending ? (

@@ -7,10 +7,7 @@ import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
-import {
-  resetSettings,
-  setSettingsValue,
-} from 'core/settings/reducer';
+import { resetSettings, setSettingsValue } from 'core/settings/reducer';
 import { logout } from 'core/auth/actions';
 import theme, { NUBABI_RED } from 'core/themes/defaultTheme';
 import * as ActionSheet from './ActionSheet';

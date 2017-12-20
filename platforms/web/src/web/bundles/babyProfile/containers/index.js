@@ -1,16 +1,16 @@
-import BabyProfile from '../components/index';
 import { connect } from 'react-redux';
-import { compose, withHandlers } from 'recompose';
-import { graphql } from 'react-apollo';
-import { createBaby } from '../grapghQl/mutations/createBaby';
 import { withRouter } from 'react-router-dom';
 import path from 'ramda/src/path';
-import { getBabyQuery } from '../grapghQl/queries/getBaby';
-import { updateBaby } from '../grapghQl/mutations/updateBaby';
+import { compose, withHandlers } from 'recompose';
+import { graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
-import { babyForm } from '../grapghQl/fragments/babyForm';
 import { selectBaby } from 'core/babies/actions';
 import { handleError } from 'web/common/errorHandler';
+import { createBaby } from '../grapghQl/mutations/createBaby';
+import { getBabyQuery } from '../grapghQl/queries/getBaby';
+import { updateBaby } from '../grapghQl/mutations/updateBaby';
+import { babyForm } from '../grapghQl/fragments/babyForm';
+import BabyProfile from '../components/index';
 
 const mapStateToProps = state => ({
   babyEditForm: state.form.BabyForm && state.form.BabyForm.values,

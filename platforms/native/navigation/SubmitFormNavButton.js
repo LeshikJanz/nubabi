@@ -16,10 +16,7 @@ const Submitting = () => (
   <ActivityIndicator style={{ marginRight: 10, marginTop: -5 }} />
 );
 
-export const SubmitFormNavButton = ({
-  onSubmit,
-  text = 'Save',
-}: Props) => {
+export const SubmitFormNavButton = ({ onSubmit, text = 'Save' }: Props) => {
   return <RightNavButton onPress={onSubmit} text={text} />;
 };
 

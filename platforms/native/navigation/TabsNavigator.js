@@ -23,17 +23,17 @@ const navigationOptions: NavigationOptions = ({
   );
 
   const config: TabBarConfig = {
-      title: upperFirst(navigation.state.key),
-      headerMode: 'screen',
-      headerVisible: true,
-      headerStyle: {
-        backgroundColor: theme.colors.white,
-        shadowOpacity: 0.1,
-        ...childOptions.headerStyle,
-      },
-      headerLeft: getTabHeaders(navigation.navigate).left,
-      headerRight: getTabHeaders(navigation.navigate).right,
-      tabBarIcon: TabBarIcon,
+    title: upperFirst(navigation.state.key),
+    headerMode: 'screen',
+    headerVisible: true,
+    headerStyle: {
+      backgroundColor: theme.colors.white,
+      shadowOpacity: 0.1,
+      ...childOptions.headerStyle,
+    },
+    headerLeft: getTabHeaders(navigation.navigate).left,
+    headerRight: getTabHeaders(navigation.navigate).right,
+    tabBarIcon: TabBarIcon,
   };
 
   return config;

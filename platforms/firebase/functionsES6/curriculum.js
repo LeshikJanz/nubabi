@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const request = require("request-promise"),
-  moment = require("moment"),
-  logging = require("@google-cloud/logging")(),
-  functions = require("firebase-functions"),
-  errorReporter = require("./errorReporter");
+const request = require('request-promise'),
+  moment = require('moment'),
+  logging = require('@google-cloud/logging')(),
+  functions = require('firebase-functions'),
+  errorReporter = require('./errorReporter');
 
 exports.handler = event => {
   if (!event.data.exists()) {
@@ -31,21 +31,21 @@ exports.handler = event => {
   }
   return request({
     uri: `${NUBABI_API_URL}babies/${event.params.babyId}/activities`,
-    method: "POST",
+    method: 'POST',
     json: true,
     body: {
-      birth_date: birthDate.format("YYYY-MM-DD"),
-      week_born: weekBorn
+      birth_date: birthDate.format('YYYY-MM-DD'),
+      week_born: weekBorn,
     },
     headers: {
-      Authorization: `Bearer ${NUBABI_TOKEN}`
+      Authorization: `Bearer ${NUBABI_TOKEN}`,
     },
-    resolveWithFullResponse: true
+    resolveWithFullResponse: true,
   })
     .then(response => {
       if (response.statusCode >= 400) {
         reportError(new Error(`HTTP Error: ${response.statusCode}`), {
-          user: event.params.babyId
+          user: event.params.babyId,
         });
       }
     })

@@ -5,8 +5,8 @@ import { Screen } from '../components/Screen';
 import ActivityHistory from './ActivityHistory';
 
 type Props = {
-  navigation: NavigationProp;
-}
+  navigation: NavigationProp,
+};
 
 export class ActivityHistoryScreen extends PureComponent<Props> {
   static navigationOptions = {

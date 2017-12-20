@@ -80,17 +80,17 @@ export type LoadPricingSuccessAction = {
 };
 
 export type GlobalLoaderInitAction = {
-  type: 'LOADING_REQUEST/REQUEST',
+  type: 'loading/REQUEST',
   payload: { useGlobalLoader: string },
 };
 
 export type GlobalLoaderDoneAction = {
-  type: 'LOADING_REQUEST/SUCCESS',
+  type: 'loading/SUCCESS',
   payload: { useGlobalLoader: string },
 };
 
 export type BlobalLoaderErrorAction = {
-  type: 'LOADING_REQUEST/ERROR',
+  type: 'loading/ERROR',
   payload: { useGlobalLoader: string },
 };
 

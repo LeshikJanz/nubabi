@@ -1,6 +1,12 @@
 // @flow
 import React from 'react';
-import { StyleSheet, Text, TouchableHighlight, TouchableOpacity, View, } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import { NubabiIcon } from '../../components';
 import { NUBABI_RED } from 'core/themes/defaultTheme';
 import { formatAge } from 'core/helpers/formatAge';
@@ -24,21 +30,14 @@ export const NameAgeRow = ({ babyName, birthDate, onEditBaby }: Props) => (
       <View style={styles.backdropView}>
         <Text style={styles.babyName}>{babyName}</Text>
       </View>
-      <View
-        style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}
-      >
+      <View style={[styles.backdropView, { marginLeft: 25, marginRight: 25 }]}>
         <View style={styles.babyAgeBackground}>
-          <Text style={styles.babyAge}>
-            {formatAge(birthDate)}
-          </Text>
+          <Text style={styles.babyAge}>{formatAge(birthDate)}</Text>
         </View>
       </View>
     </View>
     <View style={styles.profileHeaderButtonView}>
-      <TouchableOpacity
-        onPress={onEditBaby}
-        style={styles.profileHeaderButton}
-      >
+      <TouchableOpacity onPress={onEditBaby} style={styles.profileHeaderButton}>
         <NubabiIcon
           style={[
             styles.profileHeaderButtonText,
