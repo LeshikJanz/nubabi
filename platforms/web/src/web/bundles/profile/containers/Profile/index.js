@@ -169,6 +169,6 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
-  requireBaby,
   displayLoadingState,
+  requireBaby,
 )(Profile);

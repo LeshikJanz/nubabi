@@ -34,6 +34,6 @@ export default compose(
       favoriteActivities: path(['viewer', 'baby', 'favoriteActivities'], data),
     }),
   }),
-  requireBaby,
   displayLoadingState,
+  requireBaby,
 )(Favorites);

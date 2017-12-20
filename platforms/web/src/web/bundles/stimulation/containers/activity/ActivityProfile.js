@@ -1,11 +1,11 @@
 import { gql, graphql } from 'react-apollo';
 import { compose, withHandlers } from 'recompose';
 import withCurrentBaby from 'web/components/withCurrentBaby';
-import { withRouter } from 'react-router-dom';
 import { optimisticResponse } from 'core/helpers/graphqlUtils';
 import ActivityProfile from '../../components/activity/ActivityProfile';
 
 export default compose(
+  withCurrentBaby,
   graphql(
     gql`
       mutation ToogleActivityFavorite($input: ToggleFavoriteInput!) {
@@ -42,20 +42,9 @@ export default compose(
       },
     },
   ),
-  withCurrentBaby,
-  withRouter,
   withHandlers({
     handlePrint: () => () => null,
-    refreshFavoriteActivity: () => ({ data }) => data,
-  }),
-  withCurrentBaby,
-  withHandlers({
-    handleFavorite: ({
-      activity,
-      currentBabyId,
-      toggleFavorite,
-      refreshFavoriteActivity,
-    }) => () => {
+    handleFavorite: ({ activity, currentBabyId, toggleFavorite }) => () => {
       const input = {
         id: activity.id,
         babyId: currentBabyId,
@@ -66,7 +55,7 @@ export default compose(
         variables: {
           input,
         },
-      }).then(refreshFavoriteActivity);
+      });
     },
   }),
 )(ActivityProfile);

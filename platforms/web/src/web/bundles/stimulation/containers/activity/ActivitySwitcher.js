@@ -40,7 +40,6 @@ export default compose(
       baby: path(['viewer', 'baby'], data),
     }),
   }),
-  requireBaby,
   graphql(
     gql`
         mutation SwoopActivity($input: SwoopActivityInput!) {
@@ -124,4 +123,5 @@ export default compose(
     },
   }),
   displayLoadingState,
+  requireBaby,
 )(ActivitySwitcher);

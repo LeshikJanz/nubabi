@@ -40,6 +40,6 @@ export default compose(
       activities: path(['viewer', 'baby', 'activities', 'edges'], data),
     }),
   }),
-  requireBaby,
   displayLoadingState,
+  requireBaby,
 )(WeekActivities);

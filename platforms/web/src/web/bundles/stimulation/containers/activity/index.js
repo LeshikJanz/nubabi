@@ -62,6 +62,6 @@ export default compose(
       }),
     },
   ),
-  requireBaby,
   displayLoadingState,
+  requireBaby,
 )(Activity);
