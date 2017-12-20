@@ -1,6 +1,4 @@
 // @flow
-// We will probably store this on a reducer at some point.
-/* global __DEV__: false */
 
 const config = {
   appName: process.env.NUBABI_APP_NAME || 'app',

@@ -22,6 +22,7 @@ import App from 'web/app';
 import registerServiceWorker from './registerServiceWorker';
 import { epics as appEpics } from './app/actions';
 import globalLoader from './app/reducer';
+import * as firebase from 'firebase';
 
 const routingMiddlware: Middleware = routerMiddleware((history: History));
 
@@ -34,6 +35,9 @@ const reportingMiddleware = configureReporting({
 const store = configureStore({
   initialState: {
     config,
+  },
+  platformDeps: {
+    firebase,
   },
   platformReducers: {
     navigation: routerReducer,
