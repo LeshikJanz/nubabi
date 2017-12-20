@@ -54,7 +54,7 @@ const appStartedEpic = (action$: any, deps: Deps) => {
     const unsubscribe = firebaseAuth().onAuthStateChanged(firebaseUser => {
       if (firebaseUser) {
         firebaseAuth()
-          .currentUser.getIdToken()
+          .currentUser.getIdToken(true)
           .then(token => {
             if (__DEV__) {
               axios
