@@ -85,3 +85,18 @@ deploy_dev:
     name: development
   except:
     - master
+
+deploy_graphql:
+  stage: deploy
+  script:
+    - >
+      if git diff HEAD^ HEAD --name-only|grep 'platforms/server'; then
+        yarn global add serverless
+        mkdir ~/.gcloud
+        export TERM=xterm
+        echo -E "$GCLOUD_KEYFILE_DEV" > ~/.gcloud/keyfile.json
+        echo -E "$FIREBASE_ADMIN_KEY_DEV" > ./platforms/server/graphql/nubabitest1-firebase-adminsdk-r7bmb-2f00516d5e.json
+        cd platforms/server/graphql && sls deploy -v
+      fi
+  variables:
+    NUBABI_GRAPHQL_ENDPOINT: http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
