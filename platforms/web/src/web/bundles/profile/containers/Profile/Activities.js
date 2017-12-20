@@ -3,6 +3,7 @@ import type { ActivityConnection } from 'core/types';
 import React, { PureComponent } from 'react';
 import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import formatPossessive from 'core/helpers/formatPossessive';
 import ActivityList from 'web/bundles/stimulation/containers/ActivityList';
 
@@ -26,7 +27,7 @@ const ActivitiesListTitle = styled(Box)`
   color: ${props => props.theme.colors.open.black0};
 `;
 
-const MoreLink = styled(Box)`
+const MoreLink = styled(Link)`
   font-size: 12px;
   color: ${props => props.theme.colors.primary};
   text-decoration: none;
@@ -41,9 +42,7 @@ class Activities extends PureComponent<Props> {
       <ActivitiesListWrapper>
         <ActivitiesListHeader justify="space-between" align="center">
           <ActivitiesListTitle is="h3">{title}</ActivitiesListTitle>
-          <MoreLink is="a" href="/profile">
-            See all activities
-          </MoreLink>
+          <MoreLink to="/stimulation/weeks">See all activities</MoreLink>
         </ActivitiesListHeader>
         <ActivityList activities={activities.edges} />
       </ActivitiesListWrapper>

@@ -136,21 +136,21 @@ class Profile extends PureComponent<Props> {
 }
 
 const query = gql`
-  query getBaby($id: ID!) {
-    viewer {
-      baby(id: $id) {
-        ...Profile
-        ...ProfileGrowth
-        ...ProfileActivities
-        ...RecentMemories
-      }
+    query getBaby($id: ID!) {
+        viewer {
+            baby(id: $id) {
+                ...Profile
+                ...ProfileGrowth
+                ...ProfileActivities
+                ...RecentMemories
+            }
+        }
     }
-  }
 
-  ${Profile.fragments.baby}
-  ${Profile.fragments.growth}
-  ${Profile.fragments.activities}
-  ${Profile.fragments.recentMemories}
+    ${Profile.fragments.baby}
+    ${Profile.fragments.growth}
+    ${Profile.fragments.activities}
+    ${Profile.fragments.recentMemories}
 `;
 
 export default compose(
