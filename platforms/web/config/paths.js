@@ -51,6 +51,6 @@ const paths = (module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
   core: resolveApp('../../core'),
-  server: resolveApp('../../platforms/server'),
   graphqlUtils: resolveApp('../../libs/graphql-utils'),
+  recursiveIterator: resolveApp('../../node_modules/recursive-iterator/src'),
 });

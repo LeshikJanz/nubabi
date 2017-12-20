@@ -99,7 +99,11 @@ module.exports = {
       // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
       // please link the files into your node_modules/ and let module-resolution kick in.
       // Make sure your source files are compiled, as they will not be processed in any way.
-      new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson, paths.core]),
+      new ModuleScopePlugin(paths.appSrc, [
+        paths.appPackageJson,
+        paths.core,
+        paths.recursiveIterator,
+      ]),
     ],
   },
   module: {
@@ -152,8 +156,8 @@ module.exports = {
             include: [
               paths.appSrc,
               paths.core,
-              paths.server,
               paths.graphqlUtils,
+              paths.recursiveIterator,
             ],
             exclude: [
               path.resolve(
