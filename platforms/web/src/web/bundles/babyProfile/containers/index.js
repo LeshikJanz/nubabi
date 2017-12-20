@@ -11,6 +11,7 @@ import { getBabyQuery } from '../grapghQl/queries/getBaby';
 import { updateBaby } from '../grapghQl/mutations/updateBaby';
 import { babyForm } from '../grapghQl/fragments/babyForm';
 import BabyProfile from '../components/index';
+import { setFields } from 'web/utils/setFields';
 
 const mapStateToProps = state => ({
   babyEditForm: state.form.BabyForm && state.form.BabyForm.values,
@@ -53,8 +54,8 @@ export default compose(
   }),
   graphql(updateBaby, {
     props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
-      handleEditBaby: () => {
-        mutate({ variables: { input: filter(babyForm.form, babyEditForm) } })
+      handleEditBaby: () =>
+        mutate({ variables: { input: setFields(babyForm, babyEditForm) } })
           .then(({ data }) => {
             const updatedBaby = path(['updateBaby', 'edge', 'node'], data);
             if (updatedBaby) {
@@ -64,8 +65,7 @@ export default compose(
               handleError(new Error('Baby has not been updated'));
             }
           })
-          .catch(handleError);
-      },
+          .catch(handleError),
     }),
     options: {
       refetchQueries: ['Profile', 'getBabies'],

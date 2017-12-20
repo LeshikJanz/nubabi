@@ -8,6 +8,7 @@ import DropzoneField from 'web/elements/DropzoneField';
 import BabyRadio from './BabyRadio';
 import { ButtonContainer, RedButton } from './StepOne';
 import { required } from '../../utils/validation';
+import { RELATIONSHIPS } from 'web/constants';
 
 const BabyInfoContainer = styled(Flex)`
   background-color: white;
@@ -67,10 +68,7 @@ let BabyEditForm = ({ handleSubmit, invalid }: Props) => (
         <Selector
           name="relationship"
           placeholder="My relationship"
-          options={[
-            { id: 1, value: 'Mother', label: 'Mother' },
-            { id: 2, value: 'Father', label: 'Father' },
-          ]}
+          options={RELATIONSHIPS}
         />
 
         <Field

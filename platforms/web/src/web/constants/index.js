@@ -100,3 +100,13 @@ export const CURRENT_PLAN = {
   monthsFree: 3,
   paymentTotal: 400.0,
 };
+
+export const RELATIONSHIPS = [
+  { id: 1, value: 'Parent', label: 'Parent' },
+  { id: 2, value: 'Grandparent', label: 'Grandparent' },
+  { id: 3, value: 'Guardian', label: 'Guardian' },
+  { id: 4, value: 'Relative', label: 'Relative' },
+  { id: 5, value: 'Nanny', label: 'Nanny' },
+  { id: 6, value: 'AuPair', label: 'AuPair' },
+  { id: 7, value: 'Other', label: 'Other' },
+];
