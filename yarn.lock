@@ -10579,6 +10579,10 @@ react-native-spinkit@^1.1.1:
   dependencies:
     prop-types "^15.5.8"
 
+react-native-store-review@^0.1.3:
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/react-native-store-review/-/react-native-store-review-0.1.3.tgz#55929cd95bcc82fd1f25da963e1eb406739ac23a"
+
 react-native-svg@^5.4.2:
   version "5.5.1"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-5.5.1.tgz#633d882077f048f05c721ebb793cd073e846ba1f"

@@ -11,6 +11,7 @@ import { isEditable } from '../shared/forms';
 type Props = {
   children: any,
   leftIcon?: string,
+  leftIconStyle?: Object,
   iconColor?: string,
   avatarLeft?: React.Element<*>,
   rightToggle?: boolean,
@@ -46,7 +47,11 @@ class ListItem extends PureComponent {
     return <ListItemArrow />;
   }
 
-  renderIcon(iconName: string, color: string = theme.colors.secondary) {
+  renderIcon(
+    iconName: string,
+    color: string = theme.colors.secondary,
+    iconStyle = {},
+  ) {
     return (
       <Box
         alignItems="center"
@@ -54,7 +59,7 @@ class ListItem extends PureComponent {
         padding={0}
         marginRight={0.5}
         marginTop={0.1}
-        style={() => ({ width: 20 })}
+        style={() => ({ width: 20, ...iconStyle })}
       >
         <Icon color={color} size={20} name={iconName} />
       </Box>
@@ -89,9 +94,8 @@ class ListItem extends PureComponent {
 
   render() {
     const {
-      style,
-      children,
       leftIcon,
+      leftIconStyle,
       borderWidth = 1,
       borderColor = 'separator',
       backgroundColor = 'white',
@@ -101,7 +105,6 @@ class ListItem extends PureComponent {
       onPress,
       rightToggle,
       padding = 1,
-      onRightTogglePress,
     } = this.props;
 
     const borders = last ? { borderBottomWidth: borderWidth } : {};
@@ -123,7 +126,8 @@ class ListItem extends PureComponent {
       <Box {...containerProps}>
         <Box flexDirection="row">
           {avatarLeft && this.renderLeftAvatar(avatarLeft)}
-          {leftIcon && this.renderIcon(leftIcon, this.props.iconColor)}
+          {leftIcon &&
+            this.renderIcon(leftIcon, this.props.iconColor, leftIconStyle)}
 
           <Box flex={1} justifyContent="center">
             {this.renderMainSection()}

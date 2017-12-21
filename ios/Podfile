@@ -18,6 +18,8 @@ target 'NuBabiMobile' do
   pod "FBSDKShareKit";
   pod "react-native-fbsdk", :path => '../platforms/native/node_modules/react-native-fbsdk/ios'
 
+  pod 'RNStoreReview', :path => '../node_modules/react-native-store-review/ios'
+
   pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
 	pod 'React', :path => '../node_modules/react-native', :subspecs => [
 		'BatchedBridge', # Required For React Native 0.45.0+

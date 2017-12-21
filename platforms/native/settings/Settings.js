@@ -7,13 +7,11 @@ import { compose, path } from 'ramda';
 import { gql, graphql } from 'react-apollo';
 import { filter } from 'graphql-anywhere';
 import { Box, List, ListItem, ListItemSeparator, Text } from '../components';
-import {
-  resetSettings,
-  setSettingsValue,
-} from 'core/settings/reducer';
+import { resetSettings, setSettingsValue } from 'core/settings/reducer';
 import { logout } from 'core/auth/actions';
 import theme, { NUBABI_RED } from 'core/themes/defaultTheme';
 import * as ActionSheet from './ActionSheet';
+import RateApp from '../components/RateApp';
 import UserProfileTrigger from './UserProfileTrigger';
 
 type Props = {
@@ -145,6 +143,7 @@ export class Settings extends Component {
             <Text color="secondary">Height</Text>
           </ListItem>
           <Box contentSpacing />
+          <RateApp />
           <ListItem onPress={this.props.resetSettings} last>
             <Text color="primary">Reset all settings</Text>
           </ListItem>
