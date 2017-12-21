@@ -142,6 +142,5 @@ publish:
   only:
     - master
   script:
-    - >
-      yarn global add lerna
-      yarn release -yes && git add -u . && git push origin master && git push --tags
+    - yarn global add lerna
+    - yarn release -yes && git add -u . && git push origin master && git push --tags
