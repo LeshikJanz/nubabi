@@ -40,10 +40,11 @@ const StepTwoButtonContainer = styled(ButtonContainer)`
 type Props = {
   handleSubmit: Function,
   invalid: boolean,
+  dirty: boolean,
 };
 
 /* eslint-disable import/no-mutable-exports */
-let BabyEditForm = ({ handleSubmit, invalid }: Props) => (
+let BabyEditForm = ({ handleSubmit, invalid, dirty }: Props) => (
   <form onSubmit={handleSubmit}>
     <BabyInfoContainer>
       <Field name="avatar" component={DropzoneField} />
@@ -101,7 +102,7 @@ let BabyEditForm = ({ handleSubmit, invalid }: Props) => (
     </BabyInfoContainer>
 
     <StepTwoButtonContainer>
-      <RedButton type="primary" disabled={invalid}>
+      <RedButton type="primary" disabled={!dirty || invalid}>
         DONE
       </RedButton>
     </StepTwoButtonContainer>

@@ -44,7 +44,7 @@ const BabySelected = styled.span`
 `;
 
 const BabiesListWrapper = styled(Menu)`
-  padding-top: 20px;
+  padding-top: 30px;
   background: ${props => props.theme.colors.white};
   border: 1px solid ${props => props.theme.colors.open.white2};
   border-top: none;
@@ -75,6 +75,7 @@ const BabiesListItem = styled(Menu.Link)`
 
   &:hover {
     color: ${props => props.theme.colors.primary};
+    text-decoration: none;
   }
 
   &:last-child {
@@ -99,19 +100,30 @@ const BabyProfileImage = styled.div`
   background-size: cover;
   background-position: center;
   z-index: 3;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.15);
 `;
 
-const BabyImage = styled(Box)`
-  width: 40px;
-  height: 40px;
+const BabyImage = styled.div`
+  background-image: url(${props => props.image});
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 100%;
+`;
+
+const BabyImageContainer = styled(Box)`
+  width: 55px;
+  height: 55px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 25px 0 0;
   border: 1px solid ${props => props.theme.colors.white2};
   border-radius: 100%;
+  padding: 5px;
 
   > img {
+    height: 100%;
     max-width: 100%;
   }
 `;
@@ -119,6 +131,7 @@ const BabyImage = styled(Box)`
 const BabyName = styled(Box)`
   font-size: 16px;
   font-weight: 400;
+  text-decoration: normal;
 `;
 
 const modalStyles = {
@@ -130,7 +143,7 @@ const modalStyles = {
   content: {
     minWidth: '250px',
     position: 'absolute',
-    top: '48px',
+    top: '51px',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
@@ -139,6 +152,7 @@ const modalStyles = {
     borderRadius: '0',
     padding: '0',
     transform: 'translateX(-50%)',
+    boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.25)',
   },
 };
 
@@ -225,12 +239,12 @@ class Select extends Component<Props> {
                   key={node.id}
                   onClick={() => this.handleSelect(node.id)}
                 >
-                  <BabyImage>
+                  <BabyImageContainer>
                     {(node.avatar &&
                       node.avatar.url && (
-                        <img src={node.avatar.url} alt={node.nam} />
+                        <BabyImage image={node.avatar && node.avatar.url} />
                       )) || <PersonDefaultIcon />}
-                  </BabyImage>
+                  </BabyImageContainer>
                   <BabyName>{node.name}</BabyName>
                 </BabiesListItem>
               ))}

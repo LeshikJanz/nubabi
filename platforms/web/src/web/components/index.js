@@ -16,3 +16,4 @@ export { default as CreditCard } from './CreditCard';
 export { default as Eft } from './Eft';
 export { default as IPay } from './IPay';
 export { default as Snapscan } from './Snapscan';
+export { default as BackButton } from './BackButton';

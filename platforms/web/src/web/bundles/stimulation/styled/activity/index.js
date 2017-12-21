@@ -10,14 +10,5 @@ export const Wrapper = styled(Flex)`
 
 export const BackButton = styled.div`
   position: absolute;
-  cursor: pointer;
   top: -40px;
-  color: darkblue;
-  opacity: 0.9;
-
-  &:hover {
-    text-decoration: underline;
-    opacity: 1;
-    transition: all 0.2s;
-  }
 `;

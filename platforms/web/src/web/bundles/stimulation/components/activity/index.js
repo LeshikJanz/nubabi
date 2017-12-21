@@ -8,6 +8,7 @@ import ActivitySkittles from './ActivitySkittles';
 import ActivityStatus from '../../containers/activity/ActivityStatus';
 import ActivitySwitcher from '../../containers/activity/ActivitySwitcher';
 import * as ActivityStyled from '../../styled/activity';
+import { BackButton } from 'web/components';
 
 type Props = {
   activity: ActivityConnection,
@@ -17,8 +18,8 @@ type Props = {
 
 const Activity = ({ activity, handleBackRedirect, isSwitchable }: Props) => (
   <ActivityStyled.Wrapper>
-    <ActivityStyled.BackButton onClick={handleBackRedirect}>
-      Back
+    <ActivityStyled.BackButton>
+      <BackButton name="Back" handleClick={handleBackRedirect} />
     </ActivityStyled.BackButton>
     <ActivityProfile activity={activity} />
     <ActivityExpert {...activity} />
