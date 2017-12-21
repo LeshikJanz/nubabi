@@ -2,15 +2,23 @@
 import type { Expert } from 'core/types';
 import React from 'react';
 import { InfoIcon } from 'web/assets/images';
-import ReactTooltip from 'react-tooltip';
 import * as ActivityExpertStyled from '../../styled/activity/ActivityExpertStyled';
+import { Tooltip } from 'web/elements';
+import { compose, withState } from 'recompose';
 
 type Props = {
   expert: Expert,
   introduction: string,
+  isTooltipOpen: boolean,
+  handleTooltip: Function,
 };
 
-const ActivityExpert = ({ expert, introduction }: Props) => (
+const ActivityExpert = ({
+  expert,
+  introduction,
+  isTooltipOpen,
+  handleTooltip,
+}: Props) => (
   <ActivityExpertStyled.Wrapper>
     <ActivityExpertStyled.Heading>
       <ActivityExpertStyled.HeadingText>
@@ -24,14 +32,21 @@ const ActivityExpert = ({ expert, introduction }: Props) => (
         {expert.name} <br />
         {expert.discipline}
       </ActivityExpertStyled.FooterText>
-      <div data-tip="React-tooltip">
-        <InfoIcon />
-      </div>
-      <ReactTooltip place="bottom" type="warning" effect="solid">
-        {expert.biography}
-      </ReactTooltip>
+      <ActivityExpertStyled.TooltipWrapper>
+        <InfoIcon onClick={handleTooltip} />
+        <Tooltip
+          isOpen={isTooltipOpen}
+          handleOpen={handleTooltip}
+          width="345"
+          height="192"
+        >
+          {expert.biography}
+        </Tooltip>
+      </ActivityExpertStyled.TooltipWrapper>
     </ActivityExpertStyled.Footer>
   </ActivityExpertStyled.Wrapper>
 );
 
-export default ActivityExpert;
+export default compose(withState('isTooltipOpen', 'handleTooltip', false))(
+  ActivityExpert,
+);

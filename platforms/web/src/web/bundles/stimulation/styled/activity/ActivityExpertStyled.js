@@ -29,6 +29,14 @@ export const Icon = styled.img`
   max-height: 40px;
 `;
 
+export const TooltipWrapper = styled.div`
+  position: relative;
+
+  > svg {
+    cursor: pointer;
+  }
+`;
+
 export const FooterText = styled.div`
   ${props => props.theme.text.small};
 `;
@@ -44,22 +52,6 @@ export const Footer = styled(Flex)`
 
     &:hover {
       opacity: 1;
-    }
-  }
-
-  .__react_component_tooltip {
-    max-width: 345px;
-    background-color: #fff !important;
-    border: solid 1px ${props => props.theme.colors.open.white2};
-    padding: 16px;
-    line-height: 1.71;
-    color: ${props => props.theme.colors.open.gray6b} !important;
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
-    margin-top: 15px !important;
-
-    &.type-warning.place-bottom:after {
-      border-bottom-color: #fff !important;
-      filter: drop-shadow(rgba(0, 0, 0, 0.3) 0 -3px 5px);
     }
   }
 `;

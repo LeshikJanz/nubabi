@@ -16,3 +16,4 @@ export { default as RadioForInput } from './RadioForInput';
 export { default as MenuProfileDetails } from './MenuProfileDetails';
 export { default as Icon } from './Icon';
 export { default as Relative } from './Relative';
+export { default as Tooltip } from './Tooltip';
