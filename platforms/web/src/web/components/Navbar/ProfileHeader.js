@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import Modal from 'react-modal';
 import onClickOutside from 'react-onclickoutside';
-
+import { Link } from 'react-router-dom';
 import IWeight from 'web/assets/images/icons/weight.svg';
 import IHeight from 'web/assets/images/icons/height.svg';
 import IEdit from 'web/assets/images/icons/edit.svg';
@@ -82,6 +82,9 @@ const Footer = styled(Flex)`
   color: ${props => props.theme.colors.secondary};
   background: ${props => props.theme.colors.white};
   border-bottom: 1px solid ${props => props.theme.colors.open.white2};
+  position: relative;
+  font-family: sans-serif;
+  height: 55px;
 `;
 
 const FooterItem = styled(Flex)`
@@ -114,7 +117,29 @@ const Separator = styled.span`
   border-right: 1px solid ${props => props.theme.colors.open.white2};
 `;
 
-const EditProfileButton = styled(Box)``;
+const EditProfileButton = styled(Link)`
+  position: absolute;
+  right: 30px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 35px;
+  width: 138px;
+  border-radius: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid ${props => props.theme.colors.open.gray1};
+  color: ${props => props.theme.colors.open.secondary};
+  text-transform: uppercase;
+  font-weight: 300;
+  font-size: 13px;
+  padding-top: 1px;
+
+  &:hover {
+    text-decoration: none;
+  }
+`;
 
 const PhotoActionsList = styled.ul`
   min-width: 210px;
@@ -217,9 +242,6 @@ class ProfileHeader extends Component<Props> {
     this.state = {
       modalIsOpen: false,
     };
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
   }
 
   handleClickOutside(e) {
@@ -227,16 +249,16 @@ class ProfileHeader extends Component<Props> {
     this.closeModal();
   }
 
-  openModal() {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
-  }
+  };
 
-  closeModal() {
+  closeModal = () => {
     this.setState({ modalIsOpen: false });
-  }
+  };
 
   render() {
-    const { coverImage, dob, name, weight, height } = this.props;
+    const { coverImage, dob, name, weight, height, id } = this.props;
 
     return (
       <Box width={1} is={Header}>
@@ -246,7 +268,6 @@ class ProfileHeader extends Component<Props> {
           className="ProfileHeaderMain"
         >
           {' '}
-          {/* Be careful! Modal depend on className */}
           {this.state.modalIsOpen && (
             <PhotoChangeIcon>
               <ICamera />
@@ -303,7 +324,7 @@ class ProfileHeader extends Component<Props> {
             </span>
           </FooterItem>
 
-          <EditProfileButton ml="auto" is={Button}>
+          <EditProfileButton to={`/babyprofile/${id}`} ml="auto" is={Button}>
             Edit profile
           </EditProfileButton>
         </Footer>
