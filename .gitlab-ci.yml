@@ -1,40 +1,42 @@
 image: node:latest
 
 stages:
-  - set_version
+  - setup
   - test
   - build
   - deploy
   - publish
 
-cache:
-  paths:
-    - node_modules/
-  key: “$CI_BUILD_REPO-$CI_COMMIT_REF_SLUG”
-
-before_script:
-  - >
-    if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
-      export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
-      export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
-      yarn install
-    fi
-
-set_dev_app_version:
-  stage: set_version
+yarn_install:
+  stage: setup
   script:
     - >
       if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
+        export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
+        export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
+        yarn install
+      fi
+  cache:
+    paths:
+      - node_modules/
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+
+set_dev_app_version:
+  stage: setup
+  script:
+    - >
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web'; then
         export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA
       fi
   except:
     - master
 
 set_prod_app_version:
-  stage: set_version
+  stage: setup
   script:
     - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web'; then
         export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID
       fi
   only:
@@ -47,17 +49,29 @@ run_tests:
       if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
         yarn web:test
       fi
+  cache:
+    paths:
+      - node_modules/
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+    policy: pull
 
 build:
   stage: build
   script:
     - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
+      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web'; then
         yarn web:build
       fi
   artifacts:
     paths:
       - platforms/web/build
+  cache:
+    paths:
+      - node_modules/
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+    policy: pull
 
 deploy_staging:
   stage: deploy
@@ -70,6 +84,12 @@ deploy_staging:
       fi
   environment:
     name: staging
+  cache:
+    paths:
+      - node_modules/
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+    policy: pull
   only:
     - master
 
@@ -84,13 +104,17 @@ deploy_dev:
       fi
   environment:
     name: development
+  cache:
+    paths:
+      - node_modules/
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+    policy: pull
   except:
     - master
 
 deploy_graphql:
   stage: deploy
-  only:
-    - master
   script:
     - >
       if git diff HEAD^ HEAD --name-only|grep 'platforms/server'; then
@@ -101,6 +125,15 @@ deploy_graphql:
         echo -E "$FIREBASE_ADMIN_KEY_DEV" > ./platforms/server/graphql/nubabitest1-firebase-adminsdk-r7bmb-2f00516d5e.json
         cd platforms/server/graphql && sls deploy -v
       fi
+  dependencies: []
+  cache:
+    paths:
+      - node_modules/
+    key: "$CI_COMMIT_REF_NAME"
+    untracked: true
+    policy: pull
+  only:
+    - master
   variables:
     NUBABI_GRAPHQL_ENDPOINT: http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
 
@@ -110,4 +143,4 @@ publish:
     - master
   script:
     - >
-      yarn release --yes && git add -u . && git push origin master && git push --tags
+      yarn release -yes && git add -u . && git push origin master && git push --tags
