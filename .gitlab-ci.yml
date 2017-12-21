@@ -89,6 +89,8 @@ deploy_dev:
 
 deploy_graphql:
   stage: deploy
+  only:
+    - master
   script:
     - >
       if git diff HEAD^ HEAD --name-only|grep 'platforms/server'; then
