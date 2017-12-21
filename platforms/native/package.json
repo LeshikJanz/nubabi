@@ -1,6 +1,6 @@
 {
   "name": "nubabi-native",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "private": true,
   "scripts": {
     "postinstall": "mv ../../node_modules/victory-* node_modules/"
@@ -15,7 +15,7 @@
     "hoist-non-react-statics": "^1.2.0",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
-    "nubabi-core": "^2.0.0",
+    "nubabi-core": "^2.0.1",
     "pluralize": "^4.0.0",
     "prop-types": "^15.6.0",
     "ramda": "^0.24.1",

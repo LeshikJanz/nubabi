@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.1"></a>
+## [2.0.1](https://gitlab.com/nubabi/mobile/compare/nubabi-core@2.0.0...nubabi-core@2.0.1) (2017-12-21)
+
+
+### Bug Fixes
+
+* force refresh on token accessor ([56aeb3b](https://gitlab.com/nubabi/mobile/commit/56aeb3b))
+
+
+
+
 <a name="2.0.0"></a>
 # [2.0.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@1.4.0...nubabi-core@2.0.0) (2017-12-19)
 

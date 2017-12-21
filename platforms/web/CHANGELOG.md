@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.8"></a>
+## [1.1.8](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.1.7...nubabi-web@1.1.8) (2017-12-21)
+
+
+### Bug Fixes
+
+* **web:** transpile recursive-iterator, remove server ([2ebd9fa](https://gitlab.com/nubabi/mobile/commit/2ebd9fa))
+
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.1.6...nubabi-web@1.1.7) (2017-12-19)
 
