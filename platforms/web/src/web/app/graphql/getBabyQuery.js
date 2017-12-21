@@ -13,6 +13,7 @@ export const getBabyQuery = gql`
           url
         }
         name
+        dob
         weight
         height
       }

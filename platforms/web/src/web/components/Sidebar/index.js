@@ -60,7 +60,11 @@ const PanelBody = styled.div`
   font-size: 12px;
 
   > a {
-    color: ${props => props.theme.colors.open.black0};
+    color: ${props => props.theme.colors.secondary};
+
+    &:hover {
+      color: ${props => props.theme.colors.open.black0};
+    }
   }
 `;
 

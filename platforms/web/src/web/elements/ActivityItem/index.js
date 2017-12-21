@@ -78,6 +78,20 @@ const ActionArea = styled(Flex)`
   }
 `;
 
+const Introduction = styled.div`
+  position: absolute;
+  font-size: 12px;
+  padding-top: 10px;
+  max-width: 420px;
+  min-height: 35px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  line-height: 17px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
+
 class ActivityItem extends PureComponent<Props> {
   render() {
     const { activity, handleClick } = this.props;
@@ -95,6 +109,7 @@ class ActivityItem extends PureComponent<Props> {
             <div>
               <h4>{activity.skillArea.name}</h4>
               <ActivityName>{activity.name}</ActivityName>
+              <Introduction>{activity.introduction}</Introduction>
             </div>
             <SkillIcon>
               <img
