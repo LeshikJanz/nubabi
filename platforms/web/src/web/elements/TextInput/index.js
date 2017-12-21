@@ -31,11 +31,10 @@ const Label = styled.span`
   font-family: sans-serif;
   font-size: 10px;
   font-weight: 300;
-
   color: ${props =>
     props.touched && (props.error || props.warning)
       ? props.theme.colors.open.red1
-      : props.theme.colors.grey};
+      : props.theme.colors.gray};
 `;
 
 const Input = styled.input`
@@ -45,9 +44,10 @@ const Input = styled.input`
       props.touched && (props.error || props.warning)
         ? props.theme.colors.open.red1
         : props.theme.colors.border};
-  color: ${props => props.theme.colors.grey};
+  color: ${props => props.theme.colors.open.label};
   padding: 5px 0 5px 0;
   font-weight: 300;
+  font-family: SF Pro Text, sans-serif;
 
   &:focus {
     outline: none;

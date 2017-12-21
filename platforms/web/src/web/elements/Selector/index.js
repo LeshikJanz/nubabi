@@ -16,17 +16,30 @@ const InputContainer = styled(Flex)`
   flex-direction: column;
   width: 100%;
   max-width: 400px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const RelationshipSelector = styled(Select)`
-  background-color: red;
   font-family: sans-serif;
   font-weight: 300;
+
+  &: focus {
+    outline: none;
+  }
+
+  &.is-focused:not(.is-open) > .Select-control {
+    border-color: transparent;
+    border-bottom: 1px solid ${props => props.theme.colors.border};
+    box-shadow: none;
+  }
 
   & .Select-control {
     border: none;
     border-radius: 0;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid ${props => props.theme.colors.border};
     height: 30px;
 
     & > *:last-child {
@@ -51,11 +64,15 @@ const RelationshipSelector = styled(Select)`
 
   & .Select-value {
     padding-left: 0 !important;
+
+    &:focus {
+      outline: none;
+    }
   }
 `;
 
 const Label = styled.span`
-  color: #ccc;
+  color: ${props => props.theme.colors.gray};
   font-family: sans-serif;
   font-size: 10px;
   font-weight: 300;
@@ -65,10 +82,12 @@ export const Selector = ({ placeholder, options, name }: Props) => {
   const reactSelect = ({ input }: *) => (
     <RelationshipSelector
       {...input}
+      clearable={false}
       value={input.value}
       onChange={value => input.onChange(value)}
       onBlur={() => input.onBlur(input.value)}
       options={options}
+      searchable={false}
     />
   );
 
