@@ -1,12 +1,8 @@
 // @flow
-import type {
-  ActivityConnection,
-  ActivityHistoryItemFragment,
-} from 'core/types';
+import type { ActivityConnection } from 'core/types';
 import React from 'react';
 import * as ActivitiesStyled from '../../styled/ActivitiesStyled';
 import ActivityList from '../../containers/ActivityList';
-import moment from 'moment';
 import styled from 'styled-components';
 
 const HistoryWrapper = styled.div`
@@ -15,25 +11,23 @@ const HistoryWrapper = styled.div`
 
 type Props = {
   activities: ActivityConnection[],
-  activeHistory: ActivityHistoryItemFragment,
-  location: { pathname: string },
+  timeStamp: string,
 };
 
-const HistoryList = ({
-  activities,
-  activeHistory,
-  location: { pathname },
-}: Props) => (
+const HistoryList = ({ activities, timeStamp }: Props) => (
   <HistoryWrapper>
     <ActivitiesStyled.ListWrapper>
       <ActivitiesStyled.ListHeader justify="space-between" align="center">
         <ActivitiesStyled.ListTitle is="h3">
-          {moment(activeHistory.startDate).format('DD MMMM')} -{' '}
-          {moment(activeHistory.endDate).format('DD MMMM YYYY')}
+          {timeStamp}
         </ActivitiesStyled.ListTitle>
       </ActivitiesStyled.ListHeader>
 
-      <ActivityList activities={activities.edges} backLink={pathname} />
+      <ActivityList
+        activities={activities}
+        backLink="/stimulation/history"
+        backLinkName="Back to History"
+      />
     </ActivitiesStyled.ListWrapper>
   </HistoryWrapper>
 );

@@ -1,5 +1,11 @@
 import { gql, graphql } from 'react-apollo';
-import { compose, withHandlers, withState, lifecycle } from 'recompose';
+import {
+  compose,
+  withHandlers,
+  withState,
+  lifecycle,
+  withProps,
+} from 'recompose';
 import path from 'ramda/src/path';
 import withCurrentBaby from 'web/components/withCurrentBaby';
 import requireBaby from 'web/components/requireBaby';
@@ -30,23 +36,29 @@ export default compose(
   }),
   withHandlers({
     handleBackRedirect: ({ history, backLink }) => () =>
-      backLink ? history.push(backLink) : history.goBack(),
+      backLink ? history.push(backLink) : history.push('/stimulation/weeks'),
   }),
+  withProps(({ location }) => ({
+    backLinkName:
+      (location.state && location.state.backLinkName) ||
+      "Back to Week's activities",
+  })),
   graphql(
     gql`
       query ViewActivity($babyId: ID!, $activityId: ID!) {
-          viewer {
-              baby(id: $babyId) {
-                  id
-                  name
-                  activity(id: $activityId) {
-                      isFavorite
-                      ...Activity
-                  }
-              }
+        viewer {
+          baby(id: $babyId) {
+            id
+            name
+            activity(id: $activityId) {
+              isFavorite
+              ...Activity
+            }
           }
+        }
       }
-  ${ActivityFragments.activity}`,
+      ${ActivityFragments.activity}
+    `,
     {
       options: ({ currentBabyId, match }) => ({
         variables: {

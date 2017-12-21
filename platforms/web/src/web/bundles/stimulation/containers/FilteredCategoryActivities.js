@@ -5,29 +5,30 @@ import displayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { ActivityListFragment } from '../fragments/activity';
 import { toGlobalId } from 'graphql-relay';
-import showNoContentViewIf from '../../../components/showNoContentViewIf';
+import { withRouter } from 'react-router-dom';
 
 const query = gql`
-    query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
-        viewer {
-            allActivities(first: 15, after: $cursor, filter: $filter) {
-                edges {
-                    node {
-                        ...ActivityList
-                    }
-                }
-                pageInfo {
-                    endCursor
-                    hasNextPage
-                }
-            }
+  query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
+    viewer {
+      allActivities(first: 15, after: $cursor, filter: $filter) {
+        edges {
+          node {
+            ...ActivityList
+          }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
     }
-    ${ActivityListFragment.activities}
+  }
+  ${ActivityListFragment.activities}
 `;
 
 export default compose(
   withState('isFetching', 'handleFetch', false),
+  withRouter,
   graphql(query, {
     options: ({ match }) => ({
       variables: {
@@ -97,6 +98,5 @@ export default compose(
   withProps(({ category }) => ({
     categoryName: category && category.node ? category.node.name : category,
   })),
-  showNoContentViewIf(props => !props.activities.length),
   displayLoadingState,
 )(FilteredActivities);

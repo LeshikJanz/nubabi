@@ -4,6 +4,6 @@ import { withRouter } from 'react-router-dom';
 import ActivityList from '../components/ActivityList';
 
 export default compose(
-  showNoContentViewIf(props => !props.activities),
+  showNoContentViewIf(props => !props.activities.length),
   withRouter,
 )(ActivityList);

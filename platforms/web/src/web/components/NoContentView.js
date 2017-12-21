@@ -8,14 +8,15 @@ type Props = {
 };
 
 const WrapperContent = styled(Flex)`
+  position: relative;
   height: 100%;
   width: 100%;
   align-items: center;
   justify-content: center;
 `;
 
-export const NoContentView = ({ message = 'Nothing found' }: Props) => {
-  return <WrapperContent>{message}</WrapperContent>;
-};
+export const NoContentView = ({ message = 'Nothing found' }: Props) => (
+  <WrapperContent>{message}</WrapperContent>
+);
 
 export default NoContentView;

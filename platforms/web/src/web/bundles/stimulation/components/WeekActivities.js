@@ -20,7 +20,12 @@ const WeekActivities = ({ activities, location: { pathname } }: Props) => (
       </ActivitiesStyled.ListTitle>
     </ActivitiesStyled.ListHeader>
 
-    <ActivityList activities={activities} switchable backLink={pathname} />
+    <ActivityList
+      activities={activities}
+      switchable
+      backLink={pathname}
+      backLinkName="Back to Week's activities"
+    />
     <Equipment equipments={equipmentsMockData} />
   </ActivitiesStyled.ListWrapper>
 );

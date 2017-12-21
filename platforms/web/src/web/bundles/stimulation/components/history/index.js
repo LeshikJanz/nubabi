@@ -19,7 +19,7 @@ const History = ({ activityHistory, handleHistory }: Props) => (
         <HistoryItem
           key={node.id}
           item={node}
-          handleClick={() => handleHistory(node.id)}
+          handleClick={weekName => handleHistory(node.id, weekName)}
         />
       ))}
     </div>

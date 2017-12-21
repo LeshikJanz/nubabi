@@ -9,6 +9,7 @@ type Props = {
   activities: ActivityConnection[],
   switchable: boolean,
   backLink: string,
+  backLinkName: string,
   history: { push: Function },
   onLoadMore: Function,
 };
@@ -40,6 +41,7 @@ class ActivityList extends PureComponent<Props> {
       state: {
         switchable: this.props.switchable,
         backLink: this.props.backLink,
+        backLinkName: this.props.backLinkName,
       },
     });
   };

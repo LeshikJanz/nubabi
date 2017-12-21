@@ -4,37 +4,38 @@ import path from 'ramda/src/path';
 import displayLoadingState from 'web/components/displayLoadingState';
 import FilteredActivities from '../components/FilteredActivities';
 import { ActivityListFragment } from '../fragments/activity';
-import showNoContentViewIf from '../../../components/showNoContentViewIf';
+import { withRouter } from 'react-router-dom';
 
 const query = gql`
-    query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
-        viewer {
-            allActivities(first: 15, after: $cursor, filter: $filter) {
-                edges {
-                    node {
-                        ...ActivityList
-                    }
-                }
-                pageInfo {
-                    endCursor
-                    hasNextPage
-                }
-            }
-            allSkillAreas {
-                edges {
-                    node {
-                        id
-                        name
-                    }
-                }
-            }
+  query getSkillActivities($cursor: String, $filter: ActivityFilterInput) {
+    viewer {
+      allActivities(first: 15, after: $cursor, filter: $filter) {
+        edges {
+          node {
+            ...ActivityList
+          }
         }
+        pageInfo {
+          endCursor
+          hasNextPage
+        }
+      }
+      allSkillAreas {
+        edges {
+          node {
+            id
+            name
+          }
+        }
+      }
     }
-    ${ActivityListFragment.activities}
+  }
+  ${ActivityListFragment.activities}
 `;
 
 export default compose(
   withState('isFetching', 'handleFetch', false),
+  withRouter,
   graphql(query, {
     options: ({ match }) => ({
       variables: {
@@ -98,5 +99,4 @@ export default compose(
     categoryName: category && category.node ? category.node.name : category,
   })),
   displayLoadingState,
-  showNoContentViewIf(props => !props.activities.length),
 )(FilteredActivities);

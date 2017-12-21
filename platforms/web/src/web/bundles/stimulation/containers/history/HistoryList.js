@@ -8,31 +8,32 @@ import withCurrentBaby from 'web/components/withCurrentBaby';
 import HistoryList from '../../components/history/HistoryList';
 import { ActivityListFragment } from '../../fragments/activity';
 import { ActivityHistory } from '../../fragments/history';
+import moment from 'moment';
 
 const query = gql`
-    query ActivityHistoryDetail($periodId: ID!, $babyId: ID!) {
-        viewer {
-            baby(id: $babyId) {
-                id
-                activities(filter: { periodId: $periodId }) {
-                    edges {
-                        node {
-                            ...ActivityList
-                        }
-                    }
-                }
-                activityHistory {
-                    edges {
-                        node {
-                            ...ActivityHistoryItem
-                        }
-                    }
-                }
+  query ActivityHistoryDetail($periodId: ID!, $babyId: ID!) {
+    viewer {
+      baby(id: $babyId) {
+        id
+        activities(filter: { periodId: $periodId }) {
+          edges {
+            node {
+              ...ActivityList
             }
+          }
         }
+        activityHistory {
+          edges {
+            node {
+              ...ActivityHistoryItem
+            }
+          }
+        }
+      }
     }
-    ${ActivityListFragment.activities}
-    ${ActivityHistory.item}
+  }
+  ${ActivityListFragment.activities}
+  ${ActivityHistory.item}
 `;
 
 export default compose(
@@ -47,14 +48,18 @@ export default compose(
     }),
     props: ({ data }) => ({
       data,
-      activities: path(['viewer', 'baby', 'activities'], data),
-      history: path(['viewer', 'baby', 'activityHistory'], data),
+      activities: path(['viewer', 'baby', 'activities', 'edges'], data),
+      history: path(['viewer', 'baby', 'activityHistory', 'edges'], data),
     }),
   }),
   withProps(({ history, match }) => ({
     activeHistory:
-      history &&
-      history.edges.find(({ node }) => node.id === match.params.id).node,
+      history && history.find(({ node }) => node.id === match.params.id).node,
+  })),
+  withProps(({ activeHistory }) => ({
+    timeStamp: `${moment(activeHistory.startDate).format('DD MMMM')} - ${moment(
+      activeHistory.endDate,
+    ).format('DD MMMM YYYY')}`,
   })),
   displayLoadingState,
 )(HistoryList);

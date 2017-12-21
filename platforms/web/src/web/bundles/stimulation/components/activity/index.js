@@ -14,12 +14,18 @@ type Props = {
   activity: ActivityConnection,
   handleBackRedirect: Function,
   isSwitchable: boolean,
+  backLinkName: string,
 };
 
-const Activity = ({ activity, handleBackRedirect, isSwitchable }: Props) => (
+const Activity = ({
+  activity,
+  handleBackRedirect,
+  isSwitchable,
+  backLinkName,
+}: Props) => (
   <ActivityStyled.Wrapper>
     <ActivityStyled.BackButton>
-      <BackButton name="Back" handleClick={handleBackRedirect} />
+      <BackButton name={backLinkName} handleClick={handleBackRedirect} />
     </ActivityStyled.BackButton>
     <ActivityProfile activity={activity} />
     <ActivityExpert {...activity} />

@@ -14,8 +14,8 @@ const query = gql`
       baby(id: $id) {
         id
         ...FavoriteActivities
-        }
       }
+    }
   }
   ${FavoriteActivitiesFragment.favorites}
 `;
@@ -31,7 +31,10 @@ export default compose(
     }),
     props: ({ data }) => ({
       data,
-      favoriteActivities: path(['viewer', 'baby', 'favoriteActivities'], data),
+      favoriteActivities: path(
+        ['viewer', 'baby', 'favoriteActivities', 'edges'],
+        data,
+      ),
     }),
   }),
   displayLoadingState,

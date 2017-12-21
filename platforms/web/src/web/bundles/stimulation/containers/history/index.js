@@ -8,21 +8,21 @@ import { ActivityHistory } from '../../fragments/history';
 import History from '../../components/history';
 
 const query = gql`
-    query ActivityHistory($babyId: ID!) {
-        viewer {
-            baby(id: $babyId) {
-                id
-                activityHistory {
-                    edges {
-                        node {
-                            ...ActivityHistoryItem
-                        }
-                    }
-                }
+  query ActivityHistory($babyId: ID!) {
+    viewer {
+      baby(id: $babyId) {
+        id
+        activityHistory {
+          edges {
+            node {
+              ...ActivityHistoryItem
             }
+          }
         }
+      }
     }
-    ${ActivityHistory.item}
+  }
+  ${ActivityHistory.item}
 `;
 
 export default compose(
