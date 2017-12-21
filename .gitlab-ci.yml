@@ -110,4 +110,4 @@ publish:
     - master
   script:
     - >
-      yarn release -y && git add -u . && git push origin master && git push --tags
+      yarn release --yes && git add -u . && git push origin master && git push --tags
