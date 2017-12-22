@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@2.0.1...nubabi-graphql-server@2.1.0) (2017-12-22)
+
+
+### Features
+
+* real user data  to settings sidebar and user details ([9fc5176](https://gitlab.com/nubabi/mobile/commit/9fc5176))
+
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@2.0.0...nubabi-graphql-server@2.0.1) (2017-12-21)
 

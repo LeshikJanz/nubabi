@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.8.1...nubabi-native@1.9.0) (2017-12-22)
+
+
+### Bug Fixes
+
+* add aliases for all bundles ([4a2d723](https://gitlab.com/nubabi/mobile/commit/4a2d723))
+* fix for activity url ([521079f](https://gitlab.com/nubabi/mobile/commit/521079f))
+
+
+### Features
+
+* add selected activity status ([4126067](https://gitlab.com/nubabi/mobile/commit/4126067))
+
+
+
+
 <a name="1.8.1"></a>
 ## [1.8.1](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.8.0...nubabi-native@1.8.1) (2017-12-21)
 

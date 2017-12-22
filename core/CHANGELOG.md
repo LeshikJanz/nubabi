@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@2.0.1...nubabi-core@2.1.0) (2017-12-22)
+
+
+### Features
+
+* add possiblity to switch between activities ([bd483dd](https://gitlab.com/nubabi/mobile/commit/bd483dd))
+* extend set of colors ([0c775ca](https://gitlab.com/nubabi/mobile/commit/0c775ca))
+* firebase with new endpoint ([e5573e8](https://gitlab.com/nubabi/mobile/commit/e5573e8))
+* implement skittles on activity ([15fb66f](https://gitlab.com/nubabi/mobile/commit/15fb66f))
+* settings family friends layout ([788fb94](https://gitlab.com/nubabi/mobile/commit/788fb94))
+
+
+
+
 <a name="2.0.1"></a>
 ## [2.0.1](https://gitlab.com/nubabi/mobile/compare/nubabi-core@2.0.0...nubabi-core@2.0.1) (2017-12-21)
 
