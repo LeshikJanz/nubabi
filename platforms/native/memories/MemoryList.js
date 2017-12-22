@@ -1,9 +1,5 @@
 // @flow
-import type {
-  ApolloQueryResult,
-  Memory as MemoryType,
-  MemoryEdge,
-} from 'core/types';
+import type { ApolloQueryResult, Memory as MemoryType, MemoryEdge } from 'core/types';
 import React, { PureComponent } from 'react';
 import { FlatList } from 'react-native';
 import { compose } from 'ramda';
@@ -19,11 +15,7 @@ type Props = {
   memories: Array<MemoryEdge>,
   onViewMemory: (id: string) => void,
   onEditMemory: (id: string) => void,
-  onToggleLikeMemory: (
-    id: string,
-    isLiked: boolean,
-    likeCount,
-  ) => Promise<ApolloQueryResult<*>>,
+  onToggleLikeMemory: (id: string, isLiked: boolean, likeCount) => Promise<ApolloQueryResult<*>>,
 } & PullToRefreshProps;
 
 const keyExtractor = obj => obj.id;

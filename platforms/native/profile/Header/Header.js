@@ -1,5 +1,7 @@
 // @flow
-import type { LayoutProps } from 'core/types';
+import type {
+  LayoutProps,
+} from 'core/types';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { gql } from 'react-apollo';

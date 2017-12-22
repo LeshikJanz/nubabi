@@ -52,7 +52,7 @@ export class VoiceRecording extends PureComponent {
     return `${AudioUtils.DocumentDirectoryPath}/${uuid.v4()}.aac`;
   }
 
-  showError = (error = 'There was a problem with this recording') => {
+  showError = (error = "There was a problem with this recording") => {
     this.props.appError(new Error(error));
   };
 
@@ -154,12 +154,9 @@ export class VoiceRecording extends PureComponent {
         },
         () => {
           setTimeout(() => {
-            this.state.sound.play(
-              (/* success */) => {
-                this.setState({ isPlaying: false });
-              },
-              100,
-            );
+            this.state.sound.play((/* success */) => {
+              this.setState({ isPlaying: false });
+            }, 100);
           }, 100);
         },
       );

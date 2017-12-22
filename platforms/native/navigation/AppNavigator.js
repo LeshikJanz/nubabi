@@ -159,34 +159,30 @@ class TransitionerSwitcher extends PureComponent {
   previousTransition: Object;
 
   render() {
-    const transitionType = path(
-      [
-        'state',
-        'routes',
-        this.props.navigation.state.index,
-        'params',
-        'transition',
-      ],
-      this.props.navigation,
-    );
+    const transitionType = path([
+      'state',
+      'routes',
+      this.props.navigation.state.index,
+      'params',
+      'transition'
+    ], this.props.navigation);
 
     let props;
 
     const transition = transitionMap[transitionType];
     if (transition) {
       this.previousTransition = transition;
-      props = { ...this.props, ...transition };
-    } else if (this.previousTransition) {
-      props = {
-        ...this.props,
-        transitionConfig: this.previousTransition.transitionConfig,
-      };
-      this.previousTransition = null;
+      props = { ...this.props, ...transition};
     } else {
-      props = this.props;
+      if (this.previousTransition) {
+        props = {...this.props, transitionConfig: this.previousTransition.transitionConfig};
+        this.previousTransition = null;
+      } else {
+        props = this.props;
+      }
     }
 
-    return <CardStackTransitioner {...props} />;
+    return <CardStackTransitioner {...props} />
   }
 }
 

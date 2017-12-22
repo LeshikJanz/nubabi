@@ -73,14 +73,15 @@ export default compose(
           baby(id: $babyId) {
             id
             name
+
             activity(id: $activityId) {
-            ...Activity
-            isFavorite
+              ...Activity
+              isFavorite
             }
-         }
+          }
+        }
       }
-    }
-        ${Activity.fragments.activity}
+      ${Activity.fragments.activity}
     `,
     // TODO: remove duplication with ViewThisWeeksActivity
     {
