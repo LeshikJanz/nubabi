@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import path from 'ramda/src/path';
 import { compose, withHandlers } from 'recompose';
 import { graphql } from 'react-apollo';
-import { filter } from 'graphql-anywhere';
 import { selectBaby } from 'core/babies/actions';
 import { handleError } from 'web/common/errorHandler';
 import { createBaby } from '../grapghQl/mutations/createBaby';
@@ -54,14 +53,11 @@ export default compose(
     },
   }),
   graphql(updateBaby, {
-    props: ({
-      mutate,
-      ownProps: { babyEditForm, history, changeBaby, currentBabyPhoto },
-    }) => ({
+    props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
       handleEditBaby: () =>
         mutate({
           variables: {
-            input: setFields(babyForm, babyEditForm, currentBabyPhoto),
+            input: setFields(babyForm, babyEditForm),
           },
         })
           .then(({ data }) => {

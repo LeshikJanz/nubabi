@@ -5,8 +5,15 @@ import { dropLast, last, lensPath, set, view } from 'ramda';
 import { fromGlobalId } from 'graphql-relay';
 
 const isFile = (value, path) => {
-  // TODO: implement check for web
-  return last(path) === 'url' && value.startsWith('/');
+  if (last(path) !== 'url') {
+    return false;
+  }
+
+  if (typeof global.File !== 'undefined' && value instanceof global.File) {
+    return true;
+  }
+
+  return value.startsWith('/');
 };
 
 const normalizePath = path => {
@@ -61,6 +68,7 @@ class ServerNetworkInterface extends HTTPFetchNetworkInterface {
     }
 
     const { firebase } = this;
+
     const uploadFile = (path, file) => {
       return new Promise((resolve, reject) => {
         const uploadTask = firebase
@@ -77,8 +85,12 @@ class ServerNetworkInterface extends HTTPFetchNetworkInterface {
             /* progress */
           },
           error => reject(error),
-          snapshot => {
+          result => {
+            // TODO: reconcile Firebase SDK version differences between web and native.
+            const snapshot = result || uploadTask.snapshot;
+
             const downloadUrl = snapshot.downloadURL;
+
             request.variables = set(
               file.urlPath,
               downloadUrl,

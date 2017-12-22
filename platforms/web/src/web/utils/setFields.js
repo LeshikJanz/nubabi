@@ -1,19 +1,19 @@
 import { merge, pick } from 'ramda';
 import { filter } from 'graphql-anywhere';
 
-const setNewAvatar = (babyEditForm, currentBabyPhoto) => {
-  if (typeof babyEditForm.avatar[0] !== 'undefined' && currentBabyPhoto) {
+const parseAvatar = babyEditForm => {
+  if (typeof babyEditForm.avatar[0] !== 'undefined') {
     return {
       name: babyEditForm.avatar[0].name,
       contentType: babyEditForm.avatar[0].type,
       size: babyEditForm.avatar[0].size,
-      url: currentBabyPhoto,
+      url: babyEditForm.avatar[0],
     };
   }
   return undefined;
 };
 
-export const setFields = (babyForm, babyEditForm, currentBabyPhoto) => {
+export const setFields = (babyForm, babyEditForm) => {
   return pick(
     [
       'dob',
@@ -28,7 +28,7 @@ export const setFields = (babyForm, babyEditForm, currentBabyPhoto) => {
     ],
     merge(filter(babyForm.form, babyEditForm), {
       relationship: babyEditForm.relationship.value,
-      avatar: setNewAvatar(babyEditForm, currentBabyPhoto),
+      avatar: parseAvatar(babyEditForm),
     }),
   );
 };
