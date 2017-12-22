@@ -22,6 +22,11 @@ const BabySelect = styled.div`
   font-family: ${props => props.theme.text.fontFamily};
   font-size: 16px;
   position: relative;
+`;
+
+const BabySelected = styled.span`
+  cursor: pointer;
+  margin: 10px;
 
   &:after {
     content: '';
@@ -36,11 +41,6 @@ const BabySelect = styled.div`
     border-right: 5px solid transparent;
     border-top: 5px solid ${props => props.theme.colors.open.gray2};
   }
-`;
-
-const BabySelected = styled.span`
-  cursor: pointer;
-  margin: 10px;
 `;
 
 const BabiesListWrapper = styled(Menu)`
