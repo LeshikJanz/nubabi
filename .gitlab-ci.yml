@@ -138,7 +138,6 @@ deploy_graphql:
     NUBABI_GRAPHQL_ENDPOINT: http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
 
 publish:
-  stage: publish
   only:
     - master
   script:
