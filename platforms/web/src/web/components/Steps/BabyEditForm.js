@@ -47,7 +47,7 @@ type Props = {
 let BabyEditForm = ({ handleSubmit, invalid, dirty }: Props) => (
   <form onSubmit={handleSubmit}>
     <BabyInfoContainer>
-      <Field name="avatar" component={DropzoneField} />
+      <Field type="file" name="avatar" component={DropzoneField} />
 
       <Field component={BabyRadio} name="gender" validate={required} />
       <InputsContainer>

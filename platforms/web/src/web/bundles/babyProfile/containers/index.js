@@ -15,6 +15,7 @@ import { setFields } from 'web/utils/setFields';
 
 const mapStateToProps = state => ({
   babyEditForm: state.form.BabyForm && state.form.BabyForm.values,
+  currentBabyPhoto: state.babies.currentBabyPhoto,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -53,9 +54,16 @@ export default compose(
     },
   }),
   graphql(updateBaby, {
-    props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
+    props: ({
+      mutate,
+      ownProps: { babyEditForm, history, changeBaby, currentBabyPhoto },
+    }) => ({
       handleEditBaby: () =>
-        mutate({ variables: { input: setFields(babyForm, babyEditForm) } })
+        mutate({
+          variables: {
+            input: setFields(babyForm, babyEditForm, currentBabyPhoto),
+          },
+        })
           .then(({ data }) => {
             const updatedBaby = path(['updateBaby', 'edge', 'node'], data);
             if (updatedBaby) {

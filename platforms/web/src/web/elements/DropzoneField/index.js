@@ -1,13 +1,16 @@
 // @flow
 import React from 'react';
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import BabyPhotoImg from 'web/assets/images/baby_photo.png';
 import { compose, withHandlers, withState } from 'recompose';
+import { setBabyPhoto } from 'core/babies/actions';
 
 type Props = {
   preview: string,
   onDrop: Function,
+  input: any,
 };
 
 const Avatar = styled.div`
@@ -50,31 +53,34 @@ const Wrapper = styled.div`
   }
 `;
 
-const DropzoneField = ({ onDrop, preview }: Props) => (
+const DropzoneField = (props: Props) => (
   <Wrapper backgroundImage={BabyPhotoImg}>
     <Dropzone
-      onDrop={onDrop}
+      {...props.input}
+      onDrop={props.onDrop}
+      multiple={false}
       accept="image/jpeg, image/png, image/svg"
       className="dropzone-area"
       activeClassName="dropzone-area-active"
       rejectClassName="dropzone-area-reject"
     >
-      {preview && <Avatar backgroundImage={preview} alt="" />}
+      {props.preview && <Avatar backgroundImage={props.preview} alt="" />}
     </Dropzone>
   </Wrapper>
 );
 
 export default compose(
+  connect(null),
   withState('preview', 'handlePreview', null),
   withHandlers({
-    onDrop: ({ handlePreview }) => acceptedFiles => {
+    onDrop: props => acceptedFiles => {
       if (acceptedFiles.length) {
-        handlePreview(acceptedFiles[0].preview);
+        props.handlePreview(acceptedFiles[0].preview);
 
         const reader = new FileReader();
-        // TODO: save image data in needed format(after implementation it on server)
-        reader.onload = (/* event */) => {
-          // input.onChange(event.target.result);
+
+        reader.onload = () => {
+          props.dispatch(setBabyPhoto(reader.result));
         };
 
         reader.readAsDataURL(acceptedFiles[0]);

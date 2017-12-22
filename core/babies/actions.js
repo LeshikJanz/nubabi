@@ -13,6 +13,13 @@ import { resetNavigation } from '../navigation/actions';
 import formatPossessive from '../helpers/formatPossessive';
 import { removeEdge } from '../../libs/graphql-utils';
 
+export function setBabyPhoto(photoAsDataUrl: string) {
+  return {
+    type: 'SET_BABY_PHOTO',
+    payload: photoAsDataUrl,
+  };
+}
+
 export function selectBaby(id: string): SelectBabyAction {
   return {
     type: 'SELECT_BABY',

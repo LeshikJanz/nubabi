@@ -6,6 +6,7 @@ export const initialState = {
   isFetching: false,
   failure: false,
   currentBabyId: null,
+  currentBabyPhoto: null,
 };
 
 const reducer = (
@@ -13,6 +14,10 @@ const reducer = (
   action: Action,
 ): BabyState => {
   switch (action.type) {
+    case 'SET_BABY_PHOTO':
+      return Object.assign({}, state, {
+        currentBabyPhoto: action.payload,
+      });
     case 'GET_BABIES_REQUEST':
       return Object.assign({}, state, {
         isFetching: true,
