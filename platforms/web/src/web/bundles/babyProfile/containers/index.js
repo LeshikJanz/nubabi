@@ -36,9 +36,9 @@ export default compose(
   graphql(createBaby, {
     props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
       handleCreateBaby: () =>
-        mutate({ variables: { input: filter(babyForm.form, babyEditForm) } })
+        mutate({ variables: { input: setFields(babyForm, babyEditForm) } })
           .then(({ data }) => {
-            const createdBaby = path(['createBaby', 'createdBaby'], data);
+            const createdBaby = path(['createBaby', 'edge', 'node'], data);
             if (createdBaby) {
               changeBaby(createdBaby.id);
               history.push('/profile');
