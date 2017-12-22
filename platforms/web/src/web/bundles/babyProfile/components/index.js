@@ -9,9 +9,18 @@ type Props = {
   editableBaby: Baby,
 };
 
+const addDefaultUnits = editableBaby => ({
+  ...editableBaby,
+  weightUnits: 'kg',
+  heightUnits: 'cm',
+});
+
 const BabyProfile = ({ handleSubmit, editableBaby }: Props) => (
   <BabyProfileStyled.Wrapper>
-    <BabyEditForm onSubmit={handleSubmit} initialValues={editableBaby} />
+    <BabyEditForm
+      onSubmit={handleSubmit}
+      initialValues={addDefaultUnits(editableBaby)}
+    />
   </BabyProfileStyled.Wrapper>
 );
 

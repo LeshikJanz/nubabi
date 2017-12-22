@@ -13,6 +13,15 @@ const parseAvatar = babyEditForm => {
   return undefined;
 };
 
+const setCm = babyEditForm =>
+  babyEditForm.heightUnits === 'in'
+    ? Number(babyEditForm.weight) * 2.54
+    : babyEditForm.height;
+const setKg = babyEditForm =>
+  babyEditForm.weightUnits === 'lbs'
+    ? Number(babyEditForm.weight) * 2.2046226218488
+    : babyEditForm.weight;
+
 export const setFields = (babyForm, babyEditForm) => {
   return pick(
     [
@@ -29,6 +38,8 @@ export const setFields = (babyForm, babyEditForm) => {
     merge(filter(babyForm.form, babyEditForm), {
       relationship: babyEditForm.relationship.value,
       avatar: parseAvatar(babyEditForm),
+      weight: setKg(babyEditForm),
+      height: setCm(babyEditForm),
     }),
   );
 };

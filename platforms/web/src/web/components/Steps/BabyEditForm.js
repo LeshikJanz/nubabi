@@ -86,7 +86,6 @@ let BabyEditForm = ({ handleSubmit, invalid, dirty }: Props) => (
           type="number"
           inputValidate={[required]}
           variants={['kg', 'lbs']}
-          radioValue="kg"
           placeholder="weight"
         />
 

@@ -182,35 +182,34 @@ class Select extends Component<Props> {
     this.state = {
       modalIsOpen: false,
     };
+  }
 
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-    this.redirectToBabyAdd = this.redirectToBabyAdd.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+  componentWillMount() {
+    Modal.setAppElement('body');
   }
 
   handleClickOutside() {
     this.closeModal();
   }
 
-  openModal() {
+  openModal = () => {
     this.setState({ modalIsOpen: true });
-  }
+  };
 
-  closeModal() {
+  closeModal = () => {
     this.setState({ modalIsOpen: false });
-  }
+  };
 
-  redirectToBabyAdd() {
+  redirectToBabyAdd = () => {
     this.props.history.push('/babyprofile');
     this.closeModal();
-  }
+  };
 
-  handleSelect(babyId: string) {
+  handleSelect = (babyId: string) => {
     this.props.handleBabySelect(babyId);
     this.props.history.push('/profile');
     this.closeModal();
-  }
+  };
 
   render() {
     const { name, id, babies = [] } = this.props;

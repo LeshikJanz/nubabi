@@ -4,13 +4,13 @@ import styled from 'styled-components';
 import { Section } from 'web/elements';
 import StepOne from './StepOne';
 import StepTwo from './StepTwo';
+import { REGISTER_STEP_ONE_INPUTS } from 'web/constants';
 
 type Props = {};
 
 type State = {
   step: number,
-  stepOneInputs: Array<mixed>,
-  babyRadio: mixed,
+  babyRadio: string,
 };
 
 const StepsContainer = styled(Section)`
@@ -25,26 +25,7 @@ class Steps extends PureComponent<Props, State> {
     super(props);
     this.state = {
       step: 0,
-      stepOneInputs: [
-        {
-          type: 'name',
-          name: 'name',
-          placeholder: 'Your full name',
-          value: 'Savannah Cooper',
-        },
-        {
-          type: 'email',
-          name: 'email',
-          placeholder: 'Email address',
-          value: 'savannahcooper@gmail.com',
-        },
-        {
-          type: 'password',
-          name: 'password',
-          placeholder: 'Nubabi password (at least 6 characters)',
-          value: 'password',
-        },
-      ],
+      babyRadio: 'FEMALE',
     };
   }
 
@@ -52,7 +33,7 @@ class Steps extends PureComponent<Props, State> {
 
   onClickSignup = () => {};
 
-  radioOnChange = value => {
+  radioOnChange = (value: string) => {
     const babyRadio = Object.assign({}, this.state.babyRadio);
     babyRadio.current = value;
     this.setState({ babyRadio });
@@ -63,7 +44,7 @@ class Steps extends PureComponent<Props, State> {
       <StepsContainer>
         {this.state.step === 0 ? (
           <StepOne
-            inputs={this.state.stepOneInputs}
+            inputs={REGISTER_STEP_ONE_INPUTS}
             onClickSignup={this.onClickSignup}
             onNexStep={this.onNexStep}
           />

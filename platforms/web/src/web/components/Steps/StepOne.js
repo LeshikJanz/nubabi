@@ -1,4 +1,5 @@
 // @flow
+import type { registerStepOneInputsType } from 'web/constants';
 import React from 'react';
 import { Section, Button } from 'web/elements';
 import styled from 'styled-components';
@@ -8,7 +9,7 @@ import UserCredentialsForm from './UserForm';
 type Props = {
   onNexStep: Function,
   onClickSignup: Function,
-  inputs: Array<mixed>,
+  inputs: registerStepOneInputsType,
 };
 
 export const StepContainer = styled(Section)`

@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import FacebookLogo from 'web/assets/images/facebook-logo.png';
 import { CreditCard, Eft, IPay, Snapscan } from 'web/components';
@@ -110,3 +111,31 @@ export const RELATIONSHIPS = [
   { id: 6, value: 'AuPair', label: 'AuPair' },
   { id: 7, value: 'Other', label: 'Other' },
 ];
+
+export const REGISTER_STEP_ONE_INPUTS: registerStepOneInputsType = [
+  {
+    type: 'name',
+    name: 'name',
+    placeholder: 'Your full name',
+    value: 'Savannah Cooper',
+  },
+  {
+    type: 'email',
+    name: 'email',
+    placeholder: 'Email address',
+    value: 'savannahcooper@gmail.com',
+  },
+  {
+    type: 'password',
+    name: 'password',
+    placeholder: 'Nubabi password (at least 6 characters)',
+    value: 'password',
+  },
+];
+
+export type registerStepOneInputsType = Array<{
+  type: string,
+  name: string,
+  placeholder: string,
+  value: string,
+}>;
