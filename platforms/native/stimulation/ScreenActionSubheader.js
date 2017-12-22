@@ -19,6 +19,8 @@ const makeText = memoize((text: string | Array<string>) => {
 
   return title.map((content, index) => {
     return (
+      // FIXME: don't use array keyss
+      // eslint-disable-next-line react/no-array-index-key
       <Text key={index} style={theme.subheader}>
         {content}
       </Text>

@@ -12,9 +12,8 @@
         "web": "./platforms/web/src/web",
         "graphql-utils": "./libs/graphql-utils"
       }
-    ],
+    }]
   ],
-
   "env": {
     "development": {
       "plugins": [
