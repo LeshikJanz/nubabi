@@ -4,10 +4,8 @@ import { Link } from 'react-router-dom';
 
 export const NavbarContainer = styled(Flex)`
   flex-direction: column;
-  background-color: ${props => props.theme.colors.white};
   flex-grow: 1;
   max-width: 290px;
-  box-shadow: 0px 0px 5px -1px ${props => props.theme.colors.gray};
 `;
 
 export const MenuItem = styled(Link)`

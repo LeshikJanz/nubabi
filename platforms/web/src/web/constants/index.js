@@ -97,8 +97,8 @@ export const SUBSCRIBE_ROUTES = [
 export const CURRENT_PLAN = {
   title: 'Annual package',
   price: 37.5,
-  billedAmount: 400,
-  monthsFree: 3,
+  billedAmount: '*R400 Billed Annually',
+  monthsFree: '3 MONTHS FREE! ',
   paymentTotal: 400.0,
 };
 
@@ -132,6 +132,23 @@ export const REGISTER_STEP_ONE_INPUTS: registerStepOneInputsType = [
     value: 'password',
   },
 ];
+
+export const SUBSCRIBE_ROUTES_MONTH = [
+  {
+    route: 'creditcard',
+    label: 'Credit/Debit Card',
+    component: props => renderCreditCard(props),
+    id: 'creditcard',
+  },
+];
+
+export const MONTH_PLAN = {
+  title: 'Monthly',
+  price: 20.0,
+  billedAmount: 'Billed Monthly',
+  monthsFree: 'Cancel at any time',
+  paymentTotal: 20.0,
+};
 
 export type registerStepOneInputsType = Array<{
   type: string,

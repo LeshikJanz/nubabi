@@ -14,6 +14,11 @@ export const PlanContainer = styled(Flex)`
   flex-direction: column;
   align-items: center;
   font-weight: 300;
+
+  &:hover {
+    border: 1px solid #ea3154;
+    color: #ea3154;
+  }
 `;
 
 export const Title = styled.h3`
