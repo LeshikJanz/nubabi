@@ -6,6 +6,7 @@ export const PaymentCard = styled.div`
   flex-direction: column;
   margin: 25px 20px;
   flex: 1;
+  position: relative;
 `;
 
 export const PaymentWay = styled.div`

@@ -3,6 +3,7 @@ import React from 'react';
 import * as CreditCardStyle from './styled/index';
 import Secure from 'web/components/3DSecureBox/index';
 import CardPaymentForm from 'web/components/CardPaymentForm/index';
+import InfoBox from 'web/components/CreditCardInfoBox/index';
 
 const CreditCard = () => {
   return (
@@ -12,6 +13,7 @@ const CreditCard = () => {
       </CreditCardStyle.PaymentWay>
       <CardPaymentForm />
       <Secure />
+      <InfoBox />
     </CreditCardStyle.PaymentCard>
   );
 };
