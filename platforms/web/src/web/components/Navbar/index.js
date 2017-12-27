@@ -32,7 +32,7 @@ const MenuWrapper = styled(Flex)`
 `;
 
 const MainMenu = styled.ul`
-  width: 25%;
+  width: 33.3%;
   margin: 0;
   padding: 0;
   min-width: 290px;
@@ -97,7 +97,7 @@ class NavBar extends PureComponent<Props> {
     return (
       <Wrapper width={1 / 4} is={Nav}>
         {baby &&
-        location.pathname === '/profile' && <ProfileHeader {...baby} />}
+          location.pathname === '/profile' && <ProfileHeader {...baby} />}
 
         <MenuWrapper>
           <MainMenu>
