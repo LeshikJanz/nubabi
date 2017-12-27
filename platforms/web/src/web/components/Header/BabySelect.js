@@ -30,7 +30,7 @@ import {
 
 type Props = Baby;
 
-type queryOptsType = {
+type QueryOptsType = {
   fetchPolicy: string,
   skip: boolean,
 };
@@ -89,6 +89,18 @@ class Select extends Component<Props> {
       <PersonDefaultImg />
     );
 
+  renderBaby = (node, currentBabyId) => {
+    const isCurrent = currentBabyId === node.id;
+    return (
+      <BabiesListItem key={node.id} onClick={() => this.handleSelect(node.id)}>
+        <BabyImageContainer isCurrent={isCurrent}>
+          {this.renderBabyAvatar(node.avatar)}
+        </BabyImageContainer>
+        <BabyName isCurrent={isCurrent}>{node.name}</BabyName>
+      </BabiesListItem>
+    );
+  };
+
   render() {
     const { name, id, babies = [], currentBabyId } = this.props;
     const avatar = this.props.avatar && this.props.avatar.url;
@@ -108,19 +120,7 @@ class Select extends Component<Props> {
         >
           <BabiesListWrapper>
             <BabiesList>
-              {babies.map(({ node }) => (
-                <BabiesListItem
-                  key={node.id}
-                  onClick={() => this.handleSelect(node.id)}
-                >
-                  <BabyImageContainer isCurrent={currentBabyId === node.id}>
-                    {this.renderBabyAvatar(node.avatar)}
-                  </BabyImageContainer>
-                  <BabyName isCurrent={currentBabyId === node.id}>
-                    {node.name}
-                  </BabyName>
-                </BabiesListItem>
-              ))}
+              {babies.map(({ node }) => this.renderBaby(node, currentBabyId))}
               <AddItem justify="center" onClick={this.redirectToBabyAdd}>
                 <Button plus /> Add Baby
               </AddItem>
@@ -149,7 +149,7 @@ export default compose(
       ({
         fetchPolicy: 'cache-and-network',
         skip: !isAuthenticated,
-      }: queryOptsType),
+      }: QueryOptsType),
     props: ({ data }) => ({
       data,
       babies: path(['viewer', 'babies', 'edges'], data),
