@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.1"></a>
+## [2.1.1](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@2.1.0...nubabi-graphql-server@2.1.1) (2017-12-27)
+
+
+
+
+**Note:** Version bump only for package nubabi-graphql-server
+
 <a name="2.1.0"></a>
 # [2.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-graphql-server@2.0.1...nubabi-graphql-server@2.1.0) (2017-12-22)
 

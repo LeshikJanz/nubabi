@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.2.0...nubabi-web@1.3.0) (2017-12-27)
+
+
+### Bug Fixes
+
+* routing and styles for edit baby profile button ([bdb7b87](https://gitlab.com/nubabi/mobile/commit/bdb7b87))
+* **profile:** web was using removed version of create baby result ([a58c8ea](https://gitlab.com/nubabi/mobile/commit/a58c8ea))
+* sidebar styling & menu items styling ([58df281](https://gitlab.com/nubabi/mobile/commit/58df281))
+* uncomment eslint webpack config ([d8b743f](https://gitlab.com/nubabi/mobile/commit/d8b743f))
+* upd styles for change baby info ([1e30be9](https://gitlab.com/nubabi/mobile/commit/1e30be9))
+
+
+### Features
+
+* create payment form, add syling, add dropdown component ([5aa4668](https://gitlab.com/nubabi/mobile/commit/5aa4668))
+* default UI values in units, upd sending data, refactor components ([0427fd0](https://gitlab.com/nubabi/mobile/commit/0427fd0))
+* implement upload for web via updated middleware ([879457b](https://gitlab.com/nubabi/mobile/commit/879457b))
+* info box ([1e3d563](https://gitlab.com/nubabi/mobile/commit/1e3d563))
+* user will be able to upload baby photo ([2372319](https://gitlab.com/nubabi/mobile/commit/2372319))
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.1.8...nubabi-web@1.2.0) (2017-12-22)
 

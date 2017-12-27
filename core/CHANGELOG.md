@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.2.0"></a>
+# [2.2.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@2.1.0...nubabi-core@2.2.0) (2017-12-27)
+
+
+### Features
+
+* implement upload for web via updated middleware ([879457b](https://gitlab.com/nubabi/mobile/commit/879457b))
+* user will be able to upload baby photo ([2372319](https://gitlab.com/nubabi/mobile/commit/2372319))
+
+
+
+
 <a name="2.1.0"></a>
 # [2.1.0](https://gitlab.com/nubabi/mobile/compare/nubabi-core@2.0.1...nubabi-core@2.1.0) (2017-12-22)
 
