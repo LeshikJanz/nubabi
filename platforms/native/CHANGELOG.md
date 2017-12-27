@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.10.0"></a>
+# [1.10.0](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.9.1...nubabi-native@1.10.0) (2017-12-27)
+
+
+### Features
+
+* AppStore review ([be99fb9](https://gitlab.com/nubabi/mobile/commit/be99fb9)), closes [#50](https://gitlab.com/nubabi/mobile/issues/50)
+
+
+### Reverts
+
+* dummy native package change ([eb1824f](https://gitlab.com/nubabi/mobile/commit/eb1824f))
+
+
+
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.9.0...nubabi-native@1.9.1) (2017-12-27)
 
