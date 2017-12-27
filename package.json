@@ -15,6 +15,7 @@
     "test:e2e": "jest --testMatch '<rootDir>/__tests__/e2e/**/*.test.js' -i --forceExit",
     "prettier": "prettier --write --trailing-comma all --tab-width 2 --single-quote --parser flow --print-width 80 \"{core,platforms}/**/*.js\"",
     "precommit": "lint-staged",
+    "postrelease": "scripts/updateReadmeVersions.js && git add README.md && git commit --amend -n --reuse-message HEAD",
     "release": "lerna publish --skip-npm --conventional-commits",
     "firebase:deploy": "firebase deploy",
     "firebase:deploy:functions": "firebase deploy --only functions",
