@@ -11,8 +11,6 @@ yarn_install:
   script:
     - >
       if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web/\|platforms/server/\|libs/graphql-utils'; then
-        export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
-        export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
         yarn install
       fi
   cache:
@@ -24,22 +22,28 @@ yarn_install:
 set_dev_app_version:
   stage: setup
   script:
-    - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web'; then
-        export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA
-      fi
+    - export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
+    - export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
+    - echo "export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA" > .env
+    - echo "export NUBABI_ENV=development" >> .env
   except:
     - master
+  artifacts:
+    paths:
+      - .env
 
 set_prod_app_version:
   stage: setup
   script:
-    - >
-      if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web'; then
-        export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID
-      fi
+    - export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
+    - export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
+    - echo "export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID" > .env
+    - echo "export NUBABI_ENV=staging" >> .env
   only:
     - master
+  artifacts:
+    paths:
+      - .env
 
 run_tests:
   stage: test
@@ -60,8 +64,12 @@ build:
   script:
     - >
       if git diff HEAD^ HEAD --name-only|grep 'core/\|platforms/web'; then
+        source .env
         yarn web:build
       fi
+  dependencies: 
+    - set_dev_app_version
+    - set_prod_app_version
   artifacts:
     paths:
       - platforms/web/build
