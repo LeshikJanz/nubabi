@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.2"></a>
+## [1.9.2](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.9.1...nubabi-native@1.9.2) (2017-12-27)
+
+
+
+
+**Note:** Version bump only for package nubabi-native
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://gitlab.com/nubabi/mobile/compare/nubabi-native@1.9.0...nubabi-native@1.9.1) (2017-12-27)
 

@@ -5,7 +5,7 @@
   "useWorkspaces": true,
   "commands": {
     "publish": {
-      "message": "chore(release): publish"
+      "message": "chore(release): publish [skip ci]"
     }
   }
 }

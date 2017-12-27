@@ -5,6 +5,7 @@ stages:
   - test
   - build
   - deploy
+  - publish
 
 yarn_install:
   stage: setup
@@ -143,3 +144,22 @@ deploy_graphql:
     - master
   variables:
     NUBABI_GRAPHQL_ENDPOINT: https://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
+
+publish:
+  stage: publish
+  only:
+    - master
+  script:
+    - mkdir ~/.ssh
+    - echo "$PUBLISH_SSH_KEY" > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H gitlab.com >> ~/.ssh/known_hosts
+    - git config --global user.name "Gitlab CI"
+    - git config --global user.email "gitlab-ci@nubabi.com"
+    - git checkout $CI_COMMIT_REF_NAME
+    - git pull
+    - git remote set-url origin git@gitlab.com:nubabi/mobile.git
+    - yarn global add lerna
+    - yarn release --yes
+    - git push --follow-tags origin $CI_COMMIT_REF_NAME
+
