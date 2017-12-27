@@ -2,6 +2,9 @@
 import * as React from 'react';
 import { Flex } from 'grid-styled';
 import styled from 'styled-components';
+import config from 'core/config';
+
+const { appVersion } = config;
 
 const RightSidebar = styled(Flex)`
   flex-grow: 1;
@@ -33,6 +36,16 @@ const SettingsRightSidebar = () => {
         All rights reserved. Use of this website is regulated by our website
         Terms of Use and Privacy Policy.
       </Text>
+      <div
+        style={{
+          display: 'flex',
+          flex: 1,
+          justifyContent: 'center',
+          marginTop: 5,
+        }}
+      >
+        <Text style={{ width: 'auto' }}>Nubabi {appVersion}</Text>
+      </div>
     </RightSidebar>
   );
 };

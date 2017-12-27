@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
-import { Flex, Box } from 'grid-styled';
+import { Box, Flex } from 'grid-styled';
 import styled from 'styled-components';
-
+import config from 'core/config';
 import { Aside } from 'web/elements';
 import IAppStore from 'web/assets/images/appstore.png';
 import IPlayMarket from 'web/assets/images/googleplay.png';
@@ -11,6 +11,8 @@ import IPersons from 'web/assets/images/icons/persons.svg';
 import { Link } from 'react-router-dom';
 
 type Props = {};
+
+const { appVersion } = config;
 
 const SideBar = styled(Box)`
   margin: 25px 0 0;
@@ -120,13 +122,23 @@ const Sidebar = (): Props => (
 
     <SideBarFooter>
       <small>
-        ©2017 Nubabi. About Us • FAQ & Support • Contact Us • Log Out
+        © 2017 Nubabi. About Us • FAQ & Support • Contact Us • Log Out
       </small>
       <hr />
       <small>
         All rights reserved. Use of this website is regulated by our website
         Terms of Use and Privacy Policy.
       </small>
+      <div
+        style={{
+          display: 'flex',
+          flex: 1,
+          justifyContent: 'center',
+          marginTop: 5,
+        }}
+      >
+        <small>Nubabi {appVersion}</small>
+      </div>
     </SideBarFooter>
   </SideBar>
 );
