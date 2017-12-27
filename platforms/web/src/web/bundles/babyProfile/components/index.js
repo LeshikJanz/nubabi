@@ -15,13 +15,16 @@ const addDefaultUnits = editableBaby => ({
   heightUnits: 'cm',
 });
 
-const BabyProfile = ({ handleSubmit, editableBaby }: Props) => (
-  <BabyProfileStyled.Wrapper>
-    <BabyEditForm
-      onSubmit={handleSubmit}
-      initialValues={addDefaultUnits(editableBaby)}
-    />
-  </BabyProfileStyled.Wrapper>
-);
+const BabyProfile = (props: Props) => {
+  const { handleSubmit, editableBaby } = props;
+  return (
+    <BabyProfileStyled.Wrapper>
+      <BabyEditForm
+        onSubmit={handleSubmit}
+        initialValues={addDefaultUnits(editableBaby)}
+      />
+    </BabyProfileStyled.Wrapper>
+  );
+};
 
 export default BabyProfile;

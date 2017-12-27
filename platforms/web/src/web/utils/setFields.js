@@ -15,11 +15,11 @@ const parseAvatar = babyEditForm => {
 
 const setCm = babyEditForm =>
   babyEditForm.heightUnits === 'in'
-    ? Number(babyEditForm.weight) * 2.54
+    ? (Number(babyEditForm.weight) * 2.54).toFixed(2)
     : babyEditForm.height;
 const setKg = babyEditForm =>
   babyEditForm.weightUnits === 'lbs'
-    ? Number(babyEditForm.weight) * 2.2046226218488
+    ? (Number(babyEditForm.weight) * 2.2046226218488).toFixed(2)
     : babyEditForm.weight;
 
 export const setFields = (babyForm, babyEditForm) => {

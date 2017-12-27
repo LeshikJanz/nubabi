@@ -3,6 +3,8 @@ import type { Baby, User } from 'core/types';
 import React from 'react';
 import Loadable from 'react-loadable';
 import { Route, Switch } from 'react-router-dom';
+import NotificationSystem from 'react-notification-system';
+import { setNotificationsCenter } from 'web/components/NotificationSystem';
 import {
   Loader,
   Header,
@@ -14,7 +16,7 @@ import {
   GlobalLoader,
   NavBar,
 } from 'web/components';
-import { Wrapper, AppContent } from '../styled';
+import { Wrapper, AppContent, notificationStyle } from '../styled';
 import {
   Stimulation,
   Growth,
@@ -54,6 +56,10 @@ const Profile = Loadable({
 const App = (props: Props) => (
   <Wrapper>
     <GlobalLoader active={props.isLoading} />
+    <NotificationSystem
+      style={notificationStyle}
+      ref={n => setNotificationsCenter(n)}
+    />
     <Header
       pathname={props.pathname}
       isAuthenticated={props.isAuthenticated}

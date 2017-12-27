@@ -11,6 +11,7 @@ import { updateBaby } from '../grapghQl/mutations/updateBaby';
 import { babyForm } from '../grapghQl/fragments/babyForm';
 import BabyProfile from '../components/index';
 import { setFields } from 'web/utils/setFields';
+import * as Notifications from 'web/components/NotificationSystem';
 
 const mapStateToProps = state => ({
   babyEditForm: state.form.BabyForm && state.form.BabyForm.values,
@@ -35,8 +36,12 @@ export default compose(
   }),
   graphql(createBaby, {
     props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
-      handleCreateBaby: () =>
-        mutate({ variables: { input: setFields(babyForm, babyEditForm) } })
+      handleCreateBaby: () => {
+        return mutate({
+          variables: {
+            input: setFields(babyForm, babyEditForm),
+          },
+        })
           .then(({ data }) => {
             const createdBaby = path(['createBaby', 'edge', 'node'], data);
             if (createdBaby) {
@@ -46,42 +51,47 @@ export default compose(
               handleError(new Error('Baby has not been created'));
             }
           })
-          .catch(handleError),
+          .catch(handleError);
+      },
     }),
     options: {
       refetchQueries: ['Profile', 'getBabies'],
     },
   }),
   graphql(updateBaby, {
-    props: ({ mutate, ownProps: { babyEditForm, history, changeBaby } }) => ({
-      handleEditBaby: () =>
-        mutate({
+    props: ({ mutate, ownProps: { babyEditForm, changeBaby } }) => ({
+      handleEditBaby: () => {
+        return mutate({
           variables: {
             input: setFields(babyForm, babyEditForm),
           },
         })
           .then(({ data }) => {
+            Notifications.addNotification({
+              level: 'success',
+              message: 'Baby successfully saved',
+            });
             const updatedBaby = path(['updateBaby', 'edge', 'node'], data);
             if (updatedBaby) {
               changeBaby(updatedBaby.id);
-              history.push('/profile');
             } else {
-              handleError(new Error('Baby has not been updated'));
+              Notifications.addNotification({
+                level: 'error',
+                message: 'Baby has not been updated',
+              });
             }
           })
-          .catch(handleError),
+          .catch(error => {
+            Notifications.addNotification({ level: 'error', message: error });
+          });
+      },
     }),
     options: {
       refetchQueries: ['Profile', 'getBabies'],
     },
   }),
   withHandlers({
-    handleSubmit: ({ match, handleCreateBaby, handleEditBaby }) => () => {
-      if (match.params.id) {
-        handleEditBaby();
-      } else {
-        handleCreateBaby();
-      }
-    },
+    handleSubmit: ({ match, handleCreateBaby, handleEditBaby }) => () =>
+      match.params.id ? handleEditBaby() : handleCreateBaby(),
   }),
 )(BabyProfile);
