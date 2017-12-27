@@ -5,7 +5,6 @@ stages:
   - test
   - build
   - deploy
-  - publish
 
 yarn_install:
   stage: setup
@@ -135,13 +134,4 @@ deploy_graphql:
   only:
     - master
   variables:
-    NUBABI_GRAPHQL_ENDPOINT: http://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
-
-publish:
-  stage: publish
-  only:
-    - master
-  script:
-    - >
-      yarn global add lerna
-      yarn release -yes && git add -u . && git push origin master && git push --tags
+    NUBABI_GRAPHQL_ENDPOINT: https://us-central1-nubabitest1.cloudfunctions.net/handler/graphql
