@@ -3,6 +3,15 @@ export GIT_REVISION_SHA=$(git rev-parse HEAD)
 export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
 
 PKG_VERSION=$(cd $BUDDYBUILD_WORKSPACE && node -p "require('./platforms/native/package.json').version")
+
+# Run release script in sort-of dry-run mode so we can get the would-be version
+# since we don't seem to have control over when external runs on Gitlab. 
+# Otherwise, we're lagging one version behind. Per semver 1.10.0-dev < 1.10.0
+# so production version wouldn't be affected by this.
+yarn global add lerna
+yarn release --yes --skip-git
+
+PKG_VERSION=$(cd $BUDDYBUILD_WORKSPACE && node -p "require('./platforms/native/package.json').version")
 BUNDLE_BASE_VERSION=$PKG_VERSION
 
 echo "Setting CFBundleShortVersionString to $BUNDLE_BASE_VERSION"

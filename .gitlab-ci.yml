@@ -23,10 +23,14 @@ yarn_install:
 set_dev_app_version:
   stage: setup
   script:
+    - yarn global add lerna
+    - lerna publish --conventional-commits --skip-npm --skip-git --yes
     - export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
     - export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
-    - echo "export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA" > .env
+    - export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA
+    - echo "export NUBABI_APP_VERSION=$NUBABI_APP_VERSION" > .env
     - echo "export NUBABI_ENV=development" >> .env
+    - echo "Set app version to $NUBABI_APP_VERSION"
   except:
     - master
   artifacts:
@@ -36,10 +40,14 @@ set_dev_app_version:
 set_prod_app_version:
   stage: setup
   script:
+    - yarn global add lerna
+    - lerna publish --conventional-commits --skip-npm --skip-git --yes
     - export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
     - export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
-    - echo "export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID" > .env
+    - export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID
+    - echo "export NUBABI_APP_VERSION=-$NUBABI_APP_VERSION" > .env
     - echo "export NUBABI_ENV=staging" >> .env
+    - echo "Set app version to $NUBABI_APP_VERSION"
   only:
     - master
   artifacts:
@@ -159,7 +167,7 @@ publish:
     - git checkout $CI_COMMIT_REF_NAME
     - git pull
     - git remote set-url origin git@gitlab.com:nubabi/mobile.git
-    - yarn global add lerna
+    - yarn add lerna
     - yarn release --yes
     - git push --follow-tags origin $CI_COMMIT_REF_NAME
 

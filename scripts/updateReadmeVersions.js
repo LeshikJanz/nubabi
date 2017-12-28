@@ -1,4 +1,10 @@
 #!/usr/bin/env node
+// Avoid running on buddybuild, only update README versions
+// on Gitlab after pipeline succeeds.
+if (process.env.BUDDYBUILD_BRANCH) {
+  process.exit(0);
+}
+
 const fs = require('fs');
 const path = require('path');
 const Repository = require('lerna/lib/Repository');
