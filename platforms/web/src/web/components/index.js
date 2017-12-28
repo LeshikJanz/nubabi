@@ -17,3 +17,4 @@ export { default as Eft } from './Eft';
 export { default as IPay } from './IPay';
 export { default as Snapscan } from './Snapscan';
 export { default as BackButton } from './BackButton';
+export { default as NotificationSystem } from './NotificationSystem';

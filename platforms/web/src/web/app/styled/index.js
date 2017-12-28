@@ -16,3 +16,13 @@ export const AppContent = styled(Section)`
   display: flex;
   justify-content: center;
 `;
+
+export const notificationStyle = {
+  NotificationItem: {
+    DefaultStyle: {},
+
+    success: {
+      fontFamily: 'sans-serif',
+    },
+  },
+};

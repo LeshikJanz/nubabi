@@ -49,6 +49,7 @@ export const RedButton = styled(Button)`
   letter-spacing: 0.5px;
   padding: 7px 20px;
   outline: none;
+  margin-left: 10px;
 
   &:disabled {
     background-color: ${props => props.theme.colors.lightgrey};
