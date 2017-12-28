@@ -27,7 +27,8 @@ set_dev_app_version:
     - lerna publish --conventional-commits --skip-npm --skip-git --yes
     - export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
     - export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
-    - echo "export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA" > .env
+    - export NUBABI_APP_VERSION=$WEB_BASE_VERSION-dev+$CI_PIPELINE_ID.sha.$GIT_REVISION_SHORT_SHA
+    - echo "export NUBABI_APP_VERSION=$NUBABI_APP_VERSION" > .env
     - echo "export NUBABI_ENV=development" >> .env
     - echo "Set app version to $NUBABI_APP_VERSION"
   except:
@@ -43,7 +44,8 @@ set_prod_app_version:
     - lerna publish --conventional-commits --skip-npm --skip-git --yes
     - export GIT_REVISION_SHORT_SHA=$(git rev-parse --short HEAD)
     - export WEB_BASE_VERSION=$(node -p "require('./platforms/web/package.json').version")
-    - echo "export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID" > .env
+    - export NUBABI_APP_VERSION=-$WEB_BASE_VERSION+$CI_PIPELINE_ID
+    - echo "export NUBABI_APP_VERSION=-$NUBABI_APP_VERSION" > .env
     - echo "export NUBABI_ENV=staging" >> .env
     - echo "Set app version to $NUBABI_APP_VERSION"
   only:
