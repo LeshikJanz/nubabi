@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.3.0...nubabi-web@1.4.0) (2017-12-28)
+
+
+### Features
+
+* **web:** display app version on sidebars ([73ad9dd](https://gitlab.com/nubabi/mobile/commit/73ad9dd))
+
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://gitlab.com/nubabi/mobile/compare/nubabi-web@1.2.0...nubabi-web@1.3.0) (2017-12-27)
 
