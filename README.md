@@ -8,7 +8,7 @@
 ![nubabi-core](https://img.shields.io/badge/core-2.2.0-blue.svg?style=flat)
 ![nubabi-firebase](https://img.shields.io/badge/firebase-1.1.0-blue.svg?style=flat)
 ![nubabi-native](https://img.shields.io/badge/native-1.10.0-blue.svg?style=flat)
-![nubabi-web](https://img.shields.io/badge/web-1.6.0-blue.svg?style=flat)
+![nubabi-web](https://img.shields.io/badge/web-1.7.0-blue.svg?style=flat)
 ![nubabi-graphql-server](https://img.shields.io/badge/graphql--server-2.1.1-blue.svg?style=flat)
 ![nubabi-graphql-utils](https://img.shields.io/badge/graphql--utils-1.0.4-blue.svg?style=flat)
 
